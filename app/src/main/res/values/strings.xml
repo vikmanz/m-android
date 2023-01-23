@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">SHppPro</string>
+    <string name="settingsButton">Settings</string>
+    <string name="personNameSample">Person Name</string>
+    <string name="personCareerSample">Career</string>
+    <string name="personHomeAddressSample">Home address</string>
+    <string name="propositionToFillProfile">Go to settings and fill out the profile</string>
+    <string name="editProfile">Edit profile</string>
+    <string name="sample_of_person_photo">sample of person photo</string>
+    <string name="viewMyContacts">VIEW MY CONTACTS</string>
+    <string name="helloText">Let\'s get acquainted</string>
+    <string name="helloSubText">Fill out the profile and go to the application!</string>
+    <string name="title_e_mail">E-mail</string>
+    <string name="title_password">Password</string>
+</resources>
