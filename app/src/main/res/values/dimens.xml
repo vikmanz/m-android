@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="offset_big">32dp</dimen>
+    <dimen name="offset_medium">24dp</dimen>
+    <dimen name="offset_normal">16dp</dimen>
+    <dimen name="offset_mini">8dp</dimen>
+    <dimen name="size_button_height_standart">40dp</dimen>
+    <dimen name="size_button_height_big">55dp</dimen>
+    <dimen name="size_text_fontsize_standart">16sp</dimen>
+
+</resources>
