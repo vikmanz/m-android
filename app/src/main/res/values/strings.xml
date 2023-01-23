@@ -12,4 +12,11 @@
     <string name="helloSubText">Fill out the profile and go to the application!</string>
     <string name="title_e_mail">E-mail</string>
     <string name="title_password">Password</string>
+    <string name="termsAgreeWarning">By clicking Register you agree to our Terms \n and Conditions</string>
+    <string name="registerButton">REGISTER</string>
+    <string name="googleOrRegister">or</string>
+    <string name="googleRegisterButton">GOOGLE</string>
+    <string name="rememberMeCheckbox">Remember me</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="sign_in">Sign in</string>
 </resources>

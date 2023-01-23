@@ -13,32 +13,33 @@
         android:background="@color/BG_242235"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
         <LinearLayout
             android:id="@+id/helloLinearLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_marginTop="146dp"
+            android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0"
-            >
+            app:layout_constraintVertical_bias="0">
 
             <TextView
                 android:id="@+id/helloText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/opensans"
                 android:text="@string/helloText"
                 android:textAlignment="center"
                 android:textColor="#B2B2B3"
-                android:textSize="24sp"
-                android:fontFamily="@font/opensans"
                 android:textFontWeight="750"
+                android:textSize="24sp"
                 android:textStyle="normal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -49,11 +50,11 @@
                 android:id="@+id/helloSubText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/opensans"
                 android:text="@string/helloSubText"
                 android:textColor="#B2B2B3"
-                android:textSize="12sp"
-                android:fontFamily="@font/opensans"
                 android:textFontWeight="400"
+                android:textSize="12sp"
                 android:textStyle="normal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -65,10 +66,11 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/emailPasswordLinearLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_marginTop="24dp"
+            android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -80,53 +82,56 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:fontFamily="@font/opensans"
                 android:text="@string/title_e_mail"
                 android:textColor="@color/GreyTitles"
-                android:textSize="18sp"
-                android:fontFamily="@font/opensans"
                 android:textFontWeight="500"
+                android:textSize="18sp"
                 android:textStyle="normal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="parent"
-                app:layout_constraintHorizontal_bias="0" />
+                app:layout_constraintTop_toBottomOf="parent" />
 
             <EditText
                 android:id="@+id/editTextTextEmailAddress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="18"
+                android:hint="@string/title_e_mail"
                 android:inputType="textEmailAddress"
+                android:labelFor="@id/emailEditText"
+                android:minHeight="48dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/titleEmail"
-                />
+                app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
                 android:id="@+id/titlePassword"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:fontFamily="@font/opensans"
                 android:text="@string/title_password"
                 android:textColor="@color/GreyTitles"
-                android:textSize="18sp"
-                android:fontFamily="@font/opensans"
                 android:textFontWeight="500"
+                android:textSize="18sp"
                 android:textStyle="normal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="parent"
-                app:layout_constraintHorizontal_bias="0" />
+                app:layout_constraintTop_toBottomOf="parent" />
 
             <EditText
                 android:id="@+id/editTextTextPassword"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="18"
+                android:hint="@string/title_password"
                 android:inputType="textPassword"
+                android:minHeight="48dp"
                 android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -136,19 +141,133 @@
             <CheckBox
                 android:id="@+id/checkBox"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Remember me"
-                android:textColor="@color/GreyTitles"
-                android:textSize="18sp"
+                android:layout_height="48dp"
+                android:layout_marginTop="16dp"
                 android:fontFamily="@font/opensans"
+                android:text="@string/rememberMeCheckbox"
+                android:textColor="@color/GreyTitles"
                 android:textFontWeight="500"
-                android:textStyle="normal"
-                />
+                android:textSize="16sp"
+                android:textStyle="normal" />
 
 
         </LinearLayout>
 
+        <Button
+            android:id="@+id/bRegisterByGoogle"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="67dp"
+            android:layout_marginEnd="16dp"
+            android:backgroundTint="@color/white"
+            android:shadowColor="@android:color/transparent"
+            android:shadowRadius="0"
+            android:text="@string/googleRegisterButton"
+            android:textColor="@color/BG_242235"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/emailPasswordLinearLayout"
+            app:layout_constraintVertical_bias="0" />
 
+        <TextView
+            android:id="@+id/googleOrRegister"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/opensans"
+            android:text="@string/googleOrRegister"
+            android:textColor="@color/white"
+            android:textFontWeight="500"
+            android:textSize="18sp"
+            android:textStyle="normal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bRegisterByGoogle"
+            app:layout_constraintVertical_bias="0" />
+
+        <Button
+            android:id="@+id/bRegisterByEmailPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:backgroundTint="@android:color/transparent"
+            android:text="@string/registerButton"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/googleOrRegister"
+            app:layout_constraintVertical_bias="0"
+            tools:ignore="TextContrastCheck" />
+
+        <TextView
+            android:id="@+id/warningAboutTerms"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/opensans"
+            android:text="@string/termsAgreeWarning"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textFontWeight="400"
+            android:textSize="12sp"
+            android:textStyle="normal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bRegisterByEmailPassword"
+            app:layout_constraintVertical_bias="0" />
+
+        <LinearLayout
+            android:id="@+id/alreadyHaveAcc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/warningAboutTerms"
+            app:layout_constraintVertical_bias="0">
+
+            <TextView
+                android:id="@+id/alreadyHaveAccMessage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/opensans"
+                android:text="@string/already_have_an_account"
+                android:textColor="@color/GreyTitles"
+                android:textFontWeight="400"
+                android:textSize="16sp"
+                android:textStyle="normal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/alreadyHaveAccLink"
+                app:layout_constraintStart_toStartOf="parent"
+
+                app:layout_constraintVertical_bias="0" />
+
+            <TextView
+                android:id="@+id/alreadyHaveAccLink"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/opensans"
+                android:text="@string/sign_in"
+                android:textColor="@color/white"
+                android:textFontWeight="400"
+                android:textSize="16sp"
+                android:textStyle="normal" />
+
+
+        </LinearLayout>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
