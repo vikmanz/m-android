@@ -99,6 +99,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/editTextTextEmailAddress"
+                android:ems="18"
+                android:hint="@string/title_e_mail"
+                android:inputType="textEmailAddress"
+                android:labelFor="@id/titleEmail"
+                android:minHeight="48dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
