@@ -7,31 +7,28 @@
     tools:context=".SignUp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
+        android:id="@+id/constraintLayoutMainBG"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="match_parent"
         android:background="@color/BG_242235"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.appcompat.widget.LinearLayoutCompat
-            android:id="@+id/helloLinearLayout"
+            android:id="@+id/linearLayoutHello"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="146dp"
             android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0">
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/helloText"
+                android:id="@+id/tvHelloText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/opensans"
@@ -39,47 +36,37 @@
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textFontWeight="750"
-                android:textSize="24sp"
-                android:textStyle="normal"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="parent" />
+                android:textSize="@dimen/size_text_font_big"
+                android:textStyle="normal" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/helloSubText"
+                android:id="@+id/tvHelloSubText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/opensans"
                 android:text="@string/helloSubText"
                 android:textColor="@color/GreyTitles"
                 android:textFontWeight="400"
-                android:textSize="12sp"
-                android:textStyle="normal"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/helloText"
-                app:layout_constraintVertical_bias="0" />
+                android:textSize="@dimen/size_text_font_smallest"
+                android:textStyle="normal" />
 
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
         <androidx.appcompat.widget.LinearLayoutCompat
-            android:id="@+id/emailPasswordLinearLayout"
+            android:id="@+id/linearLayoutEmailPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:layout_marginHorizontal="@dimen/offset_normal"
+            android:layout_marginHorizontal="@dimen/offset_medium"
             android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/helloLinearLayout"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayoutHello"
             app:layout_constraintVertical_bias="0">
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/titleEmail"
+                android:id="@+id/tvTitleEmail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -87,43 +74,27 @@
                 android:text="@string/title_e_mail"
                 android:textColor="@color/GreyTitles"
                 android:textFontWeight="500"
-                android:textSize="18sp"
-                android:textStyle="normal"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="parent" />
+                android:textSize="@dimen/size_text_font_medium"
+                android:textStyle="normal"/>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/editTextTextEmailAddress"
-                android:ems="18"
-                android:hint="@string/title_e_mail"
-                android:inputType="textEmailAddress"
-                android:labelFor="@id/titleEmail"
-                android:minHeight="48dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent">
+                android:layout_height="wrap_content">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tiTextEmailAddress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textEmailAddress"
+                    android:background="@android:color/transparent"
                     android:fontFamily="@font/opensans"
                     android:textFontWeight="500"
-                    android:textSize="18sp"
-                    android:textStyle="normal"
-
-                    android:background="@android:color/transparent"
-                    />
+                    android:textSize="18sp"/>
             </com.google.android.material.textfield.TextInputLayout>
 
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/titlePassword"
+                android:id="@+id/tvTitlePassword"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -131,45 +102,36 @@
                 android:textColor="@color/GreyTitles"
                 android:fontFamily="@font/opensans"
                 android:textFontWeight="500"
-                android:textSize="18sp"
-                android:textStyle="normal"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="parent" />
+                android:textSize="@dimen/size_text_font_medium"
+                android:textStyle="normal" />
+
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/editTextTextPassword"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent">
+                android:layout_height="wrap_content">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editTextTextPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPassword"
+                    android:background="@android:color/transparent"
                     android:fontFamily="@font/opensans"
                     android:textFontWeight="500"
-                    android:textSize="18sp"
-                    android:textStyle="normal"
-                    android:background="@android:color/transparent"
-                    />
+                    android:textSize="18sp"/>
+
             </com.google.android.material.textfield.TextInputLayout>
 
             <CheckBox
                 android:id="@+id/checkBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/offset_mini"
-                android:fontFamily="@font/opensans"
+                android:layout_marginTop="@dimen/offset_small"
                 android:text="@string/rememberMeCheckbox"
                 android:textColor="@color/GreyTitles"
+                android:fontFamily="@font/opensans"
                 android:textFontWeight="500"
-                android:textSize="16sp"
-                android:textStyle="normal" />
+                android:textSize="@dimen/size_text_font_small"/>
 
 
 
@@ -179,9 +141,9 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/bRegisterByGoogle"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="@dimen/size_button_height_big"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="@dimen/offset_big"
+            android:layout_marginTop="@dimen/offset_large"
             android:layout_marginEnd="16dp"
             android:backgroundTint="@color/white"
             android:shadowColor="@android:color/transparent"
@@ -192,7 +154,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/emailPasswordLinearLayout"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayoutEmailPassword"
             app:layout_constraintVertical_bias="0.0" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -204,7 +166,7 @@
             android:text="@string/googleOrRegister"
             android:textColor="@color/white"
             android:textFontWeight="500"
-            android:textSize="18sp"
+            android:textSize="@dimen/size_text_font_medium"
             android:textStyle="normal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -215,15 +177,15 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/bRegisterByEmailPassword"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/size_button_height_big"
-            android:layout_marginStart="@dimen/offset_normal"
-            android:layout_marginEnd="@dimen/offset_normal"
+            android:layout_height="@dimen/size_button_height_large"
+            android:layout_marginStart="@dimen/offset_medium"
+            android:layout_marginEnd="@dimen/offset_medium"
             android:backgroundTint="@color/CorporateOrange"
             android:textColor="@color/white"
-            android:layout_marginVertical="@dimen/offset_normal"
+            android:layout_marginVertical="@dimen/offset_medium"
             android:background="@drawable/button"
             android:text="@string/registerButton"
-            android:textSize="16sp"
+            android:textSize="@dimen/size_text_font_small"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -241,7 +203,7 @@
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textFontWeight="400"
-            android:textSize="12sp"
+            android:textSize="@dimen/size_text_font_smallest"
             android:textStyle="normal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -270,7 +232,7 @@
                 android:text="@string/already_have_an_account"
                 android:textColor="@color/GreyTitles"
                 android:textFontWeight="400"
-                android:textSize="16sp"
+                android:textSize="@dimen/size_text_font_small"
                 android:textStyle="normal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/alreadyHaveAccLink"
@@ -288,7 +250,7 @@
                 android:text="@string/sign_in"
                 android:textColor="@color/white"
                 android:textFontWeight="400"
-                android:textSize="16sp"
+                android:textSize="@dimen/size_text_font_small"
                 android:textStyle="normal" />
 
 

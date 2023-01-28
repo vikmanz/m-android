@@ -10,16 +10,6 @@
         <item name="colorSecondaryVariant">@color/GreyTitles</item>
         <item name="colorOnSecondary">@color/black</item>
 
-        <!-- Customize your theme here. -->
-
-
-
-<!--        <item name="materialThemeOverlay">-->
-<!--            @style/MyThemeOverlayTextInputEditTextFilledBox</item>-->
-<!--    </style>-->
-
-<!--    <style name="MyThemeOverlayTextInputEditTextFilledBox">-->
-<!--        <item name="editTextStyle">@style/mainETStyle</item>-->
     </style>
 
 </resources>
