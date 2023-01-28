@@ -10,7 +10,7 @@
         android:id="@+id/constraintLayoutMainBG"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/BG_242235"
+        android:background="?attr/colorSecondary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,10 +34,9 @@
                 android:fontFamily="@font/opensans"
                 android:text="@string/helloText"
                 android:textAlignment="center"
-                android:textColor="@color/white"
-                android:textFontWeight="750"
+                android:textColor="?attr/colorOnPrimary"
                 android:textSize="@dimen/size_text_font_big"
-                android:textStyle="normal" />
+                android:textStyle="bold" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvHelloSubText"
@@ -45,7 +44,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/opensans"
                 android:text="@string/helloSubText"
-                android:textColor="@color/GreyTitles"
+                android:textColor="?attr/colorTertiary"
                 android:textFontWeight="400"
                 android:textSize="@dimen/size_text_font_smallest"
                 android:textStyle="normal" />
@@ -72,10 +71,9 @@
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/opensans"
                 android:text="@string/title_e_mail"
-                android:textColor="@color/GreyTitles"
-                android:textFontWeight="500"
+                android:textColor="?attr/colorTertiary"
                 android:textSize="@dimen/size_text_font_medium"
-                android:textStyle="normal"/>
+                android:textStyle="bold"/>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
@@ -99,11 +97,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="@string/title_password"
-                android:textColor="@color/GreyTitles"
+                android:textColor="?attr/colorTertiary"
                 android:fontFamily="@font/opensans"
-                android:textFontWeight="500"
                 android:textSize="@dimen/size_text_font_medium"
-                android:textStyle="normal" />
+                android:textStyle="bold" />
 
 
             <com.google.android.material.textfield.TextInputLayout
@@ -128,9 +125,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/offset_small"
                 android:text="@string/rememberMeCheckbox"
-                android:textColor="@color/GreyTitles"
+                android:textColor="?attr/colorTertiary"
                 android:fontFamily="@font/opensans"
-                android:textFontWeight="500"
+
                 android:textSize="@dimen/size_text_font_small"/>
 
 
@@ -139,23 +136,13 @@
         </androidx.appcompat.widget.LinearLayoutCompat>
 
         <androidx.appcompat.widget.AppCompatButton
+            style="@style/btnStdWhite"
             android:id="@+id/bRegisterByGoogle"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/size_button_height_big"
-            android:layout_marginStart="16dp"
             android:layout_marginTop="@dimen/offset_large"
-            android:layout_marginEnd="16dp"
-            android:backgroundTint="@color/white"
-            android:shadowColor="@android:color/transparent"
-            android:shadowRadius="0"
             android:text="@string/googleRegisterButton"
-            android:textColor="@color/BG_242235"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayoutEmailPassword"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toBottomOf="@+id/linearLayoutEmailPassword" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/googleOrRegister"
@@ -164,33 +151,22 @@
             android:layout_marginTop="8dp"
             android:fontFamily="@font/opensans"
             android:text="@string/googleOrRegister"
-            android:textColor="@color/white"
+            android:textColor="?attr/colorOnPrimary"
             android:textFontWeight="500"
             android:textSize="@dimen/size_text_font_medium"
             android:textStyle="normal"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/bRegisterByGoogle"
-            app:layout_constraintVertical_bias="0" />
+            app:layout_constraintTop_toBottomOf="@+id/bRegisterByGoogle"/>
 
         <androidx.appcompat.widget.AppCompatButton
+            style="@style/btnStdOrange"
             android:id="@+id/bRegisterByEmailPassword"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/size_button_height_large"
-            android:layout_marginStart="@dimen/offset_medium"
-            android:layout_marginEnd="@dimen/offset_medium"
-            android:backgroundTint="@color/CorporateOrange"
-            android:textColor="@color/white"
-            android:layout_marginVertical="@dimen/offset_medium"
-            android:background="@drawable/button"
             android:text="@string/registerButton"
-            android:textSize="@dimen/size_text_font_small"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="@dimen/offset_small"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/googleOrRegister"
-            app:layout_constraintVertical_bias="0"
             tools:ignore="TextContrastCheck" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -201,7 +177,7 @@
             android:fontFamily="@font/opensans"
             android:text="@string/termsAgreeWarning"
             android:textAlignment="center"
-            android:textColor="@color/white"
+            android:textColor="?attr/colorOnPrimary"
             android:textFontWeight="400"
             android:textSize="@dimen/size_text_font_smallest"
             android:textStyle="normal"
@@ -230,7 +206,7 @@
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/opensans"
                 android:text="@string/already_have_an_account"
-                android:textColor="@color/GreyTitles"
+                android:textColor="?attr/colorTertiary"
                 android:textFontWeight="400"
                 android:textSize="@dimen/size_text_font_small"
                 android:textStyle="normal"
@@ -248,7 +224,7 @@
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/opensans"
                 android:text="@string/sign_in"
-                android:textColor="@color/white"
+                android:textColor="?attr/colorOnPrimary"
                 android:textFontWeight="400"
                 android:textSize="@dimen/size_text_font_small"
                 android:textStyle="normal" />

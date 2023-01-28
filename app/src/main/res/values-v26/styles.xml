@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="btnStdOrange">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/size_button_height_large</item>
+        <item name="android:layout_marginHorizontal">@dimen/offset_small</item>
+        <item name="android:background">@drawable/btn_std_orange_bg_allinonefile</item>
+        <item name="android:textColor">?attr/colorOnPrimary</item>
+        <item name="android:textSize">@dimen/size_text_font_small</item>
+    </style>
+
+    <style name="btnStdWhite">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/size_button_height_medium</item>
+        <item name="android:layout_marginHorizontal">@dimen/offset_small</item>
+        <item name="android:background">@drawable/btn_std_white_bg</item>
+        <item name="android:textColor">?attr/colorOnSecondary</item>
+        <item name="android:textSize">@dimen/size_text_font_small</item>
+    </style>
+
+
+</resources>

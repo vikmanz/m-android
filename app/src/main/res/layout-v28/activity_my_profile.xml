@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
+    android:background="?attr/colorSecondary"
     tools:context=".MyProfile">
 
 
@@ -12,7 +12,7 @@
         android:id="@+id/constraintLayoutTopBG"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@color/BG_242235"
+        android:background="?attr/colorSecondary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,7 +25,7 @@
             android:layout_marginStart="@dimen/offset_medium"
             android:layout_marginTop="@dimen/offset_medium"
             android:text="@string/settingsButton"
-            android:textColor="@color/white"
+            android:textColor="?attr/colorOnPrimary"
             android:fontFamily="@font/opensans"
             android:textFontWeight="500"
             android:textSize="31sp"
@@ -53,7 +53,7 @@
             android:id="@+id/cvAvatar"
             android:layout_width="130dp"
             android:layout_height="130dp"
-            app:cardBackgroundColor="@color/CorporateOrange"
+            app:cardBackgroundColor="?attr/colorPrimary"
             app:cardCornerRadius="360dp">
 
             <androidx.appcompat.widget.AppCompatImageView
@@ -71,7 +71,7 @@
             android:layout_height="wrap_content"
             android:paddingTop="@dimen/offset_big"
             android:text="@string/personNameSample"
-            android:textColor="@color/white"
+            android:textColor="?attr/colorOnPrimary"
             android:textSize="18sp"
             tools:ignore="MissingConstraints"
             android:fontFamily="@font/opensans"
@@ -84,7 +84,7 @@
             android:layout_height="wrap_content"
             android:paddingTop="@dimen/offset_small"
             android:text="@string/personCareerSample"
-            android:textColor="@color/GreyTitles"
+            android:textColor="?attr/colorTertiary"
             android:textSize="14sp"
             tools:ignore="MissingConstraints"
             android:fontFamily="@font/opensans"
@@ -96,7 +96,7 @@
             android:layout_height="wrap_content"
             android:paddingTop="@dimen/offset_medium"
             android:text="@string/personHomeAddressSample"
-            android:textColor="@color/GreyTitles"
+            android:textColor="?attr/colorTertiary"
             android:textSize="14sp"
             tools:ignore="MissingConstraints"
             android:fontFamily="@font/opensans"
@@ -109,7 +109,7 @@
         android:id="@+id/constraintLayoutBottomBG"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@color/white"
+        android:background="?attr/colorOnPrimary"
         app:layout_constraintHeight_percent="0.5"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -158,7 +158,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/propositionToFillProfile"
-            android:textColor="@color/BG_242235"
+            android:textColor="?attr/colorSecondary"
             android:textSize="14sp"
             android:layout_marginBottom="@dimen/offset_medium"
             app:layout_constraintBottom_toTopOf="@id/btnEditProfile"
@@ -173,27 +173,27 @@
             android:layout_marginHorizontal="@dimen/offset_medium"
             android:layout_marginVertical="@dimen/offset_medium"
             android:text="@string/editProfile"
-            android:textColor="@color/BG_242235"
+            android:textColor="?attr/colorSecondary"
             app:layout_constraintBottom_toTopOf="@id/btnViewMyContacts"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:background="@drawable/button_stroke" />
+            android:background="@drawable/btn_std_white_bg_normal" />
 
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnViewMyContacts"
             android:layout_width="match_parent"
             android:layout_height="@dimen/size_button_height_large"
+            android:layout_marginVertical="@dimen/offset_medium"
             android:layout_marginStart="@dimen/offset_medium"
             android:layout_marginEnd="@dimen/offset_medium"
+            android:background="@drawable/btn_std_orange_bg_allinonefile"
             android:text="@string/viewMyContacts"
-            android:textColor="@color/white"
-            android:layout_marginVertical="@dimen/offset_medium"
+            android:textColor="?attr/colorOnPrimary"
             android:textSize="@dimen/size_text_font_small"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:background="@drawable/button"
             tools:ignore="TextContrastCheck" />
 
 

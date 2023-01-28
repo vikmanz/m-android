@@ -1,16 +1,15 @@
 <resources>
-    <!-- Base application theme. -->
-    <style name="Theme.SHppPro" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <!-- Base application theme night. -->
+    <style name="defaultTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_200</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
-        <item name="colorOnPrimary">@color/black</item>
+        <item name="colorPrimary">@color/default_theme_color_primary</item>
+        <item name="colorPrimaryVariant">@color/default_theme_color_primary_variant</item>
+        <item name="colorOnPrimary">@color/default_theme_color_on_primary</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_200</item>
-        <item name="colorOnSecondary">@color/black</item>
-        <!-- Status bar color. -->
-        <item name="android:statusBarColor"> ?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
+        <item name="colorSecondary">@color/default_theme_color_secondary</item>
+        <item name="colorSecondaryVariant">@color/default_theme_color_secondary_variant</item>
+        <item name="colorOnSecondary">@color/default_theme_color_on_secondary</item>
+        <!-- Tertiary brand color. -->
+        <item name="colorTertiary">@color/default_theme_color_tertiary</item>
     </style>
 </resources>

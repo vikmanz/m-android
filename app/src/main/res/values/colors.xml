@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
+
+    <!-- Default black and white. -->
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="BG_242235">#242235</color>
-    <color name="GreyTitles">#B2B2B3</color>
-    <color name="CorporateOrange">#FA5E06</color>
+
+    <!-- Primary colors. -->
+    <color name="default_theme_color_primary">#FA5E06</color>
+    <color name="default_theme_color_primary_variant">#EE00FF</color>
+    <color name="default_theme_color_on_primary">#FFFFFFFF</color>
+
+    <!-- Secondary colors. -->
+    <color name="default_theme_color_secondary">#242235</color>
+    <color name="default_theme_color_secondary_variant">#44FF00</color>
+    <color name="default_theme_color_on_secondary">#077C6F</color>
+
+    <!-- Tertiary colors. -->
+    <color name="default_theme_color_tertiary">#B2B2B3</color>
+
 </resources>
