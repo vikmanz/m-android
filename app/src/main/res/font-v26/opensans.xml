@@ -23,8 +23,12 @@
         android:fontStyle="normal"
         android:fontWeight="700"
         android:font="@font/open_sans_bold" />
+
     <font
         android:fontStyle="italic"
         android:fontWeight="700"
         android:font="@font/open_sans_bold_italic" />
+
+
+
 </font-family>
