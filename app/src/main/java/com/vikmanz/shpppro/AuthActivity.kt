@@ -5,11 +5,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.widget.AppCompatButton
 
-class SignUp : AppCompatActivity() {
+class AuthActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_sign_up)
+        setContentView(R.layout.activity_auth)
 
         val button: AppCompatButton = findViewById(R.id.bRegisterByEmailPassword)
 
@@ -17,7 +17,7 @@ class SignUp : AppCompatActivity() {
 
 
         button.setOnClickListener {
-            val changePage = Intent(this, MyProfile::class.java)
+            val changePage = Intent(this, MainActivity::class.java)
             startActivity(changePage)
         }
 

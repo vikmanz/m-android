@@ -2,20 +2,25 @@
 <resources>
 
     <!-- Default black and white. -->
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
 
     <!-- Primary colors. -->
     <color name="default_theme_color_primary">#FA5E06</color>
-    <color name="default_theme_color_primary_variant">#EE00FF</color>
-    <color name="default_theme_color_on_primary">#FFFFFFFF</color>
+    <color name="default_theme_color_primary_variant">#F9BC06</color>
 
     <!-- Secondary colors. -->
     <color name="default_theme_color_secondary">#242235</color>
-    <color name="default_theme_color_secondary_variant">#44FF00</color>
-    <color name="default_theme_color_on_secondary">#077C6F</color>
+    <color name="default_theme_color_secondary_variant">#1F6A81</color>
 
-    <!-- Tertiary colors. -->
-    <color name="default_theme_color_tertiary">#B2B2B3</color>
+    <!-- Text colors. -->
+    <color name="default_theme_text_color_primary">#FFFFFF</color>
+    <color name="default_theme_text_color_secondary">#B2B2B3</color>
+    <color name="night_theme_text_color_primary">#FFDA52</color>
+    <color name="night_theme_text_color_secondary">#A3D94FFF</color>
 
+    <!-- Other colors. -->
+    <color name="default_launcher_bg">#40FFFFFF</color>
+    <color name="default_launcher_fg_gradient_in">#44000000</color>
+    <color name="default_launcher_fg_gradient_out">#00000000</color>
 </resources>
