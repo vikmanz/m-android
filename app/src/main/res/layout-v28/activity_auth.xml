@@ -59,18 +59,14 @@
                 android:layout_height="wrap_content">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    style="@style/text_White"
                     android:id="@+id/tiTextEmailAddress"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
-                    android:fontFamily="@font/opensans"
                     android:hint="@string/title_e_mail"
                     android:textColorHint="?attr/colorOnTertiary"
                     android:inputType="textEmailAddress"
-                    android:textFontWeight="500"
-                    android:textSize="18sp"
-                    android:textColor="?attr/colorOnTertiary"
-                    tools:ignore="DuplicateSpeakableTextCheck" />
+                    android:textColor="?attr/colorOnTertiary" />
             </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -86,17 +82,13 @@
                 android:layout_height="wrap_content">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    style="@style/text_White"
                     android:id="@+id/editTextTextPassword"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
-                    android:fontFamily="@font/opensans"
                     android:hint="@string/title_password"
                     android:textColorHint="?attr/colorOnTertiary"
                     android:inputType="textPassword"
-                    android:textFontWeight="500"
-                    android:textSize="18sp"
-                    android:textColor="?attr/colorOnTertiary"
                     tools:ignore="DuplicateSpeakableTextCheck" />
 
             </com.google.android.material.textfield.TextInputLayout>
