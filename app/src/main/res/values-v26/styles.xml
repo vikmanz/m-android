@@ -2,7 +2,6 @@
 <resources>
 
 
-
     <!-- Buttons styles. -->
 
     <style name="btnStd">
@@ -28,9 +27,66 @@
     </style>
 
 
-
-
     <!-- Text styles. -->
+
+    <style name="login_text_hint">
+        <item name="android:textColor">?attr/colorPrimary</item>
+        <item name="android:textColorHighlight">?attr/colorPrimary</item>
+        <item name="android:textColorLink">?attr/colorPrimary</item>
+        <item name="android:shadowColor">?attr/colorPrimary</item>
+        <item name="android:shadowDx">0</item>
+        <item name="android:shadowDy">0</item>
+        <item name="android:shadowRadius">0</item>
+        <!-- The color of the label when it is collapsed and the text field is active -->
+        <item name="hintTextColor">?attr/colorPrimary</item>
+        <!-- The color of the label in all other text field states (such as resting and disabled) -->
+        <item name="android:textColorHint">?attr/colorPrimary</item>
+        <item name="android:textSize">@dimen/size_text_font_medium_18</item>
+        <item name="boxStrokeColor">?attr/colorPrimary</item>
+        <item name="color">?attr/colorPrimary</item>
+        <item name="colorAccent">?attr/colorPrimary</item>
+        <item name="colorBackgroundFloating">?attr/colorPrimary</item>
+        <item name="colorContainer">?attr/colorPrimary</item>
+        <item name="colorOnBackground">?attr/colorPrimary</item>
+        <item name="colorError">?attr/colorPrimary</item>
+        <item name="colorButtonNormal">?attr/colorPrimary</item>
+        <item name="colorControlNormal">?attr/colorPrimary</item>
+        <item name="colorErrorContainer">?attr/colorPrimary</item>
+        <item name="colorOnContainer">?attr/colorPrimary</item>
+        <item name="colorOnContainerUnchecked">?attr/colorPrimary</item>
+        <item name="colorOnError">?attr/colorPrimary</item>
+        <item name="colorOutline">?attr/colorPrimary</item>
+        <item name="colorOnPrimary">?attr/colorPrimary</item>
+        <item name="colorOnPrimaryContainer">?attr/colorPrimary</item>
+        <item name="colorSurface">?attr/colorPrimary</item>
+        <item name="colorSwitchThumbNormal">?attr/colorPrimary</item>
+        <item name="actionTextColorAlpha">?attr/colorPrimary</item>
+        <item name="android:amPmTextColor">?attr/colorPrimary</item>
+        <item name="android:cacheColorHint">?attr/colorPrimary</item>
+        <item name="android:calendarTextColor">?attr/colorPrimary</item>
+        <item name="android:actionMenuTextColor">?attr/colorPrimary</item>
+        <item name="android:colorFocusedHighlight">?attr/colorPrimary</item>
+        <item name="android:colorBackgroundCacheHint">?attr/colorPrimary</item>
+        <item name="android:color">?attr/colorPrimary</item>
+        <item name="android:colorAccent">?attr/colorPrimary</item>
+        <item name="android:colorMode">default</item>
+        <item name="android:colorPrimaryDark">?attr/colorPrimary</item>
+        <item name="colorPrimaryContainer">?attr/colorPrimary</item>
+        <item name="colorPrimaryInverse">?attr/colorPrimary</item>
+        <item name="android:colorSecondary">?attr/colorPrimary</item>
+        <item name="android:numbersBackgroundColor">?attr/colorPrimary</item>
+        <item name="android:textColorPrimaryDisableOnly">?attr/colorPrimary</item>
+        <item name="android:textColorPrimaryInverseDisableOnly">?attr/colorPrimary</item>
+        <item name="android:textColorPrimaryInverseNoDisable">?attr/colorPrimary</item>
+    </style>
+
+    <style name="text_White_clear" parent="Widget.AppCompat.TextView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">@font/opensans</item>
+        <item name="android:textSize">@dimen/size_text_font_medium_18</item>
+        <item name="android:textAppearance">@dimen/size_text_font_medium_18</item>
+    </style>
 
     <style name="text_White" parent="Widget.AppCompat.TextView">
         <item name="android:layout_width">wrap_content</item>
@@ -112,8 +168,6 @@
     <style name="text_Blue_smaller" parent="text_Blue">
         <item name="android:textSize">@dimen/size_text_font_smaller_14</item>
     </style>
-
-
 
 
 </resources>

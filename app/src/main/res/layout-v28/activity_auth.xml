@@ -56,17 +56,19 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:textColorHint="?attr/colorPrimary"
+                >
 
                 <com.google.android.material.textfield.TextInputEditText
                     style="@style/text_White"
-                    android:id="@+id/tiTextEmailAddress"
                     android:layout_width="match_parent"
                     android:background="@android:color/transparent"
+                    android:id="@+id/tiTextEmailAddress"
                     android:hint="@string/title_e_mail"
-                    android:textColorHint="?attr/colorOnTertiary"
                     android:inputType="textEmailAddress"
-                    android:textColor="?attr/colorOnTertiary" />
+                    android:textColor="?attr/colorOnTertiary"
+                    />
             </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -79,22 +81,25 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:textColorHint="?attr/colorPrimary"
+                >
 
                 <com.google.android.material.textfield.TextInputEditText
+
                     style="@style/text_White"
+                    android:textAppearance="@style/login_text_hint"
+
+                    android:layout_height="wrap_content"
                     android:id="@+id/editTextTextPassword"
                     android:layout_width="match_parent"
-                    android:background="@android:color/transparent"
                     android:hint="@string/title_password"
-                    android:textColorHint="?attr/colorOnTertiary"
-                    android:inputType="textPassword"
-                    tools:ignore="DuplicateSpeakableTextCheck" />
+                    android:background="@android:color/transparent"
+                    android:inputType="textPassword" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <CheckBox
-                style="@style/text_Grey"
                 android:id="@+id/checkBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -102,7 +107,7 @@
                 android:text="@string/rememberMeCheckbox"
                 android:textColor="?attr/colorTertiary"
                 android:fontFamily="@font/opensans"
-
+                android:buttonTint="?attr/colorPrimary"
                 android:textSize="@dimen/size_text_font_small_16"/>
 
 
