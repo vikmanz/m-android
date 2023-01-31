@@ -1,0 +1,39 @@
+
+        emailId = (TextView)findViewById(R.id.emailid);
+        continuebooking = (ImageView)findViewById(R.id.continuebooking);
+        firstName= (EditText)findViewById(R.id.firstName);
+        emailId.setText("test@gmail.com");
+        setTittle();
+        continuebooking.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+
+                if(firstName.getText().toString().trim().equalsIgnoreCase("")){
+                    firstName.setError("Enter FirstName");
+                }
+
+            }
+        });
+        firstName.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                firstName.setError(null);
+
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count,
+                int after) {
+                // TODO Auto-generated method stub
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                firstName.setError(null);
+
+            }
+        });
+    }

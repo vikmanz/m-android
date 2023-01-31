@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AuthActivity">
+    tools:context=".AuthActivity" >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayoutMainBG"
@@ -119,11 +119,12 @@
         </androidx.appcompat.widget.LinearLayoutCompat>
 
         <androidx.appcompat.widget.AppCompatButton
-            style="@style/btnStdWhite_google"
             android:id="@+id/bRegisterByGoogle"
+            style="@style/btnStdWhite_google"
             android:layout_marginTop="@dimen/offset_large_32"
             app:layout_constraintTop_toBottomOf="@+id/linearLayoutEmailPassword"
-            tools:ignore="MissingConstraints" />
+            tools:ignore="MissingConstraints,TouchTargetSizeCheck,SpeakableTextPresentCheck"
+            tools:layout_editor_absoluteX="8dp" />
 
         <androidx.appcompat.widget.AppCompatTextView
             style="@style/text_White_centered"
