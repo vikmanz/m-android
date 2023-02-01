@@ -46,56 +46,61 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayoutHello"
-            app:layout_constraintVertical_bias="0">
+            app:layout_constraintVertical_bias="0"
+            >
 
-            <androidx.appcompat.widget.AppCompatTextView
-                style="@style/text_White"
-                android:id="@+id/tvTitleEmail"
-                android:layout_marginTop="@dimen/offset_small_8"
-                android:text="@string/title_e_mail" />
+
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColorHint="?attr/colorPrimary"
+                style="@style/textInputLayout_LoginPassword"
+                android:hint="@string/title_e_mail"
+                app:hintTextAppearance="@style/textInputLayout_hint_appearance"
+                app:helperText="error message"
+                app:boxCollapsedPaddingTop="4dp"
                 >
 
+
+
                 <com.google.android.material.textfield.TextInputEditText
-                    style="@style/text_White"
+                    android:layout_height="wrap_content"
                     android:layout_width="match_parent"
-                    android:background="@android:color/transparent"
                     android:id="@+id/tiTextEmailAddress"
-                    android:hint="@string/title_e_mail"
                     android:inputType="textEmailAddress"
                     android:textColor="?attr/colorOnTertiary"
+                    android:background="@drawable/edittext_bottom_line"
+                    android:paddingStart="0dp"
+                    android:paddingEnd="0dp"
                     />
+
+
             </com.google.android.material.textfield.TextInputLayout>
 
 
-            <androidx.appcompat.widget.AppCompatTextView
-                style="@style/text_White"
-                android:id="@+id/tvTitlePassword"
-                android:layout_marginTop="@dimen/offset_small_8"
-                android:text="@string/title_password" />
-
 
             <com.google.android.material.textfield.TextInputLayout
+                android:paddingTop="@dimen/offset_small_8"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColorHint="?attr/colorPrimary"
+                style="@style/textInputLayout_LoginPassword"
+                android:hint="@string/title_password"
+                app:helperTextEnabled="true"
+                app:helperText="error message"
+                app:boxCollapsedPaddingTop="4dp"
+
                 >
 
                 <com.google.android.material.textfield.TextInputEditText
-
-                    style="@style/text_White"
-                    android:textAppearance="@style/login_text_hint"
-
                     android:layout_height="wrap_content"
-                    android:id="@+id/editTextTextPassword"
                     android:layout_width="match_parent"
-                    android:hint="@string/title_password"
-                    android:background="@android:color/transparent"
-                    android:inputType="textPassword" />
+                    android:id="@+id/editTextTextPassword"
+                    android:inputType="textPassword"
+                    android:background="@drawable/edittext_bottom_line"
+                    android:paddingStart="0dp"
+                    android:paddingEnd="0dp"
+
+                    />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -107,8 +112,9 @@
                 android:text="@string/rememberMeCheckbox"
                 android:textColor="?attr/colorTertiary"
                 android:fontFamily="@font/opensans"
-                android:buttonTint="?attr/colorPrimary"
-                android:textSize="@dimen/size_text_font_small_16"/>
+                android:buttonTint="?attr/colorTertiary"
+                android:textSize="@dimen/size_text_font_small_16"
+                />
 
 
 
@@ -133,7 +139,7 @@
             app:layout_constraintTop_toBottomOf="@+id/bRegisterByGoogle"/>
 
         <androidx.appcompat.widget.AppCompatButton
-            style="@style/btnStdOrange"
+            style="@style/btnStdOrangeOutlined"
             android:id="@+id/bRegisterByEmailPassword"
             android:text="@string/registerButton"
             android:layout_marginTop="@dimen/offset_small_8"

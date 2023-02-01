@@ -13,7 +13,7 @@
             android:viewportHeight="40">
             <path
                 android:pathData="M6,1L322,1A5,5 0,0 1,327 6L327,34A5,5 0,0 1,322 39L6,39A5,5 0,0 1,1 34L1,6A5,5 0,0 1,6 1z"
-                android:fillColor="?attr/colorOnSecondary"
+                android:fillColor="@android:color/transparent"
                 android:strokeColor="?attr/colorOnSecondary"
                 android:strokeWidth="2" />
         </vector>
@@ -29,7 +29,7 @@
             android:viewportHeight="40">
             <path
                 android:pathData="M6,1L322,1A5,5 0,0 1,327 6L327,34A5,5 0,0 1,322 39L6,39A5,5 0,0 1,1 34L1,6A5,5 0,0 1,6 1z"
-                android:fillColor="?attr/colorPrimaryVariant"
+                android:fillColor="@android:color/transparent"
                 android:strokeColor="?attr/colorPrimary"
                 android:strokeWidth="2" />
         </vector>
@@ -45,7 +45,7 @@
             android:viewportHeight="40">
             <path
                 android:pathData="M6,1L322,1A5,5 0,0 1,327 6L327,34A5,5 0,0 1,322 39L6,39A5,5 0,0 1,1 34L1,6A5,5 0,0 1,6 1z"
-                android:fillColor="?attr/colorSecondaryVariant"
+                android:fillColor="@android:color/transparent"
                 android:strokeColor="?attr/colorSecondaryVariant"
                 android:strokeWidth="2" />
         </vector>
@@ -60,7 +60,7 @@
             android:viewportHeight="40">
             <path
                 android:pathData="M6,1L322,1A5,5 0,0 1,327 6L327,34A5,5 0,0 1,322 39L6,39A5,5 0,0 1,1 34L1,6A5,5 0,0 1,6 1z"
-                android:fillColor="?attr/colorPrimary"
+                android:fillColor="@android:color/transparent"
                 android:strokeColor="?attr/colorPrimary"
                 android:strokeWidth="2" />
         </vector>

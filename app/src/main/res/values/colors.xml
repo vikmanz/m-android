@@ -23,4 +23,7 @@
     <color name="default_launcher_bg">#40FFFFFF</color>
     <color name="default_launcher_fg_gradient_in">#44000000</color>
     <color name="default_launcher_fg_gradient_out">#00000000</color>
+    <color name="default_theme_text_error">#F93E3E</color>
+    <color name="night_theme_text_error">#F9A53E</color>
+
 </resources>

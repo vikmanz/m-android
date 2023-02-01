@@ -28,7 +28,9 @@ class AuthActivity : AppCompatActivity() {
 
         button.setOnClickListener {
             val intentObject = Intent(this, MainActivity::class.java)
-            intentObject.putExtra(INTENT_EMAIL_ID, "${emailId.text}")
+            if (!emailId.text!!.equals("")) {
+                intentObject.putExtra(INTENT_EMAIL_ID, "${emailId.text}")
+            }
             startActivity(intentObject)
         }
 
