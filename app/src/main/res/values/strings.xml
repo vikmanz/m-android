@@ -19,4 +19,5 @@
     <string name="rememberMeCheckbox">Remember me</string>
     <string name="already_have_an_account">Already have an account?</string>
     <string name="sign_in">Sign in</string>
+    <string name="default_person_name">Name Surname</string>
 </resources>

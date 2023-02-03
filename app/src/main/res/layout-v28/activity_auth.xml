@@ -59,6 +59,7 @@
                 app:hintTextAppearance="@style/textInputLayout_hint_appearance"
                 app:helperText="error message"
                 app:boxCollapsedPaddingTop="4dp"
+                app:expandedHintEnabled="false"
                 >
 
 
@@ -72,6 +73,7 @@
                     android:background="@drawable/edittext_bottom_line"
                     android:paddingStart="0dp"
                     android:paddingEnd="0dp"
+
                     />
 
 
@@ -83,12 +85,13 @@
                 android:paddingTop="@dimen/offset_small_8"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/textInputLayout_LoginPassword"
                 android:hint="@string/title_password"
+                app:hintTextAppearance="@style/textInputLayout_hint_appearance"
+                style="@style/textInputLayout_LoginPassword"
                 app:helperTextEnabled="true"
                 app:helperText="error message"
                 app:boxCollapsedPaddingTop="4dp"
-
+                app:expandedHintEnabled="false"
                 >
 
                 <com.google.android.material.textfield.TextInputEditText

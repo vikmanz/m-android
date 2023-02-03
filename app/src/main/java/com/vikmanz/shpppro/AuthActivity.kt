@@ -38,6 +38,11 @@ class AuthActivity : AppCompatActivity() {
             if (emailId.text.toString().trim() == "") {
                 emailId.error = "Enter E-Mail!"
             }
+            val intentObject = Intent(this, MainActivity::class.java)
+            if (!emailId.text!!.equals("")) {
+                intentObject.putExtra(INTENT_EMAIL_ID, "${emailId.text}")
+            }
+            startActivity(intentObject)
         }
 
         emailId.addTextChangedListener(object : TextWatcher {
