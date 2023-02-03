@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="?attr/colorSecondary"
-        android:focusableInTouchMode="true">
+        >
 
 
         <androidx.appcompat.widget.LinearLayoutCompat
@@ -23,13 +23,12 @@
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:focusableInTouchMode="true" >
+            app:layout_constraintTop_toTopOf="parent" >
 
             <androidx.appcompat.widget.AppCompatTextView
                 style="@style/text_White_HelloText_Upper"
                 android:id="@+id/tvHelloText"
-                android:text="@string/helloText" />
+                android:text="@string/helloText"/>
 
             <androidx.appcompat.widget.AppCompatTextView
                 style="@style/text_White_HelloText_Sub"
@@ -126,7 +125,6 @@
                 android:textSize="@dimen/size_text_font_small_16"
                 android:focusableInTouchMode="true"
                 />
-
 
 
 

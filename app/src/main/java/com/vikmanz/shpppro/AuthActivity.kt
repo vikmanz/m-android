@@ -7,7 +7,6 @@ import android.util.Log
 import android.util.Patterns
 import androidx.appcompat.app.AppCompatActivity
 import com.vikmanz.shpppro.constants.Constants.INTENT_EMAIL_ID
-import com.vikmanz.shpppro.constants.Constants.PASS_CHECK
 import com.vikmanz.shpppro.databinding.ActivityAuthBinding
 
 
@@ -95,7 +94,7 @@ class AuthActivity : AppCompatActivity() {
     }
 
     private fun validPassword(): String? {
-        if (PASS_CHECK) {
+        if (!binding.checkBox.isChecked) {
             val passwordText = binding.tiTextPassword.text.toString()
             if (passwordText.length < 8) {
                 return "Minimum 8 Characters Password"
