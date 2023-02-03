@@ -1,13 +1,13 @@
 package com.vikmanz.shpppro
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
+import android.util.Log
+import android.util.Patterns
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.AppCompatButton
-import androidx.appcompat.widget.AppCompatEditText
 import com.vikmanz.shpppro.constants.Constants.INTENT_EMAIL_ID
+import com.vikmanz.shpppro.constants.Constants.PASS_CHECK
 import com.vikmanz.shpppro.databinding.ActivityAuthBinding
 
 
@@ -21,47 +21,95 @@ class AuthActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        val emailId = binding.tiTextEmailAddress as AppCompatEditText
-        //val pass = binding.tiTextEmailAddress as AppCompatEditText
-        val googleButton = binding.bRegisterByGoogle
-        val button: AppCompatButton = binding.bRegisterByEmailPassword
+        emailFocusListener()
+        passwordFocusListener()
 
-        button.setOnClickListener {
-            val intentObject = Intent(this, MainActivity::class.java)
-            if (!emailId.text!!.equals("")) {
-                intentObject.putExtra(INTENT_EMAIL_ID, "${emailId.text}")
-            }
-            startActivity(intentObject)
+        binding.bRegisterByEmailPassword.setOnClickListener { submitRegisterForm() }
+
+    }
+
+    private fun submitRegisterForm() {
+
+        binding.tiLayoutEmail.helperText = validEmail()
+        binding.tiLayoutPassword.helperText = validPassword()
+
+        val isValid =
+            binding.tiLayoutEmail.helperText == null && binding.tiLayoutPassword.helperText == null
+
+        if (isValid) {
+            doRegister()
+        } else {
+            invalidForm()
         }
 
-        googleButton.setOnClickListener {
-            if (emailId.text.toString().trim() == "") {
-                emailId.error = "Enter E-Mail!"
+    }
+
+    private fun doRegister() {
+        val intentObject = Intent(this, MainActivity::class.java)
+        intentObject.putExtra(INTENT_EMAIL_ID, binding.tiTextEmail.text.toString())
+        Log.d("MyLog", "email: ${binding.tiTextEmail.text.toString()}")
+        startActivity(intentObject)
+    }
+
+    private fun invalidForm() {
+        var message = ""
+        message += if (binding.tiLayoutEmail.helperText != null) "\n\nEmail: ${binding.tiLayoutEmail.helperText}" else ""
+        message += if (binding.tiLayoutPassword.helperText != null) "\n\nPassword: ${binding.tiLayoutPassword.helperText}" else ""
+
+        Log.d("MyLog", message)
+        AlertDialog.Builder(this)
+            .setTitle("Invalid registration form!")
+            .setMessage(message)
+            .setPositiveButton("Okay") { _, _ ->
+                if (binding.tiLayoutEmail.helperText != null) {
+                    binding.tiTextEmail.requestFocus()
+                } else {
+                    binding.tiTextPassword.requestFocus()
+                }
             }
-            val intentObject = Intent(this, MainActivity::class.java)
-            if (!emailId.text!!.equals("")) {
-                intentObject.putExtra(INTENT_EMAIL_ID, "${emailId.text}")
+            .show()
+    }
+
+    private fun emailFocusListener() {
+        binding.tiTextEmail.setOnFocusChangeListener { _, focused ->
+            if (!focused) {
+                binding.tiLayoutEmail.helperText = validEmail()
             }
-            startActivity(intentObject)
         }
+    }
 
-        emailId.addTextChangedListener(object : TextWatcher {
-            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                emailId.error = null
+    private fun validEmail(): String? {
+        val emailText = binding.tiTextEmail.text.toString()
+        if (!Patterns.EMAIL_ADDRESS.matcher(emailText).matches()) {
+            return "Invalid email address"
+        }
+        return null
+    }
+
+    private fun passwordFocusListener() {
+        binding.tiTextPassword.setOnFocusChangeListener { _, focused ->
+            if (!focused) {
+                binding.tiLayoutPassword.helperText = validPassword()
             }
+        }
+    }
 
-            override fun beforeTextChanged(
-                s: CharSequence, start: Int, count: Int,
-                after: Int
-            ) {
-
+    private fun validPassword(): String? {
+        if (PASS_CHECK) {
+            val passwordText = binding.tiTextPassword.text.toString()
+            if (passwordText.length < 8) {
+                return "Minimum 8 Characters Password"
             }
-
-            override fun afterTextChanged(s: Editable) {
-                emailId.error = null
+            if (!passwordText.matches(".*[A-Z].*".toRegex())) {
+                return "Must Contain 1 Upper-case Character"
             }
-        })
-
-
+            if (!passwordText.matches(".*[a-z].*".toRegex())) {
+                return "Must Contain 1 Lower-case Character"
+            }
+            if (!passwordText.matches(".*[@#\$%^&+=].*".toRegex())) {
+                return "Must Contain 1 Special Character (@#\$%^&+=)"
+            }
+        }
+        return null
     }
 }

@@ -4,13 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AuthActivity" >
+    tools:context=".AuthActivity"
+    android:focusableInTouchMode="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayoutMainBG"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="?attr/colorSecondary">
+        android:background="?attr/colorSecondary"
+        android:focusableInTouchMode="true">
 
 
         <androidx.appcompat.widget.LinearLayoutCompat
@@ -21,7 +23,8 @@
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            android:focusableInTouchMode="true" >
 
             <androidx.appcompat.widget.AppCompatTextView
                 style="@style/text_White_HelloText_Upper"
@@ -57,9 +60,9 @@
                 style="@style/textInputLayout_LoginPassword"
                 android:hint="@string/title_e_mail"
                 app:hintTextAppearance="@style/textInputLayout_hint_appearance"
-                app:helperText="error message"
                 app:boxCollapsedPaddingTop="4dp"
                 app:expandedHintEnabled="false"
+                android:id="@+id/tiLayoutEmail"
                 >
 
 
@@ -67,13 +70,12 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_height="wrap_content"
                     android:layout_width="match_parent"
-                    android:id="@+id/tiTextEmailAddress"
+                    android:id="@+id/tiTextEmail"
                     android:inputType="textEmailAddress"
-                    android:textColor="?attr/colorOnTertiary"
                     android:background="@drawable/edittext_bottom_line"
                     android:paddingStart="0dp"
                     android:paddingEnd="0dp"
-
+                    android:textColor="?attr/colorTertiary"
                     />
 
 
@@ -89,20 +91,25 @@
                 app:hintTextAppearance="@style/textInputLayout_hint_appearance"
                 style="@style/textInputLayout_LoginPassword"
                 app:helperTextEnabled="true"
-                app:helperText="error message"
                 app:boxCollapsedPaddingTop="4dp"
                 app:expandedHintEnabled="false"
+                app:counterEnabled="true"
+                app:counterTextColor="?attr/colorTertiary"
+                app:counterMaxLength="16"
+                app:passwordToggleEnabled="true"
+                app:passwordToggleTint="?attr/colorTertiary"
+                android:id="@+id/tiLayoutPassword"
                 >
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_height="wrap_content"
                     android:layout_width="match_parent"
-                    android:id="@+id/editTextTextPassword"
+                    android:id="@+id/tiTextPassword"
                     android:inputType="textPassword"
                     android:background="@drawable/edittext_bottom_line"
                     android:paddingStart="0dp"
                     android:paddingEnd="0dp"
-
+                    android:textColor="?attr/colorTertiary"
                     />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -117,6 +124,7 @@
                 android:fontFamily="@font/opensans"
                 android:buttonTint="?attr/colorTertiary"
                 android:textSize="@dimen/size_text_font_small_16"
+                android:focusableInTouchMode="true"
                 />
 
 

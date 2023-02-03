@@ -20,7 +20,11 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        binding.tvPersonName.text = parseEmail(intent.getStringExtra(INTENT_EMAIL_ID))
+        Log.d("MyLog", "-3")
+        val emailToParse = intent.getStringExtra(INTENT_EMAIL_ID).toString()
+        Log.d("MyLog", "-2: $emailToParse")
+        binding.tvPersonName.text = parseEmail(emailToParse)
+        Log.d("MyLog", "-1")
 
         val button: AppCompatButton = binding.btnViewMyContacts
         button.setOnClickListener {
@@ -29,71 +33,49 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun parseEmail(fullEmail: String?): String {
+    private fun parseEmail(fullEmail: String): String {
 
+        Log.d("MyLog", "0: $fullEmail")
+        val personName: String
 
-        var personName = resources.getString(R.string.default_person_name)
-        var registered = false
-        Log.d("MyLog", "0")
-        if (fullEmail!!.isNotEmpty()) {
-            Log.d("MyLog", "1")
-            if (fullEmail.indexOf('@') != -1) {
-                Log.d("MyLog", "2")
-                val firstPartEmail = fullEmail.substring(0, fullEmail.indexOf('@'))
-                Log.d("MyLog", "$fullEmail")
+        if (fullEmail == getString(R.string.guest_email)) return getString(R.string.guest_name_surname)
+        Log.d("MyLog", "1: $fullEmail")
 
+        val firstPartEmail = fullEmail.substring(0, fullEmail.indexOf('@'))
+        Log.d("MyLog", "email first part: $firstPartEmail")
 
-                if (fullEmail.indexOf('.') == -1) {
-                    Log.d("MyLog", "3")
-                    val regex = "[A-Z]".toRegex()
-                    val match: MatchResult? = regex.find(firstPartEmail.substring(1))
+        if (firstPartEmail.indexOf('.') == -1) {
+            Log.d("MyLog", "2")
+            val regex = "[A-Z]".toRegex()
+            val match: MatchResult? = regex.find(firstPartEmail.substring(1))
 
-                    personName = if (match == null) {
-                        firstPartEmail
-                    } else {
-                        val surnameStartIndex = match.range.first + 1
-                        "${
-                            firstPartEmail.substring(0, surnameStartIndex).replaceFirstChar {
-                                if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString()
-                            }
-                        } ${firstPartEmail.substring(surnameStartIndex)}"
-                    }
-                    Log.d("MyLog", "4")
-                    Log.d("MyLog", "Name is [${personName}]")
-                    registered = true
-
-                } else {
-                    Log.d("MyLog", "5")
-
-                    if (fullEmail.indexOf('.') == -1) {
-                        personName = firstPartEmail
-                    } else {
-                        personName = firstPartEmail
-                            .split('.')
-                            .joinToString(" ", transform = String::firstCharToUpperCase)
-
-                    }
-                    Log.d("MyLog", "6")
-                    Log.d("MyLog", personName)
-                    registered = true
-                }
+            personName = if (match == null) {
+                firstPartEmail
             } else {
-                Log.d("MyLog", "7")
-                personName = fullEmail
-                registered = true
+                val surnameStartIndex = match.range.first + 1
+                "${
+                    firstPartEmail.substring(0, surnameStartIndex).replaceFirstChar {
+                        if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString()
+                    }
+                } ${firstPartEmail.substring(surnameStartIndex)}"
             }
+            Log.d("MyLog", "3")
+
+        } else {
+            Log.d("MyLog", "4")
+            personName = firstPartEmail
+                .split('.')
+                .joinToString(" ", transform = String::firstCharToUpperCase)
+
+            Log.d("MyLog", "5")
         }
 
-        Log.d("MyLog", "8")
-        if (registered) {
-            Log.d("MyLog", "9")
-            binding.ivPerson.setImageResource(R.drawable.sample_avatar)
-        }
-        Log.d("MyLog", "10")
+        Log.d("MyLog", "6")
+        binding.ivPerson.setImageResource(R.drawable.sample_avatar)
+
+        Log.d("MyLog", "Name is [${personName}]")
         return personName
     }
-
-
 }
 
 

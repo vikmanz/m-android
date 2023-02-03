@@ -20,4 +20,6 @@
     <string name="already_have_an_account">Already have an account?</string>
     <string name="sign_in">Sign in</string>
     <string name="default_person_name">Name Surname</string>
+    <string name="guest_email">guest@gmail.com</string>
+    <string name="guest_name_surname">Guest Guestovich</string>
 </resources>
