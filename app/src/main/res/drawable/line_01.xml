@@ -1,12 +1,11 @@
 <vector
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:aapt="http://schemas.android.com/aapt"
     xmlns:tools="http://schemas.android.com/tools"
     android:width="329dp"
     android:height="1dp"
     android:viewportWidth="329"
     android:viewportHeight="1"
-    >
+    tools:ignore="VectorRaster">
 
     <group>
 
@@ -19,7 +18,7 @@
     <path
         android:pathData="M0.5 0.5H328.5H0.5Z"
         android:strokeWidth="1"
-        android:strokeColor="#BDBDBD"
+        android:strokeColor="?attr/colorTertiary"
         />
 
 </vector>

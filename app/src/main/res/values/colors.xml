@@ -1,13 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
-    <color name="BG_242235">#242235</color>
-    <color name="GreyTitles">#B2B2B3</color>
-    <color name="CorporateOrange">#FA5E06</color>
+
+    <!-- Default black and white. -->
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+
+    <!-- Primary colors. -->
+    <color name="default_theme_color_primary">#FA5E06</color>
+    <color name="default_theme_color_primary_variant">#F9BC06</color>
+
+    <!-- Secondary colors. -->
+    <color name="default_theme_color_secondary">#242235</color>
+    <color name="default_theme_color_secondary_variant">#1F6A81</color>
+
+    <!-- Text colors. -->
+    <color name="default_theme_text_color_primary">#FFFFFF</color>
+    <color name="default_theme_text_color_secondary">#B2B2B3</color>
+    <color name="night_theme_text_color_primary">#FFDA52</color>
+    <color name="night_theme_text_color_secondary">#A3D94FFF</color>
+
+    <!-- Other colors. -->
+    <color name="default_launcher_bg">#40FFFFFF</color>
+    <color name="default_launcher_fg_gradient_in">#44000000</color>
+    <color name="default_launcher_fg_gradient_out">#00000000</color>
+    <color name="default_theme_text_error">#F93E3E</color>
+    <color name="night_theme_text_error">#F9A53E</color>
+
 </resources>

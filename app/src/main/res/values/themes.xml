@@ -1,15 +1,22 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="Theme.SHppPro" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="defaultTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/CorporateOrange</item>
-        <item name="colorPrimaryVariant">@color/CorporateOrange</item>
-        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorPrimary">@color/default_theme_color_primary</item>
+        <item name="colorPrimaryVariant">@color/default_theme_color_primary_variant</item>
+
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/GreyTitles</item>
-        <item name="colorSecondaryVariant">@color/GreyTitles</item>
-        <item name="colorOnSecondary">@color/black</item>
+        <item name="colorSecondary">@color/default_theme_color_secondary</item>
+        <item name="colorSecondaryVariant">@color/default_theme_color_secondary_variant</item>
+
+        <!-- Text colors. -->
+        <item name="colorTertiary">@color/default_theme_text_color_primary</item>
+        <item name="colorOnTertiary">@color/default_theme_text_color_secondary</item>
+        <item name="colorError">@color/default_theme_text_error</item>
+
+        <!-- Widgets styles. -->
+        <item name="android:textViewStyle">@style/text_White</item>
 
     </style>
-
 </resources>

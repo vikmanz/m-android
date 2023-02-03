@@ -2,10 +2,10 @@
 <resources>
 
     <!-- Offsets of elements. -->
-    <dimen name="offset_large">32dp</dimen>
-    <dimen name="offset_big">24dp</dimen>
-    <dimen name="offset_medium">16dp</dimen>
-    <dimen name="offset_small">8dp</dimen>
+    <dimen name="offset_large_32">32dp</dimen>
+    <dimen name="offset_big_24">24dp</dimen>
+    <dimen name="offset_medium_16">16dp</dimen>
+    <dimen name="offset_small_8">8dp</dimen>
 
     <!-- Buttons size. -->
     <dimen name="size_button_height_medium">40dp</dimen>
@@ -13,12 +13,17 @@
     <dimen name="size_button_height_large">55dp</dimen>
 
     <!-- Text size. -->
-    <dimen name="size_text_font_smallest">12sp</dimen>
-    <dimen name="size_text_font_small">16sp</dimen>
-    <dimen name="size_text_font_medium">18sp</dimen>
-    <dimen name="size_text_font_big">24sp</dimen>
+    <dimen name="size_text_font_mini_12">12sp</dimen>
+    <dimen name="size_text_font_smaller_14">14sp</dimen>
+    <dimen name="size_text_font_small_16">16sp</dimen>
+    <dimen name="size_text_font_medium_18">18sp</dimen>
+    <dimen name="size_text_font_big_24">24sp</dimen>
+    <dimen name="size_text_font_large_32">32sp</dimen>
 
     <!-- Font weight. -->
     <dimen name="a">12</dimen>
+    <dimen name="avatar_size_x">130dp</dimen>
+    <dimen name="avatar_size_y">130dp</dimen>
+    <dimen name="avatar_corner_radius">360dp</dimen>
 
 </resources>
