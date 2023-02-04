@@ -20,11 +20,25 @@ class AuthActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
+        
+        binding.root.setOnClickListener { binding.tiTextEmail.clearFocus() }
         emailFocusListener()
         passwordFocusListener()
 
         binding.bRegisterByEmailPassword.setOnClickListener { submitRegisterForm() }
+        
+        binding.checkBox.setOnClickListener { printEmail() }
 
+    }
+
+    private fun printEmail() {
+        binding.checkBox.setOnCheckedChangeListener { buttonView, isChecked ->
+            Log.d("MyLog", "$isChecked")
+            if (isChecked) {
+                val text = "viktor.manza@gmail.com"
+                binding.tiTextEmail.setText(text)
+            }
+        }
     }
 
     private fun submitRegisterForm() {
