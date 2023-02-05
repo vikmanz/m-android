@@ -10,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.vikmanz.shpppro.constants.Constants.INTENT_EMAIL_ID
 import com.vikmanz.shpppro.databinding.ActivityAuthBinding
 
-
 class AuthActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAuthBinding
@@ -47,7 +46,7 @@ class AuthActivity : AppCompatActivity() {
                 tvHelloText.text = getString(R.string.helloText_signin)
                 tvHelloSubText.text = getString(R.string.helloSubText_signin)
                 tiLayoutPassword.isCounterEnabled = false
-                forgotPassword?.visibility = View.VISIBLE
+                forgotPassword.visibility = View.VISIBLE
                 bRegisterByGoogle.visibility = View.GONE
                 googleOrRegister.visibility = View.GONE
                 bRegisterByEmailPassword.text = getString(R.string.registerButton_signin)
@@ -61,7 +60,7 @@ class AuthActivity : AppCompatActivity() {
                 tvHelloText.text = getString(R.string.helloText)
                 tvHelloSubText.text = getString(R.string.helloSubText)
                 tiLayoutPassword.isCounterEnabled = true
-                forgotPassword?.visibility = View.GONE
+                forgotPassword.visibility = View.GONE
                 bRegisterByGoogle.visibility = View.VISIBLE
                 googleOrRegister.visibility = View.VISIBLE
                 bRegisterByEmailPassword.text = getString(R.string.registerButton)
