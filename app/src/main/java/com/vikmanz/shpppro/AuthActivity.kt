@@ -1,19 +1,19 @@
 package com.vikmanz.shpppro
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
+import android.util.Log
+import android.util.Patterns
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.AppCompatButton
-import androidx.appcompat.widget.AppCompatEditText
 import com.vikmanz.shpppro.constants.Constants.INTENT_EMAIL_ID
 import com.vikmanz.shpppro.databinding.ActivityAuthBinding
-
 
 class AuthActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAuthBinding
+    private var isLoginScreen = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,47 +21,169 @@ class AuthActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        val emailId = binding.tiTextEmailAddress as AppCompatEditText
-        //val pass = binding.tiTextEmailAddress as AppCompatEditText
-        val googleButton = binding.bRegisterByGoogle
-        val button: AppCompatButton = binding.bRegisterByEmailPassword
+        binding.tiTextEmail.setText(getString(R.string.my_main_email))
+        binding.tiTextPassword.setText(getString(R.string.my_main_password))
 
-        button.setOnClickListener {
-            val intentObject = Intent(this, MainActivity::class.java)
-            if (!emailId.text!!.equals("")) {
-                intentObject.putExtra(INTENT_EMAIL_ID, "${emailId.text}")
+        // Focus to bg and checkbox login functions.
+        backgroundFocusHandler()
+        binding.checkBox.setOnClickListener { printEmail() }    // disable this to own email
+
+        // Listeners to text fields and register button.
+        emailFocusListener()
+        passwordFocusListener()
+        binding.bRegisterByEmailPassword.setOnClickListener { submitRegisterForm() }
+
+        // Change Register to Login and another.
+        binding.alreadyHaveAccLink.setOnClickListener { changeRegisterLoginScreen() }
+    }
+
+    private fun changeRegisterLoginScreen() {
+
+        isLoginScreen = !isLoginScreen
+
+        if (isLoginScreen) {
+            binding.apply {
+                tvHelloText.text = getString(R.string.helloText_signin)
+                tvHelloSubText.text = getString(R.string.helloSubText_signin)
+                tiLayoutPassword.isCounterEnabled = false
+                forgotPassword.visibility = View.VISIBLE
+                bRegisterByGoogle.visibility = View.GONE
+                googleOrRegister.visibility = View.GONE
+                bRegisterByEmailPassword.text = getString(R.string.registerButton_signin)
+                warningAboutTerms.visibility = View.GONE
+                alreadyHaveAccMessage.text = getString(R.string.already_have_an_account_signin)
+                alreadyHaveAccLink.text = getString(R.string.sign_in_signin)
             }
-            startActivity(intentObject)
         }
-
-        googleButton.setOnClickListener {
-            if (emailId.text.toString().trim() == "") {
-                emailId.error = "Enter E-Mail!"
+        else {
+            binding.apply {
+                tvHelloText.text = getString(R.string.helloText)
+                tvHelloSubText.text = getString(R.string.helloSubText)
+                tiLayoutPassword.isCounterEnabled = true
+                forgotPassword.visibility = View.GONE
+                bRegisterByGoogle.visibility = View.VISIBLE
+                googleOrRegister.visibility = View.VISIBLE
+                bRegisterByEmailPassword.text = getString(R.string.registerButton)
+                warningAboutTerms.visibility = View.VISIBLE
+                alreadyHaveAccMessage.text = getString(R.string.already_have_an_account)
+                alreadyHaveAccLink.text = getString(R.string.sign_in)
             }
-            val intentObject = Intent(this, MainActivity::class.java)
-            if (!emailId.text!!.equals("")) {
-                intentObject.putExtra(INTENT_EMAIL_ID, "${emailId.text}")
-            }
-            startActivity(intentObject)
         }
+    }
 
-        emailId.addTextChangedListener(object : TextWatcher {
-            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                emailId.error = null
+
+    private fun doRegister() {
+        val intentObject = Intent(this, MainActivity::class.java)
+        intentObject.putExtra(INTENT_EMAIL_ID, binding.tiTextEmail.text.toString())
+        Log.d("MyLog", "email: ${binding.tiTextEmail.text.toString()}")
+        startActivity(intentObject)
+        overridePendingTransition(R.anim.zoom_in_inner, R.anim.zoom_in_outter)
+    }
+
+
+    private fun printEmail() {
+        binding.checkBox.setOnCheckedChangeListener { _, isChecked ->
+            Log.d("MyLog", "$isChecked")
+            if (isChecked) {
+                val text = getString(R.string.my_main_email)
+                binding.apply {
+                    tiTextEmail.setText(text)
+                    tiLayoutEmail.helperText = null
+                    tiLayoutPassword.helperText = null
+                }
             }
+        }
+    }
 
-            override fun beforeTextChanged(
-                s: CharSequence, start: Int, count: Int,
-                after: Int
-            ) {
+    private fun backgroundFocusHandler() {
+        binding.root.setOnClickListener { binding.tiTextEmail.clearFocus() }
+    }
 
+    private fun submitRegisterForm() {
+        if (isLoginScreen) {
+            AlertDialog.Builder(this)
+                .setTitle("NOT YET")
+                .setPositiveButton("Okay") { _, _ ->
+                    // do nothing
+                }
+                .show()
+        }
+        else {
+            binding.tiLayoutEmail.helperText = validEmail()
+            binding.tiLayoutPassword.helperText = validPassword()
+
+            val isValid =
+                binding.tiLayoutEmail.helperText == null && binding.tiLayoutPassword.helperText == null
+
+            if (isValid) {
+                doRegister()
+            } else {
+                invalidForm()
             }
+        }
+    }
 
-            override fun afterTextChanged(s: Editable) {
-                emailId.error = null
+
+
+    private fun invalidForm() {
+        var message = ""
+        message += if (binding.tiLayoutEmail.helperText != null) "\n\nEmail: ${binding.tiLayoutEmail.helperText}" else ""
+        message += if (binding.tiLayoutPassword.helperText != null) "\n\nPassword: ${binding.tiLayoutPassword.helperText}" else ""
+
+        Log.d("MyLog", message)
+        AlertDialog.Builder(this)
+            .setTitle("Invalid registration form!")
+            .setMessage(message)
+            .setPositiveButton("Okay") { _, _ ->
+                if (binding.tiLayoutEmail.helperText != null) {
+                    binding.tiTextEmail.requestFocus()
+                } else {
+                    binding.tiTextPassword.requestFocus()
+                }
             }
-        })
+            .show()
+    }
 
+    private fun emailFocusListener() {
+        binding.tiTextEmail.setOnFocusChangeListener { _, focused ->
+            if (!focused) {
+                binding.tiLayoutEmail.helperText = validEmail()
+            }
+        }
+    }
 
+    private fun validEmail(): String? {
+        val emailText = binding.tiTextEmail.text.toString()
+        if (!Patterns.EMAIL_ADDRESS.matcher(emailText).matches()) {
+            return "Invalid email address"
+        }
+        return null
+    }
+
+    private fun passwordFocusListener() {
+        binding.tiTextPassword.setOnFocusChangeListener { _, focused ->
+            if (!focused) {
+                binding.tiLayoutPassword.helperText = validPassword()
+            }
+        }
+    }
+
+    private fun validPassword(): String? {
+        if (!binding.checkBox.isChecked) {
+            val passwordText = binding.tiTextPassword.text.toString()
+            if (passwordText.length < 8) {
+                return "Minimum 8 Characters Password"
+            }
+            if (!passwordText.matches(".*[A-Z].*".toRegex())) {
+                return "Must Contain 1 Upper-case Character"
+            }
+            if (!passwordText.matches(".*[a-z].*".toRegex())) {
+                return "Must Contain 1 Lower-case Character"
+            }
+            if (!passwordText.matches(".*[@#\$%^&+=].*".toRegex())) {
+                return "Must Contain 1 Special Character (@#\$%^&+=)"
+            }
+        }
+        return null
     }
 }

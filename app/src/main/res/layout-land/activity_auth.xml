@@ -18,7 +18,7 @@
             android:id="@+id/linearLayoutHello"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="146dp"
+            android:layout_marginTop="30dp"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -37,18 +37,18 @@
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
+
         <androidx.appcompat.widget.LinearLayoutCompat
             android:id="@+id/linearLayoutEmailPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/offset_medium_16"
-            android:layout_marginTop="@dimen/offset_big_24"
+            android:layout_marginTop="@dimen/offset_small_8"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayoutHello"
             app:layout_constraintVertical_bias="0">
-
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tiLayoutEmail"
@@ -104,7 +104,6 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:id="@+id/rememberOrForgotLinearLayout"
                 android:layout_width="match_parent"
@@ -138,38 +137,59 @@
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
+
+        <androidx.constraintlayout.helper.widget.Flow
+            android:id="@+id/flowProfileSummary"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/offset_small_8"
+            android:orientation="horizontal"
+            android:paddingHorizontal="@dimen/offset_medium_16"
+            app:constraint_referenced_ids="bRegisterByGoogle, googleOrRegister, bRegisterByEmailPassword"
+            app:flow_horizontalGap="@dimen/offset_small_8"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayoutEmailPassword"
+
+            />
+
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/bRegisterByGoogle"
             style="@style/btnStdWhite_google"
-            android:layout_marginTop="@dimen/offset_large_32"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayoutEmailPassword"
-            tools:ignore="MissingConstraints,TouchTargetSizeCheck,SpeakableTextPresentCheck"
-            tools:layout_editor_absoluteX="8dp" />
+
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/size_button_height_medium"
+
+            tools:ignore="MissingConstraints,TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/googleOrRegister"
             style="@style/text_White_centered"
-            android:layout_marginTop="@dimen/offset_small_8"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/size_button_height_medium"
+
+            android:gravity="center"
             android:text="@string/googleOrRegister"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/bRegisterByGoogle" />
+
+            tools:ignore="MissingConstraints" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/bRegisterByEmailPassword"
             style="@style/btnStdOrangeOutlined"
-            android:layout_marginTop="@dimen/offset_small_8"
+            android:layout_width="wrap_content"
+
+            android:layout_height="@dimen/size_button_height_medium"
             android:text="@string/registerButton"
-            app:layout_constraintTop_toBottomOf="@+id/googleOrRegister"
+
             tools:ignore="MissingConstraints" />
+
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/warningAboutTerms"
             style="@style/text_White_mini_centered"
             android:layout_marginTop="@dimen/offset_small_8"
-            android:text="@string/termsAgreeWarning"
+            android:text="@string/termsAgreeWarning_landscape"
             android:textColor="?attr/colorTertiary"
-            android:textFontWeight="400"
             android:textSize="@dimen/size_text_font_mini_12"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
