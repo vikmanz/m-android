@@ -13,6 +13,7 @@
     <string name="title_e_mail">E-mail</string>
     <string name="title_password">Password</string>
     <string name="termsAgreeWarning">By clicking Register you agree to our Terms \n and Conditions</string>
+    <string name="termsAgreeWarning_landscape">By clicking Register you agree to our Terms and Conditions</string>
     <string name="registerButton">REGISTER</string>
     <string name="googleOrRegister">or</string>
     <string name="googleRegisterButton">GOOGLE</string>
@@ -22,4 +23,12 @@
     <string name="default_person_name">Name Surname</string>
     <string name="guest_email">guest@gmail.com</string>
     <string name="guest_name_surname">Guest Guestovich</string>
+    <string name="my_main_email">viktor.manza@gmail.com</string>
+    <string name="my_main_password">passwordE3@</string>
+    <string name="helloText_signin">Hello!</string>
+    <string name="helloSubText_signin">Enter your email and password below</string>
+    <string name="registerButton_signin">LOGIN</string>
+    <string name="already_have_an_account_signin">Don’t have account?</string>
+    <string name="sign_in_signin">Sign up</string>
+    <string name="forgot_your_password">Forgot your password?</string>
 </resources>

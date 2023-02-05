@@ -1,10 +1,9 @@
 package com.vikmanz.shpppro
 
-import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import androidx.appcompat.widget.AppCompatButton
+import androidx.activity.OnBackPressedCallback
 import com.vikmanz.shpppro.databinding.ActivityMainBinding
 import com.vikmanz.shpppro.constants.Constants.INTENT_EMAIL_ID
 import java.util.*
@@ -13,7 +12,6 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
-    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -26,11 +24,19 @@ class MainActivity : AppCompatActivity() {
         binding.tvPersonName.text = parseEmail(emailToParse)
         Log.d("MyLog", "-1")
 
-        val button: AppCompatButton = binding.btnViewMyContacts
-        button.setOnClickListener {
-            finish()
-        }
+        binding.btnViewMyContacts.setOnClickListener { finishActivity() }
 
+        onBackPressedDispatcher.addCallback(this /* lifecycle owner */, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                finishActivity()
+            }
+        })
+
+    }
+
+    private fun finishActivity() {
+        finish()
+        overridePendingTransition(R.anim.zoom_out_inner, R.anim.zoom_out_outter)
     }
 
     private fun parseEmail(fullEmail: String): String {
