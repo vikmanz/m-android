@@ -1,6 +1,5 @@
 package com.vikmanz.shpppro
 
-import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
@@ -10,16 +9,18 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.*
 import com.vikmanz.shpppro.constants.Constants.AUTO_LOGIN_TO_PROFILE
+import com.vikmanz.shpppro.constants.Constants.CHECKBOX_STATE_STATE_KEY
+import com.vikmanz.shpppro.constants.Constants.EMAIL_FIELD_STATE_KEY
 import com.vikmanz.shpppro.constants.Constants.INTENT_EMAIL_ID
 import com.vikmanz.shpppro.constants.Constants.LOGIN_VIEW_FIRST
+import com.vikmanz.shpppro.constants.Constants.LOGIN_VIEW_STATE_KEY
+import com.vikmanz.shpppro.constants.Constants.PASSWORD_FIELD_STATE_KEY
+import com.vikmanz.shpppro.constants.Constants.PASSWORD_VIEW_STATE_KEY
 import com.vikmanz.shpppro.dataSave.LoginDataStoreManager
 import com.vikmanz.shpppro.databinding.ActivityAuthBinding
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-
-@SuppressLint("StaticFieldLeak")
-
 
 class AuthActivity : AppCompatActivity() {
 
@@ -46,7 +47,7 @@ class AuthActivity : AppCompatActivity() {
 
         // Focus to bg and checkbox login functions.
         backgroundFocusHandler()
-       // binding.checkBox.setOnClickListener { saveAuthData() }    // disable this to own email
+        // binding.checkBox.setOnClickListener { saveAuthData() }    // disable this to own email
 
         // Listeners to text fields and register button.
         emailFocusListener()
@@ -57,6 +58,33 @@ class AuthActivity : AppCompatActivity() {
         binding.alreadyHaveAccLink.setOnClickListener { changeRegisterLoginScreen() }
 
     }
+
+    // save state
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putString(EMAIL_FIELD_STATE_KEY, binding.tiTextEmail.text.toString())
+        outState.putString(PASSWORD_FIELD_STATE_KEY, binding.tiTextPassword.text.toString())
+        outState.putInt(PASSWORD_VIEW_STATE_KEY, binding.tiLayoutPassword.endIconMode)
+        outState.putBoolean(CHECKBOX_STATE_STATE_KEY, binding.checkBox.isChecked)
+        outState.putBoolean(LOGIN_VIEW_STATE_KEY, autologinStatus)
+        super.onSaveInstanceState(outState)
+    }
+
+    // load state
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+        binding.apply {
+            tiTextEmail.setText(savedInstanceState.getString(EMAIL_FIELD_STATE_KEY))
+            tiTextPassword.setText(savedInstanceState.getString(PASSWORD_FIELD_STATE_KEY))
+            tiLayoutPassword.endIconMode = savedInstanceState.getInt(PASSWORD_VIEW_STATE_KEY)
+            checkBox.isChecked = savedInstanceState.getBoolean(CHECKBOX_STATE_STATE_KEY)
+        }
+        autologinStatus = savedInstanceState.getBoolean(LOGIN_VIEW_STATE_KEY)
+        changeRegisterLoginScreen()
+    }
+
+
+
+
 
 
     private fun doAutoLogin() {
@@ -70,10 +98,10 @@ class AuthActivity : AppCompatActivity() {
     private fun saveUserData() {
         val email = binding.tiTextEmail.text.toString()
         val password = binding.tiTextPassword.text.toString()
-        val isAutologin =  binding.checkBox.isChecked
+        val isAutologin = binding.checkBox.isChecked
         Log.d("MyLog", "email is $email, password is $password, isAutologin is $isAutologin")
         GlobalScope.launch {
-                loginData.setUser(email, password, isAutologin)
+            loginData.setUser(email, password, isAutologin)
         }
     }
 
@@ -108,8 +136,6 @@ class AuthActivity : AppCompatActivity() {
     }
 
 
-
-
     private fun changeRegisterLoginScreen() {
 
         isLoginScreen = !isLoginScreen
@@ -127,8 +153,7 @@ class AuthActivity : AppCompatActivity() {
                 alreadyHaveAccMessage.text = getString(R.string.already_have_an_account_signin)
                 alreadyHaveAccLink.text = getString(R.string.sign_in_signin)
             }
-        }
-        else {
+        } else {
             binding.apply {
                 tvHelloText.text = getString(R.string.helloText)
                 tvHelloSubText.text = getString(R.string.helloSubText)
@@ -155,49 +180,25 @@ class AuthActivity : AppCompatActivity() {
     }
 
 
-//    private fun saveAuthData() {
-//        binding.checkBox.setOnCheckedChangeListener { _, isChecked ->
-//            Log.d("MyLog", "$isChecked")
-//            if (isChecked) {
-//                val text = getString(R.string.my_main_email)
-//                binding.apply {
-//                    tiTextEmail.setText(text)
-//                    tiLayoutEmail.helperText = null
-//                    tiLayoutPassword.helperText = null
-//                }
-//            }
-//        }
-//    }
-
     private fun backgroundFocusHandler() {
         binding.root.setOnClickListener { binding.tiTextEmail.clearFocus() }
     }
 
     private fun submitRegisterForm() {
-//        if (isLoginScreen) {
-//            AlertDialog.Builder(this)
-//                .setTitle("NOT YET")
-//                .setPositiveButton("Okay") { _, _ ->
-//                    // do nothing
-//                }
-//                .show()
-//        }
-//        else {
-            binding.tiLayoutEmail.helperText = validEmail()
-            binding.tiLayoutPassword.helperText = validPassword()
 
-            val isValid =
-                binding.tiLayoutEmail.helperText == null && binding.tiLayoutPassword.helperText == null
+        binding.tiLayoutEmail.helperText = validEmail()
+        binding.tiLayoutPassword.helperText = validPassword()
 
-            if (isValid) {
-                if (binding.checkBox.isChecked) saveUserData()
-                doRegister()
-            } else {
-                invalidForm()
-            }
-//        }
+        val isValid =
+            binding.tiLayoutEmail.helperText == null && binding.tiLayoutPassword.helperText == null
+
+        if (isValid) {
+            if (binding.checkBox.isChecked) saveUserData()
+            doRegister()
+        } else {
+            invalidForm()
+        }
     }
-
 
 
     private fun invalidForm() {
