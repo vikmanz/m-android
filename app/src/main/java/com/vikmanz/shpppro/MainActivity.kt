@@ -1,22 +1,31 @@
 package com.vikmanz.shpppro
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.OnBackPressedCallback
 import com.vikmanz.shpppro.databinding.ActivityMainBinding
 import com.vikmanz.shpppro.constants.Constants.INTENT_EMAIL_ID
+import com.vikmanz.shpppro.dataSave.LoginDataStoreManager
+import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private lateinit var loginData: LoginDataStoreManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
+        // save login data tests
+        loginData = LoginDataStoreManager(this)
 
         Log.d("MyLog", "-3")
         val emailToParse = intent.getStringExtra(INTENT_EMAIL_ID).toString()
@@ -32,6 +41,21 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
+        binding.tvLogout.setOnClickListener { logout() }
+
+    }
+
+    @OptIn(DelicateCoroutinesApi::class)
+    private fun logout() {
+
+        GlobalScope.launch {
+            loginData.clearUser()
+        }
+
+        val intentObject = Intent(this, AuthActivity::class.java)
+        finish()
+        startActivity(intentObject)
+        overridePendingTransition(R.anim.zoom_out_inner, R.anim.zoom_out_outter)
     }
 
     private fun finishActivity() {
@@ -83,6 +107,8 @@ class MainActivity : AppCompatActivity() {
         return personName
     }
 }
+
+
 
 
 fun String.firstCharToUpperCase() = replaceFirstChar {

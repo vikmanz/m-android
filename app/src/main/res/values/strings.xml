@@ -31,4 +31,9 @@
     <string name="already_have_an_account_signin">Don’t have account?</string>
     <string name="sign_in_signin">Sign up</string>
     <string name="forgot_your_password">Forgot your password?</string>
+    <string name="logout_button_text">LOGOUT</string>
+    <string name="save">SAVE</string>
+    <string name="restore">RESTORE</string>
+    <string name="clear">CLEAR</string>
+    <string name="fill">Fill</string>
 </resources>

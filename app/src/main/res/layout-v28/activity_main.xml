@@ -17,15 +17,35 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            style="@style/text_White_Title"
-            android:id="@+id/tvSettings"
-            android:layout_marginStart="@dimen/offset_medium_16"
-            android:layout_marginTop="@dimen/offset_medium_16"
-            android:text="@string/settingsButton"
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/settingsAndLogoutLinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="@dimen/offset_medium_16"
+            android:layout_marginHorizontal="@dimen/offset_medium_16"
+            >
 
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvSettings"
+                style="@style/text_White_Title"
+                android:text="@string/settingsButton"
+                android:layout_gravity="center"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvLogout"
+                style="@style/text_White_small"
+                android:layout_width="match_parent"
+                android:layout_gravity="center"
+                android:text="@string/logout_button_text"
+                android:gravity="end"
+                android:textStyle="bold"
+                />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
         <androidx.constraintlayout.helper.widget.Flow
             android:id="@+id/flowProfileSummary"
@@ -34,7 +54,7 @@
             android:layout_marginTop="@dimen/offset_big_24"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvSettings"
+            app:layout_constraintTop_toBottomOf="@id/settingsAndLogoutLinearLayout"
             android:orientation="vertical"
             app:constraint_referenced_ids="cvAvatar, tvPersonName, tvPersonCareer, tvPersonHomeAddress"
             />
