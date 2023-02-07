@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/constraintLayoutMainBG"
+    android:id="@+id/mainLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/colorSecondary"
@@ -43,8 +43,7 @@
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayoutHello"
-        app:layout_constraintVertical_bias="0">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutHello">
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tiLayoutEmail"
@@ -137,7 +136,7 @@
 
 
     <androidx.constraintlayout.helper.widget.Flow
-        android:id="@+id/flowTestButtons"
+        android:id="@+id/flowRegisterButtons"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/offset_small_8"
@@ -179,7 +178,9 @@
         android:layout_height="@dimen/size_button_height_medium"
         android:text="@string/registerButton"
 
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints,TouchTargetSizeCheck"
+        tools:layout_editor_absoluteX="478dp"
+        tools:layout_editor_absoluteY="293dp" />
 
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -219,7 +220,7 @@
     </androidx.appcompat.widget.LinearLayoutCompat>
 
     <androidx.constraintlayout.helper.widget.Flow
-        android:id="@+id/flowProfileSummary"
+        android:id="@+id/flowTestButtons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -234,7 +235,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/bSave"
-        style="@style/btnStdOrangeOutlined"
+        style="@style/btnHelperForTest"
         android:layout_width="80dp"
         android:layout_height="@dimen/size_button_height_medium"
         android:text="@string/save"
@@ -244,7 +245,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/bClear"
-        style="@style/btnStdOrangeOutlined"
+        style="@style/btnHelperForTest"
         android:layout_width="80dp"
         android:layout_height="@dimen/size_button_height_medium"
         android:text="@string/clear"
@@ -254,7 +255,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/bRestore"
-        style="@style/btnStdOrangeOutlined"
+        style="@style/btnHelperForTest"
         android:layout_width="80dp"
         android:layout_height="@dimen/size_button_height_medium"
         android:text="@string/restore"
@@ -264,7 +265,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/bFill"
-        style="@style/btnStdOrangeOutlined"
+        style="@style/btnHelperForTest"
         android:layout_width="80dp"
         android:layout_height="@dimen/size_button_height_medium"
         android:text="@string/fill"

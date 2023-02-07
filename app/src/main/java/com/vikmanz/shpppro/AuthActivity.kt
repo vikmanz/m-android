@@ -34,6 +34,7 @@ class AuthActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         // init activity
         super.onCreate(savedInstanceState)
+
         binding = ActivityAuthBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
@@ -56,7 +57,6 @@ class AuthActivity : AppCompatActivity() {
 
         // Change Register to Login and another.
         binding.alreadyHaveAccLink.setOnClickListener { changeRegisterLoginScreen() }
-
     }
 
     // save state

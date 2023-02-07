@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/constraintLayoutMainBG"
+    android:id="@+id/mainLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/colorSecondary"
@@ -64,8 +64,7 @@
                 android:inputType="textEmailAddress"
                 android:paddingStart="0dp"
                 android:paddingEnd="0dp"
-                android:textColor="?attr/colorTertiary"
-                tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+                android:textColor="?attr/colorTertiary" />
 
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -96,8 +95,7 @@
                 android:inputType="textPassword"
                 android:paddingStart="0dp"
                 android:paddingEnd="0dp"
-                android:textColor="?attr/colorTertiary"
-                tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+                android:textColor="?attr/colorTertiary" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -118,8 +116,7 @@
                 android:fontFamily="@font/opensans"
                 android:text="@string/rememberMeCheckbox"
                 android:textColor="?attr/colorTertiary"
-                android:textSize="@dimen/size_text_font_small_16"
-                tools:ignore="TouchTargetSizeCheck" />
+                android:textSize="@dimen/size_text_font_small_16" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/forgotPassword"
@@ -210,21 +207,21 @@
         app:flow_horizontalGap="@dimen/offset_small_8"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/alreadyHaveAcc" />
+        app:layout_constraintTop_toBottomOf="@+id/alreadyHaveAcc"/>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/bSave"
-        style="@style/btnStdOrangeOutlined"
-        android:layout_width="80dp"
-        android:layout_height="@dimen/size_button_height_medium"
-        android:text="@string/save"
-        android:visibility="gone"
-        tools:visibility="visible"
-        tools:ignore="MissingConstraints,TouchTargetSizeCheck" />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/bSave"
+            style="@style/btnHelperForTest"
+            android:layout_width="80dp"
+            android:layout_height="@dimen/size_button_height_medium"
+            android:text="@string/save"
+            android:visibility="gone"
+            tools:ignore="MissingConstraints,TouchTargetSizeCheck"
+            tools:visibility="visible" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/bClear"
-        style="@style/btnStdOrangeOutlined"
+        style="@style/btnHelperForTest"
         android:layout_width="80dp"
         android:layout_height="@dimen/size_button_height_medium"
         android:text="@string/clear"
@@ -234,7 +231,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/bRestore"
-        style="@style/btnStdOrangeOutlined"
+        style="@style/btnHelperForTest"
         android:layout_width="80dp"
         android:layout_height="@dimen/size_button_height_medium"
         android:text="@string/restore"
@@ -244,7 +241,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/bFill"
-        style="@style/btnStdOrangeOutlined"
+        style="@style/btnHelperForTest"
         android:layout_width="80dp"
         android:layout_height="@dimen/size_button_height_medium"
         android:text="@string/fill"

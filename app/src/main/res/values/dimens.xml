@@ -13,6 +13,7 @@
     <dimen name="size_button_height_large">55dp</dimen>
 
     <!-- Text size. -->
+    <dimen name="size_text_font_little_8">8sp</dimen>
     <dimen name="size_text_font_mini_12">12sp</dimen>
     <dimen name="size_text_font_smaller_14">14sp</dimen>
     <dimen name="size_text_font_small_16">16sp</dimen>

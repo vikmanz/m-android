@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="btnHelperForTest">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:textSize">@dimen/size_text_font_mini_12</item>
+        <item name="android:layout_marginHorizontal">@dimen/offset_small_8</item>
+        <item name="android:layout_height">@dimen/size_button_height_large</item>
+        <item name="android:background">@drawable/btn_std_orange_outlined_bg_all_in_one_file</item>
+        <item name="android:textColor">?attr/colorTertiary</item>
+    </style>
+</resources>
