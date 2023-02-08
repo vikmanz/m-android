@@ -30,6 +30,7 @@ class AuthActivity : AppCompatActivity() {
 
 
     private var autologinStatus = false
+    private var helperButtonsVisible = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         // init activity
@@ -38,13 +39,13 @@ class AuthActivity : AppCompatActivity() {
         binding = ActivityAuthBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+        initHelpTesterButtons()
+
         if (LOGIN_VIEW_FIRST) changeRegisterLoginScreen()
 
         // save login data tests
         loginData = LoginDataStoreManager(this)
         checkUserLoginStatus()
-        initHelpTesterButtons()
-
 
         // Focus to bg and checkbox login functions.
         backgroundFocusHandler()
@@ -54,9 +55,27 @@ class AuthActivity : AppCompatActivity() {
         emailFocusListener()
         passwordFocusListener()
         binding.bRegisterByEmailPassword.setOnClickListener { submitRegisterForm() }
+        binding.forgotPassword.setOnClickListener { viewOrHideHelpTesterButtons() }
 
         // Change Register to Login and another.
         binding.alreadyHaveAccLink.setOnClickListener { changeRegisterLoginScreen() }
+    }
+
+    private fun viewOrHideHelpTesterButtons() {
+        helperButtonsVisible = !helperButtonsVisible
+        binding.apply {
+            if (helperButtonsVisible) {
+                bSave.visibility = View.VISIBLE
+                bClear.visibility = View.VISIBLE
+                bRestore.visibility = View.VISIBLE
+                bFill.visibility = View.VISIBLE
+            } else {
+                bSave.visibility = View.GONE
+                bClear.visibility = View.GONE
+                bRestore.visibility = View.GONE
+                bFill.visibility = View.GONE
+            }
+        }
     }
 
     // save state
@@ -83,15 +102,11 @@ class AuthActivity : AppCompatActivity() {
     }
 
 
-
-
-
-
     private fun doAutoLogin() {
         Log.d("MyLog", "Do Autologin!")
         restoreUserData()
         doRegister()
-        finish()
+        //finish()
     }
 
     @OptIn(DelicateCoroutinesApi::class)
@@ -264,12 +279,6 @@ class AuthActivity : AppCompatActivity() {
     }
 
     private fun initHelpTesterButtons() {
-        binding.apply {
-            bSave.visibility = View.VISIBLE
-            bClear.visibility = View.VISIBLE
-            bRestore.visibility = View.VISIBLE
-            bFill.visibility = View.VISIBLE
-        }
 
         binding.bSave.setOnClickListener { saveUserData() }
 
