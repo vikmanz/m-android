@@ -27,13 +27,8 @@ class MainActivity : AppCompatActivity() {
         // save login data tests
         loginData = LoginDataStoreManager(this)
 
-        Log.d("MyLog", "-3")
         val emailToParse = intent.getStringExtra(INTENT_EMAIL_ID).toString()
-        Log.d("MyLog", "-2: $emailToParse")
         binding.tvPersonName.text = parseEmail(emailToParse)
-        Log.d("MyLog", "-1")
-
-        binding.btnViewMyContacts.setOnClickListener { finishActivity() }
 
         onBackPressedDispatcher.addCallback(this /* lifecycle owner */, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
@@ -59,7 +54,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun finishActivity() {
+        val intentObject = Intent(this, AuthActivity::class.java)
         finish()
+        startActivity(intentObject)
         overridePendingTransition(R.anim.zoom_out_inner, R.anim.zoom_out_outter)
     }
 

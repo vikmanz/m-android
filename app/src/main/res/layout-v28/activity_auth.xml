@@ -16,7 +16,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingTop="@dimen/offset_auth_hello_text_from_top_portrait"
+        android:layout_marginTop="@dimen/offset_auth_hello_text_from_top_portrait"
+        android:layout_marginHorizontal="@dimen/offset_medium_16"
         app:constraint_referenced_ids="tvHelloText, tvHelloSubText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -146,7 +147,7 @@
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/offset_large_32"
         android:orientation="vertical"
-        android:paddingHorizontal="@dimen/offset_medium_16"
+        android:layout_marginHorizontal="@dimen/offset_medium_16"
         app:constraint_referenced_ids="bRegisterByGoogle, googleOrRegister, bRegisterByEmailPassword"
         app:flow_verticalGap="@dimen/offset_small_8"
         app:layout_constraintEnd_toEndOf="parent"
@@ -156,6 +157,7 @@
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/bRegisterByGoogle"
         style="@style/btnStdWhite_google"
+        android:layout_width="0dp"
         tools:ignore="MissingConstraints,TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -167,6 +169,7 @@
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/bRegisterByEmailPassword"
         style="@style/btnStdOrangeOutlined"
+        android:layout_width="0dp"
         android:text="@string/registerButton"
         tools:ignore="MissingConstraints" />
 
@@ -217,8 +220,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:paddingHorizontal="@dimen/offset_medium_16"
-        android:paddingTop="@dimen/offset_medium_16"
+        android:layout_marginHorizontal="@dimen/offset_medium_16"
+        android:layout_marginTop="@dimen/offset_medium_16"
         app:constraint_referenced_ids="bSave, bClear, bRestore, bFill"
         app:flow_horizontalGap="@dimen/offset_small_8"
         app:layout_constraintEnd_toEndOf="parent"

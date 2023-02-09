@@ -55,7 +55,7 @@ class AuthActivity : AppCompatActivity() {
         emailFocusListener()
         passwordFocusListener()
         binding.bRegisterByEmailPassword.setOnClickListener { submitRegisterForm() }
-        binding.forgotPassword.setOnClickListener { viewOrHideHelpTesterButtons() }
+        binding.alreadyHaveAccMessage.setOnClickListener { viewOrHideHelpTesterButtons() }
 
         // Change Register to Login and another.
         binding.alreadyHaveAccLink.setOnClickListener { changeRegisterLoginScreen() }
@@ -106,7 +106,6 @@ class AuthActivity : AppCompatActivity() {
         Log.d("MyLog", "Do Autologin!")
         restoreUserData()
         doRegister()
-        //finish()
     }
 
     @OptIn(DelicateCoroutinesApi::class)
@@ -189,7 +188,6 @@ class AuthActivity : AppCompatActivity() {
         val intentObject = Intent(this, MainActivity::class.java)
         intentObject.putExtra(INTENT_EMAIL_ID, binding.tiTextEmail.text.toString())
         Log.d("MyLog", "email: ${binding.tiTextEmail.text.toString()}")
-        finish()
         startActivity(intentObject)
         overridePendingTransition(R.anim.zoom_in_inner, R.anim.zoom_in_outter)
     }

@@ -23,16 +23,13 @@
     <dimen name="size_text_font_large_32">32sp</dimen>
 
     <!-- Font weight. -->
-    <dimen name="a">12</dimen>
     <dimen name="avatar_size_x">130dp</dimen>
     <dimen name="avatar_size_y">130dp</dimen>
     <dimen name="avatar_corner_radius">360dp</dimen>
 
-
-
+    <!-- Others. -->
     <dimen name="offset_auth_hello_text_from_top_portrait">146dp</dimen>
     <dimen name="offset_auth_hello_text_from_top_landscape">20dp</dimen>
     <dimen name="email_password_boxCollapsedPaddingTop">4dp</dimen>
-    <dimen name="password_max_length">16</dimen>
 
 </resources>
