@@ -8,7 +8,6 @@ import android.util.Patterns
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.asLiveData
-import androidx.lifecycle.observe
 import com.vikmanz.shpppro.constants.Constants.AUTO_LOGIN_TO_PROFILE
 import com.vikmanz.shpppro.constants.Constants.CHECKBOX_STATE_STATE_KEY
 import com.vikmanz.shpppro.constants.Constants.EMAIL_FIELD_STATE_KEY
@@ -20,7 +19,6 @@ import com.vikmanz.shpppro.constants.Constants.PASSWORD_VIEW_STATE_KEY
 import com.vikmanz.shpppro.dataSave.LoginDataStoreManager
 import com.vikmanz.shpppro.databinding.ActivityAuthBinding
 import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.collectLatest
 
 class AuthActivity : AppCompatActivity() {
 
@@ -94,12 +92,6 @@ class AuthActivity : AppCompatActivity() {
     }
 
 
-    private fun doAutoLogin() {
-        Log.d("MyLog", "Do Autologin!")
-        restoreUserData()
-        doRegister()
-    }
-
     private fun saveUserData() {
         val email = binding.tiTextEmail.text.toString()
         val password = binding.tiTextPassword.text.toString()
@@ -109,10 +101,26 @@ class AuthActivity : AppCompatActivity() {
         coroutineScope.launch(Dispatchers.IO) {
             loginData.saveUserSata(email, password, isAutologin)
         }
-
     }
 
-    @Suppress("COMPATIBILITY_WARNING", "DEPRECATION")
+
+    private fun doAutoLogin() {
+        Log.d("MyLog", "Do Autologin!")
+        restoreUserData()
+        doRegister()
+    }
+
+    private fun checkUserLoginStatus() {
+        loginData.userLoginStatusFlow.asLiveData().observe(this) {
+            Log.d("MyLog", "db00: $it")
+            autologinStatus = it
+            if (autologinStatus && AUTO_LOGIN_TO_PROFILE) doAutoLogin()
+            if (autologinStatus) {
+                restoreUserData()
+            }
+        }
+    }
+
     private fun restoreUserData() {
         loginData.userNameFlow.asLiveData().observe(this) {
             binding.tiTextEmail.setText(it)
@@ -120,46 +128,9 @@ class AuthActivity : AppCompatActivity() {
         loginData.userPasswordFlow.asLiveData().observe(this) {
             binding.tiTextPassword.setText(it)
         }
-
         loginData.userLoginStatusFlow.asLiveData().observe(this) {
             binding.checkBox.isChecked = it
         }
-//        coroutineScope.launch(Dispatchers.Main) {
-//
-//            Log.d("MyLog", "db1 init")
-//            loginData.userNameFlow.collectLatest {
-//                Log.d("MyLog", "db1 read: $it")
-//                binding.tiTextEmail.setText(it)
-//            }
-//
-//            Log.d("MyLog", "db2 init")
-//            loginData.userPasswordFlow.collectLatest {
-//                Log.d("MyLog", "db2 read: $it")
-//                binding.tiTextPassword.setText(it)
-//            }
-//
-//            Log.d("MyLog", "db3 init")
-//            loginData.userLoginStatusFlow.collectLatest {
-//                Log.d("MyLog", "db3 read: $it")
-//                binding.checkBox.isChecked = it
-//            }
-//
-//        }
-    }
-
-    @Suppress("COMPATIBILITY_WARNING", "DEPRECATION")
-    private fun checkUserLoginStatus() {
-        loginData.userLoginStatusFlow.asLiveData().observe(this) {
-        //lifecycleScope.launch(Dispatchers.IO) {
-        //loginData.userLoginStatusFlow.collectLatest {
-                Log.d("MyLog", "db4: $it")
-                autologinStatus = it
-                if (autologinStatus && AUTO_LOGIN_TO_PROFILE) doAutoLogin()
-                if (autologinStatus) {
-                    restoreUserData()
-                }
-            }
-       // }
     }
 
 
@@ -167,8 +138,8 @@ class AuthActivity : AppCompatActivity() {
 
         isLoginScreen = !isLoginScreen
 
-        if (isLoginScreen) {
-            binding.apply {
+        with(binding) {
+            if (isLoginScreen) {
                 tvHelloText.text = getString(R.string.helloText_signin)
                 tvHelloSubText.text = getString(R.string.helloSubText_signin)
                 tiLayoutPassword.isCounterEnabled = true
@@ -179,9 +150,7 @@ class AuthActivity : AppCompatActivity() {
                 warningAboutTerms.visibility = View.GONE
                 alreadyHaveAccMessage.text = getString(R.string.already_have_an_account_signin)
                 alreadyHaveAccLink.text = getString(R.string.sign_in_signin)
-            }
-        } else {
-            binding.apply {
+            } else {
                 tvHelloText.text = getString(R.string.helloText)
                 tvHelloSubText.text = getString(R.string.helloSubText)
                 tiLayoutPassword.isCounterEnabled = true
@@ -203,6 +172,7 @@ class AuthActivity : AppCompatActivity() {
         Log.d("MyLog", "email: ${binding.tiTextEmail.text.toString()}")
         startActivity(intentObject)
         overridePendingTransition(R.anim.zoom_in_inner, R.anim.zoom_in_outter)
+        finish()
     }
 
 

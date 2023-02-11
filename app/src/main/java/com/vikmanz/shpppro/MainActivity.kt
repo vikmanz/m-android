@@ -4,7 +4,6 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import androidx.activity.OnBackPressedCallback
 import com.vikmanz.shpppro.databinding.ActivityMainBinding
 import com.vikmanz.shpppro.constants.Constants.INTENT_EMAIL_ID
 import com.vikmanz.shpppro.dataSave.LoginDataStoreManager
@@ -28,12 +27,12 @@ class MainActivity : AppCompatActivity() {
 
         val emailToParse = intent.getStringExtra(INTENT_EMAIL_ID).toString()
         binding.tvPersonName.text = parseEmail(emailToParse)
-
-        onBackPressedDispatcher.addCallback(this /* lifecycle owner */, object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                finishActivity()
-            }
-        })
+//
+//        onBackPressedDispatcher.addCallback(this /* lifecycle owner */, object : OnBackPressedCallback(true) {
+//            override fun handleOnBackPressed() {
+//                finishActivity()
+//            }
+//        })
 
         binding.tvLogout.setOnClickListener { logout() }
 
@@ -43,10 +42,7 @@ class MainActivity : AppCompatActivity() {
         coroutineScope.launch(Dispatchers.IO) {
             loginData.clearUser()
         }
-        val intentObject = Intent(this, AuthActivity::class.java)
-        finish()
-        startActivity(intentObject)
-        overridePendingTransition(R.anim.zoom_out_inner, R.anim.zoom_out_outter)
+        finishActivity()
     }
 
     private fun finishActivity() {
@@ -58,13 +54,15 @@ class MainActivity : AppCompatActivity() {
 
     private fun parseEmail(fullEmail: String): String {
 
-        if (fullEmail.isEmpty()) return "Empty Empty"
+
 
         Log.d("MyLog", "0: [$fullEmail]")
         val personName: String
 
         if (fullEmail == getString(R.string.guest_email)) return getString(R.string.guest_name_surname)
         Log.d("MyLog", "1: [$fullEmail]")
+
+        if (fullEmail.isEmpty()) return "Empty Empty"
 
         val firstPartEmail = fullEmail.substring(0, fullEmail.indexOf('@'))
         Log.d("MyLog", "email first part: [$firstPartEmail]")
