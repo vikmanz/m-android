@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <font-family xmlns:android="http://schemas.android.com/apk/res/android">
+
     <font
         android:fontStyle="normal"
         android:fontWeight="400"
@@ -7,7 +8,7 @@
     <font
         android:fontStyle="italic"
         android:fontWeight="400"
-        android:font="@font/open_sans_regular" />
+        android:font="@font/open_sans_italic" />
 
     <font
         android:fontStyle="normal"
@@ -25,8 +26,13 @@
         android:font="@font/open_sans_bold" />
 
     <font
+        android:fontStyle="normal"
+        android:fontWeight="800"
+        android:font="@font/open_sans_extra_bold" />
+
+    <font
         android:fontStyle="italic"
-        android:fontWeight="700"
-        android:font="@font/open_sans_regular" />
+        android:fontWeight="800"
+        android:font="@font/open_sans_extra_bold_italic" />
 
 </font-family>
