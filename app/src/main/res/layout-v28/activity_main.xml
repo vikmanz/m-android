@@ -35,14 +35,23 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvSettings"
-            style="@style/text_White_Title"
+            style="@style/basicText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:gravity="start"
-            android:text="@string/settingsButton" />
+            android:text="@string/settingsButton"
+            android:textColor="?attr/colorTertiary"
+            android:textSize="@dimen/size_text_font_large_32"
+            android:textStyle="bold" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvLogout"
-            style="@style/text_White_small"
+            style="@style/basicText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="@string/logout_button_text"
+            android:textColor="?attr/colorTertiary"
+            android:textSize="@dimen/size_text_font_small_16"
             android:textStyle="bold"
             tools:ignore="MissingConstraints" />
 
@@ -88,21 +97,39 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvPersonName"
-            style="@style/text_White_big_centered"
+            style="@style/basicText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
             android:text="@string/personNameSample"
+            android:textColor="?attr/colorTertiary"
+            android:textSize="@dimen/size_text_font_medium_18"
+            android:textStyle="bold"
             tools:ignore="MissingConstraints,TextContrastCheck" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvPersonCareer"
-            style="@style/text_Grey_smaller_centered_bold"
+            style="@style/basicText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
             android:text="@string/personCareerSample"
+            android:textColor="?attr/colorOnTertiary"
+            android:textSize="@dimen/size_text_font_smaller_14"
+            android:textStyle="bold"
             tools:ignore="MissingConstraints" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvPersonHomeAddress"
-            style="@style/text_Grey_smaller_centered_bold"
+            style="@style/basicText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
             android:paddingTop="@dimen/offset_small_8"
             android:text="@string/personHomeAddressSample"
+            android:textColor="?attr/colorOnTertiary"
+            android:textSize="@dimen/size_text_font_smaller_14"
+            android:textStyle="bold"
             tools:ignore="MissingConstraints" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -161,9 +188,13 @@
         <!-- Fill Profile Text. -->
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvPropositionToFillProfile"
-            style="@style/text_Blue_smaller"
+            style="@style/basicText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/offset_medium_16"
             android:text="@string/propositionToFillProfile"
+            android:textColor="?attr/colorSecondary"
+            android:textSize="@dimen/size_text_font_smaller_14"
             app:layout_constraintBottom_toTopOf="@id/btnEditProfile"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -171,10 +202,15 @@
         <!-- Edit Profile and View Contacts buttons flow. -->
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnEditProfile"
-            style="@style/btnStdWhite"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_button_height_medium"
+            android:layout_marginHorizontal="@dimen/offset_small_8"
             android:layout_marginBottom="@dimen/offset_medium_16"
+            android:background="@drawable/btn_std_white_bg"
             android:text="@string/editProfile"
-            android:textAppearance="@style/text_Blue"
+            android:textAppearance="@style/basicText"
+            android:textColor="?attr/colorSecondary"
+            android:textSize="@dimen/size_text_font_small_16"
             app:layout_constraintBottom_toTopOf="@id/btnViewMyContacts"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -182,10 +218,15 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnViewMyContacts"
-            style="@style/btnStdOrange"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_button_height_large"
+            android:layout_marginHorizontal="@dimen/offset_small_8"
             android:layout_marginBottom="@dimen/offset_medium_16"
+            android:background="@drawable/btn_std_orange_bg"
             android:text="@string/viewMyContacts"
-            android:textAppearance="@style/text_White"
+            android:textAppearance="@style/basicText"
+            android:textColor="?attr/colorTertiary"
+            android:textSize="@dimen/size_text_font_small_16"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

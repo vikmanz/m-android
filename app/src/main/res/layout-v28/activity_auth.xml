@@ -15,9 +15,9 @@
         android:id="@+id/flowHelloText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="@dimen/offset_auth_hello_text_from_top_portrait"
         android:layout_marginHorizontal="@dimen/offset_medium_16"
+        android:layout_marginTop="@dimen/offset_auth_hello_text_from_top_portrait"
+        android:orientation="vertical"
         app:constraint_referenced_ids="tvHelloText, tvHelloSubText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,14 +25,28 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvHelloText"
-        style="@style/text_White_HelloText_Upper"
+        style="@style/basicText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
         android:text="@string/helloText"
+        android:textAlignment="center"
+        android:textColor="?attr/colorTertiary"
+        android:textSize="@dimen/size_text_font_big_24"
+        android:textStyle="bold"
         tools:ignore="MissingConstraints" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvHelloSubText"
-        style="@style/text_White_HelloText_Sub"
+        style="@style/basicText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
         android:text="@string/helloSubText"
+        android:textAlignment="center"
+        android:textColor="?attr/colorTertiary"
+        android:textSize="@dimen/size_text_font_smaller_14"
+        android:textStyle="bold"
         tools:ignore="MissingConstraints" />
 
 
@@ -57,8 +71,7 @@
         android:hint="@string/title_e_mail"
         app:boxCollapsedPaddingTop="@dimen/email_password_boxCollapsedPaddingTop"
         app:expandedHintEnabled="false"
-        app:hintTextAppearance="@style/textInputLayout_hint_appearance"
-
+        app:hintTextAppearance="@style/textInputLayout_hintAppearance"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/flowLayoutEmailPassword">
@@ -78,7 +91,6 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tiLayoutPassword"
         style="@style/textInputLayout_LoginPassword"
-        app:hintTextAppearance="@style/textInputLayout_hint_appearance"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="@string/title_password"
@@ -89,6 +101,7 @@
         app:counterTextColor="?attr/colorTertiary"
         app:expandedHintEnabled="false"
         app:helperTextEnabled="true"
+        app:hintTextAppearance="@style/textInputLayout_hintAppearance"
         app:passwordToggleEnabled="true"
         app:passwordToggleTint="?attr/colorTertiary"
         tools:ignore="MissingConstraints">
@@ -129,11 +142,13 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/forgotPassword"
-        style="@style/text_White_small"
+        style="@style/basicText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="end"
         android:text="@string/forgot_your_password"
+        android:textColor="?attr/colorTertiary"
+        android:textSize="@dimen/size_text_font_small_16"
         android:textStyle="bold"
         android:visibility="gone"
         tools:ignore="MissingConstraints"
@@ -145,9 +160,9 @@
         android:id="@+id/flowRegisterButtons"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginHorizontal="@dimen/offset_medium_16"
         android:layout_marginTop="@dimen/offset_large_32"
         android:orientation="vertical"
-        android:layout_marginHorizontal="@dimen/offset_medium_16"
         app:constraint_referenced_ids="bRegisterByGoogle, googleOrRegister, bRegisterByEmailPassword"
         app:flow_verticalGap="@dimen/offset_small_8"
         app:layout_constraintEnd_toEndOf="parent"
@@ -156,30 +171,44 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/bRegisterByGoogle"
-        style="@style/btnStdWhite_google"
         android:layout_width="0dp"
+        android:layout_height="@dimen/size_button_height_medium"
+        android:background="@drawable/btn_google"
+        android:textSize="@dimen/size_text_font_small_16"
         tools:ignore="MissingConstraints,TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/googleOrRegister"
-        style="@style/text_White_centered"
+        style="@style/basicText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
         android:text="@string/googleOrRegister"
+        android:textColor="?attr/colorTertiary"
+        android:textSize="@dimen/size_text_font_medium_18"
         tools:ignore="MissingConstraints" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/bRegisterByEmailPassword"
-        style="@style/btnStdOrangeOutlined"
         android:layout_width="0dp"
+        android:layout_height="@dimen/size_button_height_large"
+        android:background="@drawable/btn_std_orange_outlined_bg_all_in_one_file"
         android:text="@string/registerButton"
+        android:textColor="?attr/colorTertiary"
+        android:textSize="@dimen/size_text_font_small_16"
         tools:ignore="MissingConstraints" />
 
 
     <!-- Sign in or Sign up flow. -->
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/warningAboutTerms"
-        style="@style/text_White_mini_centered"
+        style="@style/basicText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/offset_small_8"
+        android:gravity="center"
         android:text="@string/termsAgreeWarning"
+        android:textAlignment="center"
         android:textColor="?attr/colorTertiary"
         android:textFontWeight="400"
         android:textSize="@dimen/size_text_font_mini_12"
@@ -195,23 +224,31 @@
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/offset_small_8"
         android:orientation="horizontal"
-        app:flow_horizontalGap="12dp"
         app:constraint_referenced_ids="alreadyHaveAccMessage, alreadyHaveAccLink"
+        app:flow_horizontalGap="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/warningAboutTerms" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/alreadyHaveAccMessage"
-            style="@style/text_Grey_small"
-            android:text="@string/already_have_an_account"
-            tools:ignore="MissingConstraints"/>
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/alreadyHaveAccMessage"
+        style="@style/basicText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/already_have_an_account"
+        android:textColor="?attr/colorOnTertiary"
+        android:textSize="@dimen/size_text_font_small_16"
+        tools:ignore="MissingConstraints" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/alreadyHaveAccLink"
-            style="@style/text_White_small"
-            android:text="@string/sign_in"
-            tools:ignore="MissingConstraints" />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/alreadyHaveAccLink"
+        style="@style/basicText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sign_in"
+        android:textColor="?attr/colorTertiary"
+        android:textSize="@dimen/size_text_font_small_16"
+        tools:ignore="MissingConstraints" />
 
 
     <!-- Helper buttons. -->
@@ -219,9 +256,9 @@
         android:id="@+id/flowTestButtons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_marginHorizontal="@dimen/offset_medium_16"
         android:layout_marginTop="@dimen/offset_medium_16"
+        android:orientation="horizontal"
         app:constraint_referenced_ids="bSave, bClear, bRestore, bFill"
         app:flow_horizontalGap="@dimen/offset_small_8"
         app:layout_constraintEnd_toEndOf="parent"
@@ -230,40 +267,52 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/bSave"
-        style="@style/btnHelperForTest"
         android:layout_width="80dp"
         android:layout_height="@dimen/size_button_height_medium"
+        android:layout_marginHorizontal="@dimen/offset_small_8"
+        android:background="@drawable/btn_std_orange_outlined_bg_all_in_one_file"
         android:text="@string/save"
+        android:textColor="?attr/colorTertiary"
+        android:textSize="@dimen/size_text_font_small_16"
         android:visibility="gone"
         tools:ignore="MissingConstraints,TouchTargetSizeCheck"
         tools:visibility="visible" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/bClear"
-        style="@style/btnHelperForTest"
         android:layout_width="80dp"
         android:layout_height="@dimen/size_button_height_medium"
+        android:layout_marginHorizontal="@dimen/offset_small_8"
+        android:background="@drawable/btn_std_orange_outlined_bg_all_in_one_file"
         android:text="@string/clear"
+        android:textColor="?attr/colorTertiary"
+        android:textSize="@dimen/size_text_font_small_16"
         android:visibility="gone"
         tools:ignore="MissingConstraints,TouchTargetSizeCheck"
         tools:visibility="visible" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/bRestore"
-        style="@style/btnHelperForTest"
         android:layout_width="80dp"
         android:layout_height="@dimen/size_button_height_medium"
+        android:layout_marginHorizontal="@dimen/offset_small_8"
+        android:background="@drawable/btn_std_orange_outlined_bg_all_in_one_file"
         android:text="@string/restore"
+        android:textColor="?attr/colorTertiary"
+        android:textSize="@dimen/size_text_font_small_16"
         android:visibility="gone"
         tools:ignore="MissingConstraints,TouchTargetSizeCheck"
         tools:visibility="visible" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/bFill"
-        style="@style/btnHelperForTest"
         android:layout_width="80dp"
         android:layout_height="@dimen/size_button_height_medium"
+        android:layout_marginHorizontal="@dimen/offset_small_8"
+        android:background="@drawable/btn_std_orange_outlined_bg_all_in_one_file"
         android:text="@string/fill"
+        android:textColor="?attr/colorTertiary"
+        android:textSize="@dimen/size_text_font_small_16"
         android:visibility="gone"
         tools:ignore="MissingConstraints,TouchTargetSizeCheck"
         tools:visibility="visible" />

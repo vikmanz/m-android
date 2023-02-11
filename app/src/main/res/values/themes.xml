@@ -16,7 +16,7 @@
         <item name="colorError">@color/default_theme_text_error</item>
 
         <!-- Widgets styles. -->
-        <item name="android:textViewStyle">@style/text_White</item>
+        <item name="android:textViewStyle">@style/basicText</item>
 
 
     </style>
