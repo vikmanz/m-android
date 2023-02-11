@@ -4,9 +4,10 @@
     <!-- ————————————————————  Text styles. ———————————————————— -->
 
     <style name="basicText" parent="Widget.AppCompat.TextView">
-        <item name="android:fontFamily">@font/opensans</item>
+        <item name="android:fontFamily">@font/open_sans_regular</item>     <!-- FONT -->
         <item name="android:textColor">?attr/colorTertiary</item>
         <item name="android:textSize">@dimen/size_text_font_S</item>
+
     </style>
 
     <style name="basicText_bold" parent="basicText">
@@ -17,7 +18,11 @@
         <!-- Nothing. Need to overwrite buttons font size on UA language. -->
     </style>
 
-
+    <style name="textInputFont">
+        <item name="android:fontFamily">@font/open_sans_regular</item>     <!-- FONT -->
+        <item name="android:fontStyle">normal</item>
+        <item name="android:fontWeight">400</item>
+    </style>
 
 
     <!-- ————————————————————  TextInput styles. ———————————————————— -->
@@ -32,17 +37,16 @@
         <item name="android:textColorHint">?attr/colorOnTertiary</item>
     </style>
 
-    <style name="textInputLayout_hintSize" >
+    <style name="textInputLayout_hintSize">
         <item name="android:textSize">@dimen/size_text_font_S</item>
     </style>
 
     <style name="textInputLayout_basicTextInput" parent="Widget.AppCompat.EditText">
-        <item name="android:fontFamily">@font/opensans</item>
+        <item name="android:fontFamily">@font/open_sans_regular</item>      <!-- FONT -->
         <item name="android:textColor">?attr/colorTertiary</item>
         <item name="android:background">@drawable/edittext_bottom_line</item>
         <item name="android:paddingStart">0dp</item>
         <item name="android:paddingEnd">0dp</item>
-
     </style>
 
 

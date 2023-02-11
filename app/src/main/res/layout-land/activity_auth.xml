@@ -9,13 +9,14 @@
     android:focusableInTouchMode="true"
     tools:context=".AuthActivity">
 
+
     <!-- Hello text. -->
     <androidx.constraintlayout.helper.widget.Flow
         android:id="@+id/flowHelloText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/marginHorizontal"
-        android:layout_marginTop="@dimen/offset_auth_hello_text_from_top_portrait"
+        android:layout_marginTop="@dimen/offset_auth_hello_text_from_top_landscape"
         android:orientation="vertical"
         app:constraint_referenced_ids="tvHelloText, tvHelloSubText"
         app:layout_constraintEnd_toEndOf="parent"
@@ -47,7 +48,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/marginHorizontal"
-        android:layout_marginTop="@dimen/offset_L"
+        android:layout_marginTop="@dimen/offset_S"
         android:orientation="vertical"
         app:constraint_referenced_ids="tiLayoutEmail, tiLayoutPassword, flowLayoutRememberOrForgot"
         app:layout_constraintEnd_toEndOf="parent"
@@ -60,10 +61,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="@string/title_e_mail"
+        android:textAppearance="@style/basicText"
         app:hintTextAppearance="@style/textInputLayout_hintSize"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/flowLayoutEmailPassword">
+        tools:ignore="MissingConstraints">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/tiTextEmail"
@@ -80,7 +80,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="@string/title_password"
-        android:paddingTop="@dimen/offset_S"
+        android:paddingTop="@dimen/offset_XS"
         app:counterEnabled="true"
         app:counterMaxLength="16"
         app:counterTextColor="?attr/colorTertiary"
@@ -99,14 +99,13 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- Remember and Forgot inner flow. -->
     <androidx.constraintlayout.helper.widget.Flow
         android:id="@+id/flowLayoutRememberOrForgot"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/offset_S"
-        app:flow_horizontalStyle="spread_inside"
+        android:layout_marginTop="@dimen/offset_XS"
         android:orientation="horizontal"
+        app:flow_horizontalStyle="spread_inside"
         app:constraint_referenced_ids="checkBox, forgotPassword"
         tools:ignore="MissingConstraints" />
 
@@ -118,7 +117,6 @@
         android:buttonTint="?attr/colorTertiary"
         android:textColor="?attr/colorOnTertiary"
         android:focusableInTouchMode="true"
-        android:fontFamily="@font/opensans"
         android:text="@string/rememberMeCheckbox"
         tools:ignore="MissingConstraints" />
 
@@ -127,11 +125,11 @@
         style="@style/basicText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:gravity="end"
         android:text="@string/forgot_your_password"
         android:visibility="gone"
         tools:ignore="MissingConstraints"
         tools:visibility="visible" />
-
 
     <!-- Google or Register flow. -->
     <androidx.constraintlayout.helper.widget.Flow
@@ -139,17 +137,17 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginHorizontal="@dimen/marginHorizontal"
-        android:layout_marginTop="@dimen/offset_XL"
-        android:orientation="vertical"
+        android:layout_marginTop="@dimen/offset_XS"
+        android:orientation="horizontal"
         app:constraint_referenced_ids="bRegisterByGoogle, googleOrRegister, bRegisterByEmailPassword"
-        app:flow_verticalGap="@dimen/offset_S"
+        app:flow_horizontalGap="@dimen/offset_S"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/flowLayoutEmailPassword" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/bRegisterByGoogle"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="@dimen/size_button_height_M"
         android:background="@drawable/btn_google"
         tools:ignore="MissingConstraints,TouchTargetSizeCheck,SpeakableTextPresentCheck" />
@@ -165,12 +163,12 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/bRegisterByEmailPassword"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/size_button_height_XL"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/size_button_height_M"
         android:background="@drawable/btn_std_orange_outlined_bg_all_in_one_file"
         android:text="@string/registerButton"
-        android:textAppearance="@style/basicText"
-        tools:ignore="MissingConstraints" />
+        android:textAppearance="@style/basicText_buttonsText"
+        tools:ignore="MissingConstraints,TouchTargetSizeCheck" />
 
 
     <!-- Terms warning. -->
@@ -179,10 +177,8 @@
         style="@style/basicText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/offset_S"
-        android:text="@string/termsAgreeWarning"
-        android:textAlignment="center"
-        android:textFontWeight="400"
+        android:layout_marginTop="@dimen/offset_XS"
+        android:text="@string/termsAgreeWarning_landscape"
         android:textSize="@dimen/size_text_font_XXS"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -194,10 +190,11 @@
         android:id="@+id/flowAlreadyHaveAcc"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_marginTop="@dimen/offset_S"
+        android:layout_marginTop="@dimen/offset_XS"
         android:orientation="horizontal"
         app:constraint_referenced_ids="alreadyHaveAccMessage, alreadyHaveAccLink"
         app:flow_horizontalGap="12dp"
+        app:flow_horizontalStyle="spread_inside"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/warningAboutTerms" />
@@ -223,17 +220,17 @@
     <!-- Helper buttons. -->
     <androidx.constraintlayout.helper.widget.Flow
         android:id="@+id/flowTestButtons"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/marginHorizontal"
-        android:layout_marginTop="@dimen/offset_M"
+        android:layout_marginTop="@dimen/offset_S"
         android:orientation="horizontal"
         app:constraint_referenced_ids="btnForTest1, btnForTest2, btnForTest3"
-        app:flow_horizontalStyle="spread_inside"
-        android:visibility="gone"
-        tools:visibility="visible"
+        app:flow_horizontalGap="@dimen/offset_XL"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:visibility="gone"
+        tools:visibility="visible"
         app:layout_constraintTop_toBottomOf="@+id/flowAlreadyHaveAcc" />
 
     <androidx.appcompat.widget.AppCompatButton
@@ -242,7 +239,7 @@
         android:layout_height="@dimen/size_button_height_M"
         android:background="@drawable/btn_std_orange_outlined_bg_all_in_one_file"
         android:text="@string/btnTest1text"
-        android:textAppearance="@style/basicText"
+        android:textAppearance="@style/basicText_buttonsText"
         tools:ignore="MissingConstraints,TouchTargetSizeCheck" />
 
     <androidx.appcompat.widget.AppCompatButton
@@ -251,7 +248,7 @@
         android:layout_height="@dimen/size_button_height_M"
         android:background="@drawable/btn_std_orange_outlined_bg_all_in_one_file"
         android:text="@string/btnTest2text"
-        android:textAppearance="@style/basicText"
+        android:textAppearance="@style/basicText_buttonsText"
         tools:ignore="MissingConstraints,TouchTargetSizeCheck" />
 
     <androidx.appcompat.widget.AppCompatButton
@@ -260,7 +257,7 @@
         android:layout_height="@dimen/size_button_height_M"
         android:background="@drawable/btn_std_orange_outlined_bg_all_in_one_file"
         android:text="@string/btnTest3text"
-        android:textAppearance="@style/basicText"
+        android:textAppearance="@style/basicText_buttonsText"
         tools:ignore="MissingConstraints,TouchTargetSizeCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

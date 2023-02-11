@@ -8,15 +8,14 @@ import androidx.activity.OnBackPressedCallback
 import com.vikmanz.shpppro.databinding.ActivityMainBinding
 import com.vikmanz.shpppro.constants.Constants.INTENT_EMAIL_ID
 import com.vikmanz.shpppro.dataSave.LoginDataStoreManager
-import kotlinx.coroutines.DelicateCoroutinesApi
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var loginData: LoginDataStoreManager
+    private val coroutineScope: CoroutineScope = CoroutineScope(Job())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,13 +39,10 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    @OptIn(DelicateCoroutinesApi::class)
     private fun logout() {
-
-        GlobalScope.launch {
+        coroutineScope.launch(Dispatchers.IO) {
             loginData.clearUser()
         }
-
         val intentObject = Intent(this, AuthActivity::class.java)
         finish()
         startActivity(intentObject)

@@ -36,17 +36,21 @@ class AuthActivity : AppCompatActivity() {
         // init activity
         super.onCreate(savedInstanceState)
 
+        loginData = LoginDataStoreManager(this)
+
+
         binding = ActivityAuthBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-        initHelpTesterButtons()
+
 
         if (LOGIN_VIEW_FIRST) changeRegisterLoginScreen()
 
         // save login data tests
-        loginData = LoginDataStoreManager(this)
+
         checkUserLoginStatus()
 
+        initHelpTesterButtons()
         // Focus to bg and checkbox login functions.
         backgroundFocusHandler()
         // binding.checkBox.setOnClickListener { saveAuthData() }    // disable this to own email
@@ -146,7 +150,7 @@ class AuthActivity : AppCompatActivity() {
             binding.apply {
                 tvHelloText.text = getString(R.string.helloText_signin)
                 tvHelloSubText.text = getString(R.string.helloSubText_signin)
-                tiLayoutPassword.isCounterEnabled = false
+                tiLayoutPassword.isCounterEnabled = true
                 forgotPassword.visibility = View.VISIBLE
                 bRegisterByGoogle.visibility = View.GONE
                 googleOrRegister.visibility = View.GONE
