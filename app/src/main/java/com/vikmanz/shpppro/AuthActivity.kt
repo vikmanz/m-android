@@ -7,7 +7,8 @@ import android.util.Log
 import android.util.Patterns
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.*
+import androidx.lifecycle.asLiveData
+import androidx.lifecycle.observe
 import com.vikmanz.shpppro.constants.Constants.AUTO_LOGIN_TO_PROFILE
 import com.vikmanz.shpppro.constants.Constants.CHECKBOX_STATE_STATE_KEY
 import com.vikmanz.shpppro.constants.Constants.EMAIL_FIELD_STATE_KEY
@@ -18,16 +19,15 @@ import com.vikmanz.shpppro.constants.Constants.PASSWORD_FIELD_STATE_KEY
 import com.vikmanz.shpppro.constants.Constants.PASSWORD_VIEW_STATE_KEY
 import com.vikmanz.shpppro.dataSave.LoginDataStoreManager
 import com.vikmanz.shpppro.databinding.ActivityAuthBinding
-import kotlinx.coroutines.DelicateCoroutinesApi
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.collectLatest
 
 class AuthActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAuthBinding
     private var isLoginScreen = false
     private lateinit var loginData: LoginDataStoreManager
-
+    private val coroutineScope: CoroutineScope = CoroutineScope(Job())
 
     private var autologinStatus = false
     private var helperButtonsVisible = false
@@ -100,15 +100,16 @@ class AuthActivity : AppCompatActivity() {
         doRegister()
     }
 
-    @OptIn(DelicateCoroutinesApi::class)
     private fun saveUserData() {
         val email = binding.tiTextEmail.text.toString()
         val password = binding.tiTextPassword.text.toString()
         val isAutologin = binding.checkBox.isChecked
         Log.d("MyLog", "email is $email, password is $password, isAutologin is $isAutologin")
-        GlobalScope.launch {
-            loginData.setUser(email, password, isAutologin)
+
+        coroutineScope.launch(Dispatchers.IO) {
+            loginData.saveUserSata(email, password, isAutologin)
         }
+
     }
 
     @Suppress("COMPATIBILITY_WARNING", "DEPRECATION")
@@ -123,22 +124,42 @@ class AuthActivity : AppCompatActivity() {
         loginData.userLoginStatusFlow.asLiveData().observe(this) {
             binding.checkBox.isChecked = it
         }
+//        coroutineScope.launch(Dispatchers.Main) {
+//
+//            Log.d("MyLog", "db1 init")
+//            loginData.userNameFlow.collectLatest {
+//                Log.d("MyLog", "db1 read: $it")
+//                binding.tiTextEmail.setText(it)
+//            }
+//
+//            Log.d("MyLog", "db2 init")
+//            loginData.userPasswordFlow.collectLatest {
+//                Log.d("MyLog", "db2 read: $it")
+//                binding.tiTextPassword.setText(it)
+//            }
+//
+//            Log.d("MyLog", "db3 init")
+//            loginData.userLoginStatusFlow.collectLatest {
+//                Log.d("MyLog", "db3 read: $it")
+//                binding.checkBox.isChecked = it
+//            }
+//
+//        }
     }
 
     @Suppress("COMPATIBILITY_WARNING", "DEPRECATION")
     private fun checkUserLoginStatus() {
         loginData.userLoginStatusFlow.asLiveData().observe(this) {
-            Log.d("MyLog", "Autologin status is $it")
-            autologinStatus = it
-
-            if (autologinStatus && AUTO_LOGIN_TO_PROFILE) doAutoLogin()
-
-            Log.d("MyLog", "Autologin variable is $autologinStatus")
-            if (autologinStatus) {
-                Log.d("MyLog", "Fill fields!")
-                restoreUserData()
+        //lifecycleScope.launch(Dispatchers.IO) {
+        //loginData.userLoginStatusFlow.collectLatest {
+                Log.d("MyLog", "db4: $it")
+                autologinStatus = it
+                if (autologinStatus && AUTO_LOGIN_TO_PROFILE) doAutoLogin()
+                if (autologinStatus) {
+                    restoreUserData()
+                }
             }
-        }
+       // }
     }
 
 

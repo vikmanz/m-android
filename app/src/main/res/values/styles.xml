@@ -18,10 +18,6 @@
         <!-- Nothing. Need to overwrite buttons font size on UA language. -->
     </style>
 
-    <style name="textInputFont">
-        <item name="android:fontFamily">@font/open_sans_regular</item>     <!-- FONT -->
-    </style>
-
 
     <!-- ————————————————————  TextInput styles. ———————————————————— -->
 

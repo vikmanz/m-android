@@ -58,14 +58,16 @@ class MainActivity : AppCompatActivity() {
 
     private fun parseEmail(fullEmail: String): String {
 
-        Log.d("MyLog", "0: $fullEmail")
+        if (fullEmail.isEmpty()) return "Empty Empty"
+
+        Log.d("MyLog", "0: [$fullEmail]")
         val personName: String
 
         if (fullEmail == getString(R.string.guest_email)) return getString(R.string.guest_name_surname)
-        Log.d("MyLog", "1: $fullEmail")
+        Log.d("MyLog", "1: [$fullEmail]")
 
         val firstPartEmail = fullEmail.substring(0, fullEmail.indexOf('@'))
-        Log.d("MyLog", "email first part: $firstPartEmail")
+        Log.d("MyLog", "email first part: [$firstPartEmail]")
 
         if (firstPartEmail.indexOf('.') == -1) {
             Log.d("MyLog", "2")

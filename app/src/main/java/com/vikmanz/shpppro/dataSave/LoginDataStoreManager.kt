@@ -14,23 +14,19 @@ private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(na
 
 class LoginDataStoreManager (private val context: Context) {
 
-
-
     companion object {
-
         private val USER_LOGIN_KEY = stringPreferencesKey("user_name")
         private val USER_PASSWORD_KEY = stringPreferencesKey("user_pass")
         private val LOGIN_STATUS_KEY = booleanPreferencesKey("user_login_status")
     }
 
-    suspend fun setUser(name: String, password: String, isAutoLogin: Boolean) {
+    suspend fun saveUserSata(name: String, password: String, isAutoLogin: Boolean) {
         context.dataStore.edit {
             it[USER_LOGIN_KEY] = name
             it[USER_PASSWORD_KEY] = password
             it[LOGIN_STATUS_KEY] = isAutoLogin
         }
     }
-
 
     suspend fun clearUser() {
         context.dataStore.edit {
