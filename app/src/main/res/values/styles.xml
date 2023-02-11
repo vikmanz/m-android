@@ -20,8 +20,6 @@
 
     <style name="textInputFont">
         <item name="android:fontFamily">@font/open_sans_regular</item>     <!-- FONT -->
-        <item name="android:fontStyle">normal</item>
-        <item name="android:fontWeight">400</item>
     </style>
 
 
