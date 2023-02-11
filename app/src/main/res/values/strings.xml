@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <string name="app_name">SHppPro</string>
     <string name="settingsButton">Settings</string>
     <string name="personNameSample">Person Name</string>
@@ -10,8 +10,8 @@
     <string name="viewMyContacts">VIEW MY CONTACTS</string>
     <string name="helloText">Let\'s get acquainted</string>
     <string name="helloSubText">Fill out the profile and go to the application!</string>
-    <string name="title_e_mail">E-mail</string>
-    <string name="title_password">Password</string>
+    <string name="title_e_mail"><b>E-mail</b></string>
+    <string name="title_password"><b>Password</b></string>
     <string name="termsAgreeWarning">By clicking Register you agree to our Terms\nand Conditions</string>
     <string name="termsAgreeWarning_landscape">By clicking Register you agree to our Terms and Conditions</string>
     <string name="registerButton">REGISTER</string>
@@ -32,12 +32,7 @@
     <string name="sign_in_signin">Sign up</string>
     <string name="forgot_your_password">Forgot your password?</string>
     <string name="logout_button_text">LOGOUT</string>
-    <string name="save">SAVE</string>
-    <string name="restore">RESTORE</string>
-    <string name="clear">CLEAR</string>
-    <string name="fill">FILL</string>
-
-    <string name="LangTitle" tools:ignore="MissingTranslation">Язык</string>
-    <string name="LangDialogTitle" tools:ignore="MissingTranslation">Выберите язык:</string>
-    <string name="LangSummary" tools:ignore="MissingTranslation">Язык приложения.\nНеобходимо перезапустить приложение для принятия изменений.</string>
+    <string name="btnTest1text">FILL</string>
+    <string name="btnTest2text">CLEAR</string>
+    <string name="btnTest3text">LANG</string>
 </resources>

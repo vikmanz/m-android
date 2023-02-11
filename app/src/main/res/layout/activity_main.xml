@@ -23,8 +23,8 @@
             android:id="@+id/flowLayoutSettingsAndLogout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/offset_medium_16"
-            android:layout_marginTop="@dimen/offset_medium_16"
+            android:layout_marginHorizontal="@dimen/marginHorizontal"
+            android:layout_marginTop="@dimen/offset_M"
             android:orientation="horizontal"
             app:constraint_referenced_ids="tvSettings, tvLogout"
             app:flow_horizontalStyle="spread_inside"
@@ -35,24 +35,18 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvSettings"
-            style="@style/basicText"
+            style="@style/basicText_bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="start"
             android:text="@string/settingsButton"
-            android:textColor="?attr/colorTertiary"
-            android:textSize="@dimen/size_text_font_large_32"
-            android:textStyle="bold" />
+            android:textSize="@dimen/size_text_font_XL" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvLogout"
-            style="@style/basicText"
+            style="@style/basicText_bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/logout_button_text"
-            android:textColor="?attr/colorTertiary"
-            android:textSize="@dimen/size_text_font_small_16"
-            android:textStyle="bold"
             tools:ignore="MissingConstraints" />
 
         <!-- Avatar and Person Info. -->
@@ -63,7 +57,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:constraint_referenced_ids="cvAvatar, flowProfileText"
-            app:flow_verticalGap="@dimen/offset_medium_16"
+            app:flow_verticalGap="@dimen/offset_M"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -92,44 +86,37 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:constraint_referenced_ids="tvPersonName, tvPersonCareer, tvPersonHomeAddress"
-            app:flow_verticalGap="@dimen/offset_small_8"
+            app:flow_verticalGap="@dimen/offset_S"
             tools:ignore="MissingConstraints" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvPersonName"
-            style="@style/basicText"
+            style="@style/basicText_bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:text="@string/personNameSample"
-            android:textColor="?attr/colorTertiary"
-            android:textSize="@dimen/size_text_font_medium_18"
-            android:textStyle="bold"
+            android:textSize="@dimen/size_text_font_M"
             tools:ignore="MissingConstraints,TextContrastCheck" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvPersonCareer"
-            style="@style/basicText"
+            style="@style/basicText_bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:text="@string/personCareerSample"
             android:textColor="?attr/colorOnTertiary"
-            android:textSize="@dimen/size_text_font_smaller_14"
-            android:textStyle="bold"
+            android:textSize="@dimen/size_text_font_XS"
             tools:ignore="MissingConstraints" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvPersonHomeAddress"
-            style="@style/basicText"
+            style="@style/basicText_bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:paddingTop="@dimen/offset_small_8"
+            android:paddingTop="@dimen/offset_S"
             android:text="@string/personHomeAddressSample"
             android:textColor="?attr/colorOnTertiary"
-            android:textSize="@dimen/size_text_font_smaller_14"
-            android:textStyle="bold"
+            android:textSize="@dimen/size_text_font_XS"
             tools:ignore="MissingConstraints" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -152,7 +139,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:constraint_referenced_ids="btnFacebook, btnLinkedin, btnInstagram"
-            app:flow_horizontalGap="@dimen/offset_large_32"
+            app:flow_horizontalGap="@dimen/offset_XL"
             app:layout_constraintBottom_toTopOf="@+id/btnEditProfile"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -162,28 +149,38 @@
             android:id="@+id/btnFacebook"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/ic_outline_circle"
+            android:background="@drawable/socials_outline_circle"
+            android:clickable="true"
+            android:focusable="true"
             android:scaleType="center"
-            app:srcCompat="@drawable/logo_facebook"
-            tools:ignore="MissingConstraints" />
+            app:srcCompat="@drawable/socials_logo_facebook"
+            tools:ignore="MissingConstraints,SpeakableTextPresentCheck" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/btnLinkedin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/ic_outline_circle"
+            android:background="@drawable/socials_outline_circle"
+            android:clickable="true"
+            android:focusable="true"
             android:scaleType="center"
-            app:srcCompat="@drawable/logo_linkedin"
-            tools:ignore="MissingConstraints" />
+            app:srcCompat="@drawable/socials_logo_linkedin"
+            tools:ignore="MissingConstraints,SpeakableTextPresentCheck"
+            tools:layout_editor_absoluteX="176dp"
+            tools:layout_editor_absoluteY="89dp" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/btnInstagram"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/ic_outline_circle"
+            android:background="@drawable/socials_outline_circle"
+            android:clickable="true"
+            android:focusable="true"
             android:scaleType="center"
-            app:srcCompat="@drawable/logo_instagram"
-            tools:ignore="MissingConstraints" />
+            app:srcCompat="@drawable/socials_logo_instagram"
+            tools:ignore="MissingConstraints,SpeakableTextPresentCheck"
+            tools:layout_editor_absoluteX="268dp"
+            tools:layout_editor_absoluteY="89dp" />
 
         <!-- Fill Profile Text. -->
         <androidx.appcompat.widget.AppCompatTextView
@@ -191,47 +188,44 @@
             style="@style/basicText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/offset_medium_16"
+            android:layout_marginBottom="@dimen/offset_M"
             android:text="@string/propositionToFillProfile"
             android:textColor="?attr/colorSecondary"
-            android:textSize="@dimen/size_text_font_smaller_14"
+            android:textSize="@dimen/size_text_font_XS"
             app:layout_constraintBottom_toTopOf="@id/btnEditProfile"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <!-- Edit Profile and View Contacts buttons flow. -->
+        <!-- Edit Profile button. -->
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnEditProfile"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/size_button_height_medium"
-            android:layout_marginHorizontal="@dimen/offset_small_8"
-            android:layout_marginBottom="@dimen/offset_medium_16"
+            android:layout_height="@dimen/size_button_height_M"
+            android:layout_marginHorizontal="@dimen/marginHorizontal"
+            android:layout_marginBottom="@dimen/offset_M"
             android:background="@drawable/btn_std_white_bg"
             android:text="@string/editProfile"
-            android:textAppearance="@style/basicText"
+            android:textAppearance="@style/basicText_buttonsText"
             android:textColor="?attr/colorSecondary"
-            android:textSize="@dimen/size_text_font_small_16"
             app:layout_constraintBottom_toTopOf="@id/btnViewMyContacts"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             tools:ignore="TouchTargetSizeCheck" />
 
+        <!-- View Contacts button. -->
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnViewMyContacts"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/size_button_height_large"
-            android:layout_marginHorizontal="@dimen/offset_small_8"
-            android:layout_marginBottom="@dimen/offset_medium_16"
+            android:layout_height="@dimen/size_button_height_XL"
+            android:layout_marginHorizontal="@dimen/marginHorizontal"
+            android:layout_marginBottom="@dimen/offset_M"
             android:background="@drawable/btn_std_orange_bg"
             android:text="@string/viewMyContacts"
-            android:textAppearance="@style/basicText"
-            android:textColor="?attr/colorTertiary"
-            android:textSize="@dimen/size_text_font_small_16"
+            android:textAppearance="@style/basicText_buttonsText"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             tools:ignore="TextContrastCheck" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

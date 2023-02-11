@@ -9,13 +9,12 @@
     android:focusableInTouchMode="true"
     tools:context=".AuthActivity">
 
-
     <!-- Hello text. -->
     <androidx.constraintlayout.helper.widget.Flow
         android:id="@+id/flowHelloText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/offset_medium_16"
+        android:layout_marginHorizontal="@dimen/marginHorizontal"
         android:layout_marginTop="@dimen/offset_auth_hello_text_from_top_portrait"
         android:orientation="vertical"
         app:constraint_referenced_ids="tvHelloText, tvHelloSubText"
@@ -25,15 +24,11 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvHelloText"
-        style="@style/basicText"
+        style="@style/basicText_bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
         android:text="@string/helloText"
-        android:textAlignment="center"
-        android:textColor="?attr/colorTertiary"
-        android:textSize="@dimen/size_text_font_big_24"
-        android:textStyle="bold"
+        android:textSize="@dimen/size_text_font_L"
         tools:ignore="MissingConstraints" />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -41,12 +36,8 @@
         style="@style/basicText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
         android:text="@string/helloSubText"
-        android:textAlignment="center"
-        android:textColor="?attr/colorTertiary"
-        android:textSize="@dimen/size_text_font_smaller_14"
-        android:textStyle="bold"
+        android:textSize="@dimen/size_text_font_XXS"
         tools:ignore="MissingConstraints" />
 
 
@@ -55,8 +46,8 @@
         android:id="@+id/flowLayoutEmailPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/offset_medium_16"
-        android:layout_marginTop="@dimen/offset_big_24"
+        android:layout_marginHorizontal="@dimen/marginHorizontal"
+        android:layout_marginTop="@dimen/offset_L"
         android:orientation="vertical"
         app:constraint_referenced_ids="tiLayoutEmail, tiLayoutPassword, flowLayoutRememberOrForgot"
         app:layout_constraintEnd_toEndOf="parent"
@@ -69,22 +60,17 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="@string/title_e_mail"
-        app:boxCollapsedPaddingTop="@dimen/email_password_boxCollapsedPaddingTop"
-        app:expandedHintEnabled="false"
-        app:hintTextAppearance="@style/textInputLayout_hintAppearance"
+        app:hintTextAppearance="@style/textInputLayout_hintSize"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/flowLayoutEmailPassword">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/tiTextEmail"
+            style="@style/textInputLayout_basicTextInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/edittext_bottom_line"
-            android:inputType="textEmailAddress"
-            android:paddingStart="0dp"
-            android:paddingEnd="0dp"
-            android:textColor="?attr/colorTertiary" />
+            android:inputType="textEmailAddress" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -94,27 +80,22 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="@string/title_password"
-        android:paddingTop="@dimen/offset_small_8"
-        app:boxCollapsedPaddingTop="@dimen/email_password_boxCollapsedPaddingTop"
+        android:paddingTop="@dimen/offset_S"
         app:counterEnabled="true"
         app:counterMaxLength="16"
         app:counterTextColor="?attr/colorTertiary"
-        app:expandedHintEnabled="false"
         app:helperTextEnabled="true"
-        app:hintTextAppearance="@style/textInputLayout_hintAppearance"
+        app:hintTextAppearance="@style/textInputLayout_hintSize"
         app:passwordToggleEnabled="true"
         app:passwordToggleTint="?attr/colorTertiary"
         tools:ignore="MissingConstraints">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/tiTextPassword"
+            style="@style/textInputLayout_basicTextInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/edittext_bottom_line"
-            android:inputType="textPassword"
-            android:paddingStart="0dp"
-            android:paddingEnd="0dp"
-            android:textColor="?attr/colorTertiary" />
+            android:inputType="textPassword" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -123,33 +104,30 @@
         android:id="@+id/flowLayoutRememberOrForgot"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/offset_small_8"
+        android:layout_marginTop="@dimen/offset_S"
+        app:flow_horizontalStyle="spread_inside"
         android:orientation="horizontal"
         app:constraint_referenced_ids="checkBox, forgotPassword"
         tools:ignore="MissingConstraints" />
 
     <CheckBox
         android:id="@+id/checkBox"
-        android:layout_width="0dp"
+        style="@style/basicText"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:buttonTint="?attr/colorTertiary"
+        android:textColor="?attr/colorOnTertiary"
         android:focusableInTouchMode="true"
         android:fontFamily="@font/opensans"
         android:text="@string/rememberMeCheckbox"
-        android:textColor="?attr/colorTertiary"
-        android:textSize="@dimen/size_text_font_small_16"
         tools:ignore="MissingConstraints" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/forgotPassword"
         style="@style/basicText"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="end"
         android:text="@string/forgot_your_password"
-        android:textColor="?attr/colorTertiary"
-        android:textSize="@dimen/size_text_font_small_16"
-        android:textStyle="bold"
         android:visibility="gone"
         tools:ignore="MissingConstraints"
         tools:visibility="visible" />
@@ -160,11 +138,11 @@
         android:id="@+id/flowRegisterButtons"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginHorizontal="@dimen/offset_medium_16"
-        android:layout_marginTop="@dimen/offset_large_32"
+        android:layout_marginHorizontal="@dimen/marginHorizontal"
+        android:layout_marginTop="@dimen/offset_XL"
         android:orientation="vertical"
         app:constraint_referenced_ids="bRegisterByGoogle, googleOrRegister, bRegisterByEmailPassword"
-        app:flow_verticalGap="@dimen/offset_small_8"
+        app:flow_verticalGap="@dimen/offset_S"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/flowLayoutEmailPassword" />
@@ -172,9 +150,8 @@
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/bRegisterByGoogle"
         android:layout_width="0dp"
-        android:layout_height="@dimen/size_button_height_medium"
+        android:layout_height="@dimen/size_button_height_M"
         android:background="@drawable/btn_google"
-        android:textSize="@dimen/size_text_font_small_16"
         tools:ignore="MissingConstraints,TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -182,47 +159,42 @@
         style="@style/basicText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
         android:text="@string/googleOrRegister"
-        android:textColor="?attr/colorTertiary"
-        android:textSize="@dimen/size_text_font_medium_18"
+        android:textSize="@dimen/size_text_font_M"
         tools:ignore="MissingConstraints" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/bRegisterByEmailPassword"
         android:layout_width="0dp"
-        android:layout_height="@dimen/size_button_height_large"
+        android:layout_height="@dimen/size_button_height_XL"
         android:background="@drawable/btn_std_orange_outlined_bg_all_in_one_file"
         android:text="@string/registerButton"
-        android:textColor="?attr/colorTertiary"
-        android:textSize="@dimen/size_text_font_small_16"
+        android:textAppearance="@style/basicText"
         tools:ignore="MissingConstraints" />
 
 
-    <!-- Sign in or Sign up flow. -->
+    <!-- Terms warning. -->
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/warningAboutTerms"
         style="@style/basicText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/offset_small_8"
-        android:gravity="center"
+        android:layout_marginTop="@dimen/offset_S"
         android:text="@string/termsAgreeWarning"
         android:textAlignment="center"
-        android:textColor="?attr/colorTertiary"
         android:textFontWeight="400"
-        android:textSize="@dimen/size_text_font_mini_12"
+        android:textSize="@dimen/size_text_font_XXS"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bRegisterByEmailPassword" />
 
 
-    <!-- Terms warning. -->
+    <!-- Sign in or Sign up flow. -->
     <androidx.constraintlayout.helper.widget.Flow
         android:id="@+id/flowAlreadyHaveAcc"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_marginTop="@dimen/offset_small_8"
+        android:layout_marginTop="@dimen/offset_S"
         android:orientation="horizontal"
         app:constraint_referenced_ids="alreadyHaveAccMessage, alreadyHaveAccLink"
         app:flow_horizontalGap="12dp"
@@ -237,7 +209,6 @@
         android:layout_height="wrap_content"
         android:text="@string/already_have_an_account"
         android:textColor="?attr/colorOnTertiary"
-        android:textSize="@dimen/size_text_font_small_16"
         tools:ignore="MissingConstraints" />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -246,8 +217,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/sign_in"
-        android:textColor="?attr/colorTertiary"
-        android:textSize="@dimen/size_text_font_small_16"
         tools:ignore="MissingConstraints" />
 
 
@@ -256,65 +225,42 @@
         android:id="@+id/flowTestButtons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/offset_medium_16"
-        android:layout_marginTop="@dimen/offset_medium_16"
+        android:layout_marginHorizontal="@dimen/marginHorizontal"
+        android:layout_marginTop="@dimen/offset_M"
         android:orientation="horizontal"
-        app:constraint_referenced_ids="bSave, bClear, bRestore, bFill"
-        app:flow_horizontalGap="@dimen/offset_small_8"
+        app:constraint_referenced_ids="btnForTest1, btnForTest2, btnForTest3"
+        app:flow_horizontalStyle="spread_inside"
+        android:visibility="gone"
+        tools:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/flowAlreadyHaveAcc" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/bSave"
-        android:layout_width="80dp"
-        android:layout_height="@dimen/size_button_height_medium"
-        android:layout_marginHorizontal="@dimen/offset_small_8"
+        android:id="@+id/btnForTest1"
+        android:layout_width="@dimen/helpButtonsWidth"
+        android:layout_height="@dimen/size_button_height_M"
         android:background="@drawable/btn_std_orange_outlined_bg_all_in_one_file"
-        android:text="@string/save"
-        android:textColor="?attr/colorTertiary"
-        android:textSize="@dimen/size_text_font_small_16"
-        android:visibility="gone"
-        tools:ignore="MissingConstraints,TouchTargetSizeCheck"
-        tools:visibility="visible" />
+        android:text="@string/btnTest1text"
+        android:textAppearance="@style/basicText"
+        tools:ignore="MissingConstraints,TouchTargetSizeCheck" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/bClear"
-        android:layout_width="80dp"
-        android:layout_height="@dimen/size_button_height_medium"
-        android:layout_marginHorizontal="@dimen/offset_small_8"
+        android:id="@+id/btnForTest2"
+        android:layout_width="@dimen/helpButtonsWidth"
+        android:layout_height="@dimen/size_button_height_M"
         android:background="@drawable/btn_std_orange_outlined_bg_all_in_one_file"
-        android:text="@string/clear"
-        android:textColor="?attr/colorTertiary"
-        android:textSize="@dimen/size_text_font_small_16"
-        android:visibility="gone"
-        tools:ignore="MissingConstraints,TouchTargetSizeCheck"
-        tools:visibility="visible" />
+        android:text="@string/btnTest2text"
+        android:textAppearance="@style/basicText"
+        tools:ignore="MissingConstraints,TouchTargetSizeCheck" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/bRestore"
-        android:layout_width="80dp"
-        android:layout_height="@dimen/size_button_height_medium"
-        android:layout_marginHorizontal="@dimen/offset_small_8"
+        android:id="@+id/btnForTest3"
+        android:layout_width="@dimen/helpButtonsWidth"
+        android:layout_height="@dimen/size_button_height_M"
         android:background="@drawable/btn_std_orange_outlined_bg_all_in_one_file"
-        android:text="@string/restore"
-        android:textColor="?attr/colorTertiary"
-        android:textSize="@dimen/size_text_font_small_16"
-        android:visibility="gone"
-        tools:ignore="MissingConstraints,TouchTargetSizeCheck"
-        tools:visibility="visible" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/bFill"
-        android:layout_width="80dp"
-        android:layout_height="@dimen/size_button_height_medium"
-        android:layout_marginHorizontal="@dimen/offset_small_8"
-        android:background="@drawable/btn_std_orange_outlined_bg_all_in_one_file"
-        android:text="@string/fill"
-        android:textColor="?attr/colorTertiary"
-        android:textSize="@dimen/size_text_font_small_16"
-        android:visibility="gone"
-        tools:ignore="MissingConstraints,TouchTargetSizeCheck"
-        tools:visibility="visible" />
+        android:text="@string/btnTest3text"
+        android:textAppearance="@style/basicText"
+        tools:ignore="MissingConstraints,TouchTargetSizeCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

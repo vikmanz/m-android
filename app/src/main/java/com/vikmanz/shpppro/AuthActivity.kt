@@ -63,19 +63,7 @@ class AuthActivity : AppCompatActivity() {
 
     private fun viewOrHideHelpTesterButtons() {
         helperButtonsVisible = !helperButtonsVisible
-        binding.apply {
-            if (helperButtonsVisible) {
-                bSave.visibility = View.VISIBLE
-                bClear.visibility = View.VISIBLE
-                bRestore.visibility = View.VISIBLE
-                bFill.visibility = View.VISIBLE
-            } else {
-                bSave.visibility = View.GONE
-                bClear.visibility = View.GONE
-                bRestore.visibility = View.GONE
-                bFill.visibility = View.GONE
-            }
-        }
+        binding.flowTestButtons.visibility = if (helperButtonsVisible) View.VISIBLE else View.GONE
     }
 
     // save state
@@ -278,17 +266,7 @@ class AuthActivity : AppCompatActivity() {
 
     private fun initHelpTesterButtons() {
 
-        binding.bSave.setOnClickListener { saveUserData() }
-
-        binding.bClear.setOnClickListener {
-            binding.tiTextEmail.setText("")
-            binding.tiTextPassword.setText("")
-            binding.checkBox.isChecked = false
-        }
-
-        binding.bRestore.setOnClickListener { restoreUserData() }
-
-        binding.bFill.setOnClickListener {
+        binding.btnForTest1.setOnClickListener {
             binding.apply {
                 tiTextEmail.setText(getString(R.string.my_main_email))
                 tiTextPassword.setText(getString(R.string.my_main_password))
@@ -296,6 +274,18 @@ class AuthActivity : AppCompatActivity() {
                 tiLayoutPassword.helperText = null
             }
         }
+
+        binding.btnForTest2.setOnClickListener {
+            binding.tiTextEmail.setText("")
+            binding.tiTextPassword.setText("")
+            binding.checkBox.isChecked = false
+        }
+
+        binding.btnForTest3.setOnClickListener {
+
+        }
+
+
     }
 
 }

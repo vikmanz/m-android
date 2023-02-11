@@ -1,35 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- Universal margin. -->
+    <dimen name="marginHorizontal">16dp</dimen>
+
     <!-- Offsets of elements. -->
-    <dimen name="offset_large_32">32dp</dimen>
-    <dimen name="offset_big_24">24dp</dimen>
-    <dimen name="offset_medium_16">16dp</dimen>
-    <dimen name="offset_small_8">8dp</dimen>
-    <dimen name="offset_minimum_4">4dp</dimen>
+    <dimen name="offset_XL">32dp</dimen>
+    <dimen name="offset_L">24dp</dimen>
+    <dimen name="offset_M">16dp</dimen>
+    <dimen name="offset_S">8dp</dimen>
+    <dimen name="offset_XS">4dp</dimen>
 
     <!-- Buttons size. -->
-    <dimen name="size_button_height_medium">40dp</dimen>
-    <dimen name="size_button_height_big">48dp</dimen>
-    <dimen name="size_button_height_large">55dp</dimen>
+    <dimen name="size_button_height_M">40dp</dimen>
+    <dimen name="size_button_height_L">48dp</dimen>
+    <dimen name="size_button_height_XL">55dp</dimen>
 
     <!-- Text size. -->
-    <dimen name="size_text_font_little_8">8sp</dimen>
-    <dimen name="size_text_font_mini_12">12sp</dimen>
-    <dimen name="size_text_font_smaller_14">14sp</dimen>
-    <dimen name="size_text_font_small_16">16sp</dimen>
-    <dimen name="size_text_font_medium_18">18sp</dimen>
-    <dimen name="size_text_font_big_24">24sp</dimen>
-    <dimen name="size_text_font_large_32">32sp</dimen>
+    <dimen name="size_text_font_XXXS">8sp</dimen>
+    <dimen name="size_text_font_XXS">12sp</dimen>
+    <dimen name="size_text_font_XS">14sp</dimen>
+    <dimen name="size_text_font_S">16sp</dimen>
+    <dimen name="size_text_font_M">18sp</dimen>
+    <dimen name="size_text_font_L">24sp</dimen>
+    <dimen name="size_text_font_XL">32sp</dimen>
 
-    <!-- Font weight. -->
+    <!-- Avatar dimens. -->
     <dimen name="avatar_size_x">130dp</dimen>
     <dimen name="avatar_size_y">130dp</dimen>
     <dimen name="avatar_corner_radius">360dp</dimen>
 
-    <!-- Others. -->
+    <!-- HARD values. -->
     <dimen name="offset_auth_hello_text_from_top_portrait">146dp</dimen>
     <dimen name="offset_auth_hello_text_from_top_landscape">20dp</dimen>
     <dimen name="email_password_boxCollapsedPaddingTop">4dp</dimen>
+    <dimen name="helpButtonsWidth">110dp</dimen>
 
 </resources>
