@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- ————————————————————  Text styles. ———————————————————— -->
+
+    <style name="basicText_buttonsText" parent="basicText">
+        <item name="android:textSize">@dimen/size_text_font_XS</item>
+    </style>
+
+</resources>

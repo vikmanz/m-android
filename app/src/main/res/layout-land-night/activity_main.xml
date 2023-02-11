@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+
+    <!-- Up half (65%) of screen. -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayoutTopBG"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="?attr/colorSecondary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.65"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- Settings and Logout flow. -->
+        <androidx.constraintlayout.helper.widget.Flow
+            android:id="@+id/flowLayoutSettingsAndLogout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/offset_M"
+            android:layout_marginTop="@dimen/offset_M"
+            android:orientation="horizontal"
+            app:constraint_referenced_ids="tvSettings, tvLogout"
+            app:flow_horizontalStyle="spread_inside"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvSettings"
+            style="@style/basicText_bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/settingsButton"
+            android:textSize="@dimen/size_text_font_XL" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvLogout"
+            style="@style/basicText_bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/logout_button_text"
+            tools:ignore="MissingConstraints" />
+
+        <!-- Person Info and Social Icons. -->
+        <!-- <!- Avatar and Person Info. -->
+        <!-- <!- <!- Avatar flow. -->
+        <androidx.constraintlayout.helper.widget.Flow
+            android:id="@+id/flowProfileSummary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/offset_XL"
+            android:orientation="horizontal"
+            app:constraint_referenced_ids="cvAvatar, flowProfileText"
+            app:flow_horizontalGap="@dimen/offset_XL"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btnFacebook"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/flowLayoutSettingsAndLogout" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvAvatar"
+            android:layout_width="@dimen/avatar_size_x"
+            android:layout_height="@dimen/avatar_size_y"
+            app:cardBackgroundColor="?attr/colorPrimary"
+            app:cardCornerRadius="@dimen/avatar_corner_radius">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivPerson"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/ic_person" />
+
+        </androidx.cardview.widget.CardView>
+
+        <!-- <!- <!- Person Info flow. -->
+        <androidx.constraintlayout.helper.widget.Flow
+            android:id="@+id/flowProfileText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:constraint_referenced_ids="tvPersonName, tvPersonCareer, tvPersonHomeAddress"
+            app:flow_verticalGap="@dimen/offset_S"
+            app:layout_constraintBottom_toBottomOf="@+id/flowProfileSummary"
+            app:layout_constraintEnd_toEndOf="@+id/flowProfileSummary"
+            app:layout_constraintStart_toEndOf="@+id/cvAvatar"
+            app:layout_constraintTop_toTopOf="@+id/flowProfileSummary" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvPersonName"
+            style="@style/basicText_bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/personNameSample"
+            android:textSize="@dimen/size_text_font_M"
+            tools:ignore="MissingConstraints,TextContrastCheck" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvPersonCareer"
+            style="@style/basicText_bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/personCareerSample"
+            android:textColor="?attr/colorOnTertiary"
+            android:textSize="@dimen/size_text_font_XS"
+            tools:ignore="MissingConstraints" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvPersonHomeAddress"
+            style="@style/basicText_bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/offset_S"
+            android:text="@string/personHomeAddressSample"
+            android:textColor="?attr/colorOnTertiary"
+            android:textSize="@dimen/size_text_font_XS"
+            tools:ignore="MissingConstraints" />
+
+        <!-- <!- Social Icons flow. -->
+        <androidx.constraintlayout.helper.widget.Flow
+            android:id="@+id/flowSocials"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="btnFacebook, btnLinkedin, btnInstagram"
+            app:flow_horizontalGap="@dimen/offset_XL"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/flowProfileSummary"
+            app:layout_constraintTop_toBottomOf="@+id/flowLayoutSettingsAndLogout" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/btnFacebook"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/socials_outline_circle"
+            android:clickable="true"
+            android:focusable="true"
+            android:scaleType="center"
+            app:srcCompat="@drawable/socials_logo_facebook"
+            tools:ignore="MissingConstraints,SpeakableTextPresentCheck" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/btnLinkedin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/socials_outline_circle"
+            android:clickable="true"
+            android:focusable="true"
+            android:scaleType="center"
+            app:srcCompat="@drawable/socials_logo_linkedin"
+            tools:ignore="MissingConstraints,SpeakableTextPresentCheck"
+            tools:layout_editor_absoluteX="521dp"
+            tools:layout_editor_absoluteY="133dp" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/btnInstagram"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/socials_outline_circle"
+            android:clickable="true"
+            android:focusable="true"
+            android:scaleType="center"
+            app:srcCompat="@drawable/socials_logo_instagram"
+            tools:ignore="MissingConstraints,SpeakableTextPresentCheck"
+            tools:layout_editor_absoluteX="613dp"
+            tools:layout_editor_absoluteY="133dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <!-- Down half (35%) of screen. -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayoutBottomBG"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="?attr/colorTertiary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.35"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <!-- Fill Profile Text. -->
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvPropositionToFillProfile"
+            style="@style/basicText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/offset_S"
+            android:text="@string/propositionToFillProfile"
+            android:textColor="?attr/colorSecondary"
+            android:textSize="@dimen/size_text_font_XS"
+            app:layout_constraintBottom_toTopOf="@id/flowButtonsBottom"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <!-- Edit Profile and View Contacts buttons flow. -->
+        <androidx.constraintlayout.helper.widget.Flow
+            android:id="@+id/flowButtonsBottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:constraint_referenced_ids="btnEditProfile, btnViewMyContacts"
+            app:flow_horizontalAlign="center"
+            app:flow_horizontalGap="@dimen/offset_XL"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnEditProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/size_button_height_M"
+            android:background="@drawable/btn_std_white_bg"
+            android:text="@string/editProfile"
+            android:textAppearance="@style/basicText_buttonsText"
+            android:textColor="?attr/colorSecondary"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnViewMyContacts"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/size_button_height_M"
+            android:background="@drawable/btn_std_orange_bg"
+            android:text="@string/viewMyContacts"
+            android:textAppearance="@style/basicText_buttonsText"
+            tools:ignore="MissingConstraints,TextContrastCheck,TouchTargetSizeCheck"
+            tools:layout_editor_absoluteX="382dp"
+            tools:layout_editor_absoluteY="53dp" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+

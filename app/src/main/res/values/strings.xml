@@ -10,25 +10,29 @@
     <string name="viewMyContacts">VIEW MY CONTACTS</string>
     <string name="helloText">Let\'s get acquainted</string>
     <string name="helloSubText">Fill out the profile and go to the application!</string>
-    <string name="title_e_mail">E-mail</string>
-    <string name="title_password">Password</string>
-    <string name="termsAgreeWarning">By clicking Register you agree to our Terms \n and Conditions</string>
+    <string name="title_e_mail"><b>E-mail</b></string>
+    <string name="title_password"><b>Password</b></string>
+    <string name="termsAgreeWarning">By clicking Register you agree to our Terms\nand Conditions</string>
     <string name="termsAgreeWarning_landscape">By clicking Register you agree to our Terms and Conditions</string>
     <string name="registerButton">REGISTER</string>
     <string name="googleOrRegister">or</string>
-    <string name="googleRegisterButton">GOOGLE</string>
+    <string name="googleRegisterButton" translatable="false">GOOGLE</string>
     <string name="rememberMeCheckbox">Remember me</string>
     <string name="already_have_an_account">Already have an account?</string>
     <string name="sign_in">Sign in</string>
     <string name="default_person_name">Name Surname</string>
-    <string name="guest_email">guest@gmail.com</string>
+    <string name="guest_email" translatable="false">guest@gmail.com</string>
     <string name="guest_name_surname">Guest Guestovich</string>
-    <string name="my_main_email">viktor.manza@gmail.com</string>
-    <string name="my_main_password">passwordE3@</string>
+    <string name="my_main_email" translatable="false">viktor.manza@gmail.com</string>
+    <string name="my_main_password" translatable="false">passwordE3@</string>
     <string name="helloText_signin">Hello!</string>
     <string name="helloSubText_signin">Enter your email and password below</string>
     <string name="registerButton_signin">LOGIN</string>
     <string name="already_have_an_account_signin">Don’t have account?</string>
     <string name="sign_in_signin">Sign up</string>
     <string name="forgot_your_password">Forgot your password?</string>
+    <string name="logout_button_text">LOGOUT</string>
+    <string name="btnTest1text">FILL</string>
+    <string name="btnTest2text">CLEAR</string>
+    <string name="btnTest3text">LANG</string>
 </resources>

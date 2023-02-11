@@ -7,11 +7,12 @@
 
     <!-- Primary colors. -->
     <color name="default_theme_color_primary">#FA5E06</color>
+    <color name="night_theme_color_primary">#C97D2C</color>
     <color name="default_theme_color_primary_variant">#F9BC06</color>
 
     <!-- Secondary colors. -->
     <color name="default_theme_color_secondary">#242235</color>
-    <color name="default_theme_color_secondary_variant">#1F6A81</color>
+    <color name="default_theme_color_secondary_variant">#2F2E33</color>
 
     <!-- Text colors. -->
     <color name="default_theme_text_color_primary">#FFFFFF</color>

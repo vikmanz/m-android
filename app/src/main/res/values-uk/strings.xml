@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Ш++</string>
+    <string name="settingsButton">Налаштування</string>
+    <string name="personNameSample">Ім\'я</string>
+    <string name="personCareerSample">Профессія</string>
+    <string name="personHomeAddressSample">Домашня адреса</string>
+    <string name="propositionToFillProfile">Перейдіть в налаштування і заповніть профіль</string>
+    <string name="editProfile">Редагувати профіль</string>
+    <string name="sample_of_person_photo">Семпл фото</string>
+    <string name="viewMyContacts">МОЇ КОНТАКТИ</string>
+    <string name="helloText">Давайте познайомимося</string>
+    <string name="helloSubText">Заповнюйте анкету та переходьте у додаток!</string>
+    <string name="title_e_mail"><b>Електронна пошта</b></string>
+    <string name="title_password"><b>Пароль</b></string>
+    <string name="termsAgreeWarning_landscape">Натискаючи \"Зареєструватися\", ви погоджуєтеся з нашими Умовами та положеннями.</string>
+    <string name="termsAgreeWarning">Натискаючи \"Зареєструватися\", ви погоджуєтеся з нашими\nУмовами та положеннями.</string>
+    <string name="registerButton">ЗАРЕЄСТРУВАТИСЯ</string>
+    <string name="googleOrRegister">або</string>
+    <string name="rememberMeCheckbox">Запам\'ятати мене</string>
+    <string name="already_have_an_account">Вже маєте обліковий запис?</string>
+    <string name="sign_in">Увійдіть</string>
+    <string name="default_person_name">Ім\'я Прізвище</string>
+    <string name="guest_name_surname">Іван Петренко</string>
+    <string name="helloText_signin">Привіт!</string>
+    <string name="helloSubText_signin">Введіть свою електронну пошту та пароль нижче</string>
+    <string name="registerButton_signin">ЛОГІН</string>
+    <string name="already_have_an_account_signin">Не маєте облікового запису?</string>
+    <string name="sign_in_signin">Зареєструйтесь</string>
+    <string name="forgot_your_password">Забули пароль?</string>
+    <string name="logout_button_text">ВИХІД</string>
+    <string name="btnTest1text">ЗАПОВНИТИ</string>
+    <string name="btnTest2text">ОЧИСТИТИ</string>
+    <string name="btnTest3text">МОВА</string>
+</resources>

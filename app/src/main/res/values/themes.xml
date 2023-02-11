@@ -4,6 +4,7 @@
 
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/default_theme_color_primary</item>
+        <item name="colorOnPrimary">@color/default_theme_color_secondary</item>
         <item name="colorPrimaryVariant">@color/default_theme_color_primary_variant</item>
 
         <!-- Secondary brand color. -->
@@ -16,7 +17,8 @@
         <item name="colorError">@color/default_theme_text_error</item>
 
         <!-- Widgets styles. -->
-        <item name="android:textViewStyle">@style/text_White</item>
+        <item name="android:textViewStyle">@style/basicText</item>
+
 
     </style>
 </resources>

@@ -1,16 +1,20 @@
 package com.vikmanz.shpppro
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import androidx.activity.OnBackPressedCallback
 import com.vikmanz.shpppro.databinding.ActivityMainBinding
 import com.vikmanz.shpppro.constants.Constants.INTENT_EMAIL_ID
+import com.vikmanz.shpppro.dataSave.LoginDataStoreManager
+import kotlinx.coroutines.*
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private lateinit var loginData: LoginDataStoreManager
+    private val coroutineScope: CoroutineScope = CoroutineScope(Job())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,37 +22,50 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        Log.d("MyLog", "-3")
+        // save login data tests
+        loginData = LoginDataStoreManager(this)
+
         val emailToParse = intent.getStringExtra(INTENT_EMAIL_ID).toString()
-        Log.d("MyLog", "-2: $emailToParse")
         binding.tvPersonName.text = parseEmail(emailToParse)
-        Log.d("MyLog", "-1")
+//
+//        onBackPressedDispatcher.addCallback(this /* lifecycle owner */, object : OnBackPressedCallback(true) {
+//            override fun handleOnBackPressed() {
+//                finishActivity()
+//            }
+//        })
 
-        binding.btnViewMyContacts.setOnClickListener { finishActivity() }
-
-        onBackPressedDispatcher.addCallback(this /* lifecycle owner */, object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                finishActivity()
-            }
-        })
+        binding.tvLogout.setOnClickListener { logout() }
 
     }
 
+    private fun logout() {
+        coroutineScope.launch(Dispatchers.IO) {
+            loginData.clearUser()
+        }
+        finishActivity()
+    }
+
     private fun finishActivity() {
+        val intentObject = Intent(this, AuthActivity::class.java)
         finish()
+        startActivity(intentObject)
         overridePendingTransition(R.anim.zoom_out_inner, R.anim.zoom_out_outter)
     }
 
     private fun parseEmail(fullEmail: String): String {
 
-        Log.d("MyLog", "0: $fullEmail")
+
+
+        Log.d("MyLog", "0: [$fullEmail]")
         val personName: String
 
         if (fullEmail == getString(R.string.guest_email)) return getString(R.string.guest_name_surname)
-        Log.d("MyLog", "1: $fullEmail")
+        Log.d("MyLog", "1: [$fullEmail]")
+
+        if (fullEmail.isEmpty()) return "Empty Empty"
 
         val firstPartEmail = fullEmail.substring(0, fullEmail.indexOf('@'))
-        Log.d("MyLog", "email first part: $firstPartEmail")
+        Log.d("MyLog", "email first part: [$firstPartEmail]")
 
         if (firstPartEmail.indexOf('.') == -1) {
             Log.d("MyLog", "2")
@@ -83,6 +100,8 @@ class MainActivity : AppCompatActivity() {
         return personName
     }
 }
+
+
 
 
 fun String.firstCharToUpperCase() = replaceFirstChar {
