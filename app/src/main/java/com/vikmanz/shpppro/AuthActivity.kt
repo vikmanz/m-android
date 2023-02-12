@@ -244,16 +244,16 @@ class AuthActivity : AppCompatActivity() {
         if (!binding.checkBox.isChecked) {
             val passwordText = binding.tiTextPassword.text.toString()
             if (passwordText.length < 8) {
-                return "Minimum 8 Characters Password"
+                return getString(R.string.passCheckWarning_min8chars)
             }
-            if (!passwordText.matches(".*[A-Z].*".toRegex())) {
-                return "Must Contain 1 Upper-case Character"
+            if (!passwordText.matches(getString(R.string.regex_pass_OneUpperChar).toRegex())) {
+                return getString(R.string.passCheckWarning_OneUpperChar)
             }
-            if (!passwordText.matches(".*[a-z].*".toRegex())) {
-                return "Must Contain 1 Lower-case Character"
+            if (!passwordText.matches(getString(R.string.regex_pass_OneLowerChar).toRegex())) {
+                return getString(R.string.passCheckWarning_OneLowerChar)
             }
-            if (!passwordText.matches(".*[@#\$%^&+=].*".toRegex())) {
-                return "Must Contain 1 Special Character (@#\$%^&+=)"
+            if (!passwordText.matches(getString(R.string.regex_pass_OneSpecialChar).toRegex())) {
+                return getString(R.string.passCheckWarning_OneSpecialChar)
             }
         }
         return null
