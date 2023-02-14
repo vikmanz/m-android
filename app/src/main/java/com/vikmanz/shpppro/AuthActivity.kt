@@ -3,7 +3,6 @@ package com.vikmanz.shpppro
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.util.Patterns
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -12,13 +11,20 @@ import com.vikmanz.shpppro.constants.Constants.AUTO_LOGIN_TO_PROFILE
 import com.vikmanz.shpppro.constants.Constants.CHECKBOX_STATE_STATE_KEY
 import com.vikmanz.shpppro.constants.Constants.EMAIL_FIELD_STATE_KEY
 import com.vikmanz.shpppro.constants.Constants.INTENT_EMAIL_ID
+import com.vikmanz.shpppro.constants.Constants.INTENT_LANG_ID
+import com.vikmanz.shpppro.constants.Constants.LANGUAGE_STATE_KEY
 import com.vikmanz.shpppro.constants.Constants.LOGIN_VIEW_FIRST
 import com.vikmanz.shpppro.constants.Constants.LOGIN_VIEW_STATE_KEY
 import com.vikmanz.shpppro.constants.Constants.PASSWORD_FIELD_STATE_KEY
 import com.vikmanz.shpppro.constants.Constants.PASSWORD_VIEW_STATE_KEY
+import com.vikmanz.shpppro.constants.Constants.VIEW_HELP_BUTTONS
 import com.vikmanz.shpppro.dataSave.LoginDataStoreManager
 import com.vikmanz.shpppro.databinding.ActivityAuthBinding
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
+import java.util.*
 
 class AuthActivity : AppCompatActivity() {
 
@@ -28,6 +34,7 @@ class AuthActivity : AppCompatActivity() {
     private val coroutineScope: CoroutineScope = CoroutineScope(Job())
 
     private var autologinStatus = false
+    private var isEnglish = true
     private var helperButtonsVisible = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,7 +42,6 @@ class AuthActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         loginData = LoginDataStoreManager(this)
-
 
         binding = ActivityAuthBinding.inflate(layoutInflater)
         val view = binding.root
@@ -57,10 +63,26 @@ class AuthActivity : AppCompatActivity() {
         emailFocusListener()
         passwordFocusListener()
         binding.bRegisterByEmailPassword.setOnClickListener { submitRegisterForm() }
+
+        // Help buttons.
+        if (VIEW_HELP_BUTTONS) viewOrHideHelpTesterButtons()
         binding.alreadyHaveAccMessage.setOnClickListener { viewOrHideHelpTesterButtons() }
 
         // Change Register to Login and another.
         binding.alreadyHaveAccLink.setOnClickListener { changeRegisterLoginScreen() }
+
+    }
+
+    private fun setLocale() {
+        val config = resources.configuration
+        val lang =
+            if (isEnglish) getString(R.string.language_en) else getString(R.string.language_ua)
+        val locale = Locale(lang)
+        Locale.setDefault(locale)
+        config.setLocale(locale)
+        createConfigurationContext(config)
+        @Suppress("DEPRECATION")
+        resources.updateConfiguration(config, resources.displayMetrics)
     }
 
     private fun viewOrHideHelpTesterButtons() {
@@ -75,6 +97,7 @@ class AuthActivity : AppCompatActivity() {
         outState.putInt(PASSWORD_VIEW_STATE_KEY, binding.tiLayoutPassword.endIconMode)
         outState.putBoolean(CHECKBOX_STATE_STATE_KEY, binding.checkBox.isChecked)
         outState.putBoolean(LOGIN_VIEW_STATE_KEY, autologinStatus)
+        outState.putBoolean(LANGUAGE_STATE_KEY, isEnglish)
         super.onSaveInstanceState(outState)
     }
 
@@ -88,7 +111,8 @@ class AuthActivity : AppCompatActivity() {
             checkBox.isChecked = savedInstanceState.getBoolean(CHECKBOX_STATE_STATE_KEY)
         }
         autologinStatus = savedInstanceState.getBoolean(LOGIN_VIEW_STATE_KEY)
-        changeRegisterLoginScreen()
+        isEnglish = savedInstanceState.getBoolean(LANGUAGE_STATE_KEY)
+        setLocale()
     }
 
 
@@ -96,7 +120,6 @@ class AuthActivity : AppCompatActivity() {
         val email = binding.tiTextEmail.text.toString()
         val password = binding.tiTextPassword.text.toString()
         val isAutologin = binding.checkBox.isChecked
-        Log.d("MyLog", "email is $email, password is $password, isAutologin is $isAutologin")
 
         coroutineScope.launch(Dispatchers.IO) {
             loginData.saveUserSata(email, password, isAutologin)
@@ -105,14 +128,12 @@ class AuthActivity : AppCompatActivity() {
 
 
     private fun doAutoLogin() {
-        Log.d("MyLog", "Do Autologin!")
         restoreUserData()
         doRegister()
     }
 
     private fun checkUserLoginStatus() {
         loginData.userLoginStatusFlow.asLiveData().observe(this) {
-            Log.d("MyLog", "db00: $it")
             autologinStatus = it
             if (autologinStatus && AUTO_LOGIN_TO_PROFILE) doAutoLogin()
             if (autologinStatus) {
@@ -154,7 +175,7 @@ class AuthActivity : AppCompatActivity() {
                 tvHelloText.text = getString(R.string.helloText)
                 tvHelloSubText.text = getString(R.string.helloSubText)
                 tiLayoutPassword.isCounterEnabled = true
-                forgotPassword.visibility = View.GONE
+                forgotPassword.visibility = View.INVISIBLE
                 bRegisterByGoogle.visibility = View.VISIBLE
                 googleOrRegister.visibility = View.VISIBLE
                 bRegisterByEmailPassword.text = getString(R.string.registerButton)
@@ -169,7 +190,7 @@ class AuthActivity : AppCompatActivity() {
     private fun doRegister() {
         val intentObject = Intent(this, MainActivity::class.java)
         intentObject.putExtra(INTENT_EMAIL_ID, binding.tiTextEmail.text.toString())
-        Log.d("MyLog", "email: ${binding.tiTextEmail.text.toString()}")
+        intentObject.putExtra(INTENT_LANG_ID, isEnglish)
         startActivity(intentObject)
         overridePendingTransition(R.anim.zoom_in_inner, R.anim.zoom_in_outter)
         finish()
@@ -198,15 +219,19 @@ class AuthActivity : AppCompatActivity() {
 
 
     private fun invalidForm() {
-        var message = ""
-        message += if (binding.tiLayoutEmail.helperText != null) "\n\nEmail: ${binding.tiLayoutEmail.helperText}" else ""
-        message += if (binding.tiLayoutPassword.helperText != null) "\n\nPassword: ${binding.tiLayoutPassword.helperText}" else ""
 
-        Log.d("MyLog", message)
+        var message = ""
+        message += if (binding.tiLayoutEmail.helperText != null)
+            "\n\n${getString(R.string.warning_emailTitle)} ${binding.tiLayoutEmail.helperText}"
+            else ""
+        message += if (binding.tiLayoutPassword.helperText != null)
+            "\n\n${getString(R.string.warning_passwordTitle)} ${binding.tiLayoutPassword.helperText}"
+            else ""
+
         AlertDialog.Builder(this)
-            .setTitle("Invalid registration form!")
+            .setTitle(getString(R.string.warningMessage_InvalidRegisterForm))
             .setMessage(message)
-            .setPositiveButton("Okay") { _, _ ->
+            .setPositiveButton(getString(R.string.warningMessage_OkButtonOnAllert)) { _, _ ->
                 if (binding.tiLayoutEmail.helperText != null) {
                     binding.tiTextEmail.requestFocus()
                 } else {
@@ -227,7 +252,7 @@ class AuthActivity : AppCompatActivity() {
     private fun validEmail(): String? {
         val emailText = binding.tiTextEmail.text.toString()
         if (!Patterns.EMAIL_ADDRESS.matcher(emailText).matches()) {
-            return "Invalid email address"
+            return getString(R.string.warningMessage_InvalidEmailAdress)
         }
         return null
     }
@@ -261,6 +286,7 @@ class AuthActivity : AppCompatActivity() {
 
     private fun initHelpTesterButtons() {
 
+        // Fill fields button.
         binding.btnForTest1.setOnClickListener {
             binding.apply {
                 tiTextEmail.setText(getString(R.string.my_main_email))
@@ -270,16 +296,19 @@ class AuthActivity : AppCompatActivity() {
             }
         }
 
+        // Clear fields button.
         binding.btnForTest2.setOnClickListener {
             binding.tiTextEmail.setText("")
             binding.tiTextPassword.setText("")
             binding.checkBox.isChecked = false
         }
 
+        // Language change button.
         binding.btnForTest3.setOnClickListener {
-
+            isEnglish = !isEnglish
+            setLocale()
+            this.recreate()
         }
-
 
     }
 

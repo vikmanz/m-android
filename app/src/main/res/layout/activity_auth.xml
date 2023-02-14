@@ -127,9 +127,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/forgot_your_password"
-        android:visibility="gone"
+        android:visibility="invisible"
         tools:ignore="MissingConstraints"
-        tools:visibility="visible" />
+        tools:visibility="visible"
+        />
+
 
 
     <!-- Google or Register flow. -->

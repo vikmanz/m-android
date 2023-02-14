@@ -127,7 +127,7 @@
         android:layout_height="wrap_content"
         android:gravity="end"
         android:text="@string/forgot_your_password"
-        android:visibility="gone"
+        android:visibility="invisible"
         tools:ignore="MissingConstraints"
         tools:visibility="visible" />
 

@@ -5,28 +5,45 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.vikmanz.shpppro.databinding.ActivityMainBinding
 import com.vikmanz.shpppro.constants.Constants.INTENT_EMAIL_ID
+import com.vikmanz.shpppro.constants.Constants.INTENT_LANG_ID
+import com.vikmanz.shpppro.constants.Constants.LANGUAGE_STATE_KEY_TWO
 import com.vikmanz.shpppro.dataSave.LoginDataStoreManager
 import kotlinx.coroutines.*
 import java.util.*
 
+/**
+ * Class represents user main profile activity.
+ */
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var loginData: LoginDataStoreManager
     private val coroutineScope: CoroutineScope = CoroutineScope(Job())
 
+    private var isEnglish = true
+
     override fun onCreate(savedInstanceState: Bundle?) {
+
         // Init activity.
         super.onCreate(savedInstanceState)
+
+        // Get and set locale.
+        isEnglish = intent.getBooleanExtra(INTENT_LANG_ID, true)
+        setLocale()
+
+        // Others init operations.
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
+        // Create Data Store.
         loginData = LoginDataStoreManager(this)
 
         // Parse email, set Name Surname text and img of avatar.
         val emailToParse = intent.getStringExtra(INTENT_EMAIL_ID).toString()
         binding.tvPersonName.text = if (emailToParse.isEmpty()) "" else parseEmail(emailToParse)
         binding.ivPerson.setImageResource(R.drawable.sample_avatar)
+
         // Set onClick listener to Logout button.
         binding.tvLogout.setOnClickListener { logout() }
     }
@@ -54,7 +71,7 @@ class MainActivity : AppCompatActivity() {
                     firstPartEmail
                         .substring(0, surnameStartIndex)
                         .replaceFirstChar {
-                        if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString()
+                            if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString()
                         }
                 } ${firstPartEmail.substring(surnameStartIndex)}"
             }
@@ -83,13 +100,49 @@ class MainActivity : AppCompatActivity() {
      */
     private fun finishActivity() {
         val intentObject = Intent(this, AuthActivity::class.java)
+        intentObject.putExtra(INTENT_LANG_ID, isEnglish)
         finish()
         startActivity(intentObject)
         overridePendingTransition(R.anim.zoom_out_inner, R.anim.zoom_out_outter)
     }
+
+    /**
+     * Change locale. It change from EN to UA or from UA to EN.
+     */
+    private fun setLocale() {
+        val config = resources.configuration
+        val lang =
+            if (isEnglish) getString(R.string.language_en) else getString(R.string.language_ua)
+        val locale = Locale(lang)
+        Locale.setDefault(locale)
+        config.setLocale(locale)
+        createConfigurationContext(config)
+        @Suppress("DEPRECATION")
+        resources.updateConfiguration(config, resources.displayMetrics)
+    }
+
+    /**
+     * Save state.
+     */
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putBoolean(LANGUAGE_STATE_KEY_TWO, isEnglish)
+        super.onSaveInstanceState(outState)
+    }
+
+    /**
+     * Load state.
+     */
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+        isEnglish = savedInstanceState.getBoolean(LANGUAGE_STATE_KEY_TWO)
+        setLocale()
+    }
+
 }
 
-// additional function to String class, for replace first char to UpperCase
+/**
+ * Extra function of String class, for replace the first char of String to Upper case.
+ */
 fun String.firstCharToUpperCase() = replaceFirstChar {
     if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString()
 }

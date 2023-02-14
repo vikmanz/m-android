@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">SHppPro</string>
     <string name="settingsButton">Settings</string>
     <string name="personNameSample">Person Name</string>
@@ -41,4 +41,11 @@
     <string name="passCheckWarning_OneUpperChar">Must Contain 1 Upper-case Character</string>
     <string name="passCheckWarning_OneLowerChar">Must Contain 1 Lower-case Character</string>
     <string name="passCheckWarning_OneSpecialChar">Must Contain 1 Special Character (@#\$%^&amp;+=)</string>
+    <string name="language_en" tools:ignore="MissingTranslation" translatable="false">en</string>
+    <string name="language_ua" tools:ignore="MissingTranslation" translatable="false">uk</string>
+    <string name="warningMessage_InvalidEmailAdress">Invalid email address</string>
+    <string name="warningMessage_InvalidRegisterForm">Invalid registration form!</string>
+    <string name="warningMessage_OkButtonOnAllert">Okay</string>
+    <string name="warning_emailTitle">Email:</string>
+    <string name="warning_passwordTitle">Password:</string>
 </resources>
