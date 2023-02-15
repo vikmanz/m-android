@@ -213,8 +213,8 @@ class AuthActivity : AppCompatActivity() {
             // Validate email and password.
             tiLayoutEmail.helperText = validEmail()
             tiLayoutPassword.helperText = validPassword()
-            val isEmailCorrect = tiLayoutEmail.helperText != null
-            val isPasswordCorrect = tiLayoutPassword.helperText != null
+            val isEmailCorrect = tiLayoutEmail.helperText == null
+            val isPasswordCorrect = tiLayoutPassword.helperText == null
 
             // If valid, start MainActivity.
             if (isEmailCorrect && isPasswordCorrect) {
