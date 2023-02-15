@@ -7,45 +7,81 @@ import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
+import com.vikmanz.shpppro.constants.Constants.DS_USER_AUTOLOGIN_STATUS
+import com.vikmanz.shpppro.constants.Constants.DS_USER_LANGUAGE_STATUS
+import com.vikmanz.shpppro.constants.Constants.DS_USER_NAME
+import com.vikmanz.shpppro.constants.Constants.DS_USER_PASSWORD
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "auth")
 
+/**
+ * Data Store manager. Save and load user data from memory.
+ */
 class LoginDataStoreManager (private val context: Context) {
 
+    /**
+     * Companion object with keys of Data Store Preferences fields.
+     */
     companion object {
-        private val USER_LOGIN_KEY = stringPreferencesKey("user_name")
-        private val USER_PASSWORD_KEY = stringPreferencesKey("user_pass")
-        private val LOGIN_STATUS_KEY = booleanPreferencesKey("user_login_status")
+        private val USER_LOGIN_KEY = stringPreferencesKey(DS_USER_NAME)
+        private val USER_PASSWORD_KEY = stringPreferencesKey(DS_USER_PASSWORD)
+        private val LOGIN_STATUS_KEY = booleanPreferencesKey(DS_USER_AUTOLOGIN_STATUS)
+        private val LANGUAGE_KEY = booleanPreferencesKey(DS_USER_LANGUAGE_STATUS)
     }
 
-    suspend fun saveUserSata(name: String, password: String, isAutoLogin: Boolean) {
+    /**
+     * Get name, password, autologin and language status, and save all these in memory.
+     */
+    suspend fun saveUserSata(name: String, password: String, isAutoLogin: Boolean, isEnglish: Boolean) {
         context.dataStore.edit {
             it[USER_LOGIN_KEY] = name
             it[USER_PASSWORD_KEY] = password
             it[LOGIN_STATUS_KEY] = isAutoLogin
+            it[LANGUAGE_KEY] = isEnglish
         }
     }
 
+    /**
+     * Clear user data in memory.
+     */
     suspend fun clearUser() {
         context.dataStore.edit {
             it[USER_LOGIN_KEY] = ""
             it[USER_PASSWORD_KEY] = ""
             it[LOGIN_STATUS_KEY] = false
+            it[LANGUAGE_KEY] = false
         }
     }
 
+    /**
+     * Return user login as Flow.
+     */
     val userNameFlow: Flow<String> = context.dataStore.data.map {
         it[USER_LOGIN_KEY] ?: ""
     }
 
+    /**
+     * Return user password as Flow.
+     */
+    @Suppress("unused")
     val userPasswordFlow: Flow<String> = context.dataStore.data.map {
         it[USER_PASSWORD_KEY] ?: ""
     }
 
+    /**
+     * Return user autologin status as Flow.
+     */
     val userLoginStatusFlow: Flow<Boolean> = context.dataStore.data.map {
         it[LOGIN_STATUS_KEY] ?: false
+    }
+
+    /**
+     * Return user language status as Flow.
+     */
+    val userLanguageFlow: Flow<Boolean> = context.dataStore.data.map {
+        it[LANGUAGE_KEY] ?: false
     }
 
 }

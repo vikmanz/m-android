@@ -21,7 +21,6 @@
     <string name="already_have_an_account">Вже маєте обліковий запис?</string>
     <string name="sign_in">Увійдіть</string>
     <string name="default_person_name">Ім\'я Прізвище</string>
-    <string name="guest_name_surname">Іван Петренко</string>
     <string name="helloText_signin">Привіт!</string>
     <string name="helloSubText_signin">Введіть свою електронну пошту та пароль нижче</string>
     <string name="registerButton_signin">ЛОГІН</string>
@@ -32,4 +31,13 @@
     <string name="btnTest1text">ЗАПОВНИТИ</string>
     <string name="btnTest2text">ОЧИСТИТИ</string>
     <string name="btnTest3text">МОВА</string>
+    <string name="passCheckWarning_min8chars">Мінімум 9 символів</string>
+    <string name="passCheckWarning_OneUpperChar">Мусить містити 1 символ у верхньому регістрі</string>
+    <string name="passCheckWarning_OneLowerChar">Мусить містити 1 символ у нижньому регістрі</string>
+    <string name="passCheckWarning_OneSpecialChar">Мусить містити 1 спеціальний символ (@#\\$%^&amp;+=)</string>
+    <string name="warningMessage_InvalidEmailAdress">Не правильна поштова адреса</string>
+    <string name="warningMessage_InvalidRegisterForm">Не правильно введено дані!</string>
+    <string name="warningMessage_OkButtonOnAllert">Окей</string>
+    <string name="warning_emailTitle">Пошта:</string>
+    <string name="warning_passwordTitle">Пароль:</string>
 </resources>

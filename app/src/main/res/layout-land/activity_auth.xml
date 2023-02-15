@@ -127,7 +127,7 @@
         android:layout_height="wrap_content"
         android:gravity="end"
         android:text="@string/forgot_your_password"
-        android:visibility="gone"
+        android:visibility="invisible"
         tools:ignore="MissingConstraints"
         tools:visibility="visible" />
 
@@ -217,7 +217,7 @@
         tools:ignore="MissingConstraints" />
 
 
-    <!-- Helper buttons. -->
+    <!-- Helper buttons. It will be removed from release version. -->
     <androidx.constraintlayout.helper.widget.Flow
         android:id="@+id/flowTestButtons"
         android:layout_width="wrap_content"
@@ -225,7 +225,7 @@
         android:layout_marginHorizontal="@dimen/marginHorizontal"
         android:layout_marginTop="@dimen/offset_S"
         android:orientation="horizontal"
-        app:constraint_referenced_ids="btnForTest1, btnForTest2, btnForTest3"
+        app:constraint_referenced_ids="buttonFillLoginPassword, buttonClearUserPassword, buttonChangeLanguage"
         app:flow_horizontalGap="@dimen/offset_XL"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -234,7 +234,7 @@
         app:layout_constraintTop_toBottomOf="@+id/flowAlreadyHaveAcc" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnForTest1"
+        android:id="@+id/buttonFillLoginPassword"
         android:layout_width="@dimen/helpButtonsWidth"
         android:layout_height="@dimen/size_button_height_M"
         android:background="@drawable/btn_std_orange_outlined_bg_all_in_one_file"
@@ -243,7 +243,7 @@
         tools:ignore="MissingConstraints,TouchTargetSizeCheck" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnForTest2"
+        android:id="@+id/buttonClearUserPassword"
         android:layout_width="@dimen/helpButtonsWidth"
         android:layout_height="@dimen/size_button_height_M"
         android:background="@drawable/btn_std_orange_outlined_bg_all_in_one_file"
@@ -252,7 +252,7 @@
         tools:ignore="MissingConstraints,TouchTargetSizeCheck" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnForTest3"
+        android:id="@+id/buttonChangeLanguage"
         android:layout_width="@dimen/helpButtonsWidth"
         android:layout_height="@dimen/size_button_height_M"
         android:background="@drawable/btn_std_orange_outlined_bg_all_in_one_file"
