@@ -3,6 +3,7 @@ package com.vikmanz.shpppro
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.vikmanz.shpppro.MyContacts.MyContactsActivity
 import com.vikmanz.shpppro.databinding.ActivityMainBinding
 import com.vikmanz.shpppro.constants.Constants.INTENT_EMAIL_ID
 import com.vikmanz.shpppro.constants.Constants.INTENT_LANG_ID
@@ -38,8 +39,7 @@ class MainActivity : AppCompatActivity() {
 
         // Others init operations.
         binding = ActivityMainBinding.inflate(layoutInflater)
-        val view = binding.root
-        setContentView(view)
+        setContentView(binding.root)
 
         // Create Data Store.
         loginData = LoginDataStoreManager(this)
@@ -155,7 +155,6 @@ class MainActivity : AppCompatActivity() {
         intentObject.putExtra(INTENT_LANG_ID, isUkrainian)
         startActivity(intentObject)
         overridePendingTransition(R.anim.zoom_in_inner, R.anim.zoom_in_outter)
-        finish()
     }
 
 }

@@ -14,7 +14,7 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="33">
         <activity
-            android:name=".MyContactsActivity"
+            android:name=".MyContacts.MyContactsActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
