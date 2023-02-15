@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <!-- Password max length. -->
     <integer name="password_length">16</integer>
 </resources>

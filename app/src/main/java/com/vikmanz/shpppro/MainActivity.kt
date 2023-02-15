@@ -12,16 +12,21 @@ import kotlinx.coroutines.*
 import java.util.*
 
 /**
- * Class represents user main profile activity.
+ * Class represents user main profile screen activity.
  */
 class MainActivity : AppCompatActivity() {
 
+    // Binding, Data Store and Coroutine Scope variables.
     private lateinit var binding: ActivityMainBinding
     private lateinit var loginData: LoginDataStoreManager
     private val coroutineScope: CoroutineScope = CoroutineScope(Job())
 
+    // Save state of language. True - En, False - Ua.
     private var isEnglish = true
 
+    /**
+     * Main function, which used when activity was create.
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
 
         // Init activity.
@@ -122,7 +127,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     /**
-     * Save state.
+     * Save Instance State.
      */
     override fun onSaveInstanceState(outState: Bundle) {
         outState.putBoolean(LANGUAGE_STATE_KEY_TWO, isEnglish)
@@ -130,7 +135,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     /**
-     * Load state.
+     * Load Instance State.
      */
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
