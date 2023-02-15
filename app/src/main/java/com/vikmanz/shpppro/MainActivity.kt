@@ -51,6 +51,10 @@ class MainActivity : AppCompatActivity() {
 
         // Set onClick listener to Logout button.
         binding.tvLogout.setOnClickListener { logout() }
+
+        // Set onClick listener to MyContacts button.
+        binding.btnViewMyContacts.setOnClickListener { startMyContactsActivity() }
+
     }
 
     /**
@@ -141,6 +145,17 @@ class MainActivity : AppCompatActivity() {
         super.onRestoreInstanceState(savedInstanceState)
         isEnglish = savedInstanceState.getBoolean(LANGUAGE_STATE_KEY_TWO)
         setLocale()
+    }
+
+    /**
+     * Start My contacts activity.
+     */
+    private fun startMyContactsActivity() {
+        val intentObject = Intent(this, MyContactsActivity::class.java)
+        intentObject.putExtra(INTENT_LANG_ID, isEnglish)
+        startActivity(intentObject)
+        overridePendingTransition(R.anim.zoom_in_inner, R.anim.zoom_in_outter)
+        finish()
     }
 
 }
