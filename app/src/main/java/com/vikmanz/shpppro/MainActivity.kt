@@ -21,8 +21,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var loginData: LoginDataStoreManager
     private val coroutineScope: CoroutineScope = CoroutineScope(Job())
 
-    // Save state of language. True - En, False - Ua.
-    private var isNotEnglish = false
+    // Save state of language. False - En, True - Ua.
+    private var isUkrainian = false
 
     /**
      * Main function, which used when activity was create.
@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         // Get and set locale.
-        isNotEnglish = intent.getBooleanExtra(INTENT_LANG_ID, true)
+        isUkrainian = intent.getBooleanExtra(INTENT_LANG_ID, true)
         setLocale()
 
         // Others init operations.
@@ -105,7 +105,7 @@ class MainActivity : AppCompatActivity() {
      */
     private fun finishActivity() {
         val intentObject = Intent(this, AuthActivity::class.java)
-        intentObject.putExtra(INTENT_LANG_ID, isNotEnglish)
+        intentObject.putExtra(INTENT_LANG_ID, isUkrainian)
         finish()
         startActivity(intentObject)
         overridePendingTransition(R.anim.zoom_out_inner, R.anim.zoom_out_outter)
@@ -117,7 +117,7 @@ class MainActivity : AppCompatActivity() {
     private fun setLocale() {
         val config = resources.configuration
         val lang =
-            if (isNotEnglish) getString(R.string.language_ua) else getString(R.string.language_en)
+            if (isUkrainian) getString(R.string.language_ua) else getString(R.string.language_en)
         val locale = Locale(lang)
         Locale.setDefault(locale)
         config.setLocale(locale)
@@ -130,7 +130,7 @@ class MainActivity : AppCompatActivity() {
      * Save Instance State.
      */
     override fun onSaveInstanceState(outState: Bundle) {
-        outState.putBoolean(LANGUAGE_STATE_KEY_TWO, isNotEnglish)
+        outState.putBoolean(LANGUAGE_STATE_KEY_TWO, isUkrainian)
         super.onSaveInstanceState(outState)
     }
 
@@ -139,7 +139,7 @@ class MainActivity : AppCompatActivity() {
      */
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
-        isNotEnglish = savedInstanceState.getBoolean(LANGUAGE_STATE_KEY_TWO)
+        isUkrainian = savedInstanceState.getBoolean(LANGUAGE_STATE_KEY_TWO)
         setLocale()
     }
 

@@ -39,8 +39,8 @@ class AuthActivity : AppCompatActivity() {
     // Save state of screen layout. True - Login screen, False - Register screen.
     private var isLoginScreen = false
 
-    // Save state of language. True - En, False - Ua.
-    private var isNotEnglish = false
+    // Save state of language. False - En, True - Ua.
+    private var isUkrainian = false
 
     // Save state of helper buttons. True - visible, False - gone.
     private var helperButtonsVisible = false
@@ -77,7 +77,7 @@ class AuthActivity : AppCompatActivity() {
     private fun checkAutoLogin() {
         var email = ""
         loginData.userNameFlow.asLiveData().observe(this) { email = it }
-        loginData.userLanguageFlow.asLiveData().observe(this) { isNotEnglish = it }
+        loginData.userLanguageFlow.asLiveData().observe(this) { isUkrainian = it }
         loginData.userLoginStatusFlow.asLiveData().observe(this) {
             if (it) startMainActivity(email)
         }
@@ -91,7 +91,7 @@ class AuthActivity : AppCompatActivity() {
     private fun startMainActivity(email: String) {
         val intentObject = Intent(this, MainActivity::class.java)
         intentObject.putExtra(INTENT_EMAIL_ID, email)
-        intentObject.putExtra(INTENT_LANG_ID, isNotEnglish)
+        intentObject.putExtra(INTENT_LANG_ID, isUkrainian)
         startActivity(intentObject)
         overridePendingTransition(R.anim.zoom_in_inner, R.anim.zoom_in_outter)
         finish()
@@ -237,7 +237,7 @@ class AuthActivity : AppCompatActivity() {
         val email: String
         val password: String
         val isAutologin: Boolean
-        val isEnglish = this.isNotEnglish
+        val isEnglish = this.isUkrainian
 
         with(binding) {
             email = tiTextEmail.text.toString()
@@ -311,7 +311,7 @@ class AuthActivity : AppCompatActivity() {
 
             // Language change button listener.
             buttonChangeLanguage.setOnClickListener {
-                isNotEnglish = !isNotEnglish
+                isUkrainian = !isUkrainian
                 setLocale()
                 super.recreate()    // RECREATE ACTIVITY
             }
@@ -332,7 +332,7 @@ class AuthActivity : AppCompatActivity() {
     private fun setLocale() {
         val config = resources.configuration
         val lang =
-            if (isNotEnglish) getString(R.string.language_ua) else getString(R.string.language_en)
+            if (isUkrainian) getString(R.string.language_ua) else getString(R.string.language_en)
         val locale = Locale(lang)
         Locale.setDefault(locale)
         config.setLocale(locale)
@@ -358,7 +358,7 @@ class AuthActivity : AppCompatActivity() {
             outState.putInt(PASSWORD_VIEW_STATE_KEY, tiLayoutPassword.endIconMode)
             outState.putBoolean(CHECKBOX_STATE_STATE_KEY, checkBox.isChecked)
         }
-        outState.putBoolean(LANGUAGE_STATE_KEY, isNotEnglish)
+        outState.putBoolean(LANGUAGE_STATE_KEY, isUkrainian)
         outState.putBoolean(HELP_BUTTONS_STATE_KEY, helperButtonsVisible)
         super.onSaveInstanceState(outState)
     }
@@ -368,7 +368,7 @@ class AuthActivity : AppCompatActivity() {
      */
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
-        isNotEnglish = savedInstanceState.getBoolean(LANGUAGE_STATE_KEY)
+        isUkrainian = savedInstanceState.getBoolean(LANGUAGE_STATE_KEY)
         helperButtonsVisible = savedInstanceState.getBoolean(HELP_BUTTONS_STATE_KEY)
         with(binding) {
             tiTextEmail.setText(savedInstanceState.getString(EMAIL_FIELD_STATE_KEY))
