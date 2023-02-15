@@ -41,11 +41,13 @@
     <string name="passCheckWarning_OneUpperChar">Must Contain 1 Upper-case Character</string>
     <string name="passCheckWarning_OneLowerChar">Must Contain 1 Lower-case Character</string>
     <string name="passCheckWarning_OneSpecialChar">Must Contain 1 Special Character (@#\$%^&amp;+=)</string>
-    <string name="language_en" tools:ignore="MissingTranslation" translatable="false">en</string>
-    <string name="language_ua" tools:ignore="MissingTranslation" translatable="false">uk</string>
+    <string name="language_en" translatable="false" tools:ignore="MissingTranslation">en</string>
+    <string name="language_ua" translatable="false" tools:ignore="MissingTranslation">uk</string>
     <string name="warningMessage_InvalidEmailAdress">Invalid email address</string>
     <string name="warningMessage_InvalidRegisterForm">Invalid registration form!</string>
     <string name="warningMessage_OkButtonOnAllert">Okay</string>
     <string name="warning_emailTitle">Email:</string>
     <string name="warning_passwordTitle">Password:</string>
+    <string name="MyContacts_contacts">Contacts</string>
+    <string name="MyContacts_AddContacts">Add contacts</string>
 </resources>
