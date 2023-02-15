@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
     private val coroutineScope: CoroutineScope = CoroutineScope(Job())
 
     // Save state of language. True - En, False - Ua.
-    private var isEnglish = true
+    private var isUkrainian = false
 
     /**
      * Main function, which used when activity was create.
@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         // Get and set locale.
-        isEnglish = intent.getBooleanExtra(INTENT_LANG_ID, true)
+        isUkrainian = intent.getBooleanExtra(INTENT_LANG_ID, true)
         setLocale()
 
         // Others init operations.
@@ -109,7 +109,7 @@ class MainActivity : AppCompatActivity() {
      */
     private fun finishActivity() {
         val intentObject = Intent(this, AuthActivity::class.java)
-        intentObject.putExtra(INTENT_LANG_ID, isEnglish)
+        intentObject.putExtra(INTENT_LANG_ID, isUkrainian)
         finish()
         startActivity(intentObject)
         overridePendingTransition(R.anim.zoom_out_inner, R.anim.zoom_out_outter)
@@ -121,7 +121,7 @@ class MainActivity : AppCompatActivity() {
     private fun setLocale() {
         val config = resources.configuration
         val lang =
-            if (isEnglish) getString(R.string.language_en) else getString(R.string.language_ua)
+            if (isUkrainian) getString(R.string.language_ua) else getString(R.string.language_en)
         val locale = Locale(lang)
         Locale.setDefault(locale)
         config.setLocale(locale)
@@ -134,7 +134,7 @@ class MainActivity : AppCompatActivity() {
      * Save Instance State.
      */
     override fun onSaveInstanceState(outState: Bundle) {
-        outState.putBoolean(LANGUAGE_STATE_KEY_TWO, isEnglish)
+        outState.putBoolean(LANGUAGE_STATE_KEY_TWO, isUkrainian)
         super.onSaveInstanceState(outState)
     }
 
@@ -143,7 +143,7 @@ class MainActivity : AppCompatActivity() {
      */
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
-        isEnglish = savedInstanceState.getBoolean(LANGUAGE_STATE_KEY_TWO)
+        isUkrainian = savedInstanceState.getBoolean(LANGUAGE_STATE_KEY_TWO)
         setLocale()
     }
 
@@ -152,7 +152,7 @@ class MainActivity : AppCompatActivity() {
      */
     private fun startMyContactsActivity() {
         val intentObject = Intent(this, MyContactsActivity::class.java)
-        intentObject.putExtra(INTENT_LANG_ID, isEnglish)
+        intentObject.putExtra(INTENT_LANG_ID, isUkrainian)
         startActivity(intentObject)
         overridePendingTransition(R.anim.zoom_in_inner, R.anim.zoom_in_outter)
         finish()
