@@ -34,12 +34,12 @@ class LoginDataStoreManager (private val context: Context) {
     /**
      * Get name, password, autologin and language status, and save all these in memory.
      */
-    suspend fun saveUserSata(name: String, password: String, isAutoLogin: Boolean, isEnglish: Boolean) {
+    suspend fun saveUserSata(name: String, password: String, isAutoLogin: Boolean, isUkrainian: Boolean) {
         context.dataStore.edit {
             it[USER_LOGIN_KEY] = name
             it[USER_PASSWORD_KEY] = password
             it[LOGIN_STATUS_KEY] = isAutoLogin
-            it[LANGUAGE_KEY] = isEnglish
+            it[LANGUAGE_KEY] = isUkrainian
         }
     }
 
