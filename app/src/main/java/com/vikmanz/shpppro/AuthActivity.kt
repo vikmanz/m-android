@@ -39,7 +39,7 @@ class AuthActivity : AppCompatActivity() {
     // Save state of screen layout. True - Login screen, False - Register screen.
     private var isLoginScreen = false
 
-    // Save state of language. False - En, True - Ua.
+    // Save state of language. True - En, False - Ua.
     private var isUkrainian = false
 
     // Save state of helper buttons. True - visible, False - gone.

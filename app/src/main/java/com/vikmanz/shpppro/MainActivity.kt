@@ -21,7 +21,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var loginData: LoginDataStoreManager
     private val coroutineScope: CoroutineScope = CoroutineScope(Job())
 
-    // Save state of language. False - En, True - Ua.
+
+    // Save state of language. True - En, False - Ua.
     private var isUkrainian = false
 
     /**
@@ -50,6 +51,10 @@ class MainActivity : AppCompatActivity() {
 
         // Set onClick listener to Logout button.
         binding.tvLogout.setOnClickListener { logout() }
+
+        // Set onClick listener to MyContacts button.
+        binding.btnViewMyContacts.setOnClickListener { startMyContactsActivity() }
+
     }
 
     /**
@@ -140,6 +145,17 @@ class MainActivity : AppCompatActivity() {
         super.onRestoreInstanceState(savedInstanceState)
         isUkrainian = savedInstanceState.getBoolean(LANGUAGE_STATE_KEY_TWO)
         setLocale()
+    }
+
+    /**
+     * Start My contacts activity.
+     */
+    private fun startMyContactsActivity() {
+        val intentObject = Intent(this, MyContactsActivity::class.java)
+        intentObject.putExtra(INTENT_LANG_ID, isUkrainian)
+        startActivity(intentObject)
+        overridePendingTransition(R.anim.zoom_in_inner, R.anim.zoom_in_outter)
+        finish()
     }
 
 }
