@@ -38,8 +38,7 @@ class MainActivity : AppCompatActivity() {
 
         // Others init operations.
         binding = ActivityMainBinding.inflate(layoutInflater)
-        val view = binding.root
-        setContentView(view)
+        setContentView(binding.root)
 
         // Create Data Store.
         loginData = LoginDataStoreManager(this)

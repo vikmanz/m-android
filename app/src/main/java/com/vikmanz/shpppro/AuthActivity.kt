@@ -258,10 +258,10 @@ class AuthActivity : AppCompatActivity() {
         // Create error message.
         var message = ""
         with(binding) {
-            message += if (isEmailCorrect)
+            message += if (!isEmailCorrect)
                 "\n\n${getString(R.string.warning_emailTitle)} ${tiLayoutEmail.helperText}"
             else ""
-            message += if (isPasswordCorrect)
+            message += if (!isPasswordCorrect)
                 "\n\n${getString(R.string.warning_passwordTitle)} ${tiLayoutPassword.helperText}"
             else ""
         }
