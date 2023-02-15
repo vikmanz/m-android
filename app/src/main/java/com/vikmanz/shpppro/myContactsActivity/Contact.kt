@@ -1,4 +1,4 @@
-package com.vikmanz.shpppro.MyContacts
+package com.vikmanz.shpppro.myContactsActivity
 
 data class Contact(
     val imageId: Int,

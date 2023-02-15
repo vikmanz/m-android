@@ -1,7 +1,11 @@
-package com.vikmanz.shpppro.MyContacts
+package com.vikmanz.shpppro.myContactsActivity
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.vikmanz.shpppro.AuthActivity
+import com.vikmanz.shpppro.R
+import com.vikmanz.shpppro.constants.Constants
 import com.vikmanz.shpppro.databinding.ActivityMyContactsBinding
 
 /**
@@ -25,8 +29,18 @@ class MyContactsActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         // Back button.
-        binding.btnBack.setOnClickListener { finish() }
+        binding.btnBack.setOnClickListener {
+            startAuthActivity()
+        }
 
+    }
+
+    private fun startAuthActivity() {
+        val intentObject = Intent(this, AuthActivity::class.java)
+        intentObject.putExtra(Constants.INTENT_LANG_ID, false)
+        startActivity(intentObject)
+        overridePendingTransition(R.anim.zoom_in_inner, R.anim.zoom_in_outter)
+        finish()
     }
 
 
