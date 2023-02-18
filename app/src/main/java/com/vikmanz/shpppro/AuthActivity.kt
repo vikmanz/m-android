@@ -27,7 +27,7 @@ import kotlinx.coroutines.launch
 import java.util.*
 
 /**
- * Class represents SignIn or SignUp screen activity   .
+ * Class represents SignIn or SignUp screen activity .
  */
 class AuthActivity : AppCompatActivity() {
 
