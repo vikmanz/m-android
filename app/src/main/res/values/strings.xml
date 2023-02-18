@@ -50,4 +50,5 @@
     <string name="warning_passwordTitle">Password:</string>
     <string name="MyContacts_contacts">Contacts</string>
     <string name="MyContacts_AddContacts">Add contacts</string>
+    <string name="contacts_change_to_phonebook">Change to Phonebook</string>
 </resources>

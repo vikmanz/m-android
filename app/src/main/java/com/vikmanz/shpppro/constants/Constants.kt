@@ -1,5 +1,10 @@
 package com.vikmanz.shpppro.constants
 
+import com.bumptech.glide.Priority
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.RequestOptions
+import com.vikmanz.shpppro.R
+
 /**
  * Constants of application. Contains settings and keys for intent, save/load state and Data Store.
  */
@@ -28,4 +33,5 @@ object Constants {
     const val DS_USER_PASSWORD = "user_password"
     const val DS_USER_AUTOLOGIN_STATUS = "user_login_status"
     const val DS_USER_LANGUAGE_STATUS = "user_language_status"
+
 }
