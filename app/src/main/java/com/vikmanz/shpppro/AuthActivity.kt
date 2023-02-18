@@ -28,6 +28,7 @@ import java.util.*
 
 /**
  * Class represents SignIn or SignUp screen activity.
+ * test comment
  */
 class AuthActivity : AppCompatActivity() {
 
