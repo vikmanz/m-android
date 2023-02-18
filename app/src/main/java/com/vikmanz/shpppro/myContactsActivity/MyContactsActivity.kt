@@ -3,13 +3,14 @@ package com.vikmanz.shpppro.myContactsActivity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.vikmanz.shpppro.App
 import com.vikmanz.shpppro.authActivity.AuthActivity
 import com.vikmanz.shpppro.R
 import com.vikmanz.shpppro.constants.Constants
 import com.vikmanz.shpppro.databinding.ActivityMyContactsBinding
-import com.vikmanz.shpppro.myContactsActivity.contactModel.OneContact
+import com.vikmanz.shpppro.myContactsActivity.contactModel.ContactsTaker
 import com.vikmanz.shpppro.myContactsActivity.contactsRecycler.*
 import com.vikmanz.shpppro.myContactsActivity.contactModel.OneContactService
 
@@ -47,7 +48,7 @@ class MyContactsActivity : AppCompatActivity() {
         initRecyclerView()
 
         binding.tvAddContactsFromPhonebook.setOnClickListener {
-            changeToPhonebook()
+           changeToPhonebook()
         }
 
     }
@@ -70,9 +71,12 @@ class MyContactsActivity : AppCompatActivity() {
     }
 
     private fun changeToPhonebook() {
-        if (oneContactService.getContactsFromPhonebook(context = this) != null) {
-            adapter.contactList = oneContactService.getContactsFromPhonebook(context = this)!!
-        }
+
+        val contentResolver = this@MyContactsActivity.contentResolver
+        val contacts = ContactsTaker().getContacts(contentResolver)
+
+        val (name, number) = contacts[0]
+        Log.d("MyLog", "Name: $name, Number: $number")
     }
 
 }

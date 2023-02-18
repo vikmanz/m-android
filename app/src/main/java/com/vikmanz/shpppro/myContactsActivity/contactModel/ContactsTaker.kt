@@ -1,13 +1,12 @@
 package com.vikmanz.shpppro.myContactsActivity.contactModel
 
 import android.content.ContentResolver
-import android.content.Context
 import android.provider.ContactsContract
 
-class ContactsTaker(context: Context) {
+class ContactsTaker {
 
     init {
-        val contentResolver: ContentResolver = ContentResolver(context)
+       // val contentResolver: ContentResolver = ContentResolver(context)
 
     }
 

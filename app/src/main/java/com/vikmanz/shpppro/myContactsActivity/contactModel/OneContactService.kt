@@ -1,6 +1,5 @@
 package com.vikmanz.shpppro.myContactsActivity.contactModel
 
-import android.content.Context
 import com.github.javafaker.Faker
 
 class OneContactService {
@@ -24,12 +23,12 @@ class OneContactService {
         return contacts
     }
 
-    fun getContactsFromPhonebook(context: Context): MutableList<OneContact>? {
-
-        val newContacts = ContactsTaker(context).getContacts()
-
-        return
-    }
+//    fun getContactsFromPhonebook(context: Context): MutableList<OneContact>? {
+//
+//        val newContacts = ContactsTaker(context).getContacts()
+//
+//        return
+//    }
 
     companion object {
         private val IMAGES = mutableListOf(
