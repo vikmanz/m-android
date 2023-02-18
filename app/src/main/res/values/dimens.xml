@@ -35,5 +35,6 @@
     <dimen name="offset_auth_hello_text_from_top_landscape">20dp</dimen>
     <dimen name="email_password_boxCollapsedPaddingTop">4dp</dimen>
     <dimen name="helpButtonsWidth">110dp</dimen>
+    <dimen name="margin">10</dimen>
 
 </resources>

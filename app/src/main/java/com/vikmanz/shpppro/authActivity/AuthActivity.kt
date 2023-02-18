@@ -1,4 +1,4 @@
-package com.vikmanz.shpppro
+package com.vikmanz.shpppro.authActivity
 
 import android.app.AlertDialog
 import android.content.Intent
@@ -7,6 +7,7 @@ import android.util.Patterns
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.asLiveData
+import com.vikmanz.shpppro.R
 import com.vikmanz.shpppro.constants.Constants.CHECKBOX_STATE_STATE_KEY
 import com.vikmanz.shpppro.constants.Constants.EMAIL_FIELD_STATE_KEY
 import com.vikmanz.shpppro.constants.Constants.HELP_BUTTONS_STATE_KEY
@@ -20,6 +21,7 @@ import com.vikmanz.shpppro.constants.Constants.PASSWORD_VIEW_STATE_KEY
 import com.vikmanz.shpppro.constants.Constants.VIEW_HELP_BUTTONS_ON_CREATE
 import com.vikmanz.shpppro.dataSave.LoginDataStoreManager
 import com.vikmanz.shpppro.databinding.ActivityAuthBinding
+import com.vikmanz.shpppro.mainActivity.MainActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job

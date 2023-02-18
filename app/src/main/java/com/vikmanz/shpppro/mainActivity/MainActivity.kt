@@ -1,8 +1,10 @@
-package com.vikmanz.shpppro
+package com.vikmanz.shpppro.mainActivity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.vikmanz.shpppro.R
+import com.vikmanz.shpppro.authActivity.AuthActivity
 import com.vikmanz.shpppro.myContactsActivity.MyContactsActivity
 import com.vikmanz.shpppro.databinding.ActivityMainBinding
 import com.vikmanz.shpppro.constants.Constants.INTENT_EMAIL_ID
