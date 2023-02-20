@@ -31,4 +31,12 @@ class MyContactsViewModel : ViewModel() {
         return _contactList.value.indexOf(contact)
     }
 
+    fun getContact(index: Int) : Contact{
+        return _contactList.value[index]
+    }
+
+    fun getContactsFromPhonebook() {
+        _contactList = MutableStateFlow(ContactsService().getPhonebook())
+    }
+
 }

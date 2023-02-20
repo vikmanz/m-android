@@ -5,11 +5,14 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.vikmanz.shpppro.R
 import com.vikmanz.shpppro.authActivity.AuthActivity
 import com.vikmanz.shpppro.constants.Constants
+import com.vikmanz.shpppro.constants.Constants.MARGINS_OF_ELEMENTS
 import com.vikmanz.shpppro.constants.Constants.SNACK_BAR_VIEW_TIME
 import com.vikmanz.shpppro.databinding.ActivityMyContactsBinding
 import com.vikmanz.shpppro.myContactsActivity.contactModel.*
@@ -30,20 +33,10 @@ class MyContactsActivity : AppCompatActivity() {
     private val adapter: ContactsAdapter by lazy {
         ContactsAdapter(contactActionListener = object : ContactActionListener {
             override fun onDeleteUser(contact: Contact) {
-                val position = viewModel.getContactPosition(contact)
-                viewModel.deleteContact(contact)
-                showSnackBar(contact, position)
-            }
-
-            private fun showSnackBar(contact: Contact, position: Int) {
-                Snackbar
-                    .make(binding.root, "сontact has been removed", SNACK_BAR_VIEW_TIME)
-                    .setAction("Undo") { viewModel.addContact(contact, position) }
-                    .show()
+                deleteContactFromViewModel(contact)
             }
         })
     }
-
 
     /**
      * Main function, which used when activity was create.
@@ -51,12 +44,11 @@ class MyContactsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMyContactsBinding.inflate(layoutInflater).also { setContentView(it.root) }
-
         with(binding) {
             btnBack.setOnClickListener { startAuthActivity() }
             tvAddContacts.setOnClickListener { addNewContact() }
+            tvAddContactsFromPhonebook.setOnClickListener { viewModel.getContactsFromPhonebook() }
         }
-
         initRecyclerView()
         setObserver()
     }
@@ -65,9 +57,30 @@ class MyContactsActivity : AppCompatActivity() {
     private fun initRecyclerView() {
         with(binding) {
             recyclerViewMyContacts.layoutManager = LinearLayoutManager(this@MyContactsActivity)
-            recyclerViewMyContacts.addItemDecoration(MarginItemDecoration(20))
+            recyclerViewMyContacts.addItemDecoration(MarginItemDecoration(MARGINS_OF_ELEMENTS))
             recyclerViewMyContacts.adapter = adapter
         }
+        initSwipeToDelete()
+    }
+
+    private fun initSwipeToDelete() {
+        val swipeHandler = object : SwipeToDeleteCallback(this) {
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val position = viewHolder.adapterPosition
+                deleteContactFromViewModel(viewModel.getContact(position))
+            }
+        }
+        val itemTouchHelper = ItemTouchHelper(swipeHandler)
+        itemTouchHelper.attachToRecyclerView(binding.recyclerViewMyContacts)
+    }
+
+    private fun deleteContactFromViewModel(contact: Contact) {
+        val position = viewModel.getContactPosition(contact)
+        viewModel.deleteContact(contact)
+        Snackbar
+            .make(binding.root, "Contact has been removed", SNACK_BAR_VIEW_TIME)
+            .setAction("Undo") { viewModel.addContact(contact, position) }
+            .show()
     }
 
     private fun setObserver() {
@@ -86,7 +99,10 @@ class MyContactsActivity : AppCompatActivity() {
         finish()
     }
 
+
+    @Suppress("UNREACHABLE_CODE")
     private fun addNewContact() {
+        return
         val contactsService = ContactsService()
         viewModel.addContact(contact = contactsService.getOneContact())
     }

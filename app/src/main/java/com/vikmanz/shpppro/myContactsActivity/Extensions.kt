@@ -24,7 +24,4 @@ fun AppCompatImageView.setContactPhoto(contactPhotoUrl: String) {
         .into(this)
 }
 
-class Extensions {
-}
-
 
