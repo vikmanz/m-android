@@ -1,5 +1,6 @@
 package com.vikmanz.shpppro.myContactsActivity
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
@@ -41,13 +42,16 @@ class MyContactsActivity : AppCompatActivity() {
     /**
      * Main function, which used when activity was create.
      */
+    @SuppressLint("NotifyDataSetChanged")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMyContactsBinding.inflate(layoutInflater).also { setContentView(it.root) }
         with(binding) {
             btnBack.setOnClickListener { startAuthActivity() }
             tvAddContacts.setOnClickListener { addNewContact() }
-            tvAddContactsFromPhonebook.setOnClickListener { viewModel.getContactsFromPhonebook() }
+            tvAddContactsFromPhonebook.setOnClickListener {
+                viewModel.getContactsFromPhonebook()
+            }
         }
         initRecyclerView()
         setObserver()
@@ -100,10 +104,8 @@ class MyContactsActivity : AppCompatActivity() {
     }
 
 
-    @Suppress("UNREACHABLE_CODE")
     private fun addNewContact() {
-        return
-        val contactsService = ContactsService()
-        viewModel.addContact(contact = contactsService.getOneContact())
+        //return
+        viewModel.addContact(contact = ContactsService().getOneContact())
     }
 }

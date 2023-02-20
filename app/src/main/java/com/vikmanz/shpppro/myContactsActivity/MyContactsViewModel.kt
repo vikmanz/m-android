@@ -1,5 +1,6 @@
 package com.vikmanz.shpppro.myContactsActivity
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.vikmanz.shpppro.myContactsActivity.contactModel.Contact
 import com.vikmanz.shpppro.myContactsActivity.contactModel.ContactsService
@@ -36,7 +37,10 @@ class MyContactsViewModel : ViewModel() {
     }
 
     fun getContactsFromPhonebook() {
-        _contactList = MutableStateFlow(ContactsService().getPhonebook())
+        Log.d("mylog", "view model call new list")
+        _contactList = MutableStateFlow(ContactsService().getContactsFromPhonebook())
+        Log.d("mylog", "view model set new list and size is ${_contactList.value.size}")
+        Log.d("mylog", "and contactList size is ${contactList.value.size}")
     }
 
 }

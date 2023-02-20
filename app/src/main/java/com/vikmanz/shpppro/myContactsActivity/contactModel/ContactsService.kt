@@ -1,5 +1,6 @@
 package com.vikmanz.shpppro.myContactsActivity.contactModel
 
+import android.util.Log
 import com.github.javafaker.Faker
 import com.vikmanz.shpppro.constants.Constants.START_NUMBER_OF_CONTACTS
 
@@ -32,22 +33,22 @@ class ContactsService {
             contactCareer = faker.company().name()
         )
         imgCounter++
+        Log.d("mylog", "service return one contact")
         return newContact
     }
 
-
-    @Suppress("UNREACHABLE_CODE")
-    fun getPhonebook(): List<Contact> {
-        return contacts
-        contacts = (0 until START_NUMBER_OF_CONTACTS).map {
+    fun getContactsFromPhonebook(): List<Contact> {
+        val phonebook = ContactsPhonebookTaker()
+        val newContacts = (0 until phonebook.names.size).map {
             Contact(
                 contactId = it.toLong(),
                 contactPhotoUrl = IMAGES[it % IMAGES.size],
-                contactName = faker.name().fullName(),
-                contactCareer = faker.company().name()
+                contactName = phonebook.names[it],
+                contactCareer =  phonebook.phones[it]
             )
         }.toMutableList()
-        return contacts
+        Log.d("mylog", "service return new list with size ${newContacts.size}")
+        return newContacts
     }
 
 
