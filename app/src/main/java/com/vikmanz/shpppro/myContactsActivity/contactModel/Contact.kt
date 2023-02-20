@@ -1,6 +1,6 @@
 package com.vikmanz.shpppro.myContactsActivity.contactModel
 
-data class OneContact(
+data class Contact(
     val contactId: Long,
     val contactPhotoUrl: String,
     val contactName: String,

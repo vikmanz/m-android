@@ -22,9 +22,9 @@
         android:supportsRtl="true"
         android:theme="@style/defaultTheme"
         android:usesCleartextTraffic="true"
-        android:name=".App"
-        tools:targetApi="33">
 
+        tools:targetApi="33">
+<!-- android:name=".App" -->
 
         <activity
             android:name=".myContactsActivity.MyContactsActivity"

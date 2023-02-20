@@ -1,4 +1,4 @@
-package com.vikmanz.shpppro.myContactsActivity.contactsRecycler
+package com.vikmanz.shpppro.myContactsActivity
 
 import android.graphics.Rect
 import android.view.View

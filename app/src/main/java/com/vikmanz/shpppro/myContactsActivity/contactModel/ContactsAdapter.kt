@@ -1,34 +1,54 @@
-package com.vikmanz.shpppro.myContactsActivity.contactsRecycler
+package com.vikmanz.shpppro.myContactsActivity.contactModel
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.vikmanz.shpppro.R
 import com.vikmanz.shpppro.databinding.OneContactItemBinding
-import com.vikmanz.shpppro.myContactsActivity.contactModel.OneContact
+import com.vikmanz.shpppro.myContactsActivity.setContactPhoto
+import kotlinx.coroutines.*
 
 
-class OneContactAdapter: RecyclerView.Adapter<OneContactAdapter.OneContactHolder>() {
+@OptIn(DelicateCoroutinesApi::class)
+@SuppressLint("NotifyDataSetChanged")
+class ContactsAdapter(
+    private val viewModel: MyContactsViewModel
+    ): RecyclerView.Adapter<ContactsAdapter.OneContactHolder>() {
 
-    var contactList = mutableListOf<OneContact>()
+    var contactList = mutableListOf<Contact>()
+    val scope = CoroutineScope(Job() + Dispatchers.Main)
+
+    init {
+        // створюємо coroutine для збору даних з StateFlow
+        GlobalScope.launch {
+            viewModel.contactList.collect { contactList ->
+                withContext(Dispatchers.Main) {
+                    this@ContactsAdapter.contactList = contactList as MutableList<Contact>
+                    notifyDataSetChanged()
+                   // Log.d("mylog", "UPDATED!")
+                }
+            }
+        }
+    }
 
     class OneContactHolder(item: View): RecyclerView.ViewHolder(item) {
 
         private val binding = OneContactItemBinding.bind(item)
 
         @Suppress("UNUSED_PARAMETER")
-        fun bind(oneContact: OneContact, context: Context) {
+        fun bind(contact: Contact, context: Context) {
             with (binding) {
 
                 // bind Photo
-                ivContactAvatarImage.setContactPhoto(oneContact.contactPhotoUrl)
+                ivContactAvatarImage.setContactPhoto(contact.contactPhotoUrl)
 
                 // bind Name/Career
-                tvContactName.text = oneContact.contactName
-                tvContactCareer.text = oneContact.contactCareer
+                tvContactName.text = contact.contactName
+                tvContactCareer.text = contact.contactCareer
             }
         }
     }
@@ -49,22 +69,22 @@ class OneContactAdapter: RecyclerView.Adapter<OneContactAdapter.OneContactHolder
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun addContact(oneContact: OneContact) {
-        contactList.add(oneContact)
+    fun addContact(contact: Contact) {
+        viewModel.addContact(contact)
         notifyDataSetChanged()
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun removeContact(oneContact: OneContact) {
+    fun removeContact(contact: Contact) {
         // Find contact in list
-        val indexToDelete: Int = contactList.indexOfFirst { it.contactId == oneContact.contactId }
+        val indexToDelete: Int = contactList.indexOfFirst { it.contactId == contact.contactId }
         if (indexToDelete == -1) return // Останавливаемся, если не находим такого человека
         else contactList.removeAt(indexToDelete) // Удаляем человека
         notifyDataSetChanged()
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun changeContactsToPhoneBook(contactsBook: MutableList<OneContact>) {
+    fun changeContactsToPhoneBook(contactsBook: MutableList<Contact>) {
         contactList = contactsBook
         notifyDataSetChanged()
     }

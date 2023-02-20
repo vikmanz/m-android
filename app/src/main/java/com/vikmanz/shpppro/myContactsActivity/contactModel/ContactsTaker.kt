@@ -5,11 +5,6 @@ import android.provider.ContactsContract
 
 class ContactsTaker {
 
-    init {
-       // val contentResolver: ContentResolver = ContentResolver(context)
-
-    }
-
     fun getContacts(contentResolver: ContentResolver): List<Pair<String, String>> {
         val contacts = mutableListOf<Pair<String, String>>()
 

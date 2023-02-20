@@ -1,4 +1,4 @@
-package com.vikmanz.shpppro.myContactsActivity.contactsRecycler
+package com.vikmanz.shpppro.myContactsActivity
 
 import androidx.appcompat.widget.AppCompatImageView
 import com.bumptech.glide.Glide

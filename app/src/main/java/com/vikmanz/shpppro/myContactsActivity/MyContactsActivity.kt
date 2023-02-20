@@ -4,15 +4,13 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.vikmanz.shpppro.App
 import com.vikmanz.shpppro.authActivity.AuthActivity
 import com.vikmanz.shpppro.R
 import com.vikmanz.shpppro.constants.Constants
 import com.vikmanz.shpppro.databinding.ActivityMyContactsBinding
-import com.vikmanz.shpppro.myContactsActivity.contactModel.ContactsTaker
-import com.vikmanz.shpppro.myContactsActivity.contactsRecycler.*
-import com.vikmanz.shpppro.myContactsActivity.contactModel.OneContactService
+import com.vikmanz.shpppro.myContactsActivity.contactModel.*
 
 /**
  * Class represents MyContacts screen activity.
@@ -22,11 +20,13 @@ class MyContactsActivity : AppCompatActivity() {
     // Binding, Data Store and Coroutine Scope variables.
     private lateinit var binding: ActivityMyContactsBinding
 
-    // Recycler View variables.
-    private val adapter = OneContactAdapter()
-    private val oneContactService: OneContactService
-        get() = (applicationContext as App).oneContactService
+    // ініціалізуємо viewModel з використанням viewModels()
+    private val viewModel: MyContactsViewModel by viewModels()
 
+    // Recycler View variables.
+    private lateinit var adapter: ContactsAdapter
+
+    private var imgCounter = 0
 
     /**
      * Main function, which used when activity was create.
@@ -47,8 +47,8 @@ class MyContactsActivity : AppCompatActivity() {
 
         initRecyclerView()
 
-        binding.tvAddContactsFromPhonebook.setOnClickListener {
-           changeToPhonebook()
+        binding.tvAddContacts.setOnClickListener {
+           addNewContact()
         }
 
     }
@@ -57,8 +57,8 @@ class MyContactsActivity : AppCompatActivity() {
         with(binding) {
             recyclerViewMyContacts.layoutManager = LinearLayoutManager(this@MyContactsActivity)
             recyclerViewMyContacts.addItemDecoration(MarginItemDecoration(20))
+            adapter = ContactsAdapter(viewModel)
             recyclerViewMyContacts.adapter = adapter
-            adapter.contactList = oneContactService.getContacts()
         }
     }
 
@@ -70,13 +70,15 @@ class MyContactsActivity : AppCompatActivity() {
         finish()
     }
 
-    private fun changeToPhonebook() {
-
-        val contentResolver = this@MyContactsActivity.contentResolver
-        val contacts = ContactsTaker().getContacts(contentResolver)
-
-        val (name, number) = contacts[0]
-        Log.d("MyLog", "Name: $name, Number: $number")
+    private fun addNewContact() {
+       // Log.d("mylog", "add contact in Activity start!")
+        imgCounter++
+        adapter.addContact(Contact(
+                imgCounter.toLong(),
+                ContactsService.IMAGES[imgCounter % ContactsService.IMAGES.size],
+                "Namene",
+                "Coompany"))
+        // Log.d("mylog", "add contact in Activity end!")
     }
 
 }
