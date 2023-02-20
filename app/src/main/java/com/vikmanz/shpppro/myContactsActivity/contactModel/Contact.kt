@@ -7,3 +7,5 @@ data class Contact(
     val contactName: String,
     val contactCareer: String
     ): Serializable
+
+

@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.vikmanz.shpppro.databinding.OneContactItemBinding
-import com.vikmanz.shpppro.myContactsActivity.ContactActionListener
 import com.vikmanz.shpppro.myContactsActivity.setContactPhoto
 import androidx.recyclerview.widget.ListAdapter
 

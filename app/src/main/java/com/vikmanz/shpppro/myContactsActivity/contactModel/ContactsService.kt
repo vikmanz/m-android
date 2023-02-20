@@ -1,15 +1,16 @@
 package com.vikmanz.shpppro.myContactsActivity.contactModel
 
 import com.github.javafaker.Faker
+import com.vikmanz.shpppro.constants.Constants.START_NUMBER_OF_CONTACTS
 
 class ContactsService {
 
-    private var contacts = mutableListOf<Contact>() // All users
+    private var contacts = listOf<Contact>() // All users
+
+    private val faker = Faker.instance() // face data to user
 
     init {
-        val faker = Faker.instance() // face data to user
-
-        contacts = (0 until 5).map {
+        contacts = (0 until START_NUMBER_OF_CONTACTS).map {
             Contact(
                 contactId = it.toLong(),
                 contactPhotoUrl = IMAGES[it % IMAGES.size],
@@ -19,8 +20,19 @@ class ContactsService {
         }.toMutableList()
     }
 
-    fun getContacts(): MutableList<Contact> {
+    fun getContacts(): List<Contact> {
         return contacts
+    }
+
+    fun getOneContact(): Contact {
+        val newContact = Contact(
+            contactId = imgCounter.toLong(),
+            contactPhotoUrl = IMAGES[imgCounter % IMAGES.size],
+            contactName = faker.name().fullName(),
+            contactCareer = faker.company().name()
+        )
+        imgCounter++
+        return newContact
     }
 
     companion object {
@@ -36,6 +48,8 @@ class ContactsService {
             "https://images.unsplash.com/photo-1567186937675-a5131c8a89ea?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=600&ixid=MnwxfDB8MXxyYW5kb218fHx8fHx8fHwxNjI0MDE0ODYx&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=800",
             "https://images.unsplash.com/photo-1546456073-92b9f0a8d413?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=600&ixid=MnwxfDB8MXxyYW5kb218fHx8fHx8fHwxNjI0MDE0ODY1&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=800"
         )
+
+        private var imgCounter = START_NUMBER_OF_CONTACTS
     }
 
 }

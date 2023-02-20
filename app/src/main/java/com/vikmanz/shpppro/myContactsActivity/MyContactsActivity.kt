@@ -1,15 +1,16 @@
 package com.vikmanz.shpppro.myContactsActivity
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.vikmanz.shpppro.authActivity.AuthActivity
+import com.google.android.material.snackbar.Snackbar
 import com.vikmanz.shpppro.R
+import com.vikmanz.shpppro.authActivity.AuthActivity
 import com.vikmanz.shpppro.constants.Constants
+import com.vikmanz.shpppro.constants.Constants.SNACK_BAR_VIEW_TIME
 import com.vikmanz.shpppro.databinding.ActivityMyContactsBinding
 import com.vikmanz.shpppro.myContactsActivity.contactModel.*
 import kotlinx.coroutines.*
@@ -29,12 +30,20 @@ class MyContactsActivity : AppCompatActivity() {
     private val adapter: ContactsAdapter by lazy {
         ContactsAdapter(contactActionListener = object : ContactActionListener {
             override fun onDeleteUser(contact: Contact) {
+                val position = viewModel.getContactPosition(contact)
                 viewModel.deleteContact(contact)
+                showSnackBar(contact, position)
+            }
+
+            private fun showSnackBar(contact: Contact, position: Int) {
+                Snackbar
+                    .make(binding.root, "сontact has been removed", SNACK_BAR_VIEW_TIME)
+                    .setAction("Undo") { viewModel.addContact(contact, position) }
+                    .show()
             }
         })
     }
 
-    private var imgCounter = 0
 
     /**
      * Main function, which used when activity was create.
@@ -78,10 +87,7 @@ class MyContactsActivity : AppCompatActivity() {
     }
 
     private fun addNewContact() {
-        viewModel.addContact(Contact(
-                imgCounter.toLong(),
-                ContactsService.IMAGES[imgCounter % ContactsService.IMAGES.size],
-                "Namene",
-                "Coompany"))
+        val contactsService = ContactsService()
+        viewModel.addContact(contact = contactsService.getOneContact())
     }
 }

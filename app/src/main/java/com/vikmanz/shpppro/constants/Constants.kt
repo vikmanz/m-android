@@ -1,10 +1,5 @@
 package com.vikmanz.shpppro.constants
 
-import com.bumptech.glide.Priority
-import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.request.RequestOptions
-import com.vikmanz.shpppro.R
-
 /**
  * Constants of application. Contains settings and keys for intent, save/load state and Data Store.
  */
@@ -14,6 +9,10 @@ object Constants {
     const val LOGIN_VIEW_FIRST = true               // Login (true) or Register (false) view first.
     const val VIEW_HELP_BUTTONS_ON_CREATE = false   // Show or hide helper buttons on start.
     const val MIN_PASSWORD_LENGTH = 8               // Minimum number of chars in password.
+
+    // My Contacts
+    const val START_NUMBER_OF_CONTACTS = 5            // Minimum number of chars in password.
+    const val SNACK_BAR_VIEW_TIME = 5000            // Minimum number of chars in password.
 
     // Intent Keys. Don't need to change.
     const val INTENT_EMAIL_ID = "email_identifier"
