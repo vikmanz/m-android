@@ -9,7 +9,7 @@ class ContactsService {
     init {
         val faker = Faker.instance() // face data to user
 
-        contacts = (0 until 20).map {
+        contacts = (0 until 5).map {
             Contact(
                 contactId = it.toLong(),
                 contactPhotoUrl = IMAGES[it % IMAGES.size],

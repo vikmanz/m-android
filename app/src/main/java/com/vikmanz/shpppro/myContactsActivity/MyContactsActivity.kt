@@ -5,12 +5,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.vikmanz.shpppro.authActivity.AuthActivity
 import com.vikmanz.shpppro.R
 import com.vikmanz.shpppro.constants.Constants
 import com.vikmanz.shpppro.databinding.ActivityMyContactsBinding
 import com.vikmanz.shpppro.myContactsActivity.contactModel.*
+import kotlinx.coroutines.*
 
 /**
  * Class represents MyContacts screen activity.
@@ -24,7 +26,13 @@ class MyContactsActivity : AppCompatActivity() {
     private val viewModel: MyContactsViewModel by viewModels()
 
     // Recycler View variables.
-    private lateinit var adapter: ContactsAdapter
+    private val adapter: ContactsAdapter by lazy {
+        ContactsAdapter(contactActionListener = object : ContactActionListener {
+            override fun onDeleteUser(contact: Contact) {
+                viewModel.deleteContact(contact)
+            }
+        })
+    }
 
     private var imgCounter = 0
 
@@ -32,33 +40,32 @@ class MyContactsActivity : AppCompatActivity() {
      * Main function, which used when activity was create.
      */
     override fun onCreate(savedInstanceState: Bundle?) {
-
-        // Init activity.
         super.onCreate(savedInstanceState)
+        binding = ActivityMyContactsBinding.inflate(layoutInflater).also { setContentView(it.root) }
 
-        // Others init operations.
-        binding = ActivityMyContactsBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-        // Back button.
-        binding.btnBack.setOnClickListener {
-            startAuthActivity()
+        with(binding) {
+            btnBack.setOnClickListener { startAuthActivity() }
+            tvAddContacts.setOnClickListener { addNewContact() }
         }
 
         initRecyclerView()
-
-        binding.tvAddContacts.setOnClickListener {
-           addNewContact()
-        }
-
+        setObserver()
     }
+
 
     private fun initRecyclerView() {
         with(binding) {
             recyclerViewMyContacts.layoutManager = LinearLayoutManager(this@MyContactsActivity)
             recyclerViewMyContacts.addItemDecoration(MarginItemDecoration(20))
-            adapter = ContactsAdapter(viewModel)
             recyclerViewMyContacts.adapter = adapter
+        }
+    }
+
+    private fun setObserver() {
+        lifecycleScope.launch {
+            viewModel.contactList.collect { contactList ->
+                adapter.submitList(contactList)
+            }
         }
     }
 
@@ -71,14 +78,10 @@ class MyContactsActivity : AppCompatActivity() {
     }
 
     private fun addNewContact() {
-       // Log.d("mylog", "add contact in Activity start!")
-        imgCounter++
-        adapter.addContact(Contact(
+        viewModel.addContact(Contact(
                 imgCounter.toLong(),
                 ContactsService.IMAGES[imgCounter % ContactsService.IMAGES.size],
                 "Namene",
                 "Coompany"))
-        // Log.d("mylog", "add contact in Activity end!")
     }
-
 }
