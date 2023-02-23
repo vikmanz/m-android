@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--TODO виконано не той екран з figma-->
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -6,8 +7,9 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-
-    <!-- Up half of screen. -->
+<!--    TODO Розділення частин екрану краще виконати через View. ConstraintLayout вкладувати у ConstraintLayout - некраща ідея-->
+<!-- Up half of screen. -->
+<!--    TODO id в цілому нормальне, але можна його уточнити, скориставшись цим https://discord.com/channels/534496884849639455/862735944679424020/864019560587591700-->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayoutTopBG"
         android:layout_width="match_parent"
@@ -80,6 +82,7 @@
         </androidx.cardview.widget.CardView>
 
         <!-- <!- Person Info flow. -->
+<!--        TODO У task-1 треба одразу данні вписати-->
         <androidx.constraintlayout.helper.widget.Flow
             android:id="@+id/flowProfileText"
             android:layout_width="wrap_content"
@@ -183,6 +186,7 @@
             tools:layout_editor_absoluteY="89dp" />
 
         <!-- Fill Profile Text. -->
+<!--        TODO не на цьому екрані має бути (аж в 5 рівні з'являється)-->
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvPropositionToFillProfile"
             style="@style/basicText"
@@ -197,6 +201,7 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <!-- Edit Profile button. -->
+<!--        TODO мені здається, що має бути усюди шрифт semi_bold, а не regular.-->
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnEditProfile"
             android:layout_width="match_parent"

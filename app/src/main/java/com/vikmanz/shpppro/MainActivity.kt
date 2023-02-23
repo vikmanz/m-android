@@ -45,6 +45,7 @@ class MainActivity : AppCompatActivity() {
         loginData = LoginDataStoreManager(this)
 
         // Parse email, set Name Surname text and img of avatar.
+//        TODO тут виконуються дії заповнення данних. Рекомендую їх в окремий метод винести
         val emailToParse = intent.getStringExtra(INTENT_EMAIL_ID).toString()
         binding.tvPersonName.text = if (emailToParse.isEmpty()) "" else parseEmail(emailToParse)
         binding.ivPerson.setImageResource(R.drawable.sample_avatar)
@@ -62,6 +63,7 @@ class MainActivity : AppCompatActivity() {
      */
     private fun parseEmail(fullEmail: String): String {
 
+        // TODO літерали винести у константи
         val personName: String
         val firstPartEmail = fullEmail.substring(0, fullEmail.indexOf('@'))
 
