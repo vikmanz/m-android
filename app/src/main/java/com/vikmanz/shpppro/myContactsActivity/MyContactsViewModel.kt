@@ -10,10 +10,10 @@ import kotlinx.coroutines.flow.StateFlow
 class MyContactsViewModel : ViewModel() {
 
     // створюємо MutableStateFlow зі списком контактів
-    private var _contactList = MutableStateFlow(ContactsService().getContacts())
+    private val _contactList = MutableStateFlow(ContactsService().getContacts())
 
     // створюємо StateFlow, який можна споживати з зовнішнього коду
-    val contactList: StateFlow<List<Contact>> = _contactList
+    var contactList: StateFlow<List<Contact>> = _contactList
 
     // додаємо нове ім'я до MutableStateFlow
     fun addContact(contact: Contact) {
@@ -38,7 +38,8 @@ class MyContactsViewModel : ViewModel() {
 
     fun getContactsFromPhonebook() {
         Log.d("mylog", "view model call new list")
-        _contactList = MutableStateFlow(ContactsService().getContactsFromPhonebook())
+        _contactList.value = ContactsService().getContactsFromPhonebook()
+//        contactList = _contactList
         Log.d("mylog", "view model set new list and size is ${_contactList.value.size}")
         Log.d("mylog", "and contactList size is ${contactList.value.size}")
     }

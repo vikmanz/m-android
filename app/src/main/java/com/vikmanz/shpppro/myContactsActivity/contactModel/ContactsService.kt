@@ -38,13 +38,22 @@ class ContactsService {
     }
 
     fun getContactsFromPhonebook(): List<Contact> {
-        val phonebook = ContactsPhonebookTaker()
-        val newContacts = (0 until phonebook.names.size).map {
+//        val phonebook = ContactsPhonebookTaker()
+//        val newContacts = (0 until phonebook.names.size).map {
+//            Contact(
+//                contactId = it.toLong(),
+//                contactPhotoUrl = IMAGES[it % IMAGES.size],
+//                contactName = phonebook.names[it],
+//                contactCareer =  phonebook.phones[it]
+//            )
+//        }.toMutableList()
+
+        val newContacts = (0 until START_NUMBER_OF_CONTACTS).map {
             Contact(
                 contactId = it.toLong(),
                 contactPhotoUrl = IMAGES[it % IMAGES.size],
-                contactName = phonebook.names[it],
-                contactCareer =  phonebook.phones[it]
+                contactName = faker.name().fullName(),
+                contactCareer = faker.company().name()
             )
         }.toMutableList()
         Log.d("mylog", "service return new list with size ${newContacts.size}")
