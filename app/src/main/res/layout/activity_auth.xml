@@ -112,7 +112,7 @@
         app:flow_horizontalStyle="spread_inside"
         tools:ignore="MissingConstraints" />
 
-<!--    TODO якась затримка є, коли намагаюсь галочку поставити в емуляторі-->
+<!--    TODO Треба двічі натискати на чекбокс -->
 <!--    TODO стан "checked" має бути встановлено одразу-->
 <!--    TODO вигляд checkbox не по дизайну-->
     <CheckBox

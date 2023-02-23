@@ -37,7 +37,7 @@
     <string name="regex_pass_OneUpperChar" translatable="false">.*[A-Z].*</string>
     <string name="regex_pass_OneLowerChar" translatable="false">.*[a-z].*</string>
     <string name="regex_pass_OneSpecialChar" translatable="false">.*[@#$%^&amp;+=].*</string>
-    <string name="passCheckWarning_min8chars">Minimum 8 Characters Password</string>
+    <string name="passCheckWarning_min8chars">Minimum %1$d Characters Password</string>
     <string name="passCheckWarning_OneUpperChar">Must Contain 1 Upper-case Character</string>
     <string name="passCheckWarning_OneLowerChar">Must Contain 1 Lower-case Character</string>
     <string name="passCheckWarning_OneSpecialChar">Must Contain 1 Special Character (@#\$%^&amp;+=)</string>

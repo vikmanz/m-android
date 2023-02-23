@@ -179,7 +179,7 @@ class AuthActivity : AppCompatActivity() {
 
         // Do all checks.
         if (passwordText.length < MIN_PASSWORD_LENGTH) {            // Minimum 8 chars. //TODO пастка джокера. 14 чи 8?
-            return getString(R.string.passCheckWarning_min8chars)
+            return getString(R.string.passCheckWarning_min8chars, MIN_PASSWORD_LENGTH)
         }
         if (!passwordText.matches(regexOneUpperCaseChar)) {         // Minimum 1 UpperCase char.
             return getString(R.string.passCheckWarning_OneUpperChar)
@@ -352,7 +352,6 @@ class AuthActivity : AppCompatActivity() {
     /**
      * Save Instance State.
      */
-//    TODO можна без цього зробити збереження стану
     override fun onSaveInstanceState(outState: Bundle) {
         with(binding) {
             outState.putString(EMAIL_FIELD_STATE_KEY, tiTextEmail.text.toString())

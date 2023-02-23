@@ -14,10 +14,10 @@ import java.util.*
 /**
  * Class represents user main profile screen activity.
  */
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::inflate) {
 
     // Binding, Data Store and Coroutine Scope variables.
-    private lateinit var binding: ActivityMainBinding
+//    private lateinit var binding: ActivityMainBinding
     private lateinit var loginData: LoginDataStoreManager
     private val coroutineScope: CoroutineScope = CoroutineScope(Job())
 
@@ -38,8 +38,8 @@ class MainActivity : AppCompatActivity() {
         setLocale()
 
         // Others init operations.
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+//        binding = ActivityMainBinding.inflate(layoutInflater)
+//        setContentView(binding.root)
 
         // Create Data Store.
         loginData = LoginDataStoreManager(this)
@@ -50,9 +50,15 @@ class MainActivity : AppCompatActivity() {
         binding.tvPersonName.text = if (emailToParse.isEmpty()) "" else parseEmail(emailToParse)
         binding.ivPerson.setImageResource(R.drawable.sample_avatar)
 
-        // Set onClick listener to Logout button.
-        binding.tvLogout.setOnClickListener { logout() }
 
+
+    }
+
+    override fun setListeners() {
+        super.setListeners()
+
+// Set onClick listener to Logout button.
+        binding.tvLogout.setOnClickListener { logout() }
     }
 
     /**
