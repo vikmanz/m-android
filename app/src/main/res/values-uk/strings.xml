@@ -34,7 +34,7 @@
     <string name="passCheckWarning_min8chars">Мінімум %1$d символів</string>
     <string name="passCheckWarning_OneUpperChar">Мусить містити 1 символ у верхньому регістрі</string>
     <string name="passCheckWarning_OneLowerChar">Мусить містити 1 символ у нижньому регістрі</string>
-    <string name="passCheckWarning_OneSpecialChar">Мусить містити 1 спеціальний символ (@#\\$%^&amp;+=)</string>
+    <string name="passCheckWarning_OneSpecialChar">Мусить містити 1 спеціальний символ (%1$s)</string>
     <string name="warningMessage_InvalidEmailAdress">Не правильна поштова адреса</string>
     <string name="warningMessage_InvalidRegisterForm">Не правильно введено дані!</string>
     <string name="warningMessage_OkButtonOnAllert">Окей</string>

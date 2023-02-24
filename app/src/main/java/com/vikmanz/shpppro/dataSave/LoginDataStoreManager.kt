@@ -7,16 +7,11 @@ import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
-import com.vikmanz.shpppro.constants.Constants.DS_USER_AUTOLOGIN_STATUS
-import com.vikmanz.shpppro.constants.Constants.DS_USER_LANGUAGE_STATUS
-import com.vikmanz.shpppro.constants.Constants.DS_USER_NAME
-import com.vikmanz.shpppro.constants.Constants.DS_USER_PASSWORD
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-// Intent Keys. Don't need to change.
-const val DATA_STORE_NAME = "auth"
-
+// Key for preferences Data Store.
+private const val DATA_STORE_NAME = "auth"
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = DATA_STORE_NAME)
 
 /**
@@ -28,6 +23,12 @@ class LoginDataStoreManager (private val context: Context) {
      * Companion object with keys of Data Store Preferences fields.
      */
     companion object {
+        // Data Store Keys. Don't need to change.
+        private const val DS_USER_NAME = "user_name"
+        private const val DS_USER_PASSWORD = "user_password"
+        private const val DS_USER_AUTOLOGIN_STATUS = "user_login_status"
+        private const val DS_USER_LANGUAGE_STATUS = "user_language_status"
+
         private val USER_LOGIN_KEY = stringPreferencesKey(DS_USER_NAME)
         private val USER_PASSWORD_KEY = stringPreferencesKey(DS_USER_PASSWORD)
         private val LOGIN_STATUS_KEY = booleanPreferencesKey(DS_USER_AUTOLOGIN_STATUS)

@@ -7,16 +7,10 @@ import android.util.Patterns
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.asLiveData
-import com.vikmanz.shpppro.constants.Constants.CHECKBOX_STATE_STATE_KEY
-import com.vikmanz.shpppro.constants.Constants.EMAIL_FIELD_STATE_KEY
-import com.vikmanz.shpppro.constants.Constants.HELP_BUTTONS_STATE_KEY
 import com.vikmanz.shpppro.constants.Constants.INTENT_EMAIL_ID
 import com.vikmanz.shpppro.constants.Constants.INTENT_LANG_ID
-import com.vikmanz.shpppro.constants.Constants.LANGUAGE_STATE_KEY
 import com.vikmanz.shpppro.constants.Constants.LOGIN_VIEW_FIRST
 import com.vikmanz.shpppro.constants.Constants.MIN_PASSWORD_LENGTH
-import com.vikmanz.shpppro.constants.Constants.PASSWORD_FIELD_STATE_KEY
-import com.vikmanz.shpppro.constants.Constants.PASSWORD_VIEW_STATE_KEY
 import com.vikmanz.shpppro.constants.Constants.VIEW_HELP_BUTTONS_ON_CREATE
 import com.vikmanz.shpppro.dataSave.LoginDataStoreManager
 import com.vikmanz.shpppro.databinding.ActivityAuthBinding
@@ -30,6 +24,26 @@ import java.util.*
  * Class represents SignIn or SignUp screen activity .
  */
 class AuthActivity : AppCompatActivity() {
+
+    companion object {
+        // Regex's
+        private const val REGEX_ONE_UPPER_CHAR = ".*[A-Z].*"
+        private const val REGEX_ONE_LOWER_CHAR = ".*[a-z].*"
+        private const val SPECIAL_CHARS = "@#$%^&amp;+="
+        private const val REGEX_ONE_SPECIAL_CHAR = ".*[$SPECIAL_CHARS].*"
+        private const val LANG_EN = "en"
+        private const val LANG_UA = "uk"
+        private const val TEST_LOGIN = "viktor.manza@gmail.com"
+        private const val TEST_PASSWORD = "passwordE3@"
+
+        // Save/Load State Keys. Don't need to change.
+        private const val EMAIL_FIELD_STATE_KEY = "EMAIL_KEY"
+        private const val PASSWORD_FIELD_STATE_KEY = "PASSWORD_KEY"
+        private const val PASSWORD_VIEW_STATE_KEY = "PASSWORD_VIEW_KEY"
+        private const val CHECKBOX_STATE_STATE_KEY = "CHECKBOX_KEY"
+        private const val LANGUAGE_STATE_KEY = "LAND_ID_KEY"
+        private const val HELP_BUTTONS_STATE_KEY = "HELP_BUTTONS_KEY"
+    }
 
     // Binding, Data Store and Coroutine Scope variables.
     private lateinit var binding: ActivityAuthBinding
@@ -171,24 +185,18 @@ class AuthActivity : AppCompatActivity() {
         // Get password text
         val passwordText = binding.tiTextPassword.text.toString()
 
-        // Get Regex
-        // TODO у ресурси треба виносити, що змінюється залежно від мови. Патерн регулярного виразу краще у константах писати
-        val regexOneUpperCaseChar = getString(R.string.regex_pass_OneUpperChar).toRegex()
-        val regexOneLowerCaseChar = getString(R.string.regex_pass_OneLowerChar).toRegex()
-        val regexOneSpecialChar = getString(R.string.regex_pass_OneSpecialChar).toRegex()
-
         // Do all checks.
-        if (passwordText.length < MIN_PASSWORD_LENGTH) {            // Minimum 8 chars. //TODO пастка джокера. 14 чи 8?
+        if (passwordText.length < MIN_PASSWORD_LENGTH) {               // Minimum 8 chars.
             return getString(R.string.passCheckWarning_min8chars, MIN_PASSWORD_LENGTH)
         }
-        if (!passwordText.matches(regexOneUpperCaseChar)) {         // Minimum 1 UpperCase char.
+        if (!passwordText.matches(REGEX_ONE_UPPER_CHAR.toRegex())) {   // Minimum 1 UpperCase char.
             return getString(R.string.passCheckWarning_OneUpperChar)
         }
-        if (!passwordText.matches(regexOneLowerCaseChar)) {         // Minimum 1 LowerCase char.
+        if (!passwordText.matches(REGEX_ONE_LOWER_CHAR.toRegex())) {   // Minimum 1 LowerCase char.
             return getString(R.string.passCheckWarning_OneLowerChar)
         }
-        if (!passwordText.matches(regexOneSpecialChar)) {           // Minimum 1 special char.
-            return getString(R.string.passCheckWarning_OneSpecialChar)
+        if (!passwordText.matches(REGEX_ONE_SPECIAL_CHAR.toRegex())) { // Minimum 1 special char.
+            return getString(R.string.passCheckWarning_OneSpecialChar, SPECIAL_CHARS)
         }
 
         // If pass all checks, return null.
@@ -297,8 +305,8 @@ class AuthActivity : AppCompatActivity() {
 
             // Fill fields button listener.
             buttonFillLoginPassword.setOnClickListener {
-                tiTextEmail.setText(getString(R.string.my_main_email))
-                tiTextPassword.setText(getString(R.string.my_main_password))
+                tiTextEmail.setText(TEST_LOGIN)
+                tiTextPassword.setText(TEST_PASSWORD)
                 tiLayoutEmail.helperText = null
                 tiLayoutPassword.helperText = null
             }
@@ -333,7 +341,7 @@ class AuthActivity : AppCompatActivity() {
     private fun setLocale() {
         val config = resources.configuration
         val lang =
-            if (isUkrainian) getString(R.string.language_ua) else getString(R.string.language_en)
+            if (isUkrainian) LANG_UA else LANG_EN
         val locale = Locale(lang)
         Locale.setDefault(locale)
         config.setLocale(locale)

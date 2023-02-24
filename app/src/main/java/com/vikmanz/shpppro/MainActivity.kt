@@ -1,13 +1,12 @@
 package com.vikmanz.shpppro
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.vikmanz.shpppro.databinding.ActivityMainBinding
 import com.vikmanz.shpppro.constants.Constants.INTENT_EMAIL_ID
 import com.vikmanz.shpppro.constants.Constants.INTENT_LANG_ID
-import com.vikmanz.shpppro.constants.Constants.LANGUAGE_STATE_KEY_TWO
 import com.vikmanz.shpppro.dataSave.LoginDataStoreManager
+import com.vikmanz.shpppro.utilits.firstCharToUpperCase
 import kotlinx.coroutines.*
 import java.util.*
 
@@ -16,8 +15,18 @@ import java.util.*
  */
 class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::inflate) {
 
+    companion object {
+        private const val EMAIL_DOMAIN_SEPARATOR = '@'
+        private const val EMAIL_NAME_SEPARATOR = '.'
+        private const val EMAIL_NAME_JOIN_SPASE = " "
+        private const val REGEX_FROM_A_TO_Z = "[A-Z]"
+        private const val LANG_EN = "en"
+        private const val LANG_UA = "uk"
+        private const val LANGUAGE_STATE_KEY_TWO = "LAND_ID_KEY_TWO"
+    }
+
     // Binding, Data Store and Coroutine Scope variables.
-//    private lateinit var binding: ActivityMainBinding
+    // private lateinit var binding: ActivityMainBinding
     private lateinit var loginData: LoginDataStoreManager
     private val coroutineScope: CoroutineScope = CoroutineScope(Job())
 
@@ -69,13 +78,12 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
      */
     private fun parseEmail(fullEmail: String): String {
 
-        // TODO літерали винести у константи
         val personName: String
-        val firstPartEmail = fullEmail.substring(0, fullEmail.indexOf('@'))
+        val firstPartEmail = fullEmail.substring(0, fullEmail.indexOf(EMAIL_DOMAIN_SEPARATOR))
 
         // if "nameSurname" variant:
-        if (firstPartEmail.indexOf('.') == -1) {
-            val regex = getString(R.string.regex_fromBigAtoBigZ_char).toRegex()
+        if (firstPartEmail.indexOf(EMAIL_NAME_SEPARATOR) == -1) {
+            val regex = REGEX_FROM_A_TO_Z.toRegex()
             val match: MatchResult? = regex.find(firstPartEmail.substring(1))
             personName = if (match == null) {
                 firstPartEmail
@@ -94,8 +102,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
         // else if "name.surname" variant:
         else {
             personName = firstPartEmail
-                .split('.')
-                .joinToString(" ", transform = String::firstCharToUpperCase)
+                .split(EMAIL_NAME_SEPARATOR)
+                .joinToString(EMAIL_NAME_JOIN_SPASE, transform = String::firstCharToUpperCase)
         }
 
         return personName
@@ -126,7 +134,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
     private fun setLocale() {
         val config = resources.configuration
         val lang =
-            if (isUkrainian) getString(R.string.language_ua) else getString(R.string.language_en)
+            if (isUkrainian) LANG_UA else LANG_EN
         val locale = Locale(lang)
         Locale.setDefault(locale)
         config.setLocale(locale)
@@ -152,11 +160,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
         setLocale()
     }
 
+
+
 }
 
-/**
- * Extra function of String class, for replace the first char of String to Upper case.
- */
-fun String.firstCharToUpperCase() = replaceFirstChar {
-    if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString()
-}

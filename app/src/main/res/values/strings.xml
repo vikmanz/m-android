@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <string name="app_name">SHppPro</string>
     <string name="settingsButton">Settings</string>
     <string name="personNameSample">Person Name</string>
@@ -21,8 +21,6 @@
     <string name="already_have_an_account">Already have an account?</string>
     <string name="sign_in">Sign in</string>
     <string name="default_person_name">Name Surname</string>
-    <string name="my_main_email" translatable="false">viktor.manza@gmail.com</string>
-    <string name="my_main_password" translatable="false">passwordE3@</string>
     <string name="helloText_signin">Hello!</string>
     <string name="helloSubText_signin">Enter your email and password below</string>
     <string name="registerButton_signin">LOGIN</string>
@@ -33,21 +31,13 @@
     <string name="btnTest1text">FILL</string>
     <string name="btnTest2text">CLEAR</string>
     <string name="btnTest3text">LANG</string>
-    <string name="regex_fromBigAtoBigZ_char" translatable="false">[A-Z]</string>
-    <string name="regex_pass_OneUpperChar" translatable="false">.*[A-Z].*</string>
-    <string name="regex_pass_OneLowerChar" translatable="false">.*[a-z].*</string>
-    <string name="regex_pass_OneSpecialChar" translatable="false">.*[@#$%^&amp;+=].*</string>
     <string name="passCheckWarning_min8chars">Minimum %1$d Characters Password</string>
     <string name="passCheckWarning_OneUpperChar">Must Contain 1 Upper-case Character</string>
     <string name="passCheckWarning_OneLowerChar">Must Contain 1 Lower-case Character</string>
-    <string name="passCheckWarning_OneSpecialChar">Must Contain 1 Special Character (@#\$%^&amp;+=)</string>
-    <string name="language_en" translatable="false" tools:ignore="MissingTranslation">en</string>
-    <string name="language_ua" translatable="false" tools:ignore="MissingTranslation">uk</string>
+    <string name="passCheckWarning_OneSpecialChar">Must Contain 1 Special Character (%1$s)</string>
     <string name="warningMessage_InvalidEmailAdress">Invalid email address</string>
     <string name="warningMessage_InvalidRegisterForm">Invalid registration form!</string>
     <string name="warningMessage_OkButtonOnAllert">Okay</string>
     <string name="warning_emailTitle">Email:</string>
     <string name="warning_passwordTitle">Password:</string>
-    <string name="MyContacts_contacts">Contacts</string>
-    <string name="MyContacts_AddContacts">Add contacts</string>
 </resources>
