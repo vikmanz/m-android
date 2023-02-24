@@ -3,6 +3,7 @@ package com.vikmanz.shpppro
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.util.Patterns
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -30,11 +31,11 @@ class AuthActivity : AppCompatActivity() {
         private const val REGEX_ONE_UPPER_CHAR = ".*[A-Z].*"
         private const val REGEX_ONE_LOWER_CHAR = ".*[a-z].*"
         private const val SPECIAL_CHARS = "@#$%^&amp;+="
-        private const val REGEX_ONE_SPECIAL_CHAR = ".*[$SPECIAL_CHARS].*"
+        private const val REGEX_ONE_SPECIAL_CHAR = ".*[@#\$%^&amp;+=].*"        //TODO ERROR!
         private const val LANG_EN = "en"
         private const val LANG_UA = "uk"
         private const val TEST_LOGIN = "viktor.manza@gmail.com"
-        private const val TEST_PASSWORD = "passwordE3@"
+        private const val TEST_PASSWORD = "passwordE3"
 
         // Save/Load State Keys. Don't need to change.
         private const val EMAIL_FIELD_STATE_KEY = "EMAIL_KEY"
@@ -195,6 +196,8 @@ class AuthActivity : AppCompatActivity() {
         if (!passwordText.matches(REGEX_ONE_LOWER_CHAR.toRegex())) {   // Minimum 1 LowerCase char.
             return getString(R.string.passCheckWarning_OneLowerChar)
         }
+        Log.d("mylog", REGEX_ONE_SPECIAL_CHAR)
+        Log.d("mylog", "${passwordText.matches(REGEX_ONE_SPECIAL_CHAR.toRegex())}")
         if (!passwordText.matches(REGEX_ONE_SPECIAL_CHAR.toRegex())) { // Minimum 1 special char.
             return getString(R.string.passCheckWarning_OneSpecialChar, SPECIAL_CHARS)
         }
