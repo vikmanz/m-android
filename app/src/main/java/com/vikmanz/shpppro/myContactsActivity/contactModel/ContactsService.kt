@@ -37,6 +37,21 @@ class ContactsService {
         return newContact
     }
 
+    fun getNextContactPhotoUrl(): String {
+        imgCounter++
+        return getCurrentContactPhotoUrl()
+    }
+
+    fun getPreviousContactPhotoUrl(): String {
+        imgCounter--
+        return getCurrentContactPhotoUrl()
+    }
+
+    fun getCurrentContactPhotoUrl(): String {
+        return IMAGES[imgCounter % IMAGES.size]
+    }
+
+
     fun getContactsFromPhonebook(): List<Contact> {
 //        val phonebook = ContactsPhonebookTaker()
 //        val newContacts = (0 until phonebook.names.size).map {

@@ -3,6 +3,7 @@ package com.vikmanz.shpppro.myContactsActivity
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
@@ -19,16 +20,19 @@ import com.vikmanz.shpppro.databinding.ActivityMyContactsBinding
 import com.vikmanz.shpppro.myContactsActivity.contactModel.*
 import kotlinx.coroutines.*
 
+
 /**
  * Class represents MyContacts screen activity.
  */
-class MyContactsActivity : AppCompatActivity() {
+class MyContactsActivity : AppCompatActivity(), AddContactDialogFragment.ConfirmationListener {
 
     // Binding, Data Store and Coroutine Scope variables.
     private lateinit var binding: ActivityMyContactsBinding
 
     // ініціалізуємо viewModel з використанням viewModels()
     private val viewModel: MyContactsViewModel by viewModels()
+
+    private val contactsService = ContactsService()
 
     // Recycler View variables.
     private val adapter: ContactsAdapter by lazy {
@@ -105,7 +109,18 @@ class MyContactsActivity : AppCompatActivity() {
 
 
     private fun addNewContact() {
+
+        AddContactDialogFragment(contactsService)
+            .show(supportFragmentManager, "ConfirmationDialogFragmentTag")
+
         //return
-        viewModel.addContact(contact = ContactsService().getOneContact())
+
     }
+
+    override fun confirmButtonClicked(contact: Contact) {
+        viewModel.addContact(contact)
+    }
+
+
+
 }
