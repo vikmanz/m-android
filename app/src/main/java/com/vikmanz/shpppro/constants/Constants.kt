@@ -1,7 +1,7 @@
 package com.vikmanz.shpppro.constants
 
 /**
- * Constants of application. Contains settings and keys for intent, save/load state and Data Store.
+ * Constants of application. Contains settings and keys for intent.
  */
 object Constants {
 
@@ -13,19 +13,4 @@ object Constants {
     // Intent Keys. Don't need to change.
     const val INTENT_EMAIL_ID = "email_identifier"
     const val INTENT_LANG_ID = "language_identifier"
-
-    // Save/Load State Keys. Don't need to change.
-    const val EMAIL_FIELD_STATE_KEY = "EMAIL_KEY"
-    const val PASSWORD_FIELD_STATE_KEY = "PASSWORD_KEY"
-    const val PASSWORD_VIEW_STATE_KEY = "PASSWORD_VIEW_KEY"
-    const val CHECKBOX_STATE_STATE_KEY = "CHECKBOX_KEY"
-    const val LANGUAGE_STATE_KEY = "LAND_ID_KEY"
-    const val HELP_BUTTONS_STATE_KEY = "HELP_BUTTONS_KEY"
-    const val LANGUAGE_STATE_KEY_TWO = "LAND_ID_KEY_TWO"
-
-    // Data Store Keys. Don't need to change.
-    const val DS_USER_NAME = "user_name"
-    const val DS_USER_PASSWORD = "user_password"
-    const val DS_USER_AUTOLOGIN_STATUS = "user_login_status"
-    const val DS_USER_LANGUAGE_STATUS = "user_language_status"
 }
