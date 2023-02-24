@@ -175,7 +175,7 @@
         android:layout_height="@dimen/size_button_height_XL"
         android:background="@drawable/btn_std_orange_outlined_bg_all_in_one_file"
         android:text="@string/registerButton"
-        android:textAppearance="@style/basicText"
+        android:textAppearance="@style/basicText_buttonsText"
         tools:ignore="MissingConstraints" />
 
 
@@ -247,7 +247,7 @@
         android:layout_height="@dimen/size_button_height_M"
         android:background="@drawable/btn_std_orange_outlined_bg_all_in_one_file"
         android:text="@string/btnTest1text"
-        android:textAppearance="@style/basicText"
+        android:textAppearance="@style/basicText_buttonsText"
         tools:ignore="MissingConstraints,TouchTargetSizeCheck" />
 
     <androidx.appcompat.widget.AppCompatButton
@@ -256,7 +256,7 @@
         android:layout_height="@dimen/size_button_height_M"
         android:background="@drawable/btn_std_orange_outlined_bg_all_in_one_file"
         android:text="@string/btnTest2text"
-        android:textAppearance="@style/basicText"
+        android:textAppearance="@style/basicText_buttonsText"
         tools:ignore="MissingConstraints,TouchTargetSizeCheck" />
 
     <androidx.appcompat.widget.AppCompatButton
@@ -265,7 +265,7 @@
         android:layout_height="@dimen/size_button_height_M"
         android:background="@drawable/btn_std_orange_outlined_bg_all_in_one_file"
         android:text="@string/btnTest3text"
-        android:textAppearance="@style/basicText"
+        android:textAppearance="@style/basicText_buttonsText"
         tools:ignore="MissingConstraints,TouchTargetSizeCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

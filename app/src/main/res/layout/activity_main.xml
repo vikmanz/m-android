@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--TODO виконано не той екран з figma-->
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,14 +6,24 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-<!--    TODO Розділення частин екрану краще виконати через View. ConstraintLayout вкладувати у ConstraintLayout - некраща ідея-->
-<!-- Up half of screen. -->
-<!--    TODO id в цілому нормальне, але можна його уточнити, скориставшись цим https://discord.com/channels/534496884849639455/862735944679424020/864019560587591700-->
+    <!--    TODO Розділення частин екрану краще виконати через View. ConstraintLayout вкладувати у ConstraintLayout - некраща ідея-->
+    <!--    TODO id в цілому нормальне, але можна його уточнити, скориставшись цим https://discord.com/channels/534496884849639455/862735944679424020/864019560587591700-->
+
+    <!-- Top half of screen. -->
+    <View
+        android:id="@+id/view_activityMain_topHalfBg"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="?attr/colorSecondary"
+        app:layout_constraintBottom_toTopOf="@id/view_activityMain_bottomHalfBg"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_weight="0.5" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayoutTopBG"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="?attr/colorSecondary"
+        android:background="@android:color/transparent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -82,7 +91,7 @@
         </androidx.cardview.widget.CardView>
 
         <!-- <!- Person Info flow. -->
-<!--        TODO У task-1 треба одразу данні вписати-->
+        <!--        TODO У task-1 треба одразу данні вписати-->
         <androidx.constraintlayout.helper.widget.Flow
             android:id="@+id/flowProfileText"
             android:layout_width="wrap_content"
@@ -125,12 +134,21 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    <!-- Down half of screen. -->
+    <!-- Bottom half of screen. -->
+    <View
+        android:id="@+id/view_activityMain_bottomHalfBg"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="?attr/colorTertiary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/view_activityMain_topHalfBg"
+        app:layout_constraintVertical_weight="0.5" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayoutBottomBG"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="?attr/colorTertiary"
+        android:background="@android:color/transparent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.5"
@@ -185,23 +203,8 @@
             tools:layout_editor_absoluteX="268dp"
             tools:layout_editor_absoluteY="89dp" />
 
-        <!-- Fill Profile Text. -->
-<!--        TODO не на цьому екрані має бути (аж в 5 рівні з'являється)-->
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tvPropositionToFillProfile"
-            style="@style/basicText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/offset_M"
-            android:text="@string/propositionToFillProfile"
-            android:textColor="?attr/colorSecondary"
-            android:textSize="@dimen/size_text_font_XS"
-            app:layout_constraintBottom_toTopOf="@id/btnEditProfile"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
         <!-- Edit Profile button. -->
-<!--        TODO мені здається, що має бути усюди шрифт semi_bold, а не regular.-->
+        <!--        TODO мені здається, що має бути усюди шрифт semi_bold, а не regular.-->
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnEditProfile"
             android:layout_width="match_parent"

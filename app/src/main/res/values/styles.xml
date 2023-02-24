@@ -15,7 +15,7 @@
     </style>
 
     <style name="basicText_buttonsText" parent="basicText">
-        <!-- Nothing. Need to overwrite buttons font size on UA language. -->
+        <item name="android:fontFamily">@font/open_sans_semi_bold</item>     <!-- FONT -->
     </style>
 
 

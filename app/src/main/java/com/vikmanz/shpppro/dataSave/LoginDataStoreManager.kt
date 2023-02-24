@@ -14,7 +14,10 @@ import com.vikmanz.shpppro.constants.Constants.DS_USER_PASSWORD
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "auth") //TODO літерал у константи винести
+// Intent Keys. Don't need to change.
+const val DATA_STORE_NAME = "auth"
+
+private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = DATA_STORE_NAME)
 
 /**
  * Data Store manager. Save and load user data from memory.
