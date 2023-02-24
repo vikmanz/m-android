@@ -54,6 +54,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/flowHelloText" />
 
+<!--    TODO є помаранчевий колір у курсора та у label, треба виправити до вигляду дизайну -->
+<!--    TODO напевно, треба розмір label менше зробити, бо якийсь великий-->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tiLayoutEmail"
         style="@style/textInputLayout_LoginPassword"
@@ -110,6 +112,9 @@
         app:flow_horizontalStyle="spread_inside"
         tools:ignore="MissingConstraints" />
 
+<!--    TODO Треба двічі натискати на чекбокс -->
+<!--    TODO стан "checked" має бути встановлено одразу-->
+<!--    TODO вигляд checkbox не по дизайну-->
     <CheckBox
         android:id="@+id/checkBox"
         style="@style/basicText"
@@ -133,7 +138,7 @@
         />
 
 
-
+<!--    TODO кнопки мають бути якось зафіксовані, бо при різних розмірах екрану кнопки у центрі залишаються-->
     <!-- Google or Register flow. -->
     <androidx.constraintlayout.helper.widget.Flow
         android:id="@+id/flowRegisterButtons"

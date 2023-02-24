@@ -14,10 +14,10 @@ import java.util.*
 /**
  * Class represents user main profile screen activity.
  */
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::inflate) {
 
     // Binding, Data Store and Coroutine Scope variables.
-    private lateinit var binding: ActivityMainBinding
+//    private lateinit var binding: ActivityMainBinding
     private lateinit var loginData: LoginDataStoreManager
     private val coroutineScope: CoroutineScope = CoroutineScope(Job())
 
@@ -38,20 +38,27 @@ class MainActivity : AppCompatActivity() {
         setLocale()
 
         // Others init operations.
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+//        binding = ActivityMainBinding.inflate(layoutInflater)
+//        setContentView(binding.root)
 
         // Create Data Store.
         loginData = LoginDataStoreManager(this)
 
         // Parse email, set Name Surname text and img of avatar.
+//        TODO тут виконуються дії заповнення данних. Рекомендую їх в окремий метод винести
         val emailToParse = intent.getStringExtra(INTENT_EMAIL_ID).toString()
         binding.tvPersonName.text = if (emailToParse.isEmpty()) "" else parseEmail(emailToParse)
         binding.ivPerson.setImageResource(R.drawable.sample_avatar)
 
-        // Set onClick listener to Logout button.
-        binding.tvLogout.setOnClickListener { logout() }
 
+
+    }
+
+    override fun setListeners() {
+        super.setListeners()
+
+// Set onClick listener to Logout button.
+        binding.tvLogout.setOnClickListener { logout() }
     }
 
     /**
@@ -62,6 +69,7 @@ class MainActivity : AppCompatActivity() {
      */
     private fun parseEmail(fullEmail: String): String {
 
+        // TODO літерали винести у константи
         val personName: String
         val firstPartEmail = fullEmail.substring(0, fullEmail.indexOf('@'))
 

@@ -3,4 +3,5 @@
 
     <!-- Password max length. -->
     <integer name="password_length">16</integer>
+
 </resources>

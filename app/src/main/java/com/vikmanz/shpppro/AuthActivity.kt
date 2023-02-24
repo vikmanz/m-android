@@ -172,13 +172,14 @@ class AuthActivity : AppCompatActivity() {
         val passwordText = binding.tiTextPassword.text.toString()
 
         // Get Regex
+        // TODO у ресурси треба виносити, що змінюється залежно від мови. Патерн регулярного виразу краще у константах писати
         val regexOneUpperCaseChar = getString(R.string.regex_pass_OneUpperChar).toRegex()
         val regexOneLowerCaseChar = getString(R.string.regex_pass_OneLowerChar).toRegex()
         val regexOneSpecialChar = getString(R.string.regex_pass_OneSpecialChar).toRegex()
 
         // Do all checks.
-        if (passwordText.length < MIN_PASSWORD_LENGTH) {            // Minimum 8 chars.
-            return getString(R.string.passCheckWarning_min8chars)
+        if (passwordText.length < MIN_PASSWORD_LENGTH) {            // Minimum 8 chars. //TODO пастка джокера. 14 чи 8?
+            return getString(R.string.passCheckWarning_min8chars, MIN_PASSWORD_LENGTH)
         }
         if (!passwordText.matches(regexOneUpperCaseChar)) {         // Minimum 1 UpperCase char.
             return getString(R.string.passCheckWarning_OneUpperChar)

@@ -14,7 +14,7 @@ import com.vikmanz.shpppro.constants.Constants.DS_USER_PASSWORD
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "auth")
+private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "auth") //TODO літерал у константи винести
 
 /**
  * Data Store manager. Save and load user data from memory.
