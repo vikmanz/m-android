@@ -12,12 +12,7 @@ class ContactsService {
 
     init {
         contacts = (0 until START_NUMBER_OF_CONTACTS).map {
-            Contact(
-                contactId = it.toLong(),
-                contactPhotoUrl = IMAGES[it % IMAGES.size],
-                contactName = faker.name().fullName(),
-                contactCareer = faker.company().name()
-            )
+            getOneContact()
         }.toMutableList()
     }
 
@@ -25,25 +20,27 @@ class ContactsService {
         return contacts
     }
 
-    fun getOneContact(): Contact {
+    private fun getOneContact(): Contact {
         val newContact = Contact(
             contactId = imgCounter.toLong(),
             contactPhotoUrl = IMAGES[imgCounter % IMAGES.size],
             contactName = faker.name().fullName(),
             contactCareer = faker.company().name()
         )
+        Log.d("myLog", "New contact created! id:${newContact.contactId}, name:${newContact.contactName}, contact img counter: ${imgCounter}.")
         imgCounter++
-        Log.d("mylog", "service return one contact")
         return newContact
     }
 
     fun getNextContactPhotoUrl(): String {
         imgCounter++
+        Log.d("myLog", "New contact img counter: ${imgCounter}.")
         return getCurrentContactPhotoUrl()
     }
 
     fun getPreviousContactPhotoUrl(): String {
         imgCounter--
+        Log.d("myLog", "New contact img counter: ${imgCounter}.")
         return getCurrentContactPhotoUrl()
     }
 
@@ -51,6 +48,14 @@ class ContactsService {
         return IMAGES[imgCounter % IMAGES.size]
     }
 
+
+    fun getCurrentPhotoCounter(): Int {
+        return imgCounter
+    }
+
+    fun incrementPhotoCounter() {
+        imgCounter++
+    }
 
     fun getContactsFromPhonebook(): List<Contact> {
 //        val phonebook = ContactsPhonebookTaker()
@@ -64,12 +69,7 @@ class ContactsService {
 //        }.toMutableList()
 
         val newContacts = (0 until START_NUMBER_OF_CONTACTS).map {
-            Contact(
-                contactId = it.toLong(),
-                contactPhotoUrl = IMAGES[it % IMAGES.size],
-                contactName = faker.name().fullName(),
-                contactCareer = faker.company().name()
-            )
+            getOneContact()
         }.toMutableList()
         Log.d("mylog", "service return new list with size ${newContacts.size}")
         return newContacts
@@ -90,7 +90,7 @@ class ContactsService {
             "https://images.unsplash.com/photo-1546456073-92b9f0a8d413?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=600&ixid=MnwxfDB8MXxyYW5kb218fHx8fHx8fHwxNjI0MDE0ODY1&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=800"
         )
 
-        private var imgCounter = START_NUMBER_OF_CONTACTS
+        private var imgCounter = 0
     }
 
 }

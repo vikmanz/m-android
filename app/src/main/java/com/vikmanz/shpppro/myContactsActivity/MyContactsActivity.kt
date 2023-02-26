@@ -3,6 +3,7 @@ package com.vikmanz.shpppro.myContactsActivity
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -117,7 +118,8 @@ class MyContactsActivity : AppCompatActivity(), AddContactDialogFragment.Confirm
 
     }
 
-    override fun confirmButtonClicked(contact: Contact) {
+    override fun confirmButtonClicked(contact: Contact, imgCounter: Int) {
+        Log.d("myLog", "New contact created! id:${contact.contactId}, name:${contact.contactName}, contact img counter: $imgCounter.")
         viewModel.addContact(contact)
     }
 

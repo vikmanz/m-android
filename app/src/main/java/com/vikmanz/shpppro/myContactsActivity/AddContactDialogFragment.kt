@@ -16,7 +16,7 @@ import com.vikmanz.shpppro.myContactsActivity.contactModel.ContactsService
 class AddContactDialogFragment(contactsService: ContactsService) : DialogFragment() {
 
     interface ConfirmationListener {
-        fun confirmButtonClicked(contact: Contact)
+        fun confirmButtonClicked(contact: Contact, imgCounter: Int)
         //fun cancelButtonClicked()
     }
 
@@ -64,13 +64,15 @@ class AddContactDialogFragment(contactsService: ContactsService) : DialogFragmen
                 // Add action buttons
                 .setPositiveButton("Add contact",
                     DialogInterface.OnClickListener { _, _ ->
+                        _contactsService.incrementPhotoCounter()
                         listener.confirmButtonClicked(
                             Contact(
                                 contactId = Math.random().toLong(),
                                 contactPhotoUrl = _contactsService.getCurrentContactPhotoUrl(),
                                 contactName = _binding.ti1.getEditText()?.getText().toString(),
                                 contactCareer = _binding.ti2.getEditText()?.getText().toString(),
-                        )
+                        ),
+                            _contactsService.getCurrentPhotoCounter()
                         )
                     })
                 .setNegativeButton("Cancel",
