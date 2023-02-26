@@ -15,9 +15,9 @@ class MyContactsViewModel : ViewModel() {
     // створюємо StateFlow, який можна споживати з зовнішнього коду
     var contactList: StateFlow<List<Contact>> = _contactList
 
-    // додаємо нове ім'я до MutableStateFlow
     fun addContact(contact: Contact) {
         addContact(contact, _contactList.value.size)
+        Log.d("myLog", "New contact created! id:${contact.contactId}, name:${contact.contactName}, contact img counter: ${contact.contactPhotoIndex}.")
     }
 
     fun addContact(contact: Contact, index: Int) {

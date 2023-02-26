@@ -29,19 +29,32 @@
         <item name="boxCollapsedPaddingTop">@dimen/email_password_boxCollapsedPaddingTop</item>
         <item name="expandedHintEnabled">false</item>
         <item name="android:textColorHint">?attr/colorOnTertiary</item>
+        <item name="hintTextColor">?attr/colorOnTertiary</item>
+    </style>
+
+    <style name="textInputLayout_AddNewContact" parent="textInputLayout_LoginPassword">
+        <item name="android:textColorHint">?attr/colorSecondary</item>
+        <item name="hintTextColor">?attr/colorSecondary</item>
     </style>
 
     <style name="textInputLayout_hintSize">
         <item name="android:textSize">@dimen/size_text_font_S</item>
     </style>
 
-    <style name="textInputLayout_basicTextInput" parent="Widget.AppCompat.EditText">
+    <style name="textInput_basicTextInput" parent="Widget.AppCompat.EditText">
         <item name="android:fontFamily">@font/open_sans_regular</item>      <!-- FONT -->
         <item name="android:textColor">?attr/colorTertiary</item>
-        <item name="android:background">@drawable/edittext_bottom_line</item>
+        <item name="android:background">@drawable/edittext_bottom_line_white</item>
         <item name="android:paddingStart">0dp</item>
         <item name="android:paddingEnd">0dp</item>
+        <item name="android:textCursorDrawable">@null</item>
     </style>
+
+    <style name="textInput_AddNewContact" parent="textInput_basicTextInput">
+        <item name="android:textColor">?attr/colorSecondary</item>
+        <item name="android:background">@drawable/edittext_bottom_line_secondary_color</item>
+    </style>
+
 
 
 </resources>

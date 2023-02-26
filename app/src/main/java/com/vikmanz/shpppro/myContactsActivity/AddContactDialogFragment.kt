@@ -16,7 +16,7 @@ import com.vikmanz.shpppro.myContactsActivity.contactModel.ContactsService
 class AddContactDialogFragment(contactsService: ContactsService) : DialogFragment() {
 
     interface ConfirmationListener {
-        fun confirmButtonClicked(contact: Contact, imgCounter: Int)
+        fun confirmButtonClicked(contact: Contact)
         //fun cancelButtonClicked()
     }
 
@@ -46,39 +46,32 @@ class AddContactDialogFragment(contactsService: ContactsService) : DialogFragmen
             val builder = AlertDialog.Builder(it)
 
             with(_binding) {
-                imageView.setContactPhoto(_contactsService.getCurrentContactPhotoUrl())
-                ibNextPhoto.setOnClickListener {
-                   imageView.setContactPhoto(_contactsService.getNextContactPhotoUrl())
+                imageViewAvatarAddContact.setContactPhoto(_contactsService.getCurrentContactPhotoUrl())
+                buttonAddFromGaleryAddContact.setOnClickListener {
+                    imageViewAvatarAddContact.setContactPhoto(_contactsService.getNextContactPhotoUrl())
                 }
-                ibPreviousPhoto.setOnClickListener {
-                    imageView.setContactPhoto(_contactsService.getPreviousContactPhotoUrl())
+                buttonSaveAddNewContactActivityMyContacts.setOnClickListener {
+                    dialog?.dismiss()
+                    listener.confirmButtonClicked(
+                        _contactsService.getOneContact(
+                            id = Math.random().toLong(),
+                            photoUrl = _contactsService.getCurrentContactPhotoUrl(),
+                            photoIndex = _contactsService.getCurrentPhotoCounter(),
+                            name = textInputUserNameAddContact.getEditText()?.getText().toString(),
+                            career = textInputCareerAddContact.getEditText()?.getText().toString(),
+                            email = textInputCareerAddContact.getEditText()?.getText().toString(),
+                            phone = textInputCareerAddContact.getEditText()?.getText().toString(),
+                            address = textInputCareerAddContact.getEditText()?.getText().toString(),
+                            birthday = textInputCareerAddContact.getEditText()?.getText().toString()
+                        )
+                    )
+                    _contactsService.incrementPhotoCounter()
                 }
+                buttonBackAddContact.setOnClickListener { dialog?.cancel() }
             }
 
             // Pass null as the parent view because its going in the dialog layout
-            builder
-                .setView(_binding.root)
-
-                .setTitle("Write new contact information")
-
-                // Add action buttons
-                .setPositiveButton("Add contact",
-                    DialogInterface.OnClickListener { _, _ ->
-                        _contactsService.incrementPhotoCounter()
-                        listener.confirmButtonClicked(
-                            Contact(
-                                contactId = Math.random().toLong(),
-                                contactPhotoUrl = _contactsService.getCurrentContactPhotoUrl(),
-                                contactName = _binding.ti1.getEditText()?.getText().toString(),
-                                contactCareer = _binding.ti2.getEditText()?.getText().toString(),
-                        ),
-                            _contactsService.getCurrentPhotoCounter()
-                        )
-                    })
-                .setNegativeButton("Cancel",
-                    DialogInterface.OnClickListener { _, _ -> })
-
-            builder.create()
+            builder.setView(_binding.root).create()
         } ?: throw IllegalStateException("Activity cannot be null")
     }
 

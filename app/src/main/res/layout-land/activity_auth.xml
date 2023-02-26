@@ -67,7 +67,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/tiTextEmail"
-            style="@style/textInputLayout_basicTextInput"
+            style="@style/textInput_basicTextInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textEmailAddress" />
@@ -92,7 +92,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/tiTextPassword"
-            style="@style/textInputLayout_basicTextInput"
+            style="@style/textInput_basicTextInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword" />

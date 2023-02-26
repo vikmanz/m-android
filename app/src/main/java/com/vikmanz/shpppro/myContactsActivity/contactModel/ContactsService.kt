@@ -12,7 +12,7 @@ class ContactsService {
 
     init {
         contacts = (0 until START_NUMBER_OF_CONTACTS).map {
-            getOneContact()
+            generateRandomContact()
         }.toMutableList()
     }
 
@@ -20,14 +20,40 @@ class ContactsService {
         return contacts
     }
 
-    private fun getOneContact(): Contact {
-        val newContact = Contact(
-            contactId = imgCounter.toLong(),
-            contactPhotoUrl = IMAGES[imgCounter % IMAGES.size],
-            contactName = faker.name().fullName(),
-            contactCareer = faker.company().name()
+    private fun generateRandomContact(): Contact = getOneContact(
+            id = imgCounter.toLong(),
+            photoUrl = IMAGES[imgCounter % IMAGES.size],
+            photoIndex = imgCounter,
+            name = faker.name().fullName(),
+            career = faker.company().name(),
+            email = faker.internet().emailAddress(),
+            phone = faker.phoneNumber().phoneNumber(),
+            address = faker.address().fullAddress(),
+            birthday = faker.date().birthday().toString()
         )
-        Log.d("myLog", "New contact created! id:${newContact.contactId}, name:${newContact.contactName}, contact img counter: ${imgCounter}.")
+
+    fun getOneContact(
+        id: Long,
+        photoUrl: String,
+        photoIndex: Int,
+        name: String,
+        career: String,
+        email: String,
+        phone: String,
+        address: String,
+        birthday: String
+    ): Contact {
+        val newContact = Contact(
+            contactId = id,
+            contactPhotoUrl = photoUrl,
+            contactPhotoIndex = photoIndex,
+            contactName = name,
+            contactCareer = career,
+            contactEmail = email,
+            contactPhone = phone,
+            contactAddress = address,
+            contactBirthday = birthday
+        )
         imgCounter++
         return newContact
     }
@@ -69,7 +95,7 @@ class ContactsService {
 //        }.toMutableList()
 
         val newContacts = (0 until START_NUMBER_OF_CONTACTS).map {
-            getOneContact()
+            generateRandomContact()
         }.toMutableList()
         Log.d("mylog", "service return new list with size ${newContacts.size}")
         return newContacts

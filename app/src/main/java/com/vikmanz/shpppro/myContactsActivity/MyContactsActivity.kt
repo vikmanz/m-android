@@ -118,8 +118,7 @@ class MyContactsActivity : AppCompatActivity(), AddContactDialogFragment.Confirm
 
     }
 
-    override fun confirmButtonClicked(contact: Contact, imgCounter: Int) {
-        Log.d("myLog", "New contact created! id:${contact.contactId}, name:${contact.contactName}, contact img counter: $imgCounter.")
+    override fun confirmButtonClicked(contact: Contact) {
         viewModel.addContact(contact)
     }
 
