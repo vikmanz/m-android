@@ -28,10 +28,6 @@ class MyContactsViewModel : ViewModel() {
         _contactList.value = _contactList.value.toMutableList().apply { remove(contact) }
     }
 
-    fun getContactPosition(contact: Contact) : Int{
-        return _contactList.value.indexOf(contact)
-    }
-
     fun getContact(index: Int) : Contact{
         return _contactList.value[index]
     }
