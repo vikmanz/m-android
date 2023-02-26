@@ -40,4 +40,8 @@
     <string name="warningMessage_OkButtonOnAllert">Окей</string>
     <string name="warning_emailTitle">Пошта:</string>
     <string name="warning_passwordTitle">Пароль:</string>
+    <string name="MyContacts_contacts">Контакти</string>
+    <string name="MyContacts_AddContacts">Додати контакт</string>
+    <string name="contacts_change_to_phonebook">Змінити на книгу телефону</string>
+    <string name="add_contact_from_add_contact_activity_my_contacts">Додати контакт</string>
 </resources>
