@@ -11,7 +11,7 @@ object Constants {
     const val MIN_PASSWORD_LENGTH = 8               // Minimum number of chars in password.
 
     // My Contacts
-    const val START_NUMBER_OF_CONTACTS = 8            // Minimum number of chars in password.
+    const val START_NUMBER_OF_CONTACTS = 5           // Minimum number of chars in password.
     const val SNACK_BAR_VIEW_TIME = 5000
     const val MARGINS_OF_ELEMENTS = 20
 

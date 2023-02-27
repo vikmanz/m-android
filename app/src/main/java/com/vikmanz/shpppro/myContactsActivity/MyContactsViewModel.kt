@@ -36,9 +36,9 @@ class MyContactsViewModel : ViewModel() {
         return _contactList.value[index]
     }
 
-    fun getContactsFromPhonebook() {
+    fun getContactsFromPhonebook(contactsInfo: ArrayList<List<String>>) {
         Log.d("mylog", "view model call new list")
-        _contactList.value = ContactsService().getContactsFromPhonebook()
+        _contactList.value = ContactsService().createContactsFromPhonebook(contactsInfo)
         Log.d("mylog", "view model set new list and size is ${_contactList.value.size}")
         Log.d("mylog", "and contactList size is ${contactList.value.size}")
     }

@@ -3,8 +3,6 @@ package com.vikmanz.shpppro.myContactsActivity
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
@@ -55,7 +53,8 @@ class MyContactsActivity : AppCompatActivity(), AddContactDialogFragment.Confirm
             btnBack.setOnClickListener { startAuthActivity() }
             tvAddContacts.setOnClickListener { addNewContact() }
             tvAddContactsFromPhonebook.setOnClickListener {
-                viewModel.getContactsFromPhonebook()
+                val contactsInfo = ContactsFromPhonebookInformationTaker(this@MyContactsActivity, contentResolver).getContactsInfo()
+                viewModel.getContactsFromPhonebook(contactsInfo)
             }
         }
         initRecyclerView()

@@ -83,19 +83,19 @@ class ContactsService {
         imgCounter++
     }
 
-    fun getContactsFromPhonebook(): List<Contact> {
-//        val phonebook = ContactsPhonebookTaker()
-//        val newContacts = (0 until phonebook.names.size).map {
-//            Contact(
-//                contactId = it.toLong(),
-//                contactPhotoUrl = IMAGES[it % IMAGES.size],
-//                contactName = phonebook.names[it],
-//                contactCareer =  phonebook.phones[it]
-//            )
-//        }.toMutableList()
-
-        val newContacts = (0 until START_NUMBER_OF_CONTACTS).map {
-            generateRandomContact()
+    fun createContactsFromPhonebook(listOfContactsInformation: ArrayList<List<String>>): List<Contact> {
+        val newContacts = (0 until listOfContactsInformation.size).map {
+            getOneContact(
+                id = imgCounter.toLong(),
+                photoUrl = IMAGES[imgCounter % IMAGES.size],
+                photoIndex = imgCounter,
+                name = listOfContactsInformation[it][0],
+                career = listOfContactsInformation[it][1],
+                email = faker.internet().emailAddress(),
+                phone = faker.phoneNumber().phoneNumber(),
+                address = faker.address().fullAddress(),
+                birthday = faker.date().birthday().toString()
+            )
         }.toMutableList()
         Log.d("mylog", "service return new list with size ${newContacts.size}")
         return newContacts
