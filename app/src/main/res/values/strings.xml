@@ -40,4 +40,6 @@
     <string name="warningMessage_OkButtonOnAllert">Okay</string>
     <string name="warning_emailTitle">Email:</string>
     <string name="warning_passwordTitle">Password:</string>
+    <string name="person_career_hardcoded">Motion designer</string>
+    <string name="person_homeadress_hardcoded">49101, Dnipro, Homeadress str. 7</string>
 </resources>

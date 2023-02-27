@@ -25,8 +25,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
         private const val LANGUAGE_STATE_KEY_TWO = "LAND_ID_KEY_TWO"
     }
 
-    // Binding, Data Store and Coroutine Scope variables.
-    // private lateinit var binding: ActivityMainBinding
+    // Data Store and Coroutine Scope variables.
     private lateinit var loginData: LoginDataStoreManager
     private val coroutineScope: CoroutineScope = CoroutineScope(Job())
 
@@ -46,28 +45,30 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
         isUkrainian = intent.getBooleanExtra(INTENT_LANG_ID, true)
         setLocale()
 
-        // Others init operations.
-//        binding = ActivityMainBinding.inflate(layoutInflater)
-//        setContentView(binding.root)
-
         // Create Data Store.
         loginData = LoginDataStoreManager(this)
 
         // Parse email, set Name Surname text and img of avatar.
-//        TODO тут виконуються дії заповнення данних. Рекомендую їх в окремий метод винести
-        val emailToParse = intent.getStringExtra(INTENT_EMAIL_ID).toString()
-        binding.tvPersonName.text = if (emailToParse.isEmpty()) "" else parseEmail(emailToParse)
-        binding.ivPerson.setImageResource(R.drawable.sample_avatar)
-
-
-
+        setUserInformation()
+        setAvatar()
     }
+
 
     override fun setListeners() {
         super.setListeners()
-
-// Set onClick listener to Logout button.
         binding.tvLogout.setOnClickListener { logout() }
+    }
+
+    /**
+     * Get full email, parse it and set name/surname of user.
+     */
+    private fun setUserInformation() {
+        val emailToParse = intent.getStringExtra(INTENT_EMAIL_ID).toString()
+        with(binding){
+            tvPersonName.text = if (emailToParse.isEmpty()) "" else parseEmail(emailToParse)
+            tvPersonCareer.text = getString(R.string.person_career_hardcoded)
+            tvPersonHomeAddress.text = getString(R.string.person_homeadress_hardcoded)
+        }
     }
 
     /**
@@ -108,6 +109,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
 
         return personName
     }
+
+    /**
+     * Set avatar image.
+     */
+    private fun setAvatar() = binding.ivPerson.setImageResource(R.drawable.sample_avatar)
 
     /**
      * Logout with clear information about user from Data Store.

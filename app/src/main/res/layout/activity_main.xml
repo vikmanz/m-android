@@ -8,7 +8,6 @@
 
     <!--    TODO Розділення частин екрану краще виконати через View. ConstraintLayout вкладувати у ConstraintLayout - некраща ідея-->
     <!--    TODO id в цілому нормальне, але можна його уточнити, скориставшись цим https://discord.com/channels/534496884849639455/862735944679424020/864019560587591700-->
-
     <!-- Top half of screen. -->
     <View
         android:id="@+id/view_activityMain_topHalfBg"
@@ -91,7 +90,6 @@
         </androidx.cardview.widget.CardView>
 
         <!-- <!- Person Info flow. -->
-        <!--        TODO У task-1 треба одразу данні вписати-->
         <androidx.constraintlayout.helper.widget.Flow
             android:id="@+id/flowProfileText"
             android:layout_width="wrap_content"
@@ -204,7 +202,6 @@
             tools:layout_editor_absoluteY="89dp" />
 
         <!-- Edit Profile button. -->
-        <!--        TODO мені здається, що має бути усюди шрифт semi_bold, а не regular.-->
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnEditProfile"
             android:layout_width="match_parent"

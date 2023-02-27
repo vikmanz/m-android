@@ -9,18 +9,40 @@
     android:focusableInTouchMode="true"
     tools:context=".AuthActivity">
 
+    <!-- Guide of center of elements. -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_vertical_center_of_screen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.50" />
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_horizontal_start_of_screen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.05" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_horizontal_end_of_screen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.95" />
+
     <!-- Hello text. -->
     <androidx.constraintlayout.helper.widget.Flow
         android:id="@+id/flowHelloText"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/marginHorizontal"
-        android:layout_marginTop="@dimen/offset_auth_hello_text_from_top_portrait"
+        android:layout_marginBottom="@dimen/offset_L"
         android:orientation="vertical"
         app:constraint_referenced_ids="tvHelloText, tvHelloSubText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toTopOf="@+id/flowLayoutEmailPassword"
+        app:layout_constraintEnd_toStartOf="@+id/guide_horizontal_end_of_screen"
+        app:layout_constraintStart_toStartOf="@+id/guide_horizontal_start_of_screen"  />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvHelloText"
@@ -40,22 +62,17 @@
         android:textSize="@dimen/size_text_font_XXS"
         tools:ignore="MissingConstraints" />
 
-
     <!-- E-Mail, Password, Remember and Forgot. -->
     <androidx.constraintlayout.helper.widget.Flow
         android:id="@+id/flowLayoutEmailPassword"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/marginHorizontal"
-        android:layout_marginTop="@dimen/offset_L"
         android:orientation="vertical"
         app:constraint_referenced_ids="tiLayoutEmail, tiLayoutPassword, flowLayoutRememberOrForgot"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/flowHelloText" />
+        app:layout_constraintBottom_toTopOf="@+id/guide_vertical_center_of_screen"
+        app:layout_constraintEnd_toStartOf="@+id/guide_horizontal_end_of_screen"
+        app:layout_constraintStart_toStartOf="@+id/guide_horizontal_start_of_screen"  />
 
-<!--    TODO є помаранчевий колір у курсора та у label, треба виправити до вигляду дизайну -->
-<!--    TODO напевно, треба розмір label менше зробити, бо якийсь великий-->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tiLayoutEmail"
         style="@style/textInputLayout_LoginPassword"
@@ -72,7 +89,8 @@
             style="@style/textInputLayout_basicTextInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textEmailAddress" />
+            android:inputType="textEmailAddress"
+            tools:ignore="VisualLintTextFieldSize" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -97,7 +115,8 @@
             style="@style/textInputLayout_basicTextInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            tools:ignore="VisualLintTextFieldSize" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -106,25 +125,20 @@
         android:id="@+id/flowLayoutRememberOrForgot"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/offset_S"
         android:orientation="horizontal"
         app:constraint_referenced_ids="checkBox, forgotPassword"
         app:flow_horizontalStyle="spread_inside"
         tools:ignore="MissingConstraints" />
 
-<!--    TODO Треба двічі натискати на чекбокс -->
-<!--    TODO стан "checked" має бути встановлено одразу-->
-<!--    TODO вигляд checkbox не по дизайну-->
-    <CheckBox
+    <androidx.appcompat.widget.AppCompatCheckBox
         android:id="@+id/checkBox"
-        style="@style/basicText"
+        style="@style/checkbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:buttonTint="?attr/colorTertiary"
-        android:focusableInTouchMode="true"
+        android:checked="true"
         android:text="@string/rememberMeCheckbox"
         android:textColor="?attr/colorOnTertiary"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints,RtlSymmetry" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/forgotPassword"
@@ -134,31 +148,27 @@
         android:text="@string/forgot_your_password"
         android:visibility="invisible"
         tools:ignore="MissingConstraints"
-        tools:visibility="visible"
-        />
+        tools:visibility="visible" />
 
-
-<!--    TODO кнопки мають бути якось зафіксовані, бо при різних розмірах екрану кнопки у центрі залишаються-->
     <!-- Google or Register flow. -->
     <androidx.constraintlayout.helper.widget.Flow
         android:id="@+id/flowRegisterButtons"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginHorizontal="@dimen/marginHorizontal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/offset_XL"
         android:orientation="vertical"
         app:constraint_referenced_ids="bRegisterByGoogle, googleOrRegister, bRegisterByEmailPassword"
         app:flow_verticalGap="@dimen/offset_S"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/flowLayoutEmailPassword" />
+        app:layout_constraintEnd_toStartOf="@+id/guide_horizontal_end_of_screen"
+        app:layout_constraintStart_toStartOf="@+id/guide_horizontal_start_of_screen"
+        app:layout_constraintTop_toBottomOf="@+id/guide_vertical_center_of_screen" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/bRegisterByGoogle"
         android:layout_width="0dp"
         android:layout_height="@dimen/size_button_height_M"
         android:background="@drawable/btn_google"
-        tools:ignore="MissingConstraints,TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+        tools:ignore="MissingConstraints,TouchTargetSizeCheck,SpeakableTextPresentCheck,VisualLintButtonSize" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/googleOrRegister"
@@ -176,8 +186,7 @@
         android:background="@drawable/btn_std_orange_outlined_bg_all_in_one_file"
         android:text="@string/registerButton"
         android:textAppearance="@style/basicText_buttonsText"
-        tools:ignore="MissingConstraints" />
-
+        tools:ignore="MissingConstraints,VisualLintButtonSize" />
 
     <!-- Terms warning. -->
     <androidx.appcompat.widget.AppCompatTextView
@@ -189,8 +198,8 @@
         android:text="@string/termsAgreeWarning"
         android:textAlignment="center"
         android:textSize="@dimen/size_text_font_XXS"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guide_horizontal_end_of_screen"
+        app:layout_constraintStart_toStartOf="@+id/guide_horizontal_start_of_screen"
         app:layout_constraintTop_toBottomOf="@+id/bRegisterByEmailPassword" />
 
 
@@ -203,8 +212,8 @@
         android:orientation="horizontal"
         app:constraint_referenced_ids="alreadyHaveAccMessage, alreadyHaveAccLink"
         app:flow_horizontalGap="12dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guide_horizontal_end_of_screen"
+        app:layout_constraintStart_toStartOf="@+id/guide_horizontal_start_of_screen"
         app:layout_constraintTop_toBottomOf="@+id/warningAboutTerms" />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -228,16 +237,15 @@
     <!-- Helper buttons. It will be removed from release version. -->
     <androidx.constraintlayout.helper.widget.Flow
         android:id="@+id/flowTestButtons"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/marginHorizontal"
         android:layout_marginTop="@dimen/offset_M"
         android:orientation="horizontal"
         android:visibility="gone"
         app:constraint_referenced_ids="buttonFillLoginPassword, buttonClearUserPassword, buttonChangeLanguage"
         app:flow_horizontalStyle="spread_inside"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guide_horizontal_end_of_screen"
+        app:layout_constraintStart_toStartOf="@+id/guide_horizontal_start_of_screen"
         app:layout_constraintTop_toBottomOf="@+id/flowAlreadyHaveAcc"
         tools:visibility="visible" />
 

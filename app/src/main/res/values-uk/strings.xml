@@ -40,4 +40,6 @@
     <string name="warningMessage_OkButtonOnAllert">Окей</string>
     <string name="warning_emailTitle">Пошта:</string>
     <string name="warning_passwordTitle">Пароль:</string>
+    <string name="person_career_hardcoded">Графічний дизайнер</string>
+    <string name="person_homeadress_hardcoded">49101, Дніпро, Домашній 7</string>
 </resources>

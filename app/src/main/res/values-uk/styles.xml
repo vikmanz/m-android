@@ -4,7 +4,6 @@
     <!-- ————————————————————  Text styles. ———————————————————— -->
 
     <style name="basicText_buttonsText" parent="basicText">
-        <item name="android:fontFamily">@font/open_sans_semi_bold</item>     <!-- FONT -->
         <item name="android:textSize">@dimen/size_text_font_XS</item>
     </style>
 
