@@ -6,13 +6,24 @@
     android:layout_height="match_parent"
     tools:context=".mainActivity.MainActivity">
 
+    <!--    TODO Розділення частин екрану краще виконати через View. ConstraintLayout вкладувати у ConstraintLayout - некраща ідея-->
+    <!--    TODO id в цілому нормальне, але можна його уточнити, скориставшись цим https://discord.com/channels/534496884849639455/862735944679424020/864019560587591700-->
+    <!--    TODO гайди теж зробить би -->
+    <!-- Top half of screen. -->
+    <View
+        android:id="@+id/view_activityMain_topHalfBg"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="?attr/colorSecondary"
+        app:layout_constraintBottom_toTopOf="@id/view_activityMain_bottomHalfBg"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_weight="0.5" />
 
-    <!-- Up half of screen. -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayoutTopBG"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="?attr/colorSecondary"
+        android:background="@android:color/transparent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -122,12 +133,21 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    <!-- Down half of screen. -->
+    <!-- Bottom half of screen. -->
+    <View
+        android:id="@+id/view_activityMain_bottomHalfBg"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="?attr/colorTertiary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/view_activityMain_topHalfBg"
+        app:layout_constraintVertical_weight="0.5" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayoutBottomBG"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="?attr/colorTertiary"
+        android:background="@android:color/transparent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.5"
@@ -181,20 +201,6 @@
             tools:ignore="MissingConstraints,SpeakableTextPresentCheck"
             tools:layout_editor_absoluteX="268dp"
             tools:layout_editor_absoluteY="89dp" />
-
-        <!-- Fill Profile Text. -->
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tvPropositionToFillProfile"
-            style="@style/basicText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/offset_M"
-            android:text="@string/propositionToFillProfile"
-            android:textColor="?attr/colorSecondary"
-            android:textSize="@dimen/size_text_font_XS"
-            app:layout_constraintBottom_toTopOf="@id/btnEditProfile"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
 
         <!-- Edit Profile button. -->
         <androidx.appcompat.widget.AppCompatButton

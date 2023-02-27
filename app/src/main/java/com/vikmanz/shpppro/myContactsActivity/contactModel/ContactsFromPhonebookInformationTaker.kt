@@ -21,8 +21,7 @@ import androidx.core.content.ContextCompat.startActivity
 
 class ContactsFromPhonebookInformationTaker(
     private val activity: AppCompatActivity,
-    private val contentResolver: ContentResolver,
-    private val applicationContext: Context
+    private val contentResolver: ContentResolver
 ) {
 
 
@@ -36,7 +35,7 @@ class ContactsFromPhonebookInformationTaker(
         val permissionBeforeStatus = checkSelfPermission(activity, READ_CONTACTS);
         if (permissionBeforeStatus == PackageManager.PERMISSION_GRANTED) {
             val toast = Toast.makeText(
-                applicationContext,
+                activity,
                 "Access already granted!",
                 Toast.LENGTH_SHORT
             )
@@ -45,13 +44,21 @@ class ContactsFromPhonebookInformationTaker(
             return true
         } else {
             Log.d("myLog", "Request access!")
+            val toast = Toast.makeText(
+                activity,
+                "Request access!",
+                Toast.LENGTH_SHORT
+            )
+            toast.setMargin(50f, 50f)
+            toast.show()
             activity.requestPermissions(arrayOf(READ_CONTACTS), 0)
         }
 
         val permissionAfterStatus = checkSelfPermission(activity, READ_CONTACTS);
+
         if (permissionAfterStatus == PackageManager.PERMISSION_GRANTED) {
             val toast = Toast.makeText(
-                applicationContext,
+                activity,
                 "Access granted!",
                 Toast.LENGTH_SHORT
             )

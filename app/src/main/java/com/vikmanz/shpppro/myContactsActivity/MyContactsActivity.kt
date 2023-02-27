@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.provider.Settings
 import android.view.View
 import androidx.activity.viewModels
@@ -36,6 +37,8 @@ class MyContactsActivity : AppCompatActivity(), AddContactDialogFragment.Confirm
 
     private val contactsService = ContactsService()
 
+
+
     // Recycler View variables.
     private val adapter: ContactsAdapter by lazy {
         ContactsAdapter(contactActionListener = object : ContactActionListener {
@@ -56,20 +59,24 @@ class MyContactsActivity : AppCompatActivity(), AddContactDialogFragment.Confirm
             btnBack.setOnClickListener { startAuthActivity() }
             buttonGrandPermissions.setOnClickListener { buttonToGrant() }
             tvAddContacts.setOnClickListener { addNewContact() }
-            tvAddContactsFromPhonebook.setOnClickListener {
-                val contactsInfo = ContactsFromPhonebookInformationTaker(this@MyContactsActivity, contentResolver, applicationContext).getContactsInfo()
-                if (contactsInfo == null) {
-                    buttonGrandPermissions.visibility = View.VISIBLE
-                    viewModel.clearContactList()
-                }
-                else {
-                    buttonGrandPermissions.visibility = View.GONE
-                    viewModel.getContactsFromPhonebook(contactsInfo)
-                }
-            }
+            tvAddContactsFromPhonebook.setOnClickListener { getContactsFromPhone() }
         }
         initRecyclerView()
         setObserver()
+    }
+
+    private fun getContactsFromPhone() {
+        val contactsInfo = ContactsFromPhonebookInformationTaker(
+            this@MyContactsActivity,
+            contentResolver
+        ).getContactsInfo()
+        if (contactsInfo == null) {
+            binding.buttonGrandPermissions.visibility = View.VISIBLE
+            viewModel.clearContactList()
+        } else {
+            binding.buttonGrandPermissions.visibility = View.GONE
+            viewModel.getContactsFromPhonebook(contactsInfo)
+        }
     }
 
 
@@ -144,7 +151,8 @@ class MyContactsActivity : AppCompatActivity(), AddContactDialogFragment.Confirm
         viewModel.addContact(contact)
     }
 
-    // https://stackoverflow.com/questions/32822101/how-can-i-programmatically-open-the-permission-screen-for-a-specific-app-on-andr
-
-
+    override fun onRestart() {
+        getContactsFromPhone()
+        super.onRestart()
+    }
 }
