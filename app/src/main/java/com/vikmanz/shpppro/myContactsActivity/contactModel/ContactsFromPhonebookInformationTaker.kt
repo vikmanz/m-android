@@ -1,37 +1,77 @@
 package com.vikmanz.shpppro.myContactsActivity.contactModel
 
-import android.Manifest
+import android.Manifest.permission.READ_CONTACTS
 import android.annotation.SuppressLint
+import android.content.ContentProvider
 import android.content.ContentResolver
+import android.content.Context
+import android.content.Intent
+import android.content.Intent.*
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.provider.ContactsContract
+import android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
+import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.core.content.ContextCompat.checkSelfPermission
+import androidx.core.content.ContextCompat.startActivity
 
-class ContactsFromPhonebookInformationTaker(private val activity: AppCompatActivity, private val contentResolver: ContentResolver) {
 
-    fun getContactsInfo(): ArrayList<List<String>> {
-        requestPermission()
+class ContactsFromPhonebookInformationTaker(
+    private val activity: AppCompatActivity,
+    private val contentResolver: ContentResolver,
+    private val applicationContext: Context
+) {
+
+
+    fun getContactsInfo(): ArrayList<List<String>>? {
+        if (!requestPermission()) return null
         return getPhonebookContactsInformation()
     }
 
-    private fun requestPermission() {
-        if (ContextCompat.checkSelfPermission(
-                activity,
-                Manifest.permission.READ_CONTACTS
-            ) != PackageManager.PERMISSION_GRANTED.toInt()
-        ) {
-            ActivityCompat.requestPermissions(
-                activity,
-                arrayOf(Manifest.permission.READ_CONTACTS),
-                0
+    private fun requestPermission(): Boolean {
+
+        val permissionBeforeStatus = checkSelfPermission(activity, READ_CONTACTS);
+        if (permissionBeforeStatus == PackageManager.PERMISSION_GRANTED) {
+            val toast = Toast.makeText(
+                applicationContext,
+                "Access already granted!",
+                Toast.LENGTH_SHORT
             )
+            toast.setMargin(50f, 50f)
+            toast.show()
+            return true
+        } else {
+            Log.d("myLog", "Request access!")
+            activity.requestPermissions(arrayOf(READ_CONTACTS), 0)
+        }
+
+        val permissionAfterStatus = checkSelfPermission(activity, READ_CONTACTS);
+        if (permissionAfterStatus == PackageManager.PERMISSION_GRANTED) {
+            val toast = Toast.makeText(
+                applicationContext,
+                "Access granted!",
+                Toast.LENGTH_SHORT
+            )
+            toast.setMargin(50f, 50f)
+            toast.show()
+            return true
+        } else {
+            val toast = Toast.makeText(
+                activity,
+                "Access denied!",
+                Toast.LENGTH_SHORT
+            )
+            toast.setMargin(50f, 50f)
+            toast.show()
+            return false
+
         }
     }
 
-    @SuppressLint("Range")
+    @SuppressLint("Range", "Recycle")
     private fun getPhonebookContactsInformation(): ArrayList<List<String>> {
         val uri = ContactsContract.CommonDataKinds.Phone.CONTENT_URI
         val cursor = contentResolver.query(

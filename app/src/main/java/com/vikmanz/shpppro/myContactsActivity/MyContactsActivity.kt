@@ -2,7 +2,10 @@ package com.vikmanz.shpppro.myContactsActivity
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.provider.Settings
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
@@ -51,16 +54,36 @@ class MyContactsActivity : AppCompatActivity(), AddContactDialogFragment.Confirm
         binding = ActivityMyContactsBinding.inflate(layoutInflater).also { setContentView(it.root) }
         with(binding) {
             btnBack.setOnClickListener { startAuthActivity() }
+            buttonGrandPermissions.setOnClickListener { buttonToGrant() }
             tvAddContacts.setOnClickListener { addNewContact() }
             tvAddContactsFromPhonebook.setOnClickListener {
-                val contactsInfo = ContactsFromPhonebookInformationTaker(this@MyContactsActivity, contentResolver).getContactsInfo()
-                viewModel.getContactsFromPhonebook(contactsInfo)
+                val contactsInfo = ContactsFromPhonebookInformationTaker(this@MyContactsActivity, contentResolver, applicationContext).getContactsInfo()
+                if (contactsInfo == null) {
+                    buttonGrandPermissions.visibility = View.VISIBLE
+                    viewModel.clearContactList()
+                }
+                else {
+                    buttonGrandPermissions.visibility = View.GONE
+                    viewModel.getContactsFromPhonebook(contactsInfo)
+                }
             }
         }
         initRecyclerView()
         setObserver()
     }
 
+
+    private fun buttonToGrant() {
+        val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+        with(intent) {
+            data = Uri.fromParts("package", applicationContext.packageName, null)
+            addCategory(Intent.CATEGORY_DEFAULT)
+            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
+            addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS)
+        }
+        startActivity(intent)
+    }
 
     private fun initRecyclerView() {
         with(binding) {
@@ -121,6 +144,7 @@ class MyContactsActivity : AppCompatActivity(), AddContactDialogFragment.Confirm
         viewModel.addContact(contact)
     }
 
+    // https://stackoverflow.com/questions/32822101/how-can-i-programmatically-open-the-permission-screen-for-a-specific-app-on-andr
 
 
 }

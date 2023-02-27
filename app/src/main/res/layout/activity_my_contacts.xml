@@ -112,6 +112,22 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:listitem="@layout/one_contact_item" />
 
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_grand_permissions"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/size_button_height_M"
+            android:layout_marginHorizontal="@dimen/marginHorizontal"
+            android:background="@drawable/btn_std_white_bg"
+            android:text="Grant permission"
+            android:textAppearance="@style/basicText_buttonsText"
+            android:textColor="?attr/colorSecondary"
+            app:layout_constraintBottom_toBottomOf="@+id/recyclerView_MyContacts"
+            app:layout_constraintEnd_toEndOf="@+id/recyclerView_MyContacts"
+            app:layout_constraintStart_toStartOf="@+id/recyclerView_MyContacts"
+            app:layout_constraintTop_toTopOf="@+id/recyclerView_MyContacts"
+            tools:ignore="TouchTargetSizeCheck"
+            android:visibility="gone" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
