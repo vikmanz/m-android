@@ -50,4 +50,14 @@
     <string name="main_activity_person_career_hardcoded">Графічний дизайнер</string>
     <string name="main_activity_person_address_hardcoded">49101, Дніпро, Домашній 7</string>
 
+    <!-- ———————————————————— Contacts ———————————————————— -->
+    <string name="MyContacts_contacts">Контакти</string>
+    <string name="MyContacts_AddContacts">Додати контакт</string>
+    <string name="contacts_change_to_phonebook">Змінити на контакти телефону</string>
+    <string name="add_contact_from_add_contact_activity_my_contacts">Додати контакт</string>
+    <string name="personNameSample">Ім\'я</string>
+    <string name="personCareerSample">Профессія</string>
+    <string name="personHomeAddressSample">Домашня адреса</string>
+    <string name="contacts_grant_permission_button">Надати дозвіл</string>
+
 </resources>

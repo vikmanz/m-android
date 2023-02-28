@@ -158,6 +158,13 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
         setLocale()
     }
 
+    private fun startMyContactsActivity() {
+        val intentObject = Intent(this, MyContactsActivity::class.java)
+        intentObject.putExtra(INTENT_LANG_ID, isUkrainian)
+        startActivity(intentObject)
+        overridePendingTransition(R.anim.zoom_in_inner, R.anim.zoom_in_outter)
+    }
+
     /**
      * Constants.
      */

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.MyContactsActivity">
+
+
+    <!-- Up half (18%) of screen. -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayoutTopBG"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="?attr/colorSecondary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.18"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- Title and title buttons flow. -->
+        <androidx.constraintlayout.helper.widget.Flow
+            android:id="@+id/flowLayoutTitleAndTitleButtons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/marginHorizontal"
+            android:layout_marginTop="@dimen/offset_M"
+            android:orientation="horizontal"
+            app:constraint_referenced_ids="btnBack, tvContactsTitle, btnSearch"
+            app:flow_horizontalStyle="spread_inside"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:src="@drawable/arrow_back"
+            android:background="@android:color/transparent"
+            tools:ignore="MissingConstraints"
+            />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvContactsTitle"
+            style="@style/basicText_bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/MyContacts_contacts"
+            android:textSize="@dimen/size_text_font_XL"
+            tools:ignore="MissingConstraints" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btnSearch"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:src="@drawable/search"
+            android:background="@android:color/transparent"
+            tools:ignore="MissingConstraints" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvAddContacts"
+            style="@style/basicText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/MyContacts_AddContacts"
+            android:textSize="@dimen/size_text_font_XS"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="@dimen/offset_XL"
+            android:layout_marginStart="@dimen/offset_M"
+            app:layout_constraintTop_toBottomOf="@+id/flowLayoutTitleAndTitleButtons"
+            tools:ignore="MissingConstraints" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvAddContactsFromPhonebook"
+            style="@style/basicText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/offset_XL"
+            android:text="@string/contacts_change_to_phonebook"
+            android:textSize="@dimen/size_text_font_XS"
+            android:layout_marginEnd="@dimen/offset_M"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/flowLayoutTitleAndTitleButtons"
+            tools:ignore="MissingConstraints" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <!-- Down half (82%) of screen. -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayoutBottomBG"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="?attr/colorTertiary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.82"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <!-- Recycler View for Contacts. -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView_MyContacts"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="@dimen/offset_M"
+            android:layout_marginVertical="@dimen/offset_M"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:listitem="@layout/one_contact_item" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_grand_permissions"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/size_button_height_M"
+            android:layout_marginHorizontal="@dimen/marginHorizontal"
+            android:background="@drawable/btn_std_white_bg"
+            android:text="Grant permission"
+            android:textAppearance="@style/basicText_buttonsText"
+            android:textColor="?attr/colorSecondary"
+            app:layout_constraintBottom_toBottomOf="@+id/recyclerView_MyContacts"
+            app:layout_constraintEnd_toEndOf="@+id/recyclerView_MyContacts"
+            app:layout_constraintStart_toStartOf="@+id/recyclerView_MyContacts"
+            app:layout_constraintTop_toTopOf="@+id/recyclerView_MyContacts"
+            tools:ignore="TouchTargetSizeCheck"
+            android:visibility="gone" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
