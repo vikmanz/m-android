@@ -2,6 +2,6 @@
 <resources>
 
     <!-- Password max length. -->
-    <integer name="password_length">16</integer>
+    <integer name="count_auth_password_max_length">16</integer>
 
 </resources>

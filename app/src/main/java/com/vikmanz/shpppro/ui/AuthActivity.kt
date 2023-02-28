@@ -1,4 +1,4 @@
-package com.vikmanz.shpppro
+package com.vikmanz.shpppro.ui
 
 import android.app.AlertDialog
 import android.content.Intent
@@ -8,12 +8,13 @@ import android.util.Patterns
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.asLiveData
-import com.vikmanz.shpppro.constants.Constants.INTENT_EMAIL_ID
-import com.vikmanz.shpppro.constants.Constants.INTENT_LANG_ID
-import com.vikmanz.shpppro.constants.Constants.LOGIN_VIEW_FIRST
-import com.vikmanz.shpppro.constants.Constants.MIN_PASSWORD_LENGTH
-import com.vikmanz.shpppro.constants.Constants.VIEW_HELP_BUTTONS_ON_CREATE
-import com.vikmanz.shpppro.dataSave.LoginDataStoreManager
+import com.vikmanz.shpppro.R
+import com.vikmanz.shpppro.utilits.Constants.INTENT_EMAIL_ID
+import com.vikmanz.shpppro.utilits.Constants.INTENT_LANG_ID
+import com.vikmanz.shpppro.utilits.Constants.LOGIN_VIEW_FIRST
+import com.vikmanz.shpppro.utilits.Constants.MIN_PASSWORD_LENGTH
+import com.vikmanz.shpppro.utilits.Constants.VIEW_HELP_BUTTONS_ON_CREATE
+import com.vikmanz.shpppro.data.DataStoreManager
 import com.vikmanz.shpppro.databinding.ActivityAuthBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -26,29 +27,9 @@ import java.util.*
  */
 class AuthActivity : AppCompatActivity() {
 
-    companion object {
-        // Regex's
-        private const val REGEX_ONE_UPPER_CHAR = ".*[A-Z].*"
-        private const val REGEX_ONE_LOWER_CHAR = ".*[a-z].*"
-        private const val SPECIAL_CHARS = "@#$%^&amp;+="
-        private const val REGEX_ONE_SPECIAL_CHAR = ".*[@#\$%^&amp;+=].*"        //TODO ERROR!
-        private const val LANG_EN = "en"
-        private const val LANG_UA = "uk"
-        private const val TEST_LOGIN = "viktor.manza@gmail.com"
-        private const val TEST_PASSWORD = "passwordE3"
-
-        // Save/Load State Keys. Don't need to change.
-        private const val EMAIL_FIELD_STATE_KEY = "EMAIL_KEY"
-        private const val PASSWORD_FIELD_STATE_KEY = "PASSWORD_KEY"
-        private const val PASSWORD_VIEW_STATE_KEY = "PASSWORD_VIEW_KEY"
-        private const val CHECKBOX_STATE_STATE_KEY = "CHECKBOX_KEY"
-        private const val LANGUAGE_STATE_KEY = "LAND_ID_KEY"
-        private const val HELP_BUTTONS_STATE_KEY = "HELP_BUTTONS_KEY"
-    }
-
     // Binding, Data Store and Coroutine Scope variables.
     private lateinit var binding: ActivityAuthBinding
-    private lateinit var loginData: LoginDataStoreManager
+    private lateinit var loginData: DataStoreManager
     private val coroutineScope: CoroutineScope = CoroutineScope(Job())
 
     // Save state of screen layout. True - Login screen, False - Register screen.
@@ -69,7 +50,7 @@ class AuthActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         // Load saved data and do autologin if need.
-        loginData = LoginDataStoreManager(this)
+        loginData = DataStoreManager(this)
         checkAutoLogin()
 
         // binding, add content and set Login or Register screen first.
@@ -119,27 +100,27 @@ class AuthActivity : AppCompatActivity() {
         isLoginScreen = !isLoginScreen  // Change variable-state of screen layout.
         with(binding) {
             if (isLoginScreen) {
-                tvHelloText.text = getString(R.string.helloText_signin)
-                tvHelloSubText.text = getString(R.string.helloSubText_signin)
-                tiLayoutPassword.isCounterEnabled = true
-                forgotPassword.visibility = View.VISIBLE
-                bRegisterByGoogle.visibility = View.GONE
-                googleOrRegister.visibility = View.GONE
-                bRegisterByEmailPassword.text = getString(R.string.registerButton_signin)
-                warningAboutTerms.visibility = View.GONE
-                alreadyHaveAccMessage.text = getString(R.string.already_have_an_account_signin)
-                alreadyHaveAccLink.text = getString(R.string.sign_in_signin)
+                textviewAuthHelloText.text = getString(R.string.auth_activity_hello_text_login_screen)
+                textviewAuthHelloSubtext.text = getString(R.string.auth_activity_hello_subtext_login_screen)
+                textinputlayoutAuthPassword.isCounterEnabled = true
+                textviewAuthForgotPassword.visibility = View.VISIBLE
+                buttonAuthRegisterByGoogle.visibility = View.GONE
+                textviewAuthTextBetweenGoogleAndRegister.visibility = View.GONE
+                buttonAuthRegisterByEmail.text = getString(R.string.auth_activity_register_button_login_screen)
+                textviewAuthWarningAboutTerms.visibility = View.GONE
+                textviewAuthAlreadyHaveAccountMessage.text = getString(R.string.auth_activity_already_have_account_message_login_screen)
+                textviewAuthSwitchScreenToLoginButton.text = getString(R.string.auth_activity_sign_in_button_login_screen)
             } else {
-                tvHelloText.text = getString(R.string.helloText)
-                tvHelloSubText.text = getString(R.string.helloSubText)
-                tiLayoutPassword.isCounterEnabled = true
-                forgotPassword.visibility = View.INVISIBLE
-                bRegisterByGoogle.visibility = View.VISIBLE
-                googleOrRegister.visibility = View.VISIBLE
-                bRegisterByEmailPassword.text = getString(R.string.registerButton)
-                warningAboutTerms.visibility = View.VISIBLE
-                alreadyHaveAccMessage.text = getString(R.string.already_have_an_account)
-                alreadyHaveAccLink.text = getString(R.string.sign_in)
+                textviewAuthHelloText.text = getString(R.string.auth_layout_hello_text)
+                textviewAuthHelloSubtext.text = getString(R.string.auth_layout_hello_subtext)
+                textinputlayoutAuthPassword.isCounterEnabled = true
+                textviewAuthForgotPassword.visibility = View.INVISIBLE
+                buttonAuthRegisterByGoogle.visibility = View.VISIBLE
+                textviewAuthTextBetweenGoogleAndRegister.visibility = View.VISIBLE
+                buttonAuthRegisterByEmail.text = getString(R.string.auth_layout_register_button)
+                textviewAuthWarningAboutTerms.visibility = View.VISIBLE
+                textviewAuthAlreadyHaveAccountMessage.text = getString(R.string.auth_layout_already_have_account_message)
+                textviewAuthSwitchScreenToLoginButton.text = getString(R.string.auth_layout_sign_in_button)
             }
         }
     }
@@ -149,11 +130,11 @@ class AuthActivity : AppCompatActivity() {
      */
     private fun setLoginPasswordFocusListeners() {
         with(binding) {
-            tiTextEmail.setOnFocusChangeListener { _, focused ->
-                if (!focused) tiLayoutEmail.helperText = validEmail()
+            textinputAuthEmail.setOnFocusChangeListener { _, focused ->
+                if (!focused) textinputlayoutAuthEmail.helperText = validEmail()
             }
-            tiTextPassword.setOnFocusChangeListener { _, focused ->
-                if (!focused) tiLayoutPassword.helperText = validPassword()
+            textinputAuthPassword.setOnFocusChangeListener { _, focused ->
+                if (!focused) textinputlayoutAuthPassword.helperText = validPassword()
             }
         }
     }
@@ -165,11 +146,11 @@ class AuthActivity : AppCompatActivity() {
      */
     private fun validEmail(): String? {
         // Get email text
-        val emailText = binding.tiTextEmail.text.toString()
+        val emailText = binding.textinputAuthEmail.text.toString()
 
         // Do check for standard Patterns.EMAIL_ADDRESS regex.
         if (!Patterns.EMAIL_ADDRESS.matcher(emailText).matches()) {
-            return getString(R.string.warningMessage_InvalidEmailAdress)
+            return getString(R.string.auth_activity_warning_message_invalid_email)
         }
 
         // If pass check, return null.
@@ -184,22 +165,22 @@ class AuthActivity : AppCompatActivity() {
     private fun validPassword(): String? {
 
         // Get password text
-        val passwordText = binding.tiTextPassword.text.toString()
+        val passwordText = binding.textinputAuthPassword.text.toString()
 
         // Do all checks.
         if (passwordText.length < MIN_PASSWORD_LENGTH) {               // Minimum 8 chars.
-            return getString(R.string.passCheckWarning_min8chars, MIN_PASSWORD_LENGTH)
+            return getString(R.string.auth_activity_password_warning_min8chars, MIN_PASSWORD_LENGTH)
         }
         if (!passwordText.matches(REGEX_ONE_UPPER_CHAR.toRegex())) {   // Minimum 1 UpperCase char.
-            return getString(R.string.passCheckWarning_OneUpperChar)
+            return getString(R.string.auth_activity_password_warning_one_upper_char)
         }
         if (!passwordText.matches(REGEX_ONE_LOWER_CHAR.toRegex())) {   // Minimum 1 LowerCase char.
-            return getString(R.string.passCheckWarning_OneLowerChar)
+            return getString(R.string.auth_activity_password_warning_one_lower_char)
         }
-        Log.d("mylog", REGEX_ONE_SPECIAL_CHAR)
-        Log.d("mylog", "${passwordText.matches(REGEX_ONE_SPECIAL_CHAR.toRegex())}")
+        Log.d("myLog", REGEX_ONE_SPECIAL_CHAR)
+        Log.d("myLog", "${passwordText.matches(REGEX_ONE_SPECIAL_CHAR.toRegex())}")
         if (!passwordText.matches(REGEX_ONE_SPECIAL_CHAR.toRegex())) { // Minimum 1 special char.
-            return getString(R.string.passCheckWarning_OneSpecialChar, SPECIAL_CHARS)
+            return getString(R.string.auth_activity_password_warning_one_special_char, SPECIAL_CHARS)
         }
 
         // If pass all checks, return null.
@@ -211,8 +192,8 @@ class AuthActivity : AppCompatActivity() {
      */
     private fun initSubmitRegisterAndSwapInUpButtonsListeners() {
         with(binding) {
-            bRegisterByEmailPassword.setOnClickListener { submitForm() }
-            alreadyHaveAccLink.setOnClickListener { swapSignInSignUpScreens() }
+            buttonAuthRegisterByEmail.setOnClickListener { submitForm() }
+            textviewAuthSwitchScreenToLoginButton.setOnClickListener { swapSignInSignUpScreens() }
         }
     }
 
@@ -223,16 +204,16 @@ class AuthActivity : AppCompatActivity() {
         with(binding) {
 
             // Validate email and password.
-            tiLayoutEmail.helperText = validEmail()
-            tiLayoutPassword.helperText = validPassword()
-            val isEmailCorrect = tiLayoutEmail.helperText == null
-            val isPasswordCorrect = tiLayoutPassword.helperText == null
+            textinputlayoutAuthEmail.helperText = validEmail()
+            textinputlayoutAuthPassword.helperText = validPassword()
+            val isEmailCorrect = textinputlayoutAuthEmail.helperText == null
+            val isPasswordCorrect = textinputlayoutAuthPassword.helperText == null
 
             // If valid, start MainActivity.
             if (isEmailCorrect && isPasswordCorrect) {
                 // If check Remember, save data to Data Store.
-                if (checkBox.isChecked) saveUserData()
-                val emailText = tiTextEmail.text.toString()
+                if (checkboxAuthRememberMe.isChecked) saveUserData()
+                val emailText = textinputAuthEmail.text.toString()
                 startMainActivity(emailText)
             }
             // If have error - show error message.
@@ -252,9 +233,9 @@ class AuthActivity : AppCompatActivity() {
         val isEnglish = this.isUkrainian
 
         with(binding) {
-            email = tiTextEmail.text.toString()
-            password = tiTextPassword.text.toString()
-            isAutologin = checkBox.isChecked
+            email = textinputAuthEmail.text.toString()
+            password = textinputAuthPassword.text.toString()
+            isAutologin = checkboxAuthRememberMe.isChecked
         }
 
         coroutineScope.launch(Dispatchers.IO) {
@@ -271,22 +252,22 @@ class AuthActivity : AppCompatActivity() {
         var message = ""
         with(binding) {
             message += if (!isEmailCorrect)
-                "\n\n${getString(R.string.warning_emailTitle)} ${tiLayoutEmail.helperText}"
+                "\n\n${getString(R.string.auth_activity_warning_message_email_title)} ${textinputlayoutAuthEmail.helperText}"
             else ""
             message += if (!isPasswordCorrect)
-                "\n\n${getString(R.string.warning_passwordTitle)} ${tiLayoutPassword.helperText}"
+                "\n\n${getString(R.string.auth_activity_warning_message_password_title)} ${textinputlayoutAuthPassword.helperText}"
             else ""
         }
 
         // Show AlertDialog with error message.
         AlertDialog.Builder(this)
-            .setTitle(getString(R.string.warningMessage_InvalidRegisterForm))
+            .setTitle(getString(R.string.auth_activity_warning_message_invalid_register_form))
             .setMessage(message)
-            .setPositiveButton(getString(R.string.warningMessage_OkButtonOnAllert)) { _, _ ->
+            .setPositiveButton(getString(R.string.auth_activity_warning_message_ok_button_text)) { _, _ ->
                 with(binding) {
                     // Set focus to first field with error.
-                    if (isEmailCorrect) tiTextEmail.requestFocus()
-                    else tiTextPassword.requestFocus()
+                    if (isEmailCorrect) textinputAuthEmail.requestFocus()
+                    else textinputAuthPassword.requestFocus()
                 }
             }
             .show()
@@ -304,25 +285,25 @@ class AuthActivity : AppCompatActivity() {
         // Set onClickListeners().
         with(binding) {
             // Set onClickListener to message "Do you have account" to see help buttons.
-            alreadyHaveAccMessage.setOnClickListener { viewOrHideHelpTesterButtons() }
+            textviewAuthAlreadyHaveAccountMessage.setOnClickListener { viewOrHideHelpTesterButtons() }
 
             // Fill fields button listener.
-            buttonFillLoginPassword.setOnClickListener {
-                tiTextEmail.setText(TEST_LOGIN)
-                tiTextPassword.setText(TEST_PASSWORD)
-                tiLayoutEmail.helperText = null
-                tiLayoutPassword.helperText = null
+            buttonAuthFillLoginAndPass.setOnClickListener {
+                textinputAuthEmail.setText(TEST_LOGIN)
+                textinputAuthPassword.setText(TEST_PASSWORD)
+                textinputlayoutAuthEmail.helperText = null
+                textinputlayoutAuthPassword.helperText = null
             }
 
             // Clear fields button listener.
-            buttonClearUserPassword.setOnClickListener {
-                tiTextEmail.setText("")
-                tiTextPassword.setText("")
-                checkBox.isChecked = false
+            buttonAuthClearLoginPassFields.setOnClickListener {
+                textinputAuthEmail.setText("")
+                textinputAuthPassword.setText("")
+                checkboxAuthRememberMe.isChecked = false
             }
 
             // Language change button listener.
-            buttonChangeLanguage.setOnClickListener {
+            buttonAuthChangeLanguage.setOnClickListener {
                 isUkrainian = !isUkrainian
                 setLocale()
                 super.recreate()    // RECREATE ACTIVITY
@@ -335,7 +316,7 @@ class AuthActivity : AppCompatActivity() {
      */
     private fun viewOrHideHelpTesterButtons() {
         helperButtonsVisible = !helperButtonsVisible
-        binding.flowTestButtons.visibility = if (helperButtonsVisible) View.VISIBLE else View.GONE
+        binding.flowAuthDebugButtons.visibility = if (helperButtonsVisible) View.VISIBLE else View.GONE
     }
 
     /**
@@ -357,7 +338,7 @@ class AuthActivity : AppCompatActivity() {
      *  De-focus views, when user do click on background.
      */
     private fun backgroundFocusHandler() = with(binding) {
-        root.setOnClickListener { tiTextEmail.clearFocus() }
+        root.setOnClickListener { textinputAuthEmail.clearFocus() }
     }
 
     /**
@@ -365,10 +346,10 @@ class AuthActivity : AppCompatActivity() {
      */
     override fun onSaveInstanceState(outState: Bundle) {
         with(binding) {
-            outState.putString(EMAIL_FIELD_STATE_KEY, tiTextEmail.text.toString())
-            outState.putString(PASSWORD_FIELD_STATE_KEY, tiTextPassword.text.toString())
-            outState.putInt(PASSWORD_VIEW_STATE_KEY, tiLayoutPassword.endIconMode)
-            outState.putBoolean(CHECKBOX_STATE_STATE_KEY, checkBox.isChecked)
+            outState.putString(EMAIL_FIELD_STATE_KEY, textinputAuthEmail.text.toString())
+            outState.putString(PASSWORD_FIELD_STATE_KEY, textinputAuthPassword.text.toString())
+            outState.putInt(PASSWORD_VIEW_STATE_KEY, textinputlayoutAuthPassword.endIconMode)
+            outState.putBoolean(CHECKBOX_STATE_STATE_KEY, checkboxAuthRememberMe.isChecked)
         }
         outState.putBoolean(LANGUAGE_STATE_KEY, isUkrainian)
         outState.putBoolean(HELP_BUTTONS_STATE_KEY, helperButtonsVisible)
@@ -383,13 +364,33 @@ class AuthActivity : AppCompatActivity() {
         isUkrainian = savedInstanceState.getBoolean(LANGUAGE_STATE_KEY)
         helperButtonsVisible = savedInstanceState.getBoolean(HELP_BUTTONS_STATE_KEY)
         with(binding) {
-            tiTextEmail.setText(savedInstanceState.getString(EMAIL_FIELD_STATE_KEY))
-            tiTextPassword.setText(savedInstanceState.getString(PASSWORD_FIELD_STATE_KEY))
-            tiLayoutPassword.endIconMode = savedInstanceState.getInt(PASSWORD_VIEW_STATE_KEY)
-            checkBox.isChecked = savedInstanceState.getBoolean(CHECKBOX_STATE_STATE_KEY)
-            flowTestButtons.visibility = if (helperButtonsVisible) View.VISIBLE else View.GONE
+            textinputAuthEmail.setText(savedInstanceState.getString(EMAIL_FIELD_STATE_KEY))
+            textinputAuthPassword.setText(savedInstanceState.getString(PASSWORD_FIELD_STATE_KEY))
+            textinputlayoutAuthPassword.endIconMode = savedInstanceState.getInt(PASSWORD_VIEW_STATE_KEY)
+            checkboxAuthRememberMe.isChecked = savedInstanceState.getBoolean(CHECKBOX_STATE_STATE_KEY)
+            flowAuthDebugButtons.visibility = if (helperButtonsVisible) View.VISIBLE else View.GONE
         }
         setLocale()
+    }
+
+    companion object {
+        // Regex's
+        private const val REGEX_ONE_UPPER_CHAR = ".*[A-Z].*"
+        private const val REGEX_ONE_LOWER_CHAR = ".*[a-z].*"
+        private const val SPECIAL_CHARS = "@#$%^&amp;+="
+        private const val REGEX_ONE_SPECIAL_CHAR = ".*[@#\$%^&amp;+=].*"        //TODO ERROR!
+        private const val LANG_EN = "en"
+        private const val LANG_UA = "uk"
+        private const val TEST_LOGIN = "viktor.manza@gmail.com"
+        private const val TEST_PASSWORD = "passwordE3"
+
+        // Save/Load State Keys. Don't need to change.
+        private const val EMAIL_FIELD_STATE_KEY = "EMAIL_KEY_AUTH_ACTIVITY"
+        private const val PASSWORD_FIELD_STATE_KEY = "PASSWORD_KEY_AUTH_ACTIVITY"
+        private const val PASSWORD_VIEW_STATE_KEY = "PASSWORD_VIEW_KEY_AUTH_ACTIVITY"
+        private const val CHECKBOX_STATE_STATE_KEY = "CHECKBOX_KEY_AUTH_ACTIVITY"
+        private const val LANGUAGE_STATE_KEY = "LAND_ID_KEY_AUTH_ACTIVITY"
+        private const val HELP_BUTTONS_STATE_KEY = "HELP_BUTTONS_KEY_AUTH_ACTIVITY"
     }
 
 }

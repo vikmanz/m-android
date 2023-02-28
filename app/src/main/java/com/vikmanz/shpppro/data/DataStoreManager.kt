@@ -1,4 +1,4 @@
-package com.vikmanz.shpppro.dataSave
+package com.vikmanz.shpppro.data
 
 import android.content.Context
 import androidx.datastore.core.DataStore
@@ -10,19 +10,19 @@ import androidx.datastore.preferences.preferencesDataStore
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-// Key for preferences Data Store.
-private const val DATA_STORE_NAME = "auth"
-private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = DATA_STORE_NAME)
-
 /**
  * Data Store manager. Save and load user data from memory.
  */
-class LoginDataStoreManager (private val context: Context) {
+class DataStoreManager (private val context: Context) {
 
     /**
      * Companion object with keys of Data Store Preferences fields.
      */
     companion object {
+        // Key for preferences Data Store.
+        private const val DATA_STORE_NAME = "auth"
+        private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = DATA_STORE_NAME)
+
         // Data Store Keys. Don't need to change.
         private const val DS_USER_NAME = "user_name"
         private const val DS_USER_PASSWORD = "user_password"

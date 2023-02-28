@@ -1,11 +1,13 @@
-package com.vikmanz.shpppro
+package com.vikmanz.shpppro.ui
 
 import android.content.Intent
 import android.os.Bundle
+import com.vikmanz.shpppro.R
 import com.vikmanz.shpppro.databinding.ActivityMainBinding
-import com.vikmanz.shpppro.constants.Constants.INTENT_EMAIL_ID
-import com.vikmanz.shpppro.constants.Constants.INTENT_LANG_ID
-import com.vikmanz.shpppro.dataSave.LoginDataStoreManager
+import com.vikmanz.shpppro.utilits.Constants.INTENT_EMAIL_ID
+import com.vikmanz.shpppro.utilits.Constants.INTENT_LANG_ID
+import com.vikmanz.shpppro.data.DataStoreManager
+import com.vikmanz.shpppro.utilits.BaseActivity
 import com.vikmanz.shpppro.utilits.firstCharToUpperCase
 import kotlinx.coroutines.*
 import java.util.*
@@ -22,11 +24,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
         private const val REGEX_FROM_A_TO_Z = "[A-Z]"
         private const val LANG_EN = "en"
         private const val LANG_UA = "uk"
-        private const val LANGUAGE_STATE_KEY_TWO = "LAND_ID_KEY_TWO"
+        private const val LANGUAGE_STATE_KEY = "LANG_ID_KEY_MAIN_ACTIVITY"
     }
 
     // Data Store and Coroutine Scope variables.
-    private lateinit var loginData: LoginDataStoreManager
+    private lateinit var loginData: DataStoreManager
     private val coroutineScope: CoroutineScope = CoroutineScope(Job())
 
 
@@ -46,7 +48,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
         setLocale()
 
         // Create Data Store.
-        loginData = LoginDataStoreManager(this)
+        loginData = DataStoreManager(this)
 
         // Parse email, set Name Surname text and img of avatar.
         setUserInformation()
@@ -56,7 +58,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
 
     override fun setListeners() {
         super.setListeners()
-        binding.tvLogout.setOnClickListener { logout() }
+        binding.textviewMainLogoutButton.setOnClickListener { logout() }
     }
 
     /**
@@ -65,9 +67,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
     private fun setUserInformation() {
         val emailToParse = intent.getStringExtra(INTENT_EMAIL_ID).toString()
         with(binding){
-            tvPersonName.text = if (emailToParse.isEmpty()) "" else parseEmail(emailToParse)
-            tvPersonCareer.text = getString(R.string.person_career_hardcoded)
-            tvPersonHomeAddress.text = getString(R.string.person_homeadress_hardcoded)
+            textviewMainPersonName.text = if (emailToParse.isEmpty()) "" else parseEmail(emailToParse)
+            textviewMainPersonCareer.text = getString(R.string.main_activity_person_career_hardcoded)
+            textviewMainPersonAddress.text = getString(R.string.main_activity_person_address_hardcoded)
         }
     }
 
@@ -113,7 +115,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
     /**
      * Set avatar image.
      */
-    private fun setAvatar() = binding.ivPerson.setImageResource(R.drawable.sample_avatar)
+    private fun setAvatar() = binding.imageviewMainAvatarImage.setImageResource(R.drawable.sample_avatar)
 
     /**
      * Logout with clear information about user from Data Store.
@@ -153,7 +155,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
      * Save Instance State.
      */
     override fun onSaveInstanceState(outState: Bundle) {
-        outState.putBoolean(LANGUAGE_STATE_KEY_TWO, isUkrainian)
+        outState.putBoolean(LANGUAGE_STATE_KEY, isUkrainian)
         super.onSaveInstanceState(outState)
     }
 
@@ -162,7 +164,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
      */
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
-        isUkrainian = savedInstanceState.getBoolean(LANGUAGE_STATE_KEY_TWO)
+        isUkrainian = savedInstanceState.getBoolean(LANGUAGE_STATE_KEY)
         setLocale()
     }
 
