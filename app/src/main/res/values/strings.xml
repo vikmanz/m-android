@@ -1,53 +1,56 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
+
+    <!-- ———————————————————— General ———————————————————— -->
     <string name="app_name">SHppPro</string>
-    <string name="settingsButton">Settings</string>
-    <string name="personNameSample">Person Name</string>
-    <string name="personCareerSample">Career</string>
-    <string name="personHomeAddressSample">Home address</string>
-    <string name="propositionToFillProfile">Go to settings and fill out the profile</string>
-    <string name="editProfile">Edit profile</string>
-    <string name="sample_of_person_photo">sample of person photo</string>
-    <string name="viewMyContacts">VIEW MY CONTACTS</string>
-    <string name="helloText">Let\'s get acquainted</string>
-    <string name="helloSubText">Fill out the profile and go to the application!</string>
-    <string name="title_e_mail"><b>E-mail</b></string>
-    <string name="title_password"><b>Password</b></string>
-    <string name="termsAgreeWarning">By clicking Register you agree to our Terms\nand Conditions</string>
-    <string name="termsAgreeWarning_landscape">By clicking Register you agree to our Terms and Conditions</string>
-    <string name="registerButton">REGISTER</string>
-    <string name="googleOrRegister">or</string>
-    <string name="googleRegisterButton" translatable="false">GOOGLE</string>
-    <string name="rememberMeCheckbox">Remember me</string>
-    <string name="already_have_an_account">Already have an account?</string>
-    <string name="sign_in">Sign in</string>
-    <string name="default_person_name">Name Surname</string>
-    <string name="my_main_email" translatable="false">viktor.manza@gmail.com</string>
-    <string name="my_main_password" translatable="false">passwordE3@</string>
-    <string name="helloText_signin">Hello!</string>
-    <string name="helloSubText_signin">Enter your email and password below</string>
-    <string name="registerButton_signin">LOGIN</string>
-    <string name="already_have_an_account_signin">Don’t have account?</string>
-    <string name="sign_in_signin">Sign up</string>
-    <string name="forgot_your_password">Forgot your password?</string>
-    <string name="logout_button_text">LOGOUT</string>
-    <string name="btnTest1text">FILL</string>
-    <string name="btnTest2text">CLEAR</string>
-    <string name="btnTest3text">LANG</string>
-    <string name="regex_fromBigAtoBigZ_char" translatable="false">[A-Z]</string>
-    <string name="regex_pass_OneUpperChar" translatable="false">.*[A-Z].*</string>
-    <string name="regex_pass_OneLowerChar" translatable="false">.*[a-z].*</string>
-    <string name="regex_pass_OneSpecialChar" translatable="false">.*[@#$%^&amp;+=].*</string>
-    <string name="passCheckWarning_min8chars">Minimum %1$d Characters Password</string>
-    <string name="passCheckWarning_OneUpperChar">Must Contain 1 Upper-case Character</string>
-    <string name="passCheckWarning_OneLowerChar">Must Contain 1 Lower-case Character</string>
-    <string name="passCheckWarning_OneSpecialChar">Must Contain 1 Special Character (@#\$%^&amp;+=)</string>
-    <string name="language_en" translatable="false" tools:ignore="MissingTranslation">en</string>
-    <string name="language_ua" translatable="false" tools:ignore="MissingTranslation">uk</string>
-    <string name="warningMessage_InvalidEmailAdress">Invalid email address</string>
-    <string name="warningMessage_InvalidRegisterForm">Invalid registration form!</string>
-    <string name="warningMessage_OkButtonOnAllert">Okay</string>
-    <string name="warning_emailTitle">Email:</string>
-    <string name="warning_passwordTitle">Password:</string>
-    <string name="MyContacts_contacts">Contacts</string>
-    <string name="MyContacts_AddContacts">Add contacts</string>
+
+    <!-- ———————————————————— Auth ———————————————————— -->
+    <!-- Layout -->
+    <string name="auth_layout_hello_text">Let\'s get acquainted</string>
+    <string name="auth_layout_hello_subtext">Fill out the profile and go to the application!</string>
+    <string name="auth_layout_email_hint"><b>E-mail</b></string>
+    <string name="auth_layout_password_hint"><b>Password</b></string>
+    <string name="auth_layout_terms_warning">By clicking Register you agree to our Terms\nand Conditions</string> <!-- \n -->
+    <string name="auth_layout_terms_warning_landscape">By clicking Register you agree to our Terms and Conditions</string>
+    <string name="auth_layout_google_button" translatable="false">GOOGLE</string>
+    <string name="auth_layout_text_between_google_and_register">or</string>
+    <string name="auth_layout_register_button">REGISTER</string>
+    <string name="auth_layout_remember_me_checkbox">Remember me</string>
+    <string name="auth_layout_already_have_account_message">Already have an account?</string>
+    <string name="auth_layout_sign_in_button">Sign in</string>
+    <string name="auth_layout_debug_button_fill">FILL</string>
+    <string name="auth_layout_debug_button_clear">CLEAR</string>
+    <string name="auth_layout_debug_button_language">LANG</string>
+    <!-- Activity -->
+    <string name="auth_activity_sign_in_button_login_screen">Sign up</string>
+    <string name="auth_activity_hello_text_login_screen">Hello!</string>
+    <string name="auth_activity_hello_subtext_login_screen">Enter your email and password below</string>
+    <string name="auth_activity_register_button_login_screen">LOGIN</string>
+    <string name="auth_activity_already_have_account_message_login_screen">Don’t have account?</string>
+    <string name="auth_activity_forgot_your_password">Forgot your password?</string>
+
+    <string name="auth_activity_password_warning_min8chars">Minimum %1$d Characters Password</string>               <!-- Variable -->
+    <string name="auth_activity_password_warning_one_upper_char">Must Contain 1 Upper-case Character</string>
+    <string name="auth_activity_password_warning_one_lower_char">Must Contain 1 Lower-case Character</string>
+    <string name="auth_activity_password_warning_one_special_char">Must Contain 1 Special Character (%1$s)</string> <!-- Variable -->
+    <string name="auth_activity_warning_message_invalid_register_form">Invalid registration form!</string>
+    <string name="auth_activity_warning_message_invalid_email">Invalid email address</string>
+    <string name="auth_activity_warning_message_ok_button_text">Okay</string>
+    <string name="auth_activity_warning_message_email_title">Email:</string>
+    <string name="auth_activity_warning_message_password_title">Password:</string>
+
+    <!-- ———————————————————— Main ———————————————————— -->
+    <!-- Layout -->
+    <string name="main_settings">Settings</string>
+    <string name="main_logout_button">LOGOUT</string>
+    <string name="main_person_name_sample">Person Name</string>
+    <string name="main_person_career_sample">Career</string>
+    <string name="main_person_address_sample">Home address</string>
+    <string name="main_edit_profile_button">Edit profile</string>
+    <string name="main_view_my_contacts_button">VIEW MY CONTACTS</string>
+    <!-- Activity -->
+    <string name="main_activity_person_career_hardcoded">Motion designer</string>
+    <string name="main_activity_person_address_hardcoded">49101, Dnipro, Homeadress str. 7</string>
+
+<!--    <string name="default_person_name">Name Surname</string>-->
+<!--    <string name="sample_of_person_photo">sample of person photo</string>-->
 </resources>

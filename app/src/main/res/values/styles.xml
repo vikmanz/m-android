@@ -7,16 +7,25 @@
         <item name="android:fontFamily">@font/open_sans_regular</item>     <!-- FONT -->
         <item name="android:textColor">?attr/colorTertiary</item>
         <item name="android:textSize">@dimen/size_text_font_S</item>
-
     </style>
 
     <style name="basicText_bold" parent="basicText">
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="checkbox" parent="basicText">
+        <item name="android:textSize">@dimen/size_text_font_XS</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:button">@drawable/checkbox_selector</item>
+        <item name="android:paddingStart">8sp</item>
+    </style>
+
     <style name="basicText_buttonsText" parent="basicText">
+        <item name="android:fontFamily">@font/open_sans_semi_bold</item>     <!-- FONT -->
         <!-- Nothing. Need to overwrite buttons font size on UA language. -->
     </style>
+
+
 
 
     <!-- ————————————————————  TextInput styles. ———————————————————— -->
@@ -32,7 +41,7 @@
     </style>
 
     <style name="textInputLayout_hintSize">
-        <item name="android:textSize">@dimen/size_text_font_S</item>
+        <item name="android:textSize">@dimen/size_text_font_XS</item>
     </style>
 
     <style name="textInputLayout_basicTextInput" parent="Widget.AppCompat.EditText">
@@ -42,6 +51,5 @@
         <item name="android:paddingStart">0dp</item>
         <item name="android:paddingEnd">0dp</item>
     </style>
-
 
 </resources>

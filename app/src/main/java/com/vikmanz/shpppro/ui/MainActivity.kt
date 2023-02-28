@@ -1,13 +1,14 @@
-package com.vikmanz.shpppro
+package com.vikmanz.shpppro.ui
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.vikmanz.shpppro.R
 import com.vikmanz.shpppro.databinding.ActivityMainBinding
 import com.vikmanz.shpppro.constants.Constants.INTENT_EMAIL_ID
 import com.vikmanz.shpppro.constants.Constants.INTENT_LANG_ID
-import com.vikmanz.shpppro.constants.Constants.LANGUAGE_STATE_KEY_TWO
-import com.vikmanz.shpppro.dataSave.LoginDataStoreManager
+import com.vikmanz.shpppro.data.DataStoreManager
+import com.vikmanz.shpppro.utilits.BaseActivity
+import com.vikmanz.shpppro.utilits.firstCharToUpperCase
 import kotlinx.coroutines.*
 import java.util.*
 
@@ -16,9 +17,8 @@ import java.util.*
  */
 class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::inflate) {
 
-    // Binding, Data Store and Coroutine Scope variables.
-//    private lateinit var binding: ActivityMainBinding
-    private lateinit var loginData: LoginDataStoreManager
+    // Data Store and Coroutine Scope variables.
+    private lateinit var loginData: DataStoreManager
     private val coroutineScope: CoroutineScope = CoroutineScope(Job())
 
 
@@ -37,28 +37,30 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
         isUkrainian = intent.getBooleanExtra(INTENT_LANG_ID, true)
         setLocale()
 
-        // Others init operations.
-//        binding = ActivityMainBinding.inflate(layoutInflater)
-//        setContentView(binding.root)
-
         // Create Data Store.
-        loginData = LoginDataStoreManager(this)
+        loginData = DataStoreManager(this)
 
         // Parse email, set Name Surname text and img of avatar.
-//        TODO тут виконуються дії заповнення данних. Рекомендую їх в окремий метод винести
-        val emailToParse = intent.getStringExtra(INTENT_EMAIL_ID).toString()
-        binding.tvPersonName.text = if (emailToParse.isEmpty()) "" else parseEmail(emailToParse)
-        binding.ivPerson.setImageResource(R.drawable.sample_avatar)
-
-
-
+        setUserInformation()
+        setAvatar()
     }
+
 
     override fun setListeners() {
         super.setListeners()
+        binding.textviewMainLogoutButton.setOnClickListener { logout() }
+    }
 
-// Set onClick listener to Logout button.
-        binding.tvLogout.setOnClickListener { logout() }
+    /**
+     * Get full email, parse it and set name/surname of user.
+     */
+    private fun setUserInformation() {
+        val emailToParse = intent.getStringExtra(INTENT_EMAIL_ID).toString()
+        with(binding){
+            textviewMainPersonName.text = if (emailToParse.isEmpty()) "" else parseEmail(emailToParse)
+            textviewMainPersonCareer.text = getString(R.string.main_activity_person_career_hardcoded)
+            textviewMainPersonAddress.text = getString(R.string.main_activity_person_address_hardcoded)
+        }
     }
 
     /**
@@ -69,13 +71,12 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
      */
     private fun parseEmail(fullEmail: String): String {
 
-        // TODO літерали винести у константи
         val personName: String
-        val firstPartEmail = fullEmail.substring(0, fullEmail.indexOf('@'))
+        val firstPartEmail = fullEmail.substring(0, fullEmail.indexOf(EMAIL_DOMAIN_SEPARATOR))
 
         // if "nameSurname" variant:
-        if (firstPartEmail.indexOf('.') == -1) {
-            val regex = getString(R.string.regex_fromBigAtoBigZ_char).toRegex()
+        if (firstPartEmail.indexOf(EMAIL_NAME_SEPARATOR) == -1) {
+            val regex = REGEX_FROM_A_TO_Z.toRegex()
             val match: MatchResult? = regex.find(firstPartEmail.substring(1))
             personName = if (match == null) {
                 firstPartEmail
@@ -94,12 +95,17 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
         // else if "name.surname" variant:
         else {
             personName = firstPartEmail
-                .split('.')
-                .joinToString(" ", transform = String::firstCharToUpperCase)
+                .split(EMAIL_NAME_SEPARATOR)
+                .joinToString(EMAIL_NAME_JOIN_SPASE, transform = String::firstCharToUpperCase)
         }
 
         return personName
     }
+
+    /**
+     * Set avatar image.
+     */
+    private fun setAvatar() = binding.imageviewMainAvatarImage.setImageResource(R.drawable.sample_avatar)
 
     /**
      * Logout with clear information about user from Data Store.
@@ -126,7 +132,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
     private fun setLocale() {
         val config = resources.configuration
         val lang =
-            if (isUkrainian) getString(R.string.language_ua) else getString(R.string.language_en)
+            if (isUkrainian) LANG_UA else LANG_EN
         val locale = Locale(lang)
         Locale.setDefault(locale)
         config.setLocale(locale)
@@ -139,7 +145,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
      * Save Instance State.
      */
     override fun onSaveInstanceState(outState: Bundle) {
-        outState.putBoolean(LANGUAGE_STATE_KEY_TWO, isUkrainian)
+        outState.putBoolean(LANGUAGE_STATE_KEY, isUkrainian)
         super.onSaveInstanceState(outState)
     }
 
@@ -148,15 +154,22 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
      */
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
-        isUkrainian = savedInstanceState.getBoolean(LANGUAGE_STATE_KEY_TWO)
+        isUkrainian = savedInstanceState.getBoolean(LANGUAGE_STATE_KEY)
         setLocale()
+    }
+
+    /**
+     * Constants.
+     */
+    companion object {
+        private const val EMAIL_DOMAIN_SEPARATOR = '@'
+        private const val EMAIL_NAME_SEPARATOR = '.'
+        private const val EMAIL_NAME_JOIN_SPASE = " "
+        private const val REGEX_FROM_A_TO_Z = "[A-Z]"
+        private const val LANG_EN = "en"
+        private const val LANG_UA = "uk"
+        private const val LANGUAGE_STATE_KEY = "LANG_ID_KEY_MAIN_ACTIVITY"
     }
 
 }
 
-/**
- * Extra function of String class, for replace the first char of String to Upper case.
- */
-fun String.firstCharToUpperCase() = replaceFirstChar {
-    if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString()
-}

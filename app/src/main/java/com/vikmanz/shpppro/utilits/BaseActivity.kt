@@ -1,10 +1,13 @@
-package com.vikmanz.shpppro
+package com.vikmanz.shpppro.utilits
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
 
+/**
+ * Base activity with binding to extend it in activities.
+ */
 abstract class BaseActivity<VBinding : ViewBinding>(
     private val inflaterMethod: (LayoutInflater) -> VBinding
 ) :
@@ -15,9 +18,7 @@ abstract class BaseActivity<VBinding : ViewBinding>(
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        _binding = inflaterMethod.invoke(layoutInflater)
-        setContentView(binding.root)
-
+        _binding = inflaterMethod.invoke(layoutInflater).also{setContentView(it.root)}
         setListeners()
         setObservers()
     }
@@ -27,6 +28,11 @@ abstract class BaseActivity<VBinding : ViewBinding>(
         super.onDestroy()
     }
 
-    protected open fun setListeners() {}
-    protected open fun setObservers() {}
+    protected open fun setListeners() {
+
+    }
+
+    protected open fun setObservers() {
+
+    }
 }
