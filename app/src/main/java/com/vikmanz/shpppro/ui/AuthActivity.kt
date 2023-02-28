@@ -3,17 +3,16 @@ package com.vikmanz.shpppro.ui
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.util.Patterns
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.asLiveData
 import com.vikmanz.shpppro.R
-import com.vikmanz.shpppro.utilits.Constants.INTENT_EMAIL_ID
-import com.vikmanz.shpppro.utilits.Constants.INTENT_LANG_ID
-import com.vikmanz.shpppro.utilits.Constants.LOGIN_VIEW_FIRST
-import com.vikmanz.shpppro.utilits.Constants.MIN_PASSWORD_LENGTH
-import com.vikmanz.shpppro.utilits.Constants.VIEW_HELP_BUTTONS_ON_CREATE
+import com.vikmanz.shpppro.constants.Constants.INTENT_EMAIL_ID
+import com.vikmanz.shpppro.constants.Constants.INTENT_LANG_ID
+import com.vikmanz.shpppro.constants.Constants.LOGIN_VIEW_FIRST
+import com.vikmanz.shpppro.constants.Constants.MIN_PASSWORD_LENGTH
+import com.vikmanz.shpppro.constants.Constants.VIEW_HELP_BUTTONS_ON_CREATE
 import com.vikmanz.shpppro.data.DataStoreManager
 import com.vikmanz.shpppro.databinding.ActivityAuthBinding
 import kotlinx.coroutines.CoroutineScope
@@ -177,8 +176,6 @@ class AuthActivity : AppCompatActivity() {
         if (!passwordText.matches(REGEX_ONE_LOWER_CHAR.toRegex())) {   // Minimum 1 LowerCase char.
             return getString(R.string.auth_activity_password_warning_one_lower_char)
         }
-        Log.d("myLog", REGEX_ONE_SPECIAL_CHAR)
-        Log.d("myLog", "${passwordText.matches(REGEX_ONE_SPECIAL_CHAR.toRegex())}")
         if (!passwordText.matches(REGEX_ONE_SPECIAL_CHAR.toRegex())) { // Minimum 1 special char.
             return getString(R.string.auth_activity_password_warning_one_special_char, SPECIAL_CHARS)
         }
@@ -299,6 +296,8 @@ class AuthActivity : AppCompatActivity() {
             buttonAuthClearLoginPassFields.setOnClickListener {
                 textinputAuthEmail.setText("")
                 textinputAuthPassword.setText("")
+                textinputlayoutAuthEmail.helperText = null
+                textinputlayoutAuthPassword.helperText = null
                 checkboxAuthRememberMe.isChecked = false
             }
 
@@ -373,12 +372,15 @@ class AuthActivity : AppCompatActivity() {
         setLocale()
     }
 
+    /**
+     * Constants.
+     */
     companion object {
         // Regex's
         private const val REGEX_ONE_UPPER_CHAR = ".*[A-Z].*"
         private const val REGEX_ONE_LOWER_CHAR = ".*[a-z].*"
-        private const val SPECIAL_CHARS = "@#$%^&amp;+="
-        private const val REGEX_ONE_SPECIAL_CHAR = ".*[@#\$%^&amp;+=].*"        //TODO ERROR!
+        private const val SPECIAL_CHARS = "@#$%^&;+="
+        private const val REGEX_ONE_SPECIAL_CHAR = ".*[$SPECIAL_CHARS].*"
         private const val LANG_EN = "en"
         private const val LANG_UA = "uk"
         private const val TEST_LOGIN = "viktor.manza@gmail.com"

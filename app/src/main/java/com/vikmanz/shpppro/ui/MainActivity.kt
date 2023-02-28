@@ -4,8 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import com.vikmanz.shpppro.R
 import com.vikmanz.shpppro.databinding.ActivityMainBinding
-import com.vikmanz.shpppro.utilits.Constants.INTENT_EMAIL_ID
-import com.vikmanz.shpppro.utilits.Constants.INTENT_LANG_ID
+import com.vikmanz.shpppro.constants.Constants.INTENT_EMAIL_ID
+import com.vikmanz.shpppro.constants.Constants.INTENT_LANG_ID
 import com.vikmanz.shpppro.data.DataStoreManager
 import com.vikmanz.shpppro.utilits.BaseActivity
 import com.vikmanz.shpppro.utilits.firstCharToUpperCase
@@ -16,16 +16,6 @@ import java.util.*
  * Class represents user main profile screen activity.
  */
 class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::inflate) {
-
-    companion object {
-        private const val EMAIL_DOMAIN_SEPARATOR = '@'
-        private const val EMAIL_NAME_SEPARATOR = '.'
-        private const val EMAIL_NAME_JOIN_SPASE = " "
-        private const val REGEX_FROM_A_TO_Z = "[A-Z]"
-        private const val LANG_EN = "en"
-        private const val LANG_UA = "uk"
-        private const val LANGUAGE_STATE_KEY = "LANG_ID_KEY_MAIN_ACTIVITY"
-    }
 
     // Data Store and Coroutine Scope variables.
     private lateinit var loginData: DataStoreManager
@@ -168,7 +158,18 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
         setLocale()
     }
 
-
+    /**
+     * Constants.
+     */
+    companion object {
+        private const val EMAIL_DOMAIN_SEPARATOR = '@'
+        private const val EMAIL_NAME_SEPARATOR = '.'
+        private const val EMAIL_NAME_JOIN_SPASE = " "
+        private const val REGEX_FROM_A_TO_Z = "[A-Z]"
+        private const val LANG_EN = "en"
+        private const val LANG_UA = "uk"
+        private const val LANGUAGE_STATE_KEY = "LANG_ID_KEY_MAIN_ACTIVITY"
+    }
 
 }
 
