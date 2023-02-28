@@ -2,21 +2,14 @@ package com.vikmanz.shpppro.myContactsActivity.contactModel
 
 import android.Manifest.permission.READ_CONTACTS
 import android.annotation.SuppressLint
-import android.content.ContentProvider
 import android.content.ContentResolver
-import android.content.Context
-import android.content.Intent
-import android.content.Intent.*
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.provider.ContactsContract
-import android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat.checkSelfPermission
-import androidx.core.content.ContextCompat.startActivity
 
 
 class ContactsFromPhonebookInformationTaker(

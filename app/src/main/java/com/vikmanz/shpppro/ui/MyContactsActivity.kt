@@ -1,10 +1,9 @@
-package com.vikmanz.shpppro.myContactsActivity
+package com.vikmanz.shpppro.ui
 
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.provider.Settings
 import android.view.View
 import androidx.activity.viewModels
@@ -15,11 +14,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.vikmanz.shpppro.R
-import com.vikmanz.shpppro.authActivity.AuthActivity
 import com.vikmanz.shpppro.constants.Constants
 import com.vikmanz.shpppro.constants.Constants.MARGINS_OF_ELEMENTS
 import com.vikmanz.shpppro.constants.Constants.SNACK_BAR_VIEW_TIME
 import com.vikmanz.shpppro.databinding.ActivityMyContactsBinding
+import com.vikmanz.shpppro.myContactsActivity.AddContactDialogFragment
+import com.vikmanz.shpppro.myContactsActivity.MarginItemDecoration
+import com.vikmanz.shpppro.myContactsActivity.MyContactsViewModel
+import com.vikmanz.shpppro.myContactsActivity.SwipeToDeleteCallback
 import com.vikmanz.shpppro.myContactsActivity.contactModel.*
 import kotlinx.coroutines.*
 

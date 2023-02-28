@@ -1,47 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <!-- ———————————————————— General ———————————————————— -->
     <string name="app_name">Ш++</string>
-    <string name="settingsButton">Налаштування</string>
+
+    <!-- ———————————————————— Auth ———————————————————— -->
+    <!-- Layout -->
+    <string name="auth_layout_hello_text">Давайте познайомимося</string>
+    <string name="auth_layout_hello_subtext">Заповнюйте анкету та переходьте у додаток!</string>
+    <string name="auth_layout_email_hint"><b>Електронна пошта</b></string>
+    <string name="auth_layout_password_hint"><b>Пароль</b></string>
+    <string name="auth_layout_terms_warning_landscape">Натискаючи \"Зареєструватися\", ви погоджуєтеся з нашими Умовами та положеннями.</string>
+    <string name="auth_layout_terms_warning">Натискаючи \"Зареєструватися\", ви погоджуєтеся з нашими\nУмовами та положеннями.</string> <!-- \n -->
+    <string name="auth_layout_text_between_google_and_register">або</string>
+    <string name="auth_layout_register_button">ЗАРЕЄСТРУВАТИСЯ</string>
+    <string name="auth_layout_remember_me_checkbox">Запам\'ятати мене</string>
+    <string name="auth_layout_already_have_account_message">Вже маєте обліковий запис?</string>
+    <string name="auth_layout_sign_in_button">Увійдіть</string>
+    <string name="auth_layout_debug_button_fill">ЗАПОВНИТИ</string>
+    <string name="auth_layout_debug_button_clear">ОЧИСТИТИ</string>
+    <string name="auth_layout_debug_button_language">МОВА</string>
+    <!-- Activity -->
+    <string name="auth_activity_hello_text_login_screen">Привіт!</string>
+    <string name="auth_activity_hello_subtext_login_screen">Введіть свою електронну пошту та пароль нижче</string>
+    <string name="auth_activity_register_button_login_screen">ЛОГІН</string>
+    <string name="auth_activity_already_have_account_message_login_screen">Не маєте облікового запису?</string>
+    <string name="auth_activity_sign_in_button_login_screen">Зареєструйтесь</string>
+    <string name="auth_activity_forgot_your_password">Забули пароль?</string>
+    <string name="auth_activity_password_warning_min8chars">Мінімум %1$d символів</string>                              <!-- Variable -->
+    <string name="auth_activity_password_warning_one_upper_char">Мусить містити 1 символ у верхньому регістрі</string>
+    <string name="auth_activity_password_warning_one_lower_char">Мусить містити 1 символ у нижньому регістрі</string>
+    <string name="auth_activity_password_warning_one_special_char">Мусить містити 1 спеціальний символ (%1$s)</string>  <!-- Variable -->
+    <string name="auth_activity_warning_message_invalid_register_form">Не правильно введено дані!</string>
+    <string name="auth_activity_warning_message_invalid_email">Не правильна поштова адреса</string>
+    <string name="auth_activity_warning_message_ok_button_text">Окей</string>
+    <string name="auth_activity_warning_message_email_title">Пошта:</string>
+    <string name="auth_activity_warning_message_password_title">Пароль:</string>
+
+    <!-- ———————————————————— Main ———————————————————— -->
+    <!-- Layout -->
+    <string name="main_settings">Налаштування</string>
+    <string name="main_logout_button">ВИХІД</string>
+    <string name="main_person_name_sample">Ім\'я</string>
+    <string name="main_person_career_sample">Профессія</string>
+    <string name="main_person_address_sample">Домашня адреса</string>
+    <string name="main_edit_profile_button">Редагувати профіль</string>
+    <string name="main_view_my_contacts_button">МОЇ КОНТАКТИ</string>
+    <!-- Activity -->
+    <string name="main_activity_person_career_hardcoded">Графічний дизайнер</string>
+    <string name="main_activity_person_address_hardcoded">49101, Дніпро, Домашній 7</string>
+
+    <!-- ———————————————————— Contacts ———————————————————— -->
+    <string name="MyContacts_contacts">Контакти</string>
+    <string name="MyContacts_AddContacts">Додати контакт</string>
+    <string name="contacts_change_to_phonebook">Змінити на контакти телефону</string>
+    <string name="add_contact_from_add_contact_activity_my_contacts">Додати контакт</string>
     <string name="personNameSample">Ім\'я</string>
     <string name="personCareerSample">Профессія</string>
     <string name="personHomeAddressSample">Домашня адреса</string>
-    <string name="propositionToFillProfile">Перейдіть в налаштування і заповніть профіль</string>
-    <string name="editProfile">Редагувати профіль</string>
-    <string name="sample_of_person_photo">Семпл фото</string>
-    <string name="viewMyContacts">МОЇ КОНТАКТИ</string>
-    <string name="helloText">Давайте познайомимося</string>
-    <string name="helloSubText">Заповнюйте анкету та переходьте у додаток!</string>
-    <string name="title_e_mail"><b>Електронна пошта</b></string>
-    <string name="title_password"><b>Пароль</b></string>
-    <string name="termsAgreeWarning_landscape">Натискаючи \"Зареєструватися\", ви погоджуєтеся з нашими Умовами та положеннями.</string>
-    <string name="termsAgreeWarning">Натискаючи \"Зареєструватися\", ви погоджуєтеся з нашими\nУмовами та положеннями.</string>
-    <string name="registerButton">ЗАРЕЄСТРУВАТИСЯ</string>
-    <string name="googleOrRegister">або</string>
-    <string name="rememberMeCheckbox">Запам\'ятати мене</string>
-    <string name="already_have_an_account">Вже маєте обліковий запис?</string>
-    <string name="sign_in">Увійдіть</string>
-    <string name="default_person_name">Ім\'я Прізвище</string>
-    <string name="helloText_signin">Привіт!</string>
-    <string name="helloSubText_signin">Введіть свою електронну пошту та пароль нижче</string>
-    <string name="registerButton_signin">ЛОГІН</string>
-    <string name="already_have_an_account_signin">Не маєте облікового запису?</string>
-    <string name="sign_in_signin">Зареєструйтесь</string>
-    <string name="forgot_your_password">Забули пароль?</string>
-    <string name="logout_button_text">ВИХІД</string>
-    <string name="btnTest1text">ЗАПОВНИТИ</string>
-    <string name="btnTest2text">ОЧИСТИТИ</string>
-    <string name="btnTest3text">МОВА</string>
-    <string name="passCheckWarning_min8chars">Мінімум 9 символів</string>
-    <string name="passCheckWarning_OneUpperChar">Мусить містити 1 символ у верхньому регістрі</string>
-    <string name="passCheckWarning_OneLowerChar">Мусить містити 1 символ у нижньому регістрі</string>
-    <string name="passCheckWarning_OneSpecialChar">Мусить містити 1 спеціальний символ (@#\\$%^&amp;+=)</string>
-    <string name="warningMessage_InvalidEmailAdress">Не правильна поштова адреса</string>
-    <string name="warningMessage_InvalidRegisterForm">Не правильно введено дані!</string>
-    <string name="warningMessage_OkButtonOnAllert">Окей</string>
-    <string name="warning_emailTitle">Пошта:</string>
-    <string name="warning_passwordTitle">Пароль:</string>
-    <string name="MyContacts_contacts">Контакти</string>
-    <string name="MyContacts_AddContacts">Додати контакт</string>
-    <string name="contacts_change_to_phonebook">Змінити на книгу телефону</string>
-    <string name="add_contact_from_add_contact_activity_my_contacts">Додати контакт</string>
+    <string name="contacts_grant_permission_button">Надати дозвіл</string>
+
 </resources>

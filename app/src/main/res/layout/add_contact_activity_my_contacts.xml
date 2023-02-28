@@ -117,7 +117,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInput_UserName_AddContact"
-        style="@style/textInputLayout_AddNewContact"
+        style="@style/textInput_AddNewContact"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="Username"
@@ -134,7 +134,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInput_Career_AddContact"
-        style="@style/textInputLayout_AddNewContact"
+        style="@style/textInput_AddNewContact"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="Career"
@@ -151,7 +151,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInput_Email_AddContact"
-        style="@style/textInputLayout_AddNewContact"
+        style="@style/textInput_AddNewContact"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="Email"
@@ -167,7 +167,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInput_Phone_AddContact"
-        style="@style/textInputLayout_AddNewContact"
+        style="@style/textInput_AddNewContact"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="Phone"
@@ -184,7 +184,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInput_Address_AddContact"
-        style="@style/textInputLayout_AddNewContact"
+        style="@style/textInput_AddNewContact"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="Address"
@@ -200,7 +200,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInput_Birthday_AddContact"
-        style="@style/textInputLayout_AddNewContact"
+        style="@style/textInput_AddNewContact"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="Date of birth"

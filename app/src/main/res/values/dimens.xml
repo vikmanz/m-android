@@ -23,6 +23,7 @@
     <dimen name="size_text_font_S">16sp</dimen>
     <dimen name="size_text_font_M">18sp</dimen>
     <dimen name="size_text_font_L">24sp</dimen>
+    <dimen name="size_text_font_X">28sp</dimen>
     <dimen name="size_text_font_XL">32sp</dimen>
 
     <!-- Avatar dimens. -->
