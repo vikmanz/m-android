@@ -13,7 +13,7 @@
         android:theme="@style/defaultTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="33">
-        
+
         <activity
             android:name=".ui.AuthActivity"
             android:exported="true">
