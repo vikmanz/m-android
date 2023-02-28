@@ -4,7 +4,6 @@ import android.Manifest.permission.READ_CONTACTS
 import android.annotation.SuppressLint
 import android.content.ContentResolver
 import android.content.pm.PackageManager
-import android.net.Uri
 import android.provider.ContactsContract
 import android.util.Log
 import android.widget.Toast
@@ -17,6 +16,7 @@ class ContactsFromPhonebookInformationTaker(
     private val contentResolver: ContentResolver
 ) {
 
+    var counter = 0;
 
     fun getContactsInfo(): ArrayList<List<String>>? {
         if (!requestPermission()) return null
@@ -29,14 +29,14 @@ class ContactsFromPhonebookInformationTaker(
         if (permissionBeforeStatus == PackageManager.PERMISSION_GRANTED) {
             val toast = Toast.makeText(
                 activity,
-                "Access already granted!",
+                "Access already granted! ${counter++}",
                 Toast.LENGTH_SHORT
             )
             toast.setMargin(50f, 50f)
             toast.show()
             return true
         } else {
-            Log.d("myLog", "Request access!")
+            Log.d("myLog", "Request access! ${counter++}")
             val toast = Toast.makeText(
                 activity,
                 "Request access!",
@@ -52,7 +52,7 @@ class ContactsFromPhonebookInformationTaker(
         if (permissionAfterStatus == PackageManager.PERMISSION_GRANTED) {
             val toast = Toast.makeText(
                 activity,
-                "Access granted!",
+                "Access granted! ${counter++}",
                 Toast.LENGTH_SHORT
             )
             toast.setMargin(50f, 50f)
@@ -61,7 +61,7 @@ class ContactsFromPhonebookInformationTaker(
         } else {
             val toast = Toast.makeText(
                 activity,
-                "Access denied!",
+                "Access denied! ${counter++}",
                 Toast.LENGTH_SHORT
             )
             toast.setMargin(50f, 50f)

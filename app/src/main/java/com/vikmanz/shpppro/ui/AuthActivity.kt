@@ -384,7 +384,7 @@ class AuthActivity : AppCompatActivity() {
         private const val LANG_EN = "en"
         private const val LANG_UA = "uk"
         private const val TEST_LOGIN = "viktor.manza@gmail.com"
-        private const val TEST_PASSWORD = "passwordE3"
+        private const val TEST_PASSWORD = "passwordE3@"
 
         // Save/Load State Keys. Don't need to change.
         private const val EMAIL_FIELD_STATE_KEY = "EMAIL_KEY_AUTH_ACTIVITY"

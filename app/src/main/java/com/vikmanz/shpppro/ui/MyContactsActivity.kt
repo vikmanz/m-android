@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.provider.Settings
 import android.view.View
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -23,23 +22,21 @@ import com.vikmanz.shpppro.myContactsActivity.MarginItemDecoration
 import com.vikmanz.shpppro.myContactsActivity.MyContactsViewModel
 import com.vikmanz.shpppro.myContactsActivity.SwipeToDeleteCallback
 import com.vikmanz.shpppro.myContactsActivity.contactModel.*
+import com.vikmanz.shpppro.utilits.BaseActivity
 import kotlinx.coroutines.*
 
 
 /**
  * Class represents MyContacts screen activity.
  */
-class MyContactsActivity : AppCompatActivity(), AddContactDialogFragment.ConfirmationListener {
-
-    // Binding, Data Store and Coroutine Scope variables.
-    private lateinit var binding: ActivityMyContactsBinding
+class MyContactsActivity :
+    BaseActivity<ActivityMyContactsBinding>(ActivityMyContactsBinding::inflate),
+    AddContactDialogFragment.ConfirmationListener {
 
     // ініціалізуємо viewModel з використанням viewModels()
     private val viewModel: MyContactsViewModel by viewModels()
-
     private val contactsService = ContactsService()
-
-
+    private var changeToPhoneContacts = false
 
     // Recycler View variables.
     private val adapter: ContactsAdapter by lazy {
@@ -56,12 +53,25 @@ class MyContactsActivity : AppCompatActivity(), AddContactDialogFragment.Confirm
     @SuppressLint("NotifyDataSetChanged")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMyContactsBinding.inflate(layoutInflater).also { setContentView(it.root) }
         with(binding) {
             btnBack.setOnClickListener { startAuthActivity() }
             buttonGrandPermissions.setOnClickListener { buttonToGrant() }
+            btnDeclineAccess.setOnClickListener { buttonToGrant() }
             tvAddContacts.setOnClickListener { addNewContact() }
-            tvAddContactsFromPhonebook.setOnClickListener { getContactsFromPhone() }
+            tvAddContactsFromPhonebook.setOnClickListener {
+                changeToPhoneContacts = true
+                getContactsFromPhone()
+                btnDeclineAccess.visibility = View.VISIBLE
+                tvAddContactsFromPhonebook.visibility = View.GONE
+                tvAddContactsFromViewModel.visibility = View.VISIBLE
+            }
+            tvAddContactsFromViewModel.setOnClickListener {
+                changeToPhoneContacts = false
+                viewModel.getFakeContacts()
+                btnDeclineAccess.visibility = View.INVISIBLE
+                tvAddContactsFromViewModel.visibility = View.GONE
+                tvAddContactsFromPhonebook.visibility = View.VISIBLE
+            }
         }
         initRecyclerView()
         setObserver()
@@ -77,10 +87,10 @@ class MyContactsActivity : AppCompatActivity(), AddContactDialogFragment.Confirm
             viewModel.clearContactList()
         } else {
             binding.buttonGrandPermissions.visibility = View.GONE
+            binding.btnDeclineAccess.visibility = View.VISIBLE
             viewModel.getContactsFromPhonebook(contactsInfo)
         }
     }
-
 
     private fun buttonToGrant() {
         val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
@@ -154,7 +164,32 @@ class MyContactsActivity : AppCompatActivity(), AddContactDialogFragment.Confirm
     }
 
     override fun onRestart() {
-        getContactsFromPhone()
+        if (changeToPhoneContacts) getContactsFromPhone()
         super.onRestart()
     }
+
+    /**
+     * Save Instance State.
+     */
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putBoolean(PHONEBOOK_STATE_KEY, changeToPhoneContacts)
+        super.onSaveInstanceState(outState)
+    }
+
+    /**
+     * Load Instance State.
+     */
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+        changeToPhoneContacts = savedInstanceState.getBoolean(PHONEBOOK_STATE_KEY)
+        if (changeToPhoneContacts) getContactsFromPhone()
+    }
+
+    /**
+     * Constants.
+     */
+    companion object {
+        private const val PHONEBOOK_STATE_KEY = "PHONEBOOK_STATE_KEY_CONTACTS_ACTIVITY"
+    }
+
 }

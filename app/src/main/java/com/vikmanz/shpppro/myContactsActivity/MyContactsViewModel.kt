@@ -40,11 +40,12 @@ class MyContactsViewModel : ViewModel() {
         return _contactList.value[index]
     }
 
+    fun getFakeContacts() {
+        _contactList.value = ContactsService().createFakeContacts()
+    }
+
     fun getContactsFromPhonebook(contactsInfo: ArrayList<List<String>>) {
-        Log.d("mylog", "view model call new list")
         _contactList.value = ContactsService().createContactsFromPhonebook(contactsInfo)
-        Log.d("mylog", "view model set new list and size is ${_contactList.value.size}")
-        Log.d("mylog", "and contactList size is ${contactList.value.size}")
     }
 
 }

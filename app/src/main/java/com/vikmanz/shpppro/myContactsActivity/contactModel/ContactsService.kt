@@ -101,6 +101,16 @@ class ContactsService {
         return newContacts
     }
 
+    fun createFakeContacts(): List<Contact> {
+        val newContacts = (0 until START_NUMBER_OF_CONTACTS).map {
+            generateRandomContact()
+        }.toMutableList()
+        Log.d("mylog", "service return new fake list with size ${newContacts.size}")
+        return newContacts
+    }
+
+
+
 
     companion object {
         val IMAGES = mutableListOf(

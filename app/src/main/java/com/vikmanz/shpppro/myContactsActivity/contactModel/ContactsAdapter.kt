@@ -2,10 +2,10 @@ package com.vikmanz.shpppro.myContactsActivity.contactModel
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.vikmanz.shpppro.databinding.OneContactItemBinding
 import com.vikmanz.shpppro.myContactsActivity.setContactPhoto
-import androidx.recyclerview.widget.ListAdapter
 
 class ContactsAdapter(private val contactActionListener: ContactActionListener)
     : ListAdapter<Contact, ContactsAdapter.ContactHolder>(ContactComparator()) {

@@ -3,10 +3,10 @@ package com.vikmanz.shpppro.ui
 import android.content.Intent
 import android.os.Bundle
 import com.vikmanz.shpppro.R
-import com.vikmanz.shpppro.databinding.ActivityMainBinding
 import com.vikmanz.shpppro.constants.Constants.INTENT_EMAIL_ID
 import com.vikmanz.shpppro.constants.Constants.INTENT_LANG_ID
 import com.vikmanz.shpppro.data.DataStoreManager
+import com.vikmanz.shpppro.databinding.ActivityMainBinding
 import com.vikmanz.shpppro.utilits.BaseActivity
 import com.vikmanz.shpppro.utilits.firstCharToUpperCase
 import kotlinx.coroutines.*
@@ -49,6 +49,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
     override fun setListeners() {
         super.setListeners()
         binding.textviewMainLogoutButton.setOnClickListener { logout() }
+        binding.buttonMainViewMyContacts.setOnClickListener { startMyContactsActivity() }
     }
 
     /**
@@ -160,7 +161,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
 
     private fun startMyContactsActivity() {
         val intentObject = Intent(this, MyContactsActivity::class.java)
-        intentObject.putExtra(INTENT_LANG_ID, isUkrainian)
         startActivity(intentObject)
         overridePendingTransition(R.anim.zoom_in_inner, R.anim.zoom_in_outter)
     }

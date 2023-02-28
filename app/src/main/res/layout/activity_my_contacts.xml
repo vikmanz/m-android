@@ -26,7 +26,7 @@
             android:layout_marginHorizontal="@dimen/marginHorizontal"
             android:layout_marginTop="@dimen/offset_M"
             android:orientation="horizontal"
-            app:constraint_referenced_ids="btnBack, tvContactsTitle, btnSearch"
+            app:constraint_referenced_ids="btnBack, tvContactsTitle, btnDeclineAccess"
             app:flow_horizontalStyle="spread_inside"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -52,12 +52,13 @@
             tools:ignore="MissingConstraints" />
 
         <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/btnSearch"
+            android:id="@+id/btnDeclineAccess"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:src="@drawable/search"
+            android:src="@drawable/baseline_highlight_off_24"
             android:background="@android:color/transparent"
-            tools:ignore="MissingConstraints" />
+            tools:ignore="MissingConstraints"
+            android:visibility="invisible"/>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvAddContacts"
@@ -83,6 +84,20 @@
             android:layout_marginEnd="@dimen/offset_M"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/flowLayoutTitleAndTitleButtons"
+            tools:ignore="MissingConstraints" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvAddContactsFromViewModel"
+            style="@style/basicText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/offset_XL"
+            android:text="Change to fake data"
+            android:textSize="@dimen/size_text_font_XS"
+            android:layout_marginEnd="@dimen/offset_M"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/flowLayoutTitleAndTitleButtons"
+            android:visibility="gone"
             tools:ignore="MissingConstraints" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -118,7 +133,7 @@
             android:layout_height="@dimen/size_button_height_M"
             android:layout_marginHorizontal="@dimen/marginHorizontal"
             android:background="@drawable/btn_std_white_bg"
-            android:text="Grant permission"
+            android:text="@string/contacts_grant_permission_button"
             android:textAppearance="@style/basicText_buttonsText"
             android:textColor="?attr/colorSecondary"
             app:layout_constraintBottom_toBottomOf="@+id/recyclerView_MyContacts"
@@ -127,6 +142,7 @@
             app:layout_constraintTop_toTopOf="@+id/recyclerView_MyContacts"
             tools:ignore="TouchTargetSizeCheck"
             android:visibility="gone" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
