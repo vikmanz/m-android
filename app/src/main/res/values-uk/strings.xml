@@ -50,6 +50,4 @@
     <string name="main_activity_person_career_hardcoded">Графічний дизайнер</string>
     <string name="main_activity_person_address_hardcoded">49101, Дніпро, Домашній 7</string>
 
-    <string name="default_person_name">Ім\'я Прізвище</string>
-    <string name="sample_of_person_photo">Семпл фото</string>
 </resources>
