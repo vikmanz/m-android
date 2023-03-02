@@ -1,11 +1,19 @@
-package com.vikmanz.shpppro.myContactsActivity
+package com.vikmanz.shpppro.utilits
 
+import java.util.*
 import androidx.appcompat.widget.AppCompatImageView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.Priority
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.vikmanz.shpppro.R
+
+/**
+ * Extra function of String class, for replace the first char of String to Upper case.
+ */
+fun String.firstCharToUpperCase() = replaceFirstChar {
+    if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString()
+}
 
 // Glide options
 val GLIDE_OPTIONS = RequestOptions()
@@ -23,5 +31,3 @@ fun AppCompatImageView.setContactPhoto(contactPhotoUrl: String) {
         .apply(GLIDE_OPTIONS)
         .into(this)
 }
-
-

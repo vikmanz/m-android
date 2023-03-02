@@ -64,12 +64,6 @@ class ContactsService {
         return getCurrentContactPhotoUrl()
     }
 
-    fun getPreviousContactPhotoUrl(): String {
-        imgCounter--
-        Log.d("myLog", "New contact img counter: ${imgCounter}.")
-        return getCurrentContactPhotoUrl()
-    }
-
     fun getCurrentContactPhotoUrl(): String {
         return IMAGES[imgCounter % IMAGES.size]
     }
@@ -83,7 +77,7 @@ class ContactsService {
         imgCounter++
     }
 
-    fun createContactsFromPhonebook(listOfContactsInformation: ArrayList<List<String>>): List<Contact> {
+    fun createContactListFromPhonebookInfo(listOfContactsInformation: ArrayList<List<String>>): List<Contact> {
         val newContacts = (0 until listOfContactsInformation.size).map {
             getOneContact(
                 id = imgCounter.toLong(),
@@ -108,9 +102,6 @@ class ContactsService {
         Log.d("mylog", "service return new fake list with size ${newContacts.size}")
         return newContacts
     }
-
-
-
 
     companion object {
         val IMAGES = mutableListOf(

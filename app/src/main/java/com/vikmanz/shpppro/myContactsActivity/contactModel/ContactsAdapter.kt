@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.vikmanz.shpppro.databinding.OneContactItemBinding
-import com.vikmanz.shpppro.myContactsActivity.setContactPhoto
+import com.vikmanz.shpppro.utilits.setContactPhoto
 
 class ContactsAdapter(private val contactActionListener: ContactActionListener)
     : ListAdapter<Contact, ContactsAdapter.ContactHolder>(ContactComparator()) {

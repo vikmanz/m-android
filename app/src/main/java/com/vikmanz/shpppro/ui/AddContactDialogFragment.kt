@@ -1,4 +1,4 @@
-package com.vikmanz.shpppro.myContactsActivity
+package com.vikmanz.shpppro.ui
 
 import android.annotation.SuppressLint
 import android.app.Dialog
@@ -10,12 +10,13 @@ import androidx.fragment.app.DialogFragment
 import com.vikmanz.shpppro.databinding.AddContactActivityMyContactsBinding
 import com.vikmanz.shpppro.myContactsActivity.contactModel.Contact
 import com.vikmanz.shpppro.myContactsActivity.contactModel.ContactsService
+import com.vikmanz.shpppro.utilits.setContactPhoto
 
 
 class AddContactDialogFragment(contactsService: ContactsService) : DialogFragment() {
 
     interface ConfirmationListener {
-        fun confirmButtonClicked(contact: Contact)
+        fun addContactConfirmButtonClicked(contact: Contact)
         //fun cancelButtonClicked()
     }
 
@@ -51,17 +52,17 @@ class AddContactDialogFragment(contactsService: ContactsService) : DialogFragmen
                 }
                 buttonSaveAddNewContactActivityMyContacts.setOnClickListener {
                     dialog?.dismiss()
-                    listener.confirmButtonClicked(
+                    listener.addContactConfirmButtonClicked(
                         _contactsService.getOneContact(
                             id = Math.random().toLong(),
                             photoUrl = _contactsService.getCurrentContactPhotoUrl(),
                             photoIndex = _contactsService.getCurrentPhotoCounter(),
-                            name = textInputUserNameAddContact.getEditText()?.getText().toString(),
-                            career = textInputCareerAddContact.getEditText()?.getText().toString(),
-                            email = textInputCareerAddContact.getEditText()?.getText().toString(),
-                            phone = textInputCareerAddContact.getEditText()?.getText().toString(),
-                            address = textInputCareerAddContact.getEditText()?.getText().toString(),
-                            birthday = textInputCareerAddContact.getEditText()?.getText().toString()
+                            name = textInputUserNameAddContact.editText?.text.toString(),
+                            career = textInputCareerAddContact.editText?.text.toString(),
+                            email = textInputCareerAddContact.editText?.text.toString(),
+                            phone = textInputCareerAddContact.editText?.text.toString(),
+                            address = textInputCareerAddContact.editText?.text.toString(),
+                            birthday = textInputCareerAddContact.editText?.text.toString()
                         )
                     )
                     _contactsService.incrementPhotoCounter()

@@ -1,4 +1,4 @@
-package com.vikmanz.shpppro.myContactsActivity
+package com.vikmanz.shpppro.utilits
 
 import android.graphics.Rect
 import android.view.View

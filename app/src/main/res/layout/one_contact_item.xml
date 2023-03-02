@@ -45,7 +45,7 @@
                     style="@style/basicText_bold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/personNameSample"
+                    android:text="@string/contacts_recycler_person_name_sample"
                     android:textColor="?attr/colorOnTertiary"
                     android:textSize="@dimen/size_text_font_M"
                     tools:ignore="TextContrastCheck" />
@@ -55,7 +55,7 @@
                     style="@style/basicText_bold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/personCareerSample"
+                    android:text="@string/contacts_recycler_person_career_sample"
                     android:textColor="?attr/colorOnTertiary"
                     android:textSize="@dimen/size_text_font_XS"
                     tools:ignore="TextContrastCheck" />

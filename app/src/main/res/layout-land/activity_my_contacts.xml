@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.20" />
+        app:layout_constraintGuide_percent="0.30" />
 
     <!-- Top half of screen. -->
     <View
@@ -66,7 +66,7 @@
         android:src="@drawable/baseline_highlight_off_24"
         android:visibility="invisible"
         tools:ignore="MissingConstraints,SpeakableTextPresentCheck,TouchTargetSizeCheck"
-        tools:layout_editor_absoluteX="359dp"
+        tools:layout_editor_absoluteX="839dp"
         tools:layout_editor_absoluteY="16dp"
         tools:visibility="visible" />
 

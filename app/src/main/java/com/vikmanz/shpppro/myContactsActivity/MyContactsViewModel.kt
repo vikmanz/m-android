@@ -12,6 +12,8 @@ class MyContactsViewModel : ViewModel() {
     // створюємо MutableStateFlow зі списком контактів
     private val _contactList = MutableStateFlow(ContactsService().getContacts())
 
+
+
     // створюємо StateFlow, який можна споживати з зовнішнього коду
     var contactList: StateFlow<List<Contact>> = _contactList
 
@@ -28,10 +30,6 @@ class MyContactsViewModel : ViewModel() {
         _contactList.value = _contactList.value.toMutableList().apply { remove(contact) }
     }
 
-    fun clearContactList() {
-        _contactList.value = _contactList.value.toMutableList().apply { clear() }
-    }
-
     fun getContactPosition(contact: Contact) : Int{
         return _contactList.value.indexOf(contact)
     }
@@ -42,10 +40,16 @@ class MyContactsViewModel : ViewModel() {
 
     fun getFakeContacts() {
         _contactList.value = ContactsService().createFakeContacts()
+        phoneListChangedToFake = true
     }
 
-    fun getContactsFromPhonebook(contactsInfo: ArrayList<List<String>>) {
-        _contactList.value = ContactsService().createContactsFromPhonebook(contactsInfo)
+    fun setPhoneContactList(phoneContactList: List<Contact>) {
+        _contactList.value = phoneContactList
+        phoneListActivated = true
+        phoneListChangedToFake = false
     }
+
+    var phoneListActivated = false
+    var phoneListChangedToFake = false
 
 }

@@ -51,13 +51,23 @@
     <string name="main_activity_person_address_hardcoded">49101, Дніпро, Домашній 7</string>
 
     <!-- ———————————————————— Contacts ———————————————————— -->
-    <string name="MyContacts_contacts">Контакти</string>
-    <string name="MyContacts_AddContacts">Додати контакт</string>
+    <string name="contacts_recycler_person_name_sample">Ім\'я</string>
+    <string name="contacts_recycler_person_career_sample">Профессія</string>
+    <string name="contacts_contacts_title">Контакти</string>
+    <string name="contacts_add_contact">Додати контакт</string>
     <string name="contacts_change_to_phonebook">Змінити на контакти телефону</string>
-    <string name="add_contact_from_add_contact_activity_my_contacts">Додати контакт</string>
-    <string name="personNameSample">Ім\'я</string>
-    <string name="personCareerSample">Профессія</string>
-    <string name="personHomeAddressSample">Домашня адреса</string>
     <string name="contacts_grant_permission_button">Надати дозвіл</string>
+    <string name="contacts_change_to_fake_data">Змінити на фейкові дані</string>
+
+    <!-- ———————————————————— Contacts - Add new contact ———————————————————— -->
+    <string name="contacts_add_contact_title">Додати контакт</string>
+    <string name="contacts_add_contact_username">Ім\'я</string>
+    <string name="contacts_add_contact_career">Професія</string>
+    <string name="contacts_add_contact_email">Електронна пошта</string>
+    <string name="contacts_add_contact_phone">Телефон</string>
+    <string name="contacts_add_contact_address">Адреса</string>
+    <string name="contacts_add_contact_birthday">Дата народження</string>
+    <string name="contacts_add_contact_save_button">ЗБЕРЕГТИ</string>
+
 
 </resources>
