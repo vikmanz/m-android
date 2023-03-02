@@ -13,8 +13,6 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
-import com.vikmanz.shpppro.R
-import com.vikmanz.shpppro.constants.Constants
 import com.vikmanz.shpppro.constants.Constants.MARGINS_OF_ELEMENTS
 import com.vikmanz.shpppro.constants.Constants.SNACK_BAR_VIEW_TIME
 import com.vikmanz.shpppro.databinding.ActivityMyContactsBinding
@@ -46,6 +44,7 @@ class MyContactsActivity :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initRecyclerView()
+        configureUI()
     }
 
     override fun setListeners() {
@@ -175,8 +174,8 @@ class MyContactsActivity :
     }
 
     override fun onRestart() {
-        configureUI()
         super.onRestart()
+        configureUI()
     }
 
 
@@ -186,10 +185,10 @@ class MyContactsActivity :
 
     /// OTHERS FUNCTIONS ///
     private fun startAuthActivity() {
-        val intentObject = Intent(this, AuthActivity::class.java)
-        intentObject.putExtra(Constants.INTENT_LANG_ID, false)
-        startActivity(intentObject)
-        overridePendingTransition(R.anim.zoom_in_inner, R.anim.zoom_in_outter)
+//        val intentObject = Intent(this, AuthActivity::class.java)
+//        intentObject.putExtra(Constants.INTENT_LANG_ID, false)
+//        startActivity(intentObject)
+//        overridePendingTransition(R.anim.zoom_in_inner, R.anim.zoom_in_outter)
         finish()
     }
 

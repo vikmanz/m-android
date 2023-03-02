@@ -2,6 +2,7 @@ package com.vikmanz.shpppro.myContactsActivity
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
+import com.vikmanz.shpppro.constants.Constants.FAKE_FIRST
 import com.vikmanz.shpppro.myContactsActivity.contactModel.Contact
 import com.vikmanz.shpppro.myContactsActivity.contactModel.ContactsService
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -40,16 +41,16 @@ class MyContactsViewModel : ViewModel() {
 
     fun getFakeContacts() {
         _contactList.value = ContactsService().createFakeContacts()
-        phoneListChangedToFake = true
+        phoneListChangedToFake = FAKE_FIRST
     }
 
     fun setPhoneContactList(phoneContactList: List<Contact>) {
         _contactList.value = phoneContactList
-        phoneListActivated = true
-        phoneListChangedToFake = false
+        phoneListActivated = FAKE_FIRST
+        phoneListChangedToFake = !FAKE_FIRST
     }
 
-    var phoneListActivated = false
-    var phoneListChangedToFake = false
+    var phoneListActivated = !FAKE_FIRST
+    var phoneListChangedToFake = FAKE_FIRST
 
 }

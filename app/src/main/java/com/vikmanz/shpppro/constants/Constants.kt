@@ -20,6 +20,9 @@ object Constants {
     const val START_NUMBER_OF_CONTACTS = 5
     const val SNACK_BAR_VIEW_TIME = 5000
     const val MARGINS_OF_ELEMENTS = 20
+    // FakeData (true) or PhoneData (false) view first on myContacts
+    const val FAKE_FIRST = true
+
 
     /**
      * Intent Keys. Don't change it.
