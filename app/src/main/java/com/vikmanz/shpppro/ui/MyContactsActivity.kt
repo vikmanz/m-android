@@ -24,7 +24,6 @@ import com.vikmanz.shpppro.utilits.MarginItemDecoration
 import com.vikmanz.shpppro.utilits.SwipeToDeleteCallback
 import kotlinx.coroutines.*
 
-
 /**
  * Class represents MyContacts screen activity.
  */

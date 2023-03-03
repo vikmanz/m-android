@@ -1,5 +1,6 @@
 package com.vikmanz.shpppro.utilits
 
+import android.net.Uri
 import java.util.*
 import androidx.appcompat.widget.AppCompatImageView
 import com.bumptech.glide.Glide
@@ -28,6 +29,14 @@ val GLIDE_OPTIONS = RequestOptions()
 fun AppCompatImageView.setContactPhoto(contactPhotoUrl: String) {
     Glide.with(context)
         .load(contactPhotoUrl)
+        .apply(GLIDE_OPTIONS)
+        .into(this)
+}
+
+// Extensions for set photo from uri.
+fun AppCompatImageView.setContactPhotoFromUri(uri: Uri) {
+    Glide.with(context)
+        .load(uri)
         .apply(GLIDE_OPTIONS)
         .into(this)
 }

@@ -1,9 +1,11 @@
 package com.vikmanz.shpppro.myContactsActivity.contactModel
+import android.net.Uri
 import java.io.Serializable
 
 data class Contact(
     val contactId: Long,
     val contactPhotoUrl: String,
+    val contactPhotoUri: Uri?,
     val contactPhotoIndex: Int,
     val contactName: String,
     val contactCareer: String,

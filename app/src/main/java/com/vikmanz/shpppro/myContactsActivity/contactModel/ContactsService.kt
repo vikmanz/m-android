@@ -1,5 +1,6 @@
 package com.vikmanz.shpppro.myContactsActivity.contactModel
 
+import android.net.Uri
 import android.util.Log
 import com.github.javafaker.Faker
 import com.vikmanz.shpppro.constants.Constants.START_NUMBER_OF_CONTACTS
@@ -23,6 +24,7 @@ class ContactsService {
     private fun generateRandomContact(): Contact = getOneContact(
             id = imgCounter.toLong(),
             photoUrl = IMAGES[imgCounter % IMAGES.size],
+            photoUri = null,
             photoIndex = imgCounter,
             name = faker.name().fullName(),
             career = faker.company().name(),
@@ -35,6 +37,7 @@ class ContactsService {
     fun getOneContact(
         id: Long,
         photoUrl: String,
+        photoUri: Uri?,
         photoIndex: Int,
         name: String,
         career: String,
@@ -46,6 +49,7 @@ class ContactsService {
         val newContact = Contact(
             contactId = id,
             contactPhotoUrl = photoUrl,
+            contactPhotoUri = photoUri,
             contactPhotoIndex = photoIndex,
             contactName = name,
             contactCareer = career,
@@ -58,16 +62,9 @@ class ContactsService {
         return newContact
     }
 
-    fun getNextContactPhotoUrl(): String {
-        imgCounter++
-        Log.d("myLog", "New contact img counter: ${imgCounter}.")
-        return getCurrentContactPhotoUrl()
-    }
-
     fun getCurrentContactPhotoUrl(): String {
         return IMAGES[imgCounter % IMAGES.size]
     }
-
 
     fun getCurrentPhotoCounter(): Int {
         return imgCounter
@@ -82,6 +79,7 @@ class ContactsService {
             getOneContact(
                 id = imgCounter.toLong(),
                 photoUrl = IMAGES[imgCounter % IMAGES.size],
+                photoUri = null,
                 photoIndex = imgCounter,
                 name = listOfContactsInformation[it][0],
                 career = listOfContactsInformation[it][1],
