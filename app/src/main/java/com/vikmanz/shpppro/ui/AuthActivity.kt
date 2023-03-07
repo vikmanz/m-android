@@ -15,6 +15,7 @@ import com.vikmanz.shpppro.constants.Constants.MIN_PASSWORD_LENGTH
 import com.vikmanz.shpppro.constants.Constants.VIEW_HELP_BUTTONS_ON_CREATE
 import com.vikmanz.shpppro.data.DataStoreManager
 import com.vikmanz.shpppro.databinding.ActivityAuthBinding
+import com.vikmanz.shpppro.utilits.CustomGoogleButton
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -64,6 +65,7 @@ class AuthActivity : AppCompatActivity() {
         // init additional features.
         initHelpTesterButtons()     // help test buttons
         backgroundFocusHandler()    // de-focus fields when click on bg
+
     }
 
     /**

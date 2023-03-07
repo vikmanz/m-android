@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <declare-styleable name="customGoogleButtonStyle">
+        <attr name="bottomPositiveButtonText" format="string" />
+        <attr name="bottomNegativeButtonText" format="string" />
+        <attr name="bottomPositiveButtonBackgroundColor" format="color" />
+        <attr name="bottomNegativeButtonBackgroundColor" format="color" />
+        <attr name="bottomProgressMode" format="boolean" />
+
+    </declare-styleable>
+    
+</resources>
