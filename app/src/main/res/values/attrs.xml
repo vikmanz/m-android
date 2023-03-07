@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    
-    <declare-styleable name="customGoogleButtonStyle">
-        <attr name="bottomPositiveButtonText" format="string" />
-        <attr name="bottomNegativeButtonText" format="string" />
-        <attr name="bottomPositiveButtonBackgroundColor" format="color" />
-        <attr name="bottomNegativeButtonBackgroundColor" format="color" />
-        <attr name="bottomProgressMode" format="boolean" />
-
+    <declare-styleable name="CustomGoogleButtonView">
+        <attr name="cgbText" format="string" />
+        <attr name="cgbTextColor" format="color" />
+        <attr name="cgbButtonColor" format="color" />
+        <attr name="cgbLogo1Color" format="color" />
+        <attr name="cgbLogo2Color" format="color" />
+        <attr name="cgbLogo3Color" format="color" />
+        <attr name="cgbLogo4Color" format="color" />
     </declare-styleable>
-    
+
+    <attr name="customGoogleButtonStyle" format="reference"/>
+
 </resources>

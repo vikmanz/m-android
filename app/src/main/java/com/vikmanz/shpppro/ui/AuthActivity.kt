@@ -55,16 +55,18 @@ class AuthActivity : AppCompatActivity() {
 
         // binding, add content and set Login or Register screen first.
         binding = ActivityAuthBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        if (LOGIN_VIEW_FIRST) swapSignInSignUpScreens()
 
-        // init main functions.
-        setLoginPasswordFocusListeners()                 // Listeners to fields and buttons.
-        initSubmitRegisterAndSwapInUpButtonsListeners()  // Change Register to Login and another.
-
-        // init additional features.
-        initHelpTesterButtons()     // help test buttons
-        backgroundFocusHandler()    // de-focus fields when click on bg
+        setContentView(R.layout.custom_test_layout)
+//        setContentView(binding.root)
+//        if (LOGIN_VIEW_FIRST) swapSignInSignUpScreens()
+//
+//        // init main functions.
+//        setLoginPasswordFocusListeners()                 // Listeners to fields and buttons.
+//        initSubmitRegisterAndSwapInUpButtonsListeners()  // Change Register to Login and another.
+//
+//        // init additional features.
+//        initHelpTesterButtons()     // help test buttons
+//        backgroundFocusHandler()    // de-focus fields when click on bg
 
     }
 

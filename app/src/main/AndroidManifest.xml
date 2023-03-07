@@ -15,7 +15,7 @@
         tools:targetApi="33">
 
         <activity
-            android:name=".ui.DrawActivity"
+            android:name=".ui.AuthActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
