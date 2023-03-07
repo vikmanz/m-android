@@ -34,6 +34,8 @@ class CustomGoogleButton(
     private lateinit var googleLogoPaint3: Paint
     private lateinit var googleLogoPaint4: Paint
 
+    private var logoOval = RectF(0f, 0f, 0f, 0f)
+
     constructor(context: Context, attributesSet: AttributeSet?, defStyleAttr: Int) : this(
         context, attributesSet, defStyleAttr, R.style.defaultCustomGoogleButtonStyle
     )
@@ -195,12 +197,16 @@ class CustomGoogleButton(
         buttonRect.right = paddingLeft + buttonNewWidth.toFloat()
         buttonRect.bottom = buttonRect.top + buttonNewHeight
 
-
     }
 
     private val mTextBoundRect: Rect = Rect()
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
+        drawLogoAndText(canvas)
+
+    }
+
+    private fun drawLogoAndText(canvas: Canvas) {
         if (haveInvalidValues()) return
 
         val btnWidth: Float = width.toFloat()
@@ -217,40 +223,38 @@ class CustomGoogleButton(
         val textWidth: Float = googleTextPaint.measureText(text);
         val textHeight: Float = mTextBoundRect.height().toFloat();
 
-
-
-        val wightOfAlLElements = textWidth + DEFAULT_TEXT_WITH + radius * 2 + DEFAULT_LOGO_PATH_WITH + DEFAULT_MARGIN_BETWEEN_LOGO_AND_TEXT
+        val wightOfAlLElements =
+            textWidth + DEFAULT_TEXT_WITH + radius * 2 + DEFAULT_LOGO_PATH_WITH + DEFAULT_MARGIN_BETWEEN_LOGO_AND_TEXT
         val startXOfComposition = (btnWidth - wightOfAlLElements) / 2
         val startXOfGLogo = startXOfComposition + DEFAULT_LOGO_PATH_WITH / 2 + radius
 
-        val oval = RectF()
-        oval.set(
+        logoOval.set(
             startXOfGLogo - radius,
             centerY - radius,
             startXOfGLogo + radius,
             centerY + radius
         );
 
-        canvas.drawArc(oval, -11.5F, 70F, false, googleLogoPaint1)
-        canvas.drawArc(oval, 45F, 95F, false, googleLogoPaint2)
-        canvas.drawArc(oval, 135F, 95F, false, googleLogoPaint3)
-        canvas.drawArc(oval, 225F, 95F, false, googleLogoPaint4)
+        canvas.drawArc(logoOval, -11.5F, 70F, false, googleLogoPaint1)
+        canvas.drawArc(logoOval, 45F, 95F, false, googleLogoPaint2)
+        canvas.drawArc(logoOval, 135F, 95F, false, googleLogoPaint3)
+        canvas.drawArc(logoOval, 225F, 95F, false, googleLogoPaint4)
         canvas.drawLine(
-            oval.centerX() + radius + DEFAULT_LOGO_PATH_WITH,
-            oval.centerY(),
-            oval.centerX(),
-            oval.centerY(),
+            logoOval.centerX() + radius + DEFAULT_LOGO_PATH_WITH,
+            logoOval.centerY(),
+            logoOval.centerX(),
+            logoOval.centerY(),
             googleLogoPaintLine
         );
 
-        val startXOfText = startXOfGLogo + DEFAULT_LOGO_PATH_WITH / 2 + radius + DEFAULT_MARGIN_BETWEEN_LOGO_AND_TEXT
+        val startXOfText =
+            startXOfGLogo + DEFAULT_LOGO_PATH_WITH / 2 + radius + DEFAULT_MARGIN_BETWEEN_LOGO_AND_TEXT
         canvas.drawText(
             DEFAULT_TEXT,
             startXOfText,
             centerY + (textHeight / 2f),
             googleTextPaint
         );
-
     }
 
     private fun haveInvalidValues(): Boolean {
@@ -273,9 +277,6 @@ class CustomGoogleButton(
         const val DEFAULT_LOGO_PATH_WITH = 5f
         const val DEFAULT_TEXT_WITH = 2f
         const val DEFAULT_MARGIN_BETWEEN_LOGO_AND_TEXT = DEFAULT_LOGO_PATH_WITH * 10
-
-        const val DESIRED_WIDTH = 1000f
-        const val DESIRED_HEIGHT = 200f
     }
 
 }
