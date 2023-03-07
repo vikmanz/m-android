@@ -9,7 +9,7 @@ object Constants {
      * Settings:
      */
     // Login (true) or Register (false) view first.
-    const val LOGIN_VIEW_FIRST = true
+    const val LOGIN_VIEW_FIRST = false
     // Show or hide helper buttons on start.
     const val VIEW_HELP_BUTTONS_ON_CREATE = false
     // Minimum number of chars in password. Don't forget check max password length in Integer.

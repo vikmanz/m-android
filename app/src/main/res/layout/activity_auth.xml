@@ -161,12 +161,18 @@
         app:layout_constraintStart_toStartOf="@+id/guide_auth_left_border"
         app:layout_constraintTop_toBottomOf="@+id/guide_main_vertical_center_of_screen" />
 
-    <androidx.appcompat.widget.AppCompatButton
+
+    <com.vikmanz.shpppro.utilits.CustomGoogleButton
         android:id="@+id/button_auth_register_by_google"
         android:layout_width="0dp"
         android:layout_height="@dimen/size_button_height_M"
-        android:background="@drawable/btn_google"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints,TouchTargetSizeCheck,SpeakableTextPresentCheck,VisualLintButtonSize" />
+    />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textview_auth_text_between_google_and_register"

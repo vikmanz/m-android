@@ -27,10 +27,10 @@
         <item name="cgbText">GOOGLE</item>
         <item name="cgbTextColor">#000000</item>
         <item name="cgbButtonColor">#FFFFFF</item>
-        <item name="cgbLogo1Color">#DB4437</item>
-        <item name="cgbLogo2Color">#F4B400</item>
-        <item name="cgbLogo3Color">#0F9D58</item>
-        <item name="cgbLogo4Color">#4285F4</item>
+        <item name="cgbLogo1Color">#4285F4</item>
+        <item name="cgbLogo2Color">#0F9D58</item>
+        <item name="cgbLogo3Color">#F4B400</item>
+        <item name="cgbLogo4Color">#DB4437</item>
     </style>
 
     <style name="globalCustomGoogleButtonStyle" parent="defaultCustomGoogleButtonStyle">

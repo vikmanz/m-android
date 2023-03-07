@@ -10,6 +10,7 @@ import com.vikmanz.shpppro.R
 import java.lang.Integer.max
 import kotlin.properties.Delegates
 
+
 class CustomGoogleButton(
     context: Context, attributesSet: AttributeSet?, defStyleAttr: Int, defStyleRes: Int
 ) : View(context, attributesSet, defStyleAttr, defStyleRes) {
@@ -27,11 +28,11 @@ class CustomGoogleButton(
 
     private lateinit var googleButtonPaint: Paint
     private lateinit var googleTextPaint: Paint
+    private lateinit var googleLogoPaintLine: Paint
     private lateinit var googleLogoPaint1: Paint
     private lateinit var googleLogoPaint2: Paint
     private lateinit var googleLogoPaint3: Paint
     private lateinit var googleLogoPaint4: Paint
-
 
     constructor(context: Context, attributesSet: AttributeSet?, defStyleAttr: Int) : this(
         context, attributesSet, defStyleAttr, R.style.defaultCustomGoogleButtonStyle
@@ -64,29 +65,56 @@ class CustomGoogleButton(
         googleTextPaint = Paint(Paint.ANTI_ALIAS_FLAG)
         googleTextPaint.color = DEFAULT_TEXT_COLOR
 
-        googleTextPaint.textSize = 50.0f;
-        googleTextPaint.strokeWidth = 2.0f;
+        googleTextPaint.textSize = DEFAULT_LOGO_PATH_WITH * 10;
+        googleTextPaint.strokeWidth = DEFAULT_TEXT_WITH;
         googleTextPaint.style = Paint.Style.FILL;
+
+        googleLogoPaintLine = Paint(Paint.ANTI_ALIAS_FLAG)
+        googleLogoPaintLine.color = gLogoColor1
+        googleLogoPaintLine.style = Paint.Style.STROKE
+        googleLogoPaintLine.strokeWidth = TypedValue.applyDimension(
+            TypedValue.COMPLEX_UNIT_DIP,
+            DEFAULT_LOGO_PATH_WITH,
+            resources.displayMetrics
+        )
+        //googleLogoPaintLine.xfermode = PorterDuffXfermode(PorterDuff.Mode.DST_ATOP)
+
 
         googleLogoPaint1 = Paint(Paint.ANTI_ALIAS_FLAG)
         googleLogoPaint1.color = gLogoColor1
         googleLogoPaint1.style = Paint.Style.STROKE
-        googleLogoPaint1.strokeWidth = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 3f, resources.displayMetrics)
+        googleLogoPaint1.strokeWidth = TypedValue.applyDimension(
+            TypedValue.COMPLEX_UNIT_DIP,
+            DEFAULT_LOGO_PATH_WITH,
+            resources.displayMetrics
+        )
 
         googleLogoPaint2 = Paint(Paint.ANTI_ALIAS_FLAG)
         googleLogoPaint2.color = gLogoColor2
         googleLogoPaint2.style = Paint.Style.STROKE
-        googleLogoPaint2.strokeWidth = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 3f, resources.displayMetrics)
+        googleLogoPaint2.strokeWidth = TypedValue.applyDimension(
+            TypedValue.COMPLEX_UNIT_DIP,
+            DEFAULT_LOGO_PATH_WITH,
+            resources.displayMetrics
+        )
 
         googleLogoPaint3 = Paint(Paint.ANTI_ALIAS_FLAG)
         googleLogoPaint3.color = gLogoColor3
         googleLogoPaint3.style = Paint.Style.STROKE
-        googleLogoPaint3.strokeWidth = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 3f, resources.displayMetrics)
+        googleLogoPaint3.strokeWidth = TypedValue.applyDimension(
+            TypedValue.COMPLEX_UNIT_DIP,
+            DEFAULT_LOGO_PATH_WITH,
+            resources.displayMetrics
+        )
 
         googleLogoPaint4 = Paint(Paint.ANTI_ALIAS_FLAG)
         googleLogoPaint4.color = gLogoColor4
         googleLogoPaint4.style = Paint.Style.STROKE
-        googleLogoPaint4.strokeWidth = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 3f, resources.displayMetrics)
+        googleLogoPaint4.strokeWidth = TypedValue.applyDimension(
+            TypedValue.COMPLEX_UNIT_DIP,
+            DEFAULT_LOGO_PATH_WITH,
+            resources.displayMetrics
+        )
     }
 
 
@@ -131,14 +159,21 @@ class CustomGoogleButton(
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        val minimumWith = suggestedMinimumWidth + paddingLeft + paddingRight
-        val minimumHeight = suggestedMinimumHeight + paddingTop + paddingBottom
 
-        val buttonWidthInPixels = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, DESIRED_WIDTH, resources.displayMetrics).toInt() + paddingLeft + paddingRight
-        val buttonHeightInPixels = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, DESIRED_HEIGHT, resources.displayMetrics).toInt() + paddingTop + paddingBottom
+        val newWidth = TypedValue.applyDimension(
+            TypedValue.COMPLEX_UNIT_DIP,
+            buttonRect.width(),
+            resources.displayMetrics
+        ).toInt() + paddingLeft + paddingRight
 
-        val desiredWith = max(minimumWith, buttonWidthInPixels)
-        val desiredHeight = max(minimumHeight, buttonHeightInPixels)
+        val newHeight = TypedValue.applyDimension(
+            TypedValue.COMPLEX_UNIT_DIP,
+            buttonRect.height(),
+            resources.displayMetrics
+        ).toInt()
+
+        val desiredWith = max(suggestedMinimumWidth, newWidth) + paddingTop + paddingBottom
+        val desiredHeight = max(suggestedMinimumHeight, newHeight) + paddingTop + paddingBottom
 
         setMeasuredDimension(
             resolveSize(desiredWith, widthMeasureSpec),
@@ -148,20 +183,19 @@ class CustomGoogleButton(
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
-        updateSize()
+        updateSize(w, h)
     }
 
-    private fun updateSize() {
-        val safeWith = width - paddingLeft - paddingRight
-        val safeHeight = height - paddingTop - paddingBottom
+    private fun updateSize(w: Int, h: Int) {
+        val buttonNewWidth = w - paddingLeft - paddingRight
+        val buttonNewHeight = h - paddingTop - paddingBottom
 
-        val buttonCurrentWidth = DESIRED_WIDTH
-        val buttonCurrentHeight = DESIRED_HEIGHT
+        buttonRect.left = paddingLeft.toFloat()
+        buttonRect.top = paddingTop.toFloat()
+        buttonRect.right = paddingLeft + buttonNewWidth.toFloat()
+        buttonRect.bottom = buttonRect.top + buttonNewHeight
 
-        buttonRect.left = paddingLeft + ((safeWith - buttonCurrentWidth) / 2)
-        buttonRect.top = paddingTop + ((safeHeight - buttonCurrentHeight) / 2)
-        buttonRect.right = buttonRect.left + buttonCurrentWidth
-        buttonRect.bottom = buttonRect.top + buttonCurrentHeight
+
     }
 
     private val mTextBoundRect: Rect = Rect()
@@ -169,12 +203,12 @@ class CustomGoogleButton(
         super.onDraw(canvas)
         if (haveInvalidValues()) return
 
-        val centerX: Float
-        val centerY: Float
-        val width: Float = width.toFloat()
-        val height: Float = height.toFloat()
-        centerX = width / 2
-        centerY = height / 2
+        val btnWidth: Float = width.toFloat()
+        val btnHeight: Float = height.toFloat()
+
+        val radius = DEFAULT_LOGO_PATH_WITH * 5
+        val centerX = btnWidth / 2
+        val centerY = btnHeight / 2
 
         canvas.drawRoundRect(buttonRect, 50f, 50f, googleButtonPaint);
 
@@ -183,17 +217,44 @@ class CustomGoogleButton(
         val textWidth: Float = googleTextPaint.measureText(text);
         val textHeight: Float = mTextBoundRect.height().toFloat();
 
-        canvas.drawText(DEFAULT_TEXT,
-            centerX - (textWidth / 2f),
-            centerY + (textHeight /2f),
+
+
+        val wightOfAlLElements = textWidth + DEFAULT_TEXT_WITH + radius * 2 + DEFAULT_LOGO_PATH_WITH + DEFAULT_MARGIN_BETWEEN_LOGO_AND_TEXT
+        val startXOfComposition = (btnWidth - wightOfAlLElements) / 2
+        val startXOfGLogo = startXOfComposition + DEFAULT_LOGO_PATH_WITH / 2 + radius
+
+        val oval = RectF()
+        oval.set(
+            startXOfGLogo - radius,
+            centerY - radius,
+            startXOfGLogo + radius,
+            centerY + radius
+        );
+
+        canvas.drawArc(oval, -11.5F, 70F, false, googleLogoPaint1)
+        canvas.drawArc(oval, 45F, 95F, false, googleLogoPaint2)
+        canvas.drawArc(oval, 135F, 95F, false, googleLogoPaint3)
+        canvas.drawArc(oval, 225F, 95F, false, googleLogoPaint4)
+        canvas.drawLine(
+            oval.centerX() + radius + DEFAULT_LOGO_PATH_WITH,
+            oval.centerY(),
+            oval.centerX(),
+            oval.centerY(),
+            googleLogoPaintLine
+        );
+
+        val startXOfText = startXOfGLogo + DEFAULT_LOGO_PATH_WITH / 2 + radius + DEFAULT_MARGIN_BETWEEN_LOGO_AND_TEXT
+        canvas.drawText(
+            DEFAULT_TEXT,
+            startXOfText,
+            centerY + (textHeight / 2f),
             googleTextPaint
         );
-        //canvas.drawText(DEFAULT_TEXT, 20f, 200f, googleTextPaint)
 
     }
 
-    private fun haveInvalidValues(): Boolean{
-        if (buttonRect.width() <= 0 || buttonRect.height() <=0) return true
+    private fun haveInvalidValues(): Boolean {
+        if (buttonRect.width() <= 0 || buttonRect.height() <= 0) return true
         return false
     }
 
@@ -204,14 +265,17 @@ class CustomGoogleButton(
         const val DEFAULT_TEXT_COLOR = Color.BLACK
         const val DEFAULT_BUTTON_COLOR = Color.LTGRAY
 
-        const val DEFAULT_LOGO_1_COLOR = Color.YELLOW
-        const val DEFAULT_LOGO_2_COLOR = Color.GRAY
-        const val DEFAULT_LOGO_3_COLOR = Color.CYAN
-        const val DEFAULT_LOGO_4_COLOR = Color.MAGENTA
+        const val DEFAULT_LOGO_1_COLOR = Color.MAGENTA
+        const val DEFAULT_LOGO_2_COLOR = Color.CYAN
+        const val DEFAULT_LOGO_3_COLOR = Color.GRAY
+        const val DEFAULT_LOGO_4_COLOR = Color.YELLOW
 
+        const val DEFAULT_LOGO_PATH_WITH = 5f
+        const val DEFAULT_TEXT_WITH = 2f
+        const val DEFAULT_MARGIN_BETWEEN_LOGO_AND_TEXT = DEFAULT_LOGO_PATH_WITH * 10
 
-        const val DESIRED_WIDTH = 800f
-        const val DESIRED_HEIGHT = 100f
+        const val DESIRED_WIDTH = 1000f
+        const val DESIRED_HEIGHT = 200f
     }
 
 }
