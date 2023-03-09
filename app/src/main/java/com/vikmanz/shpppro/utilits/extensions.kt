@@ -1,5 +1,7 @@
 package com.vikmanz.shpppro.utilits
 
+import android.content.Context
+import android.util.TypedValue
 import java.util.*
 
 /**
@@ -8,4 +10,6 @@ import java.util.*
 fun String.firstCharToUpperCase() = replaceFirstChar {
     if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString()
 }
+
+
 
