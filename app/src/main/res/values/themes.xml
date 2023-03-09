@@ -23,19 +23,17 @@
 
     </style>
 
-    <style name="defaultCustomGoogleButtonStyle">
-        <item name="cgbText">GOOGLE</item>
-        <item name="cgbTextColor">#000000</item>
-        <item name="cgbButtonColor">#FFFFFF</item>
-        <item name="cgbLogo1Color">#4285F4</item>
-        <item name="cgbLogo2Color">#0F9D58</item>
-        <item name="cgbLogo3Color">#F4B400</item>
-        <item name="cgbLogo4Color">#DB4437</item>
+    <style name="defaultMyGButtonStyle">
+        <item name="mgbText">GOOGLE</item>
+        <item name="mgbTextColor">#000000</item>
+        <item name="mgbButtonColor">#B4B4B4</item>
+        <item name="mgbLogo1Color">#4285F4</item>
+        <item name="mgbLogo2Color">#0F9D58</item>
+        <item name="mgbLogo3Color">#F4B400</item>
+        <item name="mgbLogo4Color">#DB4437</item>
     </style>
 
-    <style name="globalCustomGoogleButtonStyle" parent="defaultCustomGoogleButtonStyle">
-        <item name="cgbTextColor">#FFFFFF</item>
-        <item name="cgbButtonColor">#000000</item>
+    <style name="globalMtGButtonStyle" parent="defaultMyGButtonStyle">
     </style>
 
 </resources>
