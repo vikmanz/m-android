@@ -254,18 +254,6 @@ class CustomGoogleButton(
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
     private fun haveInvalidValues(): Boolean {
         if (buttonRect.width() <= 0 || buttonRect.height() <= 0) return true
         return false
@@ -276,7 +264,7 @@ class CustomGoogleButton(
 
 
     companion object {
-        private const val CORNER_ROUND_VALUE = 20f
+        private const val CORNER_ROUND_VALUE = 100f
         private const val DEFAULT_BUTTON_SIZE = 40f
 
         private const val THEME_ERROR_TEXT = "ERROR! CHECK THEME!"
