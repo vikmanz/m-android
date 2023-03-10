@@ -9,6 +9,7 @@
         <attr name="mgbLogo2Color" format="color" />
         <attr name="mgbLogo3Color" format="color" />
         <attr name="mgbLogo4Color" format="color" />
+
     </declare-styleable>
 
     <attr name="myGoogleButtonStyle" format="reference"/>

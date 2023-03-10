@@ -162,16 +162,6 @@
         app:layout_constraintTop_toBottomOf="@+id/guide_main_vertical_center_of_screen" />
 
 
-    <com.vikmanz.shpppro.utilits.CustomGoogleButton
-        android:id="@+id/button_auth_register_by_google"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/size_button_height_M"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints,TouchTargetSizeCheck,SpeakableTextPresentCheck,VisualLintButtonSize" />
-
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textview_auth_text_between_google_and_register"
         style="@style/basicText"
@@ -277,5 +267,18 @@
         android:text="@string/auth_layout_debug_button_language"
         android:textAppearance="@style/basicText_buttonsText"
         tools:ignore="MissingConstraints,TouchTargetSizeCheck" />
+
+
+    <com.vikmanz.shpppro.utilits.CustomGoogleButton
+        android:id="@+id/button_auth_register_by_google"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/size_button_height_M"
+        app:mgbText="SIGN IN BY GOOGLE"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints,TouchTargetSizeCheck,SpeakableTextPresentCheck,VisualLintButtonSize" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
