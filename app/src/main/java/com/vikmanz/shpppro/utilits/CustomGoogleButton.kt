@@ -19,10 +19,16 @@ class CustomGoogleButton(
 
     private lateinit var text: String
 
-    private var btnWidth by Delegates.notNull<Float>()
-    private var btnHeight by Delegates.notNull<Float>()
+    private var minimumSizeValue by Delegates.notNull<Float>()
+    private var buttonCornerRadius by Delegates.notNull<Float>()
     private var logoShapeRadius by Delegates.notNull<Float>()
     private var logoShapeDiameter by Delegates.notNull<Float>()
+    private var logoStrokeWidth by Delegates.notNull<Float>()
+    private var textSize by Delegates.notNull<Float>()
+    private var textMargin by Delegates.notNull<Float>()
+    private var startXOfComposition by Delegates.notNull<Float>()
+    private var centerYOfComposition by Delegates.notNull<Float>()
+    private var textHeight by Delegates.notNull<Float>()
 
 
     private val mTextBoundRect: Rect = Rect()
@@ -125,32 +131,37 @@ class CustomGoogleButton(
     }
 
 
-
-
-
-
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        val newWidth = dpToPx(buttonRect.width()).toInt() + paddingLeft + paddingRight
-        val newHeight = dpToPx(buttonRect.height()).toInt()
-        val desiredWith = max(suggestedMinimumWidth, newWidth) + paddingTop + paddingBottom
+        onMeasureVariant1(widthMeasureSpec, heightMeasureSpec)
+        //onMeasureVariant2(widthMeasureSpec, heightMeasureSpec)
+    }
+
+    private fun onMeasureVariant2(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+        val initSizeW = resolveDefaultSize(widthMeasureSpec)
+        val initSizeH = resolveDefaultSize(heightMeasureSpec)
+        setMeasuredDimension(initSizeW, initSizeH)
+    }
+
+    private fun onMeasureVariant1(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+        val newWidth = dpToPx(DEFAULT_BUTTON_WIDTH).toInt()
+        val newHeight = dpToPx(DEFAULT_BUTTON_HEIGHT).toInt()
+
+        val desiredWith = max(suggestedMinimumWidth, newWidth) + paddingLeft + paddingRight
         val desiredHeight = max(suggestedMinimumHeight, newHeight) + paddingTop + paddingBottom
+
         setMeasuredDimension(
             resolveSize(desiredWith, widthMeasureSpec),
             resolveSize(desiredHeight, heightMeasureSpec)
         )
-//        val initSizeW = resolveDefaultSize(widthMeasureSpec)
-//        val initSizeH = resolveDefaultSize(heightMeasureSpec)
-//        setMeasuredDimension(initSizeW, initSizeH)
     }
 
 
-
-    fun resolveDefaultSize(spec: Int):Int = when (MeasureSpec.getMode(spec)){
-            MeasureSpec.UNSPECIFIED -> dpToPx(DEFAULT_BUTTON_SIZE).toInt() //def size
-            MeasureSpec.AT_MOST -> MeasureSpec.getSize(spec)
-            MeasureSpec.EXACTLY -> MeasureSpec.getSize(spec)
-            else -> MeasureSpec.getSize(spec)
-        }
+    fun resolveDefaultSize(spec: Int): Int = when (MeasureSpec.getMode(spec)) {
+        MeasureSpec.UNSPECIFIED -> dpToPx(DEFAULT_BUTTON_WIDTH).toInt() //def size
+        MeasureSpec.AT_MOST -> MeasureSpec.getSize(spec)
+        MeasureSpec.EXACTLY -> MeasureSpec.getSize(spec)
+        else -> MeasureSpec.getSize(spec)
+    }
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
@@ -158,64 +169,71 @@ class CustomGoogleButton(
     }
 
     private fun updateSize(w: Int, h: Int) {
-        // val buttonNewWidth = w - paddingLeft - paddingRight
-        // val buttonNewHeight = h - paddingTop - paddingBottom
+        val buttonNewWidth = (w - paddingLeft - paddingRight).toFloat()
+        val buttonNewHeight = (h - paddingTop - paddingBottom).toFloat()
 
-        //val isVertical = buttonNewWidth < buttonNewHeight
         with(buttonRect) {
             left = paddingLeft.toFloat()
             top = paddingTop.toFloat()
-            right =  w.toFloat()   //paddingLeft.toFloat() +buttonNewWidth.toFloat()
-            bottom =  h.toFloat()//   paddingTop.toFloat()//buttonNewHeight
+            right = paddingLeft.toFloat() + buttonNewWidth
+            bottom = paddingTop.toFloat() + buttonNewHeight
         }
 
-        val newTextSize = min(w, h) / 20f * 2f
+        minimumSizeValue = min(buttonNewWidth, buttonNewHeight)
+
+        logoShapeRadius = minimumSizeValue / 100 * LOGO_RADIUS_IN_PERCENT
+        textSize = logoShapeRadius
+        googleTextPaint.textSize = textSize
+        googleTextPaint.getTextBounds(text, 0, text.length, mTextBoundRect)
+        val textBoxWidth: Float = googleTextPaint.measureText(text)
+        textHeight = mTextBoundRect.height().toFloat()
+        var wightOfAlLElements = textBoxWidth + logoShapeRadius * 3.25f
+
+        logoShapeDiameter = logoShapeRadius * 2
+        logoStrokeWidth = logoShapeRadius / 2
+        textMargin = logoShapeRadius
+
+        googleLogoMainPaint.strokeWidth = logoStrokeWidth
+
+//        while (wightOfAlLElements > buttonNewWidth) {
+//            minimumSizeValue = minimumSizeValue / 100 * (100 - CONTENT_REDUCER_STEP_PERCENT)
+//            wightOfAlLElements = getReducedWidth()
+//        }
+
+        startXOfComposition = paddingLeft.toFloat() + (buttonNewWidth - wightOfAlLElements) / 2
+        centerYOfComposition = h.toFloat() / 2
+
+        buttonCornerRadius = min(buttonNewWidth, buttonNewHeight) / 100 * CORNER_ROUND_PERCENT
+
+        gLogoPath.set(
+            startXOfComposition,
+            centerYOfComposition - logoShapeRadius,
+            startXOfComposition + logoShapeDiameter,
+            centerYOfComposition + logoShapeRadius
+        )
+    }
+
+    private fun getReducedWidth(): Float {
+        logoShapeRadius = minimumSizeValue / 100 * LOGO_RADIUS_IN_PERCENT
+        textSize = logoShapeRadius
+        googleTextPaint.getTextBounds(text, 0, text.length, mTextBoundRect)
+        val textBoxWidth: Float = googleTextPaint.measureText(text)
+        textHeight = mTextBoundRect.height().toFloat()
+        return textBoxWidth + logoShapeRadius * 3.25f
     }
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-
-
-        canvas.drawRoundRect(
-            buttonRect, CORNER_ROUND_VALUE, CORNER_ROUND_VALUE, googleButtonPaint
-        ) // draw button
-        drawLogoAndText(canvas)
-
-    }
-
-    private fun drawLogoAndText(canvas: Canvas) {
         if (haveInvalidValues()) return
 
-        btnWidth = width.toFloat()
-        btnHeight = height.toFloat()
-
-        val radius = min(btnWidth, btnHeight) / 15
-        val diameter = radius * 2
-
-        val strokeWidth = radius / 2
-        googleLogoMainPaint.strokeWidth = strokeWidth
-
-        //val canvasCenterX = btnWidth / 2
-        val canvasCenterY = btnHeight / 2
-
-        googleTextPaint.apply { textSize = diameter }.getTextBounds(text, 0, text.length, mTextBoundRect)
-        val textBoxWidth: Float = googleTextPaint.measureText(text)
-        val textBoxHeight: Float = mTextBoundRect.height().toFloat()
-
-        val wightOfAlLElements = textBoxWidth + diameter * 2 + strokeWidth
-        val startXOfComposition = (btnWidth - wightOfAlLElements) / 2
-
-        gLogoPath.set(
-            startXOfComposition + radius,
-            canvasCenterY - radius,
-            startXOfComposition + radius + diameter,
-            canvasCenterY + radius
-        )
+        canvas.drawRoundRect(
+            buttonRect, buttonCornerRadius, buttonCornerRadius, googleButtonPaint
+        ) // draw button
 
         canvas.drawLine(
             gLogoPath.centerX(),
             gLogoPath.centerY(),
-            gLogoPath.right + strokeWidth / 2.0f * 0.9f,
+            gLogoPath.right + logoStrokeWidth / 2.0f * 0.9f,
             gLogoPath.centerY(),
             googleLogoMainPaint.apply {
                 color = gLogoColor1
@@ -225,13 +243,6 @@ class CustomGoogleButton(
         canvas.drawArc(gLogoPath, -10f, 55f, false, googleLogoMainPaint.apply {
             color = gLogoColor1
         })
-
-        gLogoPath.set(
-            gLogoPath.left,
-            gLogoPath.top,
-            gLogoPath.right,
-            gLogoPath.bottom
-        )
 
         canvas.drawArc(gLogoPath, 45f, 95f, false, googleLogoMainPaint.apply {
             color = gLogoColor2
@@ -245,14 +256,11 @@ class CustomGoogleButton(
             color = gLogoColor4
         })
 
-
-        val startXOfText = gLogoPath.right + strokeWidth / 2 + radius
+        val startXOfText = gLogoPath.right + logoStrokeWidth / 2 + textMargin
         canvas.drawText(
-            text, startXOfText, canvasCenterY + (textBoxHeight / 2f), googleTextPaint)
+            text, startXOfText, centerYOfComposition + textHeight / 2, googleTextPaint
+        )
     }
-
-
-
 
     private fun haveInvalidValues(): Boolean {
         if (buttonRect.width() <= 0 || buttonRect.height() <= 0) return true
@@ -260,12 +268,16 @@ class CustomGoogleButton(
     }
 
     private fun dpToPx(dp: Float): Float = TypedValue.applyDimension(
-        TypedValue.COMPLEX_UNIT_DIP, dp, resources.displayMetrics)
+        TypedValue.COMPLEX_UNIT_DIP, dp, resources.displayMetrics
+    )
 
 
     companion object {
-        private const val CORNER_ROUND_VALUE = 100f
-        private const val DEFAULT_BUTTON_SIZE = 40f
+        private const val CONTENT_REDUCER_STEP_PERCENT = 10f        // 15: 100% -> 85%
+        private const val LOGO_RADIUS_IN_PERCENT = 30f
+        private const val CORNER_ROUND_PERCENT = 15f
+        private const val DEFAULT_BUTTON_WIDTH = 60f
+        private const val DEFAULT_BUTTON_HEIGHT = 20f
 
         private const val THEME_ERROR_TEXT = "ERROR! CHECK THEME!"
         private const val THEME_ERROR_COLOR = Color.RED
