@@ -13,21 +13,14 @@
         android:theme="@style/defaultTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="33" >
-        <activity
-            android:name=".ui.GbuttonTest"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
-        </activity>
-
 
         <activity
             android:name=".ui.AuthActivity"
-            android:exported="false" >
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
 
         </activity>
         <activity
