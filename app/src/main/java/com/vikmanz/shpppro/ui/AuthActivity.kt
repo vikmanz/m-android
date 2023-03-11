@@ -5,7 +5,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Patterns
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.asLiveData
 import com.vikmanz.shpppro.R
 import com.vikmanz.shpppro.constants.Constants.INTENT_EMAIL_ID
@@ -15,6 +14,7 @@ import com.vikmanz.shpppro.constants.Constants.MIN_PASSWORD_LENGTH
 import com.vikmanz.shpppro.constants.Constants.VIEW_HELP_BUTTONS_ON_CREATE
 import com.vikmanz.shpppro.data.DataStoreManager
 import com.vikmanz.shpppro.databinding.ActivityAuthBinding
+import com.vikmanz.shpppro.utilits.BaseActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -24,10 +24,9 @@ import java.util.*
 /**
  * Class represents SignIn or SignUp screen activity .
  */
-class AuthActivity : AppCompatActivity() {
+class AuthActivity :  BaseActivity<ActivityAuthBinding>(ActivityAuthBinding::inflate) {
 
-    // Binding, Data Store and Coroutine Scope variables.
-    private lateinit var binding: ActivityAuthBinding
+    // Data Store and Coroutine Scope variables.
     private lateinit var loginData: DataStoreManager
     private val coroutineScope: CoroutineScope = CoroutineScope(Job())
 
@@ -44,7 +43,6 @@ class AuthActivity : AppCompatActivity() {
      * Main function, which used when activity was create.
      */
     override fun onCreate(savedInstanceState: Bundle?) {
-
         // init.
         super.onCreate(savedInstanceState)
 
@@ -52,9 +50,7 @@ class AuthActivity : AppCompatActivity() {
         loginData = DataStoreManager(this)
         checkAutoLogin()
 
-        // binding, add content and set Login or Register screen first.
-        binding = ActivityAuthBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        // set Login or Register screen first.
         if (LOGIN_VIEW_FIRST) swapSignInSignUpScreens()
 
         // init main functions.
