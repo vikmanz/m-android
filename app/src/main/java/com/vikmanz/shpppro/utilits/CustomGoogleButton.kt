@@ -25,16 +25,25 @@ class CustomGoogleButton(
     companion object {
         // Radius in % from lesser edge of button.
         private const val LOGO_RADIUS_IN_PERCENT = 30f
+
         // Radius of button corners in % from lesser edge of button.
         private const val CORNER_ROUND_PERCENT = 15f
+
         // Text scale. 1=100%, 2=200%, 0.5=50%
         private const val TEXT_SIZE_SCALAR = 1.75f
+
         // Default button width.
         private const val DEFAULT_BUTTON_WIDTH = 200f
+
         // Default button height.
         private const val DEFAULT_BUTTON_HEIGHT = 50f
+
         // Scale if elements bigger than button.
         private const val CONTENT_REDUCER_PERCENT = 0.25f
+
+        // Scale elements to smaller size whet text is long.
+        private const val TEXT_REDUCER_PERCENT = 0.4f
+
         // Default error colors if xml attributes are null.
         private const val THEME_ERROR_COLOR = Color.RED
     }
@@ -42,13 +51,39 @@ class CustomGoogleButton(
     /**
      * XML attributes.
      */
-    private lateinit var text: String
-    private var textColor by Delegates.notNull<Int>()
-    private var buttonColor by Delegates.notNull<Int>()
-    private var logoColor1 by Delegates.notNull<Int>()
-    private var logoColor2 by Delegates.notNull<Int>()
-    private var logoColor3 by Delegates.notNull<Int>()
-    private var logoColor4 by Delegates.notNull<Int>()
+    private var text: String = ""
+
+    var textColor: Int = THEME_ERROR_COLOR
+        set(value) {
+            field = value
+            invalidate()
+        }
+    var buttonColor: Int = THEME_ERROR_COLOR
+        set(value) {
+            field = value
+            invalidate()
+        }
+    var color1Logo: Int = THEME_ERROR_COLOR
+        set(value) {
+            field = value
+            invalidate()
+        }
+
+    var color2Logo: Int = THEME_ERROR_COLOR
+        set(value) {
+            field = value
+            invalidate()
+        }
+    var color3Logo: Int = THEME_ERROR_COLOR
+        set(value) {
+            field = value
+            invalidate()
+        }
+    var color4Logo: Int = THEME_ERROR_COLOR
+        set(value) {
+            field = value
+            invalidate()
+        }
 
     /**
      * Paints.
@@ -67,6 +102,7 @@ class CustomGoogleButton(
     /**
      * Variables for calculating size and paint elements on theirs positions.
      */
+    private var widthOfAlLElements by Delegates.notNull<Float>()
     private var startXOfComposition by Delegates.notNull<Float>()
     private var logoSize by Delegates.notNull<Float>()
     private var textXOffsetFromLogo by Delegates.notNull<Float>()
@@ -123,10 +159,10 @@ class CustomGoogleButton(
         text = typedArray.getString(R.styleable.MyGButtonView_mgbText).toString()
         textColor = getXmlColor(typedArray, R.styleable.MyGButtonView_mgbTextColor)
         buttonColor = getXmlColor(typedArray, R.styleable.MyGButtonView_mgbButtonColor)
-        logoColor1 = getXmlColor(typedArray, R.styleable.MyGButtonView_mgbLogo1Color)
-        logoColor2 = getXmlColor(typedArray, R.styleable.MyGButtonView_mgbLogo2Color)
-        logoColor3 = getXmlColor(typedArray, R.styleable.MyGButtonView_mgbLogo3Color)
-        logoColor4 = getXmlColor(typedArray, R.styleable.MyGButtonView_mgbLogo4Color)
+        color1Logo = getXmlColor(typedArray, R.styleable.MyGButtonView_mgbLogo1Color)
+        color2Logo = getXmlColor(typedArray, R.styleable.MyGButtonView_mgbLogo2Color)
+        color3Logo = getXmlColor(typedArray, R.styleable.MyGButtonView_mgbLogo3Color)
+        color4Logo = getXmlColor(typedArray, R.styleable.MyGButtonView_mgbLogo4Color)
         typedArray.close()
     }
 
@@ -143,10 +179,10 @@ class CustomGoogleButton(
         text = ""
         textColor = THEME_ERROR_COLOR
         buttonColor = THEME_ERROR_COLOR
-        logoColor1 = THEME_ERROR_COLOR
-        logoColor2 = THEME_ERROR_COLOR
-        logoColor3 = THEME_ERROR_COLOR
-        logoColor4 = THEME_ERROR_COLOR
+        color1Logo = THEME_ERROR_COLOR
+        color2Logo = THEME_ERROR_COLOR
+        color3Logo = THEME_ERROR_COLOR
+        color4Logo = THEME_ERROR_COLOR
     }
 
     /**
@@ -158,7 +194,7 @@ class CustomGoogleButton(
             style = Paint.Style.FILL
         }
         logoPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-            color = logoColor1
+            color = color1Logo
             style = Paint.Style.STROKE
         }
         textPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
@@ -188,9 +224,12 @@ class CustomGoogleButton(
      */
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
+        calculateNewTransform(w.toFloat(), h.toFloat())
+    }
 
-        val buttonNewWidth = (w - paddingLeft - paddingRight).toFloat()
-        val buttonNewHeight = (h - paddingTop - paddingBottom).toFloat()
+    private fun calculateNewTransform(w: Float, h: Float) {
+        val buttonNewWidth = w - paddingLeft - paddingRight
+        val buttonNewHeight = h - paddingTop - paddingBottom
 
         with(buttonRect) {
             left = paddingLeft.toFloat()
@@ -199,20 +238,19 @@ class CustomGoogleButton(
             bottom = top + buttonNewHeight
         }
 
-        var widthOfAlLElements = getWidthOfAllElements(min(buttonNewWidth, buttonNewHeight))
-        if (widthOfAlLElements > buttonRect.width()) widthOfAlLElements =
-            calculateLessWidth(widthOfAlLElements, buttonRect.width())
+        widthOfAlLElements = getWidthOfAllElements(min(buttonNewWidth, buttonNewHeight))
+        if (widthOfAlLElements > buttonRect.width())
+            widthOfAlLElements = calculateLessWidth(widthOfAlLElements, buttonRect.width())
 
         val paddingHorizontal = referenceSize
         startXOfComposition = paddingHorizontal + (buttonNewWidth - widthOfAlLElements) / 2
 
-
         val logoShapeRadius = referenceSize
         gLogoPath.set(
             startXOfComposition,
-            h / 2 - logoShapeRadius,
+            buttonNewHeight / 2 - logoShapeRadius,
             startXOfComposition + logoShapeDiameter,
-            h / 2 + logoShapeRadius
+            buttonNewHeight / 2 + logoShapeRadius
         )
 
         buttonCornerRadius = min(buttonNewWidth, buttonNewHeight) / 100 * CORNER_ROUND_PERCENT
@@ -223,8 +261,11 @@ class CustomGoogleButton(
      * Calculates less width of all elements for that they do not go beyond the button.
      */
     private fun calculateLessWidth(widthOfAlLElements: Float, buttonWidth: Float): Float {
-        val proportion = (buttonWidth / widthOfAlLElements) * CONTENT_REDUCER_PERCENT
-        return getWidthOfAllElements(widthOfAlLElements * proportion)
+        val proportion = min (buttonWidth, widthOfAlLElements) /  max (buttonWidth, widthOfAlLElements)
+        val edgeLength = widthOfAlLElements * (proportion * CONTENT_REDUCER_PERCENT)
+        var newWidth = getWidthOfAllElements(edgeLength)
+        if (newWidth > buttonWidth) newWidth = getWidthOfAllElements(edgeLength * TEXT_REDUCER_PERCENT)
+        return newWidth
     }
 
     /**
@@ -276,20 +317,20 @@ class CustomGoogleButton(
             gLogoPath.right + logoStrokeWidth / 2.0f,
             gLogoPath.centerY(),
             logoPaint.apply {
-                color = logoColor1
+                color = color1Logo
             }
         )
         canvas.drawArc(gLogoPath, -10f, 55f, false, logoPaint.apply {
-            color = logoColor1
+            color = color1Logo
         })
         canvas.drawArc(gLogoPath, 45f, 95f, false, logoPaint.apply {
-            color = logoColor2
+            color = color2Logo
         })
         canvas.drawArc(gLogoPath, 140f, 95f, false, logoPaint.apply {
-            color = logoColor3
+            color = color3Logo
         })
         canvas.drawArc(gLogoPath, 235f, 95f, false, logoPaint.apply {
-            color = logoColor4
+            color = color4Logo
         })
     }
 
@@ -313,5 +354,14 @@ class CustomGoogleButton(
     private fun dpToPx(dp: Float): Float = TypedValue.applyDimension(
         TypedValue.COMPLEX_UNIT_DIP, dp, resources.displayMetrics
     )
+
+    /**
+     * Setter for text.
+     */
+    fun setText(text: String) {
+        this.text = text
+        calculateNewTransform(buttonRect.width(), buttonRect.height())
+        invalidate()
+    }
 
 }

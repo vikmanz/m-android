@@ -2,6 +2,7 @@ package com.vikmanz.shpppro.ui
 
 import android.app.AlertDialog
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Patterns
 import android.view.View
@@ -62,6 +63,16 @@ class AuthActivity : BaseActivity<ActivityAuthBinding>(ActivityAuthBinding::infl
         initHelpTesterButtons()     // help test buttons
         backgroundFocusHandler()    // de-focus fields when click on bg
 
+        // customView test button
+        with(binding.buttonAuthRegisterByGoogle) {
+            setOnClickListener {
+                color1Logo = Color.BLACK
+                color2Logo = Color.RED
+                color3Logo = Color.BLUE
+                color4Logo = Color.GREEN
+                setText(GOOGLE_BUTTON_CUSTOM_TEXT)
+            }
+        }
     }
 
     /**
@@ -97,16 +108,21 @@ class AuthActivity : BaseActivity<ActivityAuthBinding>(ActivityAuthBinding::infl
         isLoginScreen = !isLoginScreen  // Change variable-state of screen layout.
         with(binding) {
             if (isLoginScreen) {
-                textviewAuthHelloText.text = getString(R.string.auth_activity_hello_text_login_screen)
-                textviewAuthHelloSubtext.text = getString(R.string.auth_activity_hello_subtext_login_screen)
+                textviewAuthHelloText.text =
+                    getString(R.string.auth_activity_hello_text_login_screen)
+                textviewAuthHelloSubtext.text =
+                    getString(R.string.auth_activity_hello_subtext_login_screen)
                 textinputlayoutAuthPassword.isCounterEnabled = true
                 textviewAuthForgotPassword.visibility = View.VISIBLE
                 buttonAuthRegisterByGoogle.visibility = View.GONE
                 textviewAuthTextBetweenGoogleAndRegister.visibility = View.GONE
-                buttonAuthRegisterByEmail.text = getString(R.string.auth_activity_register_button_login_screen)
+                buttonAuthRegisterByEmail.text =
+                    getString(R.string.auth_activity_register_button_login_screen)
                 textviewAuthWarningAboutTerms.visibility = View.GONE
-                textviewAuthAlreadyHaveAccountMessage.text = getString(R.string.auth_activity_already_have_account_message_login_screen)
-                textviewAuthSwitchScreenToLoginButton.text = getString(R.string.auth_activity_sign_in_button_login_screen)
+                textviewAuthAlreadyHaveAccountMessage.text =
+                    getString(R.string.auth_activity_already_have_account_message_login_screen)
+                textviewAuthSwitchScreenToLoginButton.text =
+                    getString(R.string.auth_activity_sign_in_button_login_screen)
             } else {
                 textviewAuthHelloText.text = getString(R.string.auth_layout_hello_text)
                 textviewAuthHelloSubtext.text = getString(R.string.auth_layout_hello_subtext)
@@ -116,8 +132,10 @@ class AuthActivity : BaseActivity<ActivityAuthBinding>(ActivityAuthBinding::infl
                 textviewAuthTextBetweenGoogleAndRegister.visibility = View.VISIBLE
                 buttonAuthRegisterByEmail.text = getString(R.string.auth_layout_register_button)
                 textviewAuthWarningAboutTerms.visibility = View.VISIBLE
-                textviewAuthAlreadyHaveAccountMessage.text = getString(R.string.auth_layout_already_have_account_message)
-                textviewAuthSwitchScreenToLoginButton.text = getString(R.string.auth_layout_sign_in_button)
+                textviewAuthAlreadyHaveAccountMessage.text =
+                    getString(R.string.auth_layout_already_have_account_message)
+                textviewAuthSwitchScreenToLoginButton.text =
+                    getString(R.string.auth_layout_sign_in_button)
             }
         }
     }
@@ -175,7 +193,10 @@ class AuthActivity : BaseActivity<ActivityAuthBinding>(ActivityAuthBinding::infl
             return getString(R.string.auth_activity_password_warning_one_lower_char)
         }
         if (!passwordText.matches(REGEX_ONE_SPECIAL_CHAR.toRegex())) { // Minimum 1 special char.
-            return getString(R.string.auth_activity_password_warning_one_special_char, SPECIAL_CHARS)
+            return getString(
+                R.string.auth_activity_password_warning_one_special_char,
+                SPECIAL_CHARS
+            )
         }
 
         // If pass all checks, return null.
@@ -313,7 +334,8 @@ class AuthActivity : BaseActivity<ActivityAuthBinding>(ActivityAuthBinding::infl
      */
     private fun viewOrHideHelpTesterButtons() {
         helperButtonsVisible = !helperButtonsVisible
-        binding.flowAuthDebugButtons.visibility = if (helperButtonsVisible) View.VISIBLE else View.GONE
+        binding.flowAuthDebugButtons.visibility =
+            if (helperButtonsVisible) View.VISIBLE else View.GONE
     }
 
     /**
@@ -363,8 +385,10 @@ class AuthActivity : BaseActivity<ActivityAuthBinding>(ActivityAuthBinding::infl
         with(binding) {
             textinputAuthEmail.setText(savedInstanceState.getString(EMAIL_FIELD_STATE_KEY))
             textinputAuthPassword.setText(savedInstanceState.getString(PASSWORD_FIELD_STATE_KEY))
-            textinputlayoutAuthPassword.endIconMode = savedInstanceState.getInt(PASSWORD_VIEW_STATE_KEY)
-            checkboxAuthRememberMe.isChecked = savedInstanceState.getBoolean(CHECKBOX_STATE_STATE_KEY)
+            textinputlayoutAuthPassword.endIconMode =
+                savedInstanceState.getInt(PASSWORD_VIEW_STATE_KEY)
+            checkboxAuthRememberMe.isChecked =
+                savedInstanceState.getBoolean(CHECKBOX_STATE_STATE_KEY)
             flowAuthDebugButtons.visibility = if (helperButtonsVisible) View.VISIBLE else View.GONE
         }
         setLocale()
@@ -391,6 +415,9 @@ class AuthActivity : BaseActivity<ActivityAuthBinding>(ActivityAuthBinding::infl
         private const val CHECKBOX_STATE_STATE_KEY = "CHECKBOX_KEY_AUTH_ACTIVITY"
         private const val LANGUAGE_STATE_KEY = "LAND_ID_KEY_AUTH_ACTIVITY"
         private const val HELP_BUTTONS_STATE_KEY = "HELP_BUTTONS_KEY_AUTH_ACTIVITY"
+
+        // test customView. If big text size will be bug.
+        private const val GOOGLE_BUTTON_CUSTOM_TEXT = "GOOGLE BUTTON, I PROMISE"
     }
 
 }
