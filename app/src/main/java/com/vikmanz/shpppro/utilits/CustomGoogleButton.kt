@@ -23,13 +23,20 @@ class CustomGoogleButton(
      * Constants
      */
     companion object {
-
-        private const val LOGO_RADIUS_IN_PERCENT = 30f      // Radius in % from lesser edge of button.
-        private const val CORNER_ROUND_PERCENT = 15f        // Radius of button corners in % from lesser edge of button.
-        private const val DEFAULT_BUTTON_WIDTH = 200f       // Default button width.
-        private const val DEFAULT_BUTTON_HEIGHT = 50f       // Default button height.
-        private const val CONTENT_REDUCER_PERCENT = 0.25f   // Scale if elements bigger than button.
-        private const val THEME_ERROR_COLOR = Color.RED     // Default error colors if xml attributes are null.
+        // Radius in % from lesser edge of button.
+        private const val LOGO_RADIUS_IN_PERCENT = 30f
+        // Radius of button corners in % from lesser edge of button.
+        private const val CORNER_ROUND_PERCENT = 15f
+        // Text scale. 1=100%, 2=200%, 0.5=50%
+        private const val TEXT_SIZE_SCALAR = 1.75f
+        // Default button width.
+        private const val DEFAULT_BUTTON_WIDTH = 200f
+        // Default button height.
+        private const val DEFAULT_BUTTON_HEIGHT = 50f
+        // Scale if elements bigger than button.
+        private const val CONTENT_REDUCER_PERCENT = 0.25f
+        // Default error colors if xml attributes are null.
+        private const val THEME_ERROR_COLOR = Color.RED
     }
 
     /**
@@ -225,7 +232,7 @@ class CustomGoogleButton(
      */
     private fun getWidthOfAllElements(edgeLength: Float): Float {
         referenceSize = edgeLength / 100 * LOGO_RADIUS_IN_PERCENT
-        textPaint.textSize = referenceSize
+        textPaint.textSize = referenceSize * TEXT_SIZE_SCALAR
         textPaint.getTextBounds(text, 0, text.length, mTextBoundRect)
         val textBoxWidth: Float = textPaint.measureText(text)
 

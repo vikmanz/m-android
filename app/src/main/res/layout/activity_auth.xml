@@ -273,7 +273,7 @@
         android:id="@+id/button_auth_register_by_google"
         android:layout_width="0dp"
         android:layout_height="@dimen/size_button_height_M"
-        app:mgbText="SIGN IN BY GOOGLE"
+        app:mgbText="GOOGLE"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
