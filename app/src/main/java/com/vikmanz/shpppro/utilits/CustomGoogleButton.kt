@@ -4,9 +4,11 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.TypedArray
 import android.graphics.*
+import android.os.Build
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.View
+import androidx.annotation.RequiresApi
 import com.vikmanz.shpppro.R
 import kotlin.math.max
 import kotlin.math.min
@@ -18,6 +20,19 @@ import kotlin.properties.Delegates
 class CustomGoogleButton(
     context: Context, attributesSet: AttributeSet?, defStyleAttr: Int, defStyleRes: Int
 ) : View(context, attributesSet, defStyleAttr, defStyleRes) {
+
+    /**
+     * Constructors.
+     */
+    constructor(context: Context, attributesSet: AttributeSet?, defStyleAttr: Int) : this(
+        context, attributesSet, defStyleAttr, R.style.defaultMyGButtonStyle
+    )
+
+    constructor(context: Context, attributesSet: AttributeSet?) : this(
+        context, attributesSet, R.attr.myGoogleButtonStyle
+    )
+
+    constructor(context: Context) : this(context, null)
 
     /**
      * Constants
@@ -110,19 +125,6 @@ class CustomGoogleButton(
     private var buttonCornerRadius by Delegates.notNull<Float>()
     private var logoStrokeWidth by Delegates.notNull<Float>()
     private var referenceSize by Delegates.notNull<Float>()
-
-    /**
-     * Constructors.
-     */
-    constructor(context: Context, attributesSet: AttributeSet?, defStyleAttr: Int) : this(
-        context, attributesSet, defStyleAttr, R.style.defaultMyGButtonStyle
-    )
-
-    constructor(context: Context, attributesSet: AttributeSet?) : this(
-        context, attributesSet, R.attr.myGoogleButtonStyle
-    )
-
-    constructor(context: Context) : this(context, null)
 
 
     /**
