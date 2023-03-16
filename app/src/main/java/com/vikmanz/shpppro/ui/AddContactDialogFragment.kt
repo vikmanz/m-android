@@ -17,29 +17,43 @@ import com.vikmanz.shpppro.utilits.log
 import com.vikmanz.shpppro.utilits.setContactPhoto
 import com.vikmanz.shpppro.utilits.setContactPhotoFromUri
 
-
+/**
+ * Dialog Fragment in which user can add new contact with typed information to list of contacts.
+ */
 class AddContactDialogFragment(contactsService: ContactsService) : DialogFragment() {
 
-    constructor() : this(ContactsService()) {
-        // doesn't do anything special
-    }
-
+    /**
+     * Interface to send new contact from this dialog to MyContactsActivity (when contact will be added to contact list).
+     */
     interface ConfirmationListener {
         fun addContactConfirmButtonClicked(contact: Contact)
-        //fun cancelButtonClicked()
     }
 
+    /**
+     * Contact service, which give fake images and create new contact from typed info.
+     */
     private val _contactsService = contactsService
+
+    /**
+     * Uri for image, which will be take from galery.
+     */
     private var imgUri: Uri? = null
 
-
+    /**
+     * Listener for send new contact from this activity to MyContactsActivity.
+     */
     private lateinit var listener: ConfirmationListener
 
+    /**
+     * Binding of that Dialog Fragment.
+     */
     private lateinit var _binding: AddContactActivityMyContactsBinding
 
+    /**
+     * I take it from internet and didn't change it.
+     */
     override fun onAttach(context: Context) {
         super.onAttach(context)
-
         try {
             // Instantiate the ConfirmationListener so we can send events to the host
             listener = activity as ConfirmationListener
@@ -49,18 +63,32 @@ class AddContactDialogFragment(contactsService: ContactsService) : DialogFragmen
         }
     }
 
+    /**
+     *
+     */
     @SuppressLint("UseGetLayoutInflater")
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
 
+        // Restore state of uri.
         if (savedInstanceState != null) restoreImageUri(savedInstanceState)
 
+        // inflate binding of dialog fragment
         _binding = AddContactActivityMyContactsBinding.inflate(LayoutInflater.from(context))
+
         return activity?.let {
+
+            // create dialog
             val builder = AlertDialog.Builder(it)
+
             with(_binding) {
+                // set avatar image
                 updateAvatarImage()
-                _binding.imageViewAvatarAddContact.setOnClickListener { requestDefaultImage() }
+
+                // set listener for change fake image and choose image from gallery
+                imageViewAvatarAddContact.setOnClickListener { requestDefaultImage() }
                 buttonAddPhotoFromGaleryAddContact.setOnClickListener { requestImage() }
+
+                // set listener for create new contact and send it to MyContactsActivity
                 buttonSaveAddNewContactActivityMyContacts.setOnClickListener {
                     dialog?.dismiss()
                     listener.addContactConfirmButtonClicked(
@@ -79,14 +107,20 @@ class AddContactDialogFragment(contactsService: ContactsService) : DialogFragmen
                     )
                     _contactsService.incrementPhotoCounter()
                 }
+
+                // set listener for back button
                 buttonBackAddContact.setOnClickListener { dialog?.cancel() }
             }
 
-            // Pass null as the parent view because its going in the dialog layout
+            // Set view and create dialog
             builder.setView(_binding.root).create()
+
         } ?: throw IllegalStateException("Activity cannot be null")
     }
 
+    /**
+     * Restore Uri of image when configuration changes.
+     */
     private fun restoreImageUri(savedInstanceState: Bundle) {
         if (SDK_INT >= 33) {
             imgUri = savedInstanceState.getParcelable(PHOTO_STATE_KEY, Uri::class.java)
@@ -98,17 +132,26 @@ class AddContactDialogFragment(contactsService: ContactsService) : DialogFragmen
         log("uri loaded! uri - $imgUri")
     }
 
+    /**
+     * Get fake image.
+     */
     private fun requestDefaultImage() {
         _contactsService.incrementPhotoCounter()
         if (imgUri != null) imgUri = null
         updateAvatarImage()
     }
 
+    /**
+     * Start activity with request image from gallery.
+     */
     private fun requestImage() {
-        requestImageLauncher.launch("image/*")
+        requestImageLauncher.launch(REQUEST_IMAGE_FROM_GALLERY)
     }
 
-    private val requestImageLauncher =                         // req img
+    /**
+     * Register activity for result for request image from gallery.
+     */
+    private val requestImageLauncher =
         registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
             uri?.let {
                 imgUri = uri
@@ -116,6 +159,9 @@ class AddContactDialogFragment(contactsService: ContactsService) : DialogFragmen
             }
         }
 
+    /**
+     * Update image in UV.
+     */
     private fun updateAvatarImage() {
         if (imgUri == null) {
             _binding.imageViewAvatarAddContact.setContactPhoto(_contactsService.getCurrentContactPhotoUrl())
@@ -126,13 +172,21 @@ class AddContactDialogFragment(contactsService: ContactsService) : DialogFragmen
         }
     }
 
-
+    /**
+     * Save state of avatar image uri.
+     */
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putParcelable(PHOTO_STATE_KEY, imgUri)
     }
 
+    /**
+     * Constants.
+     */
     companion object {
+        // input for request image launcher.
+        private const val REQUEST_IMAGE_FROM_GALLERY = "image/*"
+
         // Save/Load State Keys. Don't need to change.
         private const val PHOTO_STATE_KEY = "PHOTO_ADD_CONTACT_DIALOG"
     }

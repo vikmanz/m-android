@@ -6,7 +6,7 @@ package com.vikmanz.shpppro.constants
 object Constants {
 
     /**
-     * Settings:
+     * Auth:
      */
     // Login (true) or Register (false) view first.
     const val LOGIN_VIEW_FIRST = true
@@ -15,10 +15,14 @@ object Constants {
     // Minimum number of chars in password. Don't forget check max password length in Integer.
     const val MIN_PASSWORD_LENGTH = 8
 
-    // My Contacts
+    /**
+     * My Contacts:
+     */
     // Minimum number of chars in password.
     const val START_NUMBER_OF_CONTACTS = 5
+    // Undo dialog show length when contact was deleted.
     const val SNACK_BAR_VIEW_TIME = 5000
+    // Margin of elements in recycler view (left, right, bottom).
     const val MARGINS_OF_ELEMENTS = 20
     // FakeData (true) or PhoneData (false) view first on myContacts
     const val FAKE_FIRST = true
@@ -28,5 +32,4 @@ object Constants {
      * Intent Keys. Don't change it.
      */
     const val INTENT_EMAIL_ID = "email_identifier"
-    const val INTENT_LANG_ID = "language_identifier"
 }

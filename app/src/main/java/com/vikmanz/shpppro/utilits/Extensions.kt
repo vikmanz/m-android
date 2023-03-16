@@ -17,7 +17,30 @@ fun String.firstCharToUpperCase() = replaceFirstChar {
     if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString()
 }
 
-// Glide options
+
+/**
+ * Extra function of ImageView class, for change photo via Glide from photo URL (from internet).
+ */
+fun AppCompatImageView.setContactPhoto(contactPhotoUrl: String) {
+    Glide.with(context)
+        .load(contactPhotoUrl)
+        .apply(GLIDE_OPTIONS)
+        .into(this)
+}
+
+/**
+ * Extra function of ImageView class, for change photo via Glide from photo URI (from gallery).
+ */
+fun AppCompatImageView.setContactPhotoFromUri(uri: Uri?) {
+    Glide.with(context)
+        .load(uri)
+        .apply(GLIDE_OPTIONS)
+        .into(this)
+}
+
+/**
+ * Settings of Glide.
+ */
 val GLIDE_OPTIONS = RequestOptions()
     .centerCrop()
     .circleCrop()
@@ -26,22 +49,9 @@ val GLIDE_OPTIONS = RequestOptions()
     .diskCacheStrategy(DiskCacheStrategy.ALL)
     .priority(Priority.HIGH)
 
-// Extensions for set photo from url.
-fun AppCompatImageView.setContactPhoto(contactPhotoUrl: String) {
-    Glide.with(context)
-        .load(contactPhotoUrl)
-        .apply(GLIDE_OPTIONS)
-        .into(this)
-}
-
-// Extensions for set photo from uri.
-fun AppCompatImageView.setContactPhotoFromUri(uri: Uri?) {
-    Glide.with(context)
-        .load(uri)
-        .apply(GLIDE_OPTIONS)
-        .into(this)
-}
-
+/**
+ * Function for more comfortable print test messages to console.
+ */
 fun log(message: String) {
     Log.d("myLog", message)
 }

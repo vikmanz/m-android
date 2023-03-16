@@ -34,7 +34,7 @@ class DataStoreManager (private val context: Context) {
     }
 
     /**
-     * Get name, password, autologin and language status, and save all these in memory.
+     * Get name, password and autologin, and save all these in memory.
      */
     suspend fun saveUserSata(name: String, password: String, isAutoLogin: Boolean) {
         context.dataStore.edit {

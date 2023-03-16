@@ -7,22 +7,18 @@ import com.vikmanz.shpppro.utilits.log
 import java.util.*
 import kotlin.collections.ArrayList
 
+/**
+ * Main service to create contacts objects from information on from random.
+ */
 class ContactsService {
 
-    private var contacts = listOf<Contact>() // All users
+    private val faker = Faker.instance() // fake data generator.
 
-    private val faker = Faker.instance() // face data to user
+    private var imgCounter = 0  // counter to switch random images.
 
-    init {
-        contacts = (0 until START_NUMBER_OF_CONTACTS).map {
-            generateRandomContact()
-        }.toMutableList()
-    }
-
-    fun getContacts(): List<Contact> {
-        return contacts
-    }
-
+    /**
+     * Create and return one contact with information from input.
+     */
     fun getOneContact(
         id: Long,
         photoUrl: String,
@@ -51,6 +47,9 @@ class ContactsService {
         return newContact
     }
 
+    /**
+     * Create and return one contact with random fake information.
+     */
     private fun generateRandomContact(): Contact = getOneContact(
             id = getRandomId(),
             photoUrl = IMAGES[imgCounter % IMAGES.size],
@@ -64,6 +63,21 @@ class ContactsService {
             birthday = faker.date().birthday().toString()
         )
 
+    /**
+     * Create and return list of fake contacts.
+     */
+    fun createFakeContacts(): List<Contact> {
+        val newContacts = (0 until START_NUMBER_OF_CONTACTS).map {
+            generateRandomContact()
+        }.toMutableList()
+        log("service return new fake list with size ${newContacts.size}")
+        return newContacts
+    }
+
+
+    /**
+     * Create and return contact list with information from phonebook ArrayList<[name: String, phone: String]>.
+     */
     fun createContactListFromPhonebookInfo(listOfContactsInformation: ArrayList<List<String>>): List<Contact> {
         val newContacts = (0 until listOfContactsInformation.size).map {
             getOneContact(
@@ -83,31 +97,36 @@ class ContactsService {
         return newContacts
     }
 
-
+    /**
+     * Return random id for new contacts.
+     */
+    private fun getRandomId(): Long {
+        return UUID.randomUUID().mostSignificantBits
+    }
+    /**
+     * Return current random photo url.
+     */
     fun getCurrentContactPhotoUrl(): String {
         return IMAGES[imgCounter % IMAGES.size]
     }
 
+    /**
+     * Return current random photo counter.
+     */
     fun getCurrentPhotoCounter(): Int {
         return imgCounter
     }
 
-    private fun getRandomId(): Long {
-        return UUID.randomUUID().mostSignificantBits
-    }
-
+    /**
+     * Change random photo counter to switch random image to next.
+     */
     fun incrementPhotoCounter() {
         imgCounter++
     }
 
-    fun createFakeContacts(): List<Contact> {
-        val newContacts = (0 until START_NUMBER_OF_CONTACTS).map {
-            generateRandomContact()
-        }.toMutableList()
-        log("service return new fake list with size ${newContacts.size}")
-        return newContacts
-    }
-
+    /**
+     * Random images for fake data or adding new contacts.
+     */
     companion object {
         val IMAGES = mutableListOf(
             "https://images.unsplash.com/photo-1600267185393-e158a98703de?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=600&ixid=MnwxfDB8MXxyYW5kb218fHx8fHx8fHwxNjI0MDE0NjQ0&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=800",
@@ -121,8 +140,6 @@ class ContactsService {
             "https://images.unsplash.com/photo-1567186937675-a5131c8a89ea?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=600&ixid=MnwxfDB8MXxyYW5kb218fHx8fHx8fHwxNjI0MDE0ODYx&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=800",
             "https://images.unsplash.com/photo-1546456073-92b9f0a8d413?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=600&ixid=MnwxfDB8MXxyYW5kb218fHx8fHx8fHwxNjI0MDE0ODY1&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=800"
         )
-
-        private var imgCounter = 0
     }
 
 }

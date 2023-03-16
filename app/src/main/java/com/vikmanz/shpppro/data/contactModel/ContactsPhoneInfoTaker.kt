@@ -9,7 +9,10 @@ import com.vikmanz.shpppro.utilits.log
 
 class ContactsPhoneInfoTaker(private val contentResolver: ContentResolver) {
 
-    @SuppressLint("Range", "Recycle")
+    /**
+     * Take contacts from phonebook and return they as ArrayList<[name: String, phone: String]>.
+     */
+    @SuppressLint("Range")
     fun getPhonebookContactsInfo(): ArrayList<List<String>> {
         val uri = ContactsContract.CommonDataKinds.Phone.CONTENT_URI
         val cursor = contentResolver.query(
@@ -30,6 +33,7 @@ class ContactsPhoneInfoTaker(private val contentResolver: ContentResolver) {
                 listOfContactsInformation.add(listOf(contactName, contactNumber))
             }
         }
+        cursor?.close()
 
         return listOfContactsInformation
     }

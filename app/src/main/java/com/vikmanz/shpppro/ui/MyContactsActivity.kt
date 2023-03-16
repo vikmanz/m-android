@@ -32,10 +32,15 @@ class MyContactsActivity :
     BaseActivity<ActivityMyContactsBinding>(ActivityMyContactsBinding::inflate),
     AddContactDialogFragment.ConfirmationListener {
 
-
-    /// CREATE AND INIT ACTIVITY ///
-
+    /**
+     * Create ViewModel for this activity.
+     */
     private val viewModel: MyContactsViewModel by viewModels()
+
+    /**
+     * Create service for create new contacts. It sends to Add new contact Dialog Fragment.
+     */
+    private val contactsService = ContactsService()
 
     /**
      * Main function, which used when activity was create.
@@ -47,39 +52,9 @@ class MyContactsActivity :
         configureUI()
     }
 
-    override fun setListeners() {
-        with(binding) {
-            btnBack.setOnClickListener { startAuthActivity() }
-            btnDeclineAccess.setOnClickListener { buttonToRemoveAccess() }
-            tvAddContacts.setOnClickListener { addNewContact() }
-            tvAddContactsFromPhonebook.setOnClickListener { requestReadContactsPermission() }
-            tvAddContactsFromViewModel.setOnClickListener { changeToFakeContacts() }
-        }
-    }
-
-    override fun setObservers() {
-        lifecycleScope.launch {
-            viewModel.contactList.collect { contactList ->
-                adapter.submitList(contactList)
-            }
-        }
-    }
-
-
-
-    /// RECYCLER VIEW ///
-
-    private val contactsService = ContactsService()
-
-    // Recycler View variables.
-    private val adapter: ContactsAdapter by lazy {
-        ContactsAdapter(contactActionListener = object : ContactActionListener {
-            override fun onDeleteUser(contact: Contact) {
-                deleteContactFromViewModelWithUndo(contact)
-            }
-        })
-    }
-
+    /**
+     * Init recycler view and swipe to delete.
+     */
     private fun initRecyclerView() {
         with(binding) {
             recyclerViewMyContacts.layoutManager = LinearLayoutManager(this@MyContactsActivity)
@@ -89,15 +64,44 @@ class MyContactsActivity :
         initSwipeToDelete()
     }
 
-    private fun addNewContact() {
-        AddContactDialogFragment(contactsService)
-            .show(supportFragmentManager, "ConfirmationDialogFragmentTag")
+    /**
+     * Create adapter for contacts recycler view.
+     */
+    private val adapter: ContactsAdapter by lazy {
+        ContactsAdapter(contactActionListener = object : ContactActionListener {
+            override fun onDeleteUser(contact: Contact) {
+                // take contact from ContactsAdapter and delete it from ViewModel.
+                deleteContactFromViewModelWithUndo(contact)
+            }
+        })
     }
 
-    override fun addContactConfirmButtonClicked(contact: Contact) {
-        viewModel.addContact(contact)
+    /**
+     * Set observer for ViewModel. When ViewModel was changed, adapter of recycler view was take notify.
+     */
+    override fun setObservers() {
+        lifecycleScope.launch {
+            viewModel.contactList.collect { contactList ->
+                adapter.submitList(contactList)
+            }
+        }
     }
 
+    /**
+     * Delete contact from ViewModel and show Undo to restore it.
+     */
+    private fun deleteContactFromViewModelWithUndo(contact: Contact) {
+        val position = viewModel.getContactPosition(contact)
+        viewModel.deleteContact(contact)
+        Snackbar
+            .make(binding.root, "Contact has been removed", SNACK_BAR_VIEW_TIME)
+            .setAction("Undo") { viewModel.addContact(contact, position) }
+            .show()
+    }
+
+    /**
+     * Init swipe to delete. Taken from internet and didn't changed.
+     */
     private fun initSwipeToDelete() {
         val swipeHandler = object : SwipeToDeleteCallback(this) {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
@@ -109,24 +113,44 @@ class MyContactsActivity :
         itemTouchHelper.attachToRecyclerView(binding.recyclerViewMyContacts)
     }
 
-    private fun deleteContactFromViewModelWithUndo(contact: Contact) {
-        val position = viewModel.getContactPosition(contact)
-        viewModel.deleteContact(contact)
-        Snackbar
-            .make(binding.root, "Contact has been removed", SNACK_BAR_VIEW_TIME)
-            .setAction("Undo") { viewModel.addContact(contact, position) }
-            .show()
+    /**
+     * Set listeners for buttons.
+     */
+    override fun setListeners() {
+        with(binding) {
+            btnBack.setOnClickListener { finish() }
+            btnDeclineAccess.setOnClickListener { buttonToRemoveAccess() }
+            tvAddContacts.setOnClickListener { addNewContact() }
+            tvAddContactsFromPhonebook.setOnClickListener { requestReadContactsPermission() }
+            tvAddContactsFromViewModel.setOnClickListener { changeToFakeContacts() }
+        }
     }
 
+    /**
+     * Show Add new contact Dialog Fragment.
+     */
+    private fun addNewContact() {
+        AddContactDialogFragment(contactsService)
+            .show(supportFragmentManager, "ConfirmationDialogFragmentTag")
+    }
 
+    /**
+     * Take Contact from Add new contact Dialog Fragment and add it to ViewModel.
+     */
+    override fun addContactConfirmButtonClicked(contact: Contact) {
+        viewModel.addContact(contact)
+    }
 
-
-    /// TAKE CONTACTS FROM PHONE ///
-
+    /**
+     * Start activity with request permission for read contacts from phonebook.
+     */
     private fun requestReadContactsPermission() {
         requestPermissionLauncher.launch(READ_CONTACTS)
     }
 
+    /**
+     * Register activity for request permission for read contacts from phonebook.
+     */
     private val requestPermissionLauncher =                         // req permissions
         registerForActivityResult(ActivityResultContracts.RequestPermission()) {
             if (it) setContactsFromPhone()                          // if yes set phone contacts
@@ -134,6 +158,9 @@ class MyContactsActivity :
                 .show(supportFragmentManager, "ConfirmationDialogFragmentTag")
         }
 
+    /**
+     * Set contacts from phonebook which taken from ContactsPhoneInfoTaker to ViewModel list of contacts.
+     */
     private fun setContactsFromPhone() {
         val phonebookInfo = ContactsPhoneInfoTaker(contentResolver).getPhonebookContactsInfo()
         val contactsFromPhone = ContactsService().createContactListFromPhonebookInfo(phonebookInfo)
@@ -141,6 +168,9 @@ class MyContactsActivity :
         configureUI()
     }
 
+    /**
+     * Button to open application settings to change permission.
+     */
     private fun buttonToRemoveAccess() {
         val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
         with(intent) {
@@ -152,11 +182,18 @@ class MyContactsActivity :
         }
         startActivity(intent)
     }
+
+    /**
+     * Change contacts to fake contacts list.
+     */
     private fun changeToFakeContacts() {
         viewModel.getFakeContacts()
         configureUI()
     }
 
+    /**
+     * Configure UI to relevant buttons for phonebook or for fake contacts list.
+     */
     private fun configureUI() {
         with(binding) {
             btnDeclineAccess.visibility =
@@ -173,23 +210,11 @@ class MyContactsActivity :
         }
     }
 
+    /**
+     * Configure UI if activity restart (we don't go to onCreate()).
+     */
     override fun onRestart() {
         super.onRestart()
         configureUI()
     }
-
-
-
-
-
-
-    /// OTHERS FUNCTIONS ///
-    private fun startAuthActivity() {
-//        val intentObject = Intent(this, AuthActivity::class.java)
-//        intentObject.putExtra(Constants.INTENT_LANG_ID, false)
-//        startActivity(intentObject)
-//        overridePendingTransition(R.anim.zoom_in_inner, R.anim.zoom_in_outter)
-        finish()
-    }
-
 }

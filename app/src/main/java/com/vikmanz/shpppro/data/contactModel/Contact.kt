@@ -1,7 +1,11 @@
 package com.vikmanz.shpppro.data.contactModel
+
 import android.net.Uri
 import java.io.Serializable
 
+/**
+ * Contact object
+ */
 data class Contact(
     val contactId: Long,
     val contactPhotoUrl: String,
