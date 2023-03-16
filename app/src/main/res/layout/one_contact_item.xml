@@ -13,7 +13,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:cardCornerRadius="10dp"
         app:strokeWidth="2dp"
-        app:strokeColor="?attr/colorSecondary"
+        app:strokeColor="?attr/colorOnTertiary"
         >
 
         <LinearLayout
@@ -46,7 +46,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/contacts_recycler_person_name_sample"
-                    android:textColor="?attr/colorOnTertiary"
+                    android:textColor="?attr/colorSecondary"
                     android:textSize="@dimen/size_text_font_M"
                     tools:ignore="TextContrastCheck" />
 

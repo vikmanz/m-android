@@ -1,4 +1,4 @@
-package com.vikmanz.shpppro.myContactsActivity.contactModel
+package com.vikmanz.shpppro.data.contactModel
 import android.net.Uri
 import java.io.Serializable
 

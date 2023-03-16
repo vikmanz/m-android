@@ -1,9 +1,10 @@
-package com.vikmanz.shpppro.myContactsActivity.contactModel
+package com.vikmanz.shpppro.data.contactModel
 
 import android.annotation.SuppressLint
 import android.content.ContentResolver
 import android.provider.ContactsContract
 import android.util.Log
+import com.vikmanz.shpppro.utilits.log
 
 
 class ContactsPhoneInfoTaker(private val contentResolver: ContentResolver) {
@@ -25,7 +26,7 @@ class ContactsPhoneInfoTaker(private val contentResolver: ContentResolver) {
                     cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME))
                 val contactNumber =
                     cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER))
-                Log.d("myLog", "Adding ::: Name: $contactName   Phone: $contactNumber")
+                log("Adding ::: Name: $contactName   Phone: $contactNumber")
                 listOfContactsInformation.add(listOf(contactName, contactNumber))
             }
         }

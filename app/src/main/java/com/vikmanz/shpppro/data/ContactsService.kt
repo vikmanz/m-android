@@ -1,9 +1,13 @@
-package com.vikmanz.shpppro.myContactsActivity.contactModel
+package com.vikmanz.shpppro.data
 
 import android.net.Uri
 import android.util.Log
 import com.github.javafaker.Faker
 import com.vikmanz.shpppro.constants.Constants.START_NUMBER_OF_CONTACTS
+import com.vikmanz.shpppro.data.contactModel.Contact
+import com.vikmanz.shpppro.utilits.log
+import java.util.*
+import kotlin.collections.ArrayList
 
 class ContactsService {
 
@@ -20,19 +24,6 @@ class ContactsService {
     fun getContacts(): List<Contact> {
         return contacts
     }
-
-    private fun generateRandomContact(): Contact = getOneContact(
-            id = imgCounter.toLong(),
-            photoUrl = IMAGES[imgCounter % IMAGES.size],
-            photoUri = null,
-            photoIndex = imgCounter,
-            name = faker.name().fullName(),
-            career = faker.company().name(),
-            email = faker.internet().emailAddress(),
-            phone = faker.phoneNumber().phoneNumber(),
-            address = faker.address().fullAddress(),
-            birthday = faker.date().birthday().toString()
-        )
 
     fun getOneContact(
         id: Long,
@@ -62,22 +53,23 @@ class ContactsService {
         return newContact
     }
 
-    fun getCurrentContactPhotoUrl(): String {
-        return IMAGES[imgCounter % IMAGES.size]
-    }
-
-    fun getCurrentPhotoCounter(): Int {
-        return imgCounter
-    }
-
-    fun incrementPhotoCounter() {
-        imgCounter++
-    }
+    private fun generateRandomContact(): Contact = getOneContact(
+            id = getRandomId(),
+            photoUrl = IMAGES[imgCounter % IMAGES.size],
+            photoUri = null,
+            photoIndex = imgCounter,
+            name = faker.name().fullName(),
+            career = faker.company().name(),
+            email = faker.internet().emailAddress(),
+            phone = faker.phoneNumber().phoneNumber(),
+            address = faker.address().fullAddress(),
+            birthday = faker.date().birthday().toString()
+        )
 
     fun createContactListFromPhonebookInfo(listOfContactsInformation: ArrayList<List<String>>): List<Contact> {
         val newContacts = (0 until listOfContactsInformation.size).map {
             getOneContact(
-                id = imgCounter.toLong(),
+                id = getRandomId(),
                 photoUrl = IMAGES[imgCounter % IMAGES.size],
                 photoUri = null,
                 photoIndex = imgCounter,
@@ -89,15 +81,32 @@ class ContactsService {
                 birthday = faker.date().birthday().toString()
             )
         }.toMutableList()
-        Log.d("mylog", "service return new list with size ${newContacts.size}")
+        log("service return new list with size ${newContacts.size}")
         return newContacts
+    }
+
+
+    fun getCurrentContactPhotoUrl(): String {
+        return IMAGES[imgCounter % IMAGES.size]
+    }
+
+    fun getCurrentPhotoCounter(): Int {
+        return imgCounter
+    }
+
+    private fun getRandomId(): Long {
+        return UUID.randomUUID().mostSignificantBits
+    }
+
+    fun incrementPhotoCounter() {
+        imgCounter++
     }
 
     fun createFakeContacts(): List<Contact> {
         val newContacts = (0 until START_NUMBER_OF_CONTACTS).map {
             generateRandomContact()
         }.toMutableList()
-        Log.d("mylog", "service return new fake list with size ${newContacts.size}")
+        log("service return new fake list with size ${newContacts.size}")
         return newContacts
     }
 

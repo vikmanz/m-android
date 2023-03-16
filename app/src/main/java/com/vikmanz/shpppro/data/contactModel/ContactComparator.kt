@@ -1,4 +1,4 @@
-package com.vikmanz.shpppro.myContactsActivity.contactModel
+package com.vikmanz.shpppro.data.contactModel
 
 import androidx.recyclerview.widget.DiffUtil
 

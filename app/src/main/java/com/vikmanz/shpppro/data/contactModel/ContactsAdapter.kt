@@ -1,4 +1,4 @@
-package com.vikmanz.shpppro.myContactsActivity.contactModel
+package com.vikmanz.shpppro.data.contactModel
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -27,7 +27,6 @@ class ContactsAdapter(private val contactActionListener: ContactActionListener) 
                 // bind delete listener
                 btnRemove.setOnClickListener {
                     contactActionListener.onDeleteUser(contact)
-                    // notifyDataSetChanged()
                 }
             }
         }

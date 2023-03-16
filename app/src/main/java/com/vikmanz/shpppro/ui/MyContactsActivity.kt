@@ -16,10 +16,11 @@ import com.google.android.material.snackbar.Snackbar
 import com.vikmanz.shpppro.constants.Constants.MARGINS_OF_ELEMENTS
 import com.vikmanz.shpppro.constants.Constants.SNACK_BAR_VIEW_TIME
 import com.vikmanz.shpppro.databinding.ActivityMyContactsBinding
-import com.vikmanz.shpppro.myContactsActivity.contactModel.*
 import com.vikmanz.shpppro.utilits.BaseActivity
 import android.Manifest.permission.READ_CONTACTS
-import com.vikmanz.shpppro.myContactsActivity.*
+import com.vikmanz.shpppro.data.ContactsService
+import com.vikmanz.shpppro.data.MyContactsViewModel
+import com.vikmanz.shpppro.data.contactModel.*
 import com.vikmanz.shpppro.utilits.MarginItemDecoration
 import com.vikmanz.shpppro.utilits.SwipeToDeleteCallback
 import kotlinx.coroutines.*

@@ -1,17 +1,18 @@
 package com.vikmanz.shpppro.ui
 
-import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
 import androidx.fragment.app.DialogFragment
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.vikmanz.shpppro.R
 
 class OnDeclinePermissionDialogFragment : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog =
-        AlertDialog.Builder(requireContext())
+        MaterialAlertDialogBuilder(requireContext(), R.style.MaterialAlertDialog_rounded)
             .setTitle("Permission denied!")
             .setMessage("Please, go to settings and set contacts permission to allow.")
             .setPositiveButton("Ok") { _,_ -> goToGrantPermission() }

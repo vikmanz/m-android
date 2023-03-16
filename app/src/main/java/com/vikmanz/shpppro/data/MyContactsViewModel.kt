@@ -1,10 +1,10 @@
-package com.vikmanz.shpppro.myContactsActivity
+package com.vikmanz.shpppro.data
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.vikmanz.shpppro.constants.Constants.FAKE_FIRST
-import com.vikmanz.shpppro.myContactsActivity.contactModel.Contact
-import com.vikmanz.shpppro.myContactsActivity.contactModel.ContactsService
+import com.vikmanz.shpppro.data.contactModel.Contact
+import com.vikmanz.shpppro.utilits.log
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
@@ -13,14 +13,15 @@ class MyContactsViewModel : ViewModel() {
     // створюємо MutableStateFlow зі списком контактів
     private val _contactList = MutableStateFlow(ContactsService().getContacts())
 
-
-
     // створюємо StateFlow, який можна споживати з зовнішнього коду
     var contactList: StateFlow<List<Contact>> = _contactList
 
+    var phoneListActivated = !FAKE_FIRST
+    var phoneListChangedToFake = FAKE_FIRST
+
     fun addContact(contact: Contact) {
         addContact(contact, _contactList.value.size)
-        Log.d("myLog", "New contact created! id:${contact.contactId}, name:${contact.contactName}, contact img counter: ${contact.contactPhotoIndex}.")
+        log("New contact created! id:${contact.contactId}, name:${contact.contactName}, contact img counter: ${contact.contactPhotoIndex}.")
     }
 
     fun addContact(contact: Contact, index: Int) {
@@ -35,7 +36,7 @@ class MyContactsViewModel : ViewModel() {
         return _contactList.value.indexOf(contact)
     }
 
-    fun getContact(index: Int) : Contact{
+    fun getContact(index: Int) : Contact {
         return _contactList.value[index]
     }
 
@@ -49,8 +50,4 @@ class MyContactsViewModel : ViewModel() {
         phoneListActivated = FAKE_FIRST
         phoneListChangedToFake = !FAKE_FIRST
     }
-
-    var phoneListActivated = !FAKE_FIRST
-    var phoneListChangedToFake = FAKE_FIRST
-
 }

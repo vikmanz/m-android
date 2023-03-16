@@ -4,14 +4,17 @@ import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Context
 import android.net.Uri
+import android.os.Build
+import android.os.Build.VERSION.SDK_INT
 import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
+import com.vikmanz.shpppro.data.ContactsService
+import com.vikmanz.shpppro.data.contactModel.Contact
 import com.vikmanz.shpppro.databinding.AddContactActivityMyContactsBinding
-import com.vikmanz.shpppro.myContactsActivity.contactModel.Contact
-import com.vikmanz.shpppro.myContactsActivity.contactModel.ContactsService
+import com.vikmanz.shpppro.utilits.log
 import com.vikmanz.shpppro.utilits.setContactPhoto
 import com.vikmanz.shpppro.utilits.setContactPhotoFromUri
 
@@ -49,16 +52,16 @@ class AddContactDialogFragment(contactsService: ContactsService) : DialogFragmen
 
     @SuppressLint("UseGetLayoutInflater")
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+
+        if (savedInstanceState != null) restoreImageUri(savedInstanceState)
+
         _binding = AddContactActivityMyContactsBinding.inflate(LayoutInflater.from(context))
         return activity?.let {
             val builder = AlertDialog.Builder(it)
-
             with(_binding) {
-                imageViewAvatarAddContact.setContactPhoto(_contactsService.getCurrentContactPhotoUrl())
-                buttonAddPhotoFromGaleryAddContact.setOnClickListener {
-                    requestImage()
-                   //imageViewAvatarAddContact.setContactPhoto(_contactsService.getNextContactPhotoUrl())
-                }
+                updateAvatarImage()
+                _binding.imageViewAvatarAddContact.setOnClickListener { requestDefaultImage() }
+                buttonAddPhotoFromGaleryAddContact.setOnClickListener { requestImage() }
                 buttonSaveAddNewContactActivityMyContacts.setOnClickListener {
                     dialog?.dismiss()
                     listener.addContactConfirmButtonClicked(
@@ -85,6 +88,23 @@ class AddContactDialogFragment(contactsService: ContactsService) : DialogFragmen
         } ?: throw IllegalStateException("Activity cannot be null")
     }
 
+    private fun restoreImageUri(savedInstanceState: Bundle) {
+        if (SDK_INT >= 33) {
+            imgUri = savedInstanceState.getParcelable(PHOTO_STATE_KEY, Uri::class.java)
+        }
+        else {
+            @Suppress("DEPRECATION")
+            imgUri = savedInstanceState.getParcelable(PHOTO_STATE_KEY) as? Uri
+        }
+        log("uri loaded! uri - $imgUri")
+    }
+
+    private fun requestDefaultImage() {
+        _contactsService.incrementPhotoCounter()
+        if (imgUri != null) imgUri = null
+        updateAvatarImage()
+    }
+
     private fun requestImage() {
         requestImageLauncher.launch("image/*")
     }
@@ -93,8 +113,29 @@ class AddContactDialogFragment(contactsService: ContactsService) : DialogFragmen
         registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
             uri?.let {
                 imgUri = uri
-                _binding.imageViewAvatarAddContact.setContactPhotoFromUri(uri)
+                updateAvatarImage()
             }
         }
+
+    private fun updateAvatarImage() {
+        if (imgUri == null) {
+            _binding.imageViewAvatarAddContact.setContactPhoto(_contactsService.getCurrentContactPhotoUrl())
+            log("img update -default")
+        } else {
+            _binding.imageViewAvatarAddContact.setContactPhotoFromUri(imgUri)
+            log("img update - $imgUri")
+        }
+    }
+
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putParcelable(PHOTO_STATE_KEY, imgUri)
+    }
+
+    companion object {
+        // Save/Load State Keys. Don't need to change.
+        private const val PHOTO_STATE_KEY = "PHOTO_ADD_CONTACT_DIALOG"
+    }
 
 }
