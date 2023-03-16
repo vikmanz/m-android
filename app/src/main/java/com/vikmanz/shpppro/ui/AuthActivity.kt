@@ -3,12 +3,12 @@ package com.vikmanz.shpppro.ui
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
+import android.provider.Settings
 import android.util.Patterns
 import android.view.View
 import androidx.lifecycle.asLiveData
 import com.vikmanz.shpppro.R
 import com.vikmanz.shpppro.constants.Constants.INTENT_EMAIL_ID
-import com.vikmanz.shpppro.constants.Constants.INTENT_LANG_ID
 import com.vikmanz.shpppro.constants.Constants.LOGIN_VIEW_FIRST
 import com.vikmanz.shpppro.constants.Constants.MIN_PASSWORD_LENGTH
 import com.vikmanz.shpppro.constants.Constants.VIEW_HELP_BUTTONS_ON_CREATE
@@ -19,12 +19,11 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import java.util.*
 
 /**
  * Class represents SignIn or SignUp screen activity .
  */
-class AuthActivity :  BaseActivity<ActivityAuthBinding>(ActivityAuthBinding::inflate) {
+class AuthActivity : BaseActivity<ActivityAuthBinding>(ActivityAuthBinding::inflate) {
 
     /**
      * Constants.
@@ -35,8 +34,6 @@ class AuthActivity :  BaseActivity<ActivityAuthBinding>(ActivityAuthBinding::inf
         private const val REGEX_ONE_LOWER_CHAR = ".*[a-z].*"
         private const val SPECIAL_CHARS = "@#$%^&;+="
         private const val REGEX_ONE_SPECIAL_CHAR = ".*[$SPECIAL_CHARS].*"
-        private const val LANG_EN = "en"
-        private const val LANG_UA = "uk"
         private const val TEST_LOGIN = "viktor.manza@gmail.com"
         private const val TEST_PASSWORD = "passwordE3@a"
 
@@ -45,7 +42,6 @@ class AuthActivity :  BaseActivity<ActivityAuthBinding>(ActivityAuthBinding::inf
         private const val PASSWORD_FIELD_STATE_KEY = "PASSWORD_KEY_AUTH_ACTIVITY"
         private const val PASSWORD_VIEW_STATE_KEY = "PASSWORD_VIEW_KEY_AUTH_ACTIVITY"
         private const val CHECKBOX_STATE_STATE_KEY = "CHECKBOX_KEY_AUTH_ACTIVITY"
-        private const val LANGUAGE_STATE_KEY = "LAND_ID_KEY_AUTH_ACTIVITY"
         private const val HELP_BUTTONS_STATE_KEY = "HELP_BUTTONS_KEY_AUTH_ACTIVITY"
     }
 
@@ -55,9 +51,6 @@ class AuthActivity :  BaseActivity<ActivityAuthBinding>(ActivityAuthBinding::inf
 
     // Save state of screen layout. True - Login screen, False - Register screen.
     private var isLoginScreen = false
-
-    // Save state of language. True - En, False - Ua.
-    private var isUkrainian = false
 
     // Save state of helper buttons. True - visible, False - gone.
     private var helperButtonsVisible = false
@@ -91,7 +84,6 @@ class AuthActivity :  BaseActivity<ActivityAuthBinding>(ActivityAuthBinding::inf
     private fun checkAutoLogin() {
         var email = ""
         loginData.userNameFlow.asLiveData().observe(this) { email = it }
-        loginData.userLanguageFlow.asLiveData().observe(this) { isUkrainian = it }
         loginData.userLoginStatusFlow.asLiveData().observe(this) {
             if (it) startMainActivity(email)
         }
@@ -105,7 +97,6 @@ class AuthActivity :  BaseActivity<ActivityAuthBinding>(ActivityAuthBinding::inf
     private fun startMainActivity(email: String) {
         val intentObject = Intent(this, MainActivity::class.java)
         intentObject.putExtra(INTENT_EMAIL_ID, email)
-        intentObject.putExtra(INTENT_LANG_ID, isUkrainian)
         startActivity(intentObject)
         overridePendingTransition(R.anim.zoom_in_inner, R.anim.zoom_in_outter)
         finish()
@@ -118,16 +109,21 @@ class AuthActivity :  BaseActivity<ActivityAuthBinding>(ActivityAuthBinding::inf
         isLoginScreen = !isLoginScreen  // Change variable-state of screen layout.
         with(binding) {
             if (isLoginScreen) {
-                textviewAuthHelloText.text = getString(R.string.auth_activity_hello_text_login_screen)
-                textviewAuthHelloSubtext.text = getString(R.string.auth_activity_hello_subtext_login_screen)
+                textviewAuthHelloText.text =
+                    getString(R.string.auth_activity_hello_text_login_screen)
+                textviewAuthHelloSubtext.text =
+                    getString(R.string.auth_activity_hello_subtext_login_screen)
                 textinputlayoutAuthPassword.isCounterEnabled = true
                 textviewAuthForgotPassword.visibility = View.VISIBLE
                 buttonAuthRegisterByGoogle.visibility = View.GONE
                 textviewAuthTextBetweenGoogleAndRegister.visibility = View.GONE
-                buttonAuthRegisterByEmail.text = getString(R.string.auth_activity_register_button_login_screen)
+                buttonAuthRegisterByEmail.text =
+                    getString(R.string.auth_activity_register_button_login_screen)
                 textviewAuthWarningAboutTerms.visibility = View.GONE
-                textviewAuthAlreadyHaveAccountMessage.text = getString(R.string.auth_activity_already_have_account_message_login_screen)
-                textviewAuthSwitchScreenToLoginButton.text = getString(R.string.auth_activity_sign_in_button_login_screen)
+                textviewAuthAlreadyHaveAccountMessage.text =
+                    getString(R.string.auth_activity_already_have_account_message_login_screen)
+                textviewAuthSwitchScreenToLoginButton.text =
+                    getString(R.string.auth_activity_sign_in_button_login_screen)
             } else {
                 textviewAuthHelloText.text = getString(R.string.auth_layout_hello_text)
                 textviewAuthHelloSubtext.text = getString(R.string.auth_layout_hello_subtext)
@@ -137,8 +133,10 @@ class AuthActivity :  BaseActivity<ActivityAuthBinding>(ActivityAuthBinding::inf
                 textviewAuthTextBetweenGoogleAndRegister.visibility = View.VISIBLE
                 buttonAuthRegisterByEmail.text = getString(R.string.auth_layout_register_button)
                 textviewAuthWarningAboutTerms.visibility = View.VISIBLE
-                textviewAuthAlreadyHaveAccountMessage.text = getString(R.string.auth_layout_already_have_account_message)
-                textviewAuthSwitchScreenToLoginButton.text = getString(R.string.auth_layout_sign_in_button)
+                textviewAuthAlreadyHaveAccountMessage.text =
+                    getString(R.string.auth_layout_already_have_account_message)
+                textviewAuthSwitchScreenToLoginButton.text =
+                    getString(R.string.auth_layout_sign_in_button)
             }
         }
     }
@@ -196,7 +194,10 @@ class AuthActivity :  BaseActivity<ActivityAuthBinding>(ActivityAuthBinding::inf
             return getString(R.string.auth_activity_password_warning_one_lower_char)
         }
         if (!passwordText.matches(REGEX_ONE_SPECIAL_CHAR.toRegex())) { // Minimum 1 special char.
-            return getString(R.string.auth_activity_password_warning_one_special_char, SPECIAL_CHARS)
+            return getString(
+                R.string.auth_activity_password_warning_one_special_char,
+                SPECIAL_CHARS
+            )
         }
 
         // If pass all checks, return null.
@@ -246,7 +247,6 @@ class AuthActivity :  BaseActivity<ActivityAuthBinding>(ActivityAuthBinding::inf
         val email: String
         val password: String
         val isAutologin: Boolean
-        val isEnglish = this.isUkrainian
 
         with(binding) {
             email = textinputAuthEmail.text.toString()
@@ -255,7 +255,7 @@ class AuthActivity :  BaseActivity<ActivityAuthBinding>(ActivityAuthBinding::inf
         }
 
         coroutineScope.launch(Dispatchers.IO) {
-            loginData.saveUserSata(email, password, isAutologin, isEnglish)
+            loginData.saveUserSata(email, password, isAutologin)
         }
     }
 
@@ -322,35 +322,36 @@ class AuthActivity :  BaseActivity<ActivityAuthBinding>(ActivityAuthBinding::inf
 
             // Language change button listener.
             buttonAuthChangeLanguage.setOnClickListener {
-                isUkrainian = !isUkrainian
-                setLocale()
-                super.recreate()    // RECREATE ACTIVITY
+                goToChangeLanguage()
             }
         }
     }
+
+
+    /**
+     *  Open device language settings.
+     */
+    private fun goToChangeLanguage() {
+        val intent = Intent(Settings.ACTION_LOCALE_SETTINGS)
+        with(intent) {
+            addCategory(Intent.CATEGORY_DEFAULT)
+            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
+            addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS)
+            startActivity(this)
+        }
+    }
+
 
     /**
      *  Show/Hide help buttons.
      */
     private fun viewOrHideHelpTesterButtons() {
         helperButtonsVisible = !helperButtonsVisible
-        binding.flowAuthDebugButtons.visibility = if (helperButtonsVisible) View.VISIBLE else View.GONE
+        binding.flowAuthDebugButtons.visibility =
+            if (helperButtonsVisible) View.VISIBLE else View.GONE
     }
 
-    /**
-     * Change locale. It change from EN to UA or from UA to EN.
-     */
-    private fun setLocale() {
-        val config = resources.configuration
-        val lang =
-            if (isUkrainian) LANG_UA else LANG_EN
-        val locale = Locale(lang)
-        Locale.setDefault(locale)
-        config.setLocale(locale)
-        createConfigurationContext(config)
-        @Suppress("DEPRECATION")
-        resources.updateConfiguration(config, resources.displayMetrics)
-    }
 
     /**
      *  De-focus views, when user do click on background.
@@ -369,7 +370,6 @@ class AuthActivity :  BaseActivity<ActivityAuthBinding>(ActivityAuthBinding::inf
             outState.putInt(PASSWORD_VIEW_STATE_KEY, textinputlayoutAuthPassword.endIconMode)
             outState.putBoolean(CHECKBOX_STATE_STATE_KEY, checkboxAuthRememberMe.isChecked)
         }
-        outState.putBoolean(LANGUAGE_STATE_KEY, isUkrainian)
         outState.putBoolean(HELP_BUTTONS_STATE_KEY, helperButtonsVisible)
         super.onSaveInstanceState(outState)
     }
@@ -379,18 +379,15 @@ class AuthActivity :  BaseActivity<ActivityAuthBinding>(ActivityAuthBinding::inf
      */
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
-        isUkrainian = savedInstanceState.getBoolean(LANGUAGE_STATE_KEY)
         helperButtonsVisible = savedInstanceState.getBoolean(HELP_BUTTONS_STATE_KEY)
         with(binding) {
             textinputAuthEmail.setText(savedInstanceState.getString(EMAIL_FIELD_STATE_KEY))
             textinputAuthPassword.setText(savedInstanceState.getString(PASSWORD_FIELD_STATE_KEY))
-            textinputlayoutAuthPassword.endIconMode = savedInstanceState.getInt(PASSWORD_VIEW_STATE_KEY)
-            checkboxAuthRememberMe.isChecked = savedInstanceState.getBoolean(CHECKBOX_STATE_STATE_KEY)
+            textinputlayoutAuthPassword.endIconMode =
+                savedInstanceState.getInt(PASSWORD_VIEW_STATE_KEY)
+            checkboxAuthRememberMe.isChecked =
+                savedInstanceState.getBoolean(CHECKBOX_STATE_STATE_KEY)
             flowAuthDebugButtons.visibility = if (helperButtonsVisible) View.VISIBLE else View.GONE
         }
-        setLocale()
     }
-
-
-
 }

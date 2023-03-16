@@ -68,6 +68,7 @@
     <string name="contacts_add_contact_address">Адреса</string>
     <string name="contacts_add_contact_birthday">Дата народження</string>
     <string name="contacts_add_contact_save_button">ЗБЕРЕГТИ</string>
+    <string name="main_activity_person_name_hardcoded">Віктор Хардкодовський</string>
 
 
 </resources>

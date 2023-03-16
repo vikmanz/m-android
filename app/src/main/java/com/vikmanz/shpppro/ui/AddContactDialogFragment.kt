@@ -4,14 +4,13 @@ import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Context
 import android.net.Uri
-import android.os.Build
 import android.os.Build.VERSION.SDK_INT
 import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
-import com.vikmanz.shpppro.data.ContactsService
+import com.vikmanz.shpppro.data.contactModel.ContactsService
 import com.vikmanz.shpppro.data.contactModel.Contact
 import com.vikmanz.shpppro.databinding.AddContactActivityMyContactsBinding
 import com.vikmanz.shpppro.utilits.log

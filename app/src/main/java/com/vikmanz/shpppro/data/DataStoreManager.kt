@@ -27,23 +27,20 @@ class DataStoreManager (private val context: Context) {
         private const val DS_USER_NAME = "user_name"
         private const val DS_USER_PASSWORD = "user_password"
         private const val DS_USER_AUTOLOGIN_STATUS = "user_login_status"
-        private const val DS_USER_LANGUAGE_STATUS = "user_language_status"
 
         private val USER_LOGIN_KEY = stringPreferencesKey(DS_USER_NAME)
         private val USER_PASSWORD_KEY = stringPreferencesKey(DS_USER_PASSWORD)
         private val LOGIN_STATUS_KEY = booleanPreferencesKey(DS_USER_AUTOLOGIN_STATUS)
-        private val LANGUAGE_KEY = booleanPreferencesKey(DS_USER_LANGUAGE_STATUS)
     }
 
     /**
      * Get name, password, autologin and language status, and save all these in memory.
      */
-    suspend fun saveUserSata(name: String, password: String, isAutoLogin: Boolean, isUkrainian: Boolean) {
+    suspend fun saveUserSata(name: String, password: String, isAutoLogin: Boolean) {
         context.dataStore.edit {
             it[USER_LOGIN_KEY] = name
             it[USER_PASSWORD_KEY] = password
             it[LOGIN_STATUS_KEY] = isAutoLogin
-            it[LANGUAGE_KEY] = isUkrainian
         }
     }
 
@@ -55,7 +52,6 @@ class DataStoreManager (private val context: Context) {
             it[USER_LOGIN_KEY] = ""
             it[USER_PASSWORD_KEY] = ""
             it[LOGIN_STATUS_KEY] = false
-            it[LANGUAGE_KEY] = false
         }
     }
 
@@ -79,13 +75,6 @@ class DataStoreManager (private val context: Context) {
      */
     val userLoginStatusFlow: Flow<Boolean> = context.dataStore.data.map {
         it[LOGIN_STATUS_KEY] ?: false
-    }
-
-    /**
-     * Return user language status as Flow.
-     */
-    val userLanguageFlow: Flow<Boolean> = context.dataStore.data.map {
-        it[LANGUAGE_KEY] ?: false
     }
 
 }

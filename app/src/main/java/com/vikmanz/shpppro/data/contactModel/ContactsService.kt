@@ -1,10 +1,8 @@
-package com.vikmanz.shpppro.data
+package com.vikmanz.shpppro.data.contactModel
 
 import android.net.Uri
-import android.util.Log
 import com.github.javafaker.Faker
 import com.vikmanz.shpppro.constants.Constants.START_NUMBER_OF_CONTACTS
-import com.vikmanz.shpppro.data.contactModel.Contact
 import com.vikmanz.shpppro.utilits.log
 import java.util.*
 import kotlin.collections.ArrayList

@@ -1,9 +1,9 @@
 package com.vikmanz.shpppro.data
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.vikmanz.shpppro.constants.Constants.FAKE_FIRST
 import com.vikmanz.shpppro.data.contactModel.Contact
+import com.vikmanz.shpppro.data.contactModel.ContactsService
 import com.vikmanz.shpppro.utilits.log
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
