@@ -49,7 +49,7 @@ class MyContactsActivity :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initRecyclerView()
-        configureUI()
+        updateUI()
     }
 
     /**
@@ -159,13 +159,11 @@ class MyContactsActivity :
         }
 
     /**
-     * Set contacts from phonebook which taken from ContactsPhoneInfoTaker to ViewModel list of contacts.
+     * Set contacts to phonebook.
      */
     private fun setContactsFromPhone() {
-        val phonebookInfo = ContactsPhoneInfoTaker(contentResolver).getPhonebookContactsInfo()
-        val contactsFromPhone = ContactsService().createContactListFromPhonebookInfo(phonebookInfo)
-        viewModel.setPhoneContactList(contactsFromPhone)
-        configureUI()
+        viewModel.setPhoneContactList()
+        updateUI()
     }
 
     /**
@@ -188,13 +186,13 @@ class MyContactsActivity :
      */
     private fun changeToFakeContacts() {
         viewModel.getFakeContacts()
-        configureUI()
+        updateUI()
     }
 
     /**
      * Configure UI to relevant buttons for phonebook or for fake contacts list.
      */
-    private fun configureUI() {
+    private fun updateUI() {
         with(binding) {
             btnDeclineAccess.visibility =
                 if (viewModel.phoneListActivated) View.VISIBLE else View.INVISIBLE
@@ -215,6 +213,6 @@ class MyContactsActivity :
      */
     override fun onRestart() {
         super.onRestart()
-        configureUI()
+        updateUI()
     }
 }

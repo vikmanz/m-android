@@ -5,7 +5,6 @@ import com.github.javafaker.Faker
 import com.vikmanz.shpppro.constants.Constants.START_NUMBER_OF_CONTACTS
 import com.vikmanz.shpppro.utilits.log
 import java.util.*
-import kotlin.collections.ArrayList
 
 /**
  * Main service to create contacts objects from information on from random.
@@ -78,7 +77,9 @@ class ContactsService {
     /**
      * Create and return contact list with information from phonebook ArrayList<[name: String, phone: String]>.
      */
-    fun createContactListFromPhonebookInfo(listOfContactsInformation: ArrayList<List<String>>): List<Contact> {
+    fun createContactListFromPhonebookInfo(): List<Contact> {
+
+        val listOfContactsInformation = ContactsPhoneInfoTaker().getPhonebookContactsInfo()
         val newContacts = (0 until listOfContactsInformation.size).map {
             getOneContact(
                 id = getRandomId(),

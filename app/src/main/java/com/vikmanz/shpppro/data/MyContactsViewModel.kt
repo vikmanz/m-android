@@ -14,9 +14,14 @@ import kotlinx.coroutines.flow.StateFlow
 class MyContactsViewModel : ViewModel() {
 
     /**
+     * Create contacts service variable.
+     */
+    private val _contactService = ContactsService()
+
+    /**
      * Create fake contact list.
      */
-    private val _contactList = MutableStateFlow(ContactsService().createFakeContacts())
+    private val _contactList = MutableStateFlow(_contactService.createFakeContacts())
 
     /**
      * Flow to take it from outside.
@@ -69,15 +74,15 @@ class MyContactsViewModel : ViewModel() {
      * Change contact list to fake contacts list.
      */
     fun getFakeContacts() {
-        _contactList.value = ContactsService().createFakeContacts()
+        _contactList.value = _contactService.createFakeContacts()
         phoneListChangedToFake = FAKE_FIRST
     }
 
     /**
      * Change contact list to phone contacts list.
      */
-    fun setPhoneContactList(phoneContactList: List<Contact>) {
-        _contactList.value = phoneContactList
+    fun setPhoneContactList() {
+        _contactList.value = _contactService.createContactListFromPhonebookInfo()
         phoneListActivated = FAKE_FIRST
         phoneListChangedToFake = !FAKE_FIRST
     }

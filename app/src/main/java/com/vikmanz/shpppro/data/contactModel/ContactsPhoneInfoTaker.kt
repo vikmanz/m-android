@@ -1,13 +1,13 @@
 package com.vikmanz.shpppro.data.contactModel
 
 import android.annotation.SuppressLint
-import android.content.ContentResolver
 import android.provider.ContactsContract
 import android.util.Log
+import com.vikmanz.shpppro.App
 import com.vikmanz.shpppro.utilits.log
 
 
-class ContactsPhoneInfoTaker(private val contentResolver: ContentResolver) {
+class ContactsPhoneInfoTaker() {
 
     /**
      * Take contacts from phonebook and return they as ArrayList<[name: String, phone: String]>.
@@ -15,6 +15,7 @@ class ContactsPhoneInfoTaker(private val contentResolver: ContentResolver) {
     @SuppressLint("Range")
     fun getPhonebookContactsInfo(): ArrayList<List<String>> {
         val uri = ContactsContract.CommonDataKinds.Phone.CONTENT_URI
+        val contentResolver = App.instance.contentResolver
         val cursor = contentResolver.query(
             uri, null, null, null,
             ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME
