@@ -54,12 +54,4 @@ class ContactsAdapter(private val contactActionListener: ContactActionListener) 
     override fun onBindViewHolder(holder: ContactHolder, position: Int) {
         holder.bind(currentList[position])
     }
-
-    /**
-     * Get count of all items in list. List takes from ListAdapter.
-     */
-    override fun getItemCount(): Int {
-        return currentList.size
-    }
-
 }

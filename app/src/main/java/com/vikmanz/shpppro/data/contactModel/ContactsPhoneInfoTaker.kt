@@ -1,42 +1,82 @@
 package com.vikmanz.shpppro.data.contactModel
 
 import android.annotation.SuppressLint
+import android.content.ContentResolver
 import android.provider.ContactsContract
 import android.util.Log
 import com.vikmanz.shpppro.App
 import com.vikmanz.shpppro.utilits.log
 
-
+@SuppressLint("Range")
 class ContactsPhoneInfoTaker() {
 
     /**
      * Take contacts from phonebook and return they as ArrayList<[name: String, phone: String]>.
      */
-    @SuppressLint("Range")
+
     fun getPhonebookContactsInfo(): ArrayList<List<String>> {
-        val uri = ContactsContract.CommonDataKinds.Phone.CONTENT_URI
-        val contentResolver = App.instance.contentResolver
-        val cursor = contentResolver.query(
-            uri, null, null, null,
-            ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME
-        )
-        val count = cursor?.count
-        Log.d("myLog", "Total contacts count: $count")
+
         val listOfContactsInformation = ArrayList<List<String>>()
+        val contentResolver = App.instance.contentResolver
 
-        if (count != null && count > 0) {
+        val uri = ContactsContract.Data.CONTENT_URI
+        val projection = arrayOf(
+            ContactsContract.Data.CONTACT_ID,
+            ContactsContract.Contacts.DISPLAY_NAME,
+            ContactsContract.CommonDataKinds.Phone.NUMBER
+        )
+        val selection =
+            ContactsContract.Data.MIMETYPE + "='" + ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE + "'"
+        val sortOrder = ContactsContract.Contacts.DISPLAY_NAME
+
+        val cursor = contentResolver.query(uri, projection, selection, null, sortOrder)
+
+        cursor?.let {
+            Log.d("myLog", "Total contacts count: ${cursor.count}")
             while (cursor.moveToNext()) {
-                val contactName =
-                    cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME))
-                val contactNumber =
-                    cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER))
-                log("Adding ::: Name: $contactName   Phone: $contactNumber")
-                listOfContactsInformation.add(listOf(contactName, contactNumber))
-            }
-        }
-        cursor?.close()
 
+                val id = cursor.getLong(cursor.getColumnIndex(ContactsContract.Data.CONTACT_ID))
+
+                val name: String = cursor.getString(
+                    cursor.getColumnIndex(
+                        ContactsContract.Contacts.DISPLAY_NAME
+                    )
+                )
+
+                val phone: String = cursor.getString(
+                    cursor.getColumnIndex(
+                        ContactsContract.CommonDataKinds.Phone.NUMBER
+                    )
+                )
+
+                val company: String = getContactCompanyName(contentResolver, id)
+
+                log("Adding ::: id: $id, name: $name, phone: $phone, company: $company")
+                listOfContactsInformation.add(listOf(name, phone))
+
+            }
+            cursor.close()
+        }
         return listOfContactsInformation
+    }
+
+    private fun getContactCompanyName(contentResolver: ContentResolver, id: Long): String {
+        val uri = ContactsContract.Data.CONTENT_URI
+        val projection = arrayOf(ContactsContract.CommonDataKinds.Organization.COMPANY)
+        val selection =
+            ContactsContract.Data.MIMETYPE + "='" +
+                    ContactsContract.CommonDataKinds.Organization.CONTENT_ITEM_TYPE + "' AND " +
+                    ContactsContract.CommonDataKinds.Organization.CONTACT_ID + " = ?"
+        val selectionArgs = arrayOf(id.toString())
+        val cursor = contentResolver.query(uri, projection, selection, selectionArgs, null)
+
+        if (cursor != null && cursor.moveToFirst()) {
+            val company =
+                cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Organization.COMPANY))
+            cursor.close()
+            return company
+        }
+        return "[no have a company]"
     }
 
 }

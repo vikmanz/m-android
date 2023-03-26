@@ -5,11 +5,11 @@
     <dimen name="marginHorizontal">16dp</dimen>
 
     <!-- Offsets of elements. -->
-    <dimen name="offset_XL">32dp</dimen>
-    <dimen name="offset_L">24dp</dimen>
-    <dimen name="offset_M">16dp</dimen>
-    <dimen name="offset_S">8dp</dimen>
     <dimen name="offset_XS">4dp</dimen>
+    <dimen name="offset_S">8dp</dimen>
+    <dimen name="offset_M">16dp</dimen>
+    <dimen name="offset_L">24dp</dimen>
+    <dimen name="offset_XL">32dp</dimen>
 
     <!-- Buttons size. -->
     <dimen name="size_button_height_M">40dp</dimen>
