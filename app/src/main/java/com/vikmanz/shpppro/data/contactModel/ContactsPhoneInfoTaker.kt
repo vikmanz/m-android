@@ -29,16 +29,20 @@ class ContactsPhoneInfoTaker() {
         )
 
         val selection = null
-//            ContactsContract.Data.MIMETYPE + " in (?, ?) AND " +
-//                ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = ?"
+                                                                                        //            ContactsContract.Data.MIMETYPE + " in (?, ?) AND " +
+                                                                                        //                ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = ?"
 
         val selectionArgs =
             arrayOf(
             ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME,
-            ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE,
-            ContactsContract.CommonDataKinds.Organization.CONTENT_ITEM_TYPE
+            ContactsContract.CommonDataKinds.Phone.NUMBER,
+            ContactsContract.CommonDataKinds.Organization.COMPANY
         )
-        val sortOrder = null
+        val sortOrder = ContactsContract.CommonDataKinds.Phone.CONTACT_ID
+
+//        ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME,
+//        ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE,
+//        ContactsContract.CommonDataKinds.Organization.CONTENT_ITEM_TYPE
 
         log("""
               _FROM [table_name]: $uri
@@ -70,7 +74,7 @@ class ContactsPhoneInfoTaker() {
                 val column3 =
                     cursor.getString(3)
 
-                log("column0: $column0, column1: $column1, column2: $column2, column3: $column3")
+                log("\n[0]:$column0,   [1]:$column1, [2]:$column2, [3]:$column3")
 
             }
             cursor.close()
