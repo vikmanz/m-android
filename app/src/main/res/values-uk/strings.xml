@@ -55,6 +55,7 @@
     <string name="contacts_recycler_person_career_sample">Профессія</string>
     <string name="contacts_contacts_title">Контакти</string>
     <string name="contacts_add_contact">Додати контакт</string>
+    <string name="revoke_permits">Забрати\nдозвіл</string>
     <string name="contacts_change_to_phonebook">Змінити на контакти телефону</string>
     <string name="contacts_grant_permission_button">Надати дозвіл</string>
     <string name="contacts_change_to_fake_data">Змінити на фейкові дані</string>
@@ -69,6 +70,5 @@
     <string name="contacts_add_contact_birthday">Дата народження</string>
     <string name="contacts_add_contact_save_button">ЗБЕРЕГТИ</string>
     <string name="main_activity_person_name_hardcoded">Віктор Хардкодовський</string>
-
 
 </resources>

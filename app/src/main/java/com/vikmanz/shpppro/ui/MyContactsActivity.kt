@@ -194,8 +194,15 @@ class MyContactsActivity :
      */
     private fun updateUI() {
         with(binding) {
-            btnDeclineAccess.visibility =
-                if (viewModel.phoneListActivated) View.VISIBLE else View.INVISIBLE
+            if (viewModel.phoneListActivated) {
+                btnDeclineAccess.visibility = View.VISIBLE
+                textViewRevokePermission.visibility = View.VISIBLE
+            }
+            else {
+                btnDeclineAccess.visibility = View.INVISIBLE
+                textViewRevokePermission.visibility = View.GONE
+            }
+
 
             if (viewModel.phoneListChangedToFake) {
                 tvAddContactsFromViewModel.visibility = View.GONE

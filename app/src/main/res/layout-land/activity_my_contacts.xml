@@ -58,6 +58,20 @@
         android:textSize="@dimen/size_text_font_XL"
         tools:ignore="MissingConstraints" />
 
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textView_revoke_permission"
+        style="@style/basicText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/revoke_permits"
+        android:textAlignment="center"
+        android:textSize="@dimen/size_text_font_XXXS"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/btnDeclineAccess"
+        app:layout_constraintEnd_toStartOf="@+id/btnDeclineAccess"
+        app:layout_constraintTop_toTopOf="@+id/btnDeclineAccess"
+        tools:visibility="visible" />
+
     <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/btnDeclineAccess"
         android:layout_width="wrap_content"
