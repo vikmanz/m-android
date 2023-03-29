@@ -73,7 +73,6 @@ class ContactsService {
         return newContacts
     }
 
-
     /**
      * Create and return contact list with information from phonebook ArrayList<[name: String, phone: String]>.
      */

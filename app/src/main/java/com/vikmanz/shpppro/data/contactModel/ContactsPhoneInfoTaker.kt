@@ -8,7 +8,7 @@ import com.vikmanz.shpppro.App
 import com.vikmanz.shpppro.utilits.log
 
 @SuppressLint("Range")
-class ContactsPhoneInfoTaker() {
+class ContactsPhoneInfoTaker {
 
     /**
      * Take contacts from phonebook and return they as ArrayList<[name: String, phone: String]>.
@@ -79,6 +79,9 @@ class ContactsPhoneInfoTaker() {
         return listOfContactsInformation
     }
 
+    /**
+     * Take info from table fields via column id and content type.
+     */
     private fun getInfoForType(
         resolver: ContentResolver,
         contactId: Long,
@@ -101,5 +104,4 @@ class ContactsPhoneInfoTaker() {
         }
         return ""
     }
-
 }

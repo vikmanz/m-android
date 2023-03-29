@@ -25,27 +25,6 @@ import kotlinx.coroutines.launch
  */
 class AuthActivity : BaseActivity<ActivityAuthBinding>(ActivityAuthBinding::inflate) {
 
-    /**
-     * Constants.
-     */
-    companion object {
-        // Regex's
-        private const val PASSWORD_ERRORS_SEPARATOR = "\n"
-        private const val REGEX_ONE_UPPER_CHAR = ".*[A-Z].*"
-        private const val REGEX_ONE_LOWER_CHAR = ".*[a-z].*"
-        private const val SPECIAL_CHARS = "@#$%^&;+="
-        private const val REGEX_ONE_SPECIAL_CHAR = ".*[$SPECIAL_CHARS].*"
-        private const val TEST_LOGIN = "viktor.manza@gmail.com"
-        private const val TEST_PASSWORD = "passwordE3@a"
-
-        // Save/Load State Keys. Don't need to change.
-        private const val EMAIL_FIELD_STATE_KEY = "EMAIL_KEY_AUTH_ACTIVITY"
-        private const val PASSWORD_FIELD_STATE_KEY = "PASSWORD_KEY_AUTH_ACTIVITY"
-        private const val PASSWORD_VIEW_STATE_KEY = "PASSWORD_VIEW_KEY_AUTH_ACTIVITY"
-        private const val CHECKBOX_STATE_STATE_KEY = "CHECKBOX_KEY_AUTH_ACTIVITY"
-        private const val HELP_BUTTONS_STATE_KEY = "HELP_BUTTONS_KEY_AUTH_ACTIVITY"
-    }
-
     // Data Store and Coroutine Scope variables.
     private lateinit var loginData: DataStoreManager
     private val coroutineScope: CoroutineScope = CoroutineScope(Job())
@@ -408,5 +387,26 @@ class AuthActivity : BaseActivity<ActivityAuthBinding>(ActivityAuthBinding::infl
                 savedInstanceState.getBoolean(CHECKBOX_STATE_STATE_KEY)
             flowAuthDebugButtons.visibility = if (helperButtonsVisible) View.VISIBLE else View.GONE
         }
+    }
+
+    /**
+     * Constants.
+     */
+    companion object {
+        // Regex's
+        private const val PASSWORD_ERRORS_SEPARATOR = "\n"
+        private const val REGEX_ONE_UPPER_CHAR = ".*[A-Z].*"
+        private const val REGEX_ONE_LOWER_CHAR = ".*[a-z].*"
+        private const val SPECIAL_CHARS = "@#$%^&;+="
+        private const val REGEX_ONE_SPECIAL_CHAR = ".*[$SPECIAL_CHARS].*"
+        private const val TEST_LOGIN = "viktor.manza@gmail.com"
+        private const val TEST_PASSWORD = "passwordE3@a"
+
+        // Save/Load State Keys. Don't need to change.
+        private const val EMAIL_FIELD_STATE_KEY = "EMAIL_KEY_AUTH_ACTIVITY"
+        private const val PASSWORD_FIELD_STATE_KEY = "PASSWORD_KEY_AUTH_ACTIVITY"
+        private const val PASSWORD_VIEW_STATE_KEY = "PASSWORD_VIEW_KEY_AUTH_ACTIVITY"
+        private const val CHECKBOX_STATE_STATE_KEY = "CHECKBOX_KEY_AUTH_ACTIVITY"
+        private const val HELP_BUTTONS_STATE_KEY = "HELP_BUTTONS_KEY_AUTH_ACTIVITY"
     }
 }
