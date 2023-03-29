@@ -18,6 +18,7 @@ import com.vikmanz.shpppro.constants.Constants.SNACK_BAR_VIEW_TIME
 import com.vikmanz.shpppro.databinding.ActivityMyContactsBinding
 import com.vikmanz.shpppro.utilits.BaseActivity
 import android.Manifest.permission.READ_CONTACTS
+import com.vikmanz.shpppro.R
 import com.vikmanz.shpppro.data.contactModel.ContactsService
 import com.vikmanz.shpppro.data.contactModel.*
 import com.vikmanz.shpppro.utilits.MarginItemDecoration
@@ -93,8 +94,8 @@ class MyContactsActivity :
         val position = viewModel.getContactPosition(contact)
         viewModel.deleteContact(contact)
         Snackbar
-            .make(binding.root, "Contact has been removed", SNACK_BAR_VIEW_TIME)
-            .setAction("Undo") { viewModel.addContact(contact, position) }
+            .make(binding.root, getString(R.string.my_contacts_remove_contact), SNACK_BAR_VIEW_TIME)
+            .setAction(getString(R.string.my_contacts_remove_contact_undo)) { viewModel.addContact(contact, position) }
             .show()
     }
 

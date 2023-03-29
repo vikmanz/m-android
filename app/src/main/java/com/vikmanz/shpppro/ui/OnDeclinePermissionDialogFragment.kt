@@ -19,10 +19,10 @@ class OnDeclinePermissionDialogFragment : DialogFragment() {
      */
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog =
         MaterialAlertDialogBuilder(requireContext(), R.style.MaterialAlertDialog_rounded)
-            .setTitle("Permission denied!")
-            .setMessage("Please, go to settings and set contacts permission to allow.")
-            .setPositiveButton("Ok") { _,_ -> goToGrantPermission() }
-            .setNegativeButton("Cancel", null)
+            .setTitle(getString(R.string.my_contacts_permission_denied))
+            .setMessage(getString(R.string.my_contacts_permission_denied_message))
+            .setPositiveButton(getString(R.string.my_contacts_permission_positive_btn)) { _, _ -> goToGrantPermission() }
+            .setNegativeButton(getString(R.string.my_contacts_permission_negative_btn), null)
             .create()
 
     /**

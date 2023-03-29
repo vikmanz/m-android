@@ -59,6 +59,14 @@
     <string name="contacts_change_to_phonebook">Змінити на контакти телефону</string>
     <string name="contacts_grant_permission_button">Надати дозвіл</string>
     <string name="contacts_change_to_fake_data">Змінити на фейкові дані</string>
+    <string name="my_contacts_remove_contact">Контакт видалено</string>
+    <string name="my_contacts_remove_contact_undo">Відмінити</string>
+
+    <!-- ———————————————————— Contacts_Permissions ———————————————————— -->
+    <string name="my_contacts_permission_denied">Дозвіл відхилено!</string>
+    <string name="my_contacts_permission_denied_message">Будь ласка, перейдіть до налаштувань і надайте дозвіл на доступ до контактів.</string>
+    <string name="my_contacts_permission_positive_btn">ОК</string>
+    <string name="my_contacts_permission_negative_btn">Відміна</string>
 
     <!-- ———————————————————— Contacts - Add new contact ———————————————————— -->
     <string name="contacts_add_contact_title">Додати контакт</string>
