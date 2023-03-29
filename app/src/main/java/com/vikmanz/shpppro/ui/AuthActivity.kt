@@ -30,6 +30,7 @@ class AuthActivity : BaseActivity<ActivityAuthBinding>(ActivityAuthBinding::infl
      */
     companion object {
         // Regex's
+        private const val PASSWORD_ERRORS_SEPARATOR = "\n"
         private const val REGEX_ONE_UPPER_CHAR = ".*[A-Z].*"
         private const val REGEX_ONE_LOWER_CHAR = ".*[a-z].*"
         private const val SPECIAL_CHARS = "@#$%^&;+="
@@ -182,27 +183,45 @@ class AuthActivity : BaseActivity<ActivityAuthBinding>(ActivityAuthBinding::infl
 
         // Get password text
         val passwordText = binding.textinputAuthPassword.text.toString()
+        val result = checkPasswordErrors(passwordText)
+        // If pass all checks, return null or return errors.
+        return if (result == "") null else result
+    }
 
+    /**
+     * Check password for errors.
+     */
+    private fun checkPasswordErrors(passwordText: String): String {
         // Do all checks.
+        var result = ""
         if (passwordText.length < MIN_PASSWORD_LENGTH) {               // Minimum 8 chars.
-            return getString(R.string.auth_activity_password_warning_min8chars, MIN_PASSWORD_LENGTH)
+            result += getString(
+                R.string.auth_activity_password_warning_min8chars,
+                MIN_PASSWORD_LENGTH
+            )
         }
         if (!passwordText.matches(REGEX_ONE_UPPER_CHAR.toRegex())) {   // Minimum 1 UpperCase char.
-            return getString(R.string.auth_activity_password_warning_one_upper_char)
+            result =
+                addErrorsDescriptionSeparator(result) + getString(R.string.auth_activity_password_warning_one_upper_char)
         }
         if (!passwordText.matches(REGEX_ONE_LOWER_CHAR.toRegex())) {   // Minimum 1 LowerCase char.
-            return getString(R.string.auth_activity_password_warning_one_lower_char)
+            result =
+                addErrorsDescriptionSeparator(result) + getString(R.string.auth_activity_password_warning_one_lower_char)
         }
         if (!passwordText.matches(REGEX_ONE_SPECIAL_CHAR.toRegex())) { // Minimum 1 special char.
-            return getString(
+            result = addErrorsDescriptionSeparator(result) + getString(
                 R.string.auth_activity_password_warning_one_special_char,
                 SPECIAL_CHARS
             )
         }
-
-        // If pass all checks, return null.
-        return null
+        return result
     }
+
+    /**
+     * Add separator between two errors.
+     */
+    private fun addErrorsDescriptionSeparator(result: String): String =
+        if (result != "") "$result$PASSWORD_ERRORS_SEPARATOR" else result
 
     /**
      * Init OnClickListeners for button Login/Register and SignIn/SignUp text.
@@ -268,10 +287,10 @@ class AuthActivity : BaseActivity<ActivityAuthBinding>(ActivityAuthBinding::infl
         var message = ""
         with(binding) {
             message += if (!isEmailCorrect)
-                "\n\n${getString(R.string.auth_activity_warning_message_email_title)} ${textinputlayoutAuthEmail.helperText}"
+                "\n\n${getString(R.string.auth_activity_warning_message_email_title)}\n${textinputlayoutAuthEmail.helperText}"
             else ""
             message += if (!isPasswordCorrect)
-                "\n\n${getString(R.string.auth_activity_warning_message_password_title)} ${textinputlayoutAuthPassword.helperText}"
+                "\n\n${getString(R.string.auth_activity_warning_message_password_title)}\n${textinputlayoutAuthPassword.helperText}"
             else ""
         }
 

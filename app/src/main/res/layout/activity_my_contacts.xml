@@ -59,7 +59,7 @@
         tools:ignore="MissingConstraints" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/textView_revoke_permission"
+        android:id="@+id/text_view_revoke_permission"
         style="@style/basicText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
