@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.DiffUtil
 /**
  * Compare elements in recycler view. Need for ListAdapter type of Recycler view.
  */
-class ContactComparator: DiffUtil.ItemCallback<Contact>() {
+class DiffUtilContactsComparator: DiffUtil.ItemCallback<Contact>() {
 
     override fun areItemsTheSame(oldItem: Contact, newItem: Contact): Boolean {
         return oldItem.contactId == newItem.contactId
@@ -17,6 +17,4 @@ class ContactComparator: DiffUtil.ItemCallback<Contact>() {
                 && oldItem.contactPhotoUrl == newItem.contactPhotoUrl
                 && oldItem.contactCareer == newItem.contactCareer
     }
-
-
 }

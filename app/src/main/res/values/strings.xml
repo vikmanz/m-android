@@ -57,9 +57,18 @@
     <string name="contacts_recycler_person_career_sample">Career</string>
     <string name="contacts_contacts_title">Contacts</string>
     <string name="contacts_add_contact">Add contact</string>
+    <string name="revoke_permits">revoke\npermits</string>
     <string name="contacts_change_to_phonebook">Change to Phonebook</string>
     <string name="contacts_grant_permission_button">Grant permission</string>
     <string name="contacts_change_to_fake_data">Change to fake data</string>
+    <string name="my_contacts_remove_contact">Contact has been removed</string>
+    <string name="my_contacts_remove_contact_undo">Undo</string>
+
+    <!-- ———————————————————— Contacts_Permissions ———————————————————— -->
+    <string name="my_contacts_permission_denied">Permission denied!</string>
+    <string name="my_contacts_permission_denied_message">Please, go to settings and set contacts permission to allow.</string>
+    <string name="my_contacts_permission_positive_btn">OK</string>
+    <string name="my_contacts_permission_negative_btn">Cancel</string>
 
     <!-- ———————————————————— Add new contact ———————————————————— -->
     <string name="contacts_add_contact_title">Add contact</string>
@@ -70,6 +79,7 @@
     <string name="contacts_add_contact_address">Address</string>
     <string name="contacts_add_contact_birthday">Date of birth</string>
     <string name="contacts_add_contact_save_button">SAVE</string>
+
 
 
 </resources>

@@ -1,4 +1,4 @@
-package com.vikmanz.shpppro.data
+package com.vikmanz.shpppro.ui
 
 import androidx.lifecycle.ViewModel
 import com.vikmanz.shpppro.constants.Constants.FAKE_FIRST

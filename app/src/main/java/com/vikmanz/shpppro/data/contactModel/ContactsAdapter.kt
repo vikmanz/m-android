@@ -12,7 +12,7 @@ import com.vikmanz.shpppro.utilits.setContactPhotoFromUri
  * Adapter for Recycler view.
  */
 class ContactsAdapter(private val contactActionListener: ContactActionListener) :
-    ListAdapter<Contact, ContactsAdapter.ContactHolder>(ContactComparator()) {
+    ListAdapter<Contact, ContactsAdapter.ContactHolder>(DiffUtilContactsComparator()) {
 
     /**
      * Create Holder for one element.
@@ -22,16 +22,16 @@ class ContactsAdapter(private val contactActionListener: ContactActionListener) 
         fun bind(contact: Contact) {
             with(binding) {
                 // bind Photo
-                if (contact.contactPhotoUri != null) {
-                    ivContactAvatarImage.setContactPhotoFromUri(contact.contactPhotoUri)
+                if (contact.contactPhotoUri == null) {
+                    imageviewOnecontactAvatarImage.setContactPhoto(contact.contactPhotoUrl)
                 } else {
-                    ivContactAvatarImage.setContactPhoto(contact.contactPhotoUrl)
+                    imageviewOnecontactAvatarImage.setContactPhotoFromUri(contact.contactPhotoUri)
                 }
                 // bind Name/Career
-                tvContactName.text = contact.contactName
-                tvContactCareer.text = contact.contactCareer
+                textviewOnecontactName.text = contact.contactName
+                textviewOnecontactCareer.text = contact.contactCareer
                 // bind delete listener
-                btnRemove.setOnClickListener {
+                buttonOnecontactRemove.setOnClickListener {
                     // send contact to MyContactsActivity for delete it from ViewModel.
                     contactActionListener.onDeleteUser(contact)
                 }

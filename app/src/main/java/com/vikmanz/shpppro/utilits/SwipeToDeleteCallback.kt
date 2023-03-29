@@ -10,7 +10,8 @@ import com.vikmanz.shpppro.R
 import com.vikmanz.shpppro.constants.Constants.MARGINS_OF_ELEMENTS
 
 /**
- * Swipe to delete in recycler view. Take from internet and not changed.
+ * Swipe to delete in recycler view.
+ * I take from internet and not changed (mini changes)
  */
 abstract class SwipeToDeleteCallback(context: Context) : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
 

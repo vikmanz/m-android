@@ -31,7 +31,7 @@ fun AppCompatImageView.setContactPhoto(contactPhotoUrl: String) {
 /**
  * Extra function of ImageView class, for change photo via Glide from photo URI (from gallery).
  */
-fun AppCompatImageView.setContactPhotoFromUri(uri: Uri?) {
+fun AppCompatImageView.setContactPhotoFromUri(uri: Uri) {
     Glide.with(context)
         .load(uri)
         .apply(GLIDE_OPTIONS)

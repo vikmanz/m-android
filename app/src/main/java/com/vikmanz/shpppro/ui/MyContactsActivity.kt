@@ -18,8 +18,8 @@ import com.vikmanz.shpppro.constants.Constants.SNACK_BAR_VIEW_TIME
 import com.vikmanz.shpppro.databinding.ActivityMyContactsBinding
 import com.vikmanz.shpppro.utilits.BaseActivity
 import android.Manifest.permission.READ_CONTACTS
+import com.vikmanz.shpppro.R
 import com.vikmanz.shpppro.data.contactModel.ContactsService
-import com.vikmanz.shpppro.data.MyContactsViewModel
 import com.vikmanz.shpppro.data.contactModel.*
 import com.vikmanz.shpppro.utilits.MarginItemDecoration
 import com.vikmanz.shpppro.utilits.SwipeToDeleteCallback
@@ -57,9 +57,9 @@ class MyContactsActivity :
      */
     private fun initRecyclerView() {
         with(binding) {
-            recyclerViewMyContacts.layoutManager = LinearLayoutManager(this@MyContactsActivity)
-            recyclerViewMyContacts.addItemDecoration(MarginItemDecoration(MARGINS_OF_ELEMENTS))
-            recyclerViewMyContacts.adapter = adapter
+            recyclerviewMycontactsContactList.layoutManager = LinearLayoutManager(this@MyContactsActivity)
+            recyclerviewMycontactsContactList.addItemDecoration(MarginItemDecoration(MARGINS_OF_ELEMENTS))
+            recyclerviewMycontactsContactList.adapter = adapter
         }
         initSwipeToDelete()
     }
@@ -94,8 +94,8 @@ class MyContactsActivity :
         val position = viewModel.getContactPosition(contact)
         viewModel.deleteContact(contact)
         Snackbar
-            .make(binding.root, "Contact has been removed", SNACK_BAR_VIEW_TIME)
-            .setAction("Undo") { viewModel.addContact(contact, position) }
+            .make(binding.root, getString(R.string.my_contacts_remove_contact), SNACK_BAR_VIEW_TIME)
+            .setAction(getString(R.string.my_contacts_remove_contact_undo)) { viewModel.addContact(contact, position) }
             .show()
     }
 
@@ -110,7 +110,7 @@ class MyContactsActivity :
             }
         }
         val itemTouchHelper = ItemTouchHelper(swipeHandler)
-        itemTouchHelper.attachToRecyclerView(binding.recyclerViewMyContacts)
+        itemTouchHelper.attachToRecyclerView(binding.recyclerviewMycontactsContactList)
     }
 
     /**
@@ -118,11 +118,11 @@ class MyContactsActivity :
      */
     override fun setListeners() {
         with(binding) {
-            btnBack.setOnClickListener { finish() }
-            btnDeclineAccess.setOnClickListener { buttonToRemoveAccess() }
-            tvAddContacts.setOnClickListener { addNewContact() }
-            tvAddContactsFromPhonebook.setOnClickListener { requestReadContactsPermission() }
-            tvAddContactsFromViewModel.setOnClickListener { changeToFakeContacts() }
+            buttonMycontactsBack.setOnClickListener { finish() }
+            buttonMycontactsDeclineAccess.setOnClickListener { buttonToRemoveAccess() }
+            buttonMycontactsAddContact.setOnClickListener { addNewContact() }
+            buttonMycontactsAddContactsFromPhonebook.setOnClickListener { requestReadContactsPermission() }
+            buttonMycontactsAddContactsFromFaker.setOnClickListener { changeToFakeContacts() }
         }
     }
 
@@ -194,16 +194,23 @@ class MyContactsActivity :
      */
     private fun updateUI() {
         with(binding) {
-            btnDeclineAccess.visibility =
-                if (viewModel.phoneListActivated) View.VISIBLE else View.INVISIBLE
-
-            if (viewModel.phoneListChangedToFake) {
-                tvAddContactsFromViewModel.visibility = View.GONE
-                tvAddContactsFromPhonebook.visibility = View.VISIBLE
+            if (viewModel.phoneListActivated) {
+                buttonMycontactsDeclineAccess.visibility = View.VISIBLE
+                textviewMycontactsRevokePermission.visibility = View.VISIBLE
             }
             else {
-                tvAddContactsFromViewModel.visibility = View.VISIBLE
-                tvAddContactsFromPhonebook.visibility = View.GONE
+                buttonMycontactsDeclineAccess.visibility = View.INVISIBLE
+                textviewMycontactsRevokePermission.visibility = View.GONE
+            }
+
+
+            if (viewModel.phoneListChangedToFake) {
+                buttonMycontactsAddContactsFromFaker.visibility = View.GONE
+                buttonMycontactsAddContactsFromPhonebook.visibility = View.VISIBLE
+            }
+            else {
+                buttonMycontactsAddContactsFromFaker.visibility = View.VISIBLE
+                buttonMycontactsAddContactsFromPhonebook.visibility = View.GONE
             }
         }
     }

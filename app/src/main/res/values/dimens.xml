@@ -27,8 +27,7 @@
     <dimen name="size_text_font_XL">32sp</dimen>
 
     <!-- Avatar dimens. -->
-    <dimen name="avatar_size_x">130dp</dimen>
-    <dimen name="avatar_size_y">130dp</dimen>
+    <dimen name="avatar_radius">130dp</dimen>
     <dimen name="avatar_corner_radius">360dp</dimen>
 
     <!-- HARD values. -->

@@ -8,7 +8,7 @@
 
     <!-- Guide of center of elements. -->
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guide_main_vertical_center_of_screen"
+        android:id="@+id/guideline_mycontacts_bg_center_of_screen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -16,11 +16,11 @@
 
     <!-- Top half of screen. -->
     <View
-        android:id="@+id/view_main_top_half_bg"
+        android:id="@+id/guideline_mycontacts_bg_top_half"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="?attr/colorSecondary"
-        app:layout_constraintBottom_toTopOf="@id/guide_main_vertical_center_of_screen"
+        app:layout_constraintBottom_toTopOf="@id/guideline_mycontacts_bg_center_of_screen"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -65,15 +65,15 @@
         android:orientation="horizontal"
         app:constraint_referenced_ids="cardview_main_avatar_card, flow_main_person_text_info"
         app:flow_horizontalGap="@dimen/offset_XL"
-        app:layout_constraintBottom_toBottomOf="@id/guide_main_vertical_center_of_screen"
+        app:layout_constraintBottom_toBottomOf="@id/guideline_mycontacts_bg_center_of_screen"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/flow_main_top_buttons" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardview_main_avatar_card"
-        android:layout_width="@dimen/avatar_size_x"
-        android:layout_height="@dimen/avatar_size_y"
+        android:layout_width="@dimen/avatar_radius"
+        android:layout_height="@dimen/avatar_radius"
         app:cardBackgroundColor="?attr/colorPrimary"
         app:cardCornerRadius="@dimen/avatar_corner_radius">
 
@@ -132,12 +132,12 @@
 
     <!-- Down half of screen. -->
     <View
-        android:id="@+id/view_main_bottom_half_bg"
+        android:id="@+id/guideline_mycontacts_bg_bottom_half"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="?attr/colorTertiary"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/view_main_top_half_bg" />
+        app:layout_constraintTop_toBottomOf="@id/guideline_mycontacts_bg_top_half" />
 
     <!-- Social Icons flow. -->
     <androidx.constraintlayout.helper.widget.Flow
@@ -149,7 +149,7 @@
         app:layout_constraintBottom_toTopOf="@+id/flow_main_bottom_buttons"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/guide_main_vertical_center_of_screen" />
+        app:layout_constraintTop_toBottomOf="@id/guideline_mycontacts_bg_center_of_screen" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/imageview_main_facebook_button"

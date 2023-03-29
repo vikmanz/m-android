@@ -1,24 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- Default black and white. -->
-    <color name="black">#000000</color>
-    <color name="white">#FFFFFF</color>
+    <!-- Default black. -->
+<!--    <color name="black">#000000</color>-->
 
     <!-- Primary colors. -->
-    <color name="default_theme_color_primary">#FA5E06</color>
-    <color name="night_theme_color_primary">#C97D2C</color>
-    <color name="default_theme_color_primary_variant">#F9BC06</color>
+    <color name="main_color_orange">#FA5E06</color>
+    <color name="main_color_orange_night_theme">#C97D2C</color>
+    <color name="main_color_orange_second_variant">#F9BC06</color>
 
     <!-- Secondary colors. -->
-    <color name="default_theme_color_secondary">#242235</color>
-    <color name="default_theme_color_secondary_variant">#2F2E33</color>
+    <color name="main_color_blue">#242235</color>
+    <color name="main_color_blue_second_variant">#2F2E33</color>
 
     <!-- Text colors. -->
-    <color name="default_theme_text_color_primary">#FFFFFF</color>
-    <color name="default_theme_text_color_secondary">#B2B2B3</color>
-    <color name="night_theme_text_color_primary">#FFDA52</color>
-    <color name="night_theme_text_color_secondary">#A3D94FFF</color>
+    <color name="main_color_white">#FFFFFF</color>
+    <color name="main_color_white_second_variant">#B2B2B3</color>
+    <color name="main_color_white_night_theme">#FFDA52</color>
+    <color name="main_color_white_night_theme_secondary_variant">#A3D94FFF</color>
 
     <!-- Other colors. -->
     <color name="default_launcher_bg">#40FFFFFF</color>

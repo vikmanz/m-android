@@ -23,18 +23,18 @@
 
         <activity
             android:name=".ui.MainActivity"
-
-            android:exported="false" />
-
-        <activity
-            android:name=".ui.MyContactsActivity"
-
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".ui.MyContactsActivity"
+
+            android:exported="false" />
+
 
         <!-- Sample AdMob app ID: ca-app-pub-3940256099942544~3347511713 -->
         <meta-data
