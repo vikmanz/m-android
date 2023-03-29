@@ -5,11 +5,10 @@ import android.os.Bundle
 import com.vikmanz.shpppro.R
 import com.vikmanz.shpppro.constants.Constants.INTENT_EMAIL_ID
 import com.vikmanz.shpppro.data.DataStoreManager
+import com.vikmanz.shpppro.data.EmailParser
 import com.vikmanz.shpppro.databinding.ActivityMainBinding
 import com.vikmanz.shpppro.utilits.BaseActivity
-import com.vikmanz.shpppro.utilits.firstCharToUpperCase
 import kotlinx.coroutines.*
-import java.util.*
 
 /**
  * Class represents user main profile screen activity.
@@ -52,49 +51,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
         with(binding) {
             textviewMainPersonName.text =
                 if (emailToParse.isNullOrEmpty()) getString(R.string.main_activity_person_name_hardcoded)
-                else parseEmail(emailToParse)
+                else EmailParser().getParsedNameSurname(emailToParse)
             textviewMainPersonCareer.text = getString(R.string.main_activity_person_career_hardcoded)
             textviewMainPersonAddress.text = getString(R.string.main_activity_person_address_hardcoded)
         }
-    }
-
-    /**
-     * Parse email to Name Surname.
-     *
-     * @param fullEmail string with full user email.
-     * @return parsed Name Surname as String.
-     */
-    private fun parseEmail(fullEmail: String): String {
-
-        val personName: String
-        val firstPartEmail = fullEmail.substring(0, fullEmail.indexOf(EMAIL_DOMAIN_SEPARATOR))
-
-        // if "nameSurname" variant:
-        if (firstPartEmail.indexOf(EMAIL_NAME_SEPARATOR) == -1) {
-            val regex = REGEX_FROM_A_TO_Z.toRegex()
-            val match: MatchResult? = regex.find(firstPartEmail.substring(1))
-            personName = if (match == null) {
-                firstPartEmail
-            } else {
-                val surnameStartIndex = match.range.first + 1
-                "${
-                    firstPartEmail
-                        .substring(0, surnameStartIndex)
-                        .replaceFirstChar {
-                            if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString()
-                        }
-                } ${firstPartEmail.substring(surnameStartIndex)}"
-            }
-        }
-
-        // else if "name.surname" variant:
-        else {
-            personName = firstPartEmail
-                .split(EMAIL_NAME_SEPARATOR)
-                .joinToString(EMAIL_NAME_JOIN_SPASE, transform = String::firstCharToUpperCase)
-        }
-
-        return personName
     }
 
     /**
@@ -121,21 +81,13 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
         overridePendingTransition(R.anim.zoom_out_inner, R.anim.zoom_out_outter)
     }
 
-
+    /**
+     * Start My contacts activity.
+     */
     private fun startMyContactsActivity() {
         val intentObject = Intent(this, MyContactsActivity::class.java)
         startActivity(intentObject)
         overridePendingTransition(R.anim.zoom_in_inner, R.anim.zoom_in_outter)
-    }
-
-    /**
-     * Constants.
-     */
-    companion object {
-        private const val EMAIL_DOMAIN_SEPARATOR = '@'
-        private const val EMAIL_NAME_SEPARATOR = '.'
-        private const val EMAIL_NAME_JOIN_SPASE = " "
-        private const val REGEX_FROM_A_TO_Z = "[A-Z]"
     }
 
 }
