@@ -71,8 +71,8 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardview_main_avatar_card"
-            android:layout_width="@dimen/avatar_size_x"
-            android:layout_height="@dimen/avatar_size_y"
+            android:layout_width="@dimen/avatar_radius"
+            android:layout_height="@dimen/avatar_radius"
             app:cardBackgroundColor="?attr/colorPrimary"
             app:cardCornerRadius="@dimen/avatar_corner_radius">
 
