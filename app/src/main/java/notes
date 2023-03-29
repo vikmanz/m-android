@@ -16,12 +16,6 @@
 +++ Краще як на мене дати цю всю інформацію зразу
 +++ 4. Не стягуються фоточки контактів - це зробити нескладно
 +++ 5. в addContactDialogFragment при додаванні фото перекидує чомусь на якийсь гугл диск
-
-private val pickMediaLauncher = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
-        this.uri = uri?: Uri.EMPTY
-        binding.imageViewAvatar.setImageURI(uri)
-    }
-
 6. неочікуванно було знайти клас в'ю моделі в пекеджі дата
 7. ContactComparator не дуже назва, краще якось позначити в назві шо воно позначено з діфф утілс(ІМХО)
 8. Краще щоб логін і реєстрація було на різних екранах (ІМХО)
@@ -34,6 +28,7 @@ private val pickMediaLauncher = registerForActivityResult(ActivityResultContract
 
 change id's
 
-
-        0       1       2       3        4
-listOf(name, photoUri, phone, email, company))
+private val pickMediaLauncher = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
+        this.uri = uri?: Uri.EMPTY
+        binding.imageViewAvatar.setImageURI(uri)
+    }

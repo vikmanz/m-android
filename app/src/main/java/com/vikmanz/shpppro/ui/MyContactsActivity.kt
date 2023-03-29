@@ -19,7 +19,6 @@ import com.vikmanz.shpppro.databinding.ActivityMyContactsBinding
 import com.vikmanz.shpppro.utilits.BaseActivity
 import android.Manifest.permission.READ_CONTACTS
 import com.vikmanz.shpppro.data.contactModel.ContactsService
-import com.vikmanz.shpppro.data.MyContactsViewModel
 import com.vikmanz.shpppro.data.contactModel.*
 import com.vikmanz.shpppro.utilits.MarginItemDecoration
 import com.vikmanz.shpppro.utilits.SwipeToDeleteCallback
