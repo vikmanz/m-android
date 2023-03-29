@@ -20,7 +20,7 @@
         android:paddingVertical="@dimen/offset_S">
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/ivContactAvatarImage"
+            android:id="@+id/imageview_onecontact_avatar_image"
             android:layout_width="75dp"
             android:layout_height="75dp"
             android:scaleType="fitXY"
@@ -36,7 +36,7 @@
             android:paddingHorizontal="@dimen/offset_S">
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tvContactName"
+                android:id="@+id/textview_onecontact_name"
                 style="@style/basicText_bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -46,7 +46,7 @@
                 tools:ignore="TextContrastCheck" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tvContactCareer"
+                android:id="@+id/textview_onecontact_career"
                 style="@style/basicText_bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -58,7 +58,7 @@
         </LinearLayout>
 
         <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/btnRemove"
+            android:id="@+id/button_onecontact_remove"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

@@ -85,31 +85,30 @@ class AddContactDialogFragment(contactsService: ContactsService) : DialogFragmen
                 updateAvatarImage()
 
                 // set listener for change fake image and choose image from gallery
-                imageViewAvatarAddContact.setOnClickListener { requestDefaultImage() }
-                buttonAddPhotoFromGaleryAddContact.setOnClickListener { requestImage() }
+                imageviewAddcontactAvatar.setOnClickListener { requestDefaultImage() }
+                buttonAddcontactAvatarFromGalery.setOnClickListener { requestImageFromGalery() }
 
                 // set listener for create new contact and send it to MyContactsActivity
-                buttonSaveAddNewContactActivityMyContacts.setOnClickListener {
+                buttonAddcontactSaveUser.setOnClickListener {
                     dialog?.dismiss()
                     listener.addContactConfirmButtonClicked(
                         _contactsService.getOneContact(
-                            id = Math.random().toLong(),
                             photoUrl = _contactsService.getCurrentContactPhotoUrl(),
                             photoUri = imgUri,
                             photoIndex = _contactsService.getCurrentPhotoCounter(),
-                            name = textInputUserNameAddContact.editText?.text.toString(),
-                            career = textInputCareerAddContact.editText?.text.toString(),
-                            email = textInputCareerAddContact.editText?.text.toString(),
-                            phone = textInputCareerAddContact.editText?.text.toString(),
-                            address = textInputCareerAddContact.editText?.text.toString(),
-                            birthday = textInputCareerAddContact.editText?.text.toString()
+                            name = textinputAddcontactUserNameInputfield.text.toString(),
+                            career = textinputAddcontactUserCareerInputfield.text.toString(),
+                            email = textinputAddcontactUserEmailInputfield.text.toString(),
+                            phone = textinputAddcontactUserPhoneInputfield.text.toString(),
+                            address = textinputAddcontactUserAddressInputfield.text.toString(),
+                            birthday = textinputAddcontactUserBirthdayInputfield.text.toString()
                         )
                     )
                     _contactsService.incrementPhotoCounter()
                 }
 
                 // set listener for back button
-                buttonBackAddContact.setOnClickListener { dialog?.cancel() }
+                buttonAddcontactButtonBack.setOnClickListener { dialog?.cancel() }
             }
 
             // Set view and create dialog
@@ -143,7 +142,7 @@ class AddContactDialogFragment(contactsService: ContactsService) : DialogFragmen
     /**
      * Start activity with request image from gallery.
      */
-    private fun requestImage() {
+    private fun requestImageFromGalery() {
         requestImageLauncher.launch(REQUEST_IMAGE_FROM_GALLERY)
     }
 
@@ -163,10 +162,10 @@ class AddContactDialogFragment(contactsService: ContactsService) : DialogFragmen
      */
     private fun updateAvatarImage() {
         if (imgUri != null) {
-            _binding.imageViewAvatarAddContact.setContactPhotoFromUri(imgUri?:Uri.EMPTY)
+            _binding.imageviewAddcontactAvatar.setContactPhotoFromUri(imgUri?:Uri.EMPTY)
             log("img update - $imgUri")
         } else {
-            _binding.imageViewAvatarAddContact.setContactPhoto(_contactsService.getCurrentContactPhotoUrl())
+            _binding.imageviewAddcontactAvatar.setContactPhoto(_contactsService.getCurrentContactPhotoUrl())
             log("img update -default")
         }
     }

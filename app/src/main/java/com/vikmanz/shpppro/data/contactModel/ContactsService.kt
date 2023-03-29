@@ -19,7 +19,6 @@ class ContactsService {
      * Create and return one contact with information from input.
      */
     fun getOneContact(
-        id: Long,
         photoUrl: String,
         photoUri: Uri?,
         photoIndex: Int,
@@ -31,7 +30,7 @@ class ContactsService {
         birthday: String
     ): Contact {
         val newContact = Contact(
-            contactId = id,
+            contactId = getRandomId(),
             contactPhotoUrl = photoUrl,
             contactPhotoUri = photoUri,
             contactPhotoIndex = photoIndex,
@@ -50,7 +49,6 @@ class ContactsService {
      * Create and return one contact with random fake information.
      */
     private fun generateRandomContact(): Contact = getOneContact(
-            id = getRandomId(),
             photoUrl = IMAGES[imgCounter % IMAGES.size],
             photoUri = null,
             photoIndex = imgCounter,
@@ -81,7 +79,6 @@ class ContactsService {
         val listOfContactsInformation = ContactsPhoneInfoTaker().getPhonebookContactsInfo()
         val newContacts = (0 until listOfContactsInformation.size).map {
             getOneContact(
-                id = getRandomId(),
                 photoUrl = IMAGES[imgCounter % IMAGES.size],
                 photoUri = Uri.parse(listOfContactsInformation[it][1]),
                 photoIndex = imgCounter,

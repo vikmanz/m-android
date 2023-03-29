@@ -10,7 +10,7 @@
 
     <!-- Guide of center of elements. -->
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guide_main_vertical_center_of_screen"
+        android:id="@+id/guideline_mycontacts_bg_center_of_screen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -67,7 +67,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:constraint_referenced_ids="textinputlayout_auth_email, textinputlayout_auth_password, flow_auth_remember_and_forgot"
-        app:layout_constraintBottom_toTopOf="@+id/guide_main_vertical_center_of_screen"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_mycontacts_bg_center_of_screen"
         app:layout_constraintEnd_toStartOf="@+id/guide_auth_right_border"
         app:layout_constraintStart_toStartOf="@+id/guide_auth_left_border"  />
 
@@ -159,7 +159,7 @@
         app:flow_verticalGap="@dimen/offset_S"
         app:layout_constraintEnd_toStartOf="@+id/guide_auth_right_border"
         app:layout_constraintStart_toStartOf="@+id/guide_auth_left_border"
-        app:layout_constraintTop_toBottomOf="@+id/guide_main_vertical_center_of_screen" />
+        app:layout_constraintTop_toBottomOf="@+id/guideline_mycontacts_bg_center_of_screen" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_auth_register_by_google"

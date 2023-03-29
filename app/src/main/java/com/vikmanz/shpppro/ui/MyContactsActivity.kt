@@ -57,9 +57,9 @@ class MyContactsActivity :
      */
     private fun initRecyclerView() {
         with(binding) {
-            recyclerViewMyContacts.layoutManager = LinearLayoutManager(this@MyContactsActivity)
-            recyclerViewMyContacts.addItemDecoration(MarginItemDecoration(MARGINS_OF_ELEMENTS))
-            recyclerViewMyContacts.adapter = adapter
+            recyclerviewMycontactsContactList.layoutManager = LinearLayoutManager(this@MyContactsActivity)
+            recyclerviewMycontactsContactList.addItemDecoration(MarginItemDecoration(MARGINS_OF_ELEMENTS))
+            recyclerviewMycontactsContactList.adapter = adapter
         }
         initSwipeToDelete()
     }
@@ -110,7 +110,7 @@ class MyContactsActivity :
             }
         }
         val itemTouchHelper = ItemTouchHelper(swipeHandler)
-        itemTouchHelper.attachToRecyclerView(binding.recyclerViewMyContacts)
+        itemTouchHelper.attachToRecyclerView(binding.recyclerviewMycontactsContactList)
     }
 
     /**
@@ -118,11 +118,11 @@ class MyContactsActivity :
      */
     override fun setListeners() {
         with(binding) {
-            btnBack.setOnClickListener { finish() }
-            btnDeclineAccess.setOnClickListener { buttonToRemoveAccess() }
-            tvAddContacts.setOnClickListener { addNewContact() }
-            tvAddContactsFromPhonebook.setOnClickListener { requestReadContactsPermission() }
-            tvAddContactsFromViewModel.setOnClickListener { changeToFakeContacts() }
+            buttonMycontactsBack.setOnClickListener { finish() }
+            buttonMycontactsDeclineAccess.setOnClickListener { buttonToRemoveAccess() }
+            buttonMycontactsAddContact.setOnClickListener { addNewContact() }
+            buttonMycontactsAddContactsFromPhonebook.setOnClickListener { requestReadContactsPermission() }
+            buttonMycontactsAddContactsFromFaker.setOnClickListener { changeToFakeContacts() }
         }
     }
 
@@ -195,22 +195,22 @@ class MyContactsActivity :
     private fun updateUI() {
         with(binding) {
             if (viewModel.phoneListActivated) {
-                btnDeclineAccess.visibility = View.VISIBLE
-                textViewRevokePermission.visibility = View.VISIBLE
+                buttonMycontactsDeclineAccess.visibility = View.VISIBLE
+                textviewMycontactsRevokePermission.visibility = View.VISIBLE
             }
             else {
-                btnDeclineAccess.visibility = View.INVISIBLE
-                textViewRevokePermission.visibility = View.GONE
+                buttonMycontactsDeclineAccess.visibility = View.INVISIBLE
+                textviewMycontactsRevokePermission.visibility = View.GONE
             }
 
 
             if (viewModel.phoneListChangedToFake) {
-                tvAddContactsFromViewModel.visibility = View.GONE
-                tvAddContactsFromPhonebook.visibility = View.VISIBLE
+                buttonMycontactsAddContactsFromFaker.visibility = View.GONE
+                buttonMycontactsAddContactsFromPhonebook.visibility = View.VISIBLE
             }
             else {
-                tvAddContactsFromViewModel.visibility = View.VISIBLE
-                tvAddContactsFromPhonebook.visibility = View.GONE
+                buttonMycontactsAddContactsFromFaker.visibility = View.VISIBLE
+                buttonMycontactsAddContactsFromPhonebook.visibility = View.GONE
             }
         }
     }

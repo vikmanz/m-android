@@ -11,33 +11,33 @@
 
         <!-- Top half of screen. -->
         <View
-            android:id="@+id/view_topHalfBg_AddContact"
+            android:id="@+id/view_addcontact_bg_top_half"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:background="?attr/colorSecondary"
-            app:layout_constraintBottom_toBottomOf="@id/barrier"
+            app:layout_constraintBottom_toBottomOf="@id/view_addcontact_barrier"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
 
         <androidx.constraintlayout.widget.Barrier
-            android:id="@+id/barrier"
+            android:id="@+id/view_addcontact_barrier"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:barrierDirection="bottom"
-            app:constraint_referenced_ids="imageView_avatar_AddContact" />
+            app:constraint_referenced_ids="imageview_addcontact_avatar" />
 
 
         <!-- Title and title buttons flow. -->
         <androidx.constraintlayout.helper.widget.Flow
-            android:id="@+id/flowLayoutTitleAndTitleButtons"
+            android:id="@+id/flow_mycontacts_title_and_buttons"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/marginHorizontal"
             android:layout_marginTop="@dimen/offset_M"
             android:orientation="horizontal"
-            app:constraint_referenced_ids="button_back_add_contact, tvContactsTitle, btnSearch"
+            app:constraint_referenced_ids="button_addcontact_button_back, textview_mycontacts_title, button_addcontact_button_search"
             app:flow_horizontalStyle="spread_inside"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -45,7 +45,7 @@
             tools:ignore="MissingConstraints" />
 
         <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/button_back_add_contact"
+            android:id="@+id/button_addcontact_button_back"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:background="@android:color/transparent"
@@ -53,7 +53,7 @@
             tools:ignore="MissingConstraints,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tvContactsTitle"
+            android:id="@+id/textview_mycontacts_title"
             style="@style/basicText_bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -62,7 +62,7 @@
             tools:ignore="MissingConstraints" />
 
         <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/btnSearch"
+            android:id="@+id/button_addcontact_button_search"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:background="@android:color/transparent"
@@ -71,27 +71,27 @@
             tools:ignore="MissingConstraints" />
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/imageView_avatar_AddContact"
+            android:id="@+id/imageview_addcontact_avatar"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginTop="28dp"
             android:layout_marginBottom="28dp"
             android:src="@drawable/sample_avatar"
-            app:layout_constraintBottom_toBottomOf="@id/barrier"
+            app:layout_constraintBottom_toBottomOf="@id/view_addcontact_barrier"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/flowLayoutTitleAndTitleButtons" />
+            app:layout_constraintTop_toBottomOf="@+id/flow_mycontacts_title_and_buttons" />
 
 
         <ImageButton
-            android:id="@+id/button_add_photo_from_galery_add_contact"
+            android:id="@+id/button_addcontact_avatar_from_galery"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView_avatar_AddContact"
+            app:layout_constraintBottom_toBottomOf="@+id/imageview_addcontact_avatar"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imageView_avatar_AddContact"
-            app:layout_constraintTop_toTopOf="@+id/imageView_avatar_AddContact"
+            app:layout_constraintStart_toEndOf="@+id/imageview_addcontact_avatar"
+            app:layout_constraintTop_toTopOf="@+id/imageview_addcontact_avatar"
             app:srcCompat="@drawable/add_from_gallery_icon"
             tools:ignore="ContentDescription,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
@@ -99,28 +99,28 @@
         <!-- Bottom half of screen. -->
 
         <androidx.constraintlayout.helper.widget.Flow
-            android:id="@+id/flowTextInputs"
+            android:id="@+id/flow_addcontact_contacts_info_fields"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/marginHorizontal"
             android:layout_marginTop="@dimen/offset_M"
             android:orientation="vertical"
             app:constraint_referenced_ids="
-        textInput_UserName_AddContact,
-        textInput_Career_AddContact,
-        textInput_Email_AddContact,
-        textInput_Phone_AddContact,
-        textInput_Address_AddContact,
-        textInput_Birthday_AddContact
+        textinput_addcontact_user_name_layout,
+        textinput_addcontact_user_career_layout,
+        textinput_addcontact_user_email_layout,
+        textinput_addcontact_user_phone_layout,
+        textinput_addcontact_user_address_layout,
+        textinput_addcontact_user_birthday_layout
         "
-            app:layout_constraintBottom_toTopOf="@+id/button_save_addNewContactActivityMyContacts"
+            app:layout_constraintBottom_toTopOf="@+id/button_addcontact_save_user"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/barrier" />
+            app:layout_constraintTop_toBottomOf="@id/view_addcontact_barrier" />
 
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInput_UserName_AddContact"
+            android:id="@+id/textinput_addcontact_user_name_layout"
             style="@style/textInput_AddNewContact"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -129,7 +129,7 @@
             tools:ignore="MissingConstraints">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/textInput_field_UserName_AddContact"
+                android:id="@+id/textinput_addcontact_user_name_inputfield"
                 style="@style/textInput_AddNewContact"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -139,7 +139,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInput_Career_AddContact"
+            android:id="@+id/textinput_addcontact_user_career_layout"
             style="@style/textInput_AddNewContact"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -148,7 +148,7 @@
             tools:ignore="MissingConstraints">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/textInput_field_Career_AddContact"
+                android:id="@+id/textinput_addcontact_user_career_inputfield"
                 style="@style/textInput_AddNewContact"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -158,7 +158,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInput_Email_AddContact"
+            android:id="@+id/textinput_addcontact_user_email_layout"
             style="@style/textInput_AddNewContact"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -167,7 +167,7 @@
             tools:ignore="MissingConstraints">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/textInput_field_Email_AddContact"
+                android:id="@+id/textinput_addcontact_user_email_inputfield"
                 style="@style/textInput_AddNewContact"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -176,7 +176,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInput_Phone_AddContact"
+            android:id="@+id/textinput_addcontact_user_phone_layout"
             style="@style/textInput_AddNewContact"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -185,7 +185,7 @@
             tools:ignore="MissingConstraints">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/textInput_field_Phone_AddContact"
+                android:id="@+id/textinput_addcontact_user_phone_inputfield"
                 style="@style/textInput_AddNewContact"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -195,7 +195,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInput_Address_AddContact"
+            android:id="@+id/textinput_addcontact_user_address_layout"
             style="@style/textInput_AddNewContact"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -204,7 +204,7 @@
             tools:ignore="MissingConstraints">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/textInput_field_Address_AddContact"
+                android:id="@+id/textinput_addcontact_user_address_inputfield"
                 style="@style/textInput_AddNewContact"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -213,7 +213,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInput_Birthday_AddContact"
+            android:id="@+id/textinput_addcontact_user_birthday_layout"
             style="@style/textInput_AddNewContact"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -222,7 +222,7 @@
             tools:ignore="MissingConstraints">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/textInput_field_Birthday_AddContact"
+                android:id="@+id/textinput_addcontact_user_birthday_inputfield"
                 style="@style/textInput_AddNewContact"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -233,7 +233,7 @@
 
         <!-- View Contacts button. -->
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/button_save_addNewContactActivityMyContacts"
+            android:id="@+id/button_addcontact_save_user"
             android:layout_width="match_parent"
             android:layout_height="@dimen/size_button_height_XL"
             android:layout_marginHorizontal="@dimen/marginHorizontal"
@@ -245,7 +245,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/flowTextInputs"
+            app:layout_constraintTop_toBottomOf="@id/flow_addcontact_contacts_info_fields"
             tools:ignore="TextContrastCheck,VisualLintButtonSize" />
 
 
