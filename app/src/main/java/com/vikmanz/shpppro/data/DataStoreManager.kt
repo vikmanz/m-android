@@ -16,26 +16,6 @@ import kotlinx.coroutines.flow.map
 class DataStoreManager (private val context: Context) {
 
     /**
-     * Companion object with keys of Data Store Preferences fields.
-     */
-    companion object {
-        // Key for preferences Data Store.
-        private const val DATA_STORE_NAME = "auth"
-        private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = DATA_STORE_NAME)
-
-        // Data Store Keys. Don't need to change.
-        private const val DS_USER_NAME = "user_name"
-        private const val DS_USER_PASSWORD = "user_password"
-        private const val DS_USER_AUTOLOGIN_STATUS = "user_login_status"
-        private const val DS_USER_LANGUAGE_STATUS = "user_language_status"
-
-        private val USER_LOGIN_KEY = stringPreferencesKey(DS_USER_NAME)
-        private val USER_PASSWORD_KEY = stringPreferencesKey(DS_USER_PASSWORD)
-        private val LOGIN_STATUS_KEY = booleanPreferencesKey(DS_USER_AUTOLOGIN_STATUS)
-        private val LANGUAGE_KEY = booleanPreferencesKey(DS_USER_LANGUAGE_STATUS)
-    }
-
-    /**
      * Get name, password, autologin and language status, and save all these in memory.
      */
     suspend fun saveUserSata(name: String, password: String, isAutoLogin: Boolean, isUkrainian: Boolean) {
@@ -88,4 +68,23 @@ class DataStoreManager (private val context: Context) {
         it[LANGUAGE_KEY] ?: false
     }
 
+    /**
+     * Companion object with keys of Data Store Preferences fields.
+     */
+    companion object {
+        // Key for preferences Data Store.
+        private const val DATA_STORE_NAME = "auth"
+        private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = DATA_STORE_NAME)
+
+        // Data Store Keys. Don't need to change.
+        private const val DS_USER_NAME = "user_name"
+        private const val DS_USER_PASSWORD = "user_password"
+        private const val DS_USER_AUTOLOGIN_STATUS = "user_login_status"
+        private const val DS_USER_LANGUAGE_STATUS = "user_language_status"
+
+        private val USER_LOGIN_KEY = stringPreferencesKey(DS_USER_NAME)
+        private val USER_PASSWORD_KEY = stringPreferencesKey(DS_USER_PASSWORD)
+        private val LOGIN_STATUS_KEY = booleanPreferencesKey(DS_USER_AUTOLOGIN_STATUS)
+        private val LANGUAGE_KEY = booleanPreferencesKey(DS_USER_LANGUAGE_STATUS)
+    }
 }
