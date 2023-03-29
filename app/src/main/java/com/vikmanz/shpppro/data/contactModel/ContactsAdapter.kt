@@ -22,10 +22,10 @@ class ContactsAdapter(private val contactActionListener: ContactActionListener) 
         fun bind(contact: Contact) {
             with(binding) {
                 // bind Photo
-                if (contact.contactPhotoUri != null) {
-                    ivContactAvatarImage.setContactPhotoFromUri(contact.contactPhotoUri)
-                } else {
+                if (contact.contactPhotoUri == null) {
                     ivContactAvatarImage.setContactPhoto(contact.contactPhotoUrl)
+                } else {
+                    ivContactAvatarImage.setContactPhotoFromUri(contact.contactPhotoUri)
                 }
                 // bind Name/Career
                 tvContactName.text = contact.contactName

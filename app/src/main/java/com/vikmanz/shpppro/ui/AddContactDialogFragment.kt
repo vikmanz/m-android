@@ -124,8 +124,7 @@ class AddContactDialogFragment(contactsService: ContactsService) : DialogFragmen
     private fun restoreImageUri(savedInstanceState: Bundle) {
         if (SDK_INT >= 33) {
             imgUri = savedInstanceState.getParcelable(PHOTO_STATE_KEY, Uri::class.java)
-        }
-        else {
+        } else {
             @Suppress("DEPRECATION")
             imgUri = savedInstanceState.getParcelable(PHOTO_STATE_KEY) as? Uri
         }
@@ -163,12 +162,12 @@ class AddContactDialogFragment(contactsService: ContactsService) : DialogFragmen
      * Update image in UV.
      */
     private fun updateAvatarImage() {
-        if (imgUri == null) {
+        if (imgUri != null) {
+            _binding.imageViewAvatarAddContact.setContactPhotoFromUri(imgUri?:Uri.EMPTY)
+            log("img update - $imgUri")
+        } else {
             _binding.imageViewAvatarAddContact.setContactPhoto(_contactsService.getCurrentContactPhotoUrl())
             log("img update -default")
-        } else {
-            _binding.imageViewAvatarAddContact.setContactPhotoFromUri(imgUri)
-            log("img update - $imgUri")
         }
     }
 

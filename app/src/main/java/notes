@@ -14,9 +14,7 @@
 +++ потім виявляється що треба ше одну апперкейс букву,
 +++ ввів букву, це ше не все - треба ше символ спеціальний.
 +++ Краще як на мене дати цю всю інформацію зразу
-
-
-4. Не стягуються фоточки контактів - це зробити нескладно
++++ 4. Не стягуються фоточки контактів - це зробити нескладно
 +++ 5. в addContactDialogFragment при додаванні фото перекидує чомусь на якийсь гугл диск
 
 private val pickMediaLauncher = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
@@ -35,3 +33,7 @@ private val pickMediaLauncher = registerForActivityResult(ActivityResultContract
 в'ю модель 34 35 строчки - шо це таке?
 
 change id's
+
+
+        0       1       2       3        4
+listOf(name, photoUri, phone, email, company))

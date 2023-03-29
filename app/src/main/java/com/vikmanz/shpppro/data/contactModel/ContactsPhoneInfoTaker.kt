@@ -13,7 +13,6 @@ class ContactsPhoneInfoTaker() {
     /**
      * Take contacts from phonebook and return they as ArrayList<[name: String, phone: String]>.
      */
-
     fun getPhonebookContactsInfo(): ArrayList<List<String>> {
 
         val listOfContactsInformation = ArrayList<List<String>>()
@@ -23,6 +22,7 @@ class ContactsPhoneInfoTaker() {
         val projection = arrayOf(
             ContactsContract.Data.CONTACT_ID,
             ContactsContract.Contacts.DISPLAY_NAME,
+            ContactsContract.CommonDataKinds.Phone.PHOTO_URI,
             ContactsContract.CommonDataKinds.Phone.NUMBER
         )
         val selection =
@@ -43,16 +43,35 @@ class ContactsPhoneInfoTaker() {
                     )
                 )
 
+                val photoUri: String = cursor.getString(
+                    cursor.getColumnIndex(
+                        ContactsContract.CommonDataKinds.Phone.PHOTO_URI
+                    )
+                )
+
                 val phone: String = cursor.getString(
                     cursor.getColumnIndex(
                         ContactsContract.CommonDataKinds.Phone.NUMBER
                     )
                 )
 
-                val company: String = getContactCompanyName(contentResolver, id)
+                val company: String = getInfoForType(
+                    contentResolver,
+                    id,
+                    ContactsContract.CommonDataKinds.Organization.COMPANY,
+                    ContactsContract.CommonDataKinds.Organization.CONTENT_ITEM_TYPE
+                    )
 
-                log("Adding ::: id: $id, name: $name, phone: $phone, company: $company")
-                listOfContactsInformation.add(listOf(name, phone))
+                val email: String = getInfoForType(
+                    contentResolver,
+                    id,
+                    ContactsContract.CommonDataKinds.Email.ADDRESS,
+                    ContactsContract.CommonDataKinds.Email.CONTENT_ITEM_TYPE
+                )
+
+                log("Adding ::: id: $id, name: $name, phone: $phone, email: $email, " +
+                        "company: $company, have photo: ${photoUri != ""}")
+                listOfContactsInformation.add(listOf(name, photoUri, phone, email, company))
 
             }
             cursor.close()
@@ -60,23 +79,27 @@ class ContactsPhoneInfoTaker() {
         return listOfContactsInformation
     }
 
-    private fun getContactCompanyName(contentResolver: ContentResolver, id: Long): String {
+    private fun getInfoForType(
+        resolver: ContentResolver,
+        contactId: Long,
+        column: String,
+        contentType: String
+    ): String {
         val uri = ContactsContract.Data.CONTENT_URI
-        val projection = arrayOf(ContactsContract.CommonDataKinds.Organization.COMPANY)
+        val projection = arrayOf(column)
         val selection =
             ContactsContract.Data.MIMETYPE + "='" +
-                    ContactsContract.CommonDataKinds.Organization.CONTENT_ITEM_TYPE + "' AND " +
+                    contentType + "' AND " +
                     ContactsContract.CommonDataKinds.Organization.CONTACT_ID + " = ?"
-        val selectionArgs = arrayOf(id.toString())
-        val cursor = contentResolver.query(uri, projection, selection, selectionArgs, null)
+        val selectionArgs = arrayOf(contactId.toString())
+        val cursor = resolver.query(uri, projection, selection, selectionArgs, null)
 
         if (cursor != null && cursor.moveToFirst()) {
-            val company =
-                cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Organization.COMPANY))
+            val result = cursor.getString(cursor.getColumnIndex(column))
             cursor.close()
-            return company
+            return result
         }
-        return "[no have a company]"
+        return ""
     }
 
 }

@@ -84,12 +84,12 @@ class ContactsService {
             getOneContact(
                 id = getRandomId(),
                 photoUrl = IMAGES[imgCounter % IMAGES.size],
-                photoUri = null,
+                photoUri = Uri.parse(listOfContactsInformation[it][1]),
                 photoIndex = imgCounter,
                 name = listOfContactsInformation[it][0],
-                career = listOfContactsInformation[it][1],
-                email = faker.internet().emailAddress(),
-                phone = faker.phoneNumber().phoneNumber(),
+                career = listOfContactsInformation[it][4],
+                email = listOfContactsInformation[it][3],
+                phone = listOfContactsInformation[it][2],
                 address = faker.address().fullAddress(),
                 birthday = faker.date().birthday().toString()
             )
