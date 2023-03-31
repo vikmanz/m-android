@@ -18,8 +18,10 @@ import com.vikmanz.shpppro.constants.Constants.SNACK_BAR_VIEW_TIME
 import com.vikmanz.shpppro.databinding.ActivityMyContactsBinding
 import com.vikmanz.shpppro.utilits.BaseActivity
 import android.Manifest.permission.READ_CONTACTS
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.repeatOnLifecycle
+import com.vikmanz.shpppro.App
 import com.vikmanz.shpppro.R
-import com.vikmanz.shpppro.data.contactModel.ContactsService
 import com.vikmanz.shpppro.data.contactModel.*
 import com.vikmanz.shpppro.utilits.MarginItemDecoration
 import com.vikmanz.shpppro.utilits.SwipeToDeleteCallback
@@ -29,18 +31,21 @@ import kotlinx.coroutines.*
  * Class represents MyContacts screen activity.
  */
 class MyContactsActivity :
-    BaseActivity<ActivityMyContactsBinding>(ActivityMyContactsBinding::inflate),
-    AddContactDialogFragment.ConfirmationListener {
+    BaseActivity<ActivityMyContactsBinding>(ActivityMyContactsBinding::inflate)
+    {
+// ,AddContactDialogFragment.ConfirmationListener
+    /**
+     * Create service for create new contacts. It sends to Add new contact Dialog Fragment.
+     */
+    private val contactsService = App.contactsService
 
     /**
      * Create ViewModel for this activity.
      */
-    private val viewModel: MyContactsViewModel by viewModels()
+    private val viewModel: MyContactsViewModel by viewModels {
+        MyContactsViewModelFactory(contactsService)
+    }
 
-    /**
-     * Create service for create new contacts. It sends to Add new contact Dialog Fragment.
-     */
-    private val contactsService = ContactsService()
 
     /**
      * Main function, which used when activity was create.
@@ -57,8 +62,13 @@ class MyContactsActivity :
      */
     private fun initRecyclerView() {
         with(binding) {
-            recyclerviewMycontactsContactList.layoutManager = LinearLayoutManager(this@MyContactsActivity)
-            recyclerviewMycontactsContactList.addItemDecoration(MarginItemDecoration(MARGINS_OF_ELEMENTS))
+            recyclerviewMycontactsContactList.layoutManager =
+                LinearLayoutManager(this@MyContactsActivity)
+            recyclerviewMycontactsContactList.addItemDecoration(
+                MarginItemDecoration(
+                    MARGINS_OF_ELEMENTS
+                )
+            )
             recyclerviewMycontactsContactList.adapter = adapter
         }
         initSwipeToDelete()
@@ -81,8 +91,10 @@ class MyContactsActivity :
      */
     override fun setObservers() {
         lifecycleScope.launch {
-            viewModel.contactList.collect { contactList ->
-                adapter.submitList(contactList)
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.contactList.collect { contactList ->
+                    adapter.submitList(contactList)
+                }
             }
         }
     }
@@ -95,7 +107,12 @@ class MyContactsActivity :
         viewModel.deleteContact(contact)
         Snackbar
             .make(binding.root, getString(R.string.my_contacts_remove_contact), SNACK_BAR_VIEW_TIME)
-            .setAction(getString(R.string.my_contacts_remove_contact_undo)) { viewModel.addContact(contact, position) }
+            .setAction(getString(R.string.my_contacts_remove_contact_undo)) {
+                viewModel.addContactToPosition(
+                    contact,
+                    position
+                )
+            }
             .show()
     }
 
@@ -130,16 +147,16 @@ class MyContactsActivity :
      * Show Add new contact Dialog Fragment.
      */
     private fun addNewContact() {
-        AddContactDialogFragment(contactsService)
+        AddContactDialogFragment()
             .show(supportFragmentManager, "ConfirmationDialogFragmentTag")
     }
 
-    /**
-     * Take Contact from Add new contact Dialog Fragment and add it to ViewModel.
-     */
-    override fun addContactConfirmButtonClicked(contact: Contact) {
-        viewModel.addContact(contact)
-    }
+//    /**
+//     * Take Contact from Add new contact Dialog Fragment and add it to ViewModel.
+//     */
+//    override fun addContactConfirmButtonClicked(contact: Contact) {
+//        viewModel.addContact(contact)
+//    }
 
     /**
      * Start activity with request permission for read contacts from phonebook.
@@ -197,8 +214,7 @@ class MyContactsActivity :
             if (viewModel.phoneListActivated) {
                 buttonMycontactsDeclineAccess.visibility = View.VISIBLE
                 textviewMycontactsRevokePermission.visibility = View.VISIBLE
-            }
-            else {
+            } else {
                 buttonMycontactsDeclineAccess.visibility = View.INVISIBLE
                 textviewMycontactsRevokePermission.visibility = View.GONE
             }
@@ -207,8 +223,7 @@ class MyContactsActivity :
             if (viewModel.phoneListChangedToFake) {
                 buttonMycontactsAddContactsFromFaker.visibility = View.GONE
                 buttonMycontactsAddContactsFromPhonebook.visibility = View.VISIBLE
-            }
-            else {
+            } else {
                 buttonMycontactsAddContactsFromFaker.visibility = View.VISIBLE
                 buttonMycontactsAddContactsFromPhonebook.visibility = View.GONE
             }

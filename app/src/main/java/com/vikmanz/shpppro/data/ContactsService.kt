@@ -1,9 +1,13 @@
-package com.vikmanz.shpppro.data.contactModel
+package com.vikmanz.shpppro.data
 
 import android.net.Uri
 import com.github.javafaker.Faker
 import com.vikmanz.shpppro.constants.Constants.START_NUMBER_OF_CONTACTS
+import com.vikmanz.shpppro.data.contactModel.Contact
+import com.vikmanz.shpppro.data.contactModel.ContactsPhoneInfoTaker
 import com.vikmanz.shpppro.utilits.log
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import java.util.*
 
 /**
@@ -11,14 +15,25 @@ import java.util.*
  */
 class ContactsService {
 
+    //This object is a wrapper. if we pass it a new object it will call emit
+    private val _contactList = MutableStateFlow(listOf<Contact>())
+    //this object sends out the immutable list
+    val contactList = _contactList.asStateFlow()
+
     private val faker = Faker.instance() // fake data generator.
 
     private var imgCounter = 0  // counter to switch random images.
 
+    init {
+        log("init contactsService...")
+        setFakeContacts()
+        log("done!")
+    }
+
     /**
      * Create and return one contact with information from input.
      */
-    fun getOneContact(
+    fun createContact(
         photoUrl: String,
         photoUri: Uri?,
         photoIndex: Int,
@@ -48,7 +63,7 @@ class ContactsService {
     /**
      * Create and return one contact with random fake information.
      */
-    private fun generateRandomContact(): Contact = getOneContact(
+    private fun generateRandomContact(): Contact = createContact(
             photoUrl = IMAGES[imgCounter % IMAGES.size],
             photoUri = null,
             photoIndex = imgCounter,
@@ -63,22 +78,20 @@ class ContactsService {
     /**
      * Create and return list of fake contacts.
      */
-    fun createFakeContacts(): List<Contact> {
-        val newContacts = (0 until START_NUMBER_OF_CONTACTS).map {
+    fun setFakeContacts() {
+        _contactList.value = (0 until START_NUMBER_OF_CONTACTS).map {
             generateRandomContact()
         }.toMutableList()
-        log("service return new fake list with size ${newContacts.size}")
-        return newContacts
+        log("service return new fake list with size ${_contactList.value.size}")
     }
 
     /**
      * Create and return contact list with information from phonebook ArrayList<[name: String, phone: String]>.
      */
-    fun createContactListFromPhonebookInfo(): List<Contact> {
-
+    fun setPhoneContacts() {
         val listOfContactsInformation = ContactsPhoneInfoTaker().getPhonebookContactsInfo()
-        val newContacts = (0 until listOfContactsInformation.size).map {
-            getOneContact(
+        _contactList.value = (0 until listOfContactsInformation.size).map {
+            createContact(
                 photoUrl = IMAGES[imgCounter % IMAGES.size],
                 photoUri = Uri.parse(listOfContactsInformation[it][1]),
                 photoIndex = imgCounter,
@@ -90,8 +103,7 @@ class ContactsService {
                 birthday = faker.date().birthday().toString()
             )
         }.toMutableList()
-        log("service return new list with size ${newContacts.size}")
-        return newContacts
+        log("service return new list with size ${_contactList.value.size}")
     }
 
     /**
@@ -119,6 +131,39 @@ class ContactsService {
      */
     fun incrementPhotoCounter() {
         imgCounter++
+    }
+
+    fun addContact(contact: Contact) {
+        addContact(contact, _contactList.value.size)
+        log("New contact created! id:${contact.contactId}, name:${contact.contactName}, contact img counter: ${contact.contactPhotoIndex}.")
+    }
+
+    /**
+     * Add new contact to list of contacts to concrete index.
+     */
+    fun addContact(contact: Contact, index: Int) {
+        _contactList.value = _contactList.value.toMutableList().apply { add(index, contact) }
+    }
+
+    /**
+     * Delete contact from list of contacts.
+     */
+    fun deleteContact(contact: Contact) {
+        _contactList.value = _contactList.value.toMutableList().apply { remove(contact) }
+    }
+
+    /**
+     * Get contact position in list of contacts.
+     */
+    fun getContactPosition(contact: Contact) : Int{
+        return _contactList.value.indexOf(contact)
+    }
+
+    /**
+     * Get contact from list via index.
+     */
+    fun getContact(index: Int) : Contact {
+        return _contactList.value[index]
     }
 
     /**
