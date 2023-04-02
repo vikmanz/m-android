@@ -37,7 +37,7 @@ class MyContactsActivity :
     /**
      * Create service for create new contacts. It sends to Add new contact Dialog Fragment.
      */
-    private val contactsService = App.contactsService
+    private val contactsService = App.contactsReposetory
 
     /**
      * Create ViewModel for this activity.

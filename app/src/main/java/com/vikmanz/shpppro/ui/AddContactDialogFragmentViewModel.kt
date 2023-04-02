@@ -2,13 +2,13 @@ package com.vikmanz.shpppro.ui
 
 import android.net.Uri
 import androidx.lifecycle.*
-import com.vikmanz.shpppro.data.ContactsService
+import com.vikmanz.shpppro.data.ContactsReposetory
 
 /**
  * ViewModel for My Contacts Activity.
  */
 class AddContactDialogFragmentViewModel(
-    val contactsService: ContactsService
+    val contactsReposetory: ContactsReposetory
 ) : ViewModel() {
 
     /**
@@ -16,7 +16,7 @@ class AddContactDialogFragmentViewModel(
      */
     var imgUri: Uri = Uri.EMPTY
 
-    fun getFakePhotoUrl() = contactsService.getCurrentContactPhotoUrl()
+    fun getFakePhotoUrl() = contactsReposetory.getCurrentContactPhotoUrl()
 
     fun createNewContact(
         name: String,
@@ -26,10 +26,10 @@ class AddContactDialogFragmentViewModel(
         address: String,
         birthday: String
     ) {
-        val newContact = contactsService.createContact(
-            photoUrl = contactsService.getCurrentContactPhotoUrl(),
+        val newContact = contactsReposetory.createContact(
+            photoUrl = contactsReposetory.getCurrentContactPhotoUrl(),
             photoUri = imgUri,
-            photoIndex = contactsService.getCurrentPhotoCounter(),
+            photoIndex = contactsReposetory.getCurrentPhotoCounter(),
             name = name,
             career = career,
             email = email,
@@ -37,6 +37,6 @@ class AddContactDialogFragmentViewModel(
             address = address,
             birthday = birthday
         )
-        contactsService.addContact(newContact)
+        contactsReposetory.addContact(newContact)
     }
 }

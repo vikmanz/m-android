@@ -25,7 +25,7 @@ class AddContactDialogFragment : DialogFragment() {
      * Create ViewModel for this dialog.
      */
     private val viewModel: AddContactDialogFragmentViewModel by viewModels {
-        MyViewModelFactory(App.contactsService)
+        MyViewModelFactory(App.contactsReposetory)
     }
 
     /**
@@ -83,7 +83,7 @@ class AddContactDialogFragment : DialogFragment() {
      * Get fake image.
      */
     private fun requestDefaultImage() {
-        viewModel.contactsService.incrementPhotoCounter()
+        viewModel.contactsReposetory.incrementPhotoCounter()
 //        if (viewModel.imgUri == Uri.EMPTY) viewModel.imgUri = Uri.EMPTY
         updateAvatarImage()
     }

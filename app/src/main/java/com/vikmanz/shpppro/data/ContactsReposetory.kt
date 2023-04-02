@@ -13,7 +13,7 @@ import java.util.*
 /**
  * Main service to create contacts objects from information on from random.
  */
-class ContactsService {
+class ContactsReposetory {
 
     //This object is a wrapper. if we pass it a new object it will call emit
     private val _contactList = MutableStateFlow(listOf<Contact>())
