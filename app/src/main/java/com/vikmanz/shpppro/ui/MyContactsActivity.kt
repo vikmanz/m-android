@@ -211,21 +211,18 @@ class MyContactsActivity :
      */
     private fun updateUI() {
         with(binding) {
-            if (viewModel.phoneListActivated) {
-                buttonMycontactsDeclineAccess.visibility = View.VISIBLE
-                textviewMycontactsRevokePermission.visibility = View.VISIBLE
-            } else {
-                buttonMycontactsDeclineAccess.visibility = View.INVISIBLE
-                textviewMycontactsRevokePermission.visibility = View.GONE
-            }
-
-
             if (viewModel.phoneListChangedToFake) {
                 buttonMycontactsAddContactsFromFaker.visibility = View.GONE
+                buttonMycontactsDeclineAccess.visibility = View.INVISIBLE
+                textviewMycontactsRevokePermission.visibility = View.INVISIBLE
                 buttonMycontactsAddContactsFromPhonebook.visibility = View.VISIBLE
             } else {
                 buttonMycontactsAddContactsFromFaker.visibility = View.VISIBLE
                 buttonMycontactsAddContactsFromPhonebook.visibility = View.GONE
+                if (viewModel.phoneListActivated) {
+                    buttonMycontactsDeclineAccess.visibility = View.VISIBLE
+                    textviewMycontactsRevokePermission.visibility = View.VISIBLE
+                }
             }
         }
     }

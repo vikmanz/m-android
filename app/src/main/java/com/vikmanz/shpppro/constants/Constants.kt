@@ -26,6 +26,8 @@ object Constants {
     const val MARGINS_OF_ELEMENTS = 20
     // FakeData (true) or PhoneData (false) view first on myContacts
     const val FAKE_FIRST = true
+    // Minimum number of contacts, which will be imported from phonebook.
+    const val MAX_PHONE_IMPORT_CONTACTS_COUNT = 50
 
 
     /**

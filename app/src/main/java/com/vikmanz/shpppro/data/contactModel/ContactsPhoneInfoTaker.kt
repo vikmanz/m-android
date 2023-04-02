@@ -5,6 +5,7 @@ import android.content.ContentResolver
 import android.provider.ContactsContract
 import android.util.Log
 import com.vikmanz.shpppro.App
+import com.vikmanz.shpppro.constants.Constants.MAX_PHONE_IMPORT_CONTACTS_COUNT
 import com.vikmanz.shpppro.utilits.log
 
 @SuppressLint("Range")
@@ -73,6 +74,7 @@ class ContactsPhoneInfoTaker {
                         "company: $company, have photo: ${photoUri != ""}")
                 listOfContactsInformation.add(listOf(name, photoUri, phone, email, company))
 
+                if (listOfContactsInformation.size == MAX_PHONE_IMPORT_CONTACTS_COUNT) break
             }
             cursor.close()
         }
