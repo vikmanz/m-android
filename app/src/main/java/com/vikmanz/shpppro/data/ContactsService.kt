@@ -35,7 +35,7 @@ class ContactsService {
      */
     fun createContact(
         photoUrl: String,
-        photoUri: Uri?,
+        photoUri: Uri,
         photoIndex: Int,
         name: String,
         career: String,
@@ -65,7 +65,7 @@ class ContactsService {
      */
     private fun generateRandomContact(): Contact = createContact(
             photoUrl = IMAGES[imgCounter % IMAGES.size],
-            photoUri = null,
+            photoUri = Uri.EMPTY,
             photoIndex = imgCounter,
             name = faker.name().fullName(),
             career = faker.company().name(),

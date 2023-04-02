@@ -1,5 +1,6 @@
 package com.vikmanz.shpppro.data.contactModel
 
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
@@ -22,7 +23,7 @@ class ContactsAdapter(private val contactActionListener: ContactActionListener) 
         fun bind(contact: Contact) {
             with(binding) {
                 // bind Photo
-                if (contact.contactPhotoUri == null) {
+                if (contact.contactPhotoUri == Uri.EMPTY) {
                     imageviewOnecontactAvatarImage.setContactPhoto(contact.contactPhotoUrl)
                 } else {
                     imageviewOnecontactAvatarImage.setContactPhotoFromUri(contact.contactPhotoUri)

@@ -84,7 +84,7 @@ class AddContactDialogFragment : DialogFragment() {
      */
     private fun requestDefaultImage() {
         viewModel.contactsService.incrementPhotoCounter()
-        if (viewModel.imgUri != null) viewModel.imgUri = null
+//        if (viewModel.imgUri == Uri.EMPTY) viewModel.imgUri = Uri.EMPTY
         updateAvatarImage()
     }
 
@@ -110,8 +110,8 @@ class AddContactDialogFragment : DialogFragment() {
      * Update image in UV.
      */
     private fun updateAvatarImage() {
-        if (viewModel.imgUri != null) {
-            _binding.imageviewAddcontactAvatar.setContactPhotoFromUri(viewModel.imgUri?:Uri.EMPTY)
+        if (viewModel.imgUri != Uri.EMPTY) {
+            _binding.imageviewAddcontactAvatar.setContactPhotoFromUri(viewModel.imgUri)
             log("img update - $viewModel.imgUri")
         } else {
             _binding.imageviewAddcontactAvatar.setContactPhoto(viewModel.getFakePhotoUrl())

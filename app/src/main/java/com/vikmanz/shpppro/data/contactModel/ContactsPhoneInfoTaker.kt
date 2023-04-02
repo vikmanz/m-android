@@ -47,7 +47,7 @@ class ContactsPhoneInfoTaker {
                     cursor.getColumnIndex(
                         ContactsContract.CommonDataKinds.Phone.PHOTO_URI
                     )
-                )
+                ) ?: ""
 
                 val phone: String = cursor.getString(
                     cursor.getColumnIndex(

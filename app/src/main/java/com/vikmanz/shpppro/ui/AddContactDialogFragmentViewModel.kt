@@ -14,7 +14,7 @@ class AddContactDialogFragmentViewModel(
     /**
      * Uri for image, which will be take from gallery.
      */
-    var imgUri: Uri? = null
+    var imgUri: Uri = Uri.EMPTY
 
     fun getFakePhotoUrl() = contactsService.getCurrentContactPhotoUrl()
 
