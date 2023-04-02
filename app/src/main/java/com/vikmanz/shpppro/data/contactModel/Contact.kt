@@ -9,7 +9,7 @@ import java.io.Serializable
 data class Contact(
     val contactId: Long,
     val contactPhotoUrl: String,
-    val contactPhotoUri: Uri?,
+    val contactPhotoUri: Uri,
     val contactPhotoIndex: Int,
     val contactName: String,
     val contactCareer: String,
