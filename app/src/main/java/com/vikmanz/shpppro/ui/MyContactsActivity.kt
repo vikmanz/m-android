@@ -43,7 +43,7 @@ class MyContactsActivity :
      * Create ViewModel for this activity.
      */
     private val viewModel: MyContactsViewModel by viewModels {
-        MyContactsViewModelFactory(contactsService)
+        MyViewModelFactory(contactsService)
     }
 
 

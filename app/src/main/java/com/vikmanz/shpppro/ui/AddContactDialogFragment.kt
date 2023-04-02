@@ -25,7 +25,7 @@ class AddContactDialogFragment : DialogFragment() {
      * Create ViewModel for this dialog.
      */
     private val viewModel: AddContactDialogFragmentViewModel by viewModels {
-        AddContactDialogFragmentViewModelFactory(App.contactsService)
+        MyViewModelFactory(App.contactsService)
     }
 
     /**
