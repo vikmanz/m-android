@@ -4,9 +4,6 @@ import androidx.lifecycle.*
 import com.vikmanz.shpppro.constants.Constants.FAKE_FIRST
 import com.vikmanz.shpppro.data.contactModel.Contact
 import com.vikmanz.shpppro.data.ContactsService
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.launch
 
 /**
  * ViewModel for My Contacts Activity.
@@ -18,22 +15,13 @@ class MyContactsViewModel(
     /**
      * Create fake contact list and Flow to take it from outside.
      */
-    private val _contactList = MutableStateFlow(emptyList<Contact>())
-    var contactList = _contactList.asStateFlow()
+    val contactList = _contactsService.contactList
 
     /**
      * Variables to control swap between fake contacts and phone contacts lists.
      */
     var phoneListActivated = !FAKE_FIRST
     var phoneListChangedToFake = FAKE_FIRST
-
-    init {
-        viewModelScope.launch {
-            _contactsService.contactList.collect { newContactList ->
-                _contactList.value = newContactList
-            }
-        }
-    }
 
     /**
      * Add new contact to list of contacts to concrete index.
