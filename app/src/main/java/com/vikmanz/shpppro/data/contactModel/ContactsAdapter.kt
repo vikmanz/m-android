@@ -30,7 +30,7 @@ class ContactsAdapter(private val contactActionListener: ContactActionListener) 
                 }
                 // bind Name/Career
                 textviewOnecontactName.text = contact.contactName
-                textviewOnecontactCareer.text = contact.contactCareer
+                textviewOnecontactCareer.text = contact.contactPhone
                 // bind delete listener
                 buttonOnecontactRemove.setOnClickListener {
                     // send contact to MyContactsActivity for delete it from ViewModel.
