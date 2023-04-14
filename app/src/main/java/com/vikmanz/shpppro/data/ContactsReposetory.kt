@@ -166,6 +166,10 @@ class ContactsReposetory {
         return _contactList.value[index]
     }
 
+    fun isContainsContact(contact: Contact): Boolean {
+        return _contactList.value.contains(contact)
+    }
+
     /**
      * Random images for fake data or adding new contacts.
      */

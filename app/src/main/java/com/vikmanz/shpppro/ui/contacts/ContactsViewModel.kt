@@ -1,4 +1,4 @@
-package com.vikmanz.shpppro.ui
+package com.vikmanz.shpppro.ui.contacts
 
 import androidx.lifecycle.*
 import com.vikmanz.shpppro.constants.Constants.FAKE_FIRST
@@ -8,7 +8,7 @@ import com.vikmanz.shpppro.data.ContactsReposetory
 /**
  * ViewModel for My Contacts Activity.
  */
-class MyContactsViewModel(
+class ContactsViewModel(
     private val _contactsReposetory: ContactsReposetory
 ) : ViewModel() {
 
@@ -49,6 +49,13 @@ class MyContactsViewModel(
      */
     fun getContact(index: Int) : Contact {
         return _contactsReposetory.getContact(index)
+    }
+
+    /**
+     * Get contact from list via index.
+     */
+    fun isContainsContact(contact: Contact) : Boolean {
+        return _contactsReposetory.isContainsContact(contact)
     }
 
     /**

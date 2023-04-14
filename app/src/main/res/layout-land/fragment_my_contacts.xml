@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.MyContactsActivity">
+    tools:context=".ui.contacts.ContactsFragment">
 
     <!-- Guide of center of elements. -->
     <androidx.constraintlayout.widget.Guideline
@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.20" />
+        app:layout_constraintGuide_percent="0.30" />
 
     <!-- Top half of screen. -->
     <View
@@ -80,8 +80,6 @@
         android:src="@drawable/baseline_highlight_off_24"
         android:visibility="invisible"
         tools:ignore="MissingConstraints,SpeakableTextPresentCheck,TouchTargetSizeCheck"
-        tools:layout_editor_absoluteX="359dp"
-        tools:layout_editor_absoluteY="16dp"
         tools:visibility="visible" />
 
     <androidx.appcompat.widget.AppCompatTextView

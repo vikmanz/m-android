@@ -1,4 +1,4 @@
-package com.vikmanz.shpppro.ui
+package com.vikmanz.shpppro.ui.auth
 
 import android.app.AlertDialog
 import android.content.Intent
@@ -14,6 +14,7 @@ import com.vikmanz.shpppro.constants.Constants.MIN_PASSWORD_LENGTH
 import com.vikmanz.shpppro.constants.Constants.VIEW_HELP_BUTTONS_ON_CREATE
 import com.vikmanz.shpppro.data.DataStoreManager
 import com.vikmanz.shpppro.databinding.ActivityAuthBinding
+import com.vikmanz.shpppro.ui.MainActivity
 import com.vikmanz.shpppro.utilits.BaseActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

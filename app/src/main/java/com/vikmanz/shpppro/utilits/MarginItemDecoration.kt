@@ -16,7 +16,7 @@ class MarginItemDecoration(private val spaceSize: Int) : RecyclerView.ItemDecora
         state: RecyclerView.State
     ) {
         with(outRect) {
-//            if (parent.getChildAdapterPosition(view) == 0) top = spaceSize    // this call bug when deleting first element in recycler view.
+         //  if (parent.getChildAdapterPosition(view) == 0) top = spaceSize    // this call bug when deleting first element in recycler view.
             left = spaceSize
             right = spaceSize
             bottom = spaceSize

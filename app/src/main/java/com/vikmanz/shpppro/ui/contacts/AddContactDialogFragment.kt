@@ -1,4 +1,4 @@
-package com.vikmanz.shpppro.ui
+package com.vikmanz.shpppro.ui.contacts
 
 import android.annotation.SuppressLint
 import android.app.Dialog
@@ -11,6 +11,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import com.vikmanz.shpppro.App
 import com.vikmanz.shpppro.databinding.AddContactActivityMyContactsBinding
+import com.vikmanz.shpppro.utilits.ViewModelFactory
 import com.vikmanz.shpppro.utilits.log
 import com.vikmanz.shpppro.utilits.setContactPhoto
 import com.vikmanz.shpppro.utilits.setContactPhotoFromUri
@@ -25,7 +26,7 @@ class AddContactDialogFragment : DialogFragment() {
      * Create ViewModel for this dialog.
      */
     private val viewModel: AddContactDialogFragmentViewModel by viewModels {
-        MyViewModelFactory(App.contactsReposetory)
+        ViewModelFactory(App.contactsReposetory)
     }
 
     /**

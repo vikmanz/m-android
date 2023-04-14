@@ -49,6 +49,7 @@
     <string name="main_view_my_contacts_button">VIEW MY CONTACTS</string>
     <!-- Activity -->
     <string name="main_activity_person_name_hardcoded">Viktor Hardcode</string>
+    <string name="main_activity_person_email_hardcoded" translatable="false">Viktor.Hardcode@gmail.com</string>
     <string name="main_activity_person_career_hardcoded">Motion designer</string>
     <string name="main_activity_person_address_hardcoded">49101, Dnipro, Homeadress str. 7</string>
 
