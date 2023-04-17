@@ -46,6 +46,7 @@ class ContactsFragment :
         ViewModelFactory(contactsService)
     }
 
+    private var undo: Snackbar? = null
 
     override fun setStartUI() {
         log("my contacts set UI!")
@@ -111,7 +112,7 @@ class ContactsFragment :
         val position = viewModel.getContactPosition(contact)
         val isFakeData = viewModel.phoneListChangedToFake
         viewModel.deleteContact(contact)
-        Snackbar
+        undo = Snackbar
             .make(binding.root, getString(R.string.my_contacts_remove_contact), SNACK_BAR_VIEW_TIME)
             .setAction(getString(R.string.my_contacts_remove_contact_undo)) {
                 if (!viewModel.isContainsContact(contact) && viewModel.phoneListChangedToFake == isFakeData) {
@@ -121,7 +122,7 @@ class ContactsFragment :
                     )
                 }
             }
-            .show()
+        undo?.show()
     }
 
     /**
@@ -181,6 +182,7 @@ class ContactsFragment :
      */
     private fun setContactsFromPhone() {
         viewModel.setPhoneContactList()
+        undo?.dismiss()
         updateUI()
     }
 
@@ -204,6 +206,7 @@ class ContactsFragment :
      */
     private fun changeToFakeContacts() {
         viewModel.getFakeContacts()
+        undo?.dismiss()
         updateUI()
     }
 
@@ -228,10 +231,14 @@ class ContactsFragment :
         }
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        undo = null
+    }
 
     companion object {
 
-       // private val TEXT_KEY = "CUSTOM_BTN_TEXT_1"
+        // private val TEXT_KEY = "CUSTOM_BTN_TEXT_1"
         @JvmStatic
         fun getInstance(): ContactsFragment {
             val args: Bundle = Bundle().apply {
