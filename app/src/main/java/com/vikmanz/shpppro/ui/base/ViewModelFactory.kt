@@ -6,8 +6,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.viewbinding.ViewBinding
 import com.example.fragmentsnavigatortest.screens.base.BaseScreen
 import com.vikmanz.shpppro.data.ContactsReposetory
-import com.vikmanz.shpppro.navigator.ARG_SCREEN
-import com.vikmanz.shpppro.navigator.MainNavigator
+//import com.vikmanz.shpppro.navigator.ARG_SCREEN
+//import com.vikmanz.shpppro.navigator.MainNavigator
 import com.vikmanz.shpppro.navigator.Navigator
 import com.vikmanz.shpppro.ui.contacts.ContactsViewModel
 import com.vikmanz.shpppro.ui.contacts.addcontact.AddContactDialogFragmentViewModel
