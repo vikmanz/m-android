@@ -1,22 +1,30 @@
 package com.vikmanz.shpppro.ui.profile
 
 import android.os.Bundle
+import androidx.fragment.app.viewModels
+import com.example.fragmentsnavigatortest.screens.edit.ProfileViewModel
+import com.vikmanz.shpppro.App
 import com.vikmanz.shpppro.R
 import com.vikmanz.shpppro.data.EmailParser
-import com.vikmanz.shpppro.databinding.FragmentMyProfileBinding
+import com.vikmanz.shpppro.databinding.FragmentProfileBinding
 import com.vikmanz.shpppro.ui.contacts.ContactsFragment
 import com.vikmanz.shpppro.ui.base.BaseFragment
+import com.vikmanz.shpppro.ui.base.ViewModelFactory
+import com.vikmanz.shpppro.ui.contacts.ContactsViewModel
 import com.vikmanz.shpppro.utilits.log
 
-class ProfileFragment :
-    BaseFragment<FragmentMyProfileBinding>(FragmentMyProfileBinding::inflate) {
-
-    // Data Store and Coroutine Scope variables.
-//    private lateinit var loginData: DataStoreManager
-//    private val coroutineScope: CoroutineScope = CoroutineScope(Job())
-
+class ProfileFragment : BaseFragment<FragmentProfileBinding, ProfileViewModel>(FragmentProfileBinding::inflate) {
 
     /**
+     * Create ViewModel for this activity.
+     */
+    override val viewModel: ProfileViewModel by viewModels()
+
+    override fun onReady(savedInstanceState: Bundle?) {
+        // nothing
+    }
+
+        /**
      * Main function, which used when activity was create.
      */
     override fun onCreate(savedInstanceState: Bundle?) {

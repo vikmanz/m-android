@@ -8,7 +8,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.fragmentsnavigatortest.screens.base.BaseScreen
-import com.example.fragmentsnavigatortest.screens.edit.ContactProfileFragment
+import com.vikmanz.shpppro.ui.contactprofile.ContactProfileFragment
 import com.vikmanz.shpppro.Event
 import com.vikmanz.shpppro.R
 import com.vikmanz.shpppro.ui.MainActivity

@@ -21,8 +21,8 @@ import com.vikmanz.shpppro.App
 import com.vikmanz.shpppro.R
 import com.vikmanz.shpppro.data.contactModel.*
 import com.vikmanz.shpppro.databinding.FragmentMyContactsBinding
-import com.vikmanz.shpppro.ui.base.ViewModelFactory
 import com.vikmanz.shpppro.ui.base.BaseFragment
+import com.vikmanz.shpppro.ui.base.ViewModelFactory
 import com.vikmanz.shpppro.ui.contacts.addcontact.AddContactDialogFragment
 import com.vikmanz.shpppro.utilits.MarginItemDecoration
 import com.vikmanz.shpppro.utilits.SwipeToDeleteCallback
@@ -32,9 +32,8 @@ import kotlinx.coroutines.*
 /**
  * Class represents MyContacts screen activity.
  */
-class ContactsFragment :
-    BaseFragment<FragmentMyContactsBinding>(FragmentMyContactsBinding::inflate) {
-// ,AddContactDialogFragment.ConfirmationListener
+class ContactsFragment() : BaseFragment<FragmentMyContactsBinding, ContactsViewModel>(FragmentMyContactsBinding::inflate) {
+
     /**
      * Create service for create new contacts. It sends to Add new contact Dialog Fragment.
      */
@@ -43,8 +42,12 @@ class ContactsFragment :
     /**
      * Create ViewModel for this activity.
      */
-    private val viewModel: ContactsViewModel by viewModels {
+    override val viewModel: ContactsViewModel by viewModels{
         ViewModelFactory(contactsService)
+    }
+
+    override fun onReady(savedInstanceState: Bundle?) {
+        // nothing
     }
 
     private var undo: Snackbar? = null
