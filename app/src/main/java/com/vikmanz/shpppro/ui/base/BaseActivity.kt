@@ -1,4 +1,4 @@
-package com.vikmanz.shpppro.utilits
+package com.vikmanz.shpppro.ui.base
 
 import android.os.Bundle
 import android.view.LayoutInflater

@@ -5,7 +5,7 @@ import com.vikmanz.shpppro.R
 import com.vikmanz.shpppro.constants.Constants.INTENT_EMAIL_ID
 import com.vikmanz.shpppro.databinding.ActivityMainBinding
 import com.vikmanz.shpppro.ui.profile.ProfileFragment
-import com.vikmanz.shpppro.utilits.BaseActivity
+import com.vikmanz.shpppro.ui.base.BaseActivity
 
 /**
  * Class represents user main profile screen activity.

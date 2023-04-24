@@ -15,7 +15,7 @@ import com.vikmanz.shpppro.constants.Constants.VIEW_HELP_BUTTONS_ON_CREATE
 import com.vikmanz.shpppro.data.DataStoreManager
 import com.vikmanz.shpppro.databinding.ActivityAuthBinding
 import com.vikmanz.shpppro.ui.MainActivity
-import com.vikmanz.shpppro.utilits.BaseActivity
+import com.vikmanz.shpppro.ui.base.BaseActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job

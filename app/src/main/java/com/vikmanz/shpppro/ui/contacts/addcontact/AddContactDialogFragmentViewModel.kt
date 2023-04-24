@@ -1,4 +1,4 @@
-package com.vikmanz.shpppro.ui.contacts
+package com.vikmanz.shpppro.ui.contacts.addcontact
 
 import android.net.Uri
 import androidx.lifecycle.*

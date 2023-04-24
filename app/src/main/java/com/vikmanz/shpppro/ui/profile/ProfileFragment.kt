@@ -5,7 +5,7 @@ import com.vikmanz.shpppro.R
 import com.vikmanz.shpppro.data.EmailParser
 import com.vikmanz.shpppro.databinding.FragmentMyProfileBinding
 import com.vikmanz.shpppro.ui.contacts.ContactsFragment
-import com.vikmanz.shpppro.utilits.BaseFragment
+import com.vikmanz.shpppro.ui.base.BaseFragment
 import com.vikmanz.shpppro.utilits.log
 
 class ProfileFragment :

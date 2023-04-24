@@ -1,4 +1,4 @@
-package com.vikmanz.shpppro.utilits
+package com.vikmanz.shpppro.ui.base
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,6 +11,11 @@ abstract class BaseFragment<VBinding : ViewBinding>(
     private val inflaterMethod: (LayoutInflater, ViewGroup?, Boolean) -> VBinding
 ) :
     Fragment() {
+
+    /**
+     * View-model that manages this fragment
+     */
+    abstract val viewModel: BaseViewModel
 
     private var _binding: VBinding? = null
     val binding get() = requireNotNull(_binding)

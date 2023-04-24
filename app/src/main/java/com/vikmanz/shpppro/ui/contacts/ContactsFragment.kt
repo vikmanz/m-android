@@ -21,8 +21,9 @@ import com.vikmanz.shpppro.App
 import com.vikmanz.shpppro.R
 import com.vikmanz.shpppro.data.contactModel.*
 import com.vikmanz.shpppro.databinding.FragmentMyContactsBinding
-import com.vikmanz.shpppro.utilits.ViewModelFactory
-import com.vikmanz.shpppro.utilits.BaseFragment
+import com.vikmanz.shpppro.ui.base.ViewModelFactory
+import com.vikmanz.shpppro.ui.base.BaseFragment
+import com.vikmanz.shpppro.ui.contacts.addcontact.AddContactDialogFragment
 import com.vikmanz.shpppro.utilits.MarginItemDecoration
 import com.vikmanz.shpppro.utilits.SwipeToDeleteCallback
 import com.vikmanz.shpppro.utilits.log

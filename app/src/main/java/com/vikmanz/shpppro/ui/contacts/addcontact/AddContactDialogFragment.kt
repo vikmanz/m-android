@@ -1,4 +1,4 @@
-package com.vikmanz.shpppro.ui.contacts
+package com.vikmanz.shpppro.ui.contacts.addcontact
 
 import android.annotation.SuppressLint
 import android.app.Dialog
@@ -11,7 +11,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import com.vikmanz.shpppro.App
 import com.vikmanz.shpppro.databinding.AddContactActivityMyContactsBinding
-import com.vikmanz.shpppro.utilits.ViewModelFactory
+import com.vikmanz.shpppro.ui.base.ViewModelFactory
 import com.vikmanz.shpppro.utilits.log
 import com.vikmanz.shpppro.utilits.setContactPhoto
 import com.vikmanz.shpppro.utilits.setContactPhotoFromUri
