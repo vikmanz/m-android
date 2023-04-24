@@ -2,11 +2,11 @@ package com.example.fragmentsnavigatortest.screens.edit
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.fragmentsnavigatortest.Event
-import com.example.fragmentsnavigatortest.R
-import com.example.fragmentsnavigatortest.navigator.Navigator
 import com.example.fragmentsnavigatortest.screens.base.BaseViewModel
 import com.example.fragmentsnavigatortest.screens.edit.ContactProfileFragment.Screen
+import com.vikmanz.shpppro.Event
+import com.vikmanz.shpppro.R
+import com.vikmanz.shpppro.navigator.Navigator
 
 class ProfileViewModel(
     private val navigator: Navigator,

@@ -7,6 +7,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.example.fragmentsnavigatortest.screens.base.BaseScreen
+import com.example.fragmentsnavigatortest.screens.edit.ContactProfileFragment
+import com.vikmanz.shpppro.Event
+import com.vikmanz.shpppro.R
+import com.vikmanz.shpppro.ui.MainActivity
 
 const val ARG_SCREEN = "SCREEN"
 const val IS_NAVIGATION = true
@@ -25,10 +30,13 @@ class MainNavigator(
     private val _result = MutableLiveData<Event<Any>>()
     val result: LiveData<Event<Any>> = _result
 
-    override fun launch(screen: BaseScreen) = whenActivityActive {
-        if (IS_NAVIGATION) launchFragment(it, screen)
-            else launchFragment(it, screen, true)
+    override fun launchMyProfile() = whenActivityActive {
+    if (IS_NAVIGATION) launchFragment(it, ContactProfileFragment.Screen(""))
+    else launchFragment(it, ContactProfileFragment.Screen(""), true)
+    }
 
+    override fun launchMeContacts() {
+        TODO("Not yet implemented")
     }
 
     override fun goBack(result: Any?) = whenActivityActive {
@@ -57,7 +65,7 @@ class MainNavigator(
         val transaction = activity.supportFragmentManager.beginTransaction()
         if (addToBackStack) transaction.addToBackStack(null)
         transaction
-            .replace(R.id.fragmentContainer, fragment)
+            .replace(R.id.fragment_container_main_container, fragment)
             .commit()
     }
 
@@ -70,11 +78,11 @@ class MainNavigator(
 //        transaction
 //            .replace(R.id.fragmentContainer, fragment)
 //            .commit()
-
-        val direction =
-            if (screen.name == "hello") HelloFragmentDirections.actionHelloFragmentToEditFragment(screen)
-            else EditFragmentDirections.actionEditFragmentToHelloFragment(screen)
-        activity.findNavController(R.id.nav_graph).navigate(direction)
+//
+//        val direction =
+//            if (screen.name == "hello") HelloFragmentDirections.actionHelloFragmentToEditFragment(screen)
+//            else EditFragmentDirections.actionEditFragmentToHelloFragment(screen)
+//        activity.findNavController(R.id.nav_graph).navigate(direction)
 
     }
 }

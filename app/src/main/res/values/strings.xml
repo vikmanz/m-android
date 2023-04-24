@@ -80,7 +80,7 @@
     <string name="contacts_add_contact_address">Address</string>
     <string name="contacts_add_contact_birthday">Date of birth</string>
     <string name="contacts_add_contact_save_button">SAVE</string>
-
+    <string name="empty_message" />
 
 
 </resources>

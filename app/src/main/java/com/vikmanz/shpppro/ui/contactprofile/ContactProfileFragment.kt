@@ -5,9 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.fragmentsnavigatortest.databinding.FragmentEditBinding
-import com.example.fragmentsnavigatortest.screens.base.BaseFragment
 import com.example.fragmentsnavigatortest.screens.base.BaseScreen
-import com.example.fragmentsnavigatortest.screens.base.screenViewModel
+import com.vikmanz.shpppro.ui.base.BaseFragment
 
 class ContactProfileFragment : BaseFragment() {
 
