@@ -5,7 +5,6 @@ import java.io.Serializable
 /**
  * Base class for defining screen arguments
  */
-interface BaseScreen {
+interface BaseArgs  : Serializable {
     val name: String
-    val initialValue: String
 }

@@ -2,14 +2,16 @@ package com.vikmanz.shpppro.ui.contacts.addcontact
 
 import android.net.Uri
 import androidx.lifecycle.*
+import com.vikmanz.shpppro.App
 import com.vikmanz.shpppro.data.ContactsReposetory
 
 /**
  * ViewModel for My Contacts Activity.
  */
 class AddContactDialogFragmentViewModel(
-    val contactsReposetory: ContactsReposetory
 ) : ViewModel() {
+
+    val contactsReposetory = App.contactsReposetory
 
     /**
      * Uri for image, which will be take from gallery.

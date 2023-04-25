@@ -1,17 +1,20 @@
 package com.vikmanz.shpppro.ui.contacts
 
-import androidx.lifecycle.*
-import com.example.fragmentsnavigatortest.screens.base.BaseViewModel
+import com.vikmanz.shpppro.ui.base.BaseViewModel
+import com.vikmanz.shpppro.App
 import com.vikmanz.shpppro.constants.Constants.FAKE_FIRST
 import com.vikmanz.shpppro.data.contactModel.Contact
-import com.vikmanz.shpppro.data.ContactsReposetory
+import com.vikmanz.shpppro.navigator.Navigator
 
 /**
  * ViewModel for My Contacts Activity.
  */
 class ContactsViewModel(
-    private val _contactsReposetory: ContactsReposetory
+    private val navigator: Navigator,
+    customArgs: ContactsFragment.CustomArgs
 ) : BaseViewModel() {
+
+    private val _contactsReposetory = App.contactsReposetory
 
     /**
      * Create fake contact list and Flow to take it from outside.

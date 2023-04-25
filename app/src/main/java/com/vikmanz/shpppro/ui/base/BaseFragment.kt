@@ -5,29 +5,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.LiveData
-import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
-import com.example.fragmentsnavigatortest.screens.base.BaseViewModel
-import com.vikmanz.shpppro.navigator.NavigationCommand
 
 abstract class BaseFragment<VBinding : ViewBinding, VM : BaseViewModel>(
     private val inflaterMethod: (LayoutInflater, ViewGroup?, Boolean) -> VBinding
 ) : Fragment() {
 
-    protected abstract val viewModel: VM
+    //    protected abstract val viewModel: VM
+    abstract val viewModel: VM
 
     private var _binding: VBinding? = null
     val binding get() = requireNotNull(_binding)
-
 
     abstract fun setStartUI()
     abstract fun setObservers()
     abstract fun setListeners()
     abstract fun onReady(savedInstanceState: Bundle?)
-
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,39 +34,45 @@ abstract class BaseFragment<VBinding : ViewBinding, VM : BaseViewModel>(
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        observeNavigation()
-        onReady(savedInstanceState)
-    }
-
-    private fun observeNavigation() {
-        viewModel.navigation.observeNonNull(viewLifecycleOwner) {
-            it.getContentIfNotHandled()?.let { navigationCommand ->
-                handleNavigation(navigationCommand)
-            }
-        }
-    }
-
-    private fun handleNavigation(navCommand: NavigationCommand) {
-        when (navCommand) {
-            is NavigationCommand.ToDirection -> findNavController().navigate(navCommand.directions)
-            is NavigationCommand.Back -> findNavController().navigateUp()
-        }
-    }
-
-        override fun onDestroyView() {
+    override fun onDestroyView() {
         _binding = null
         super.onDestroyView()
     }
 
 }
-
-
-fun <T> LiveData<T>.observeNonNull(owner: LifecycleOwner, observer: (t: T) -> Unit) {
-    this.observe(
-        owner
-    ) {
-        it?.let(observer)
-    }
-}
+//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+//        super.onViewCreated(view, savedInstanceState)
+//        observeNavigation()
+//        onReady(savedInstanceState)
+//    }
+//
+//    private fun observeNavigation() {
+//        viewModel.navigation.observeNonNull(viewLifecycleOwner) {
+//            it.getContentIfNotHandled()?.let { navigationCommand ->
+//                handleNavigation(navigationCommand)
+//            }
+//        }
+//    }
+//
+//    private fun handleNavigation(navCommand: NavigationCommand) {
+//        when (navCommand) {
+//            is NavigationCommand.ToDirection -> findNavController().navigate(navCommand.directions)
+//            is NavigationCommand.Back -> findNavController().navigateUp()
+//        }
+//    }
+//
+//        override fun onDestroyView() {
+//        _binding = null
+//        super.onDestroyView()
+//    }
+//
+//}
+//
+//
+//fun <T> LiveData<T>.observeNonNull(owner: LifecycleOwner, observer: (t: T) -> Unit) {
+//    this.observe(
+//        owner
+//    ) {
+//        it?.let(observer)
+//    }
+//}

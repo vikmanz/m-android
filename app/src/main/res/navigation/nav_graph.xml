@@ -13,8 +13,8 @@
 
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.vikmanz.shpppro.ui.profile.ProfileFragment"
+        android:name="com.vikmanz.shpppro.ui.profile.MyProfileFragment"
         android:label="fragment_my_profile"
-        tools:layout="@layout/fragment_profile"/>
+        tools:layout="@layout/fragment_my_profile"/>
 
 </navigation>

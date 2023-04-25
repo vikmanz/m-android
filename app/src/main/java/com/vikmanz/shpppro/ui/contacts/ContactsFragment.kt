@@ -17,12 +17,15 @@ import android.Manifest.permission.READ_CONTACTS
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.repeatOnLifecycle
+import com.example.fragmentsnavigatortest.screens.base.BaseArgs
 import com.vikmanz.shpppro.App
 import com.vikmanz.shpppro.R
+import com.vikmanz.shpppro.data.ContactsReposetory
 import com.vikmanz.shpppro.data.contactModel.*
 import com.vikmanz.shpppro.databinding.FragmentMyContactsBinding
 import com.vikmanz.shpppro.ui.base.BaseFragment
 import com.vikmanz.shpppro.ui.base.ViewModelFactory
+import com.vikmanz.shpppro.ui.base.screenViewModel
 import com.vikmanz.shpppro.ui.contacts.addcontact.AddContactDialogFragment
 import com.vikmanz.shpppro.utilits.MarginItemDecoration
 import com.vikmanz.shpppro.utilits.SwipeToDeleteCallback
@@ -34,18 +37,17 @@ import kotlinx.coroutines.*
  */
 class ContactsFragment() : BaseFragment<FragmentMyContactsBinding, ContactsViewModel>(FragmentMyContactsBinding::inflate) {
 
-    /**
-     * Create service for create new contacts. It sends to Add new contact Dialog Fragment.
-     */
-    private val contactsService = App.contactsReposetory
+    // this screen accepts a string value from the HelloFragment
+    class CustomArgs(
+    ) : BaseArgs {
+        override val name = "contacts"
+    }
 
     /**
      * Create ViewModel for this activity.
      */
-    override val viewModel: ContactsViewModel by viewModels{
-        ViewModelFactory(contactsService)
-    }
-
+//    override val viewModel: ContactsViewModel by viewModels{}
+    override val viewModel by screenViewModel()
     override fun onReady(savedInstanceState: Bundle?) {
         // nothing
     }

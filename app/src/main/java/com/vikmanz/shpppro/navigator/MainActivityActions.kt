@@ -1,6 +1,7 @@
 package com.vikmanz.shpppro.navigator
 
 import com.vikmanz.shpppro.ui.MainActivity
+import com.vikmanz.shpppro.utilits.log
 
 typealias MainActivityAction = (MainActivity) -> Unit
 
@@ -35,10 +36,14 @@ class MainActivityActions {
      * ```
      */
     operator fun invoke(action: MainActivityAction) {
+        log("start invoke")
         val activity = this.mainActivity
         if (activity == null) {
+            log("activity is null!")
             actions += action
+            log("action added")
         } else {
+            log("activity is not null -> do action!")
             action(activity)
         }
     }

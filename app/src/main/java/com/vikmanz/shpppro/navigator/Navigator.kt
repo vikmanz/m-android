@@ -1,10 +1,12 @@
 package com.vikmanz.shpppro.navigator
 
+import com.example.fragmentsnavigatortest.screens.base.BaseArgs
+
 interface Navigator {
 
-    fun launchMyProfile()
+    fun launchMyProfile(baseArgs: BaseArgs)
 
-    fun launchMeContacts()
+    fun launchMyContacts(baseArgs: BaseArgs)
 
     fun goBack(result: Any? = null)
 

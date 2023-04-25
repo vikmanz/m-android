@@ -1,24 +1,26 @@
 package com.vikmanz.shpppro.ui.profile
 
 import android.os.Bundle
-import androidx.fragment.app.viewModels
-import com.example.fragmentsnavigatortest.screens.edit.ProfileViewModel
-import com.vikmanz.shpppro.App
+import com.example.fragmentsnavigatortest.screens.base.BaseArgs
+import com.example.fragmentsnavigatortest.screens.edit.MyProfileViewModel
 import com.vikmanz.shpppro.R
 import com.vikmanz.shpppro.data.EmailParser
-import com.vikmanz.shpppro.databinding.FragmentProfileBinding
-import com.vikmanz.shpppro.ui.contacts.ContactsFragment
+import com.vikmanz.shpppro.databinding.FragmentMyProfileBinding
 import com.vikmanz.shpppro.ui.base.BaseFragment
-import com.vikmanz.shpppro.ui.base.ViewModelFactory
-import com.vikmanz.shpppro.ui.contacts.ContactsViewModel
+import com.vikmanz.shpppro.ui.base.screenViewModel
 import com.vikmanz.shpppro.utilits.log
 
-class ProfileFragment : BaseFragment<FragmentProfileBinding, ProfileViewModel>(FragmentProfileBinding::inflate) {
+class MyProfileFragment : BaseFragment<FragmentMyProfileBinding, MyProfileViewModel>(FragmentMyProfileBinding::inflate) {
+
+    class CustomArgs(userEmail: String) : BaseArgs {
+        override val name = "profile"
+        val emailToParse = userEmail
+    }
 
     /**
      * Create ViewModel for this activity.
      */
-    override val viewModel: ProfileViewModel by viewModels()
+    override val viewModel by screenViewModel()
 
     override fun onReady(savedInstanceState: Bundle?) {
         // nothing
@@ -31,13 +33,15 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, ProfileViewModel>(F
 
         // Init activity.
         super.onCreate(savedInstanceState)
-
+        log("create mpf")
         // Create Data Store.
         //loginData = DataStoreManager(requireContext())
     }
 
     override fun setStartUI() {
         // Parse email, set Name Surname text and img of avatar.
+
+        log("setted starter ui")
         setUserInformation()
         setAvatar()
     }
@@ -47,6 +51,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, ProfileViewModel>(F
     }
 
     override fun setListeners() {
+        log("set listener")
         // binding.textviewMainLogoutButton.setOnClickListener { logout() }
         binding.buttonMainViewMyContacts.setOnClickListener { goToMyContacts() }
     }
@@ -56,7 +61,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, ProfileViewModel>(F
      */
     private fun setUserInformation() {
        // val emailToParse =  if (arguments == null) null else requireArguments().getString(EMAIL_KEY)
-        val emailToParse = requireArguments().getString(EMAIL_KEY)
+        val emailToParse = viewModel.userEmail //requireArguments().getString(EMAIL_KEY)
         with(binding) {
             textviewMainPersonName.text =
                 if (emailToParse.isNullOrEmpty()) getString(R.string.main_activity_person_name_hardcoded)
@@ -96,14 +101,15 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, ProfileViewModel>(F
      * Start My contacts activity.
      */
     private fun goToMyContacts() {
-        log("create new my contacts fragment")
-        val fragment = ContactsFragment.getInstance()
-        parentFragmentManager
-            .beginTransaction()
-            .addToBackStack(null)
-            .add(R.id.fragment_container_main_container, fragment)
-            .commit()
-        log("started new my contacts fragment")
+    viewModel.onMyContactsPressed()
+        //        log("create new my contacts fragment")
+//        val fragment = ContactsFragment.getInstance()
+//        parentFragmentManager
+//            .beginTransaction()
+//            .addToBackStack(null)
+//            .add(R.id.fragment_container_main_container, fragment)
+//            .commit()
+//        log("started new my contacts fragment")
     }
 
     companion object {
@@ -111,12 +117,12 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, ProfileViewModel>(F
         private const val EMAIL_KEY = "USER_EMAIL"
 //        private const val COUNT_KEY = "COUNT_OF_FRAGMENTS"
 
-        fun getInstance(userEmail: String): ProfileFragment {
+        fun getInstance(userEmail: String): MyProfileFragment {
             val args: Bundle = Bundle().apply {
                 putString(EMAIL_KEY, userEmail)
 //                putInt(COUNT_KEY, count)
             }
-            val fragment = ProfileFragment()
+            val fragment = MyProfileFragment()
             fragment.arguments = args
             return fragment
         }
