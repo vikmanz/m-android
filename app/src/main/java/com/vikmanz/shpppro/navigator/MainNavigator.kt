@@ -7,7 +7,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.fragmentsnavigatortest.screens.base.BaseArgs
+import com.vikmanz.shpppro.ui.base.BaseArgs
 import com.vikmanz.shpppro.Event
 import com.vikmanz.shpppro.R
 import com.vikmanz.shpppro.ui.MainActivity

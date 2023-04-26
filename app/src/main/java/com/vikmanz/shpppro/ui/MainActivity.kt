@@ -41,6 +41,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
         log("if not null...")
         if (savedInstanceState == null) {
             log("create custom args")
+            //val args = MyProfileFragment.CustomArgs()
             val args = MyProfileFragment.CustomArgs(getString(R.string.main_activity_person_email_hardcoded))
             log("start root fragment")
             navigator.launchMyProfile(args)
@@ -63,7 +64,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        onBackPressed()
+        //onBackPressed()
         return true
     }
 

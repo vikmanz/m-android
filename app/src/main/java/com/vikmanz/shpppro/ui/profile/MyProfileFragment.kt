@@ -1,8 +1,7 @@
 package com.vikmanz.shpppro.ui.profile
 
 import android.os.Bundle
-import com.example.fragmentsnavigatortest.screens.base.BaseArgs
-import com.example.fragmentsnavigatortest.screens.edit.MyProfileViewModel
+import com.vikmanz.shpppro.ui.base.BaseArgs
 import com.vikmanz.shpppro.R
 import com.vikmanz.shpppro.data.EmailParser
 import com.vikmanz.shpppro.databinding.FragmentMyProfileBinding
@@ -12,9 +11,8 @@ import com.vikmanz.shpppro.utilits.log
 
 class MyProfileFragment : BaseFragment<FragmentMyProfileBinding, MyProfileViewModel>(FragmentMyProfileBinding::inflate) {
 
-    class CustomArgs(userEmail: String) : BaseArgs {
+    class CustomArgs(val email: String) : BaseArgs {
         override val name = "profile"
-        val emailToParse = userEmail
     }
 
     /**

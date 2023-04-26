@@ -1,6 +1,6 @@
 package com.vikmanz.shpppro.navigator
 
-import com.example.fragmentsnavigatortest.screens.base.BaseArgs
+import com.vikmanz.shpppro.ui.base.BaseArgs
 
 interface Navigator {
 

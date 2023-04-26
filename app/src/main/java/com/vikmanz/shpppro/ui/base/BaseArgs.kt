@@ -1,4 +1,4 @@
-package com.example.fragmentsnavigatortest.screens.base
+package com.vikmanz.shpppro.ui.base
 
 import java.io.Serializable
 
