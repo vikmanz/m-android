@@ -1,6 +1,5 @@
 package com.vikmanz.shpppro.ui.my_profile
 
-import android.os.Bundle
 import com.vikmanz.shpppro.ui.base.BaseArgs
 import com.vikmanz.shpppro.R
 import com.vikmanz.shpppro.data.EmailParser
@@ -9,36 +8,22 @@ import com.vikmanz.shpppro.ui.base.BaseFragment
 import com.vikmanz.shpppro.ui.base.screenViewModel
 import com.vikmanz.shpppro.utilits.log
 
-class MyProfileFragment : BaseFragment<FragmentMyProfileBinding, MyProfileViewModel>(FragmentMyProfileBinding::inflate) {
+class MyProfileFragment :
+    BaseFragment<FragmentMyProfileBinding, MyProfileViewModel>(FragmentMyProfileBinding::inflate) {
 
-    class CustomArgs(val email: String) : BaseArgs {
-        override val name = "profile"
-    }
+    class CustomArgs(
+        val email: String
+    ) : BaseArgs
 
     /**
      * Create ViewModel for this activity.
      */
     override val viewModel by screenViewModel()
 
-    override fun onReady(savedInstanceState: Bundle?) {
-        // nothing
-    }
+    //val loginData = DataStoreManager(requireContext()) //in onCreate
 
-        /**
-     * Main function, which used when activity was create.
-     */
-    override fun onCreate(savedInstanceState: Bundle?) {
-
-        // Init activity.
-        super.onCreate(savedInstanceState)
-        log("create mpf")
-        // Create Data Store.
-        //loginData = DataStoreManager(requireContext())
-    }
-
-    override fun setStartUI() {
+    override fun setStartUi() {
         // Parse email, set Name Surname text and img of avatar.
-
         log("setted starter ui")
         setUserInformation()
         setAvatar()
@@ -58,7 +43,7 @@ class MyProfileFragment : BaseFragment<FragmentMyProfileBinding, MyProfileViewMo
      * Get full email, parse it and set name/surname of user.
      */
     private fun setUserInformation() {
-       // val emailToParse =  if (arguments == null) null else requireArguments().getString(EMAIL_KEY)
+        // val emailToParse =  if (arguments == null) null else requireArguments().getString(EMAIL_KEY)
         val emailToParse = viewModel.userEmail //requireArguments().getString(EMAIL_KEY)
         with(binding) {
             textviewMainPersonName.text =
@@ -99,7 +84,7 @@ class MyProfileFragment : BaseFragment<FragmentMyProfileBinding, MyProfileViewMo
      * Start My contacts activity.
      */
     private fun goToMyContacts() {
-    viewModel.onMyContactsPressed()
+        viewModel.onMyContactsPressed()
         //        log("create new my contacts fragment")
 //        val fragment = ContactsFragment.getInstance()
 //        parentFragmentManager
@@ -109,21 +94,4 @@ class MyProfileFragment : BaseFragment<FragmentMyProfileBinding, MyProfileViewMo
 //            .commit()
 //        log("started new my contacts fragment")
     }
-
-    companion object {
-
-        private const val EMAIL_KEY = "USER_EMAIL"
-//        private const val COUNT_KEY = "COUNT_OF_FRAGMENTS"
-
-        fun getInstance(userEmail: String): MyProfileFragment {
-            val args: Bundle = Bundle().apply {
-                putString(EMAIL_KEY, userEmail)
-//                putInt(COUNT_KEY, count)
-            }
-            val fragment = MyProfileFragment()
-            fragment.arguments = args
-            return fragment
-        }
-    }
-
 }

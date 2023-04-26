@@ -36,6 +36,7 @@ class ContactsAdapter(private val contactActionListener: ContactActionListener) 
                     // send contact to MyContactsActivity for delete it from ViewModel.
                     contactActionListener.onDeleteUser(contact)
                 }
+                root.setOnClickListener { contactActionListener.onTapUser(contact.contactId) }
             }
         }
     }

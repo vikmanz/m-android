@@ -31,38 +31,51 @@ import kotlinx.coroutines.*
 /**
  * Class represents MyContacts screen activity.
  */
-class ContactsFragment() : BaseFragment<FragmentMyContactsBinding, ContactsViewModel>(FragmentMyContactsBinding::inflate) {
+class MyContactsFragment() : BaseFragment<FragmentMyContactsBinding, MyContactsViewModel>(FragmentMyContactsBinding::inflate) {
 
     // this screen accepts a string value from the HelloFragment
     class CustomArgs(
-    ) : BaseArgs {
-        override val name = "contacts"
-    }
+    ) : BaseArgs
 
     /**
      * Create ViewModel for this activity.
      */
 //    override val viewModel: ContactsViewModel by viewModels{}
     override val viewModel by screenViewModel()
-    override fun onReady(savedInstanceState: Bundle?) {
-        // nothing
-    }
 
     private var undo: Snackbar? = null
 
-    override fun setStartUI() {
+    /**
+     * Set listeners for buttons.
+     */
+    override fun setListeners() {
+        with(binding) {
+            buttonMycontactsBack.setOnClickListener { parentFragmentManager.popBackStack() }
+            buttonMycontactsDeclineAccess.setOnClickListener { buttonToRemoveAccess() }
+            buttonMycontactsAddContact.setOnClickListener { addNewContact() }
+            buttonMycontactsAddContactsFromPhonebook.setOnClickListener { requestReadContactsPermission() }
+            buttonMycontactsAddContactsFromFaker.setOnClickListener { changeToFakeContacts() }
+        }
+    }
+
+    /**
+     * Set observer for ViewModel. When ViewModel was changed, adapter of recycler view was take notify.
+     */
+    override fun setObservers() {
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.contactList.collect { contactList ->
+                    adapter.submitList(contactList)
+                }
+            }
+        }
+    }
+
+    override fun setStartUi() {
         log("my contacts set UI!")
         initRecyclerView()
         updateUI()
     }
-
-    /**
-     * Main function, which used when activity was create.
-     */
-//    @SuppressLint("NotifyDataSetChanged")
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//    }
 
     /**
      * Init recycler view and swipe to delete.
@@ -86,6 +99,10 @@ class ContactsFragment() : BaseFragment<FragmentMyContactsBinding, ContactsViewM
      */
     private val adapter: ContactsAdapter by lazy {
         ContactsAdapter(contactActionListener = object : ContactActionListener {
+            override fun onTapUser(contactID: Long) {
+                viewModel.onContactPressed(contactID)
+            }
+
             override fun onDeleteUser(contact: Contact) {
                 // take contact from ContactsAdapter and delete it from ViewModel.
                 deleteContactFromViewModelWithUndo(contact)
@@ -94,18 +111,6 @@ class ContactsFragment() : BaseFragment<FragmentMyContactsBinding, ContactsViewM
     }
 
 
-    /**
-     * Set observer for ViewModel. When ViewModel was changed, adapter of recycler view was take notify.
-     */
-    override fun setObservers() {
-        lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.contactList.collect { contactList ->
-                    adapter.submitList(contactList)
-                }
-            }
-        }
-    }
 
     /**
      * Delete contact from ViewModel and show Undo to restore it.
@@ -141,18 +146,7 @@ class ContactsFragment() : BaseFragment<FragmentMyContactsBinding, ContactsViewM
         itemTouchHelper.attachToRecyclerView(binding.recyclerviewMycontactsContactList)
     }
 
-    /**
-     * Set listeners for buttons.
-     */
-    override fun setListeners() {
-        with(binding) {
-            buttonMycontactsBack.setOnClickListener { parentFragmentManager.popBackStack() }
-            buttonMycontactsDeclineAccess.setOnClickListener { buttonToRemoveAccess() }
-            buttonMycontactsAddContact.setOnClickListener { addNewContact() }
-            buttonMycontactsAddContactsFromPhonebook.setOnClickListener { requestReadContactsPermission() }
-            buttonMycontactsAddContactsFromFaker.setOnClickListener { changeToFakeContacts() }
-        }
-    }
+
 
     /**
      * Show Add new contact Dialog Fragment.
@@ -236,20 +230,6 @@ class ContactsFragment() : BaseFragment<FragmentMyContactsBinding, ContactsViewM
     override fun onDestroyView() {
         super.onDestroyView()
         undo = null
-    }
-
-    companion object {
-
-        // private val TEXT_KEY = "CUSTOM_BTN_TEXT_1"
-        @JvmStatic
-        fun getInstance(): ContactsFragment {
-            val args: Bundle = Bundle().apply {
-                //putString(TEXT_KEY, btnText)
-            }
-            val fragment = ContactsFragment()
-            fragment.arguments = args
-            return fragment
-        }
     }
 
 }

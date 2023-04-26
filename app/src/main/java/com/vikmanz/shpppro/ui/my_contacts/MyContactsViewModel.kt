@@ -5,13 +5,14 @@ import com.vikmanz.shpppro.App
 import com.vikmanz.shpppro.constants.Constants.FAKE_FIRST
 import com.vikmanz.shpppro.data.contactModel.Contact
 import com.vikmanz.shpppro.navigator.Navigator
+import com.vikmanz.shpppro.ui.contact_profile.ContactProfileFragment
 
 /**
  * ViewModel for My Contacts Activity.
  */
-class ContactsViewModel(
+class MyContactsViewModel(
     private val navigator: Navigator,
-    customArgs: ContactsFragment.CustomArgs
+    customArgs: MyContactsFragment.CustomArgs
 ) : BaseViewModel() {
 
     private val _contactsReposetory = App.contactsReposetory
@@ -77,5 +78,9 @@ class ContactsViewModel(
         _contactsReposetory.setPhoneContacts()
         phoneListActivated = FAKE_FIRST
         phoneListChangedToFake = !FAKE_FIRST
+    }
+
+    fun onContactPressed(contactID: Long) {
+        navigator.launchMyContacts(ContactProfileFragment.CustomArgs(contactID))
     }
 }

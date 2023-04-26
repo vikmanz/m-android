@@ -63,7 +63,7 @@ class ContactsReposetory {
     /**
      * Create and return one contact with random fake information.
      */
-    private fun generateRandomContact(): Contact = createContact(
+    fun generateRandomContact(): Contact = createContact(
             photoUrl = IMAGES[imgCounter % IMAGES.size],
             photoUri = Uri.EMPTY,
             photoIndex = imgCounter,
@@ -165,6 +165,15 @@ class ContactsReposetory {
     fun getContact(index: Int) : Contact {
         return _contactList.value[index]
     }
+
+    /**
+     * Get contact from list via id.
+     */
+    fun findContact(id: Long) : Contact? {
+        _contactList.value.forEach { if(it.contactId == id) return it}
+        return null
+    }
+
 
     fun isContainsContact(contact: Contact): Boolean {
         return _contactList.value.contains(contact)

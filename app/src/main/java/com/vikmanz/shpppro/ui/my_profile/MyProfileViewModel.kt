@@ -2,7 +2,7 @@ package com.vikmanz.shpppro.ui.my_profile
 
 import com.vikmanz.shpppro.ui.base.BaseViewModel
 import com.vikmanz.shpppro.navigator.Navigator
-import com.vikmanz.shpppro.ui.my_contacts.ContactsFragment
+import com.vikmanz.shpppro.ui.my_contacts.MyContactsFragment
 
 class MyProfileViewModel(
     private val navigator: Navigator,
@@ -12,7 +12,7 @@ class MyProfileViewModel(
     val userEmail = customArgs.email
 
     fun onMyContactsPressed() {
-        navigator.launchMyContacts(ContactsFragment.CustomArgs())
+        navigator.launchMyContacts(MyContactsFragment.CustomArgs())
     }
 
 }
