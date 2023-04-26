@@ -1,9 +1,8 @@
-package com.vikmanz.shpppro.ui.profile
+package com.vikmanz.shpppro.ui.my_profile
 
 import com.vikmanz.shpppro.ui.base.BaseViewModel
 import com.vikmanz.shpppro.navigator.Navigator
-import com.vikmanz.shpppro.ui.contacts.ContactsFragment
-import com.vikmanz.shpppro.ui.profile.MyProfileFragment
+import com.vikmanz.shpppro.ui.my_contacts.ContactsFragment
 
 class MyProfileViewModel(
     private val navigator: Navigator,

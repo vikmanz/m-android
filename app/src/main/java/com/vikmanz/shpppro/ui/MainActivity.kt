@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.vikmanz.shpppro.R
 import com.vikmanz.shpppro.databinding.ActivityMainBinding
 import com.vikmanz.shpppro.navigator.MainNavigator
-import com.vikmanz.shpppro.ui.profile.MyProfileFragment
+import com.vikmanz.shpppro.ui.my_profile.MyProfileFragment
 import com.vikmanz.shpppro.ui.base.BaseActivity
 import com.vikmanz.shpppro.utilits.log
 

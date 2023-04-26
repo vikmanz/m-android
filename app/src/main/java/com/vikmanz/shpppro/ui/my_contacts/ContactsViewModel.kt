@@ -1,4 +1,4 @@
-package com.vikmanz.shpppro.ui.contacts
+package com.vikmanz.shpppro.ui.my_contacts
 
 import com.vikmanz.shpppro.ui.base.BaseViewModel
 import com.vikmanz.shpppro.App

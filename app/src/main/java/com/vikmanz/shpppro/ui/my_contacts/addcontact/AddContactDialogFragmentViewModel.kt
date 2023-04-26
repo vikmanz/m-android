@@ -1,9 +1,8 @@
-package com.vikmanz.shpppro.ui.contacts.addcontact
+package com.vikmanz.shpppro.ui.my_contacts.addcontact
 
 import android.net.Uri
 import androidx.lifecycle.*
 import com.vikmanz.shpppro.App
-import com.vikmanz.shpppro.data.ContactsReposetory
 
 /**
  * ViewModel for My Contacts Activity.

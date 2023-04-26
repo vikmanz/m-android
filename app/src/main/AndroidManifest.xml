@@ -31,7 +31,7 @@
         </activity>
 
         <activity
-            android:name=".ui.contacts.ContactsFragment"
+            android:name=".ui.my_contacts.ContactsFragment"
 
             android:exported="false" />
 

@@ -1,8 +1,6 @@
 package com.vikmanz.shpppro.ui.base
 
 import androidx.lifecycle.ViewModel
-import com.vikmanz.shpppro.navigator.Navigator
-import com.vikmanz.shpppro.ui.contacts.ContactsFragment
 
 /**
  * Base class for all view-models.

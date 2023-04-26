@@ -1,4 +1,4 @@
-package com.vikmanz.shpppro.ui.profile
+package com.vikmanz.shpppro.ui.my_profile
 
 import android.os.Bundle
 import com.vikmanz.shpppro.ui.base.BaseArgs

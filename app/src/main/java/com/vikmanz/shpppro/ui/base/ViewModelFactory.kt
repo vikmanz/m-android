@@ -9,7 +9,6 @@ import com.vikmanz.shpppro.navigator.ARG_SCREEN
 import com.vikmanz.shpppro.navigator.MainNavigator
 
 import com.vikmanz.shpppro.navigator.Navigator
-import com.vikmanz.shpppro.ui.profile.MyProfileFragment
 
 class ViewModelFactory<VBinding : ViewBinding, VM : BaseViewModel>(
     private val baseArgs: BaseArgs,

@@ -1,4 +1,4 @@
-package com.vikmanz.shpppro.ui.contacts.addcontact
+package com.vikmanz.shpppro.ui.my_contacts.addcontact
 
 import android.annotation.SuppressLint
 import android.app.Dialog
@@ -9,7 +9,6 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
-import com.vikmanz.shpppro.App
 import com.vikmanz.shpppro.databinding.AddContactActivityMyContactsBinding
 
 import com.vikmanz.shpppro.utilits.log

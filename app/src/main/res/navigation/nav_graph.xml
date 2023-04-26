@@ -7,13 +7,13 @@
 
     <fragment
         android:id="@+id/contactsFragment"
-        android:name="com.vikmanz.shpppro.ui.contacts.ContactsFragment"
+        android:name="com.vikmanz.shpppro.ui.my_contacts.ContactsFragment"
         android:label="fragment_my_contacts"
         tools:layout="@layout/fragment_my_contacts" />
 
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.vikmanz.shpppro.ui.profile.MyProfileFragment"
+        android:name="com.vikmanz.shpppro.ui.my_profile.MyProfileFragment"
         android:label="fragment_my_profile"
         tools:layout="@layout/fragment_my_profile"/>
 

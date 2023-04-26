@@ -1,4 +1,4 @@
-package com.vikmanz.shpppro.ui.contacts
+package com.vikmanz.shpppro.ui.my_contacts
 
 import android.content.Intent
 import android.net.Uri
@@ -22,7 +22,7 @@ import com.vikmanz.shpppro.data.contactModel.*
 import com.vikmanz.shpppro.databinding.FragmentMyContactsBinding
 import com.vikmanz.shpppro.ui.base.BaseFragment
 import com.vikmanz.shpppro.ui.base.screenViewModel
-import com.vikmanz.shpppro.ui.contacts.addcontact.AddContactDialogFragment
+import com.vikmanz.shpppro.ui.my_contacts.addcontact.AddContactDialogFragment
 import com.vikmanz.shpppro.utilits.MarginItemDecoration
 import com.vikmanz.shpppro.utilits.SwipeToDeleteCallback
 import com.vikmanz.shpppro.utilits.log

@@ -1,4 +1,4 @@
-package com.vikmanz.shpppro.ui.contacts
+package com.vikmanz.shpppro.ui.my_contacts
 
 import android.app.Dialog
 import android.content.Intent
