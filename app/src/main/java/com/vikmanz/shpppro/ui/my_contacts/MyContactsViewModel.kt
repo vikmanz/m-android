@@ -83,4 +83,8 @@ class MyContactsViewModel(
     fun onContactPressed(contactID: Long) {
         navigator.launchContactDetails(ContactDetailsFragment.CustomArgument("to_ContactsDetail_args", contactID))
     }
+
+    fun onButtonBackPressed() {
+        navigator.goBack()
+    }
 }

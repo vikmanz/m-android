@@ -40,7 +40,6 @@ class MyContactsFragment() : BaseFragment<FragmentMyContactsBinding, MyContactsV
     /**
      * Create ViewModel for this activity.
      */
-//    override val viewModel: ContactsViewModel by viewModels{}
     override val viewModel by screenViewModel()
 
     private var undo: Snackbar? = null
@@ -50,7 +49,7 @@ class MyContactsFragment() : BaseFragment<FragmentMyContactsBinding, MyContactsV
      */
     override fun setListeners() {
         with(binding) {
-            buttonMycontactsBack.setOnClickListener { parentFragmentManager.popBackStack() }
+            buttonMycontactsBack.setOnClickListener { viewModel.onButtonBackPressed() }
             buttonMycontactsDeclineAccess.setOnClickListener { buttonToRemoveAccess() }
             buttonMycontactsAddContact.setOnClickListener { addNewContact() }
             buttonMycontactsAddContactsFromPhonebook.setOnClickListener { requestReadContactsPermission() }

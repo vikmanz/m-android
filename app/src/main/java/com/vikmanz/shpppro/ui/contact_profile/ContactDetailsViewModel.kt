@@ -23,7 +23,8 @@ class ContactDetailsViewModel(
     val photoUrl = contact.contactPhotoUrl
     val photoUri = contact.contactPhotoUri
 
-    fun onBackPressed() {
+
+    fun onButtonBackPressed() {
         navigator.goBack()
     }
 }

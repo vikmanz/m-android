@@ -32,7 +32,7 @@ class ContactDetailsFragment :
     }
 
     override fun setListeners() {
-        binding.buttonContactBack.setOnClickListener { viewModel.onBackPressed() }
+        binding.buttonContactBack.setOnClickListener { viewModel.onButtonBackPressed() }
     }
     override fun setObservers() { }
 

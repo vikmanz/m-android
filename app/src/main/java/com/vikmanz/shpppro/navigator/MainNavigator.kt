@@ -45,8 +45,7 @@ class MainNavigator(
 
     override fun goBack(result: Any?) = whenActivityActive {
         if (USE_NAVIGATION_COMPONENT) {
-            @Suppress("DEPRECATION")
-            it.onBackPressed()
+           it.findNavController(R.id.fragment_container_main_container).popBackStack()
         } else {
             if (result != null) {
                 _result.value = Event(result)
