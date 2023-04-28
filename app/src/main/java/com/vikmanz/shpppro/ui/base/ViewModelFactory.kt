@@ -11,7 +11,6 @@ import com.vikmanz.shpppro.navigator.ARG_SCREEN
 import com.vikmanz.shpppro.navigator.MainNavigator
 
 import com.vikmanz.shpppro.navigator.Navigator
-import com.vikmanz.shpppro.ui.my_profile.MyProfileFragment
 
 class ViewModelFactory<VBinding : ViewBinding, VM : BaseViewModel>(
     private val baseArgument: BaseArgument,
@@ -36,7 +35,7 @@ inline fun <reified VM : BaseViewModel, reified VBinding : ViewBinding> BaseFrag
         val key = if (USE_NAVIGATION_COMPONENT) getString(R.string.safe_arg_id) else ARG_SCREEN
 
         val baseArgument: BaseArgument =
-               try {
+//               try {
                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                        requireArguments().getSerializable(
                            key,
@@ -45,9 +44,9 @@ inline fun <reified VM : BaseViewModel, reified VBinding : ViewBinding> BaseFrag
                    } else {
                        @Suppress("DEPRECATION") requireArguments().getSerializable(key) as BaseArgument
                    }
-               }
-               catch (e: NullPointerException) {
-                   MyProfileFragment.CustomArgument("a", "vik.manz@gmail.com")
-               }
+//               }
+//               catch (e: NullPointerException) {
+//                   MyProfileFragment.CustomArgument("a", "vik.manz@gmail.com")
+//               }
         ViewModelFactory(baseArgument, this)
     }

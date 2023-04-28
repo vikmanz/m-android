@@ -12,7 +12,7 @@ import com.vikmanz.shpppro.ui.contact_profile.ContactProfileFragment
  */
 class MyContactsViewModel(
     private val navigator: Navigator,
-    customArgs: MyContactsFragment.CustomArgument
+    private val customArgument: MyContactsFragment.CustomArgument
 ) : BaseViewModel() {
 
     private val _contactsReposetory = App.contactsReposetory

@@ -7,12 +7,12 @@ import com.vikmanz.shpppro.ui.base.BaseViewModel
 
 class ContactProfileViewModel(
     private val navigator: Navigator,
-    customArgs: ContactProfileFragment.CustomArgument
+    customArgument: ContactProfileFragment.CustomArgument
 ) : BaseViewModel() {
 
     private val contactsService = App.contactsReposetory
 
-    private val id = customArgs.contactID
+    private val id = customArgument.contactID
 
     private val contact: Contact = contactsService.findContact(id) ?: contactsService.generateRandomContact()
 
