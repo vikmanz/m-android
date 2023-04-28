@@ -5,6 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavArgs
+import androidx.navigation.NavArgsLazy
+import androidx.navigation.fragment.navArgs
 import androidx.viewbinding.ViewBinding
 
 abstract class BaseFragment<VBinding : ViewBinding, VM : BaseViewModel>(
@@ -12,7 +15,9 @@ abstract class BaseFragment<VBinding : ViewBinding, VM : BaseViewModel>(
 ) : Fragment() {
 
     //    protected abstract val viewModel: VM
+
     abstract val viewModel: VM
+
 
     private var _binding: VBinding? = null
     val binding get() = requireNotNull(_binding)

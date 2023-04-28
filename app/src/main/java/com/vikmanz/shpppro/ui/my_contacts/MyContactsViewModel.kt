@@ -12,7 +12,7 @@ import com.vikmanz.shpppro.ui.contact_profile.ContactProfileFragment
  */
 class MyContactsViewModel(
     private val navigator: Navigator,
-    customArgs: MyContactsFragment.CustomArgs
+    customArgs: MyContactsFragment.CustomArgument
 ) : BaseViewModel() {
 
     private val _contactsReposetory = App.contactsReposetory
@@ -81,6 +81,6 @@ class MyContactsViewModel(
     }
 
     fun onContactPressed(contactID: Long) {
-        navigator.launchMyContacts(ContactProfileFragment.CustomArgs(contactID))
+        navigator.launchMyContacts(ContactProfileFragment.CustomArgument("to_ContactsDetail_args", contactID))
     }
 }

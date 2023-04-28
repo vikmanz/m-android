@@ -1,6 +1,6 @@
 package com.vikmanz.shpppro.ui.my_profile
 
-import com.vikmanz.shpppro.ui.base.BaseArgs
+import com.vikmanz.shpppro.ui.base.BaseArgument
 import com.vikmanz.shpppro.R
 import com.vikmanz.shpppro.data.EmailParser
 import com.vikmanz.shpppro.databinding.FragmentMyProfileBinding
@@ -11,9 +11,9 @@ import com.vikmanz.shpppro.utilits.log
 class MyProfileFragment :
     BaseFragment<FragmentMyProfileBinding, MyProfileViewModel>(FragmentMyProfileBinding::inflate) {
 
-    class CustomArgs(
-        val email: String
-    ) : BaseArgs
+    class CustomArgument(
+        override val name: String, val email: String
+    ) : BaseArgument
 
     /**
      * Create ViewModel for this activity.
@@ -43,11 +43,10 @@ class MyProfileFragment :
      * Get full email, parse it and set name/surname of user.
      */
     private fun setUserInformation() {
-        // val emailToParse =  if (arguments == null) null else requireArguments().getString(EMAIL_KEY)
         val emailToParse = viewModel.userEmail //requireArguments().getString(EMAIL_KEY)
         with(binding) {
             textviewMainPersonName.text =
-                if (emailToParse.isNullOrEmpty()) getString(R.string.main_activity_person_name_hardcoded)
+                if (emailToParse.isEmpty()) getString(R.string.main_activity_person_name_hardcoded)
                 else EmailParser().getParsedNameSurname(emailToParse)
             textviewMainPersonCareer.text =
                 getString(R.string.main_activity_person_career_hardcoded)

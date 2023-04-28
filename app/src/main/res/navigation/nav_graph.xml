@@ -6,36 +6,42 @@
     app:startDestination="@id/profileFragment">
 
     <fragment
-        android:id="@+id/contactsFragment"
-        android:name="com.vikmanz.shpppro.ui.my_contacts.MyContactsFragment"
-        android:label="fragment_my_contacts"
-        tools:layout="@layout/fragment_my_contacts" >
-        <action
-            android:id="@+id/action_contactsFragment_to_contactFragment"
-            app:destination="@id/contactFragment" />
-        <action
-            android:id="@+id/action_contactsFragment_to_profileFragment2"
-            app:destination="@id/profileFragment" />
-    </fragment>
-
-    <fragment
         android:id="@+id/profileFragment"
         android:name="com.vikmanz.shpppro.ui.my_profile.MyProfileFragment"
         android:label="fragment_my_profile"
         tools:layout="@layout/fragment_my_profile">
         <action
-            android:id="@+id/action_profileFragment_to_contactsFragment"
+            android:id="@+id/action_profileFragment_to_myContactsFragment"
             app:destination="@id/contactsFragment" />
+        <argument
+            android:name="@string/safe_arg_id"
+            app:argType="com.vikmanz.shpppro.ui.base.BaseArgument"/>
     </fragment>
 
+
     <fragment
-        android:id="@+id/contactFragment"
+        android:id="@+id/contactsFragment"
+        android:name="com.vikmanz.shpppro.ui.my_contacts.MyContactsFragment"
+        android:label="fragment_my_contacts"
+        tools:layout="@layout/fragment_my_contacts">
+        <action
+            android:id="@+id/action_myContactsFragment_to_contactDetailsFragment"
+            app:destination="@id/contactDetailsFragment" />
+        <argument
+            android:name="@string/safe_arg_id"
+            app:argType="com.vikmanz.shpppro.ui.base.BaseArgument" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/contactDetailsFragment"
         android:name="com.vikmanz.shpppro.ui.my_profile.MyProfileFragment"
         android:label="fragment_my_profile"
         tools:layout="@layout/fragment_contact_profile">
-        <action
-            android:id="@+id/action_contactFragment_to_contactsFragment2"
-            app:destination="@id/contactsFragment" />
+        <argument
+            android:name="@string/safe_arg_id"
+            app:argType="com.vikmanz.shpppro.ui.base.BaseArgument" />
     </fragment>
+
 
 </navigation>

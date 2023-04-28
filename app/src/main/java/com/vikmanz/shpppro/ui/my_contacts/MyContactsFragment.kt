@@ -2,7 +2,6 @@ package com.vikmanz.shpppro.ui.my_contacts
 
 import android.content.Intent
 import android.net.Uri
-import android.os.Bundle
 import android.provider.Settings
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
@@ -16,7 +15,7 @@ import com.vikmanz.shpppro.constants.Constants.SNACK_BAR_VIEW_TIME
 import android.Manifest.permission.READ_CONTACTS
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.repeatOnLifecycle
-import com.vikmanz.shpppro.ui.base.BaseArgs
+import com.vikmanz.shpppro.ui.base.BaseArgument
 import com.vikmanz.shpppro.R
 import com.vikmanz.shpppro.data.contactModel.*
 import com.vikmanz.shpppro.databinding.FragmentMyContactsBinding
@@ -34,8 +33,9 @@ import kotlinx.coroutines.*
 class MyContactsFragment() : BaseFragment<FragmentMyContactsBinding, MyContactsViewModel>(FragmentMyContactsBinding::inflate) {
 
     // this screen accepts a string value from the HelloFragment
-    class CustomArgs(
-    ) : BaseArgs
+    class CustomArgument(
+        override val name: String,
+    ) : BaseArgument
 
     /**
      * Create ViewModel for this activity.
