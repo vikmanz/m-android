@@ -5,7 +5,7 @@ import com.vikmanz.shpppro.App
 import com.vikmanz.shpppro.constants.Constants.FAKE_FIRST
 import com.vikmanz.shpppro.data.contactModel.Contact
 import com.vikmanz.shpppro.navigator.Navigator
-import com.vikmanz.shpppro.ui.contact_profile.ContactProfileFragment
+import com.vikmanz.shpppro.ui.contact_profile.ContactDetailsFragment
 
 /**
  * ViewModel for My Contacts Activity.
@@ -81,6 +81,6 @@ class MyContactsViewModel(
     }
 
     fun onContactPressed(contactID: Long) {
-        navigator.launchMyContacts(ContactProfileFragment.CustomArgument("to_ContactsDetail_args", contactID))
+        navigator.launchContactDetails(ContactDetailsFragment.CustomArgument("to_ContactsDetail_args", contactID))
     }
 }

@@ -12,7 +12,8 @@
         tools:layout="@layout/fragment_my_profile">
         <action
             android:id="@+id/action_profileFragment_to_myContactsFragment"
-            app:destination="@id/contactsFragment" />
+            app:destination="@id/myContactsFragment"
+            />
         <argument
             android:name="@string/safe_arg_id"
             app:argType="com.vikmanz.shpppro.ui.base.BaseArgument"/>
@@ -20,7 +21,7 @@
 
 
     <fragment
-        android:id="@+id/contactsFragment"
+        android:id="@+id/myContactsFragment"
         android:name="com.vikmanz.shpppro.ui.my_contacts.MyContactsFragment"
         android:label="fragment_my_contacts"
         tools:layout="@layout/fragment_my_contacts">
@@ -37,7 +38,7 @@
         android:id="@+id/contactDetailsFragment"
         android:name="com.vikmanz.shpppro.ui.my_profile.MyProfileFragment"
         android:label="fragment_my_profile"
-        tools:layout="@layout/fragment_contact_profile">
+        tools:layout="@layout/fragment_contact_details">
         <argument
             android:name="@string/safe_arg_id"
             app:argType="com.vikmanz.shpppro.ui.base.BaseArgument" />

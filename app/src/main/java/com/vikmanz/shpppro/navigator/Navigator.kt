@@ -8,6 +8,8 @@ interface Navigator {
 
     fun launchMyContacts(argument: BaseArgument)
 
+    fun launchContactDetails(argument: BaseArgument)
+
     fun goBack(result: Any? = null)
 
     fun toast(messageRes: Int)

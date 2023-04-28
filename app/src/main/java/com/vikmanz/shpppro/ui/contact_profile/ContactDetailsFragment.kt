@@ -1,17 +1,16 @@
 package com.vikmanz.shpppro.ui.contact_profile
 
 import android.net.Uri
-import android.os.Bundle
-import com.vikmanz.shpppro.databinding.FragmentContactProfileBinding
+import com.vikmanz.shpppro.databinding.FragmentContactDetailsBinding
 import com.vikmanz.shpppro.ui.base.BaseArgument
 import com.vikmanz.shpppro.ui.base.BaseFragment
 import com.vikmanz.shpppro.ui.base.screenViewModel
 import com.vikmanz.shpppro.utilits.setContactPhoto
 import com.vikmanz.shpppro.utilits.setContactPhotoFromUri
 
-class ContactProfileFragment :
-    BaseFragment<FragmentContactProfileBinding, ContactProfileViewModel>(
-        FragmentContactProfileBinding::inflate
+class ContactDetailsFragment :
+    BaseFragment<FragmentContactDetailsBinding, ContactDetailsViewModel>(
+        FragmentContactDetailsBinding::inflate
     ) {
     class CustomArgument(
         override val name: String, val contactID: Long
@@ -19,10 +18,6 @@ class ContactProfileFragment :
 
     override val viewModel by screenViewModel()
 
-    override fun setListeners() {
-        binding.buttonContactBack.setOnClickListener { viewModel.onBackPressed() }
-    }
-    override fun setObservers() { }
     override fun setStartUi() {
         with(binding){
             textviewMainPersonName.text = viewModel.name
@@ -35,4 +30,10 @@ class ContactProfileFragment :
             }
         }
     }
+
+    override fun setListeners() {
+        binding.buttonContactBack.setOnClickListener { viewModel.onBackPressed() }
+    }
+    override fun setObservers() { }
+
 }

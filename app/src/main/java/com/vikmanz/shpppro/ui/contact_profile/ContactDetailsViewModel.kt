@@ -5,9 +5,9 @@ import com.vikmanz.shpppro.data.contactModel.Contact
 import com.vikmanz.shpppro.navigator.Navigator
 import com.vikmanz.shpppro.ui.base.BaseViewModel
 
-class ContactProfileViewModel(
+class ContactDetailsViewModel(
     private val navigator: Navigator,
-    customArgument: ContactProfileFragment.CustomArgument
+    customArgument: ContactDetailsFragment.CustomArgument
 ) : BaseViewModel() {
 
     private val contactsService = App.contactsReposetory

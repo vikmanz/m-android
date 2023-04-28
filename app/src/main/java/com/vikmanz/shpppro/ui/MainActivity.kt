@@ -3,6 +3,7 @@ package com.vikmanz.shpppro.ui
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
@@ -11,6 +12,7 @@ import com.vikmanz.shpppro.R
 import com.vikmanz.shpppro.constants.Preferences
 import com.vikmanz.shpppro.constants.Preferences.USE_NAVIGATION_COMPONENT
 import com.vikmanz.shpppro.databinding.ActivityMainBinding
+import com.vikmanz.shpppro.navigator.ARG_SCREEN
 import com.vikmanz.shpppro.navigator.MainNavigator
 import com.vikmanz.shpppro.ui.my_profile.MyProfileFragment
 import com.vikmanz.shpppro.ui.base.BaseActivity
@@ -39,16 +41,20 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
     private fun startRootFragment(savedInstanceState: Bundle?) {
         if (savedInstanceState == null) {
             val args =
-                MyProfileFragment.CustomArgument("MyContacts", getString(R.string.main_activity_person_email_hardcoded))
+                MyProfileFragment.CustomArgument("MyContacts", "createdIn.Mainactiviti@gmail.com")
             log("if not null...")
             if (USE_NAVIGATION_COMPONENT) {
             log("... start by nav_graph")
 
-                val finalHost = NavHostFragment.create(R.navigation.nav_graph)
+                val startArguments = bundleOf(getString(R.string.safe_arg_id) to args)
+                val navHostFragment = NavHostFragment.create(R.navigation.nav_graph, startArguments)
+
                 supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container_main_container, finalHost)
-                    .setPrimaryNavigationFragment(finalHost) // equivalent to app:defaultNavHost="true"
+                    .replace(R.id.fragment_container_main_container, navHostFragment)
+                    .setPrimaryNavigationFragment(navHostFragment) // equivalent to app:defaultNavHost="true"
                     .commit()
+
+
             } else {
                 log("... start by transactions")
                 navigator.launchStartFragment(args)

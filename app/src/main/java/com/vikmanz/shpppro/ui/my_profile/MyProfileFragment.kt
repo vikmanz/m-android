@@ -11,9 +11,16 @@ import com.vikmanz.shpppro.utilits.log
 class MyProfileFragment :
     BaseFragment<FragmentMyProfileBinding, MyProfileViewModel>(FragmentMyProfileBinding::inflate) {
 
+    class StartArgument() : BaseArgument{
+        override val name = "start"
+        val email = "start.vikmanz@gmail.com"
+    }
+
     class CustomArgument(
         override val name: String, val email: String
     ) : BaseArgument
+
+
 
     /**
      * Create ViewModel for this activity.

@@ -7,19 +7,15 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.navigation.NavDirections
 import androidx.navigation.findNavController
 import com.vikmanz.shpppro.ui.base.BaseArgument
 import com.vikmanz.shpppro.Event
 import com.vikmanz.shpppro.R
-import com.vikmanz.shpppro.constants.Constants
 import com.vikmanz.shpppro.constants.Preferences.USE_NAVIGATION_COMPONENT
 import com.vikmanz.shpppro.ui.MainActivity
-import com.vikmanz.shpppro.ui.my_profile.MyProfileFragment
-import com.vikmanz.shpppro.ui.my_profile.MyProfileFragmentDirections
 import com.vikmanz.shpppro.utilits.log
 
-const val ARG_SCREEN = "SCREEN"
+const val ARG_SCREEN = "argument"
 
 /**
  * Navigator implementation. It extends [AndroidViewModel] because 1) we need android dependency
@@ -35,29 +31,22 @@ class MainNavigator(
     private val _result = MutableLiveData<Event<Any>>()
     val result: LiveData<Event<Any>> = _result
 
-    override fun launchStartFragment(argument: BaseArgument) = whenActivityActive {
-        log("launch my profile enter point by transaction")
+    override fun launchStartFragment(argument: BaseArgument) = launchFragment(argument)
 
-//        val argument =
-//            MyProfileFragment.CustomArgument(getString(R.string.main_activity_person_email_hardcoded))
-        launchFragment(it, argument)
-    }
+    override fun launchMyContacts(argument: BaseArgument) = launchFragment(
+        argument,
+        direction = R.id.action_profileFragment_to_myContactsFragment
+    )
 
-
-    override fun launchMyContacts(argument: BaseArgument) = whenActivityActive {
-        if (USE_NAVIGATION_COMPONENT) {
-            val direction = MyProfileFragmentDirections.actionProfileFragmentToMyContactsFragment(argument)
-            log("launch my contacts in main navigator")
-            launchFragmentViaNavigation(it, direction, argument)
-        } else {
-            launchFragment(it, argument)
-        }
-    }
+    override fun launchContactDetails(argument: BaseArgument) = launchFragment(
+        argument,
+        direction = R.id.action_myContactsFragment_to_contactDetailsFragment
+    )
 
     override fun goBack(result: Any?) = whenActivityActive {
         if (USE_NAVIGATION_COMPONENT) {
-            //TODO need impl
-
+            @Suppress("DEPRECATION")
+            it.onBackPressed()
         } else {
             if (result != null) {
                 _result.value = Event(result)
@@ -65,7 +54,6 @@ class MainNavigator(
             @Suppress("DEPRECATION")
             it.onBackPressed()
         }
-
     }
 
     override fun onCleared() {
@@ -82,6 +70,18 @@ class MainNavigator(
     }
 
     private fun launchFragment(
+        argument: BaseArgument,
+        direction: Int = -1
+    ) = whenActivityActive {
+        if (USE_NAVIGATION_COMPONENT) {
+            //val direction = MyProfileFragmentDirections.actionProfileFragmentToMyContactsFragment(argument)
+            launchFragmentByNavigation(it, argument, direction)
+        } else {
+            launchFragmentByTransaction(it, argument)
+        }
+    }
+
+    private fun launchFragmentByTransaction(
         activity: MainActivity,
         argument: BaseArgument,
         @Suppress("SameParameterValue") addToBackStack: Boolean = true
@@ -98,12 +98,14 @@ class MainNavigator(
         log("commit")
     }
 
-    private fun launchFragmentViaNavigation(
+    private fun launchFragmentByNavigation(
         activity: MainActivity,
-        direction: NavDirections,
-        argument: BaseArgument
+        argument: BaseArgument,
+        direction: Int, //NavDirections
     ) {
-        activity.findNavController(R.id.fragment_container_main_container).navigate(direction)
+        val bundle = bundleOf(getString(R.string.safe_arg_id) to argument)
+        activity.findNavController(R.id.fragment_container_main_container)
+            .navigate(direction, bundle)
     }
 
 }
