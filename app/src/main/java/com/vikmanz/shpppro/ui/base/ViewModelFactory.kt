@@ -6,13 +6,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewbinding.ViewBinding
 import com.vikmanz.shpppro.R
-import com.vikmanz.shpppro.constants.Preferences.USE_NAVIGATION_COMPONENT
+import com.vikmanz.shpppro.constants.Features.USE_NAVIGATION_COMPONENT
 import com.vikmanz.shpppro.navigator.ARG_SCREEN
 import com.vikmanz.shpppro.navigator.MainNavigator
 
 import com.vikmanz.shpppro.navigator.Navigator
-import com.vikmanz.shpppro.ui.my_profile.MyProfileFragment
-import com.vikmanz.shpppro.utilits.log
 
 class ViewModelFactory<VBinding : ViewBinding, VM : BaseViewModel>(
     private val baseArgument: BaseArgument,

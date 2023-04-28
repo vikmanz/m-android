@@ -11,7 +11,7 @@ import androidx.navigation.findNavController
 import com.vikmanz.shpppro.ui.base.BaseArgument
 import com.vikmanz.shpppro.Event
 import com.vikmanz.shpppro.R
-import com.vikmanz.shpppro.constants.Preferences.USE_NAVIGATION_COMPONENT
+import com.vikmanz.shpppro.constants.Features.USE_NAVIGATION_COMPONENT
 import com.vikmanz.shpppro.ui.MainActivity
 import com.vikmanz.shpppro.utilits.log
 

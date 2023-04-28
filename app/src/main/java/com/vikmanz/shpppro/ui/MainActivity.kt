@@ -1,18 +1,13 @@
 package com.vikmanz.shpppro.ui
 
 import android.os.Bundle
-import android.view.View
 import androidx.activity.viewModels
 import androidx.core.os.bundleOf
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import com.vikmanz.shpppro.R
-import com.vikmanz.shpppro.constants.Preferences
-import com.vikmanz.shpppro.constants.Preferences.USE_NAVIGATION_COMPONENT
+import com.vikmanz.shpppro.constants.Features.USE_NAVIGATION_COMPONENT
 import com.vikmanz.shpppro.databinding.ActivityMainBinding
-import com.vikmanz.shpppro.navigator.ARG_SCREEN
 import com.vikmanz.shpppro.navigator.MainNavigator
 import com.vikmanz.shpppro.ui.my_profile.MyProfileFragment
 import com.vikmanz.shpppro.ui.base.BaseActivity
