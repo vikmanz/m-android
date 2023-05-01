@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="?attr/colorSecondary"
     android:focusableInTouchMode="true"
-    tools:context=".ui.auth.AuthActivity">
+    tools:context=".presentation.auth.AuthActivity">
 
     <!-- Guide of center of elements. -->
     <androidx.constraintlayout.widget.Guideline
@@ -95,6 +95,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textinputlayout_auth_password"
         style="@style/textInputLayout_LoginPassword"
+        app:helperTextTextColor="?attr/colorError"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="@string/auth_layout_password_hint"
@@ -102,7 +103,6 @@
         app:counterEnabled="true"
         app:counterMaxLength="@integer/count_auth_password_max_length"
         app:counterTextColor="?attr/colorTertiary"
-        app:helperTextEnabled="true"
         app:hintTextAppearance="@style/textInputLayout_hintSize"
         app:passwordToggleEnabled="true"
         app:passwordToggleTint="?attr/colorTertiary"

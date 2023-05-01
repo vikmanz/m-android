@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="?attr/colorSecondary"
     android:focusableInTouchMode="true"
-    tools:context=".ui.auth.AuthActivity">
+    tools:context=".presentation.auth.AuthActivity">
 
     <!-- Guide of center of elements. -->
     <androidx.constraintlayout.widget.Guideline

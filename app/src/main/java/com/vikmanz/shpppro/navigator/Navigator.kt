@@ -1,6 +1,6 @@
 package com.vikmanz.shpppro.navigator
 
-import com.vikmanz.shpppro.ui.base.BaseArgument
+import com.vikmanz.shpppro.presentation.base.BaseArgument
 
 interface Navigator {
 

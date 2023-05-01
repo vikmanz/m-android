@@ -1,0 +1,62 @@
+package com.vikmanz.shpppro.data.my_contacts_list_recycler_view
+
+import android.net.Uri
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
+import com.vikmanz.shpppro.data.contact_model.Contact
+import com.vikmanz.shpppro.data.my_contacts_list_recycler_view.listeners.ContactActionListener
+import com.vikmanz.shpppro.data.my_contacts_list_recycler_view.utils.DiffUtilContactsComparator
+import com.vikmanz.shpppro.databinding.OneContactItemBinding
+import com.vikmanz.shpppro.presentation.utils.extensions.setContactPhoto
+import com.vikmanz.shpppro.presentation.utils.extensions.setContactPhotoFromUri
+
+/**
+ * Adapter for Recycler view.
+ */
+class ContactsAdapter(private val contactActionListener: ContactActionListener) :
+    ListAdapter<Contact, ContactsAdapter.ContactHolder>(DiffUtilContactsComparator()) {
+
+    /**
+     * Create Holder for one element.
+     */
+    inner class ContactHolder(private val binding: OneContactItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(contact: Contact) {
+            with(binding) {
+                // bind Photo
+                if (contact.contactPhotoUri == Uri.EMPTY) {
+                    imageviewOnecontactAvatarImage.setContactPhoto(contact.contactPhotoUrl)
+                } else {
+                    imageviewOnecontactAvatarImage.setContactPhotoFromUri(contact.contactPhotoUri)
+                }
+                // bind Name/Career
+                textviewOnecontactName.text = contact.contactName
+                textviewOnecontactCareer.text = contact.contactPhone
+                // bind delete listener
+                buttonOnecontactRemove.setOnClickListener {
+                    // send contact to MyContactsActivity for delete it from ViewModel.
+                    contactActionListener.onDeleteUser(contact)
+                }
+                root.setOnClickListener { contactActionListener.onTapUser(contact.contactId) }
+            }
+        }
+    }
+
+    /**
+     * Create one element from holder and return it.
+     */
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContactHolder {
+        val binding =
+            OneContactItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ContactHolder(binding)
+    }
+
+    /**
+     * Bind info to one element holder.
+     */
+    override fun onBindViewHolder(holder: ContactHolder, position: Int) {
+        holder.bind(currentList[position])
+    }
+}

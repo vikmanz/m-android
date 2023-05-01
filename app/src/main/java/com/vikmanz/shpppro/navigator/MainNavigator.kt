@@ -8,12 +8,11 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.findNavController
-import com.vikmanz.shpppro.ui.base.BaseArgument
-import com.vikmanz.shpppro.Event
+import com.vikmanz.shpppro.presentation.base.BaseArgument
 import com.vikmanz.shpppro.R
 import com.vikmanz.shpppro.constants.Features.USE_NAVIGATION_COMPONENT
-import com.vikmanz.shpppro.ui.MainActivity
-import com.vikmanz.shpppro.utilits.log
+import com.vikmanz.shpppro.presentation.MainActivity
+import com.vikmanz.shpppro.utilits.extensions.log
 
 const val ARG_SCREEN = "argument"
 

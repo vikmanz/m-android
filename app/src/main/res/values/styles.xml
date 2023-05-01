@@ -34,7 +34,7 @@
         <item name="boxStrokeWidth">0dp</item>
         <item name="boxStrokeWidthFocused">0dp</item>
         <item name="android:textSize">@dimen/size_text_font_XL</item>
-        <item name="helperTextTextColor">?attr/colorError</item>
+<!--        <item name="helperTextTextColor">?attr/colorError</item>-->
         <item name="boxCollapsedPaddingTop">@dimen/email_password_boxCollapsedPaddingTop</item>
         <item name="expandedHintEnabled">false</item>
         <item name="android:textColorHint">?attr/colorOnTertiary</item>
