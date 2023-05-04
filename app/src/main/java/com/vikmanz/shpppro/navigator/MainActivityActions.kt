@@ -1,6 +1,6 @@
 package com.vikmanz.shpppro.navigator
 
-import com.vikmanz.shpppro.presentation.MainActivity
+import com.vikmanz.shpppro.presentation.main.MainActivity
 
 typealias MainActivityAction = (MainActivity) -> Unit
 

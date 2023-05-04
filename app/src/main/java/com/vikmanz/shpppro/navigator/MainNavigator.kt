@@ -10,8 +10,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.navigation.findNavController
 import com.vikmanz.shpppro.presentation.base.BaseArgument
 import com.vikmanz.shpppro.R
-import com.vikmanz.shpppro.constants.Features.USE_NAVIGATION_COMPONENT
-import com.vikmanz.shpppro.presentation.MainActivity
+import com.vikmanz.shpppro.constants.USE_NAVIGATION_COMPONENT
+import com.vikmanz.shpppro.presentation.main.MainActivity
 import com.vikmanz.shpppro.utilits.extensions.log
 
 const val ARG_SCREEN = "argument"

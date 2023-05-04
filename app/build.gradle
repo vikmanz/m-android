@@ -48,10 +48,10 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.8.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    implementation 'com.android.tools.build:aapt2:8.1.0-alpha02-9289358'
+    implementation 'com.android.tools.build:aapt2:8.2.0-alpha02-9603961'
     implementation 'com.google.android.ads:mediation-test-suite:3.0.0'
     implementation 'androidx.preference:preference:1.2.0'
-    implementation 'androidx.databinding:databinding-runtime:8.0.0'
+    implementation 'androidx.databinding:databinding-runtime:8.0.1'
     implementation "android.arch.lifecycle:extensions:1.1.1"
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
@@ -67,13 +67,13 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1"
 
     // Kotlin coroutines components
-    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.10'
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.20-RC2'
     api 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4'
     api "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4"
 
     // Recycler view contacts
     implementation 'com.github.javafaker:javafaker:1.0.2'
-    implementation 'com.github.bumptech.glide:glide:4.14.2'
+    implementation 'com.github.bumptech.glide:glide:4.15.1'
 
     // viewModel and stateFlow
     implementation 'androidx.activity:activity-ktx:1.7.1'

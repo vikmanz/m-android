@@ -162,9 +162,9 @@ class ContactsRepository {
     /**
      * Get contact from list via index.
      */
-    fun getContact(index: Int) : Contact {
-        return _contactList.value[index]
-    }
+    fun getContact(index: Int) : Contact? =
+        if (index > 0 && index < _contactList.value.size) _contactList.value[index]
+        else null
 
     /**
      * Get contact from list via id.

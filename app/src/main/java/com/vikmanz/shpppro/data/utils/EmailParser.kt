@@ -7,7 +7,15 @@ import java.util.*
  * Class which get full email and parse email to "Name Surname".
  *
  */
-class EmailParser {
+object EmailParser {
+
+    /**
+     * Constants.
+     */
+    private const val EMAIL_DOMAIN_SEPARATOR = '@'
+    private const val EMAIL_NAME_SEPARATOR = '.'
+    private const val EMAIL_NAME_JOIN_SPASE = " "
+    private const val REGEX_FROM_A_TO_Z = "[A-Z]"
 
     /**
      * Parse email to Name Surname.
@@ -46,16 +54,6 @@ class EmailParser {
         }
 
         return personName
-    }
-
-    /**
-     * Constants.
-     */
-    companion object {
-        private const val EMAIL_DOMAIN_SEPARATOR = '@'
-        private const val EMAIL_NAME_SEPARATOR = '.'
-        private const val EMAIL_NAME_JOIN_SPASE = " "
-        private const val REGEX_FROM_A_TO_Z = "[A-Z]"
     }
 
 }

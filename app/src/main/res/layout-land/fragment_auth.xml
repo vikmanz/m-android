@@ -14,33 +14,33 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.50" />
+        app:layout_constraintGuide_percent="0.62" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guide_auth_left_border"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.05" />
+        app:layout_constraintGuide_percent="0.20" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guide_auth_right_border"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.95" />
+        app:layout_constraintGuide_percent="0.80" />
 
     <!-- Hello text. -->
     <androidx.constraintlayout.helper.widget.Flow
         android:id="@+id/flow_auth_hello_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/offset_L"
+        android:layout_marginBottom="@dimen/offset_XS"
         android:orientation="vertical"
         app:constraint_referenced_ids="textview_auth_hello_text, textview_auth_hello_subtext"
         app:layout_constraintBottom_toTopOf="@+id/flow_auth_email_and_password"
         app:layout_constraintEnd_toStartOf="@+id/guide_auth_right_border"
-        app:layout_constraintStart_toStartOf="@+id/guide_auth_left_border"  />
+        app:layout_constraintStart_toStartOf="@+id/guide_auth_left_border" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textview_auth_hello_text"
@@ -69,7 +69,7 @@
         app:constraint_referenced_ids="textinputlayout_auth_email, textinputlayout_auth_password, flow_auth_remember_and_forgot"
         app:layout_constraintBottom_toTopOf="@+id/guideline_mycontacts_bg_center_of_screen"
         app:layout_constraintEnd_toStartOf="@+id/guide_auth_right_border"
-        app:layout_constraintStart_toStartOf="@+id/guide_auth_left_border"  />
+        app:layout_constraintStart_toStartOf="@+id/guide_auth_left_border" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textinputlayout_auth_email"
@@ -77,7 +77,6 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="@string/auth_layout_email_hint"
-        app:helperTextTextColor="?attr/colorError"
         app:hintTextAppearance="@style/textInputLayout_hintSize"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -96,14 +95,14 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textinputlayout_auth_password"
         style="@style/textInputLayout_LoginPassword"
-        app:helperTextTextColor="?attr/colorError"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="@string/auth_layout_password_hint"
-        android:paddingTop="@dimen/offset_S"
+        android:paddingTop="@dimen/offset_XS"
         app:counterEnabled="true"
         app:counterMaxLength="@integer/count_auth_password_max_length"
         app:counterTextColor="?attr/colorTertiary"
+        app:helperTextEnabled="true"
         app:hintTextAppearance="@style/textInputLayout_hintSize"
         app:passwordToggleEnabled="true"
         app:passwordToggleTint="?attr/colorTertiary"
@@ -149,25 +148,26 @@
         tools:ignore="MissingConstraints"
         tools:visibility="visible" />
 
+
     <!-- Google or Register flow. -->
     <androidx.constraintlayout.helper.widget.Flow
         android:id="@+id/flow_auth_google_or_register"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/offset_XL"
-        android:orientation="vertical"
+        android:layout_marginTop="@dimen/offset_XS"
+        android:orientation="horizontal"
         app:constraint_referenced_ids="button_auth_register_by_google, textview_auth_text_between_google_and_register, button_auth_register_by_email"
-        app:flow_verticalGap="@dimen/offset_S"
+        app:flow_horizontalGap="@dimen/offset_S"
         app:layout_constraintEnd_toStartOf="@+id/guide_auth_right_border"
         app:layout_constraintStart_toStartOf="@+id/guide_auth_left_border"
         app:layout_constraintTop_toBottomOf="@+id/guideline_mycontacts_bg_center_of_screen" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_auth_register_by_google"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="@dimen/size_button_height_M"
         android:background="@drawable/btn_google"
-        tools:ignore="MissingConstraints,TouchTargetSizeCheck,SpeakableTextPresentCheck,VisualLintButtonSize" />
+        tools:ignore="MissingConstraints,TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textview_auth_text_between_google_and_register"
@@ -180,12 +180,12 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_auth_register_by_email"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/size_button_height_XL"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/size_button_height_M"
         android:background="@drawable/btn_std_orange_outlined_bg_all_in_one_file"
         android:text="@string/auth_layout_register_button"
         android:textAppearance="@style/basicText_buttonsText"
-        tools:ignore="MissingConstraints,VisualLintButtonSize" />
+        tools:ignore="MissingConstraints,TouchTargetSizeCheck" />
 
     <!-- Terms warning. -->
     <androidx.appcompat.widget.AppCompatTextView
@@ -193,8 +193,8 @@
         style="@style/basicText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/offset_S"
-        android:text="@string/auth_layout_terms_warning"
+        android:paddingTop="@dimen/offset_S"
+        android:text="@string/auth_layout_terms_warning_landscape"
         android:textAlignment="center"
         android:textSize="@dimen/size_text_font_XXS"
         app:layout_constraintEnd_toStartOf="@+id/guide_auth_right_border"
@@ -207,7 +207,7 @@
         android:id="@+id/flow_auth_already_have_account_switch"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_marginTop="@dimen/offset_S"
+        android:layout_marginTop="@dimen/offset_XS"
         android:orientation="horizontal"
         app:constraint_referenced_ids="textview_auth_already_have_account_message, textview_auth_switch_screen_to_login_button"
         app:flow_horizontalGap="12dp"
@@ -238,7 +238,7 @@
         android:id="@+id/flow_auth_debug_buttons"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/offset_M"
+        android:layout_marginTop="@dimen/offset_XS"
         android:orientation="horizontal"
         android:visibility="gone"
         app:constraint_referenced_ids="button_auth_fill_login_and_pass, button_auth_clear_login_pass_fields, button_auth_change_language"

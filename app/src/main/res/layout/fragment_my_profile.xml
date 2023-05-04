@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.MainActivity">
+    tools:context=".presentation.main.MainActivity">
 
     <!-- Guide of center of elements. -->
     <androidx.constraintlayout.widget.Guideline
@@ -25,7 +25,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-        <!-- Settings and Logout flow. -->
+    <!-- Settings and Logout flow. -->
     <androidx.constraintlayout.helper.widget.Flow
         android:id="@+id/flow_main_top_buttons"
         android:layout_width="match_parent"
@@ -39,91 +39,83 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/textview_main_settings"
-            style="@style/basicText_bold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/main_settings"
-            android:textSize="@dimen/size_text_font_XL" />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textview_main_settings"
+        style="@style/basicText_bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/main_settings"
+        android:textSize="@dimen/size_text_font_XL" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/textview_main_logout_button"
-            style="@style/basicText_bold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/main_logout_button"
-            tools:ignore="MissingConstraints" />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textview_main_logout_button"
+        style="@style/basicText_bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/main_logout_button"
+        tools:ignore="MissingConstraints" />
 
-        <!-- Avatar and Person Info. -->
-        <!-- <!- Avatar flow. -->
-        <androidx.constraintlayout.helper.widget.Flow
-            android:id="@+id/flow_main_profile_info"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:constraint_referenced_ids="cardview_main_avatar_card, flow_main_person_text_info"
-            app:flow_verticalGap="@dimen/offset_M"
-            app:layout_constraintBottom_toBottomOf="@id/guideline_mycontacts_bg_center_of_screen"
-            app:layout_constraintTop_toBottomOf="@id/flow_main_top_buttons"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+    <!-- Avatar and Person Info. -->
+    <!-- <!- Avatar flow. -->
+    <androidx.constraintlayout.helper.widget.Flow
+        android:id="@+id/flow_main_profile_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:constraint_referenced_ids="imageview_main_avatar_image, flow_main_person_text_info"
+        app:flow_verticalGap="@dimen/offset_M"
+        app:layout_constraintBottom_toBottomOf="@id/guideline_mycontacts_bg_center_of_screen"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/flow_main_top_buttons" />
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardview_main_avatar_card"
-            android:layout_width="@dimen/avatar_radius"
-            android:layout_height="@dimen/avatar_radius"
-            app:cardBackgroundColor="?attr/colorPrimary"
-            app:cardCornerRadius="@dimen/avatar_corner_radius">
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imageview_main_avatar_image"
+        android:layout_width="@dimen/avatar_radius"
+        android:layout_height="@dimen/avatar_radius"
+        android:layout_marginTop="28dp"
+        android:layout_marginBottom="28dp"
+        android:src="@drawable/sample_avatar" />
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/imageview_main_avatar_image"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="fitXY"
-                app:srcCompat="@drawable/ic_person" />
+    <!-- <!- Person Info flow. -->
+    <androidx.constraintlayout.helper.widget.Flow
+        android:id="@+id/flow_main_person_text_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:constraint_referenced_ids="textview_main_person_name, textview_main_person_career, textview_main_person_address"
+        app:flow_verticalGap="@dimen/offset_S"
+        tools:ignore="MissingConstraints" />
 
-        </androidx.cardview.widget.CardView>
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textview_main_person_name"
+        style="@style/basicText_bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/main_person_name_sample"
+        android:textSize="@dimen/size_text_font_M"
+        tools:ignore="MissingConstraints,TextContrastCheck" />
 
-        <!-- <!- Person Info flow. -->
-        <androidx.constraintlayout.helper.widget.Flow
-            android:id="@+id/flow_main_person_text_info"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:constraint_referenced_ids="textview_main_person_name, textview_main_person_career, textview_main_person_address"
-            app:flow_verticalGap="@dimen/offset_S"
-            tools:ignore="MissingConstraints" />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textview_main_person_career"
+        style="@style/basicText_bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/main_person_career_sample"
+        android:textColor="?attr/colorOnTertiary"
+        android:textSize="@dimen/size_text_font_XS"
+        tools:ignore="MissingConstraints" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/textview_main_person_name"
-            style="@style/basicText_bold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/main_person_name_sample"
-            android:textSize="@dimen/size_text_font_M"
-            tools:ignore="MissingConstraints,TextContrastCheck" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/textview_main_person_career"
-            style="@style/basicText_bold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/main_person_career_sample"
-            android:textColor="?attr/colorOnTertiary"
-            android:textSize="@dimen/size_text_font_XS"
-            tools:ignore="MissingConstraints" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/textview_main_person_address"
-            style="@style/basicText_bold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingTop="@dimen/offset_S"
-            android:text="@string/main_person_address_sample"
-            android:textColor="?attr/colorOnTertiary"
-            android:textSize="@dimen/size_text_font_XS"
-            tools:ignore="MissingConstraints" />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textview_main_person_address"
+        style="@style/basicText_bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/offset_S"
+        android:text="@string/main_person_address_sample"
+        android:textColor="?attr/colorOnTertiary"
+        android:textSize="@dimen/size_text_font_XS"
+        tools:ignore="MissingConstraints" />
 
 
     <!-- Bottom half of screen. -->

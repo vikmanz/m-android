@@ -27,7 +27,9 @@
     <string name="auth_activity_already_have_account_message_login_screen">Не маєте облікового запису?</string>
     <string name="auth_activity_sign_in_button_login_screen">Зареєструйтесь</string>
     <string name="auth_activity_forgot_your_password">Забули пароль?</string>
-    <string name="auth_activity_password_warning_min8chars">Мінімум %1$d символів</string>                              <!-- Variable -->
+    
+    <string name="auth_activity_password_warning_min_chars">Мінімум %1$d символів</string>                              <!-- Variable -->
+    <string name="auth_activity_password_warning_max_chars">Максимум %1$d символів</string>                              <!-- Variable -->
     <string name="auth_activity_password_warning_one_upper_char">Мусить містити 1 символ у верхньому регістрі</string>
     <string name="auth_activity_password_warning_one_lower_char">Мусить містити 1 символ у нижньому регістрі</string>
     <string name="auth_activity_password_warning_one_special_char">Мусить містити 1 спеціальний символ (%1$s)</string>  <!-- Variable -->

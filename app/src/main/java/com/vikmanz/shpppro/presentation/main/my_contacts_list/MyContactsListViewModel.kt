@@ -1,11 +1,11 @@
-package com.vikmanz.shpppro.presentation.my_contacts_list
+package com.vikmanz.shpppro.presentation.main.my_contacts_list
 
 import androidx.lifecycle.MutableLiveData
 import com.vikmanz.shpppro.presentation.base.BaseViewModel
 import com.vikmanz.shpppro.App
 import com.vikmanz.shpppro.data.contact_model.Contact
 import com.vikmanz.shpppro.navigator.Navigator
-import com.vikmanz.shpppro.presentation.contact_details.ContactDetailsFragment
+import com.vikmanz.shpppro.presentation.main.contact_details.ContactDetailsFragment
 
 // FakeData (true) or PhoneData (false) view first on myContacts
 const val FAKE_LIST_FIRST = true
@@ -54,7 +54,7 @@ class MyContactsListViewModel(
     /**
      * Get contact from list via index.
      */
-    fun getContact(index: Int) : Contact {
+    fun getContact(index: Int) : Contact? {
         return _contactsReposetory.getContact(index)
     }
 
@@ -78,7 +78,8 @@ class MyContactsListViewModel(
     }
 
     fun onContactPressed(contactID: Long) {
-        navigator.launchContactDetails(ContactDetailsFragment.CustomArgument("to_ContactsDetail_args", contactID))
+        //navigator.launchContactDetails(ContactDetailsFragment.CustomArgument("to_ContactsDetail_args", contactID))
+        navigator.launchContactDetails(ContactDetailsFragment.CustomArgument(contactID))
     }
 
     fun onButtonBackPressed() {

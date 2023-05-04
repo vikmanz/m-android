@@ -28,7 +28,8 @@
     <string name="auth_activity_already_have_account_message_login_screen">Don’t have account?</string>
     <string name="auth_activity_forgot_your_password">Forgot your password?</string>
 
-    <string name="auth_activity_password_warning_min8chars">Minimum %1$d Characters Password</string>               <!-- Variable -->
+    <string name="auth_activity_password_warning_min_chars">Minimum %1$d Characters Password</string>               <!-- Variable -->
+    <string name="auth_activity_password_warning_max_chars">Maximum %1$d Characters Password</string>               <!-- Variable -->
     <string name="auth_activity_password_warning_one_upper_char">Must Contain 1 Upper-case Character</string>
     <string name="auth_activity_password_warning_one_lower_char">Must Contain 1 Lower-case Character</string>
     <string name="auth_activity_password_warning_one_special_char">Must Contain 1 Special Character (%1$s)</string> <!-- Variable -->

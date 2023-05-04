@@ -11,8 +11,6 @@ abstract class BaseFragment<VBinding : ViewBinding, VM : BaseViewModel>(
     private val inflaterMethod: (LayoutInflater, ViewGroup?, Boolean) -> VBinding
 ) : Fragment() {
 
-    //    protected abstract val viewModel: VM
-
     abstract val viewModel: VM
 
 
@@ -22,8 +20,6 @@ abstract class BaseFragment<VBinding : ViewBinding, VM : BaseViewModel>(
     abstract fun setListeners()
     abstract fun setObservers()
     abstract fun setStartUi()
-
-//    abstract fun onReady(savedInstanceState: Bundle?)
 
     override fun onCreateView(
         inflater: LayoutInflater,

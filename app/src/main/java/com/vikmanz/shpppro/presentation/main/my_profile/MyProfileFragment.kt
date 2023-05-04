@@ -1,18 +1,25 @@
-package com.vikmanz.shpppro.presentation.my_profile
+package com.vikmanz.shpppro.presentation.main.my_profile
 
+import android.content.Intent
+import androidx.lifecycle.lifecycleScope
 import com.vikmanz.shpppro.presentation.base.BaseArgument
 import com.vikmanz.shpppro.R
+import com.vikmanz.shpppro.data.DataStoreManager
 import com.vikmanz.shpppro.data.utils.EmailParser
 import com.vikmanz.shpppro.databinding.FragmentMyProfileBinding
+import com.vikmanz.shpppro.presentation.auth.AuthActivity
 import com.vikmanz.shpppro.presentation.base.BaseFragment
+import com.vikmanz.shpppro.presentation.utils.extensions.setContactPhotoFromResource
 import com.vikmanz.shpppro.presentation.utils.screenViewModel
 import com.vikmanz.shpppro.utilits.extensions.log
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class MyProfileFragment :
     BaseFragment<FragmentMyProfileBinding, MyProfileViewModel>(FragmentMyProfileBinding::inflate) {
 
     class CustomArgument(
-        override val name: String,
+//        override val name: String,
         val email: String
     ) : BaseArgument
 
@@ -23,8 +30,6 @@ class MyProfileFragment :
      */
     override val viewModel by screenViewModel()
 
-    //val loginData = DataStoreManager(requireContext()) //in onCreate
-
     override fun setStartUi() {
         // Parse email, set Name Surname text and img of avatar.
         log("setted starter ui")
@@ -32,13 +37,11 @@ class MyProfileFragment :
         setAvatar()
     }
 
-    override fun setObservers() {
-        return
-    }
+    override fun setObservers() { }
 
     override fun setListeners() {
         log("set listener")
-        // binding.textviewMainLogoutButton.setOnClickListener { logout() }
+        binding.textviewMainLogoutButton.setOnClickListener { logout() }
         binding.buttonMainViewMyContacts.setOnClickListener { goToMyContacts() }
     }
 
@@ -50,7 +53,7 @@ class MyProfileFragment :
         with(binding) {
             textviewMainPersonName.text =
                 if (emailToParse.isEmpty()) getString(R.string.main_activity_person_name_hardcoded)
-                else EmailParser().getParsedNameSurname(emailToParse)
+                else EmailParser.getParsedNameSurname(emailToParse)
             textviewMainPersonCareer.text =
                 getString(R.string.main_activity_person_career_hardcoded)
             textviewMainPersonAddress.text =
@@ -61,26 +64,30 @@ class MyProfileFragment :
     /**
      * Set avatar image.
      */
-    private fun setAvatar() =
-        binding.imageviewMainAvatarImage.setImageResource(R.drawable.sample_avatar)
+    private fun setAvatar() = binding.imageviewMainAvatarImage.setContactPhotoFromResource(R.drawable.sample_avatar)
 
     /**
      * Logout with clear information about user from Data Store.
      */
-//    private fun logout() {
-//        coroutineScope.launch(Dispatchers.IO) { loginData.clearUser() }
-//        finishActivity()
-//    }
+    private fun logout() {
+        val loginData = DataStoreManager(requireContext()) //in onCreate
+        with(requireActivity()){
+            lifecycleScope.launch(Dispatchers.IO) {
+                loginData.clearUser()
+            }
+            finishActivity()
+        }
+    }
 
     /**
      * Finish that activity and start SignIn/SignUp activity.
      */
-//    private fun finishActivity() {
-//        val intentObject = Intent(this, AuthActivity::class.java)
-//        finish()
-//        startActivity(intentObject)
-//        overridePendingTransition(R.anim.zoom_out_inner, R.anim.zoom_out_outter)
-//    }
+    private fun finishActivity() {
+        val activity = requireActivity()
+        val intentObject = Intent(activity, AuthActivity::class.java)
+        activity.finish()
+        startActivity(intentObject)
+    }
 
     /**
      * Start My contacts activity.

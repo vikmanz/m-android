@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewbinding.ViewBinding
 import com.vikmanz.shpppro.R
-import com.vikmanz.shpppro.constants.Features.USE_NAVIGATION_COMPONENT
+import com.vikmanz.shpppro.constants.USE_NAVIGATION_COMPONENT
 import com.vikmanz.shpppro.navigator.ARG_SCREEN
 import com.vikmanz.shpppro.navigator.MainNavigator
 
@@ -14,9 +14,10 @@ import com.vikmanz.shpppro.navigator.Navigator
 import com.vikmanz.shpppro.presentation.base.*
 
 class ViewModelFactory<VBinding : ViewBinding, VM : BaseViewModel>(
-    private val baseArgument: BaseArgument,
+    private val baseArgument: BaseArgument?,
     private val fragment: BaseFragment<VBinding, VM>
 ) : ViewModelProvider.Factory {
+
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         val hostActivity = fragment.requireActivity()
         val application = hostActivity.application
@@ -24,11 +25,13 @@ class ViewModelFactory<VBinding : ViewBinding, VM : BaseViewModel>(
             ViewModelProvider(hostActivity, ViewModelProvider.AndroidViewModelFactory(application))
         val navigator = navigatorProvider[MainNavigator::class.java]
 
+        val arguments = if (baseArgument == null) null else baseArgument::class.java
         val constructor =
-            modelClass.getDeclaredConstructor(Navigator::class.java, baseArgument::class.java)
+            modelClass.getDeclaredConstructor(Navigator::class.java, arguments)
         return constructor.newInstance(navigator, baseArgument)
     }
 }
+
 
 inline fun <reified VM : BaseViewModel, reified VBinding : ViewBinding> BaseFragment<VBinding, VM>.screenViewModel() =
     viewModels<VM> {

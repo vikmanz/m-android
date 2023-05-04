@@ -14,7 +14,7 @@ import com.vikmanz.shpppro.constants.Constants.MIN_PASSWORD_LENGTH
 import com.vikmanz.shpppro.constants.Constants.VIEW_HELP_BUTTONS_ON_CREATE
 import com.vikmanz.shpppro.data.DataStoreManager
 import com.vikmanz.shpppro.databinding.ActivityAuthBinding
-import com.vikmanz.shpppro.presentation.MainActivity
+import com.vikmanz.shpppro.presentation.main.MainActivity
 import com.vikmanz.shpppro.presentation.base.BaseActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -35,6 +35,9 @@ class AuthActivity : BaseActivity<ActivityAuthBinding>(ActivityAuthBinding::infl
 
     // Save state of helper buttons. True - visible, False - gone.
     private var helperButtonsVisible = false
+
+    private var emailAlreadyFocused = false
+    private var passwordAlreadyFocused = false
 
     /**
      * Main function, which used when activity was create.
@@ -128,10 +131,14 @@ class AuthActivity : BaseActivity<ActivityAuthBinding>(ActivityAuthBinding::infl
     private fun setLoginPasswordFocusListeners() {
         with(binding) {
             textinputAuthEmail.setOnFocusChangeListener { _, focused ->
-                if (!focused) textinputlayoutAuthEmail.helperText = validEmail()
+                if (focused && !emailAlreadyFocused) emailAlreadyFocused = true
+                if (!focused && emailAlreadyFocused) textinputlayoutAuthEmail.helperText =
+                    validEmail()
             }
             textinputAuthPassword.setOnFocusChangeListener { _, focused ->
-                if (!focused) textinputlayoutAuthPassword.helperText = validPassword()
+                if (focused && !passwordAlreadyFocused) passwordAlreadyFocused = true
+                if (!focused && passwordAlreadyFocused) textinputlayoutAuthPassword.helperText =
+                    validPassword()
             }
         }
     }
@@ -174,11 +181,21 @@ class AuthActivity : BaseActivity<ActivityAuthBinding>(ActivityAuthBinding::infl
     private fun checkPasswordErrors(passwordText: String): String {
         // Do all checks.
         var result = ""
-        if (passwordText.length < MIN_PASSWORD_LENGTH) {               // Minimum 8 chars.
+        if (passwordText.length < MIN_PASSWORD_LENGTH) {                           // Minimum # chars.
             result += getString(
-                R.string.auth_activity_password_warning_min8chars,
+                R.string.auth_activity_password_warning_min_chars,
                 MIN_PASSWORD_LENGTH
             )
+        }
+
+        val maxPasswordLength =
+            resources.getInteger(R.integer.count_auth_password_max_length)  // Minimum # chars.
+        if (passwordText.length > maxPasswordLength) {
+            result =
+                addErrorsDescriptionSeparator(result) + getString(
+                    R.string.auth_activity_password_warning_max_chars,
+                    maxPasswordLength
+                )
         }
         if (!passwordText.matches(REGEX_ONE_UPPER_CHAR.toRegex())) {   // Minimum 1 UpperCase char.
             result =
@@ -356,7 +373,10 @@ class AuthActivity : BaseActivity<ActivityAuthBinding>(ActivityAuthBinding::infl
      *  De-focus views, when user do click on background.
      */
     private fun backgroundFocusHandler() = with(binding) {
-        root.setOnClickListener { textinputAuthEmail.clearFocus() }
+        root.setOnClickListener {
+            textinputAuthEmail.clearFocus()
+            textinputAuthPassword.clearFocus()
+        }
     }
 
     /**

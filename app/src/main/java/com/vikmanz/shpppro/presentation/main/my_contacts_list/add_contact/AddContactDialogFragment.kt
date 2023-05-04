@@ -1,4 +1,4 @@
-package com.vikmanz.shpppro.presentation.my_contacts_list.add_contact
+package com.vikmanz.shpppro.presentation.main.my_contacts_list.add_contact
 
 import android.annotation.SuppressLint
 import android.app.Dialog
@@ -33,7 +33,7 @@ class AddContactDialogFragment : DialogFragment() {
     /**
      * Binding of that Dialog Fragment.
      */
-    private lateinit var _binding: AddContactActivityMyContactsBinding
+    private var _binding: AddContactActivityMyContactsBinding? = null
 
 
     /**
@@ -50,7 +50,7 @@ class AddContactDialogFragment : DialogFragment() {
             // create dialog
             val builder = AlertDialog.Builder(it)
 
-            with(_binding) {
+            _binding?.apply {
                 // set avatar image
                 updateAvatarImage()
 
@@ -76,7 +76,7 @@ class AddContactDialogFragment : DialogFragment() {
             }
 
             // Set view and create dialog
-            builder.setView(_binding.root).create()
+            builder.setView(_binding?.root).create()
 
         } ?: throw IllegalStateException("Activity cannot be null")
     }
@@ -113,14 +113,18 @@ class AddContactDialogFragment : DialogFragment() {
      */
     private fun updateAvatarImage() {
         if (viewModel.imgUri != Uri.EMPTY) {
-            _binding.imageviewAddcontactAvatar.setContactPhotoFromUri(viewModel.imgUri)
+            _binding?.imageviewAddcontactAvatar?.setContactPhotoFromUri(viewModel.imgUri)
             log("img update - $viewModel.imgUri")
         } else {
-            _binding.imageviewAddcontactAvatar.setContactPhoto(viewModel.getFakePhotoUrl())
+            _binding?.imageviewAddcontactAvatar?.setContactPhoto(viewModel.getFakePhotoUrl())
             log("img update -default")
         }
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 
     /**
      * Constants.

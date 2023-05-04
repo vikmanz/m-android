@@ -1,4 +1,4 @@
-package com.vikmanz.shpppro.presentation.contact_details
+package com.vikmanz.shpppro.presentation.main.contact_details
 
 import com.vikmanz.shpppro.App
 import com.vikmanz.shpppro.data.contact_model.Contact

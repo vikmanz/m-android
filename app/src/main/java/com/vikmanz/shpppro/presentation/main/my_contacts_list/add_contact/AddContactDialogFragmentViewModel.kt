@@ -1,4 +1,4 @@
-package com.vikmanz.shpppro.presentation.my_contacts_list.add_contact
+package com.vikmanz.shpppro.presentation.main.my_contacts_list.add_contact
 
 import android.net.Uri
 import androidx.lifecycle.*

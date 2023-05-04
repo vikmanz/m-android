@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.my_contacts_list.MyContactsListFragment">
+    tools:context=".presentation.main.my_contacts_list.MyContactsListFragment">
 
     <!-- Guide of center of elements. -->
     <androidx.constraintlayout.widget.Guideline

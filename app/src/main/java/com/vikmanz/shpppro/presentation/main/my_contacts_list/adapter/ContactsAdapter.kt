@@ -1,4 +1,4 @@
-package com.vikmanz.shpppro.data.my_contacts_list_recycler_view
+package com.vikmanz.shpppro.presentation.main.my_contacts_list.adapter
 
 import android.net.Uri
 import android.view.LayoutInflater

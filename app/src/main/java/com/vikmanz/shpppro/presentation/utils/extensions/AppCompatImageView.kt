@@ -39,3 +39,9 @@ fun AppCompatImageView.setContactPhotoFromUri(uri: Uri) {
         .into(this)
 }
 
+fun AppCompatImageView.setContactPhotoFromResource(resource: Int) {
+    Glide.with(context)
+        .load(resource)
+        .apply(GLIDE_OPTIONS)
+        .into(this)
+}

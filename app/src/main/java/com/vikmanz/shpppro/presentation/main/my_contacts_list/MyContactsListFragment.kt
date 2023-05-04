@@ -1,4 +1,4 @@
-package com.vikmanz.shpppro.presentation.my_contacts_list
+package com.vikmanz.shpppro.presentation.main.my_contacts_list
 
 import android.content.Intent
 import android.net.Uri
@@ -19,12 +19,12 @@ import com.vikmanz.shpppro.presentation.base.BaseArgument
 import com.vikmanz.shpppro.R
 import com.vikmanz.shpppro.data.contact_model.*
 import com.vikmanz.shpppro.data.my_contacts_list_recycler_view.listeners.ContactActionListener
-import com.vikmanz.shpppro.data.my_contacts_list_recycler_view.ContactsAdapter
 import com.vikmanz.shpppro.databinding.FragmentMyContactsListBinding
 import com.vikmanz.shpppro.presentation.base.BaseFragment
+import com.vikmanz.shpppro.presentation.main.my_contacts_list.adapter.ContactsAdapter
 import com.vikmanz.shpppro.presentation.utils.screenViewModel
-import com.vikmanz.shpppro.presentation.my_contacts_list.add_contact.AddContactDialogFragment
-import com.vikmanz.shpppro.presentation.my_contacts_list.decline_permision.OnDeclinePermissionDialogFragment
+import com.vikmanz.shpppro.presentation.main.my_contacts_list.add_contact.AddContactDialogFragment
+import com.vikmanz.shpppro.presentation.main.my_contacts_list.decline_permision.OnDeclinePermissionDialogFragment
 import com.vikmanz.shpppro.presentation.utils.extensions.setGone
 import com.vikmanz.shpppro.presentation.utils.extensions.setInvisible
 import com.vikmanz.shpppro.presentation.utils.extensions.setVisible
@@ -40,7 +40,7 @@ class MyContactsListFragment() :
 
     // this screen accepts a string value from the HelloFragment
     class CustomArgument(
-        override val name: String,
+//        override val name: String,
     ) : BaseArgument
 
     /**
@@ -73,6 +73,11 @@ class MyContactsListFragment() :
         observeUI()
     }
 
+
+    override fun setStartUi() {
+        initRecyclerView()
+    }
+
     private fun observeUI() {
         uiObserver = Observer {
             with(binding) {
@@ -102,9 +107,6 @@ class MyContactsListFragment() :
         }
     }
 
-    override fun setStartUi() {
-        initRecyclerView()
-    }
 
     /**
      * Init recycler view and swipe to delete.
@@ -167,7 +169,7 @@ class MyContactsListFragment() :
         val swipeHandler = object : SwipeToDeleteCallback(requireContext()) {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val position = viewHolder.adapterPosition
-                deleteContactFromViewModelWithUndo(viewModel.getContact(position))
+                viewModel.getContact(position)?.let { deleteContactFromViewModelWithUndo(it) }
             }
         }
         val itemTouchHelper = ItemTouchHelper(swipeHandler)

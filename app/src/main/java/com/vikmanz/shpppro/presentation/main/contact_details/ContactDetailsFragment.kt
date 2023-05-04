@@ -1,4 +1,4 @@
-package com.vikmanz.shpppro.presentation.contact_details
+package com.vikmanz.shpppro.presentation.main.contact_details
 
 import android.net.Uri
 import com.vikmanz.shpppro.databinding.FragmentContactDetailsBinding
@@ -13,7 +13,8 @@ class ContactDetailsFragment :
         FragmentContactDetailsBinding::inflate
     ) {
     class CustomArgument(
-        override val name: String, val contactID: Long
+//        override val name: String,
+        val contactID: Long
     ) : BaseArgument
 
     override val viewModel by screenViewModel()

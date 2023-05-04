@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.MainActivity">
+    tools:context=".presentation.main.MainActivity">
 
     <!-- Guide of center of elements. -->
     <androidx.constraintlayout.widget.Guideline
@@ -66,28 +66,20 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/offset_XL"
         android:orientation="horizontal"
-        app:constraint_referenced_ids="cardview_main_avatar_card, flow_main_person_text_info"
+        app:constraint_referenced_ids="imageview_main_avatar_image, flow_main_person_text_info"
         app:flow_horizontalGap="@dimen/offset_XL"
         app:layout_constraintBottom_toBottomOf="@+id/guideline_mycontacts_bg_center_of_screen"
         app:layout_constraintEnd_toStartOf="@+id/imageview_main_facebook_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/flow_main_top_buttons" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardview_main_avatar_card"
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imageview_main_avatar_image"
         android:layout_width="@dimen/avatar_radius"
         android:layout_height="@dimen/avatar_radius"
-        app:cardBackgroundColor="?attr/colorPrimary"
-        app:cardCornerRadius="@dimen/avatar_corner_radius">
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/imageview_main_avatar_image"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="fitXY"
-            app:srcCompat="@drawable/ic_person" />
-
-    </androidx.cardview.widget.CardView>
+        android:layout_marginTop="28dp"
+        android:layout_marginBottom="28dp"
+        android:src="@drawable/sample_avatar" />
 
     <!-- <!- <!- Person Info flow. -->
     <androidx.constraintlayout.helper.widget.Flow
@@ -97,10 +89,10 @@
         android:orientation="vertical"
         app:constraint_referenced_ids="textview_main_person_name, textview_main_person_career, textview_main_person_address"
         app:flow_verticalGap="@dimen/offset_S"
-        app:layout_constraintBottom_toBottomOf="@+id/flow_main_profile_info"
-        app:layout_constraintEnd_toEndOf="@+id/flow_main_profile_info"
-        app:layout_constraintStart_toEndOf="@+id/cardview_main_avatar_card"
-        app:layout_constraintTop_toTopOf="@+id/flow_main_profile_info" />
+        app:layout_constraintBottom_toBottomOf="@id/flow_main_profile_info"
+        app:layout_constraintEnd_toEndOf="@id/flow_main_profile_info"
+        app:layout_constraintStart_toEndOf="@id/imageview_main_avatar_image"
+        app:layout_constraintTop_toTopOf="@id/flow_main_profile_info" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textview_main_person_name"
@@ -179,15 +171,18 @@
 
 
     <!-- Down half of screen. -->
+
+    <!-- Edit Profile and View Contacts buttons flow. -->
     <View
         android:id="@+id/guideline_mycontacts_bg_bottom_half"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="?attr/colorTertiary"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/guideline_mycontacts_bg_top_half" />
+        app:layout_constraintTop_toBottomOf="@id/guideline_mycontacts_bg_top_half"
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_editor_absoluteX="235dp" />
 
-    <!-- Edit Profile and View Contacts buttons flow. -->
     <androidx.constraintlayout.helper.widget.Flow
         android:id="@+id/flow_main_bottom_buttons"
         android:layout_width="wrap_content"

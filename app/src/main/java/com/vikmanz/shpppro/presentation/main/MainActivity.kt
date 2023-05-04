@@ -1,4 +1,4 @@
-package com.vikmanz.shpppro.presentation
+package com.vikmanz.shpppro.presentation.main
 
 import android.os.Bundle
 import androidx.activity.viewModels
@@ -6,10 +6,10 @@ import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import com.vikmanz.shpppro.R
-import com.vikmanz.shpppro.constants.Features.USE_NAVIGATION_COMPONENT
+import com.vikmanz.shpppro.constants.USE_NAVIGATION_COMPONENT
 import com.vikmanz.shpppro.databinding.ActivityMainBinding
 import com.vikmanz.shpppro.navigator.MainNavigator
-import com.vikmanz.shpppro.presentation.my_profile.MyProfileFragment
+import com.vikmanz.shpppro.presentation.main.my_profile.MyProfileFragment
 import com.vikmanz.shpppro.presentation.base.BaseActivity
 import com.vikmanz.shpppro.utilits.extensions.log
 
@@ -36,7 +36,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
     private fun startRootFragment(savedInstanceState: Bundle?) {
         if (savedInstanceState == null) {
             val args =
-                MyProfileFragment.CustomArgument("MyContacts", "createdIn.Mainactiviti@gmail.com")
+                //MyProfileFragment.CustomArgument("MyContacts", "createdIn.Mainactiviti@gmail.com")
+                MyProfileFragment.CustomArgument("createdIn.Mainactiviti@gmail.com")
             log("if not null...")
             if (USE_NAVIGATION_COMPONENT) {
             log("... start by nav_graph")
