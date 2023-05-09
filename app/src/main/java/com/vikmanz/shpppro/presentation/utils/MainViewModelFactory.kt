@@ -13,7 +13,7 @@ import com.vikmanz.shpppro.presentation.navigator.Navigator
 import com.vikmanz.shpppro.presentation.base.*
 import com.vikmanz.shpppro.presentation.navigator.AuthNavigator.Companion.ARG_SCREEN
 
-class ViewModelFactory<VBinding : ViewBinding, VM : BaseViewModel>(
+class MainViewModelFactory<VBinding : ViewBinding, VM : BaseViewModel>(
     private val baseArgument: BaseArgument?,
     private val fragment: BaseFragment<VBinding, VM>
 ) : ViewModelProvider.Factory {
@@ -33,7 +33,7 @@ class ViewModelFactory<VBinding : ViewBinding, VM : BaseViewModel>(
 }
 
 
-inline fun <reified VM : BaseViewModel, reified VBinding : ViewBinding> BaseFragment<VBinding, VM>.screenViewModel() =
+inline fun <reified VM : BaseViewModel, reified VBinding : ViewBinding> BaseFragment<VBinding, VM>.screenMainViewModel() =
     viewModels<VM> {
 
         val key = if (USE_NAVIGATION_COMPONENT) getString(R.string.safe_arg_id) else ARG_SCREEN
@@ -47,5 +47,5 @@ inline fun <reified VM : BaseViewModel, reified VBinding : ViewBinding> BaseFrag
                    } else {
                        @Suppress("DEPRECATION") requireArguments().getSerializable(key) as BaseArgument
                    }
-        ViewModelFactory(baseArgument, this)
+        MainViewModelFactory(baseArgument, this)
     }

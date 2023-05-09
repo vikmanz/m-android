@@ -1,8 +1,10 @@
 package com.vikmanz.shpppro
 
 
+import android.annotation.SuppressLint
 import android.app.Application
 import com.vikmanz.shpppro.data.ContactsRepository
+import com.vikmanz.shpppro.data.DataStoreManager
 
 /**
  * Singleton for send ContentResolver to ContactsPhoneInfoTaker().
@@ -23,5 +25,4 @@ class App : Application() {
         private lateinit var _contactsRepository: ContactsRepository
         val contactsRepository: ContactsRepository get() = _contactsRepository
     }
-
 }

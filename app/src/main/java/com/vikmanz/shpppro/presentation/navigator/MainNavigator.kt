@@ -30,7 +30,7 @@ class MainNavigator(
     val result: LiveData<Event<Any>> = _result
 
     override fun launchStartFragment(argument: BaseArgument) = launchFragment(argument)
-    override fun launchLoginFragment(argument: BaseArgument) { }
+    override fun launchLoginFragment(argument: BaseArgument) { log("LLF in main navigator") }
 
     override fun launchMyContacts(argument: BaseArgument) = launchFragment(
         argument,

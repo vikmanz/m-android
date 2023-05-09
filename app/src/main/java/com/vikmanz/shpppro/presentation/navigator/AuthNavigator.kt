@@ -31,10 +31,13 @@ class AuthNavigator(
 
     override fun launchStartFragment(argument: BaseArgument) = launchFragment(argument)
 
-    override fun launchLoginFragment(argument: BaseArgument) = launchFragment(
-    argument,
-    direction = R.id.action_splashScreenFragment_to_loginFragment
-    )
+    override fun launchLoginFragment(argument: BaseArgument) {
+        log("LLF in auth navigator")
+        launchFragment(
+            argument,
+            direction = R.id.action_splashScreenFragment_to_loginFragment
+        )
+    }
 
     override fun launchMyContacts(argument: BaseArgument) {    }
     override fun launchContactDetails(argument: BaseArgument) {    }

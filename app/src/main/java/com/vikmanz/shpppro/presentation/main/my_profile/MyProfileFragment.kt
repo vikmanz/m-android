@@ -1,18 +1,23 @@
 package com.vikmanz.shpppro.presentation.main.my_profile
 
 import android.content.Intent
+import android.os.Bundle
 import androidx.lifecycle.lifecycleScope
 import com.vikmanz.shpppro.presentation.base.BaseArgument
 import com.vikmanz.shpppro.R
+import com.vikmanz.shpppro.constants.Constants
 import com.vikmanz.shpppro.data.DataStoreManager
 import com.vikmanz.shpppro.data.utils.EmailParser
 import com.vikmanz.shpppro.databinding.FragmentMyProfileBinding
 import com.vikmanz.shpppro.presentation.auth.AuthActivity
 import com.vikmanz.shpppro.presentation.base.BaseFragment
+import com.vikmanz.shpppro.presentation.main.MainActivity
 import com.vikmanz.shpppro.presentation.utils.extensions.setContactPhotoFromResource
-import com.vikmanz.shpppro.presentation.utils.screenViewModel
+import com.vikmanz.shpppro.presentation.utils.screenMainViewModel
 import com.vikmanz.shpppro.utilits.extensions.log
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 class MyProfileFragment :
@@ -24,11 +29,10 @@ class MyProfileFragment :
     ) : BaseArgument
 
 
-
     /**
      * Create ViewModel for this activity.
      */
-    override val viewModel by screenViewModel()
+    override val viewModel by screenMainViewModel()
 
     override fun setStartUi() {
         // Parse email, set Name Surname text and img of avatar.
@@ -37,7 +41,7 @@ class MyProfileFragment :
         setAvatar()
     }
 
-    override fun setObservers() { }
+    override fun setObservers() {}
 
     override fun setListeners() {
         log("set listener")
@@ -64,29 +68,32 @@ class MyProfileFragment :
     /**
      * Set avatar image.
      */
-    private fun setAvatar() = binding.imageviewMainAvatarImage.setContactPhotoFromResource(R.drawable.sample_avatar)
+    private fun setAvatar() =
+        binding.imageviewMainAvatarImage.setContactPhotoFromResource(R.drawable.sample_avatar)
 
     /**
      * Logout with clear information about user from Data Store.
      */
     private fun logout() {
-        val loginData = DataStoreManager(requireContext()) //in onCreate
-        with(requireActivity()){
-            lifecycleScope.launch(Dispatchers.IO) {
-                loginData.clearUser()
-            }
-            finishActivity()
+        val dataStore = DataStoreManager(requireContext()) //in onCreate
+        val coroutineScope = CoroutineScope(Job())
+        coroutineScope.launch(Dispatchers.IO) {
+            dataStore.clearUser()
         }
+        startAuthActivity()
     }
 
     /**
      * Finish that activity and start SignIn/SignUp activity.
+     *
+     * @param email User email as String.
      */
-    private fun finishActivity() {
+    private fun startAuthActivity() {
         val activity = requireActivity()
         val intentObject = Intent(activity, AuthActivity::class.java)
-        activity.finish()
         startActivity(intentObject)
+        activity.overridePendingTransition(R.anim.zoom_in_inner, R.anim.zoom_in_outter)
+        activity.finish()
     }
 
     /**

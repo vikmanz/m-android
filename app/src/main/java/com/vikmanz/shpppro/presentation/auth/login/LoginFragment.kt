@@ -13,7 +13,6 @@ import com.vikmanz.shpppro.data.DataStoreManager
 import com.vikmanz.shpppro.presentation.base.BaseArgument
 import com.vikmanz.shpppro.presentation.base.BaseFragment
 import com.vikmanz.shpppro.presentation.main.MainActivity
-import com.vikmanz.shpppro.presentation.utils.screenViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -29,6 +28,7 @@ import com.vikmanz.shpppro.presentation.utils.extensions.setInvisible
 import com.vikmanz.shpppro.presentation.utils.extensions.setMultipleGone
 import com.vikmanz.shpppro.presentation.utils.extensions.setMultipleVisible
 import com.vikmanz.shpppro.presentation.utils.extensions.setVisible
+import com.vikmanz.shpppro.presentation.utils.screenAuthViewModel
 
 /**
  * Constants.
@@ -56,12 +56,16 @@ class LoginFragment :
     /**
      * Create ViewModel for this activity.
      */
-    override val viewModel by screenViewModel()
+    override val viewModel by screenAuthViewModel()
 
     private lateinit var uiObserver: Observer<Boolean>
     private lateinit var helpersObserver: Observer<Boolean>
 
-    //val loginData = DataStoreManager(requireContext()) //in onCreate
+    private lateinit var dataStore: DataStoreManager
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        dataStore = DataStoreManager(requireActivity())
+    }
 
     override fun setStartUi() {}
 
@@ -77,26 +81,6 @@ class LoginFragment :
         }
         initHelpTesterButtons()
         setLoginPasswordFocusListeners()                 // Listeners to fields and buttons.
-    }
-
-    // Data Store and Coroutine Scope variables.
-    private lateinit var loginData: DataStoreManager
-    private val coroutineScope: CoroutineScope = CoroutineScope(Job())
-
-
-    /**
-     * Main function, which used when activity was create.
-     */
-    override fun onCreate(savedInstanceState: Bundle?) {
-        // init.
-        super.onCreate(savedInstanceState)
-
-        // Load saved data and do autologin if need.
-        loginData = DataStoreManager(requireActivity())
-        checkAutoLogin()
-
-        // init additional features.
-        initHelpTesterButtons()     // help test buttons
         backgroundFocusHandler()    // de-focus fields when click on bg
     }
 
@@ -154,18 +138,7 @@ class LoginFragment :
                 if (it) setVisible() else setGone()
             }
         }
-        viewModel.helperButtonsVisible.observe(this, uiObserver)
-    }
-
-    /**
-     * Check if user already save login-password, and do autologin if it's need.
-     */
-    private fun checkAutoLogin() {
-        var email = ""
-        loginData.userNameFlow.asLiveData().observe(this) { email = it }
-        loginData.userLoginStatusFlow.asLiveData().observe(this) {
-            if (it) startMainActivity(email)
-        }
+        viewModel.helperButtonsVisible.observe(this, helpersObserver)
     }
 
     /**
@@ -310,18 +283,10 @@ class LoginFragment :
      *  Save user data from text input fields and language key from class variable to Data Store.
      */
     private fun saveUserData() {
-        val email: String
-        val password: String
-        val isAutologin: Boolean
-
-        with(binding) {
-            email = textinputAuthEmail.text.toString()
-            password = textinputAuthPassword.text.toString()
-            isAutologin = checkboxAuthRememberMe.isChecked
-        }
-
+        val email = binding.textinputAuthEmail.text.toString()
+        val coroutineScope = CoroutineScope(Job())
         coroutineScope.launch(Dispatchers.IO) {
-            loginData.saveUserSata(email, password, isAutologin)
+            dataStore.saveUserSata(email)
         }
     }
 

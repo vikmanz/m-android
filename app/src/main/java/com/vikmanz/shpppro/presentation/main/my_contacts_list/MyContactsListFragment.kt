@@ -22,7 +22,6 @@ import com.vikmanz.shpppro.data.my_contacts_list_recycler_view.listeners.Contact
 import com.vikmanz.shpppro.databinding.FragmentMyContactsListBinding
 import com.vikmanz.shpppro.presentation.base.BaseFragment
 import com.vikmanz.shpppro.presentation.main.my_contacts_list.adapter.ContactsAdapter
-import com.vikmanz.shpppro.presentation.utils.screenViewModel
 import com.vikmanz.shpppro.presentation.main.my_contacts_list.add_contact.AddContactDialogFragment
 import com.vikmanz.shpppro.presentation.main.my_contacts_list.decline_permision.OnDeclinePermissionDialogFragment
 import com.vikmanz.shpppro.presentation.utils.extensions.setGone
@@ -32,6 +31,7 @@ import com.vikmanz.shpppro.presentation.utils.extensions.setMultipleVisible
 import com.vikmanz.shpppro.presentation.utils.extensions.setVisible
 import com.vikmanz.shpppro.presentation.utils.recycler_view_decoration.MarginItemDecoration
 import com.vikmanz.shpppro.presentation.utils.recycler_view_decoration.SwipeToDeleteCallback
+import com.vikmanz.shpppro.presentation.utils.screenMainViewModel
 import kotlinx.coroutines.*
 
 /**
@@ -48,7 +48,7 @@ class MyContactsListFragment() :
     /**
      * Create ViewModel for this activity.
      */
-    override val viewModel by screenViewModel()
+    override val viewModel by screenMainViewModel()
 
     private lateinit var uiObserver: Observer<Boolean>
 
