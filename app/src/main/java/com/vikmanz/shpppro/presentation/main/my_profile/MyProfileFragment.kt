@@ -101,13 +101,6 @@ class MyProfileFragment :
      */
     private fun goToMyContacts() {
         viewModel.onMyContactsPressed()
-        //        log("create new my contacts fragment")
-//        val fragment = ContactsFragment.getInstance()
-//        parentFragmentManager
-//            .beginTransaction()
-//            .addToBackStack(null)
-//            .add(R.id.fragment_container_main_container, fragment)
-//            .commit()
-//        log("started new my contacts fragment")
     }
+
 }
