@@ -7,11 +7,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.viewbinding.ViewBinding
 import com.vikmanz.shpppro.R
 import com.vikmanz.shpppro.constants.USE_NAVIGATION_COMPONENT
-import com.vikmanz.shpppro.navigator.ARG_SCREEN
-import com.vikmanz.shpppro.navigator.MainNavigator
+import com.vikmanz.shpppro.presentation.navigator.MainNavigator
 
-import com.vikmanz.shpppro.navigator.Navigator
+import com.vikmanz.shpppro.presentation.navigator.Navigator
 import com.vikmanz.shpppro.presentation.base.*
+import com.vikmanz.shpppro.presentation.navigator.AuthNavigator.Companion.ARG_SCREEN
 
 class ViewModelFactory<VBinding : ViewBinding, VM : BaseViewModel>(
     private val baseArgument: BaseArgument?,

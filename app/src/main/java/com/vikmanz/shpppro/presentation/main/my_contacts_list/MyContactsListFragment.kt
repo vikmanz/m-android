@@ -27,6 +27,8 @@ import com.vikmanz.shpppro.presentation.main.my_contacts_list.add_contact.AddCon
 import com.vikmanz.shpppro.presentation.main.my_contacts_list.decline_permision.OnDeclinePermissionDialogFragment
 import com.vikmanz.shpppro.presentation.utils.extensions.setGone
 import com.vikmanz.shpppro.presentation.utils.extensions.setInvisible
+import com.vikmanz.shpppro.presentation.utils.extensions.setMultipleInvisible
+import com.vikmanz.shpppro.presentation.utils.extensions.setMultipleVisible
 import com.vikmanz.shpppro.presentation.utils.extensions.setVisible
 import com.vikmanz.shpppro.presentation.utils.recycler_view_decoration.MarginItemDecoration
 import com.vikmanz.shpppro.presentation.utils.recycler_view_decoration.SwipeToDeleteCallback
@@ -82,15 +84,19 @@ class MyContactsListFragment() :
         uiObserver = Observer {
             with(binding) {
                 if (it) {
+                    setMultipleInvisible(
+                        buttonMycontactsDeclineAccess,
+                        textviewMycontactsRevokePermission
+                    )
                     buttonMycontactsAddContactsFromFaker.setGone()
-                    buttonMycontactsDeclineAccess.setInvisible()
-                    textviewMycontactsRevokePermission.setInvisible()
                     buttonMycontactsAddContactsFromPhonebook.setVisible()
                 } else {
-                    buttonMycontactsAddContactsFromFaker.setVisible()
+                    setMultipleVisible(
+                        buttonMycontactsAddContactsFromFaker,
+                        buttonMycontactsDeclineAccess,
+                        textviewMycontactsRevokePermission
+                    )
                     buttonMycontactsAddContactsFromPhonebook.setGone()
-                    buttonMycontactsDeclineAccess.setVisible()
-                    textviewMycontactsRevokePermission.setVisible()
                 }
             }
         }

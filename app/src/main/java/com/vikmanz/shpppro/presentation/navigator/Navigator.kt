@@ -1,10 +1,12 @@
-package com.vikmanz.shpppro.navigator
+package com.vikmanz.shpppro.presentation.navigator
 
 import com.vikmanz.shpppro.presentation.base.BaseArgument
 
 interface Navigator {
 
     fun launchStartFragment(argument: BaseArgument)
+
+    fun launchLoginFragment(argument: BaseArgument)
 
     fun launchMyContacts(argument: BaseArgument)
 

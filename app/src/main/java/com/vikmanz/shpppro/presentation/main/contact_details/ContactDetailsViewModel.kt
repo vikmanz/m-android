@@ -2,7 +2,7 @@ package com.vikmanz.shpppro.presentation.main.contact_details
 
 import com.vikmanz.shpppro.App
 import com.vikmanz.shpppro.data.contact_model.Contact
-import com.vikmanz.shpppro.navigator.Navigator
+import com.vikmanz.shpppro.presentation.navigator.Navigator
 import com.vikmanz.shpppro.presentation.base.BaseViewModel
 
 class ContactDetailsViewModel(

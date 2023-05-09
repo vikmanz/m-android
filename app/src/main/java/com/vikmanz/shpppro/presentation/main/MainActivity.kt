@@ -8,7 +8,7 @@ import androidx.navigation.fragment.NavHostFragment
 import com.vikmanz.shpppro.R
 import com.vikmanz.shpppro.constants.USE_NAVIGATION_COMPONENT
 import com.vikmanz.shpppro.databinding.ActivityMainBinding
-import com.vikmanz.shpppro.navigator.MainNavigator
+import com.vikmanz.shpppro.presentation.navigator.MainNavigator
 import com.vikmanz.shpppro.presentation.main.my_profile.MyProfileFragment
 import com.vikmanz.shpppro.presentation.base.BaseActivity
 import com.vikmanz.shpppro.utilits.extensions.log
@@ -43,7 +43,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
             log("... start by nav_graph")
 
                 val startArguments = bundleOf(getString(R.string.safe_arg_id) to args)
-                val navHostFragment = NavHostFragment.create(R.navigation.nav_graph, startArguments)
+                val navHostFragment = NavHostFragment.create(R.navigation.main_nav_graph, startArguments)
 
                 supportFragmentManager.beginTransaction()
                     .replace(R.id.fragment_container_main_container, navHostFragment)
@@ -72,28 +72,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
         super.onPause()
         navigator.whenActivityActive.mainActivity = null
     }
-//
-//    private val fragmentCallbacks = object : FragmentManager.FragmentLifecycleCallbacks() {
-//        override fun onFragmentViewCreated(
-//            fm: FragmentManager,
-//            f: Fragment,
-//            v: View,
-//            savedInstanceState: Bundle?
-//        ) {
-//            if (supportFragmentManager.backStackEntryCount > 0) {
-//                // more than 1 screen -> show back button in the toolbar
-//                supportActionBar?.setDisplayHomeAsUpEnabled(true)
-//            } else {
-//                supportActionBar?.setDisplayHomeAsUpEnabled(false)
-//            }
-//
-////            val result = navigator.result.value?.getValue() ?: return
-////            if (f is BaseFragment) {
-////                // has result that can be delivered to the screen's view-model
-////                f.viewModel.onResult(result)
-////            }
-//        }
-//    }
 
 }
 

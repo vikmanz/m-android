@@ -1,4 +1,4 @@
-package com.vikmanz.shpppro.navigator
+package com.vikmanz.shpppro.presentation.navigator
 
 import androidx.navigation.NavDirections
 

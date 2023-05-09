@@ -1,6 +1,6 @@
 
 
-package com.vikmanz.shpppro.navigator
+package com.vikmanz.shpppro.presentation.navigator
 
 //class Event<T>(
 //    private val value: T

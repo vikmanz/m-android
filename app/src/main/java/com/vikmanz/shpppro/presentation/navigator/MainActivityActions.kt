@@ -1,8 +1,10 @@
-package com.vikmanz.shpppro.navigator
+package com.vikmanz.shpppro.presentation.navigator
 
+import androidx.appcompat.app.AppCompatActivity
+import com.vikmanz.shpppro.presentation.base.BaseActivity
 import com.vikmanz.shpppro.presentation.main.MainActivity
 
-typealias MainActivityAction = (MainActivity) -> Unit
+typealias MainActivityAction = (AppCompatActivity) -> Unit
 
 /**
  * This class executes actions only when activity is assigned to [mainActivity] field.
@@ -13,7 +15,7 @@ class MainActivityActions {
     /**
      * Assign activity in [MainActivity.onResume] and assign NULL in [MainActivity.onPause]
      */
-    var mainActivity: MainActivity? = null
+    var mainActivity: AppCompatActivity? = null
         set(activity) {
             field = activity
             if (activity != null) {

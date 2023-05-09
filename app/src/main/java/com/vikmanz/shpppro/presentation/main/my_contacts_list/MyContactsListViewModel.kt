@@ -4,11 +4,12 @@ import androidx.lifecycle.MutableLiveData
 import com.vikmanz.shpppro.presentation.base.BaseViewModel
 import com.vikmanz.shpppro.App
 import com.vikmanz.shpppro.data.contact_model.Contact
-import com.vikmanz.shpppro.navigator.Navigator
+import com.vikmanz.shpppro.presentation.navigator.Navigator
 import com.vikmanz.shpppro.presentation.main.contact_details.ContactDetailsFragment
+import com.vikmanz.shpppro.presentation.utils.extensions.swapBoolean
 
 // FakeData (true) or PhoneData (false) view first on myContacts
-const val FAKE_LIST_FIRST = true
+private const val FAKE_LIST_FIRST = true
 
 /**
  * ViewModel for My Contacts Activity.
@@ -74,7 +75,7 @@ class MyContactsListViewModel(
         } else {
             _contactsReposetory.setFakeContacts()
         }
-        fakeListActivated.value = !fakeListActivated.value!!
+        fakeListActivated.swapBoolean()
     }
 
     fun onContactPressed(contactID: Long) {

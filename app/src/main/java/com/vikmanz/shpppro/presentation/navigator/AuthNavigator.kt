@@ -1,4 +1,4 @@
-package com.vikmanz.shpppro.navigator
+package com.vikmanz.shpppro.presentation.navigator
 
 import android.app.Application
 import android.widget.Toast
@@ -11,17 +11,16 @@ import androidx.navigation.findNavController
 import com.vikmanz.shpppro.presentation.base.BaseArgument
 import com.vikmanz.shpppro.R
 import com.vikmanz.shpppro.constants.USE_NAVIGATION_COMPONENT
+import com.vikmanz.shpppro.presentation.auth.AuthActivity
 import com.vikmanz.shpppro.presentation.main.MainActivity
 import com.vikmanz.shpppro.utilits.extensions.log
-
-const val ARG_SCREEN = "argument"
 
 /**
  * Navigator implementation. It extends [AndroidViewModel] because 1) we need android dependency
  * (application context); 2) it should survive after screen rotation.
  * https://github.com/romychab/android-tutorials/tree/main/mvvm-navigation
  */
-class MainNavigator(
+class AuthNavigator(
     application: Application
 ) : AndroidViewModel(application), Navigator {
 
@@ -32,19 +31,17 @@ class MainNavigator(
 
     override fun launchStartFragment(argument: BaseArgument) = launchFragment(argument)
 
-    override fun launchMyContacts(argument: BaseArgument) = launchFragment(
-        argument,
-        direction = R.id.action_profileFragment_to_myContactsFragment
+    override fun launchLoginFragment(argument: BaseArgument) = launchFragment(
+    argument,
+    direction = R.id.action_splashScreenFragment_to_loginFragment
     )
 
-    override fun launchContactDetails(argument: BaseArgument) = launchFragment(
-        argument,
-        direction = R.id.action_myContactsFragment_to_contactDetailsFragment
-    )
+    override fun launchMyContacts(argument: BaseArgument) {    }
+    override fun launchContactDetails(argument: BaseArgument) {    }
 
     override fun goBack(result: Any?) = whenActivityActive {
         if (USE_NAVIGATION_COMPONENT) {
-           it.findNavController(R.id.fragment_container_main_container).popBackStack()
+           it.findNavController(R.id.fragment_container_auth_container).popBackStack()
         } else {
             if (result != null) {
                 _result.value = Event(result)
@@ -73,14 +70,14 @@ class MainNavigator(
     ) = whenActivityActive {
         if (USE_NAVIGATION_COMPONENT) {
             //val direction = MyProfileFragmentDirections.actionProfileFragmentToMyContactsFragment(argument)
-            launchFragmentByNavigation(it, argument, direction)
+            launchFragmentByNavigation(it as AuthActivity, argument, direction)
         } else {
-            launchFragmentByTransaction(it, argument)
+            launchFragmentByTransaction(it as AuthActivity, argument)
         }
     }
 
     private fun launchFragmentByTransaction(
-        activity: MainActivity,
+        activity: AuthActivity,
         argument: BaseArgument,
         @Suppress("SameParameterValue") addToBackStack: Boolean = true
     ) {
@@ -91,19 +88,22 @@ class MainNavigator(
         if (addToBackStack) transaction.addToBackStack(null)
         log("begin transaction")
         transaction
-            .replace(R.id.fragment_container_main_container, fragment)
+            .replace(R.id.fragment_container_auth_container, fragment)
             .commit()
         log("commit")
     }
 
     private fun launchFragmentByNavigation(
-        activity: MainActivity,
+        activity: AuthActivity,
         argument: BaseArgument,
         direction: Int, //NavDirections
     ) {
         val bundle = bundleOf(getString(R.string.safe_arg_id) to argument)
-        activity.findNavController(R.id.fragment_container_main_container)
+        activity.findNavController(R.id.fragment_container_auth_container)
             .navigate(direction, bundle)
     }
 
+    companion object {
+        const val ARG_SCREEN = "argument"
+    }
 }

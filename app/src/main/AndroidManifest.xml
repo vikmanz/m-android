@@ -19,22 +19,16 @@
 
         <activity
             android:name=".presentation.auth.AuthActivity"
-        android:exported="true">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
-    </activity>
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
         <activity
             android:name=".presentation.main.MainActivity"
             android:exported="false" />
-
-        <activity
-            android:name=".presentation.main.my_contacts_list.MyContactsListFragment"
-
-            android:exported="false" />
-
 
         <!-- Sample AdMob app ID: ca-app-pub-3940256099942544~3347511713 -->
         <meta-data
