@@ -1,14 +1,14 @@
 package com.vikmanz.shpppro.presentation.main.my_contacts_list.add_contact
 
-import android.annotation.SuppressLint
 import android.app.Dialog
 import android.net.Uri
 import android.os.Bundle
-import android.view.LayoutInflater
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
+import com.vikmanz.shpppro.R
 import com.vikmanz.shpppro.databinding.AddContactActivityMyContactsBinding
 
 import com.vikmanz.shpppro.utilits.extensions.log
@@ -21,12 +21,7 @@ import com.vikmanz.shpppro.presentation.utils.extensions.setContactPhotoFromUri
  */
 class AddContactDialogFragment : DialogFragment() {
 
-    /**
-     * Create ViewModel for this dialog.
-     */
-//    private val viewModel: AddContactDialogFragmentViewModel by viewModels {
-//        ViewModelFactoryTwo(App.contactsReposetory)
-//    }
+
     private val viewModel: AddContactDialogFragmentViewModel by viewModels()
 
 
@@ -39,11 +34,10 @@ class AddContactDialogFragment : DialogFragment() {
     /**
      * Create dialog fragment.
      */
-    @SuppressLint("UseGetLayoutInflater")
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
 
         // inflate binding of dialog fragment
-        _binding = AddContactActivityMyContactsBinding.inflate(LayoutInflater.from(context))
+        _binding = AddContactActivityMyContactsBinding.inflate(layoutInflater)
 
         return activity?.let {
 
@@ -60,15 +54,17 @@ class AddContactDialogFragment : DialogFragment() {
 
                 // set listener for create new contact and send it to MyContactsActivity
                 buttonAddcontactSaveUser.setOnClickListener {
-                    dialog?.dismiss()
-                    viewModel.createNewContact(
-                        name = textinputAddcontactUserNameInputfield.text.toString(),
-                        career = textinputAddcontactUserCareerInputfield.text.toString(),
-                        email = textinputAddcontactUserEmailInputfield.text.toString(),
-                        phone = textinputAddcontactUserPhoneInputfield.text.toString(),
-                        address = textinputAddcontactUserAddressInputfield.text.toString(),
-                        birthday = textinputAddcontactUserBirthdayInputfield.text.toString()
-                    )
+                    if (checkContactIsNotEmpty()) {
+                        dialog?.dismiss()
+                        viewModel.createNewContact(
+                            name = textinputAddcontactUserNameInputfield.text.toString(),
+                            career = textinputAddcontactUserCareerInputfield.text.toString(),
+                            email = textinputAddcontactUserEmailInputfield.text.toString(),
+                            phone = textinputAddcontactUserPhoneInputfield.text.toString(),
+                            address = textinputAddcontactUserAddressInputfield.text.toString(),
+                            birthday = textinputAddcontactUserBirthdayInputfield.text.toString()
+                        )
+                    }
                 }
 
                 // set listener for back button
@@ -79,6 +75,13 @@ class AddContactDialogFragment : DialogFragment() {
             builder.setView(_binding?.root).create()
 
         } ?: throw IllegalStateException("Activity cannot be null")
+    }
+
+    private fun checkContactIsNotEmpty(): Boolean {
+        return if (_binding?.textinputAddcontactUserNameInputfield?.text.toString().isEmpty()) {
+            Toast.makeText(requireContext(),getString(R.string.my_contacts_add_contact_please_write_name),Toast.LENGTH_SHORT).show()
+            false
+        } else true
     }
 
     /**

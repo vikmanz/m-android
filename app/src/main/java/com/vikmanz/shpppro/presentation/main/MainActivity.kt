@@ -6,6 +6,7 @@ import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import com.vikmanz.shpppro.R
+import com.vikmanz.shpppro.constants.Constants.INTENT_EMAIL_ID
 import com.vikmanz.shpppro.constants.USE_NAVIGATION_COMPONENT
 import com.vikmanz.shpppro.databinding.ActivityMainBinding
 import com.vikmanz.shpppro.presentation.navigator.MainNavigator
@@ -34,23 +35,17 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
 
 
     private fun startRootFragment(savedInstanceState: Bundle?) {
+        val email = intent.getStringExtra(INTENT_EMAIL_ID).toString()
         if (savedInstanceState == null) {
-            val args =
-                //MyProfileFragment.CustomArgument("MyContacts", "createdIn.Mainactiviti@gmail.com")
-                MyProfileFragment.CustomArgument("createdIn.Mainactiviti@gmail.com")
-            log("if not null...")
+            val args = MyProfileFragment.CustomArgument(email)
             if (USE_NAVIGATION_COMPONENT) {
-            log("... start by nav_graph")
-
                 val startArguments = bundleOf(getString(R.string.safe_arg_id) to args)
-                val navHostFragment = NavHostFragment.create(R.navigation.main_nav_graph, startArguments)
-
+                val navHostFragment =
+                    NavHostFragment.create(R.navigation.main_nav_graph, startArguments)
                 supportFragmentManager.beginTransaction()
                     .replace(R.id.fragment_container_main_container, navHostFragment)
                     .setPrimaryNavigationFragment(navHostFragment) // equivalent to app:defaultNavHost="true"
                     .commit()
-
-
             } else {
                 log("... start by transactions")
                 navigator.launchStartFragment(args)

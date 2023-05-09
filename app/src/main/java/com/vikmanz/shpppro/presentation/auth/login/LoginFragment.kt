@@ -5,9 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.provider.Settings
 import android.util.Patterns
-import android.view.View
 import androidx.lifecycle.Observer
-import androidx.lifecycle.asLiveData
 import com.vikmanz.shpppro.R
 import com.vikmanz.shpppro.data.DataStoreManager
 import com.vikmanz.shpppro.presentation.base.BaseArgument
@@ -18,9 +16,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import com.vikmanz.shpppro.constants.Constants.INTENT_EMAIL_ID
-import com.vikmanz.shpppro.constants.Constants.LOGIN_VIEW_FIRST
 import com.vikmanz.shpppro.constants.Constants.MIN_PASSWORD_LENGTH
-import com.vikmanz.shpppro.constants.Constants.VIEW_HELP_BUTTONS_ON_CREATE
 import com.vikmanz.shpppro.databinding.FragmentLoginBinding
 import com.vikmanz.shpppro.presentation.utils.extensions.clearError
 import com.vikmanz.shpppro.presentation.utils.extensions.setGone
@@ -41,25 +37,18 @@ private const val REGEX_ONE_SPECIAL_CHAR = ".*[$SPECIAL_CHARS].*"
 private const val TEST_LOGIN = "viktor.manza@gmail.com"
 private const val TEST_PASSWORD = "passwordE3@a"
 
-// Save/Load State Keys. Don't need to change.
-private const val EMAIL_FIELD_STATE_KEY = "EMAIL_KEY_AUTH_ACTIVITY"
-private const val PASSWORD_FIELD_STATE_KEY = "PASSWORD_KEY_AUTH_ACTIVITY"
-private const val PASSWORD_VIEW_STATE_KEY = "PASSWORD_VIEW_KEY_AUTH_ACTIVITY"
-private const val CHECKBOX_STATE_STATE_KEY = "CHECKBOX_KEY_AUTH_ACTIVITY"
-private const val HELP_BUTTONS_STATE_KEY = "HELP_BUTTONS_KEY_AUTH_ACTIVITY"
-
 class LoginFragment :
     BaseFragment<FragmentLoginBinding, LoginViewModel>(FragmentLoginBinding::inflate) {
 
-    class CustomArgument() : BaseArgument
+    class CustomArgument : BaseArgument
 
     /**
      * Create ViewModel for this activity.
      */
     override val viewModel by screenAuthViewModel()
 
-    private lateinit var uiObserver: Observer<Boolean>
-    private lateinit var helpersObserver: Observer<Boolean>
+    private var uiObserver: Observer<Boolean>? = null
+    private var helpersObserver: Observer<Boolean>? = null
 
     private lateinit var dataStore: DataStoreManager
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -88,7 +77,7 @@ class LoginFragment :
      * Observe and swap SignIn ans SignUp screens via changing text and visibility view on layout.
      */
     private fun observeUI() {
-        uiObserver = Observer {
+        uiObserver = Observer<Boolean> {
             with(binding) {
                 if (it) {
                     textviewAuthHelloText.text =
@@ -125,20 +114,20 @@ class LoginFragment :
                     )
                 }
             }
-        }
-        viewModel.loginScreen.observe(this, uiObserver)
+
+        }.also { viewModel.loginScreen.observe(this@LoginFragment, it) }
+
     }
 
     /**
      * Observe and show/Hide help buttons.
      */
     private fun observeHelpers() {
-        helpersObserver = Observer {
+        helpersObserver = Observer<Boolean> {
             with(binding.flowAuthDebugButtons) {
                 if (it) setVisible() else setGone()
             }
-        }
-        viewModel.helperButtonsVisible.observe(this, helpersObserver)
+        }.also { viewModel.helperButtonsVisible.observe(this@LoginFragment, it) }
     }
 
     /**
@@ -381,33 +370,9 @@ class LoginFragment :
         }
     }
 
-//    /**
-//     * Save Instance State.
-//     */
-//    override fun onSaveInstanceState(outState: Bundle) {
-//        with(binding) {
-//            outState.putString(EMAIL_FIELD_STATE_KEY, textinputAuthEmail.text.toString())
-//            outState.putString(PASSWORD_FIELD_STATE_KEY, textinputAuthPassword.text.toString())
-//            outState.putInt(PASSWORD_VIEW_STATE_KEY, textinputlayoutAuthPassword.endIconMode)
-//            outState.putBoolean(CHECKBOX_STATE_STATE_KEY, checkboxAuthRememberMe.isChecked)
-//        }
-//        super.onSaveInstanceState(outState)
-//    }
-//
-//    /**
-//     * Load Instance State.
-//     */
-//    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
-//        super.onRestoreInstanceState(savedInstanceState)
-//        with(binding) {
-//            textinputAuthEmail.setText(savedInstanceState.getString(EMAIL_FIELD_STATE_KEY))
-//            textinputAuthPassword.setText(savedInstanceState.getString(PASSWORD_FIELD_STATE_KEY))
-//            textinputlayoutAuthPassword.endIconMode =
-//                savedInstanceState.getInt(PASSWORD_VIEW_STATE_KEY)
-//            checkboxAuthRememberMe.isChecked =
-//                savedInstanceState.getBoolean(CHECKBOX_STATE_STATE_KEY)
-//        }
-//    }
-
-
+    override fun onDestroyView() {
+        super.onDestroyView()
+        viewModel.loginScreen.removeObservers(this)
+        viewModel.helperButtonsVisible.removeObservers(this)
+    }
 }

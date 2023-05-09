@@ -80,5 +80,6 @@
     <string name="contacts_add_contact_birthday">Дата народження</string>
     <string name="contacts_add_contact_save_button">ЗБЕРЕГТИ</string>
     <string name="main_activity_person_name_hardcoded">Віктор Хардкодовський</string>
+    <string name="my_contacts_add_contact_please_write_name">Введіть ім\'я!</string>
 
 </resources>

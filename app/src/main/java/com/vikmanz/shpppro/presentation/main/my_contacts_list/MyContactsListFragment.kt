@@ -25,7 +25,6 @@ import com.vikmanz.shpppro.presentation.main.my_contacts_list.adapter.ContactsAd
 import com.vikmanz.shpppro.presentation.main.my_contacts_list.add_contact.AddContactDialogFragment
 import com.vikmanz.shpppro.presentation.main.my_contacts_list.decline_permision.OnDeclinePermissionDialogFragment
 import com.vikmanz.shpppro.presentation.utils.extensions.setGone
-import com.vikmanz.shpppro.presentation.utils.extensions.setInvisible
 import com.vikmanz.shpppro.presentation.utils.extensions.setMultipleInvisible
 import com.vikmanz.shpppro.presentation.utils.extensions.setMultipleVisible
 import com.vikmanz.shpppro.presentation.utils.extensions.setVisible
@@ -53,6 +52,8 @@ class MyContactsListFragment() :
     private lateinit var uiObserver: Observer<Boolean>
 
     private var undo: Snackbar? = null
+
+    private var deletedContact: Contact? = null
 
     /**
      * Set listeners for buttons.
@@ -142,7 +143,7 @@ class MyContactsListFragment() :
 
             override fun onDeleteUser(contact: Contact) {
                 // take contact from ContactsAdapter and delete it from ViewModel.
-                deleteContactFromViewModelWithUndo(contact)
+               if (contact != deletedContact) deleteContactFromViewModelWithUndo(contact)
             }
         })
     }
@@ -152,6 +153,7 @@ class MyContactsListFragment() :
      * Delete contact from ViewModel and show Undo to restore it.
      */
     private fun deleteContactFromViewModelWithUndo(contact: Contact) {
+        deletedContact = contact
         val position = viewModel.getContactPosition(contact)
         viewModel.deleteContact(contact)
         undo = Snackbar
@@ -162,6 +164,7 @@ class MyContactsListFragment() :
                         contact,
                         position
                     )
+                    deletedContact = null
                     undo?.dismiss()
                 }
             }
@@ -234,8 +237,11 @@ class MyContactsListFragment() :
 
     override fun onDestroyView() {
         super.onDestroyView()
+        deletedContact = null
+        undo?.dismiss()
         undo = null
         viewModel.fakeListActivated.removeObserver(uiObserver)
+        viewModel.fakeListActivated.removeObservers(this)
     }
 
 }

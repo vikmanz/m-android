@@ -19,12 +19,16 @@ class MyContactsListViewModel(
     @Suppress("unused") private val customArgument: MyContactsListFragment.CustomArgument
 ) : BaseViewModel() {
 
-    private val _contactsReposetory = App.contactsRepository
+    private val _contactsRepository = App.contactsRepository
+
+    init {
+        _contactsRepository.setFakeContacts()
+    }
 
     /**
      * Create fake contact list and Flow to take it from outside.
      */
-    val contactList = _contactsReposetory.contactList
+    val contactList = _contactsRepository.contactList
 
     /**
      * Variables to control swap between fake contacts and phone contacts lists.
@@ -35,35 +39,35 @@ class MyContactsListViewModel(
      * Add new contact to list of contacts to concrete index.
      */
     fun addContactToPosition(contact: Contact, index: Int) {
-        _contactsReposetory.addContact(contact, index)
+        _contactsRepository.addContact(contact, index)
     }
 
     /**
      * Delete contact from list of contacts.
      */
     fun deleteContact(contact: Contact) {
-        _contactsReposetory.deleteContact(contact)
+        _contactsRepository.deleteContact(contact)
     }
 
     /**
      * Get contact position in list of contacts.
      */
     fun getContactPosition(contact: Contact) : Int {
-        return _contactsReposetory.getContactPosition(contact)
+        return _contactsRepository.getContactPosition(contact)
     }
 
     /**
      * Get contact from list via index.
      */
     fun getContact(index: Int) : Contact? {
-        return _contactsReposetory.getContact(index)
+        return _contactsRepository.getContact(index)
     }
 
     /**
      * Get contact from list via index.
      */
     fun isContainsContact(contact: Contact) : Boolean {
-        return _contactsReposetory.isContainsContact(contact)
+        return _contactsRepository.isContainsContact(contact)
     }
 
     /**
@@ -71,15 +75,14 @@ class MyContactsListViewModel(
      */
     fun getContactsList() {
         if (fakeListActivated.value == true){
-            _contactsReposetory.setPhoneContacts()
+            _contactsRepository.setPhoneContacts()
         } else {
-            _contactsReposetory.setFakeContacts()
+            _contactsRepository.setFakeContacts()
         }
         fakeListActivated.swapBoolean()
     }
 
     fun onContactPressed(contactID: Long) {
-        //navigator.launchContactDetails(ContactDetailsFragment.CustomArgument("to_ContactsDetail_args", contactID))
         navigator.launchContactDetails(ContactDetailsFragment.CustomArgument(contactID))
     }
 
