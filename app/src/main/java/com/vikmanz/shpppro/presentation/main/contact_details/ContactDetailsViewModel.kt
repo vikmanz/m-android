@@ -10,11 +10,11 @@ class ContactDetailsViewModel(
     customArgument: ContactDetailsFragment.CustomArgument
 ) : BaseViewModel() {
 
-    private val contactsService = App.contactsRepository
+    private val contactsRepository = App.contactsRepository
 
     private val id = customArgument.contactID
 
-    private val contact: Contact = contactsService.findContact(id) ?: contactsService.generateRandomContact()
+    private val contact: Contact = contactsRepository.findContact(id) ?: contactsRepository.generateRandomContact()
 
     val name = contact.contactName
     val career = contact.contactCareer

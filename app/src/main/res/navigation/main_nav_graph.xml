@@ -44,5 +44,4 @@
             app:argType="com.vikmanz.shpppro.presentation.base.BaseArgument" />
     </fragment>
 
-
 </navigation>
