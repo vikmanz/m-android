@@ -1,6 +1,7 @@
 package com.vikmanz.shpppro.presentation.main.my_profile
 
 import android.content.Intent
+import androidx.navigation.fragment.navArgs
 import com.vikmanz.shpppro.presentation.base.BaseArgument
 import com.vikmanz.shpppro.R
 import com.vikmanz.shpppro.data.DataStoreManager
@@ -21,7 +22,6 @@ class MyProfileFragment :
     class CustomArgument(
         val email: String
     ) : BaseArgument
-
 
     /**
      * Create ViewModel for this activity.
