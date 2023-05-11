@@ -51,12 +51,11 @@ class LoginFragment :
     private var helpersObserver: Observer<Boolean>? = null
 
     private lateinit var dataStore: DataStoreManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         dataStore = DataStoreManager(requireActivity())
     }
-
-    override fun setStartUi() {}
 
     override fun setObservers() {
         observeUI()
@@ -69,8 +68,8 @@ class LoginFragment :
             textviewAuthSwitchScreenToLoginButton.setOnClickListener { viewModel.swapLoginAndRegister() }
         }
         initHelpTesterButtons()
-        setLoginPasswordFocusListeners()                 // Listeners to fields and buttons.
-        backgroundFocusHandler()    // de-focus fields when click on bg
+        setLoginPasswordFocusListeners()        // Listeners to fields and buttons.
+        backgroundFocusHandler()                // de-focus fields when click on bg
     }
 
     /**
@@ -211,7 +210,7 @@ class LoginFragment :
         }
 
         val maxPasswordLength =
-            resources.getInteger(R.integer.count_auth_password_max_length)  // Minimum # chars.
+            resources.getInteger(R.integer.count_loginFragment_passwordMaxLength)  // Minimum # chars.
         if (passwordText.length > maxPasswordLength) {
             result =
                 addErrorsDescriptionSeparator(result) + getString(

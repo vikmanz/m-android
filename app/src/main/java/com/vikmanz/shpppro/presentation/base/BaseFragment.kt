@@ -17,9 +17,9 @@ abstract class BaseFragment<VBinding : ViewBinding, VM : BaseViewModel>(
     private var _binding: VBinding? = null
     val binding get() = requireNotNull(_binding)
 
-    abstract fun setListeners()
-    abstract fun setObservers()
-    abstract fun setStartUi()
+    protected open fun setListeners() {}
+    protected open fun setObservers() {}
+    protected open fun onCreatedFragmentView() {}
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,7 +29,7 @@ abstract class BaseFragment<VBinding : ViewBinding, VM : BaseViewModel>(
         _binding = inflaterMethod.invoke(inflater, container, false)
         setListeners()
         setObservers()
-        setStartUi()
+        onCreatedFragmentView()
         return binding.root
     }
 

@@ -8,7 +8,7 @@
 
     <!-- Guide of center of elements. -->
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_contact_bg_center_of_screen"
+        android:id="@+id/guideLine_contactDetails_bgCenterOfScreen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -16,32 +16,35 @@
 
     <!-- Top half of screen. -->
     <View
-        android:id="@+id/guideline_contact_bg_top_half"
+        android:id="@+id/guideLine_contactDetails_bgTopHalf"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="?attr/colorSecondary"
-        app:layout_constraintBottom_toTopOf="@id/guideline_contact_bg_center_of_screen"
+        app:layout_constraintBottom_toTopOf="@id/guideLine_contactDetails_bgCenterOfScreen"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <!-- Title and title buttons flow. -->
     <androidx.constraintlayout.helper.widget.Flow
-        android:id="@+id/flow_contact_title_and_buttons"
+        android:id="@+id/flow_contactDetails_titleAndButtons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/marginHorizontal"
         android:layout_marginTop="@dimen/offset_M"
         android:orientation="horizontal"
-        app:constraint_referenced_ids="button_contact_back, textview_contact_title, button_contact_decline_access"
+        app:constraint_referenced_ids="
+        button_contactDetails_backButton,
+        textView_contactDetails_title,
+        button_contactDetails_declineAccess"
         app:flow_horizontalStyle="spread_inside"
-        app:layout_constraintEnd_toEndOf="@id/guideline_contact_bg_top_half"
-        app:layout_constraintStart_toStartOf="@id/guideline_contact_bg_top_half"
-        app:layout_constraintTop_toTopOf="@id/guideline_contact_bg_top_half"
+        app:layout_constraintEnd_toEndOf="@id/guideLine_contactDetails_bgTopHalf"
+        app:layout_constraintStart_toStartOf="@id/guideLine_contactDetails_bgTopHalf"
+        app:layout_constraintTop_toTopOf="@id/guideLine_contactDetails_bgTopHalf"
         tools:ignore="MissingConstraints" />
 
     <androidx.appcompat.widget.AppCompatImageButton
-        android:id="@+id/button_contact_back"
+        android:id="@+id/button_contactDetails_backButton"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:background="@android:color/transparent"
@@ -49,16 +52,16 @@
         tools:ignore="MissingConstraints,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/textview_contact_title"
+        android:id="@+id/textView_contactDetails_title"
         style="@style/basicText_bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Profile"
-        android:textSize="@dimen/size_text_font_L"
-        tools:ignore="HardcodedText,MissingConstraints" />
+        android:text="@string/contactDetails_profileTitle"
+        android:textSize="@dimen/size_textFont_L"
+        tools:ignore="MissingConstraints" />
 
     <androidx.appcompat.widget.AppCompatImageButton
-        android:id="@+id/button_contact_decline_access"
+        android:id="@+id/button_contactDetails_declineAccess"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:background="@android:color/transparent"
@@ -69,96 +72,104 @@
         tools:layout_editor_absoluteY="16dp"
         tools:visibility="invisible" />
 
-
     <!-- Avatar and Person Info. -->
     <!-- <!- Avatar flow. -->
     <androidx.constraintlayout.helper.widget.Flow
-        android:id="@+id/flow_main_profile_info"
+        android:id="@+id/flow_contactDetails_profileInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:constraint_referenced_ids="imageview_main_avatar_image, flow_main_person_text_info"
+        app:constraint_referenced_ids="
+        imageView_contactDetails_avatarImage,
+        flow_contactDetails_personTextInfo"
         app:flow_verticalGap="@dimen/offset_M"
-        app:layout_constraintBottom_toBottomOf="@id/guideline_contact_bg_center_of_screen"
+        app:layout_constraintBottom_toBottomOf="@id/guideLine_contactDetails_bgCenterOfScreen"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/flow_contact_title_and_buttons" />
+        app:layout_constraintTop_toBottomOf="@id/flow_contactDetails_titleAndButtons" />
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/imageview_main_avatar_image"
+        android:id="@+id/imageView_contactDetails_avatarImage"
         android:layout_width="@dimen/avatar_radius"
         android:layout_height="@dimen/avatar_radius"
         android:layout_marginTop="28dp"
         android:layout_marginBottom="28dp"
-        android:src="@drawable/sample_avatar" />
+        android:src="@drawable/sample_avatar"
+        tools:ignore="MissingConstraints" />
     <!-- <!- Person Info flow. -->
 
     <androidx.constraintlayout.helper.widget.Flow
-        android:id="@+id/flow_main_person_text_info"
+        android:id="@+id/flow_contactDetails_personTextInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:constraint_referenced_ids="textview_main_person_name, textview_main_person_career, textview_main_person_address"
+        app:constraint_referenced_ids="
+        textView_contactDetails_personName,
+        textView_contactDetails_personCareer,
+        textView_contactDetails_personAddress"
         app:flow_verticalGap="@dimen/offset_S"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="149dp"
         tools:layout_editor_absoluteY="282dp" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/textview_main_person_name"
+        android:id="@+id/textView_contactDetails_personName"
         style="@style/basicText_bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/main_person_name_sample"
-        android:textSize="@dimen/size_text_font_M"
+        android:textSize="@dimen/size_textFont_M"
         tools:ignore="MissingConstraints,TextContrastCheck" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/textview_main_person_career"
+        android:id="@+id/textView_contactDetails_personCareer"
         style="@style/basicText_bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/main_person_career_sample"
         android:textColor="?attr/colorOnTertiary"
-        android:textSize="@dimen/size_text_font_XS"
+        android:textSize="@dimen/size_textFont_XS"
         tools:ignore="MissingConstraints" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/textview_main_person_address"
+        android:id="@+id/textView_contactDetails_personAddress"
         style="@style/basicText_bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/offset_S"
         android:text="@string/main_person_address_sample"
         android:textColor="?attr/colorOnTertiary"
-        android:textSize="@dimen/size_text_font_XS"
+        android:textSize="@dimen/size_textFont_XS"
         tools:ignore="MissingConstraints" />
 
 
     <!-- Bottom half of screen. -->
     <View
-        android:id="@+id/guideline_contact_bg_bottom_half"
+        android:id="@+id/guideLine_contactDetails_bgBottomHalf"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="?attr/colorTertiary"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/guideline_contact_bg_top_half" />
+        app:layout_constraintTop_toBottomOf="@id/guideLine_contactDetails_bgTopHalf" />
 
     <!-- Social Icons flow. -->
     <androidx.constraintlayout.helper.widget.Flow
-        android:id="@+id/flow_main_social_icons"
+        android:id="@+id/flow_contactDetails_socialIcons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:constraint_referenced_ids="imageview_main_facebook_button, imageview_main_linkedin_button, imageview_main_instagram_button"
+        app:constraint_referenced_ids="
+        imageView_contactDetails_facebookButton,
+        imageView_contactDetails_linkedinButton,
+        imageView_contactDetails_instagramButton"
         app:flow_horizontalGap="@dimen/offset_XL"
-        app:layout_constraintBottom_toTopOf="@+id/button_main_view_my_contacts"
+        app:layout_constraintBottom_toTopOf="@+id/button_contactDetails_viewMyContacts"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/guideline_contact_bg_center_of_screen"
+        app:layout_constraintTop_toBottomOf="@id/guideLine_contactDetails_bgCenterOfScreen"
         app:layout_constraintVertical_bias="0.33" />
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/imageview_main_facebook_button"
+        android:id="@+id/imageView_contactDetails_facebookButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/socials_outline_circle"
@@ -169,7 +180,7 @@
         tools:ignore="MissingConstraints,SpeakableTextPresentCheck" />
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/imageview_main_linkedin_button"
+        android:id="@+id/imageView_contactDetails_linkedinButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/socials_outline_circle"
@@ -180,7 +191,7 @@
         tools:ignore="MissingConstraints,SpeakableTextPresentCheck" />
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/imageview_main_instagram_button"
+        android:id="@+id/imageView_contactDetails_instagramButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/socials_outline_circle"
@@ -190,21 +201,20 @@
         app:srcCompat="@drawable/socials_logo_instagram"
         tools:ignore="MissingConstraints,SpeakableTextPresentCheck" />
 
-
     <!-- View Contacts button. -->
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/button_main_view_my_contacts"
+        android:id="@+id/button_contactDetails_viewMyContacts"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/size_button_height_XL"
+        android:layout_height="@dimen/size_buttonHeight_XL"
         android:layout_marginHorizontal="@dimen/marginHorizontal"
         android:layout_marginBottom="@dimen/offset_M"
         android:background="@drawable/btn_std_orange_bg"
-        android:text="MESSAGE"
+        android:text="@string/contactDetails_messageButton"
         android:textAppearance="@style/basicText_buttonsText"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="HardcodedText,TextContrastCheck,VisualLintButtonSize" />
+        tools:ignore="TextContrastCheck,VisualLintButtonSize" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

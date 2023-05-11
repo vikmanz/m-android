@@ -44,7 +44,7 @@ class MainNavigator(
 
     override fun goBack(result: Any?) = whenActivityActive {
         if (USE_NAVIGATION_COMPONENT) {
-           it.findNavController(R.id.fragment_container_main_container).popBackStack()
+           it.findNavController(R.id.fragmentContainer_mainActivity).popBackStack()
         } else {
             if (result != null) {
                 _result.value = Event(result)
@@ -91,7 +91,7 @@ class MainNavigator(
         if (addToBackStack) transaction.addToBackStack(null)
         log("begin transaction")
         transaction
-            .replace(R.id.fragment_container_main_container, fragment)
+            .replace(R.id.fragmentContainer_mainActivity, fragment)
             .commit()
         log("commit")
     }
@@ -102,7 +102,7 @@ class MainNavigator(
         direction: Int, //NavDirections
     ) {
         val bundle = bundleOf(getString(R.string.safe_arg_id) to argument)
-        activity.findNavController(R.id.fragment_container_main_container)
+        activity.findNavController(R.id.fragmentContainer_mainActivity)
             .navigate(direction, bundle)
     }
 

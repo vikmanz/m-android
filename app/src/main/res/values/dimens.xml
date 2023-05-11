@@ -12,29 +12,29 @@
     <dimen name="offset_XL">32dp</dimen>
 
     <!-- Buttons size. -->
-    <dimen name="size_button_height_M">40dp</dimen>
-    <dimen name="size_button_height_L">48dp</dimen>
-    <dimen name="size_button_height_XL">55dp</dimen>
+    <dimen name="size_buttonHeight_M">40dp</dimen>
+    <dimen name="size_buttonHeight_L">48dp</dimen>
+    <dimen name="size_buttonHeight_XL">55dp</dimen>
 
     <!-- Text size. -->
-    <dimen name="size_text_font_XXXS">8sp</dimen>
-    <dimen name="size_text_font_XXS">12sp</dimen>
-    <dimen name="size_text_font_XS">14sp</dimen>
-    <dimen name="size_text_font_S">16sp</dimen>
-    <dimen name="size_text_font_M">18sp</dimen>
-    <dimen name="size_text_font_L">24sp</dimen>
-    <dimen name="size_text_font_X">28sp</dimen>
-    <dimen name="size_text_font_XL">32sp</dimen>
+    <dimen name="size_textFont_XXXS">8sp</dimen>
+    <dimen name="size_textFont_XXS">12sp</dimen>
+    <dimen name="size_textFont_XS">14sp</dimen>
+    <dimen name="size_textFont_S">16sp</dimen>
+    <dimen name="size_textFont_M">18sp</dimen>
+    <dimen name="size_textFont_L">24sp</dimen>
+    <dimen name="size_textFont_X">28sp</dimen>
+    <dimen name="size_textFont_XL">32sp</dimen>
 
     <!-- Avatar dimens. -->
     <dimen name="avatar_radius">130dp</dimen>
-    <dimen name="avatar_corner_radius">360dp</dimen>
+    <dimen name="avatar_cornerRadius">360dp</dimen>
 
     <!-- HARD values. -->
-    <dimen name="offset_auth_hello_text_from_top_portrait">146dp</dimen>
-    <dimen name="offset_auth_hello_text_from_top_landscape">20dp</dimen>
-    <dimen name="email_password_boxCollapsedPaddingTop">4dp</dimen>
-    <dimen name="helpButtonsWidth">110dp</dimen>
-    <dimen name="margin">10</dimen>
+    <dimen name="offset_loginFragment_helloTextFromTop_portrait">146dp</dimen>
+    <dimen name="offset_loginFragment_helloTextFromTop_landscape">20dp</dimen>
+    <dimen name="padding_loginFragment_emailPasswordBoxCollapsedPaddingTop">4dp</dimen>
+    <dimen name="width_loginFragment_helpButtonsWidth">110dp</dimen>
+<!--    <dimen name="margin">10</dimen>-->
 
 </resources>

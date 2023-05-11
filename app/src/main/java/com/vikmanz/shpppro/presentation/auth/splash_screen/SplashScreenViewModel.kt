@@ -7,7 +7,7 @@ import com.vikmanz.shpppro.utilits.extensions.log
 
 class SplashScreenViewModel(
     private val navigator: Navigator,
-    customArgument: SplashScreenFragment.CustomArgument
+    @Suppress("UNUSED_PARAMETER") customArgument: SplashScreenFragment.CustomArgument
 ) : BaseViewModel() {
 
     fun goToLoginFragment() {

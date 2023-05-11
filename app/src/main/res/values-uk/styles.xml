@@ -4,7 +4,7 @@
     <!-- ————————————————————  Text styles. ———————————————————— -->
 
     <style name="basicText_buttonsText" parent="basicText">
-        <item name="android:textSize">@dimen/size_text_font_XS</item>
+        <item name="android:textSize">@dimen/size_textFont_XS</item>
     </style>
 
 </resources>

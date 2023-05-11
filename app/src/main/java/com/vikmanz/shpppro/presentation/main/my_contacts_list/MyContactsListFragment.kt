@@ -38,11 +38,7 @@ import kotlinx.coroutines.*
  */
 class MyContactsListFragment() :
     BaseFragment<FragmentMyContactsListBinding, MyContactsListViewModel>(FragmentMyContactsListBinding::inflate) {
-
-    // this screen accepts a string value from the HelloFragment
-    class CustomArgument(
-//        override val name: String,
-    ) : BaseArgument
+    class CustomArgument : BaseArgument
 
     /**
      * Create ViewModel for this activity.
@@ -60,11 +56,11 @@ class MyContactsListFragment() :
      */
     override fun setListeners() {
         with(binding) {
-            buttonMycontactsBack.setOnClickListener { viewModel.onButtonBackPressed() }
-            buttonMycontactsDeclineAccess.setOnClickListener { buttonToRemoveAccess() }
-            buttonMycontactsAddContact.setOnClickListener { addNewContact() }
-            buttonMycontactsAddContactsFromPhonebook.setOnClickListener { requestReadContactsPermission() }
-            buttonMycontactsAddContactsFromFaker.setOnClickListener { changeContactsList() }
+            buttonMyContactsBackButton.setOnClickListener { viewModel.onButtonBackPressed() }
+            buttonMyContactsDeclineAccess.setOnClickListener { buttonToRemoveAccess() }
+            buttonMyContactsAddContact.setOnClickListener { addNewContact() }
+            buttonMyContactsAddContactsFromPhonebook.setOnClickListener { requestReadContactsPermission() }
+            buttonMyContactsAddContactsFromFaker.setOnClickListener { changeContactsList() }
         }
     }
 
@@ -77,7 +73,7 @@ class MyContactsListFragment() :
     }
 
 
-    override fun setStartUi() {
+    override fun onCreatedFragmentView() {
         initRecyclerView()
     }
 
@@ -86,18 +82,18 @@ class MyContactsListFragment() :
             with(binding) {
                 if (it) {
                     setMultipleInvisible(
-                        buttonMycontactsDeclineAccess,
-                        textviewMycontactsRevokePermission
+                        buttonMyContactsDeclineAccess,
+                        textviewMyContactsRevokePermission
                     )
-                    buttonMycontactsAddContactsFromFaker.setGone()
-                    buttonMycontactsAddContactsFromPhonebook.setVisible()
+                    buttonMyContactsAddContactsFromFaker.setGone()
+                    buttonMyContactsAddContactsFromPhonebook.setVisible()
                 } else {
                     setMultipleVisible(
-                        buttonMycontactsAddContactsFromFaker,
-                        buttonMycontactsDeclineAccess,
-                        textviewMycontactsRevokePermission
+                        buttonMyContactsAddContactsFromFaker,
+                        buttonMyContactsDeclineAccess,
+                        textviewMyContactsRevokePermission
                     )
-                    buttonMycontactsAddContactsFromPhonebook.setGone()
+                    buttonMyContactsAddContactsFromPhonebook.setGone()
                 }
             }
         }
@@ -120,14 +116,14 @@ class MyContactsListFragment() :
      */
     private fun initRecyclerView() {
         with(binding) {
-            recyclerviewMycontactsContactList.layoutManager =
+            recyclerViewMyContactsContactList.layoutManager =
                 LinearLayoutManager(requireContext())
-            recyclerviewMycontactsContactList.addItemDecoration(
+            recyclerViewMyContactsContactList.addItemDecoration(
                 MarginItemDecoration(
                     MARGINS_OF_ELEMENTS
                 )
             )
-            recyclerviewMycontactsContactList.adapter = adapter
+            recyclerViewMyContactsContactList.adapter = adapter
         }
         initSwipeToDelete()
     }
@@ -182,7 +178,7 @@ class MyContactsListFragment() :
             }
         }
         val itemTouchHelper = ItemTouchHelper(swipeHandler)
-        itemTouchHelper.attachToRecyclerView(binding.recyclerviewMycontactsContactList)
+        itemTouchHelper.attachToRecyclerView(binding.recyclerViewMyContactsContactList)
     }
 
 

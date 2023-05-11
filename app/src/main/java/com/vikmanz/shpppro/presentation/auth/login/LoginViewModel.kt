@@ -7,6 +7,7 @@ import com.vikmanz.shpppro.presentation.navigator.Navigator
 import com.vikmanz.shpppro.presentation.utils.extensions.swapBoolean
 
 private const val DEFAULT_SHOW_HELPERS = false
+@Suppress("unused")
 class LoginViewModel(
     private val navigator: Navigator,
     customArgument: LoginFragment.CustomArgument
@@ -16,12 +17,11 @@ class LoginViewModel(
     val loginScreen = MutableLiveData(LOGIN_VIEW_FIRST)
 
     // Save state of helper buttons. True - visible, False - gone.
-    // Save state of screen layout. True - Login screen, False - Register screen.
     val helperButtonsVisible = MutableLiveData(DEFAULT_SHOW_HELPERS)
 
+    // For show errors only for one field and not for all if it didn't been activated.
     var emailAlreadyFocused = false
     var passwordAlreadyFocused = false
-
 
     /**
      * Change screen to register or to login.

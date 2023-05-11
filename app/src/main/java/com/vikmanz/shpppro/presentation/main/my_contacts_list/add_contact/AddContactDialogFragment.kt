@@ -88,7 +88,7 @@ class AddContactDialogFragment : DialogFragment() {
      * Get fake image.
      */
     private fun requestDefaultImage() {
-        viewModel.contactsReposetory.incrementPhotoCounter()
+        viewModel.contactsRepository.incrementPhotoCounter()
 //        if (viewModel.imgUri == Uri.EMPTY) viewModel.imgUri = Uri.EMPTY
         updateAvatarImage()
     }

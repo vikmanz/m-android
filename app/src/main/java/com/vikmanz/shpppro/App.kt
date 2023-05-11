@@ -14,7 +14,7 @@ class App : Application() {
 
     override fun onCreate() {
         app = this
-        _contactsRepository = ContactsRepository()
+        contactsRepositoryPrivate = ContactsRepository()
         super.onCreate()
     }
 
@@ -22,7 +22,8 @@ class App : Application() {
         private lateinit var app: App
         val instance: App get() = app
 
-        private lateinit var _contactsRepository: ContactsRepository
-        val contactsRepository: ContactsRepository get() = _contactsRepository
+        private lateinit var contactsRepositoryPrivate: ContactsRepository
+        val contactsRepository: ContactsRepository
+            get() = contactsRepositoryPrivate
     }
 }

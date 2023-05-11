@@ -34,8 +34,6 @@ class SplashScreenFragment :
         dataStore = DataStoreManager(requireActivity())
     }
 
-    override fun setStartUi() {}
-    override fun setListeners() {}
     override fun setObservers() {
         setAutoLoginObserver()
     }

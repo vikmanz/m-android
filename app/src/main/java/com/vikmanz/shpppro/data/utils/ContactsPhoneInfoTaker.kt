@@ -3,7 +3,6 @@ package com.vikmanz.shpppro.data.utils
 import android.annotation.SuppressLint
 import android.content.ContentResolver
 import android.provider.ContactsContract
-import android.util.Log
 import com.vikmanz.shpppro.App
 import com.vikmanz.shpppro.constants.Constants.MAX_PHONE_IMPORT_CONTACTS_COUNT
 import com.vikmanz.shpppro.utilits.extensions.log
@@ -33,7 +32,6 @@ class ContactsPhoneInfoTaker {
         val cursor = contentResolver.query(uri, projection, selection, null, sortOrder)
 
         cursor?.let {
-            Log.d("myLog", "Total contacts count: ${cursor.count}")
             while (cursor.moveToNext()) {
 
                 val id = cursor.getLong(cursor.getColumnIndex(ContactsContract.Data.CONTACT_ID))
@@ -69,9 +67,6 @@ class ContactsPhoneInfoTaker {
                     ContactsContract.CommonDataKinds.Email.ADDRESS,
                     ContactsContract.CommonDataKinds.Email.CONTENT_ITEM_TYPE
                 )
-
-                log("Adding ::: id: $id, name: $name, phone: $phone, email: $email, " +
-                        "company: $company, have photo: ${photoUri != ""}")
                 listOfContactsInformation.add(listOf(name, photoUri, phone, email, company))
 
                 if (listOfContactsInformation.size == MAX_PHONE_IMPORT_CONTACTS_COUNT) break

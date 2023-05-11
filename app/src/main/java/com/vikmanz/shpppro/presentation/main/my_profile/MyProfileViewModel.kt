@@ -12,7 +12,6 @@ class MyProfileViewModel(
     val userEmail = customArgument.email
 
     fun onMyContactsPressed() {
-      //  navigator.launchMyContacts(MyContactsListFragment.CustomArgument(name = "to_MyContacts_args"))
        navigator.launchMyContacts(MyContactsListFragment.CustomArgument())
     }
 

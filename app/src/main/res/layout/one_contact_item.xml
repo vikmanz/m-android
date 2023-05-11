@@ -20,12 +20,11 @@
         android:paddingVertical="@dimen/offset_S">
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/imageview_onecontact_avatar_image"
+            android:id="@+id/imageView_oneContact_avatarImage"
             android:layout_width="75dp"
             android:layout_height="75dp"
             android:scaleType="fitXY"
             app:srcCompat="@drawable/ic_person" />
-
 
         <LinearLayout
             android:layout_width="0dp"
@@ -36,29 +35,29 @@
             android:paddingHorizontal="@dimen/offset_S">
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/textview_onecontact_name"
+                android:id="@+id/textView_oneContact_name"
                 style="@style/basicText_bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/contacts_recycler_person_name_sample"
                 android:textColor="?attr/colorSecondary"
-                android:textSize="@dimen/size_text_font_M"
+                android:textSize="@dimen/size_textFont_M"
                 tools:ignore="TextContrastCheck" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/textview_onecontact_career"
+                android:id="@+id/textView_oneContact_career"
                 style="@style/basicText_bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/contacts_recycler_person_career_sample"
                 android:textColor="?attr/colorOnTertiary"
-                android:textSize="@dimen/size_text_font_XS"
+                android:textSize="@dimen/size_textFont_XS"
                 tools:ignore="TextContrastCheck" />
 
         </LinearLayout>
 
         <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/button_onecontact_remove"
+            android:id="@+id/button_oneContact_remove"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

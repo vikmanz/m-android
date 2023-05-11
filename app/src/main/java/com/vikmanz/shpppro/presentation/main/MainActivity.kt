@@ -33,7 +33,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
         startRootFragment(savedInstanceState)
     }
 
-
     private fun startRootFragment(savedInstanceState: Bundle?) {
         val email = intent.getStringExtra(INTENT_EMAIL_ID).toString()
         if (savedInstanceState == null) {
@@ -43,7 +42,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
                 val navHostFragment =
                     NavHostFragment.create(R.navigation.main_nav_graph, startArguments)
                 supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container_main_container, navHostFragment)
+                    .replace(R.id.fragmentContainer_mainActivity, navHostFragment)
                     .setPrimaryNavigationFragment(navHostFragment) // equivalent to app:defaultNavHost="true"
                     .commit()
             } else {
@@ -51,11 +50,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
                 navigator.launchStartFragment(args)
             }
         }
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        //onBackPressed()
-        return true
     }
 
     override fun onResume() {

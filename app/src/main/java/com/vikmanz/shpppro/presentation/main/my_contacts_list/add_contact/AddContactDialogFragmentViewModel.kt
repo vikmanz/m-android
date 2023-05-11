@@ -10,14 +10,14 @@ import com.vikmanz.shpppro.App
 class AddContactDialogFragmentViewModel(
 ) : ViewModel() {
 
-    val contactsReposetory = App.contactsRepository
+    val contactsRepository = App.contactsRepository
 
     /**
      * Uri for image, which will be take from gallery.
      */
     var imgUri: Uri = Uri.EMPTY
 
-    fun getFakePhotoUrl() = contactsReposetory.getCurrentContactPhotoUrl()
+    fun getFakePhotoUrl() = contactsRepository.getCurrentContactPhotoUrl()
 
     fun createNewContact(
         name: String,
@@ -27,10 +27,10 @@ class AddContactDialogFragmentViewModel(
         address: String,
         birthday: String
     ) {
-        val newContact = contactsReposetory.createContact(
-            photoUrl = contactsReposetory.getCurrentContactPhotoUrl(),
+        val newContact = contactsRepository.createContact(
+            photoUrl = contactsRepository.getCurrentContactPhotoUrl(),
             photoUri = imgUri,
-            photoIndex = contactsReposetory.getCurrentPhotoCounter(),
+            photoIndex = contactsRepository.getCurrentPhotoCounter(),
             name = name,
             career = career,
             email = email,
@@ -38,6 +38,6 @@ class AddContactDialogFragmentViewModel(
             address = address,
             birthday = birthday
         )
-        contactsReposetory.addContact(newContact)
+        contactsRepository.addContact(newContact)
     }
 }

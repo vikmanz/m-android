@@ -27,15 +27,15 @@ class ContactsAdapter(private val contactActionListener: ContactActionListener) 
             with(binding) {
                 // bind Photo
                 if (contact.contactPhotoUri == Uri.EMPTY) {
-                    imageviewOnecontactAvatarImage.setContactPhoto(contact.contactPhotoUrl)
+                    imageViewOneContactAvatarImage.setContactPhoto(contact.contactPhotoUrl)
                 } else {
-                    imageviewOnecontactAvatarImage.setContactPhotoFromUri(contact.contactPhotoUri)
+                    imageViewOneContactAvatarImage.setContactPhotoFromUri(contact.contactPhotoUri)
                 }
                 // bind Name/Career
-                textviewOnecontactName.text = contact.contactName
-                textviewOnecontactCareer.text = contact.contactPhone
+                textViewOneContactName.text = contact.contactName
+                textViewOneContactCareer.text = contact.contactPhone
                 // bind delete listener
-                buttonOnecontactRemove.setOnClickListener {
+                buttonOneContactRemove.setOnClickListener {
                     // send contact to MyContactsActivity for delete it from ViewModel.
                     contactActionListener.onDeleteUser(contact)
                 }

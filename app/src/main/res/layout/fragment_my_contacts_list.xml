@@ -8,7 +8,7 @@
 
     <!-- Guide of center of elements. -->
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_mycontacts_bg_center_of_screen"
+        android:id="@+id/guideLine_myContactsFragment_bgCenterOfScreen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -16,33 +16,34 @@
 
     <!-- Top half of screen. -->
     <View
-        android:id="@+id/guideline_mycontacts_bg_top_half"
+        android:id="@+id/guideLine_myContacts_bgTopHalf"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="?attr/colorSecondary"
-        app:layout_constraintBottom_toTopOf="@id/guideline_mycontacts_bg_center_of_screen"
+        app:layout_constraintBottom_toTopOf="@id/guideLine_myContactsFragment_bgCenterOfScreen"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
     <!-- Title and title buttons flow. -->
     <androidx.constraintlayout.helper.widget.Flow
-        android:id="@+id/flow_mycontacts_title_and_buttons"
+        android:id="@+id/flow_myContacts_titleAndButtons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/marginHorizontal"
         android:layout_marginTop="@dimen/offset_M"
         android:orientation="horizontal"
-        app:constraint_referenced_ids="button_mycontacts_back, textview_mycontacts_title, button_mycontacts_decline_access"
+        app:constraint_referenced_ids="
+        button_myContacts_backButton,
+        textView_myContacts_title,
+        button_myContacts_declineAccess"
         app:flow_horizontalStyle="spread_inside"
-        app:layout_constraintEnd_toEndOf="@id/guideline_mycontacts_bg_top_half"
-        app:layout_constraintStart_toStartOf="@id/guideline_mycontacts_bg_top_half"
-        app:layout_constraintTop_toTopOf="@id/guideline_mycontacts_bg_top_half"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintEnd_toEndOf="@id/guideLine_myContacts_bgTopHalf"
+        app:layout_constraintStart_toStartOf="@id/guideLine_myContacts_bgTopHalf"
+        app:layout_constraintTop_toTopOf="@id/guideLine_myContacts_bgTopHalf" />
 
     <androidx.appcompat.widget.AppCompatImageButton
-        android:id="@+id/button_mycontacts_back"
+        android:id="@+id/button_myContacts_backButton"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:background="@android:color/transparent"
@@ -50,30 +51,30 @@
         tools:ignore="MissingConstraints,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/textview_mycontacts_title"
+        android:id="@+id/textView_myContacts_title"
         style="@style/basicText_bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/contacts_contacts_title"
-        android:textSize="@dimen/size_text_font_XL"
+        android:textSize="@dimen/size_textFont_XL"
         tools:ignore="MissingConstraints" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/textview_mycontacts_revoke_permission"
+        android:id="@+id/textview_myContacts_revokePermission"
         style="@style/basicText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/revoke_permits"
         android:textAlignment="center"
-        android:textSize="@dimen/size_text_font_XXXS"
+        android:textSize="@dimen/size_textFont_XXXS"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/button_mycontacts_decline_access"
-        app:layout_constraintEnd_toStartOf="@+id/button_mycontacts_decline_access"
-        app:layout_constraintTop_toTopOf="@+id/button_mycontacts_decline_access"
+        app:layout_constraintBottom_toBottomOf="@+id/button_myContacts_declineAccess"
+        app:layout_constraintEnd_toStartOf="@+id/button_myContacts_declineAccess"
+        app:layout_constraintTop_toTopOf="@+id/button_myContacts_declineAccess"
         tools:visibility="visible" />
 
     <androidx.appcompat.widget.AppCompatImageButton
-        android:id="@+id/button_mycontacts_decline_access"
+        android:id="@+id/button_myContacts_declineAccess"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:background="@android:color/transparent"
@@ -85,67 +86,66 @@
         tools:visibility="visible" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/button_mycontacts_add_contact"
+        android:id="@+id/button_myContacts_addContact"
         style="@style/basicText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/contacts_add_contact"
-        android:textSize="@dimen/size_text_font_XS"
+        android:textSize="@dimen/size_textFont_XS"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginStart="@dimen/offset_M"
-        app:layout_constraintTop_toBottomOf="@+id/flow_mycontacts_title_and_buttons"
-        app:layout_constraintBottom_toTopOf="@+id/guideline_mycontacts_bg_center_of_screen"
+        app:layout_constraintTop_toBottomOf="@+id/flow_myContacts_titleAndButtons"
+        app:layout_constraintBottom_toTopOf="@+id/guideLine_myContactsFragment_bgCenterOfScreen"
         tools:ignore="MissingConstraints" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/button_mycontacts_add_contacts_from_phonebook"
+        android:id="@+id/button_myContacts_addContactsFromPhonebook"
         style="@style/basicText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/contacts_change_to_phonebook"
-        android:textSize="@dimen/size_text_font_XS"
+        android:textSize="@dimen/size_textFont_XS"
         android:layout_marginEnd="@dimen/offset_M"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/flow_mycontacts_title_and_buttons"
-        app:layout_constraintBottom_toTopOf="@+id/guideline_mycontacts_bg_center_of_screen"
+        app:layout_constraintTop_toBottomOf="@+id/flow_myContacts_titleAndButtons"
+        app:layout_constraintBottom_toTopOf="@+id/guideLine_myContactsFragment_bgCenterOfScreen"
         tools:ignore="MissingConstraints,VisualLintOverlap" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/button_mycontacts_add_contacts_from_faker"
+        android:id="@+id/button_myContacts_addContactsFromFaker"
         style="@style/basicText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/contacts_change_to_fake_data"
-        android:textSize="@dimen/size_text_font_XS"
+        android:textSize="@dimen/size_textFont_XS"
         android:layout_marginEnd="@dimen/offset_M"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/flow_mycontacts_title_and_buttons"
-        app:layout_constraintBottom_toTopOf="@+id/guideline_mycontacts_bg_center_of_screen"
+        app:layout_constraintTop_toBottomOf="@+id/flow_myContacts_titleAndButtons"
+        app:layout_constraintBottom_toTopOf="@+id/guideLine_myContactsFragment_bgCenterOfScreen"
         android:visibility="gone"
-        tools:ignore="MissingConstraints"
         tools:visibility="visible" />
 
     <!-- Bottom half of screen. -->
     <View
-        android:id="@+id/guideline_mycontacts_bg_bottom_half"
+        android:id="@+id/guideLine_myContacts_bgBottomHalf"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="?attr/colorTertiary"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/guideline_mycontacts_bg_top_half" />
+        app:layout_constraintTop_toBottomOf="@id/guideLine_myContacts_bgTopHalf" />
 
 
     <!-- Recycler View for Contacts. -->
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerview_mycontacts_contact_list"
+        android:id="@+id/recyclerView_myContacts_contactList"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginHorizontal="@dimen/offset_M"
         android:layout_marginVertical="@dimen/offset_M"
-        app:layout_constraintBottom_toBottomOf="@id/guideline_mycontacts_bg_bottom_half"
-        app:layout_constraintEnd_toEndOf="@id/guideline_mycontacts_bg_bottom_half"
-        app:layout_constraintStart_toStartOf="@id/guideline_mycontacts_bg_bottom_half"
-        app:layout_constraintTop_toTopOf="@id/guideline_mycontacts_bg_bottom_half"
+        app:layout_constraintBottom_toBottomOf="@id/guideLine_myContacts_bgBottomHalf"
+        app:layout_constraintEnd_toEndOf="@id/guideLine_myContacts_bgBottomHalf"
+        app:layout_constraintStart_toStartOf="@id/guideLine_myContacts_bgBottomHalf"
+        app:layout_constraintTop_toTopOf="@id/guideLine_myContacts_bgBottomHalf"
         tools:listitem="@layout/one_contact_item" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

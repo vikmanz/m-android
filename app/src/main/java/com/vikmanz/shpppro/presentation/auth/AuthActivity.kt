@@ -8,7 +8,6 @@ import androidx.navigation.fragment.NavHostFragment
 import com.vikmanz.shpppro.R
 import com.vikmanz.shpppro.constants.USE_NAVIGATION_COMPONENT
 import com.vikmanz.shpppro.databinding.ActivityAuthBinding
-import com.vikmanz.shpppro.presentation.auth.login.LoginFragment
 import com.vikmanz.shpppro.presentation.auth.splash_screen.SplashScreenFragment
 import com.vikmanz.shpppro.presentation.base.BaseActivity
 import com.vikmanz.shpppro.presentation.navigator.AuthNavigator
@@ -46,7 +45,7 @@ class AuthActivity : BaseActivity<ActivityAuthBinding>(ActivityAuthBinding::infl
                 val navHostFragment = NavHostFragment.create(R.navigation.auth_nav_graph, startArguments)
 
                 supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container_auth_container, navHostFragment)
+                    .replace(R.id.fragmentContainer_authActivity, navHostFragment)
                     .setPrimaryNavigationFragment(navHostFragment) // equivalent to app:defaultNavHost="true"
                     .commit()
 

@@ -12,7 +12,6 @@ import com.vikmanz.shpppro.presentation.base.BaseArgument
 import com.vikmanz.shpppro.R
 import com.vikmanz.shpppro.constants.USE_NAVIGATION_COMPONENT
 import com.vikmanz.shpppro.presentation.auth.AuthActivity
-import com.vikmanz.shpppro.presentation.main.MainActivity
 import com.vikmanz.shpppro.utilits.extensions.log
 
 /**
@@ -44,7 +43,7 @@ class AuthNavigator(
 
     override fun goBack(result: Any?) = whenActivityActive {
         if (USE_NAVIGATION_COMPONENT) {
-           it.findNavController(R.id.fragment_container_auth_container).popBackStack()
+           it.findNavController(R.id.fragmentContainer_authActivity).popBackStack()
         } else {
             if (result != null) {
                 _result.value = Event(result)
@@ -91,7 +90,7 @@ class AuthNavigator(
         if (addToBackStack) transaction.addToBackStack(null)
         log("begin transaction")
         transaction
-            .replace(R.id.fragment_container_auth_container, fragment)
+            .replace(R.id.fragmentContainer_authActivity, fragment)
             .commit()
         log("commit")
     }
@@ -102,7 +101,7 @@ class AuthNavigator(
         direction: Int, //NavDirections
     ) {
         val bundle = bundleOf(getString(R.string.safe_arg_id) to argument)
-        activity.findNavController(R.id.fragment_container_auth_container)
+        activity.findNavController(R.id.fragmentContainer_authActivity)
             .navigate(direction, bundle)
     }
 

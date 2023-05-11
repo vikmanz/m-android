@@ -5,7 +5,6 @@ import com.github.javafaker.Faker
 import com.vikmanz.shpppro.constants.Constants.START_NUMBER_OF_CONTACTS
 import com.vikmanz.shpppro.data.contact_model.Contact
 import com.vikmanz.shpppro.data.utils.ContactsPhoneInfoTaker
-import com.vikmanz.shpppro.utilits.extensions.log
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import java.util.*
@@ -25,9 +24,7 @@ class ContactsRepository {
     private var imgCounter = 0  // counter to switch random images.
 
     init {
-        log("init contactsService...")
         setFakeContacts()
-        log("done!")
     }
 
     /**
@@ -82,7 +79,6 @@ class ContactsRepository {
         _contactList.value = (0 until START_NUMBER_OF_CONTACTS).map {
             generateRandomContact()
         }.toMutableList()
-        log("service return new fake list with size ${_contactList.value.size}")
     }
 
     /**
@@ -103,7 +99,6 @@ class ContactsRepository {
                 birthday = faker.date().birthday().toString()
             )
         }.toMutableList()
-        log("service return new list with size ${_contactList.value.size}")
     }
 
     /**
@@ -135,7 +130,6 @@ class ContactsRepository {
 
     fun addContact(contact: Contact) {
         addContact(contact, _contactList.value.size)
-        log("New contact created! id:${contact.contactId}, name:${contact.contactName}, contact img counter: ${contact.contactPhotoIndex}.")
     }
 
     /**

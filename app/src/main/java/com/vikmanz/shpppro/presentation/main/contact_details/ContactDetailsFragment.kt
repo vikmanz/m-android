@@ -13,28 +13,26 @@ class ContactDetailsFragment :
         FragmentContactDetailsBinding::inflate
     ) {
     class CustomArgument(
-//        override val name: String,
         val contactID: Long
     ) : BaseArgument
 
     override val viewModel by screenMainViewModel()
 
-    override fun setStartUi() {
+    override fun onCreatedFragmentView() {
         with(binding){
-            textviewMainPersonName.text = viewModel.name
-            textviewMainPersonCareer.text = viewModel.career
-            textviewMainPersonAddress.text = viewModel.homeAddress
+            textViewContactDetailsPersonName.text = viewModel.name
+            textViewContactDetailsPersonCareer.text = viewModel.career
+            textViewContactDetailsPersonAddress.text = viewModel.homeAddress
             if (viewModel.photoUri == Uri.EMPTY) {
-                imageviewMainAvatarImage.setContactPhoto(viewModel.photoUrl)
+                imageViewContactDetailsAvatarImage.setContactPhoto(viewModel.photoUrl)
             } else {
-                imageviewMainAvatarImage.setContactPhotoFromUri(viewModel.photoUri)
+                imageViewContactDetailsAvatarImage.setContactPhotoFromUri(viewModel.photoUri)
             }
         }
     }
 
     override fun setListeners() {
-        binding.buttonContactBack.setOnClickListener { viewModel.onButtonBackPressed() }
+        binding.buttonContactDetailsBackButton.setOnClickListener { viewModel.onButtonBackPressed() }
     }
-    override fun setObservers() { }
 
 }

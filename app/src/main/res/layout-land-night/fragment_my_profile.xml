@@ -8,7 +8,7 @@
 
     <!-- Guide of center of elements. -->
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_mycontacts_bg_center_of_screen"
+        android:id="@+id/guideLine_myProfile_bgCenterOfScreen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -16,25 +16,26 @@
 
     <!-- Top half of screen. -->
     <View
-        android:id="@+id/guideline_mycontacts_bg_top_half"
+        android:id="@+id/guideLine_myProfile_bgTopHalf"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="?attr/colorSecondary"
-        app:layout_constraintBottom_toTopOf="@id/guideline_mycontacts_bg_center_of_screen"
+        app:layout_constraintBottom_toTopOf="@id/guideLine_myProfile_bgCenterOfScreen"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
     <!-- Settings and Logout flow. -->
     <androidx.constraintlayout.helper.widget.Flow
-        android:id="@+id/flow_main_top_buttons"
+        android:id="@+id/flow_myProfile_topButtons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/offset_M"
         android:layout_marginTop="@dimen/offset_M"
         android:orientation="horizontal"
-        app:constraint_referenced_ids="textview_main_settings, textview_main_logout_button"
+        app:constraint_referenced_ids="
+        textView_myProfile_settings,
+        textView_myProfile_logoutButton"
         app:flow_horizontalStyle="spread_inside"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -42,15 +43,16 @@
         tools:ignore="MissingConstraints" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/textview_main_settings"
+        android:id="@+id/textView_myProfile_settings"
         style="@style/basicText_bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/main_settings"
-        android:textSize="@dimen/size_text_font_XL" />
+        android:textSize="@dimen/size_textFont_XL"
+        tools:ignore="MissingConstraints" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/textview_main_logout_button"
+        android:id="@+id/textView_myProfile_logoutButton"
         style="@style/basicText_bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -61,83 +63,89 @@
     <!-- <!- Avatar and Person Info. -->
     <!-- <!- <!- Avatar flow. -->
     <androidx.constraintlayout.helper.widget.Flow
-        android:id="@+id/flow_main_profile_info"
+        android:id="@+id/flow_myProfile_profileInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/offset_XL"
         android:orientation="horizontal"
-        app:constraint_referenced_ids="imageview_main_avatar_image, flow_main_person_text_info"
+        app:constraint_referenced_ids="
+        imageView_myProfile_avatarImage,
+        flow_myProfile_personTextInfo"
         app:flow_horizontalGap="@dimen/offset_XL"
-        app:layout_constraintBottom_toBottomOf="@+id/guideline_mycontacts_bg_center_of_screen"
-        app:layout_constraintEnd_toStartOf="@+id/imageview_main_facebook_button"
+        app:layout_constraintBottom_toBottomOf="@+id/guideLine_myProfile_bgCenterOfScreen"
+        app:layout_constraintEnd_toStartOf="@+id/imageView_myProfile_facebookButton"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/flow_main_top_buttons" />
+        app:layout_constraintTop_toBottomOf="@+id/flow_myProfile_topButtons" />
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/imageview_main_avatar_image"
+        android:id="@+id/imageView_myProfile_avatarImage"
         android:layout_width="@dimen/avatar_radius"
         android:layout_height="@dimen/avatar_radius"
         android:layout_marginTop="28dp"
         android:layout_marginBottom="28dp"
-        android:src="@drawable/sample_avatar" />
+        android:src="@drawable/sample_avatar"
+        tools:ignore="MissingConstraints" />
 
     <!-- <!- <!- Person Info flow. -->
     <androidx.constraintlayout.helper.widget.Flow
-        android:id="@+id/flow_main_person_text_info"
+        android:id="@+id/flow_myProfile_personTextInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:constraint_referenced_ids="textview_main_person_name, textview_main_person_career, textview_main_person_address"
+        app:constraint_referenced_ids="
+        textView_myProfile_personName,
+        textView_myProfile_personCareer,
+        textView_myProfile_personAddress"
         app:flow_verticalGap="@dimen/offset_S"
-        app:layout_constraintBottom_toBottomOf="@id/flow_main_profile_info"
-        app:layout_constraintEnd_toEndOf="@id/flow_main_profile_info"
-        app:layout_constraintStart_toEndOf="@id/imageview_main_avatar_image"
-        app:layout_constraintTop_toTopOf="@id/flow_main_profile_info" />
+        tools:ignore="MissingConstraints" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/textview_main_person_name"
+        android:id="@+id/textView_myProfile_personName"
         style="@style/basicText_bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/main_person_name_sample"
-        android:textSize="@dimen/size_text_font_M"
+        android:textSize="@dimen/size_textFont_M"
         tools:ignore="MissingConstraints,TextContrastCheck" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/textview_main_person_career"
+        android:id="@+id/textView_myProfile_personCareer"
         style="@style/basicText_bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/main_person_career_sample"
         android:textColor="?attr/colorOnTertiary"
-        android:textSize="@dimen/size_text_font_XS"
+        android:textSize="@dimen/size_textFont_XS"
         tools:ignore="MissingConstraints" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/textview_main_person_address"
+        android:id="@+id/textView_myProfile_personAddress"
         style="@style/basicText_bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/offset_S"
         android:text="@string/main_person_address_sample"
         android:textColor="?attr/colorOnTertiary"
-        android:textSize="@dimen/size_text_font_XS"
+        android:textSize="@dimen/size_textFont_XS"
         tools:ignore="MissingConstraints" />
 
     <!-- <!- Social Icons flow. -->
     <androidx.constraintlayout.helper.widget.Flow
-        android:id="@+id/flow_main_social_icons"
+        android:id="@+id/flow_myProfile_socialIcons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:constraint_referenced_ids="imageview_main_facebook_button, imageview_main_linkedin_button, imageview_main_instagram_button"
+        app:constraint_referenced_ids="
+        imageView_myProfile_facebookButton,
+        imageView_myProfile_linkedinButton,
+        imageView_myProfile_instagramButton"
         app:flow_horizontalGap="@dimen/offset_XL"
-        app:layout_constraintBottom_toBottomOf="@+id/guideline_mycontacts_bg_center_of_screen"
+        app:layout_constraintBottom_toBottomOf="@+id/guideLine_myProfile_bgCenterOfScreen"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/flow_main_profile_info"
-        app:layout_constraintTop_toBottomOf="@+id/flow_main_top_buttons" />
+        app:layout_constraintStart_toEndOf="@+id/flow_myProfile_profileInfo"
+        app:layout_constraintTop_toBottomOf="@+id/flow_myProfile_topButtons" />
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/imageview_main_facebook_button"
+        android:id="@+id/imageView_myProfile_facebookButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/socials_outline_circle"
@@ -148,7 +156,7 @@
         tools:ignore="MissingConstraints,SpeakableTextPresentCheck" />
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/imageview_main_linkedin_button"
+        android:id="@+id/imageView_myProfile_linkedinButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/socials_outline_circle"
@@ -159,7 +167,7 @@
         tools:ignore="MissingConstraints,SpeakableTextPresentCheck" />
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/imageview_main_instagram_button"
+        android:id="@+id/imageView_myProfile_instagramButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/socials_outline_circle"
@@ -169,47 +177,46 @@
         app:srcCompat="@drawable/socials_logo_instagram"
         tools:ignore="MissingConstraints,SpeakableTextPresentCheck" />
 
-
     <!-- Down half of screen. -->
-
     <!-- Edit Profile and View Contacts buttons flow. -->
     <View
-        android:id="@+id/guideline_mycontacts_bg_bottom_half"
+        android:id="@+id/guideLine_myProfile_bgBottomHalf"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="?attr/colorTertiary"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/guideline_mycontacts_bg_top_half"
-        app:layout_constraintVertical_bias="0.0"
-        tools:layout_editor_absoluteX="235dp" />
+        app:layout_constraintTop_toBottomOf="@id/guideLine_myProfile_bgTopHalf"
+        app:layout_constraintVertical_bias="0.0" />
 
     <androidx.constraintlayout.helper.widget.Flow
-        android:id="@+id/flow_main_bottom_buttons"
+        android:id="@+id/flow_myProfile_bottomButtons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:constraint_referenced_ids="button_main_edit_profile, button_main_view_my_contacts"
+        app:constraint_referenced_ids="
+        button_myProfile_editProfile,
+        button_myProfile_viewMyContacts"
         app:flow_horizontalAlign="center"
         app:flow_horizontalGap="@dimen/offset_XL"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/guideline_mycontacts_bg_center_of_screen" />
+        app:layout_constraintTop_toBottomOf="@+id/guideLine_myProfile_bgCenterOfScreen" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/button_main_edit_profile"
+        android:id="@+id/button_myProfile_editProfile"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/size_button_height_M"
+        android:layout_height="@dimen/size_buttonHeight_M"
         android:background="@drawable/btn_std_white_bg"
         android:text="@string/main_edit_profile_button"
         android:textAppearance="@style/basicText_buttonsText"
         android:textColor="?attr/colorSecondary"
-        tools:ignore="TouchTargetSizeCheck" />
+        tools:ignore="MissingConstraints,TouchTargetSizeCheck" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/button_main_view_my_contacts"
+        android:id="@+id/button_myProfile_viewMyContacts"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/size_button_height_M"
+        android:layout_height="@dimen/size_buttonHeight_M"
         android:background="@drawable/btn_std_orange_bg"
         android:text="@string/main_view_my_contacts_button"
         android:textAppearance="@style/basicText_buttonsText"
