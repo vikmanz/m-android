@@ -1,21 +1,20 @@
 package com.vikmanz.shpppro.presentation.navigator
 
 import androidx.appcompat.app.AppCompatActivity
-import com.vikmanz.shpppro.presentation.base.BaseActivity
 import com.vikmanz.shpppro.presentation.main.MainActivity
 
 typealias MainActivityAction = (AppCompatActivity) -> Unit
 
 /**
- * This class executes actions only when activity is assigned to [mainActivity] field.
+ * This class executes actions only when activity is assigned to [currentActivity] field.
  * See setup logic and usage example in [MainNavigator] and [MainActivity]
  */
-class MainActivityActions {
+class ActivityActions {
 
     /**
      * Assign activity in [MainActivity.onResume] and assign NULL in [MainActivity.onPause]
      */
-    var mainActivity: AppCompatActivity? = null
+    var currentActivity: AppCompatActivity? = null
         set(activity) {
             field = activity
             if (activity != null) {
@@ -37,7 +36,7 @@ class MainActivityActions {
      * ```
      */
     operator fun invoke(action: MainActivityAction) {
-        val activity = this.mainActivity
+        val activity = this.currentActivity
         if (activity == null) {
             actions += action
         } else {

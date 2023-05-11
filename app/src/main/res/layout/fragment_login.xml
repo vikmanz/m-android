@@ -172,11 +172,22 @@
         app:layout_constraintStart_toStartOf="@+id/guideLine_login_leftBorder"
         app:layout_constraintTop_toBottomOf="@+id/guideLine_login_bgCenterOfScreen" />
 
-    <androidx.appcompat.widget.AppCompatButton
+<!--    <androidx.appcompat.widget.AppCompatButton-->
+<!--        android:id="@+id/button_login_registerByGoogle"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="@dimen/size_buttonHeight_M"-->
+<!--        android:background="@drawable/btn_google"-->
+<!--        tools:ignore="MissingConstraints,TouchTargetSizeCheck,SpeakableTextPresentCheck,VisualLintButtonSize" />-->
+
+    <com.vikmanz.shpppro.presentation.utils.CustomGoogleButton
         android:id="@+id/button_login_registerByGoogle"
         android:layout_width="0dp"
         android:layout_height="@dimen/size_buttonHeight_M"
-        android:background="@drawable/btn_google"
+        app:mgbText="GOOGLE"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints,TouchTargetSizeCheck,SpeakableTextPresentCheck,VisualLintButtonSize" />
 
     <androidx.appcompat.widget.AppCompatTextView

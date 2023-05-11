@@ -5,8 +5,6 @@ import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.navigation.findNavController
 import com.vikmanz.shpppro.presentation.base.BaseArgument
 import com.vikmanz.shpppro.R
@@ -24,10 +22,7 @@ class MainNavigator(
     application: Application
 ) : AndroidViewModel(application), Navigator {
 
-    val whenActivityActive = MainActivityActions()
-
-    private val _result = MutableLiveData<Event<Any>>()
-    val result: LiveData<Event<Any>> = _result
+    val whenActivityActive = ActivityActions()
 
     override fun launchStartFragment(argument: BaseArgument) = launchFragment(argument)
     override fun launchLoginFragment(argument: BaseArgument) { log("LLF in main navigator") }
@@ -46,9 +41,6 @@ class MainNavigator(
         if (USE_NAVIGATION_COMPONENT) {
            it.findNavController(R.id.fragmentContainer_mainActivity).popBackStack()
         } else {
-            if (result != null) {
-                _result.value = Event(result)
-            }
             @Suppress("DEPRECATION")
             it.onBackPressed()
         }

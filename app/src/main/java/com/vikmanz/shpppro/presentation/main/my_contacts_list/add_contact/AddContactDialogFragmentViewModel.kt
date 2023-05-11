@@ -7,8 +7,7 @@ import com.vikmanz.shpppro.App
 /**
  * ViewModel for My Contacts Activity.
  */
-class AddContactDialogFragmentViewModel(
-) : ViewModel() {
+class AddContactDialogFragmentViewModel : ViewModel() {
 
     val contactsRepository = App.contactsRepository
 

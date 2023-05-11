@@ -5,6 +5,4 @@ import java.io.Serializable
 /**
  * Base class for defining screen arguments
  */
-interface BaseArgument : Serializable {
-//    val name : String
-}
+interface BaseArgument : Serializable

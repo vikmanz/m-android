@@ -64,12 +64,12 @@ class AuthActivity : BaseActivity<ActivityAuthBinding>(ActivityAuthBinding::infl
 
     override fun onResume() {
         super.onResume()
-        navigator.whenActivityActive.mainActivity = this
+        navigator.whenActivityActive.currentActivity = this
     }
 
     override fun onPause() {
         super.onPause()
-        navigator.whenActivityActive.mainActivity = null
+        navigator.whenActivityActive.currentActivity = null
     }
 
 }

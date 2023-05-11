@@ -28,11 +28,7 @@ abstract class BaseActivity<VBinding : ViewBinding>(
         super.onDestroy()
     }
 
-    protected open fun setListeners() {
+    protected open fun setListeners() { }
 
-    }
-
-    protected open fun setObservers() {
-
-    }
+    protected open fun setObservers() { }
 }

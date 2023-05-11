@@ -36,7 +36,7 @@ import kotlinx.coroutines.*
 /**
  * Class represents MyContacts screen activity.
  */
-class MyContactsListFragment() :
+class MyContactsListFragment :
     BaseFragment<FragmentMyContactsListBinding, MyContactsListViewModel>(FragmentMyContactsListBinding::inflate) {
     class CustomArgument : BaseArgument
 
