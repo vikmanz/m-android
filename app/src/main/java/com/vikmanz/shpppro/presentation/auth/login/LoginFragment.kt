@@ -64,8 +64,8 @@ class LoginFragment :
 
     override fun setListeners() {
         with(binding) {
-            buttonAuthRegisterByEmail.setOnClickListener { submitForm() }
-            textviewAuthSwitchScreenToLoginButton.setOnClickListener { viewModel.swapLoginAndRegister() }
+            buttonLoginRegisterByEmail.setOnClickListener { submitForm() }
+            textViewLoginSwitchScreenToLoginButton.setOnClickListener { viewModel.swapLoginAndRegister() }
         }
         initHelpTesterButtons()
         setLoginPasswordFocusListeners()        // Listeners to fields and buttons.
@@ -79,37 +79,37 @@ class LoginFragment :
         uiObserver = Observer<Boolean> {
             with(binding) {
                 if (it) {
-                    textviewAuthHelloText.text =
+                    textViewLoginHelloText.text =
                         getString(R.string.auth_activity_hello_text_login_screen)
-                    textviewAuthHelloSubtext.text =
+                    textViewLoginHelloSubtext.text =
                         getString(R.string.auth_activity_hello_subtext_login_screen)
-                    buttonAuthRegisterByEmail.text =
+                    buttonLoginRegisterByEmail.text =
                         getString(R.string.auth_activity_register_button_login_screen)
-                    textviewAuthAlreadyHaveAccountMessage.text =
+                    textViewLoginAlreadyHaveAccountMessage.text =
                         getString(R.string.auth_activity_already_have_account_message_login_screen)
-                    textviewAuthSwitchScreenToLoginButton.text =
+                    textViewLoginSwitchScreenToLoginButton.text =
                         getString(R.string.auth_activity_sign_in_button_login_screen)
-                    textviewAuthForgotPassword.setVisible()
+                    textViewLoginForgotPasswordText.setVisible()
                     setMultipleGone(
-                        buttonAuthRegisterByGoogle,
-                        textviewAuthTextBetweenGoogleAndRegister,
-                        textviewAuthWarningAboutTerms
+                        buttonLoginRegisterByGoogle,
+                        textViewLoginTextBetweenGoogleAndRegister,
+                        textViewLoginWarningAboutTerms
                     )
                 } else {
-                    textviewAuthHelloText.text = getString(R.string.auth_layout_hello_text)
-                    textviewAuthHelloSubtext.text =
+                    textViewLoginHelloText.text = getString(R.string.auth_layout_hello_text)
+                    textViewLoginHelloSubtext.text =
                         getString(R.string.auth_layout_hello_subtext)
-                    buttonAuthRegisterByEmail.text =
+                    buttonLoginRegisterByEmail.text =
                         getString(R.string.auth_layout_register_button)
-                    textviewAuthAlreadyHaveAccountMessage.text =
+                    textViewLoginAlreadyHaveAccountMessage.text =
                         getString(R.string.auth_layout_already_have_account_message)
-                    textviewAuthSwitchScreenToLoginButton.text =
+                    textViewLoginSwitchScreenToLoginButton.text =
                         getString(R.string.auth_layout_sign_in_button)
-                    textviewAuthForgotPassword.setInvisible()
+                    textViewLoginForgotPasswordText.setInvisible()
                     setMultipleVisible(
-                        buttonAuthRegisterByGoogle,
-                        textviewAuthTextBetweenGoogleAndRegister,
-                        textviewAuthWarningAboutTerms
+                        buttonLoginRegisterByGoogle,
+                        textViewLoginTextBetweenGoogleAndRegister,
+                        textViewLoginWarningAboutTerms
                     )
                 }
             }
@@ -123,7 +123,7 @@ class LoginFragment :
      */
     private fun observeHelpers() {
         helpersObserver = Observer<Boolean> {
-            with(binding.flowAuthDebugButtons) {
+            with(binding.flowLoginDebugButtons) {
                 if (it) setVisible() else setGone()
             }
         }.also { viewModel.helperButtonsVisible.observe(this@LoginFragment, it) }
@@ -149,16 +149,16 @@ class LoginFragment :
      */
     private fun setLoginPasswordFocusListeners() {
         with(binding) {
-            textinputAuthEmail.setOnFocusChangeListener { _, focused ->
+            textInputLayoutLoginEmail.setOnFocusChangeListener { _, focused ->
                 if (focused && !viewModel.emailAlreadyFocused) viewModel.emailAlreadyFocused =
                     true
-                if (!focused && viewModel.emailAlreadyFocused) textinputlayoutAuthEmail.helperText =
+                if (!focused && viewModel.emailAlreadyFocused) textInputLayoutLoginEmail.helperText =
                     validEmail()
             }
-            textinputAuthPassword.setOnFocusChangeListener { _, focused ->
+            textInputLayoutLoginPassword.setOnFocusChangeListener { _, focused ->
                 if (focused && !viewModel.passwordAlreadyFocused) viewModel.passwordAlreadyFocused =
                     true
-                if (!focused && viewModel.passwordAlreadyFocused) textinputlayoutAuthPassword.helperText =
+                if (!focused && viewModel.passwordAlreadyFocused) textInputLayoutLoginPassword.helperText =
                     validPassword()
             }
         }
@@ -171,7 +171,7 @@ class LoginFragment :
      */
     private fun validEmail(): String? {
         // Get email text
-        val emailText = binding.textinputAuthEmail.text.toString()
+        val emailText = binding.textInputLoginEmailField.text.toString()
 
         // Do check for standard Patterns.EMAIL_ADDRESS regex.
         if (!Patterns.EMAIL_ADDRESS.matcher(emailText).matches()) {
@@ -190,7 +190,7 @@ class LoginFragment :
     private fun validPassword(): String? {
 
         // Get password text
-        val passwordText = binding.textinputAuthPassword.text.toString()
+        val passwordText = binding.textInputLoginPasswordField.text.toString()
         val result = checkPasswordErrors(passwordText)
         // If pass all checks, return null or return errors.
         return if (result == "") null else result
@@ -248,16 +248,16 @@ class LoginFragment :
         with(binding) {
 
             // Validate email and password.
-            textinputlayoutAuthEmail.helperText = validEmail()
-            textinputlayoutAuthPassword.helperText = validPassword()
-            val isEmailCorrect = textinputlayoutAuthEmail.helperText == null
-            val isPasswordCorrect = textinputlayoutAuthPassword.helperText == null
+            textInputLayoutLoginEmail.helperText = validEmail()
+            textInputLayoutLoginPassword.helperText = validPassword()
+            val isEmailCorrect = textInputLayoutLoginEmail.helperText == null
+            val isPasswordCorrect = textInputLayoutLoginPassword.helperText == null
 
             // If valid, start MainActivity.
             if (isEmailCorrect && isPasswordCorrect) {
                 // If check Remember, save data to Data Store.
-                if (checkboxAuthRememberMe.isChecked) saveUserData()
-                val emailText = textinputAuthEmail.text.toString()
+                if (checkboxLoginRememberMe.isChecked) saveUserData()
+                val emailText = textInputLoginEmailField.text.toString()
                 startMainActivity(emailText)
             }
             // If have error - show error message.
@@ -271,7 +271,7 @@ class LoginFragment :
      *  Save user data from text input fields and language key from class variable to Data Store.
      */
     private fun saveUserData() {
-        val email = binding.textinputAuthEmail.text.toString()
+        val email = binding.textInputLoginEmailField.text.toString()
         val coroutineScope = CoroutineScope(Job())
         coroutineScope.launch(Dispatchers.IO) {
             dataStore.saveUserSata(email)
@@ -287,10 +287,10 @@ class LoginFragment :
         var message = ""
         with(binding) {
             message += if (!isEmailCorrect)
-                "\n\n${getString(R.string.auth_activity_warning_message_email_title)}\n${textinputlayoutAuthEmail.helperText}"
+                "\n\n${getString(R.string.auth_activity_warning_message_email_title)}\n${textInputLayoutLoginEmail.helperText}"
             else ""
             message += if (!isPasswordCorrect)
-                "\n\n${getString(R.string.auth_activity_warning_message_password_title)}\n${textinputlayoutAuthPassword.helperText}"
+                "\n\n${getString(R.string.auth_activity_warning_message_password_title)}\n${textInputLayoutLoginPassword.helperText}"
             else ""
         }
 
@@ -301,8 +301,8 @@ class LoginFragment :
             .setPositiveButton(getString(R.string.auth_activity_warning_message_ok_button_text)) { _, _ ->
                 with(binding) {
                     // Set focus to first field with error.
-                    if (isEmailCorrect) textinputAuthEmail.requestFocus()
-                    else textinputAuthPassword.requestFocus()
+                    if (isEmailCorrect) textInputLoginEmailField.requestFocus()
+                    else textInputLoginPasswordField.requestFocus()
                 }
             }
             .show()
@@ -317,27 +317,27 @@ class LoginFragment :
         // Set onClickListeners().
         with(binding) {
             // Set onClickListener to message "Do you have account" to see help buttons.
-            textviewAuthAlreadyHaveAccountMessage.setOnClickListener { viewModel.showOrHideHelpers() }
+            textViewLoginAlreadyHaveAccountMessage.setOnClickListener { viewModel.showOrHideHelpers() }
 
             // Fill fields button listener.
-            buttonAuthFillLoginAndPass.setOnClickListener {
-                textinputAuthEmail.setText(TEST_LOGIN)
-                textinputAuthPassword.setText(TEST_PASSWORD)
-                textinputlayoutAuthEmail.clearError()
-                textinputlayoutAuthPassword.clearError()
+            buttonLoginFillLoginAndPass.setOnClickListener {
+                textInputLoginEmailField.setText(TEST_LOGIN)
+                textInputLoginPasswordField.setText(TEST_PASSWORD)
+                textInputLayoutLoginEmail.clearError()
+                textInputLayoutLoginPassword.clearError()
             }
 
             // Clear fields button listener.
-            buttonAuthClearLoginPassFields.setOnClickListener {
-                textinputAuthEmail.setText("")
-                textinputAuthPassword.setText("")
-                textinputlayoutAuthEmail.clearError()
-                textinputlayoutAuthPassword.clearError()
-                checkboxAuthRememberMe.isChecked = false
+            buttonLoginClearLoginPassFields.setOnClickListener {
+                textInputLoginEmailField.setText("")
+                textInputLoginPasswordField.setText("")
+                textInputLayoutLoginEmail.clearError()
+                textInputLayoutLoginPassword.clearError()
+                checkboxLoginRememberMe.isChecked = false
             }
 
             // Language change button listener.
-            buttonAuthChangeLanguage.setOnClickListener {
+            buttonLoginChangeLanguage.setOnClickListener {
                 goToChangeLanguage()
             }
         }
@@ -364,8 +364,8 @@ class LoginFragment :
      */
     private fun backgroundFocusHandler() = with(binding) {
         root.setOnClickListener {
-            textinputAuthEmail.clearFocus()
-            textinputAuthPassword.clearFocus()
+            textInputLoginEmailField.clearFocus()
+            textInputLoginPasswordField.clearFocus()
         }
     }
 

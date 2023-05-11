@@ -157,7 +157,7 @@ class ContactsRepository {
      * Get contact from list via index.
      */
     fun getContact(index: Int) : Contact? =
-        if (index > 0 && index < _contactList.value.size) _contactList.value[index]
+        if (index >= 0 && index < _contactList.value.size) _contactList.value[index]
         else null
 
     /**

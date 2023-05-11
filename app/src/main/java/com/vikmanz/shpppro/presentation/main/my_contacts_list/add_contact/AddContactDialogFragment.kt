@@ -9,7 +9,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import com.vikmanz.shpppro.R
-import com.vikmanz.shpppro.databinding.AddContactActivityMyContactsBinding
+import com.vikmanz.shpppro.databinding.FragmentAddContactMyContactsBinding
 
 import com.vikmanz.shpppro.utilits.extensions.log
 import com.vikmanz.shpppro.presentation.utils.extensions.setContactPhoto
@@ -28,7 +28,7 @@ class AddContactDialogFragment : DialogFragment() {
     /**
      * Binding of that Dialog Fragment.
      */
-    private var _binding: AddContactActivityMyContactsBinding? = null
+    private var _binding: FragmentAddContactMyContactsBinding? = null
 
 
     /**
@@ -37,7 +37,7 @@ class AddContactDialogFragment : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
 
         // inflate binding of dialog fragment
-        _binding = AddContactActivityMyContactsBinding.inflate(layoutInflater)
+        _binding = FragmentAddContactMyContactsBinding.inflate(layoutInflater)
 
         return activity?.let {
 
@@ -49,26 +49,26 @@ class AddContactDialogFragment : DialogFragment() {
                 updateAvatarImage()
 
                 // set listener for change fake image and choose image from gallery
-                imageviewAddcontactAvatar.setOnClickListener { requestDefaultImage() }
-                buttonAddcontactAvatarFromGalery.setOnClickListener { requestImageFromGallery() }
+                imageViewAddContactAvatar.setOnClickListener { requestDefaultImage() }
+                buttonAddContactGetAvatarFromGallery.setOnClickListener { requestImageFromGallery() }
 
                 // set listener for create new contact and send it to MyContactsActivity
-                buttonAddcontactSaveUser.setOnClickListener {
+                buttonAddContactSaveUser.setOnClickListener {
                     if (checkContactIsNotEmpty()) {
                         dialog?.dismiss()
                         viewModel.createNewContact(
-                            name = textinputAddcontactUserNameInputfield.text.toString(),
-                            career = textinputAddcontactUserCareerInputfield.text.toString(),
-                            email = textinputAddcontactUserEmailInputfield.text.toString(),
-                            phone = textinputAddcontactUserPhoneInputfield.text.toString(),
-                            address = textinputAddcontactUserAddressInputfield.text.toString(),
-                            birthday = textinputAddcontactUserBirthdayInputfield.text.toString()
+                            name = textInputAddContactUserNameInputField.text.toString(),
+                            career = textInputAddContactUserCareerInputField.text.toString(),
+                            email = textInputAddContactUserEmailInputField.text.toString(),
+                            phone = textInputAddContactUserPhoneInputField.text.toString(),
+                            address = textInputAddContactUserAddressInputField.text.toString(),
+                            birthday = textInputAddContactUserBirthdayInputField.text.toString()
                         )
                     }
                 }
 
                 // set listener for back button
-                buttonAddcontactButtonBack.setOnClickListener { dialog?.cancel() }
+                buttonAddContactButtonBack.setOnClickListener { dialog?.cancel() }
             }
 
             // Set view and create dialog
@@ -78,7 +78,7 @@ class AddContactDialogFragment : DialogFragment() {
     }
 
     private fun checkContactIsNotEmpty(): Boolean {
-        return if (_binding?.textinputAddcontactUserNameInputfield?.text.toString().isEmpty()) {
+        return if (_binding?.textInputAddContactUserNameInputField?.text.toString().isEmpty()) {
             Toast.makeText(requireContext(),getString(R.string.my_contacts_add_contact_please_write_name),Toast.LENGTH_SHORT).show()
             false
         } else true
@@ -116,10 +116,10 @@ class AddContactDialogFragment : DialogFragment() {
      */
     private fun updateAvatarImage() {
         if (viewModel.imgUri != Uri.EMPTY) {
-            _binding?.imageviewAddcontactAvatar?.setContactPhotoFromUri(viewModel.imgUri)
+            _binding?.imageViewAddContactAvatar?.setContactPhotoFromUri(viewModel.imgUri)
             log("img update - $viewModel.imgUri")
         } else {
-            _binding?.imageviewAddcontactAvatar?.setContactPhoto(viewModel.getFakePhotoUrl())
+            _binding?.imageViewAddContactAvatar?.setContactPhoto(viewModel.getFakePhotoUrl())
             log("img update -default")
         }
     }

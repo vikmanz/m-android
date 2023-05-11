@@ -34,8 +34,8 @@
     <string name="auth_activity_warning_message_invalid_register_form">Не правильно введено дані!</string>
     <string name="auth_activity_warning_message_invalid_email">Не правильна поштова адреса</string>
     <string name="auth_activity_warning_message_ok_button_text">Окей</string>
-    <string name="auth_activity_warning_message_email_title">Пошта:</string>
-    <string name="auth_activity_warning_message_password_title">Пароль:</string>
+    <string name="auth_activity_warning_message_email_title">Пошта</string>
+    <string name="auth_activity_warning_message_password_title">Пароль</string>
 
     <!-- ———————————————————— Main ———————————————————— -->
     <!-- Layout -->

@@ -35,8 +35,8 @@
     <string name="auth_activity_warning_message_invalid_register_form">Invalid registration form!</string>
     <string name="auth_activity_warning_message_invalid_email">Invalid email address</string>
     <string name="auth_activity_warning_message_ok_button_text">Okay</string>
-    <string name="auth_activity_warning_message_email_title">Email:</string>
-    <string name="auth_activity_warning_message_password_title">Password:</string>
+    <string name="auth_activity_warning_message_email_title">Email</string>
+    <string name="auth_activity_warning_message_password_title">Password</string>
 
     <!-- ———————————————————— Main ———————————————————— -->
     <!-- Layout -->
