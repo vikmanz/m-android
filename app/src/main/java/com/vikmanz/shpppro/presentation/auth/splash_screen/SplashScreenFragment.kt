@@ -61,6 +61,7 @@ class SplashScreenFragment :
      *
      * @param email User email as String.
      */
+    // TODO you can use nav graph for activity and fragment navigation either
     private fun startMainActivity(email: String) {
         val activity = requireActivity()
         val intentObject = Intent(activity, MainActivity::class.java)

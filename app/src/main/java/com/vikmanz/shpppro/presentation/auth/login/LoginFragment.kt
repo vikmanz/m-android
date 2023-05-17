@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.provider.Settings
 import android.util.Patterns
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import com.vikmanz.shpppro.R
 import com.vikmanz.shpppro.data.DataStoreManager
 import com.vikmanz.shpppro.presentation.base.BaseArgument
@@ -37,9 +38,11 @@ private const val REGEX_ONE_SPECIAL_CHAR = ".*[$SPECIAL_CHARS].*"
 private const val TEST_LOGIN = "viktor.manza@gmail.com"
 private const val TEST_PASSWORD = "passwordE3@a"
 
+// TODO This fragment is too big. You should extract some logic to viewModel
 class LoginFragment :
     BaseFragment<FragmentLoginBinding, LoginViewModel>(FragmentLoginBinding::inflate) {
 
+    // TODO classes should be in the end of the file
     class CustomArgument : BaseArgument
 
     /**
@@ -52,6 +55,7 @@ class LoginFragment :
 
     private lateinit var dataStore: DataStoreManager
 
+    // TODO why do we init datastore in onCreate? Why not in onViewCreated?
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         dataStore = DataStoreManager(requireActivity())
@@ -64,7 +68,9 @@ class LoginFragment :
 
     override fun setListeners() {
         with(binding) {
-            buttonLoginRegisterByEmail.setOnClickListener { submitForm() }
+            buttonLoginRegisterByEmail.setOnClickListener {
+                submitForm()
+            }
             textViewLoginSwitchScreenToLoginButton.setOnClickListener { viewModel.swapLoginAndRegister() }
         }
         initHelpTesterButtons()
@@ -362,6 +368,7 @@ class LoginFragment :
     /**
      *  De-focus views, when user do click on background.
      */
+    //TODO add functionality to discard keyboard
     private fun backgroundFocusHandler() = with(binding) {
         root.setOnClickListener {
             textInputLoginEmailField.clearFocus()

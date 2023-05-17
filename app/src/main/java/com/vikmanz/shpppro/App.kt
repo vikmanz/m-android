@@ -1,10 +1,8 @@
 package com.vikmanz.shpppro
 
-
-import android.annotation.SuppressLint
+//TODO unused imports
 import android.app.Application
 import com.vikmanz.shpppro.data.ContactsRepository
-import com.vikmanz.shpppro.data.DataStoreManager
 
 /**
  * Singleton for send ContentResolver to ContactsPhoneInfoTaker().

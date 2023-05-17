@@ -1,6 +1,7 @@
 package com.vikmanz.shpppro.presentation.main.my_profile
 
 import android.content.Intent
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.vikmanz.shpppro.presentation.base.BaseArgument
 import com.vikmanz.shpppro.R
@@ -66,10 +67,11 @@ class MyProfileFragment :
     /**
      * Logout with clear information about user from Data Store.
      */
+
+    //TODO you should use lifecycle scope instead of coroutine scope
     private fun logout() {
         val dataStore = DataStoreManager(requireContext()) //in onCreate
-        val coroutineScope = CoroutineScope(Job())
-        coroutineScope.launch(Dispatchers.IO) {
+        lifecycleScope.launch(Dispatchers.IO) {
             dataStore.clearUser()
         }
         startAuthActivity()

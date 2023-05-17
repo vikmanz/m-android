@@ -15,8 +15,9 @@ import com.vikmanz.shpppro.presentation.utils.extensions.setContactPhotoFromUri
 /**
  * Adapter for Recycler view.
  */
-class ContactsAdapter(private val contactActionListener: ContactActionListener) :
-    ListAdapter<Contact, ContactsAdapter.ContactHolder>(DiffUtilContactsComparator()) {
+class ContactsAdapter(
+    private val contactActionListener: ContactActionListener
+    ) : ListAdapter<Contact, ContactsAdapter.ContactHolder>(DiffUtilContactsComparator()) {
 
     /**
      * Create Holder for one element.

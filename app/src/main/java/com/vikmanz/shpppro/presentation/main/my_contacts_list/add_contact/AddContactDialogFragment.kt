@@ -19,9 +19,11 @@ import com.vikmanz.shpppro.presentation.utils.extensions.setContactPhotoFromUri
 /**
  * Dialog Fragment in which user can add new contact with typed information to list of contacts.
  */
+//TODO bad structure functions and variables mixed
 class AddContactDialogFragment : DialogFragment() {
 
 
+    //TODO i don`t know is this good idea to use view model in dialog fragment, maybe it is better to use interface
     private val viewModel: AddContactDialogFragmentViewModel by viewModels()
 
 

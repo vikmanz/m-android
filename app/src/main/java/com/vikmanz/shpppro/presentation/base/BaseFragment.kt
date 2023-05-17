@@ -19,6 +19,8 @@ abstract class BaseFragment<VBinding : ViewBinding, VM : BaseViewModel>(
 
     protected open fun setListeners() {}
     protected open fun setObservers() {}
+
+    // TODO why do you need this?
     protected open fun onCreatedFragmentView() {}
 
     override fun onCreateView(
