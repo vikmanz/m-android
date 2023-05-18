@@ -1,6 +1,5 @@
 package com.vikmanz.shpppro
 
-//TODO unused imports
 import android.app.Application
 import com.vikmanz.shpppro.data.ContactsRepository
 

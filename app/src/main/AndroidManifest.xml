@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:name=".App"
@@ -28,7 +29,6 @@
         <activity
             android:name=".presentation.main.MainActivity"
             android:exported="false" />
-
 
 <!--        <provider-->
 <!--            android:name="androidx.core.content.FileProvider"-->

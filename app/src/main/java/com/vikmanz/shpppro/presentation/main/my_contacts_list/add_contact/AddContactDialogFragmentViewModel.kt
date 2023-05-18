@@ -1,22 +1,31 @@
 package com.vikmanz.shpppro.presentation.main.my_contacts_list.add_contact
 
+import android.annotation.SuppressLint
 import android.net.Uri
 import androidx.lifecycle.*
 import com.vikmanz.shpppro.App
+import com.vikmanz.shpppro.constants.Constants
+import org.jetbrains.annotations.NotNull
 
 /**
  * ViewModel for My Contacts Activity.
  */
 class AddContactDialogFragmentViewModel : ViewModel() {
 
-    val contactsRepository = App.contactsRepository
+    private val contactsRepository = App.contactsRepository
 
-    /**
-     * Uri for image, which will be take from gallery.
-     */
-    var imgUri: Uri = Uri.EMPTY
+    // avatar
+    val currentPhoto = MutableLiveData<Any>(getFakePhotoUrl())
+    private fun getFakePhotoUrl() = contactsRepository.getCurrentContactPhotoUrl()
 
-    fun getFakePhotoUrl() = contactsRepository.getCurrentContactPhotoUrl()
+    fun changeFakePhotoToNext() {
+        contactsRepository.incrementPhotoCounter()
+        currentPhoto.value = getFakePhotoUrl()
+    }
+
+    fun setPhotoUri(uri: Uri) {
+        currentPhoto.value = uri
+    }
 
     fun createNewContact(
         name: String,
@@ -27,8 +36,7 @@ class AddContactDialogFragmentViewModel : ViewModel() {
         birthday: String
     ) {
         val newContact = contactsRepository.createContact(
-            photoUrl = contactsRepository.getCurrentContactPhotoUrl(),
-            photoUri = imgUri,
+            contactPhotoLink = getCurrentPhoto(),
             photoIndex = contactsRepository.getCurrentPhotoCounter(),
             name = name,
             career = career,
@@ -39,4 +47,10 @@ class AddContactDialogFragmentViewModel : ViewModel() {
         )
         contactsRepository.addContact(newContact)
     }
+
+    private fun getCurrentPhoto(): Any = with(currentPhoto.value) {
+        if (this is Uri) this else getFakePhotoUrl()
+    }
+
+
 }

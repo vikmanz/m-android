@@ -1,8 +1,8 @@
-package com.vikmanz.shpppro.data.my_contacts_list_recycler_view.utils
+package com.vikmanz.shpppro.presentation.main.my_contacts_list.adapter.utils
 
 import androidx.recyclerview.widget.DiffUtil
 import com.vikmanz.shpppro.data.contact_model.Contact
-// TODO this is not part of data layer. Move to presentation layer.
+
 /**
  * Compare elements in recycler view. Need for ListAdapter type of Recycler view.
  */

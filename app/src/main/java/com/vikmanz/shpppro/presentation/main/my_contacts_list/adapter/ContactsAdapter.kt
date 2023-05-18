@@ -6,18 +6,17 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.vikmanz.shpppro.data.contact_model.Contact
-import com.vikmanz.shpppro.data.my_contacts_list_recycler_view.listeners.ContactActionListener
-import com.vikmanz.shpppro.data.my_contacts_list_recycler_view.utils.DiffUtilContactsComparator
+import com.vikmanz.shpppro.presentation.main.my_contacts_list.adapter.listeners.ContactActionListener
+import com.vikmanz.shpppro.presentation.main.my_contacts_list.adapter.utils.DiffUtilContactsComparator
 import com.vikmanz.shpppro.databinding.OneContactItemBinding
-import com.vikmanz.shpppro.presentation.utils.extensions.setContactPhoto
-import com.vikmanz.shpppro.presentation.utils.extensions.setContactPhotoFromUri
+import com.vikmanz.shpppro.presentation.utils.extensions.setImageWithGlide
 
 /**
  * Adapter for Recycler view.
  */
 class ContactsAdapter(
     private val contactActionListener: ContactActionListener
-    ) : ListAdapter<Contact, ContactsAdapter.ContactHolder>(DiffUtilContactsComparator()) {
+) : ListAdapter<Contact, ContactsAdapter.ContactHolder>(DiffUtilContactsComparator()) {
 
     /**
      * Create Holder for one element.
@@ -26,12 +25,7 @@ class ContactsAdapter(
         RecyclerView.ViewHolder(binding.root) {
         fun bind(contact: Contact) {
             with(binding) {
-                // bind Photo
-                if (contact.contactPhotoUri == Uri.EMPTY) {
-                    imageViewOneContactAvatarImage.setContactPhoto(contact.contactPhotoUrl)
-                } else {
-                    imageViewOneContactAvatarImage.setContactPhotoFromUri(contact.contactPhotoUri)
-                }
+                imageViewOneContactAvatarImage.setImageWithGlide(contact.contactPhotoLink)
                 // bind Name/Career
                 textViewOneContactName.text = contact.contactName
                 textViewOneContactCareer.text = contact.contactPhone

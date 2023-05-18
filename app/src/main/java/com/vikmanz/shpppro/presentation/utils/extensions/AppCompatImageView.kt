@@ -7,6 +7,9 @@ import com.bumptech.glide.Priority
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.vikmanz.shpppro.R
+import com.vikmanz.shpppro.utilits.extensions.log
+import java.net.URL
+import java.security.InvalidParameterException
 
 /**
  * Settings of Glide.
@@ -20,29 +23,20 @@ val GLIDE_OPTIONS = RequestOptions()
     .priority(Priority.HIGH)
 
 /**
- * Extra function of ImageView class, for change photo via Glide from photo URL (from internet).
+ * Extra function of ImageView class, for change photo via Glide from link.
+ * Link can be:
+ * - URI (from gallery),
+ * - photo URL (from internet),
+ * - resource id (from resources).
+ *
+ * @param link URI, URL or resource id.
  */
-fun AppCompatImageView.setContactPhoto(contactPhotoUrl: String) {
-    Glide.with(context)
-        .load(contactPhotoUrl)
-        .apply(GLIDE_OPTIONS)
-        .into(this)
-}
-
-/**
- * Extra function of ImageView class, for change photo via Glide from photo URI (from gallery).
- */
-// TODO you can combine two functions below
-fun AppCompatImageView.setContactPhotoFromUri(uri: Uri) {
-    Glide.with(context)
-        .load(uri)
-        .apply(GLIDE_OPTIONS)
-        .into(this)
-}
-
-fun AppCompatImageView.setContactPhotoFromResource(resource: Int) {
-    Glide.with(context)
-        .load(resource)
-        .apply(GLIDE_OPTIONS)
-        .into(this)
+fun AppCompatImageView.setImageWithGlide(link: Any) {
+    log(link.toString())
+    if (link is Uri || link is URL || link is Int)
+        Glide.with(context)
+            .load(link)
+            .apply(GLIDE_OPTIONS)
+            .into(this)
+    else throw InvalidParameterException()
 }

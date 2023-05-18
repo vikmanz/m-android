@@ -18,7 +18,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.vikmanz.shpppro.presentation.base.BaseArgument
 import com.vikmanz.shpppro.R
 import com.vikmanz.shpppro.data.contact_model.*
-import com.vikmanz.shpppro.data.my_contacts_list_recycler_view.listeners.ContactActionListener
+import com.vikmanz.shpppro.presentation.main.my_contacts_list.adapter.listeners.ContactActionListener
 import com.vikmanz.shpppro.databinding.FragmentMyContactsListBinding
 import com.vikmanz.shpppro.presentation.base.BaseFragment
 import com.vikmanz.shpppro.presentation.main.my_contacts_list.adapter.ContactsAdapter

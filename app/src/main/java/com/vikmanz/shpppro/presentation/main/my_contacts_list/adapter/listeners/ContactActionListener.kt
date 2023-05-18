@@ -1,7 +1,7 @@
-package com.vikmanz.shpppro.data.my_contacts_list_recycler_view.listeners
+package com.vikmanz.shpppro.presentation.main.my_contacts_list.adapter.listeners
 
 import com.vikmanz.shpppro.data.contact_model.Contact
-// TODO this is not part of data layer. Move to presentation layer.
+
 /**
  * Interface to send deleteUser from ContactAdapter to MyContactsActivity
  */

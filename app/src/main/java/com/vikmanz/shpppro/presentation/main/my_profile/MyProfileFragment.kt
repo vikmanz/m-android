@@ -2,7 +2,6 @@ package com.vikmanz.shpppro.presentation.main.my_profile
 
 import android.content.Intent
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.navArgs
 import com.vikmanz.shpppro.presentation.base.BaseArgument
 import com.vikmanz.shpppro.R
 import com.vikmanz.shpppro.data.DataStoreManager
@@ -10,11 +9,9 @@ import com.vikmanz.shpppro.data.utils.EmailParser
 import com.vikmanz.shpppro.databinding.FragmentMyProfileBinding
 import com.vikmanz.shpppro.presentation.auth.AuthActivity
 import com.vikmanz.shpppro.presentation.base.BaseFragment
-import com.vikmanz.shpppro.presentation.utils.extensions.setContactPhotoFromResource
+import com.vikmanz.shpppro.presentation.utils.extensions.setImageWithGlide
 import com.vikmanz.shpppro.presentation.utils.screenMainViewModel
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 class MyProfileFragment :
@@ -62,7 +59,7 @@ class MyProfileFragment :
      * Set avatar image.
      */
     private fun setAvatar() =
-        binding.imageViewMyProfileAvatarImage.setContactPhotoFromResource(R.drawable.sample_avatar)
+        binding.imageViewMyProfileAvatarImage.setImageWithGlide(R.drawable.sample_avatar)
 
     /**
      * Logout with clear information about user from Data Store.
