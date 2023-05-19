@@ -10,6 +10,7 @@ import com.vikmanz.shpppro.data.utils.PasswordErrorsChecker.checkPasswordErrors
 import com.vikmanz.shpppro.databinding.FragmentLoginBinding
 import com.vikmanz.shpppro.presentation.base.BaseArgument
 import com.vikmanz.shpppro.presentation.base.BaseFragment
+import com.vikmanz.shpppro.presentation.utils.CustomGoogleButton
 import com.vikmanz.shpppro.presentation.utils.extensions.clearError
 import com.vikmanz.shpppro.presentation.utils.extensions.hideKeyboard
 import com.vikmanz.shpppro.presentation.utils.extensions.setGone
@@ -19,6 +20,7 @@ import com.vikmanz.shpppro.presentation.utils.extensions.setMultipleVisible
 import com.vikmanz.shpppro.presentation.utils.extensions.setVisible
 import com.vikmanz.shpppro.presentation.utils.extensions.startMainActivity
 import com.vikmanz.shpppro.presentation.utils.screenAuthViewModel
+import com.vikmanz.shpppro.utilits.extensions.log
 
 /**
  * Constants.
@@ -33,6 +35,7 @@ class LoginFragment :
      * Create ViewModel for this activity. Custom class need to change relevant type of viewModel in fabric.
      */
     class CustomArgument : BaseArgument
+
     override val viewModel by screenAuthViewModel()
 
     private lateinit var uiObserver: Observer<Boolean>
@@ -47,7 +50,9 @@ class LoginFragment :
         with(binding) {
             buttonLoginRegisterByEmail.setOnClickListener { checkForm() }
             textViewLoginSwitchScreenToLoginButton.setOnClickListener { viewModel.swapLoginAndRegister() }
-            buttonLoginRegisterByGoogle.setOnClickListener { buttonLoginRegisterByGoogle.setText() }
+            buttonLoginRegisterByGoogle.setOnClickListener {
+                (buttonLoginRegisterByGoogle as CustomGoogleButton).setFunText()
+            }
         }
         initHelpTesterButtons()
         setLoginPasswordFocusListeners()        // Listeners to fields and buttons.
@@ -116,18 +121,23 @@ class LoginFragment :
      * Set onClickListeners for email and password text input fields.
      */
     private fun setLoginPasswordFocusListeners() {
+        log("set listener!")
         with(binding) {
-            textInputLayoutLoginEmail.setOnFocusChangeListener { _, focused ->
-                if (focused && !viewModel.emailAlreadyFocused)
+           textInputLoginEmailField.setOnFocusChangeListener { _, focused ->
+                if (focused && !viewModel.emailAlreadyFocused) {
+                    log("is focused")
                     viewModel.emailAlreadyFocused = true
-                if (!focused && viewModel.emailAlreadyFocused)
-                    textInputLayoutLoginEmail.helperText = validEmail()
+                } else if (!focused && viewModel.emailAlreadyFocused) {
+                    log("is not focused")
+                    validEmail()
+                }
             }
-            textInputLayoutLoginPassword.setOnFocusChangeListener { _, focused ->
+
+            textInputLoginPasswordField.setOnFocusChangeListener { _, focused ->
                 if (focused && !viewModel.passwordAlreadyFocused)
                     viewModel.passwordAlreadyFocused = true
-                if (!focused && viewModel.passwordAlreadyFocused)
-                    textInputLayoutLoginPassword.helperText = validPassword()
+                else if (!focused && viewModel.passwordAlreadyFocused)
+                    validPassword()
             }
         }
     }
@@ -143,10 +153,12 @@ class LoginFragment :
 
         // Do check for standard Patterns.EMAIL_ADDRESS regex.
         if (!Patterns.EMAIL_ADDRESS.matcher(emailText).matches()) {
-            return getString(R.string.auth_activity_warning_message_invalid_email)
+            val error = getString(R.string.auth_activity_warning_message_invalid_email)
+            binding.textInputLayoutLoginEmail.helperText = error
+            return error
         }
-
         // If pass check, return null.
+        binding.textInputLayoutLoginEmail.helperText = null
         return null
     }
 
@@ -160,17 +172,22 @@ class LoginFragment :
         val passwordText = binding.textInputLoginPasswordField.text.toString()
         val result = checkPasswordErrors(passwordText, this)
         // If pass all checks, return null or return errors.
-        return if (result == "") null else result
+        val message = if (result == "") null else result
+        binding.textInputLayoutLoginPassword.helperText = message
+        return message
     }
 
     /**
      *  Submit Login/Register form and init MainActivity or show error messages.
      */
     private fun checkForm() {
+        // Check correct or not.
         val isEmailCorrect = validEmail() == null
         val isPasswordCorrect = validPassword() == null
-        if (isEmailCorrect && isPasswordCorrect) initMainActivity()     // If correct - start main activity.
-        else showInvalidFormMessage(isEmailCorrect, isPasswordCorrect)  // If have error - show error message.
+        // If correct - start main activity.
+        if (isEmailCorrect && isPasswordCorrect) initMainActivity()
+        // If have error - show error message.
+        else showInvalidFormMessage(isEmailCorrect, isPasswordCorrect)
     }
 
 
@@ -285,7 +302,7 @@ class LoginFragment :
         root.setOnClickListener {
             textInputLoginEmailField.clearFocus()
             textInputLoginPasswordField.clearFocus()
-            hideKeyboard()
+            hideKeyboard(root)
         }
     }
 
