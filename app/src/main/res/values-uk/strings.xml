@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
     <!-- ———————————————————— General ———————————————————— -->
@@ -27,15 +26,16 @@
     <string name="auth_activity_already_have_account_message_login_screen">Не маєте облікового запису?</string>
     <string name="auth_activity_sign_in_button_login_screen">Зареєструйтесь</string>
     <string name="auth_activity_forgot_your_password">Забули пароль?</string>
-    <string name="auth_activity_password_warning_min8chars">Мінімум %1$d символів</string>                              <!-- Variable -->
+    <string name="auth_activity_password_warning_min_chars">Мінімум %1$d символів</string>                              <!-- Variable -->
+    <string name="auth_activity_password_warning_max_chars">Максимум %1$d символів</string>                              <!-- Variable -->
     <string name="auth_activity_password_warning_one_upper_char">Мусить містити 1 символ у верхньому регістрі</string>
     <string name="auth_activity_password_warning_one_lower_char">Мусить містити 1 символ у нижньому регістрі</string>
     <string name="auth_activity_password_warning_one_special_char">Мусить містити 1 спеціальний символ (%1$s)</string>  <!-- Variable -->
     <string name="auth_activity_warning_message_invalid_register_form">Не правильно введено дані!</string>
     <string name="auth_activity_warning_message_invalid_email">Не правильна поштова адреса</string>
     <string name="auth_activity_warning_message_ok_button_text">Окей</string>
-    <string name="auth_activity_warning_message_email_title">Пошта:</string>
-    <string name="auth_activity_warning_message_password_title">Пароль:</string>
+    <string name="auth_activity_warning_message_email_title">Пошта</string>
+    <string name="auth_activity_warning_message_password_title">Пароль</string>
 
     <!-- ———————————————————— Main ———————————————————— -->
     <!-- Layout -->
@@ -46,9 +46,6 @@
     <string name="main_person_address_sample">Домашня адреса</string>
     <string name="main_edit_profile_button">Редагувати профіль</string>
     <string name="main_view_my_contacts_button">МОЇ КОНТАКТИ</string>
-    <!-- Activity -->
-    <string name="main_activity_person_career_hardcoded">Графічний дизайнер</string>
-    <string name="main_activity_person_address_hardcoded">49101, Дніпро, Домашній 7</string>
 
     <!-- ———————————————————— Contacts ———————————————————— -->
     <string name="contacts_recycler_person_name_sample">Ім\'я</string>
@@ -78,5 +75,10 @@
     <string name="contacts_add_contact_birthday">Дата народження</string>
     <string name="contacts_add_contact_save_button">ЗБЕРЕГТИ</string>
     <string name="main_activity_person_name_hardcoded">Віктор Хардкодовський</string>
+    <string name="my_contacts_add_contact_please_write_name">Введіть ім\'я!</string>
+
+    <!-- ———————————————————— Contact details ———————————————————— -->
+    <string name="contactDetails_profileTitle">Профіль</string>
+    <string name="contactDetails_messageButton">ПОВІДОМЛЕННЯ</string>
 
 </resources>

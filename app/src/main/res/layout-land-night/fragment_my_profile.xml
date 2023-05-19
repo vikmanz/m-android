@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.main.MainActivity">
+
+    <!-- Guide of center of elements. -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideLine_myProfile_bgCenterOfScreen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.70" />
+
+    <!-- Top half of screen. -->
+    <View
+        android:id="@+id/guideLine_myProfile_bgTopHalf"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="?attr/colorSecondary"
+        app:layout_constraintBottom_toTopOf="@id/guideLine_myProfile_bgCenterOfScreen"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Settings and Logout flow. -->
+    <androidx.constraintlayout.helper.widget.Flow
+        android:id="@+id/flow_myProfile_topButtons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/offset_M"
+        android:layout_marginTop="@dimen/offset_M"
+        android:orientation="horizontal"
+        app:constraint_referenced_ids="
+        textView_myProfile_settings,
+        textView_myProfile_logoutButton"
+        app:flow_horizontalStyle="spread_inside"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textView_myProfile_settings"
+        style="@style/basicText_bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/main_settings"
+        android:textSize="@dimen/size_textFont_XL"
+        tools:ignore="MissingConstraints" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textView_myProfile_logoutButton"
+        style="@style/basicText_bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/main_logout_button"
+        tools:ignore="MissingConstraints" />
+
+    <!-- Person Info and Social Icons. -->
+    <!-- <!- Avatar and Person Info. -->
+    <!-- <!- <!- Avatar flow. -->
+    <androidx.constraintlayout.helper.widget.Flow
+        android:id="@+id/flow_myProfile_profileInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/offset_XL"
+        android:orientation="horizontal"
+        app:constraint_referenced_ids="
+        imageView_myProfile_avatarImage,
+        flow_myProfile_personTextInfo"
+        app:flow_horizontalGap="@dimen/offset_XL"
+        app:layout_constraintBottom_toBottomOf="@+id/guideLine_myProfile_bgCenterOfScreen"
+        app:layout_constraintEnd_toStartOf="@+id/imageView_myProfile_facebookButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/flow_myProfile_topButtons" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imageView_myProfile_avatarImage"
+        android:layout_width="@dimen/avatarSide_myProfile"
+        android:layout_height="@dimen/avatarSide_myProfile"
+        android:layout_marginTop="28dp"
+        android:layout_marginBottom="28dp"
+        android:src="@drawable/sample_avatar"
+        tools:ignore="MissingConstraints" />
+
+    <!-- <!- <!- Person Info flow. -->
+    <androidx.constraintlayout.helper.widget.Flow
+        android:id="@+id/flow_myProfile_personTextInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:constraint_referenced_ids="
+        textView_myProfile_personName,
+        textView_myProfile_personCareer,
+        textView_myProfile_personAddress"
+        app:flow_verticalGap="@dimen/offset_S"
+        tools:ignore="MissingConstraints" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textView_myProfile_personName"
+        style="@style/basicText_bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/main_person_name_sample"
+        android:textSize="@dimen/size_textFont_M"
+        tools:ignore="MissingConstraints,TextContrastCheck" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textView_myProfile_personCareer"
+        style="@style/basicText_bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/main_person_career_sample"
+        android:textColor="?attr/colorOnTertiary"
+        android:textSize="@dimen/size_textFont_XS"
+        tools:ignore="MissingConstraints" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textView_myProfile_personAddress"
+        style="@style/basicText_bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/offset_S"
+        android:text="@string/main_person_address_sample"
+        android:textColor="?attr/colorOnTertiary"
+        android:textSize="@dimen/size_textFont_XS"
+        tools:ignore="MissingConstraints" />
+
+    <!-- <!- Social Icons flow. -->
+    <androidx.constraintlayout.helper.widget.Flow
+        android:id="@+id/flow_myProfile_socialIcons"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="
+        imageView_myProfile_facebookButton,
+        imageView_myProfile_linkedinButton,
+        imageView_myProfile_instagramButton"
+        app:flow_horizontalGap="@dimen/offset_XL"
+        app:layout_constraintBottom_toBottomOf="@+id/guideLine_myProfile_bgCenterOfScreen"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/flow_myProfile_profileInfo"
+        app:layout_constraintTop_toBottomOf="@+id/flow_myProfile_topButtons" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imageView_myProfile_facebookButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/socials_outline_circle"
+        android:clickable="true"
+        android:focusable="true"
+        android:scaleType="center"
+        app:srcCompat="@drawable/socials_logo_facebook"
+        tools:ignore="MissingConstraints,SpeakableTextPresentCheck" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imageView_myProfile_linkedinButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/socials_outline_circle"
+        android:clickable="true"
+        android:focusable="true"
+        android:scaleType="center"
+        app:srcCompat="@drawable/socials_logo_linkedin"
+        tools:ignore="MissingConstraints,SpeakableTextPresentCheck" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imageView_myProfile_instagramButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/socials_outline_circle"
+        android:clickable="true"
+        android:focusable="true"
+        android:scaleType="center"
+        app:srcCompat="@drawable/socials_logo_instagram"
+        tools:ignore="MissingConstraints,SpeakableTextPresentCheck" />
+
+    <!-- Down half of screen. -->
+    <!-- Edit Profile and View Contacts buttons flow. -->
+    <View
+        android:id="@+id/guideLine_myProfile_bgBottomHalf"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="?attr/colorTertiary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guideLine_myProfile_bgTopHalf"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <androidx.constraintlayout.helper.widget.Flow
+        android:id="@+id/flow_myProfile_bottomButtons"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:constraint_referenced_ids="
+        button_myProfile_editProfile,
+        button_myProfile_viewMyContacts"
+        app:flow_horizontalAlign="center"
+        app:flow_horizontalGap="@dimen/offset_XL"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/guideLine_myProfile_bgCenterOfScreen" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/button_myProfile_editProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/size_buttonHeight_M"
+        android:background="@drawable/btn_std_white_bg"
+        android:text="@string/main_edit_profile_button"
+        android:textAppearance="@style/basicText_buttonsText"
+        android:textColor="?attr/colorSecondary"
+        tools:ignore="MissingConstraints,TouchTargetSizeCheck" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/button_myProfile_viewMyContacts"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/size_buttonHeight_M"
+        android:background="@drawable/btn_std_orange_bg"
+        android:text="@string/main_view_my_contacts_button"
+        android:textAppearance="@style/basicText_buttonsText"
+        tools:ignore="MissingConstraints,TextContrastCheck,TouchTargetSizeCheck" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+

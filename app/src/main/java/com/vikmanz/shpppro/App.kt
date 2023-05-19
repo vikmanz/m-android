@@ -1,18 +1,17 @@
 package com.vikmanz.shpppro
 
-
 import android.app.Application
-import com.vikmanz.shpppro.data.ContactsReposetory
+import com.vikmanz.shpppro.data.ContactsRepository
 
 /**
- * Singleton for send ContentResolver to ContactsPhoneInfoTaker().
+ * Singleton for send ContentResolver to ContactsPhoneInfoTaker()
  */
 
 class App : Application() {
 
     override fun onCreate() {
         app = this
-        _contactsReposetory = ContactsReposetory()
+        contactsRepositoryPrivate = ContactsRepository()
         super.onCreate()
     }
 
@@ -20,8 +19,8 @@ class App : Application() {
         private lateinit var app: App
         val instance: App get() = app
 
-        private lateinit var _contactsReposetory: ContactsReposetory
-        val contactsReposetory: ContactsReposetory get() = _contactsReposetory
+        private lateinit var contactsRepositoryPrivate: ContactsRepository
+        val contactsRepository: ContactsRepository
+            get() = contactsRepositoryPrivate
     }
-
 }

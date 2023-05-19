@@ -20,5 +20,19 @@
         <item name="android:textViewStyle">@style/basicText</item>
 
 
+        <item name="myGoogleButtonStyle">@style/defaultMyGButtonStyle</item>
+
     </style>
+
+    <style name="defaultMyGButtonStyle">
+        <item name="mgbText">GOOGLE</item>
+        <item name="mgbTextColor">#000000</item>
+        <item name="mgbButtonColor">#B4B4B4</item>
+        <item name="mgbLogo1Color">#4285F4</item>
+        <item name="mgbLogo2Color">#0F9D58</item>
+        <item name="mgbLogo3Color">#F4B400</item>
+        <item name="mgbLogo4Color">#DB4437</item>
+
+    </style>
+
 </resources>

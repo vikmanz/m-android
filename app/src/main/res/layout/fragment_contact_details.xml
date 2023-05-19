@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.main.MainActivity">
+
+    <!-- Guide of center of elements. -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideLine_contactDetails_bgCenterOfScreen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <!-- Top half of screen. -->
+    <View
+        android:id="@+id/guideLine_contactDetails_bgTopHalf"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="?attr/colorSecondary"
+        app:layout_constraintBottom_toTopOf="@id/guideLine_contactDetails_bgCenterOfScreen"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Title and title buttons flow. -->
+    <androidx.constraintlayout.helper.widget.Flow
+        android:id="@+id/flow_contactDetails_titleAndButtons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/marginHorizontal"
+        android:layout_marginTop="@dimen/offset_M"
+        android:orientation="horizontal"
+        app:constraint_referenced_ids="
+        button_contactDetails_backButton,
+        textView_contactDetails_title,
+        button_contactDetails_declineAccess"
+        app:flow_horizontalStyle="spread_inside"
+        app:layout_constraintEnd_toEndOf="@id/guideLine_contactDetails_bgTopHalf"
+        app:layout_constraintStart_toStartOf="@id/guideLine_contactDetails_bgTopHalf"
+        app:layout_constraintTop_toTopOf="@id/guideLine_contactDetails_bgTopHalf"
+        tools:ignore="MissingConstraints" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/button_contactDetails_backButton"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/arrow_back"
+        tools:ignore="MissingConstraints,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textView_contactDetails_title"
+        style="@style/basicText_bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/contactDetails_profileTitle"
+        android:textSize="@dimen/size_textFont_L"
+        tools:ignore="MissingConstraints" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/button_contactDetails_declineAccess"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/baseline_highlight_off_24"
+        android:visibility="invisible"
+        tools:ignore="MissingConstraints,SpeakableTextPresentCheck,TouchTargetSizeCheck"
+        tools:layout_editor_absoluteX="359dp"
+        tools:layout_editor_absoluteY="16dp"
+        tools:visibility="invisible" />
+
+    <!-- Avatar and Person Info. -->
+    <!-- <!- Avatar flow. -->
+    <androidx.constraintlayout.helper.widget.Flow
+        android:id="@+id/flow_contactDetails_profileInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:constraint_referenced_ids="
+        imageView_contactDetails_avatarImage,
+        flow_contactDetails_personTextInfo"
+        app:flow_verticalGap="@dimen/offset_M"
+        app:layout_constraintBottom_toBottomOf="@id/guideLine_contactDetails_bgCenterOfScreen"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/flow_contactDetails_titleAndButtons" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imageView_contactDetails_avatarImage"
+        android:layout_width="@dimen/avatarSide_myProfile"
+        android:layout_height="@dimen/avatarSide_myProfile"
+        android:src="@drawable/sample_avatar"
+        tools:ignore="MissingConstraints" />
+
+    <!-- <!- Person Info flow. -->
+    <androidx.constraintlayout.helper.widget.Flow
+        android:id="@+id/flow_contactDetails_personTextInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:constraint_referenced_ids="
+        textView_contactDetails_personName,
+        textView_contactDetails_personCareer,
+        textView_contactDetails_personAddress"
+        app:flow_verticalGap="@dimen/offset_S"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="149dp"
+        tools:layout_editor_absoluteY="282dp" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textView_contactDetails_personName"
+        style="@style/basicText_bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/main_person_name_sample"
+        android:textSize="@dimen/size_textFont_M"
+        tools:ignore="MissingConstraints,TextContrastCheck" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textView_contactDetails_personCareer"
+        style="@style/basicText_bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/main_person_career_sample"
+        android:textColor="?attr/colorOnTertiary"
+        android:textSize="@dimen/size_textFont_XS"
+        tools:ignore="MissingConstraints" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textView_contactDetails_personAddress"
+        style="@style/basicText_bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/offset_S"
+        android:text="@string/main_person_address_sample"
+        android:textColor="?attr/colorOnTertiary"
+        android:textSize="@dimen/size_textFont_XS"
+        tools:ignore="MissingConstraints" />
+
+
+    <!-- Bottom half of screen. -->
+    <View
+        android:id="@+id/guideLine_contactDetails_bgBottomHalf"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="?attr/colorTertiary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guideLine_contactDetails_bgTopHalf" />
+
+    <!-- Social Icons flow. -->
+    <androidx.constraintlayout.helper.widget.Flow
+        android:id="@+id/flow_contactDetails_socialIcons"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="
+        imageView_contactDetails_facebookButton,
+        imageView_contactDetails_linkedinButton,
+        imageView_contactDetails_instagramButton"
+        app:flow_horizontalGap="@dimen/offset_XL"
+        app:layout_constraintBottom_toTopOf="@+id/button_contactDetails_viewMyContacts"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guideLine_contactDetails_bgCenterOfScreen"
+        app:layout_constraintVertical_bias="0.33" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imageView_contactDetails_facebookButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/socials_outline_circle"
+        android:clickable="true"
+        android:focusable="true"
+        android:scaleType="center"
+        app:srcCompat="@drawable/socials_logo_facebook"
+        tools:ignore="MissingConstraints,SpeakableTextPresentCheck" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imageView_contactDetails_linkedinButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/socials_outline_circle"
+        android:clickable="true"
+        android:focusable="true"
+        android:scaleType="center"
+        app:srcCompat="@drawable/socials_logo_linkedin"
+        tools:ignore="MissingConstraints,SpeakableTextPresentCheck" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imageView_contactDetails_instagramButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/socials_outline_circle"
+        android:clickable="true"
+        android:focusable="true"
+        android:scaleType="center"
+        app:srcCompat="@drawable/socials_logo_instagram"
+        tools:ignore="MissingConstraints,SpeakableTextPresentCheck" />
+
+    <!-- View Contacts button. -->
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/button_contactDetails_viewMyContacts"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_buttonHeight_XL"
+        android:layout_marginHorizontal="@dimen/marginHorizontal"
+        android:layout_marginBottom="@dimen/offset_M"
+        android:background="@drawable/btn_std_orange_bg"
+        android:text="@string/contactDetails_messageButton"
+        android:textAppearance="@style/basicText_buttonsText"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="TextContrastCheck,VisualLintButtonSize" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+

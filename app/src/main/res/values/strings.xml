@@ -27,16 +27,16 @@
     <string name="auth_activity_register_button_login_screen">LOGIN</string>
     <string name="auth_activity_already_have_account_message_login_screen">Don’t have account?</string>
     <string name="auth_activity_forgot_your_password">Forgot your password?</string>
-
-    <string name="auth_activity_password_warning_min8chars">Minimum %1$d Characters Password</string>               <!-- Variable -->
+    <string name="auth_activity_password_warning_min_chars">Minimum %1$d Characters Password</string>               <!-- Variable -->
+    <string name="auth_activity_password_warning_max_chars">Maximum %1$d Characters Password</string>               <!-- Variable -->
     <string name="auth_activity_password_warning_one_upper_char">Must Contain 1 Upper-case Character</string>
     <string name="auth_activity_password_warning_one_lower_char">Must Contain 1 Lower-case Character</string>
     <string name="auth_activity_password_warning_one_special_char">Must Contain 1 Special Character (%1$s)</string> <!-- Variable -->
     <string name="auth_activity_warning_message_invalid_register_form">Invalid registration form!</string>
     <string name="auth_activity_warning_message_invalid_email">Invalid email address</string>
     <string name="auth_activity_warning_message_ok_button_text">Okay</string>
-    <string name="auth_activity_warning_message_email_title">Email:</string>
-    <string name="auth_activity_warning_message_password_title">Password:</string>
+    <string name="auth_activity_warning_message_email_title">Email</string>
+    <string name="auth_activity_warning_message_password_title">Password</string>
 
     <!-- ———————————————————— Main ———————————————————— -->
     <!-- Layout -->
@@ -48,9 +48,11 @@
     <string name="main_edit_profile_button">Edit profile</string>
     <string name="main_view_my_contacts_button">VIEW MY CONTACTS</string>
     <!-- Activity -->
-    <string name="main_activity_person_name_hardcoded">Viktor Hardcode</string>
-    <string name="main_activity_person_career_hardcoded">Motion designer</string>
-    <string name="main_activity_person_address_hardcoded">49101, Dnipro, Homeadress str. 7</string>
+    <string name="main_activity_person_name_hardcoded" translatable="false">Viktor Hardcode</string>
+    <string name="main_activity_person_email_hardcoded" translatable="false">Viktor.Hardcode@gmail.com</string>
+    <string name="main_activity_person_career_hardcoded" translatable="false">Motion designer</string>
+    <string name="main_activity_person_address_hardcoded" translatable="false">49101, Dnipro, Homeadress str. 7</string>
+    <string name="safe_arg_id" translatable="false">argument</string>
 
     <!-- ———————————————————— Contacts ———————————————————— -->
     <string name="contacts_recycler_person_name_sample">Person Name</string>
@@ -79,7 +81,11 @@
     <string name="contacts_add_contact_address">Address</string>
     <string name="contacts_add_contact_birthday">Date of birth</string>
     <string name="contacts_add_contact_save_button">SAVE</string>
+    <string name="my_contacts_add_contact_please_write_name">Please, write name!</string>
 
+    <!-- ———————————————————— Contact details ———————————————————— -->
+    <string name="contactDetails_profileTitle">Profile</string>
+    <string name="contactDetails_messageButton">MESSAGE</string>
 
 
 </resources>

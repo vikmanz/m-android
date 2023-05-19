@@ -6,7 +6,7 @@
     <style name="basicText" parent="Widget.AppCompat.TextView">
         <item name="android:fontFamily">@font/open_sans_regular</item>     <!-- FONT -->
         <item name="android:textColor">?attr/colorTertiary</item>
-        <item name="android:textSize">@dimen/size_text_font_S</item>
+        <item name="android:textSize">@dimen/size_textFont_S</item>
     </style>
 
     <style name="basicText_bold" parent="basicText">
@@ -14,7 +14,7 @@
     </style>
 
     <style name="checkbox" parent="basicText">
-        <item name="android:textSize">@dimen/size_text_font_XS</item>
+        <item name="android:textSize">@dimen/size_textFont_XS</item>
         <item name="android:textStyle">bold</item>
         <item name="android:button">@drawable/checkbox_selector</item>
         <item name="android:paddingStart">8sp</item>
@@ -33,15 +33,15 @@
     <style name="textInputLayout_LoginPassword" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
         <item name="boxStrokeWidth">0dp</item>
         <item name="boxStrokeWidthFocused">0dp</item>
-        <item name="android:textSize">@dimen/size_text_font_XL</item>
-        <item name="helperTextTextColor">?attr/colorError</item>
-        <item name="boxCollapsedPaddingTop">@dimen/email_password_boxCollapsedPaddingTop</item>
+        <item name="android:textSize">@dimen/size_textFont_XL</item>
+<!--        <item name="helperTextTextColor">?attr/colorError</item>-->
+        <item name="boxCollapsedPaddingTop">@dimen/padding_loginFragment_emailPasswordBoxCollapsedPaddingTop</item>
         <item name="expandedHintEnabled">false</item>
         <item name="android:textColorHint">?attr/colorOnTertiary</item>
     </style>
 
     <style name="textInputLayout_hintSize">
-        <item name="android:textSize">@dimen/size_text_font_XS</item>
+        <item name="android:textSize">@dimen/size_textFont_XS</item>
     </style>
 
     <style name="textInputLayout_basicTextInput" parent="Widget.AppCompat.EditText">
