@@ -12,6 +12,7 @@
     <string name="auth_layout_terms_warning">By clicking Register you agree to our Terms\nand Conditions</string> <!-- \n -->
     <string name="auth_layout_terms_warning_landscape">By clicking Register you agree to our Terms and Conditions</string>
     <string name="auth_layout_google_button" translatable="false">GOOGLE</string>
+    <string name="auth_layout_google_button_text2" translatable="false">I am GOOGLE, i promise!</string>
     <string name="auth_layout_text_between_google_and_register">or</string>
     <string name="auth_layout_register_button">REGISTER</string>
     <string name="auth_layout_remember_me_checkbox">Remember me</string>
