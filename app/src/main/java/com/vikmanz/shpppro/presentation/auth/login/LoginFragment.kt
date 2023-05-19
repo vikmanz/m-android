@@ -2,7 +2,6 @@ package com.vikmanz.shpppro.presentation.auth.login
 
 import android.app.AlertDialog
 import android.content.Intent
-import android.os.Bundle
 import android.provider.Settings
 import android.util.Patterns
 import androidx.lifecycle.Observer
@@ -52,13 +51,7 @@ class LoginFragment :
     private var uiObserver: Observer<Boolean>? = null
     private var helpersObserver: Observer<Boolean>? = null
 
-    private lateinit var dataStore: DataStoreManager
-
-    // TODO why do we init datastore in onCreate? Why not in onViewCreated?
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        dataStore = DataStoreManager(requireActivity())
-    }
+    private val dataStore =  DataStoreManager(requireActivity())
 
     override fun setObservers() {
         observeUI()
