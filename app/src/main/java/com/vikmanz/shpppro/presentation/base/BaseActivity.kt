@@ -14,7 +14,7 @@ abstract class BaseActivity<VBinding : ViewBinding>(
     AppCompatActivity() {
 
     private var _binding: VBinding? = null
-    val binding get() = _binding!!
+    val binding get() = requireNotNull(_binding)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

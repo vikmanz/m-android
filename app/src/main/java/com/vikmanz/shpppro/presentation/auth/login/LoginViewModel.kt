@@ -2,10 +2,12 @@ package com.vikmanz.shpppro.presentation.auth.login
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.vikmanz.shpppro.App
 import com.vikmanz.shpppro.constants.Constants.LOGIN_VIEW_FIRST
 import com.vikmanz.shpppro.presentation.base.BaseViewModel
 import com.vikmanz.shpppro.presentation.navigator.Navigator
 import com.vikmanz.shpppro.presentation.utils.extensions.swapBoolean
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 private const val DEFAULT_SHOW_HELPERS = false
@@ -28,9 +30,6 @@ class LoginViewModel(
      * Change screen to register or to login.
      */
     fun swapLoginAndRegister() {
-        viewModelScope.launch {
-
-        }
         loginScreen.swapBoolean()
     }
 
@@ -39,6 +38,16 @@ class LoginViewModel(
      */
     fun showOrHideHelpers() {
         helperButtonsVisible.swapBoolean()
+    }
+
+    /**
+     *  Save user data from text input fields and language key from class variable to Data Store.
+     */
+    fun saveUserEmailToDatastore(email: String) {
+        val dataStore = App.dataStore
+        viewModelScope.launch(Dispatchers.IO) {
+            dataStore.saveUserSata(email)
+        }
     }
 
 }

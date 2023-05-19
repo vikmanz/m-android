@@ -12,6 +12,7 @@
     <string name="auth_layout_terms_warning">By clicking Register you agree to our Terms\nand Conditions</string> <!-- \n -->
     <string name="auth_layout_terms_warning_landscape">By clicking Register you agree to our Terms and Conditions</string>
     <string name="auth_layout_google_button" translatable="false">GOOGLE</string>
+    <string name="auth_layout_google_button_text2" translatable="false">I am GOOGLE, i promise!</string>
     <string name="auth_layout_text_between_google_and_register">or</string>
     <string name="auth_layout_register_button">REGISTER</string>
     <string name="auth_layout_remember_me_checkbox">Remember me</string>
@@ -52,7 +53,6 @@
     <string name="main_activity_person_email_hardcoded" translatable="false">Viktor.Hardcode@gmail.com</string>
     <string name="main_activity_person_career_hardcoded" translatable="false">Motion designer</string>
     <string name="main_activity_person_address_hardcoded" translatable="false">49101, Dnipro, Homeadress str. 7</string>
-    <string name="safe_arg_id" translatable="false">argument</string>
 
     <!-- ———————————————————— Contacts ———————————————————— -->
     <string name="contacts_recycler_person_name_sample">Person Name</string>
@@ -87,5 +87,7 @@
     <string name="contactDetails_profileTitle">Profile</string>
     <string name="contactDetails_messageButton">MESSAGE</string>
 
+    <!-- ———————————————————— Safe Arg ———————————————————— -->
+    <string name="safe_arg_id" translatable="false">argument</string>
 
 </resources>

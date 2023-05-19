@@ -10,10 +10,13 @@ class ContactDetailsFragment :
     BaseFragment<FragmentContactDetailsBinding, ContactDetailsViewModel>(
         FragmentContactDetailsBinding::inflate
     ) {
+
+    /**
+     * Create ViewModel for this activity. Custom class need to change relevant type of viewModel in fabric.
+     */
     class CustomArgument(
         val contactID: Long
     ) : BaseArgument
-
     override val viewModel by screenMainViewModel()
 
     override fun onCreatedFragmentView() {

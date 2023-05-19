@@ -358,9 +358,8 @@ class CustomGoogleButton(
     /**
      * Setter for text.
      */
-    @Suppress("unused")
-    fun setText(text: String) {
-        this.text = text
+    fun setFunText() {
+        this.text = context.getString(R.string.auth_layout_google_button_text2)
         calculateNewTransform(buttonRect.width(), buttonRect.height())
         invalidate()
     }

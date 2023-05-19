@@ -1,27 +1,27 @@
 package com.vikmanz.shpppro.presentation.main.my_contacts_list
 
+import android.Manifest.permission.READ_CONTACTS
 import android.content.Intent
 import android.net.Uri
 import android.provider.Settings
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
+import com.vikmanz.shpppro.R
 import com.vikmanz.shpppro.constants.Constants.MARGINS_OF_ELEMENTS
 import com.vikmanz.shpppro.constants.Constants.SNACK_BAR_VIEW_TIME
-import android.Manifest.permission.READ_CONTACTS
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.Observer
-import androidx.lifecycle.repeatOnLifecycle
-import com.vikmanz.shpppro.presentation.base.BaseArgument
-import com.vikmanz.shpppro.R
-import com.vikmanz.shpppro.data.contact_model.*
-import com.vikmanz.shpppro.presentation.main.my_contacts_list.adapter.listeners.ContactActionListener
+import com.vikmanz.shpppro.data.contact_model.Contact
 import com.vikmanz.shpppro.databinding.FragmentMyContactsListBinding
+import com.vikmanz.shpppro.presentation.base.BaseArgument
 import com.vikmanz.shpppro.presentation.base.BaseFragment
 import com.vikmanz.shpppro.presentation.main.my_contacts_list.adapter.ContactsAdapter
+import com.vikmanz.shpppro.presentation.main.my_contacts_list.adapter.listeners.ContactActionListener
 import com.vikmanz.shpppro.presentation.main.my_contacts_list.add_contact.AddContactDialogFragment
 import com.vikmanz.shpppro.presentation.main.my_contacts_list.decline_permision.OnDeclinePermissionDialogFragment
 import com.vikmanz.shpppro.presentation.utils.extensions.setGone
@@ -31,18 +31,18 @@ import com.vikmanz.shpppro.presentation.utils.extensions.setVisible
 import com.vikmanz.shpppro.presentation.utils.recycler_view_decoration.MarginItemDecoration
 import com.vikmanz.shpppro.presentation.utils.recycler_view_decoration.SwipeToDeleteCallback
 import com.vikmanz.shpppro.presentation.utils.screenMainViewModel
-import kotlinx.coroutines.*
+import kotlinx.coroutines.launch
 
 /**
  * Class represents MyContacts screen activity.
  */
 class MyContactsListFragment :
     BaseFragment<FragmentMyContactsListBinding, MyContactsListViewModel>(FragmentMyContactsListBinding::inflate) {
-    class CustomArgument : BaseArgument
 
     /**
-     * Create ViewModel for this activity.
+     * Create ViewModel for this activity. Custom class need to change relevant type of viewModel in fabric.
      */
+    class CustomArgument : BaseArgument
     override val viewModel by screenMainViewModel()
 
     private lateinit var uiObserver: Observer<Boolean>
@@ -78,7 +78,7 @@ class MyContactsListFragment :
     }
 
     private fun observeUI() {
-        uiObserver = Observer {
+        uiObserver = Observer<Boolean> {
             with(binding) {
                 if (it) {
                     setMultipleInvisible(
@@ -96,8 +96,7 @@ class MyContactsListFragment :
                     buttonMyContactsAddContactsFromPhonebook.setGone()
                 }
             }
-        }
-        viewModel.fakeListActivated.observe(this, uiObserver)
+        }.also { viewModel.fakeListActivated.observe(this@MyContactsListFragment, it) }
     }
 
     private fun observeContactsList() {
@@ -237,7 +236,6 @@ class MyContactsListFragment :
         undo?.dismiss()
         undo = null
         viewModel.fakeListActivated.removeObserver(uiObserver)
-        viewModel.fakeListActivated.removeObservers(this)
     }
 
 }
