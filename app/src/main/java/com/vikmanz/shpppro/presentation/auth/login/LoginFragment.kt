@@ -141,7 +141,7 @@ class LoginFragment :
         activity.finish()
     }
 
-
+    //TODO errors don't work after change focus
     /**
      * Set onClickListeners for email and password text input fields.
      */
