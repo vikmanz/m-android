@@ -53,7 +53,6 @@
     <string name="main_activity_person_email_hardcoded" translatable="false">Viktor.Hardcode@gmail.com</string>
     <string name="main_activity_person_career_hardcoded" translatable="false">Motion designer</string>
     <string name="main_activity_person_address_hardcoded" translatable="false">49101, Dnipro, Homeadress str. 7</string>
-    <string name="safe_arg_id" translatable="false">argument</string>
 
     <!-- ———————————————————— Contacts ———————————————————— -->
     <string name="contacts_recycler_person_name_sample">Person Name</string>
@@ -88,5 +87,7 @@
     <string name="contactDetails_profileTitle">Profile</string>
     <string name="contactDetails_messageButton">MESSAGE</string>
 
+    <!-- ———————————————————— Safe Arg ———————————————————— -->
+    <string name="safe_arg_id" translatable="false">argument</string>
 
 </resources>
