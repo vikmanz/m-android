@@ -356,7 +356,7 @@ class CustomGoogleButton(
     )
 
     /**
-     * Setter for text.
+     * Setter for text.asdasdasdasd
      */
     fun setText(text: String) {
         this.text = text
