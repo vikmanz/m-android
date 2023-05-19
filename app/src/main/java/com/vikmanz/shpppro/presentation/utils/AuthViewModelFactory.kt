@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.viewbinding.ViewBinding
 import com.vikmanz.shpppro.R
 import com.vikmanz.shpppro.constants.USE_NAVIGATION_COMPONENT
-import com.vikmanz.shpppro.presentation.navigator.MainNavigator
 
 import com.vikmanz.shpppro.presentation.navigator.Navigator
 import com.vikmanz.shpppro.presentation.base.*

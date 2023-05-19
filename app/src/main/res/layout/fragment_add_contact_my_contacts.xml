@@ -70,10 +70,10 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/imageView_addContact_avatar"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginTop="28dp"
-            android:layout_marginBottom="28dp"
+            android:layout_width="@dimen/avatarSide_addContactDialog"
+            android:layout_height="@dimen/avatarSide_addContactDialog"
+            android:layout_marginTop="@dimen/avatarMargin_addContactDialog"
+            android:layout_marginBottom="@dimen/avatarMargin_addContactDialog"
             android:src="@drawable/sample_avatar"
             app:layout_constraintBottom_toBottomOf="@id/barrier_addContact_barrier"
             app:layout_constraintEnd_toEndOf="parent"

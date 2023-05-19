@@ -13,7 +13,6 @@ abstract class BaseFragment<VBinding : ViewBinding, VM : BaseViewModel>(
 
     abstract val viewModel: VM
 
-
     private var _binding: VBinding? = null
     val binding get() = requireNotNull(_binding)
 

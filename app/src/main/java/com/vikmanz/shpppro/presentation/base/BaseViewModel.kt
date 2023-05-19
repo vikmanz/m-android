@@ -5,4 +5,4 @@ import androidx.lifecycle.ViewModel
 /**
  * Base class for all view-models.
  */
-open class BaseViewModel (): ViewModel()
+open class BaseViewModel : ViewModel()

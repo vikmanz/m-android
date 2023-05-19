@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.lifecycle.lifecycleScope
 import com.vikmanz.shpppro.R
 import com.vikmanz.shpppro.constants.Constants
+import com.vikmanz.shpppro.constants.Constants.SPLASH_DELAY
 import com.vikmanz.shpppro.data.DataStoreManager
 import com.vikmanz.shpppro.presentation.base.BaseArgument
 import com.vikmanz.shpppro.databinding.FragmentSplashScreenBinding
@@ -13,13 +14,14 @@ import com.vikmanz.shpppro.presentation.base.BaseFragment
 import com.vikmanz.shpppro.presentation.main.MainActivity
 import com.vikmanz.shpppro.presentation.utils.screenAuthViewModel
 import com.vikmanz.shpppro.utilits.extensions.log
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @SuppressLint("CustomSplashScreen")
 class SplashScreenFragment :
     BaseFragment<FragmentSplashScreenBinding, SplashScreenViewModel>(FragmentSplashScreenBinding::inflate) {
 
-    class CustomArgument() : BaseArgument
+    class CustomArgument : BaseArgument
 
     /**
      * Create ViewModel for this activity.
@@ -43,6 +45,7 @@ class SplashScreenFragment :
      */
     private fun setAutoLoginObserver() {
         lifecycleScope.launch {
+            delay(SPLASH_DELAY)
             dataStore.userNameFlow.collect { name ->
                 if (name.isBlank()) {
                     log("datastore is null is [$name]")
@@ -54,7 +57,6 @@ class SplashScreenFragment :
             }
         }
     }
-
 
     /**
      * Start main activity.

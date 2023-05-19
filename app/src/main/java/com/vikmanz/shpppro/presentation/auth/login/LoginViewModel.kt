@@ -1,16 +1,17 @@
 package com.vikmanz.shpppro.presentation.auth.login
 
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.vikmanz.shpppro.constants.Constants.LOGIN_VIEW_FIRST
 import com.vikmanz.shpppro.presentation.base.BaseViewModel
 import com.vikmanz.shpppro.presentation.navigator.Navigator
 import com.vikmanz.shpppro.presentation.utils.extensions.swapBoolean
+import kotlinx.coroutines.launch
 
 private const val DEFAULT_SHOW_HELPERS = false
-@Suppress("unused")
 class LoginViewModel(
-    private val navigator: Navigator,
-    customArgument: LoginFragment.CustomArgument
+    @Suppress("unused") private val navigator: Navigator,
+    @Suppress("UNUSED_PARAMETER") customArgument: LoginFragment.CustomArgument,
 ) : BaseViewModel() {
 
     // Save state of screen layout. True - Login screen, False - Register screen.
@@ -27,15 +28,17 @@ class LoginViewModel(
      * Change screen to register or to login.
      */
     fun swapLoginAndRegister() {
+        viewModelScope.launch {
+
+        }
         loginScreen.swapBoolean()
     }
 
     /**
-     * Show/hide helpar buttons.
+     * Show/hide helper buttons.
      */
     fun showOrHideHelpers() {
         helperButtonsVisible.swapBoolean()
     }
-
 
 }

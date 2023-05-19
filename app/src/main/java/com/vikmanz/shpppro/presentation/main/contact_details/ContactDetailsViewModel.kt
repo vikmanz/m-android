@@ -11,7 +11,6 @@ class ContactDetailsViewModel(
 ) : BaseViewModel() {
 
     private val contactsRepository = App.contactsRepository
-
     private val id = customArgument.contactID
 
     private val contact: Contact = contactsRepository.findContact(id) ?: contactsRepository.generateRandomContact()
@@ -19,10 +18,7 @@ class ContactDetailsViewModel(
     val name = contact.contactName
     val career = contact.contactCareer
     val homeAddress = contact.contactAddress
-
-    val photoUrl = contact.contactPhotoUrl
-    val photoUri = contact.contactPhotoUri
-
+    val photoLink = contact.contactPhotoLink
 
     fun onButtonBackPressed() {
         navigator.goBack()

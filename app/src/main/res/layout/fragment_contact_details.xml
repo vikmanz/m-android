@@ -90,14 +90,12 @@
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/imageView_contactDetails_avatarImage"
-        android:layout_width="@dimen/avatar_radius"
-        android:layout_height="@dimen/avatar_radius"
-        android:layout_marginTop="28dp"
-        android:layout_marginBottom="28dp"
+        android:layout_width="@dimen/avatarSide_myProfile"
+        android:layout_height="@dimen/avatarSide_myProfile"
         android:src="@drawable/sample_avatar"
         tools:ignore="MissingConstraints" />
-    <!-- <!- Person Info flow. -->
 
+    <!-- <!- Person Info flow. -->
     <androidx.constraintlayout.helper.widget.Flow
         android:id="@+id/flow_contactDetails_personTextInfo"
         android:layout_width="wrap_content"

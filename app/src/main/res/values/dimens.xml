@@ -26,15 +26,17 @@
     <dimen name="size_textFont_X">28sp</dimen>
     <dimen name="size_textFont_XL">32sp</dimen>
 
-    <!-- Avatar dimens. -->
-    <dimen name="avatar_radius">130dp</dimen>
-    <dimen name="avatar_cornerRadius">360dp</dimen>
+    <!-- Avatar size and margins. -->
+    <dimen name="avatarSide_myProfile">130dp</dimen>
+    <dimen name="avatarSide_addContactDialog">130dp</dimen>
+    <dimen name="avatarMargin_addContactDialog">28dp</dimen>
+    <dimen name="avatarSide_myContactsList">75dp</dimen>
 
     <!-- HARD values. -->
     <dimen name="offset_loginFragment_helloTextFromTop_portrait">146dp</dimen>
     <dimen name="offset_loginFragment_helloTextFromTop_landscape">20dp</dimen>
     <dimen name="padding_loginFragment_emailPasswordBoxCollapsedPaddingTop">4dp</dimen>
     <dimen name="width_loginFragment_helpButtonsWidth">110dp</dimen>
-<!--    <dimen name="margin">10</dimen>-->
+
 
 </resources>
