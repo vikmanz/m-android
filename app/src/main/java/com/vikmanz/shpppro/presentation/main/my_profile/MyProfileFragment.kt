@@ -1,29 +1,25 @@
 package com.vikmanz.shpppro.presentation.main.my_profile
 
 import android.content.Intent
-import androidx.lifecycle.lifecycleScope
-import com.vikmanz.shpppro.App
-import com.vikmanz.shpppro.presentation.base.BaseArgument
 import com.vikmanz.shpppro.R
 import com.vikmanz.shpppro.data.utils.EmailParser
 import com.vikmanz.shpppro.databinding.FragmentMyProfileBinding
 import com.vikmanz.shpppro.presentation.auth.AuthActivity
+import com.vikmanz.shpppro.presentation.base.BaseArgument
 import com.vikmanz.shpppro.presentation.base.BaseFragment
 import com.vikmanz.shpppro.presentation.utils.extensions.setImageWithGlide
 import com.vikmanz.shpppro.presentation.utils.screenMainViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+
 
 class MyProfileFragment :
     BaseFragment<FragmentMyProfileBinding, MyProfileViewModel>(FragmentMyProfileBinding::inflate) {
 
+    /**
+     * Create ViewModel for this activity. Custom class need to change relevant type of viewModel in fabric.
+     */
     class CustomArgument(
         val email: String
     ) : BaseArgument
-
-    /**
-     * Create ViewModel for this activity.
-     */
     override val viewModel by screenMainViewModel()
 
     override fun onCreatedFragmentView() {
@@ -64,13 +60,8 @@ class MyProfileFragment :
     /**
      * Logout with clear information about user from Data Store.
      */
-
-    //TODO you should use lifecycle scope instead of coroutine scope
     private fun logout() {
-        val dataStore = App.dataStore
-        lifecycleScope.launch(Dispatchers.IO) {
-            dataStore.clearUser()
-        }
+        viewModel.clearSavedUserData()
         startAuthActivity()
     }
 

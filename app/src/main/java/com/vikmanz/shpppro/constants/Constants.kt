@@ -9,7 +9,7 @@ object Constants {
      * Auth:
      */
     // Splash screen delay
-    const val SPLASH_DELAY = 1000L
+    const val SPLASH_DELAY = 500L
     // Login (true) or Register (false) view first.
     const val LOGIN_VIEW_FIRST = true
     // Minimum number of chars in password. Don't forget check max password length in Integer.

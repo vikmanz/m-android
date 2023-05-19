@@ -358,7 +358,6 @@ class CustomGoogleButton(
     /**
      * Setter for text.
      */
-    @Suppress("unused")
     fun setText(text: String) {
         this.text = text
         calculateNewTransform(buttonRect.width(), buttonRect.height())

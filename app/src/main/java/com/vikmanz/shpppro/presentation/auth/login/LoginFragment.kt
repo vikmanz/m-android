@@ -5,18 +5,11 @@ import android.content.Intent
 import android.provider.Settings
 import android.util.Patterns
 import androidx.lifecycle.Observer
-import com.vikmanz.shpppro.App
 import com.vikmanz.shpppro.R
+import com.vikmanz.shpppro.data.utils.PasswordErrorsChecker.checkPasswordErrors
+import com.vikmanz.shpppro.databinding.FragmentLoginBinding
 import com.vikmanz.shpppro.presentation.base.BaseArgument
 import com.vikmanz.shpppro.presentation.base.BaseFragment
-import com.vikmanz.shpppro.presentation.main.MainActivity
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
-import com.vikmanz.shpppro.constants.Constants.INTENT_EMAIL_ID
-import com.vikmanz.shpppro.constants.Constants.MIN_PASSWORD_LENGTH
-import com.vikmanz.shpppro.databinding.FragmentLoginBinding
 import com.vikmanz.shpppro.presentation.utils.extensions.clearError
 import com.vikmanz.shpppro.presentation.utils.extensions.hideKeyboard
 import com.vikmanz.shpppro.presentation.utils.extensions.setGone
@@ -24,36 +17,26 @@ import com.vikmanz.shpppro.presentation.utils.extensions.setInvisible
 import com.vikmanz.shpppro.presentation.utils.extensions.setMultipleGone
 import com.vikmanz.shpppro.presentation.utils.extensions.setMultipleVisible
 import com.vikmanz.shpppro.presentation.utils.extensions.setVisible
+import com.vikmanz.shpppro.presentation.utils.extensions.startMainActivity
 import com.vikmanz.shpppro.presentation.utils.screenAuthViewModel
 
 /**
  * Constants.
  */
-private const val PASSWORD_ERRORS_SEPARATOR = "\n"
-private const val REGEX_ONE_UPPER_CHAR = ".*[A-Z].*"
-private const val REGEX_ONE_LOWER_CHAR = ".*[a-z].*"
-private const val SPECIAL_CHARS = "@#$%^&;+="
-private const val REGEX_ONE_SPECIAL_CHAR = ".*[$SPECIAL_CHARS].*"
 private const val TEST_LOGIN = "viktor.manza@gmail.com"
 private const val TEST_PASSWORD = "passwordE3@a"
 
-// TODO This fragment is too big. You should extract some logic to viewModel
 class LoginFragment :
     BaseFragment<FragmentLoginBinding, LoginViewModel>(FragmentLoginBinding::inflate) {
 
-    // TODO classes should be in the end of the file
-    class CustomArgument : BaseArgument
-
     /**
-     * Create ViewModel for this activity.
+     * Create ViewModel for this activity. Custom class need to change relevant type of viewModel in fabric.
      */
+    class CustomArgument : BaseArgument
     override val viewModel by screenAuthViewModel()
 
     private lateinit var uiObserver: Observer<Boolean>
     private lateinit var helpersObserver: Observer<Boolean>
-
-    // Data Store
-    private val dataStore = App.dataStore
 
     override fun setObservers() {
         observeUI()
@@ -62,8 +45,9 @@ class LoginFragment :
 
     override fun setListeners() {
         with(binding) {
-            buttonLoginRegisterByEmail.setOnClickListener { submitForm() }
+            buttonLoginRegisterByEmail.setOnClickListener { checkForm() }
             textViewLoginSwitchScreenToLoginButton.setOnClickListener { viewModel.swapLoginAndRegister() }
+            buttonLoginRegisterByGoogle.setOnClickListener { buttonLoginRegisterByGoogle.setText() }
         }
         initHelpTesterButtons()
         setLoginPasswordFocusListeners()        // Listeners to fields and buttons.
@@ -127,20 +111,6 @@ class LoginFragment :
         }.also { viewModel.helperButtonsVisible.observe(this@LoginFragment, it) }
     }
 
-    /**
-     * Start main activity.
-     *
-     * @param email User email as String.
-     */
-    private fun startMainActivity(email: String) {
-        val activity = requireActivity()
-        val intentObject = Intent(activity, MainActivity::class.java)
-        intentObject.putExtra(INTENT_EMAIL_ID, email)
-        startActivity(intentObject)
-        activity.overridePendingTransition(R.anim.zoom_in_inner, R.anim.zoom_in_outter)
-        activity.finish()
-    }
-
     //TODO errors don't work after change focus
     /**
      * Set onClickListeners for email and password text input fields.
@@ -188,79 +158,27 @@ class LoginFragment :
     private fun validPassword(): String? {
         // Get password text
         val passwordText = binding.textInputLoginPasswordField.text.toString()
-        val result = checkPasswordErrors(passwordText)
+        val result = checkPasswordErrors(passwordText, this)
         // If pass all checks, return null or return errors.
         return if (result == "") null else result
     }
 
     /**
-     * Check password for errors.
+     *  Submit Login/Register form and init MainActivity or show error messages.
      */
-    private fun checkPasswordErrors(passwordText: String): String {
-        // Do all checks.
-        var result = ""
-        if (passwordText.length < MIN_PASSWORD_LENGTH) {                           // Minimum # chars.
-            result += getString(
-                R.string.auth_activity_password_warning_min_chars,
-                MIN_PASSWORD_LENGTH
-            )
-        }
-
-        val maxPasswordLength =
-            resources.getInteger(R.integer.count_loginFragment_passwordMaxLength)  // Minimum # chars.
-        if (passwordText.length > maxPasswordLength) {
-            result =
-                addErrorsDescriptionSeparator(result) + getString(
-                    R.string.auth_activity_password_warning_max_chars,
-                    maxPasswordLength
-                )
-        }
-        if (!passwordText.matches(REGEX_ONE_UPPER_CHAR.toRegex())) {   // Minimum 1 UpperCase char.
-            result =
-                addErrorsDescriptionSeparator(result) + getString(R.string.auth_activity_password_warning_one_upper_char)
-        }
-        if (!passwordText.matches(REGEX_ONE_LOWER_CHAR.toRegex())) {   // Minimum 1 LowerCase char.
-            result =
-                addErrorsDescriptionSeparator(result) + getString(R.string.auth_activity_password_warning_one_lower_char)
-        }
-        if (!passwordText.matches(REGEX_ONE_SPECIAL_CHAR.toRegex())) { // Minimum 1 special char.
-            result = addErrorsDescriptionSeparator(result) + getString(
-                R.string.auth_activity_password_warning_one_special_char,
-                SPECIAL_CHARS
-            )
-        }
-        return result
+    private fun checkForm() {
+        val isEmailCorrect = validEmail() == null
+        val isPasswordCorrect = validPassword() == null
+        if (isEmailCorrect && isPasswordCorrect) initMainActivity()     // If correct - start main activity.
+        else showInvalidFormMessage(isEmailCorrect, isPasswordCorrect)  // If have error - show error message.
     }
 
-    /**
-     * Add separator between two errors.
-     */
-    private fun addErrorsDescriptionSeparator(result: String): String =
-        if (result != "") "$result$PASSWORD_ERRORS_SEPARATOR" else result
 
-    /**
-     *  Submit Login/Register form and start MainActivity or show error messages.
-     */
-    private fun submitForm() {
+    private fun initMainActivity() {
         with(binding) {
-
-            // Validate email and password.
-            textInputLayoutLoginEmail.helperText = validEmail()
-            textInputLayoutLoginPassword.helperText = validPassword()
-            val isEmailCorrect = textInputLayoutLoginEmail.helperText == null
-            val isPasswordCorrect = textInputLayoutLoginPassword.helperText == null
-
-            // If valid, start MainActivity.
-            if (isEmailCorrect && isPasswordCorrect) {
-                // If check Remember, save data to Data Store.
-                if (checkboxLoginRememberMe.isChecked) saveUserData()
-                val emailText = textInputLoginEmailField.text.toString()
-                startMainActivity(emailText)
-            }
-            // If have error - show error message.
-            else {
-                showInvalidFormMessage(isEmailCorrect, isPasswordCorrect)
-            }
+            if (checkboxLoginRememberMe.isChecked) saveUserData()  // If check Remember, save data to Data Store.
+            val email = textInputLoginEmailField.text.toString()   // Take email text.
+            startMainActivity(email)                               // Start main activity.
         }
     }
 
@@ -269,17 +187,20 @@ class LoginFragment :
      */
     private fun saveUserData() {
         val email = binding.textInputLoginEmailField.text.toString()
-        val coroutineScope = CoroutineScope(Job())
-        coroutineScope.launch(Dispatchers.IO) {
-            dataStore.saveUserSata(email)
-        }
+        viewModel.saveUserEmailToDatastore(email)
     }
 
     /**
      *  Get error status of email and password, and show error message.
      */
     private fun showInvalidFormMessage(isEmailCorrect: Boolean, isPasswordCorrect: Boolean) {
+        // Create error message.
+        val message = createErrorMessage(isEmailCorrect, isPasswordCorrect)
+        // Show AlertDialog with error message.
+        showErrorAlertDialog(message, isEmailCorrect)
+    }
 
+    private fun createErrorMessage(isEmailCorrect: Boolean, isPasswordCorrect: Boolean): String {
         // Create error message.
         var message = ""
         with(binding) {
@@ -290,8 +211,10 @@ class LoginFragment :
                 "\n\n${getString(R.string.auth_activity_warning_message_password_title)}\n${textInputLayoutLoginPassword.helperText}"
             else ""
         }
+        return message
+    }
 
-        // Show AlertDialog with error message.
+    private fun showErrorAlertDialog(message: String, isEmailCorrect: Boolean) {
         AlertDialog.Builder(requireContext())
             .setTitle(getString(R.string.auth_activity_warning_message_invalid_register_form))
             .setMessage(message)
@@ -355,16 +278,14 @@ class LoginFragment :
         }
     }
 
-
     /**
      *  De-focus views, when user do click on background.
      */
-    //TODO add functionality to discard keyboard
     private fun backgroundFocusHandler() = with(binding) {
         root.setOnClickListener {
             textInputLoginEmailField.clearFocus()
             textInputLoginPasswordField.clearFocus()
-            //hideKeyboard()
+            hideKeyboard()
         }
     }
 
