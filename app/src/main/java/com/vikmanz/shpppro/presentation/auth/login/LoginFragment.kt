@@ -5,8 +5,8 @@ import android.content.Intent
 import android.provider.Settings
 import android.util.Patterns
 import androidx.lifecycle.Observer
+import com.vikmanz.shpppro.App
 import com.vikmanz.shpppro.R
-import com.vikmanz.shpppro.data.DataStoreManager
 import com.vikmanz.shpppro.presentation.base.BaseArgument
 import com.vikmanz.shpppro.presentation.base.BaseFragment
 import com.vikmanz.shpppro.presentation.main.MainActivity
@@ -18,6 +18,7 @@ import com.vikmanz.shpppro.constants.Constants.INTENT_EMAIL_ID
 import com.vikmanz.shpppro.constants.Constants.MIN_PASSWORD_LENGTH
 import com.vikmanz.shpppro.databinding.FragmentLoginBinding
 import com.vikmanz.shpppro.presentation.utils.extensions.clearError
+import com.vikmanz.shpppro.presentation.utils.extensions.hideKeyboard
 import com.vikmanz.shpppro.presentation.utils.extensions.setGone
 import com.vikmanz.shpppro.presentation.utils.extensions.setInvisible
 import com.vikmanz.shpppro.presentation.utils.extensions.setMultipleGone
@@ -48,10 +49,11 @@ class LoginFragment :
      */
     override val viewModel by screenAuthViewModel()
 
-    private var uiObserver: Observer<Boolean>? = null
-    private var helpersObserver: Observer<Boolean>? = null
+    private lateinit var uiObserver: Observer<Boolean>
+    private lateinit var helpersObserver: Observer<Boolean>
 
-    private val dataStore =  DataStoreManager(requireActivity())
+    // Data Store
+    private val dataStore = App.dataStore
 
     override fun setObservers() {
         observeUI()
@@ -60,9 +62,7 @@ class LoginFragment :
 
     override fun setListeners() {
         with(binding) {
-            buttonLoginRegisterByEmail.setOnClickListener {
-                submitForm()
-            }
+            buttonLoginRegisterByEmail.setOnClickListener { submitForm() }
             textViewLoginSwitchScreenToLoginButton.setOnClickListener { viewModel.swapLoginAndRegister() }
         }
         initHelpTesterButtons()
@@ -148,16 +148,16 @@ class LoginFragment :
     private fun setLoginPasswordFocusListeners() {
         with(binding) {
             textInputLayoutLoginEmail.setOnFocusChangeListener { _, focused ->
-                if (focused && !viewModel.emailAlreadyFocused) viewModel.emailAlreadyFocused =
-                    true
-                if (!focused && viewModel.emailAlreadyFocused) textInputLayoutLoginEmail.helperText =
-                    validEmail()
+                if (focused && !viewModel.emailAlreadyFocused)
+                    viewModel.emailAlreadyFocused = true
+                if (!focused && viewModel.emailAlreadyFocused)
+                    textInputLayoutLoginEmail.helperText = validEmail()
             }
             textInputLayoutLoginPassword.setOnFocusChangeListener { _, focused ->
-                if (focused && !viewModel.passwordAlreadyFocused) viewModel.passwordAlreadyFocused =
-                    true
-                if (!focused && viewModel.passwordAlreadyFocused) textInputLayoutLoginPassword.helperText =
-                    validPassword()
+                if (focused && !viewModel.passwordAlreadyFocused)
+                    viewModel.passwordAlreadyFocused = true
+                if (!focused && viewModel.passwordAlreadyFocused)
+                    textInputLayoutLoginPassword.helperText = validPassword()
             }
         }
     }
@@ -186,7 +186,6 @@ class LoginFragment :
      * @return Invalid message if password contains errors, or null if not.
      */
     private fun validPassword(): String? {
-
         // Get password text
         val passwordText = binding.textInputLoginPasswordField.text.toString()
         val result = checkPasswordErrors(passwordText)
@@ -365,12 +364,13 @@ class LoginFragment :
         root.setOnClickListener {
             textInputLoginEmailField.clearFocus()
             textInputLoginPasswordField.clearFocus()
+            //hideKeyboard()
         }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        viewModel.loginScreen.removeObservers(this)
-        viewModel.helperButtonsVisible.removeObservers(this)
+        viewModel.loginScreen.removeObserver(uiObserver)
+        viewModel.helperButtonsVisible.removeObserver(helpersObserver)
     }
 }

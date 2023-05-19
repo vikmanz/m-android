@@ -2,12 +2,11 @@ package com.vikmanz.shpppro.presentation.auth.splash_screen
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.os.Bundle
 import androidx.lifecycle.lifecycleScope
+import com.vikmanz.shpppro.App
 import com.vikmanz.shpppro.R
 import com.vikmanz.shpppro.constants.Constants
 import com.vikmanz.shpppro.constants.Constants.SPLASH_DELAY
-import com.vikmanz.shpppro.data.DataStoreManager
 import com.vikmanz.shpppro.presentation.base.BaseArgument
 import com.vikmanz.shpppro.databinding.FragmentSplashScreenBinding
 import com.vikmanz.shpppro.presentation.base.BaseFragment
@@ -28,13 +27,8 @@ class SplashScreenFragment :
      */
     override val viewModel by screenAuthViewModel()
 
-    // Data Store and Coroutine Scope variables.
-    private lateinit var dataStore: DataStoreManager
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        dataStore = DataStoreManager(requireActivity())
-    }
+    // Data Store
+    private val dataStore = App.dataStore
 
     override fun setObservers() {
         setAutoLoginObserver()

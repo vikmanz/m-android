@@ -2,9 +2,9 @@ package com.vikmanz.shpppro.presentation.main.my_profile
 
 import android.content.Intent
 import androidx.lifecycle.lifecycleScope
+import com.vikmanz.shpppro.App
 import com.vikmanz.shpppro.presentation.base.BaseArgument
 import com.vikmanz.shpppro.R
-import com.vikmanz.shpppro.data.DataStoreManager
 import com.vikmanz.shpppro.data.utils.EmailParser
 import com.vikmanz.shpppro.databinding.FragmentMyProfileBinding
 import com.vikmanz.shpppro.presentation.auth.AuthActivity
@@ -67,7 +67,7 @@ class MyProfileFragment :
 
     //TODO you should use lifecycle scope instead of coroutine scope
     private fun logout() {
-        val dataStore = DataStoreManager(requireContext()) //in onCreate
+        val dataStore = App.dataStore
         lifecycleScope.launch(Dispatchers.IO) {
             dataStore.clearUser()
         }

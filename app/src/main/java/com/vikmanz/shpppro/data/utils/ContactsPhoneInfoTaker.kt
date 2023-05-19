@@ -15,7 +15,7 @@ class ContactsPhoneInfoTaker {
     fun getPhonebookContactsInfo(): ArrayList<List<String>> {
 
         val listOfContactsInformation = ArrayList<List<String>>()
-        val contentResolver = App.instance.contentResolver
+        val contentResolver = App.contentResolver
 
         val uri = ContactsContract.Data.CONTENT_URI
         val projection = arrayOf(

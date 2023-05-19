@@ -237,7 +237,6 @@ class MyContactsListFragment :
         undo?.dismiss()
         undo = null
         viewModel.fakeListActivated.removeObserver(uiObserver)
-        viewModel.fakeListActivated.removeObservers(this)
     }
 
 }
