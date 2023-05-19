@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="10dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:strokeColor="?attr/colorOnTertiary"
+    app:strokeWidth="2dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:paddingHorizontal="@dimen/offset_S"
+        android:paddingVertical="@dimen/offset_S">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imageview_onecontact_avatar_image"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/ic_person" />
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/offset_S">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textview_onecontact_name"
+                style="@style/basicText_bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/contacts_recycler_person_name_sample"
+                android:textColor="?attr/colorSecondary"
+                android:textSize="@dimen/size_text_font_M"
+                tools:ignore="TextContrastCheck" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textview_onecontact_career"
+                style="@style/basicText_bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/contacts_recycler_person_career_sample"
+                android:textColor="?attr/colorOnTertiary"
+                android:textSize="@dimen/size_text_font_XS"
+                tools:ignore="TextContrastCheck" />
+
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/button_onecontact_remove"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="@dimen/offset_S"
+            android:background="@android:color/transparent"
+            android:src="@drawable/trash"
+            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

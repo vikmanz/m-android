@@ -3,17 +3,17 @@
     <style name="defaultTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
 
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/night_theme_color_primary</item>
-        <item name="colorOnPrimary">@color/default_theme_text_color_primary</item>
-        <item name="colorPrimaryVariant">@color/default_theme_color_secondary</item>
+        <item name="colorPrimary">@color/main_color_orange_night_theme</item>
+        <item name="colorOnPrimary">@color/main_color_white</item>
+        <item name="colorPrimaryVariant">@color/main_color_blue</item>
 
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/default_theme_color_secondary_variant</item>
-        <item name="colorSecondaryVariant">@color/default_theme_color_primary_variant</item>
+        <item name="colorSecondary">@color/main_color_blue_second_variant</item>
+        <item name="colorSecondaryVariant">@color/main_color_orange_second_variant</item>
 
         <!-- Text colors. -->
-        <item name="colorTertiary">@color/default_theme_text_color_primary</item>
-        <item name="colorOnTertiary">@color/default_theme_text_color_secondary</item>
+        <item name="colorTertiary">@color/main_color_white</item>
+        <item name="colorOnTertiary">@color/main_color_white_second_variant</item>
         <item name="colorError">@color/night_theme_text_error</item>
 
     </style>

@@ -48,9 +48,38 @@
     <string name="main_edit_profile_button">Edit profile</string>
     <string name="main_view_my_contacts_button">VIEW MY CONTACTS</string>
     <!-- Activity -->
+    <string name="main_activity_person_name_hardcoded">Viktor Hardcode</string>
     <string name="main_activity_person_career_hardcoded">Motion designer</string>
     <string name="main_activity_person_address_hardcoded">49101, Dnipro, Homeadress str. 7</string>
 
-<!--    <string name="default_person_name">Name Surname</string>-->
-<!--    <string name="sample_of_person_photo">sample of person photo</string>-->
+    <!-- ———————————————————— Contacts ———————————————————— -->
+    <string name="contacts_recycler_person_name_sample">Person Name</string>
+    <string name="contacts_recycler_person_career_sample">Career</string>
+    <string name="contacts_contacts_title">Contacts</string>
+    <string name="contacts_add_contact">Add contact</string>
+    <string name="revoke_permits">revoke\npermits</string>
+    <string name="contacts_change_to_phonebook">Change to Phonebook</string>
+    <string name="contacts_grant_permission_button">Grant permission</string>
+    <string name="contacts_change_to_fake_data">Change to fake data</string>
+    <string name="my_contacts_remove_contact">Contact has been removed</string>
+    <string name="my_contacts_remove_contact_undo">Undo</string>
+
+    <!-- ———————————————————— Contacts_Permissions ———————————————————— -->
+    <string name="my_contacts_permission_denied">Permission denied!</string>
+    <string name="my_contacts_permission_denied_message">Please, go to settings and set contacts permission to allow.</string>
+    <string name="my_contacts_permission_positive_btn">OK</string>
+    <string name="my_contacts_permission_negative_btn">Cancel</string>
+
+    <!-- ———————————————————— Add new contact ———————————————————— -->
+    <string name="contacts_add_contact_title">Add contact</string>
+    <string name="contacts_add_contact_username">Username</string>
+    <string name="contacts_add_contact_career">Career</string>
+    <string name="contacts_add_contact_email">Email</string>
+    <string name="contacts_add_contact_phone">Phone</string>
+    <string name="contacts_add_contact_address">Address</string>
+    <string name="contacts_add_contact_birthday">Date of birth</string>
+    <string name="contacts_add_contact_save_button">SAVE</string>
+
+
+
 </resources>

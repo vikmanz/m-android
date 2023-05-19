@@ -3,39 +3,34 @@ package com.vikmanz.shpppro.ui
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
+import android.provider.Settings
 import android.util.Patterns
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.asLiveData
 import com.vikmanz.shpppro.R
 import com.vikmanz.shpppro.constants.Constants.INTENT_EMAIL_ID
-import com.vikmanz.shpppro.constants.Constants.INTENT_LANG_ID
 import com.vikmanz.shpppro.constants.Constants.LOGIN_VIEW_FIRST
 import com.vikmanz.shpppro.constants.Constants.MIN_PASSWORD_LENGTH
 import com.vikmanz.shpppro.constants.Constants.VIEW_HELP_BUTTONS_ON_CREATE
 import com.vikmanz.shpppro.data.DataStoreManager
 import com.vikmanz.shpppro.databinding.ActivityAuthBinding
+import com.vikmanz.shpppro.utilits.BaseActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import java.util.*
 
 /**
  * Class represents SignIn or SignUp screen activity .
  */
-class AuthActivity : AppCompatActivity() {
+class AuthActivity : BaseActivity<ActivityAuthBinding>(ActivityAuthBinding::inflate) {
 
-    // Binding, Data Store and Coroutine Scope variables.
-    private lateinit var binding: ActivityAuthBinding
+    // Data Store and Coroutine Scope variables.
     private lateinit var loginData: DataStoreManager
     private val coroutineScope: CoroutineScope = CoroutineScope(Job())
 
     // Save state of screen layout. True - Login screen, False - Register screen.
     private var isLoginScreen = false
-
-    // Save state of language. True - En, False - Ua.
-    private var isUkrainian = false
 
     // Save state of helper buttons. True - visible, False - gone.
     private var helperButtonsVisible = false
@@ -44,7 +39,6 @@ class AuthActivity : AppCompatActivity() {
      * Main function, which used when activity was create.
      */
     override fun onCreate(savedInstanceState: Bundle?) {
-
         // init.
         super.onCreate(savedInstanceState)
 
@@ -52,9 +46,7 @@ class AuthActivity : AppCompatActivity() {
         loginData = DataStoreManager(this)
         checkAutoLogin()
 
-        // binding, add content and set Login or Register screen first.
-        binding = ActivityAuthBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        // set Login or Register screen first.
         if (LOGIN_VIEW_FIRST) swapSignInSignUpScreens()
 
         // init main functions.
@@ -72,7 +64,6 @@ class AuthActivity : AppCompatActivity() {
     private fun checkAutoLogin() {
         var email = ""
         loginData.userNameFlow.asLiveData().observe(this) { email = it }
-        loginData.userLanguageFlow.asLiveData().observe(this) { isUkrainian = it }
         loginData.userLoginStatusFlow.asLiveData().observe(this) {
             if (it) startMainActivity(email)
         }
@@ -86,7 +77,6 @@ class AuthActivity : AppCompatActivity() {
     private fun startMainActivity(email: String) {
         val intentObject = Intent(this, MainActivity::class.java)
         intentObject.putExtra(INTENT_EMAIL_ID, email)
-        intentObject.putExtra(INTENT_LANG_ID, isUkrainian)
         startActivity(intentObject)
         overridePendingTransition(R.anim.zoom_in_inner, R.anim.zoom_in_outter)
         finish()
@@ -99,16 +89,21 @@ class AuthActivity : AppCompatActivity() {
         isLoginScreen = !isLoginScreen  // Change variable-state of screen layout.
         with(binding) {
             if (isLoginScreen) {
-                textviewAuthHelloText.text = getString(R.string.auth_activity_hello_text_login_screen)
-                textviewAuthHelloSubtext.text = getString(R.string.auth_activity_hello_subtext_login_screen)
+                textviewAuthHelloText.text =
+                    getString(R.string.auth_activity_hello_text_login_screen)
+                textviewAuthHelloSubtext.text =
+                    getString(R.string.auth_activity_hello_subtext_login_screen)
                 textinputlayoutAuthPassword.isCounterEnabled = true
                 textviewAuthForgotPassword.visibility = View.VISIBLE
                 buttonAuthRegisterByGoogle.visibility = View.GONE
                 textviewAuthTextBetweenGoogleAndRegister.visibility = View.GONE
-                buttonAuthRegisterByEmail.text = getString(R.string.auth_activity_register_button_login_screen)
+                buttonAuthRegisterByEmail.text =
+                    getString(R.string.auth_activity_register_button_login_screen)
                 textviewAuthWarningAboutTerms.visibility = View.GONE
-                textviewAuthAlreadyHaveAccountMessage.text = getString(R.string.auth_activity_already_have_account_message_login_screen)
-                textviewAuthSwitchScreenToLoginButton.text = getString(R.string.auth_activity_sign_in_button_login_screen)
+                textviewAuthAlreadyHaveAccountMessage.text =
+                    getString(R.string.auth_activity_already_have_account_message_login_screen)
+                textviewAuthSwitchScreenToLoginButton.text =
+                    getString(R.string.auth_activity_sign_in_button_login_screen)
             } else {
                 textviewAuthHelloText.text = getString(R.string.auth_layout_hello_text)
                 textviewAuthHelloSubtext.text = getString(R.string.auth_layout_hello_subtext)
@@ -118,8 +113,10 @@ class AuthActivity : AppCompatActivity() {
                 textviewAuthTextBetweenGoogleAndRegister.visibility = View.VISIBLE
                 buttonAuthRegisterByEmail.text = getString(R.string.auth_layout_register_button)
                 textviewAuthWarningAboutTerms.visibility = View.VISIBLE
-                textviewAuthAlreadyHaveAccountMessage.text = getString(R.string.auth_layout_already_have_account_message)
-                textviewAuthSwitchScreenToLoginButton.text = getString(R.string.auth_layout_sign_in_button)
+                textviewAuthAlreadyHaveAccountMessage.text =
+                    getString(R.string.auth_layout_already_have_account_message)
+                textviewAuthSwitchScreenToLoginButton.text =
+                    getString(R.string.auth_layout_sign_in_button)
             }
         }
     }
@@ -165,24 +162,45 @@ class AuthActivity : AppCompatActivity() {
 
         // Get password text
         val passwordText = binding.textinputAuthPassword.text.toString()
+        val result = checkPasswordErrors(passwordText)
+        // If pass all checks, return null or return errors.
+        return if (result == "") null else result
+    }
 
+    /**
+     * Check password for errors.
+     */
+    private fun checkPasswordErrors(passwordText: String): String {
         // Do all checks.
+        var result = ""
         if (passwordText.length < MIN_PASSWORD_LENGTH) {               // Minimum 8 chars.
-            return getString(R.string.auth_activity_password_warning_min8chars, MIN_PASSWORD_LENGTH)
+            result += getString(
+                R.string.auth_activity_password_warning_min8chars,
+                MIN_PASSWORD_LENGTH
+            )
         }
         if (!passwordText.matches(REGEX_ONE_UPPER_CHAR.toRegex())) {   // Minimum 1 UpperCase char.
-            return getString(R.string.auth_activity_password_warning_one_upper_char)
+            result =
+                addErrorsDescriptionSeparator(result) + getString(R.string.auth_activity_password_warning_one_upper_char)
         }
         if (!passwordText.matches(REGEX_ONE_LOWER_CHAR.toRegex())) {   // Minimum 1 LowerCase char.
-            return getString(R.string.auth_activity_password_warning_one_lower_char)
+            result =
+                addErrorsDescriptionSeparator(result) + getString(R.string.auth_activity_password_warning_one_lower_char)
         }
         if (!passwordText.matches(REGEX_ONE_SPECIAL_CHAR.toRegex())) { // Minimum 1 special char.
-            return getString(R.string.auth_activity_password_warning_one_special_char, SPECIAL_CHARS)
+            result = addErrorsDescriptionSeparator(result) + getString(
+                R.string.auth_activity_password_warning_one_special_char,
+                SPECIAL_CHARS
+            )
         }
-
-        // If pass all checks, return null.
-        return null
+        return result
     }
+
+    /**
+     * Add separator between two errors.
+     */
+    private fun addErrorsDescriptionSeparator(result: String): String =
+        if (result != "") "$result$PASSWORD_ERRORS_SEPARATOR" else result
 
     /**
      * Init OnClickListeners for button Login/Register and SignIn/SignUp text.
@@ -227,7 +245,6 @@ class AuthActivity : AppCompatActivity() {
         val email: String
         val password: String
         val isAutologin: Boolean
-        val isEnglish = this.isUkrainian
 
         with(binding) {
             email = textinputAuthEmail.text.toString()
@@ -236,7 +253,7 @@ class AuthActivity : AppCompatActivity() {
         }
 
         coroutineScope.launch(Dispatchers.IO) {
-            loginData.saveUserSata(email, password, isAutologin, isEnglish)
+            loginData.saveUserSata(email, password, isAutologin)
         }
     }
 
@@ -249,10 +266,10 @@ class AuthActivity : AppCompatActivity() {
         var message = ""
         with(binding) {
             message += if (!isEmailCorrect)
-                "\n\n${getString(R.string.auth_activity_warning_message_email_title)} ${textinputlayoutAuthEmail.helperText}"
+                "\n\n${getString(R.string.auth_activity_warning_message_email_title)}\n${textinputlayoutAuthEmail.helperText}"
             else ""
             message += if (!isPasswordCorrect)
-                "\n\n${getString(R.string.auth_activity_warning_message_password_title)} ${textinputlayoutAuthPassword.helperText}"
+                "\n\n${getString(R.string.auth_activity_warning_message_password_title)}\n${textinputlayoutAuthPassword.helperText}"
             else ""
         }
 
@@ -303,35 +320,36 @@ class AuthActivity : AppCompatActivity() {
 
             // Language change button listener.
             buttonAuthChangeLanguage.setOnClickListener {
-                isUkrainian = !isUkrainian
-                setLocale()
-                super.recreate()    // RECREATE ACTIVITY
+                goToChangeLanguage()
             }
         }
     }
+
+
+    /**
+     *  Open device language settings.
+     */
+    private fun goToChangeLanguage() {
+        val intent = Intent(Settings.ACTION_LOCALE_SETTINGS)
+        with(intent) {
+            addCategory(Intent.CATEGORY_DEFAULT)
+            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
+            addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS)
+            startActivity(this)
+        }
+    }
+
 
     /**
      *  Show/Hide help buttons.
      */
     private fun viewOrHideHelpTesterButtons() {
         helperButtonsVisible = !helperButtonsVisible
-        binding.flowAuthDebugButtons.visibility = if (helperButtonsVisible) View.VISIBLE else View.GONE
+        binding.flowAuthDebugButtons.visibility =
+            if (helperButtonsVisible) View.VISIBLE else View.GONE
     }
 
-    /**
-     * Change locale. It change from EN to UA or from UA to EN.
-     */
-    private fun setLocale() {
-        val config = resources.configuration
-        val lang =
-            if (isUkrainian) LANG_UA else LANG_EN
-        val locale = Locale(lang)
-        Locale.setDefault(locale)
-        config.setLocale(locale)
-        createConfigurationContext(config)
-        @Suppress("DEPRECATION")
-        resources.updateConfiguration(config, resources.displayMetrics)
-    }
 
     /**
      *  De-focus views, when user do click on background.
@@ -350,7 +368,6 @@ class AuthActivity : AppCompatActivity() {
             outState.putInt(PASSWORD_VIEW_STATE_KEY, textinputlayoutAuthPassword.endIconMode)
             outState.putBoolean(CHECKBOX_STATE_STATE_KEY, checkboxAuthRememberMe.isChecked)
         }
-        outState.putBoolean(LANGUAGE_STATE_KEY, isUkrainian)
         outState.putBoolean(HELP_BUTTONS_STATE_KEY, helperButtonsVisible)
         super.onSaveInstanceState(outState)
     }
@@ -360,16 +377,16 @@ class AuthActivity : AppCompatActivity() {
      */
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
-        isUkrainian = savedInstanceState.getBoolean(LANGUAGE_STATE_KEY)
         helperButtonsVisible = savedInstanceState.getBoolean(HELP_BUTTONS_STATE_KEY)
         with(binding) {
             textinputAuthEmail.setText(savedInstanceState.getString(EMAIL_FIELD_STATE_KEY))
             textinputAuthPassword.setText(savedInstanceState.getString(PASSWORD_FIELD_STATE_KEY))
-            textinputlayoutAuthPassword.endIconMode = savedInstanceState.getInt(PASSWORD_VIEW_STATE_KEY)
-            checkboxAuthRememberMe.isChecked = savedInstanceState.getBoolean(CHECKBOX_STATE_STATE_KEY)
+            textinputlayoutAuthPassword.endIconMode =
+                savedInstanceState.getInt(PASSWORD_VIEW_STATE_KEY)
+            checkboxAuthRememberMe.isChecked =
+                savedInstanceState.getBoolean(CHECKBOX_STATE_STATE_KEY)
             flowAuthDebugButtons.visibility = if (helperButtonsVisible) View.VISIBLE else View.GONE
         }
-        setLocale()
     }
 
     /**
@@ -377,22 +394,19 @@ class AuthActivity : AppCompatActivity() {
      */
     companion object {
         // Regex's
+        private const val PASSWORD_ERRORS_SEPARATOR = "\n"
         private const val REGEX_ONE_UPPER_CHAR = ".*[A-Z].*"
         private const val REGEX_ONE_LOWER_CHAR = ".*[a-z].*"
         private const val SPECIAL_CHARS = "@#$%^&;+="
         private const val REGEX_ONE_SPECIAL_CHAR = ".*[$SPECIAL_CHARS].*"
-        private const val LANG_EN = "en"
-        private const val LANG_UA = "uk"
         private const val TEST_LOGIN = "viktor.manza@gmail.com"
-        private const val TEST_PASSWORD = "passwordE3"
+        private const val TEST_PASSWORD = "passwordE3@a"
 
         // Save/Load State Keys. Don't need to change.
         private const val EMAIL_FIELD_STATE_KEY = "EMAIL_KEY_AUTH_ACTIVITY"
         private const val PASSWORD_FIELD_STATE_KEY = "PASSWORD_KEY_AUTH_ACTIVITY"
         private const val PASSWORD_VIEW_STATE_KEY = "PASSWORD_VIEW_KEY_AUTH_ACTIVITY"
         private const val CHECKBOX_STATE_STATE_KEY = "CHECKBOX_KEY_AUTH_ACTIVITY"
-        private const val LANGUAGE_STATE_KEY = "LAND_ID_KEY_AUTH_ACTIVITY"
         private const val HELP_BUTTONS_STATE_KEY = "HELP_BUTTONS_KEY_AUTH_ACTIVITY"
     }
-
 }

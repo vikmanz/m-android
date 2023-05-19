@@ -5,11 +5,11 @@
     <dimen name="marginHorizontal">16dp</dimen>
 
     <!-- Offsets of elements. -->
-    <dimen name="offset_XL">32dp</dimen>
-    <dimen name="offset_L">24dp</dimen>
-    <dimen name="offset_M">16dp</dimen>
-    <dimen name="offset_S">8dp</dimen>
     <dimen name="offset_XS">4dp</dimen>
+    <dimen name="offset_S">8dp</dimen>
+    <dimen name="offset_M">16dp</dimen>
+    <dimen name="offset_L">24dp</dimen>
+    <dimen name="offset_XL">32dp</dimen>
 
     <!-- Buttons size. -->
     <dimen name="size_button_height_M">40dp</dimen>
@@ -27,8 +27,7 @@
     <dimen name="size_text_font_XL">32sp</dimen>
 
     <!-- Avatar dimens. -->
-    <dimen name="avatar_size_x">130dp</dimen>
-    <dimen name="avatar_size_y">130dp</dimen>
+    <dimen name="avatar_radius">130dp</dimen>
     <dimen name="avatar_corner_radius">360dp</dimen>
 
     <!-- HARD values. -->
@@ -36,5 +35,6 @@
     <dimen name="offset_auth_hello_text_from_top_landscape">20dp</dimen>
     <dimen name="email_password_boxCollapsedPaddingTop">4dp</dimen>
     <dimen name="helpButtonsWidth">110dp</dimen>
+    <dimen name="margin">10</dimen>
 
 </resources>

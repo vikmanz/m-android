@@ -10,7 +10,7 @@
 
     <!-- Guide of center of elements. -->
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guide_main_vertical_center_of_screen"
+        android:id="@+id/guideline_mycontacts_bg_center_of_screen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -40,7 +40,7 @@
         app:constraint_referenced_ids="textview_auth_hello_text, textview_auth_hello_subtext"
         app:layout_constraintBottom_toTopOf="@+id/flow_auth_email_and_password"
         app:layout_constraintEnd_toStartOf="@+id/guide_auth_right_border"
-        app:layout_constraintStart_toStartOf="@+id/guide_auth_left_border"  />
+        app:layout_constraintStart_toStartOf="@+id/guide_auth_left_border" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textview_auth_hello_text"
@@ -67,9 +67,9 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:constraint_referenced_ids="textinputlayout_auth_email, textinputlayout_auth_password, flow_auth_remember_and_forgot"
-        app:layout_constraintBottom_toTopOf="@+id/guide_main_vertical_center_of_screen"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_mycontacts_bg_center_of_screen"
         app:layout_constraintEnd_toStartOf="@+id/guide_auth_right_border"
-        app:layout_constraintStart_toStartOf="@+id/guide_auth_left_border"  />
+        app:layout_constraintStart_toStartOf="@+id/guide_auth_left_border" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textinputlayout_auth_email"
@@ -160,7 +160,7 @@
         app:flow_horizontalGap="@dimen/offset_S"
         app:layout_constraintEnd_toStartOf="@+id/guide_auth_right_border"
         app:layout_constraintStart_toStartOf="@+id/guide_auth_left_border"
-        app:layout_constraintTop_toBottomOf="@+id/guide_main_vertical_center_of_screen" />
+        app:layout_constraintTop_toBottomOf="@+id/guideline_mycontacts_bg_center_of_screen" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_auth_register_by_google"
@@ -193,10 +193,10 @@
         style="@style/basicText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingTop="@dimen/offset_S"
         android:text="@string/auth_layout_terms_warning_landscape"
         android:textAlignment="center"
         android:textSize="@dimen/size_text_font_XXS"
-        android:paddingTop="@dimen/offset_S"
         app:layout_constraintEnd_toStartOf="@+id/guide_auth_right_border"
         app:layout_constraintStart_toStartOf="@+id/guide_auth_left_border"
         app:layout_constraintTop_toBottomOf="@+id/button_auth_register_by_email" />
