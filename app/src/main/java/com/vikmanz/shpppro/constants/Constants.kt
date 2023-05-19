@@ -37,5 +37,5 @@ object Constants {
     /**
      * TAG for LOG
      */
-    const val LOG_TAG = "logd"
+    const val LOG_TAG = "myLog"
 }

@@ -1,6 +1,5 @@
 package com.vikmanz.shpppro.presentation.main.my_contacts_list.adapter
 
-import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter

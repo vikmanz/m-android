@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.provider.Settings
 import android.util.Patterns
 import androidx.lifecycle.Observer
-import androidx.lifecycle.lifecycleScope
 import com.vikmanz.shpppro.R
 import com.vikmanz.shpppro.data.DataStoreManager
 import com.vikmanz.shpppro.presentation.base.BaseArgument

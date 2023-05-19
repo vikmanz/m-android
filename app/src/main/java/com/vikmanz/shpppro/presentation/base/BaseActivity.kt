@@ -23,7 +23,6 @@ abstract class BaseActivity<VBinding : ViewBinding>(
         setObservers()
     }
 
-    // TODO why do you need to nullify binding?
     override fun onDestroy() {
         _binding = null
         super.onDestroy()

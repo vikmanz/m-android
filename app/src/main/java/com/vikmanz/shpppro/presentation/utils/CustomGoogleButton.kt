@@ -66,33 +66,33 @@ class CustomGoogleButton(
      */
     private var text: String = ""
 
-    var textColor: Int = THEME_ERROR_COLOR
+    private var textColor: Int = THEME_ERROR_COLOR
         set(value) {
             field = value
             invalidate()
         }
-    var buttonColor: Int = THEME_ERROR_COLOR
+    private var buttonColor: Int = THEME_ERROR_COLOR
         set(value) {
             field = value
             invalidate()
         }
-    var color1Logo: Int = THEME_ERROR_COLOR
+    private var color1Logo: Int = THEME_ERROR_COLOR
         set(value) {
             field = value
             invalidate()
         }
 
-    var color2Logo: Int = THEME_ERROR_COLOR
+    private var color2Logo: Int = THEME_ERROR_COLOR
         set(value) {
             field = value
             invalidate()
         }
-    var color3Logo: Int = THEME_ERROR_COLOR
+    private var color3Logo: Int = THEME_ERROR_COLOR
         set(value) {
             field = value
             invalidate()
         }
-    var color4Logo: Int = THEME_ERROR_COLOR
+    private var color4Logo: Int = THEME_ERROR_COLOR
         set(value) {
             field = value
             invalidate()
@@ -358,6 +358,7 @@ class CustomGoogleButton(
     /**
      * Setter for text.
      */
+    @Suppress("unused")
     fun setText(text: String) {
         this.text = text
         calculateNewTransform(buttonRect.width(), buttonRect.height())

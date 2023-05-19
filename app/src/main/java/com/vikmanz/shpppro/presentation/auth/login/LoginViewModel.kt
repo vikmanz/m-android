@@ -9,12 +9,9 @@ import com.vikmanz.shpppro.presentation.utils.extensions.swapBoolean
 import kotlinx.coroutines.launch
 
 private const val DEFAULT_SHOW_HELPERS = false
-
-//TODO looks weird. My intuition suggests that you can avoid parameters for this class
-@Suppress("unused")
 class LoginViewModel(
-    private val navigator: Navigator,
-    customArgument: LoginFragment.CustomArgument,
+    @Suppress("unused") private val navigator: Navigator,
+    @Suppress("UNUSED_PARAMETER") customArgument: LoginFragment.CustomArgument,
 ) : BaseViewModel() {
 
     // Save state of screen layout. True - Login screen, False - Register screen.
@@ -38,11 +35,10 @@ class LoginViewModel(
     }
 
     /**
-     * Show/hide helpar buttons.
+     * Show/hide helper buttons.
      */
     fun showOrHideHelpers() {
         helperButtonsVisible.swapBoolean()
     }
-
 
 }

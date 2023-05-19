@@ -1,11 +1,8 @@
 package com.vikmanz.shpppro.presentation.main.my_contacts_list.add_contact
 
-import android.annotation.SuppressLint
 import android.net.Uri
 import androidx.lifecycle.*
 import com.vikmanz.shpppro.App
-import com.vikmanz.shpppro.constants.Constants
-import org.jetbrains.annotations.NotNull
 
 /**
  * ViewModel for My Contacts Activity.

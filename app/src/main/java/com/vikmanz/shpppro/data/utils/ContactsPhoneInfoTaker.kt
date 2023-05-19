@@ -5,7 +5,6 @@ import android.content.ContentResolver
 import android.provider.ContactsContract
 import com.vikmanz.shpppro.App
 import com.vikmanz.shpppro.constants.Constants.MAX_PHONE_IMPORT_CONTACTS_COUNT
-import com.vikmanz.shpppro.utilits.extensions.log
 
 @SuppressLint("Range")
 class ContactsPhoneInfoTaker {

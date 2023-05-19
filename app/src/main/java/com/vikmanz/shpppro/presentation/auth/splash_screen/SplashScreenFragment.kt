@@ -21,7 +21,7 @@ import kotlinx.coroutines.launch
 class SplashScreenFragment :
     BaseFragment<FragmentSplashScreenBinding, SplashScreenViewModel>(FragmentSplashScreenBinding::inflate) {
 
-    class CustomArgument() : BaseArgument
+    class CustomArgument : BaseArgument
 
     /**
      * Create ViewModel for this activity.
@@ -58,13 +58,11 @@ class SplashScreenFragment :
         }
     }
 
-
     /**
      * Start main activity.
      *
      * @param email User email as String.
      */
-    // TODO you can use nav graph for activity and fragment navigation either
     private fun startMainActivity(email: String) {
         val activity = requireActivity()
         val intentObject = Intent(activity, MainActivity::class.java)

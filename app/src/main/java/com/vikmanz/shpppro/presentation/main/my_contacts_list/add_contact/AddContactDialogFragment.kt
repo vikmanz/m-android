@@ -1,7 +1,6 @@
 package com.vikmanz.shpppro.presentation.main.my_contacts_list.add_contact
 
 import android.app.Dialog
-import android.net.Uri
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -11,21 +10,14 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.vikmanz.shpppro.R
 import com.vikmanz.shpppro.databinding.FragmentAddContactMyContactsBinding
-import com.vikmanz.shpppro.presentation.utils.extensions.setGone
 import com.vikmanz.shpppro.presentation.utils.extensions.setImageWithGlide
-import com.vikmanz.shpppro.presentation.utils.extensions.setVisible
-
 
 /**
  * Dialog Fragment in which user can add new contact with typed information to list of contacts.
  */
-//TODO bad structure functions and variables mixed
 class AddContactDialogFragment : DialogFragment() {
 
-
-    //TODO i don`t know is this good idea to use view model in dialog fragment, maybe it is better to use interface
     private val viewModel: AddContactDialogFragmentViewModel by viewModels()
-
 
     /**
      * Binding of that Dialog Fragment.
@@ -90,6 +82,12 @@ class AddContactDialogFragment : DialogFragment() {
         } ?: throw IllegalStateException("Activity cannot be null")
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
+        avatarObserver = null
+    }
+
     private fun setAvatarObserver() = with(viewModel.currentPhoto) {
         avatarObserver = Observer<Any> {
             value?.let {
@@ -121,12 +119,6 @@ class AddContactDialogFragment : DialogFragment() {
      */
     private fun requestImageFromGallery() {
         requestImageLauncher.launch(REQUEST_IMAGE_FROM_GALLERY)
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        binding = null
-        avatarObserver = null
     }
 
     /**
