@@ -4,7 +4,7 @@ import android.app.Application
 import com.vikmanz.shpppro.data.ContactsRepository
 
 /**
- * Singleton for send ContentResolver to ContactsPhoneInfoTaker().
+ * Singleton for send ContentResolver to ContactsPhoneInfoTaker()
  */
 
 class App : Application() {
