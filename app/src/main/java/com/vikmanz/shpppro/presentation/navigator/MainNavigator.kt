@@ -13,6 +13,7 @@ import com.vikmanz.shpppro.presentation.main.MainActivity
  * Navigator implementation. It extends [AndroidViewModel] because 1) we need android dependency
  * (application context); 2) it should survive after screen rotation.
  * https://github.com/romychab/android-tutorials/tree/main/mvvm-navigation
+ *
  */
 class MainNavigator(
     application: Application
