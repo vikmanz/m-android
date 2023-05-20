@@ -20,12 +20,11 @@ import com.vikmanz.shpppro.presentation.utils.extensions.setMultipleVisible
 import com.vikmanz.shpppro.presentation.utils.extensions.setVisible
 import com.vikmanz.shpppro.presentation.utils.extensions.startMainActivity
 import com.vikmanz.shpppro.presentation.utils.screenAuthViewModel
-import com.vikmanz.shpppro.utilits.extensions.log
 
 /**
  * Constants.
  */
-private const val TEST_LOGIN = "viktor.manza@gmail.com"
+const val TEST_LOGIN = "viktor.manza@gmail.com"
 private const val TEST_PASSWORD = "passwordE3@a"
 
 class LoginFragment :
@@ -120,14 +119,11 @@ class LoginFragment :
      * Set onClickListeners for email and password text input fields.
      */
     private fun setLoginPasswordFocusListeners() {
-        log("set listener!")
         with(binding) {
            textInputLoginEmailField.setOnFocusChangeListener { _, focused ->
                 if (focused && !viewModel.emailAlreadyFocused) {
-                    log("is focused")
                     viewModel.emailAlreadyFocused = true
                 } else if (!focused && viewModel.emailAlreadyFocused) {
-                    log("is not focused")
                     validEmail()
                 }
             }

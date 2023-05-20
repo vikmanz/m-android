@@ -7,7 +7,6 @@ import com.bumptech.glide.Priority
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.vikmanz.shpppro.R
-import com.vikmanz.shpppro.utilits.extensions.log
 import java.net.URL
 import java.security.InvalidParameterException
 
@@ -32,7 +31,6 @@ val GLIDE_OPTIONS = RequestOptions()
  * @param link URI, URL or resource id.
  */
 fun AppCompatImageView.setImageWithGlide(link: Any) {
-    log(link.toString())
     if (link is Uri || link is URL || link is Int)
         Glide.with(context)
             .load(link)

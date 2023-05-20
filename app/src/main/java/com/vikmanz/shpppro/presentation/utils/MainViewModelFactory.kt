@@ -6,12 +6,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewbinding.ViewBinding
 import com.vikmanz.shpppro.R
-import com.vikmanz.shpppro.constants.USE_NAVIGATION_COMPONENT
+import com.vikmanz.shpppro.presentation.auth.login.TEST_LOGIN
+import com.vikmanz.shpppro.presentation.base.BaseArgument
+import com.vikmanz.shpppro.presentation.base.BaseFragment
+import com.vikmanz.shpppro.presentation.base.BaseViewModel
+import com.vikmanz.shpppro.presentation.main.my_profile.MyProfileFragment
 import com.vikmanz.shpppro.presentation.navigator.MainNavigator
-
 import com.vikmanz.shpppro.presentation.navigator.Navigator
-import com.vikmanz.shpppro.presentation.base.*
-import com.vikmanz.shpppro.presentation.navigator.AuthNavigator.Companion.ARG_SCREEN
 
 class MainViewModelFactory<VBinding : ViewBinding, VM : BaseViewModel>(
     private val baseArgument: BaseArgument,
@@ -36,16 +37,21 @@ class MainViewModelFactory<VBinding : ViewBinding, VM : BaseViewModel>(
 inline fun <reified VM : BaseViewModel, reified VBinding : ViewBinding> BaseFragment<VBinding, VM>.screenMainViewModel() =
     viewModels<VM> {
 
-        val key = if (USE_NAVIGATION_COMPONENT) getString(R.string.safe_arg_id) else ARG_SCREEN
-
-        val baseArgument: BaseArgument =
-                   if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                       requireArguments().getSerializable(
-                           key,
-                           BaseArgument::class.java
-                       ) as BaseArgument
-                   } else {
-                       @Suppress("DEPRECATION") requireArguments().getSerializable(key) as BaseArgument
-                   }
-        MainViewModelFactory(baseArgument, this)
+        val key = getString(R.string.safe_arg_id)
+        try {
+            val baseArgument: BaseArgument =
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                    requireArguments().getSerializable(
+                        key,
+                        BaseArgument::class.java
+                    ) as BaseArgument
+                } else {
+                    @Suppress("DEPRECATION") requireArguments().getSerializable(key) as BaseArgument
+                }
+            MainViewModelFactory(baseArgument, this)
+        }
+        catch (e: NullPointerException) {
+            val baseArgument: BaseArgument = MyProfileFragment.CustomArgument(TEST_LOGIN)
+            MainViewModelFactory(baseArgument, this)
+        }
     }
