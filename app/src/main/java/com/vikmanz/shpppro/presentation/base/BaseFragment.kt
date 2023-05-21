@@ -7,14 +7,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 
-abstract class BaseFragment<VBinding : ViewBinding, VM : BaseViewModel>(
+abstract class BaseFragment<VBinding : ViewBinding>(
     private val inflaterMethod: (LayoutInflater, ViewGroup?, Boolean) -> VBinding
 ) : Fragment() {
 
-    abstract val viewModel: VM
-
     private var _binding: VBinding? = null
-    val binding get() = requireNotNull(_binding)
+    protected val binding get() = requireNotNull(_binding)
 
     protected open fun setListeners() {}
     protected open fun setObservers() {}

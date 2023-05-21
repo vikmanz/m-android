@@ -1,26 +1,20 @@
 package com.vikmanz.shpppro.presentation.main.my_profile
 
 import android.content.Intent
+import androidx.fragment.app.viewModels
 import com.vikmanz.shpppro.R
 import com.vikmanz.shpppro.data.utils.EmailParser
 import com.vikmanz.shpppro.databinding.FragmentMyProfileBinding
 import com.vikmanz.shpppro.presentation.auth.AuthActivity
-import com.vikmanz.shpppro.presentation.base.BaseArgument
 import com.vikmanz.shpppro.presentation.base.BaseFragment
 import com.vikmanz.shpppro.presentation.utils.extensions.setImageWithGlide
-import com.vikmanz.shpppro.presentation.utils.screenMainViewModel
 
 
 class MyProfileFragment :
-    BaseFragment<FragmentMyProfileBinding, MyProfileViewModel>(FragmentMyProfileBinding::inflate) {
+    BaseFragment<FragmentMyProfileBinding>(FragmentMyProfileBinding::inflate) {
 
-    /**
-     * Create ViewModel for this activity. Custom class need to change relevant type of viewModel in fabric.
-     */
-    class CustomArgument(
-        val email: String
-    ) : BaseArgument
-    override val viewModel by screenMainViewModel()
+
+    private val viewModel by viewModels<MyProfileViewModel>()
 
     override fun onCreatedFragmentView() {
         // Parse email, set Name Surname text and img of avatar.

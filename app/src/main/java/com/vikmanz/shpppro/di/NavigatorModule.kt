@@ -1,0 +1,20 @@
+package com.vikmanz.shpppro.di
+
+import com.vikmanz.shpppro.presentation.navigator.AuthNavigator
+import com.vikmanz.shpppro.presentation.navigator.Navigator
+import dagger.Binds
+import dagger.Module
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
+
+@Module
+@InstallIn(SingletonComponent::class)
+abstract class NavigatorModule {
+    @Binds
+    @Singleton
+    abstract fun bindNavigator(
+        navigator: AuthNavigator
+    ): Navigator
+
+}

@@ -4,11 +4,11 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.provider.Settings
 import android.util.Patterns
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.vikmanz.shpppro.R
 import com.vikmanz.shpppro.data.utils.PasswordErrorsChecker.checkPasswordErrors
 import com.vikmanz.shpppro.databinding.FragmentLoginBinding
-import com.vikmanz.shpppro.presentation.base.BaseArgument
 import com.vikmanz.shpppro.presentation.base.BaseFragment
 import com.vikmanz.shpppro.presentation.utils.CustomGoogleButton
 import com.vikmanz.shpppro.presentation.utils.extensions.clearError
@@ -19,17 +19,11 @@ import com.vikmanz.shpppro.presentation.utils.extensions.setMultipleGone
 import com.vikmanz.shpppro.presentation.utils.extensions.setMultipleVisible
 import com.vikmanz.shpppro.presentation.utils.extensions.setVisible
 import com.vikmanz.shpppro.presentation.utils.extensions.startMainActivity
-import com.vikmanz.shpppro.presentation.utils.screenAuthViewModel
 
 class LoginFragment :
-    BaseFragment<FragmentLoginBinding, LoginViewModel>(FragmentLoginBinding::inflate) {
+    BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::inflate) {
 
-    /**
-     * Create ViewModel for this activity. Custom class need to change relevant type of viewModel in fabric.
-     */
-    class CustomArgument : BaseArgument
-
-    override val viewModel by screenAuthViewModel()
+    private val viewModel by viewModels<LoginViewModel>()
 
     private lateinit var uiObserver: Observer<Boolean>
     private lateinit var helpersObserver: Observer<Boolean>

@@ -5,6 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import android.provider.Settings
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
@@ -18,7 +19,6 @@ import com.vikmanz.shpppro.constants.Constants.MARGINS_OF_ELEMENTS
 import com.vikmanz.shpppro.constants.Constants.SNACK_BAR_VIEW_TIME
 import com.vikmanz.shpppro.data.contact_model.Contact
 import com.vikmanz.shpppro.databinding.FragmentMyContactsListBinding
-import com.vikmanz.shpppro.presentation.base.BaseArgument
 import com.vikmanz.shpppro.presentation.base.BaseFragment
 import com.vikmanz.shpppro.presentation.main.my_contacts_list.adapter.ContactsAdapter
 import com.vikmanz.shpppro.presentation.main.my_contacts_list.adapter.listeners.ContactActionListener
@@ -30,20 +30,16 @@ import com.vikmanz.shpppro.presentation.utils.extensions.setMultipleVisible
 import com.vikmanz.shpppro.presentation.utils.extensions.setVisible
 import com.vikmanz.shpppro.presentation.utils.recycler_view_decoration.MarginItemDecoration
 import com.vikmanz.shpppro.presentation.utils.recycler_view_decoration.SwipeToDeleteCallback
-import com.vikmanz.shpppro.presentation.utils.screenMainViewModel
 import kotlinx.coroutines.launch
 
 /**
  * Class represents MyContacts screen activity.
  */
 class MyContactsListFragment :
-    BaseFragment<FragmentMyContactsListBinding, MyContactsListViewModel>(FragmentMyContactsListBinding::inflate) {
+    BaseFragment<FragmentMyContactsListBinding>(FragmentMyContactsListBinding::inflate) {
 
-    /**
-     * Create ViewModel for this activity. Custom class need to change relevant type of viewModel in fabric.
-     */
-    class CustomArgument : BaseArgument
-    override val viewModel by screenMainViewModel()
+
+    private val viewModel by viewModels<MyContactsListViewModel>()
 
     private lateinit var uiObserver: Observer<Boolean>
 

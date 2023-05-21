@@ -10,9 +10,6 @@
         android:name="com.vikmanz.shpppro.presentation.auth.splash_screen.SplashScreenFragment"
         android:label="SplashScreenFragment"
         tools:layout="@layout/fragment_splash_screen">
-        <argument
-            android:name="@string/safe_arg_id"
-            app:argType="com.vikmanz.shpppro.presentation.base.BaseArgument" />
         <action
             android:id="@+id/action_splashScreenFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
@@ -23,9 +20,6 @@
         android:name="com.vikmanz.shpppro.presentation.auth.login.LoginFragment"
         android:label="LoginFragment"
         tools:layout="@layout/fragment_login">
-        <argument
-            android:name="@string/safe_arg_id"
-            app:argType="com.vikmanz.shpppro.presentation.base.BaseArgument" />
     </fragment>
 
 

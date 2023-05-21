@@ -14,10 +14,7 @@
             android:id="@+id/action_profileFragment_to_myContactsFragment"
             app:destination="@id/myContactsFragment"
             />
-        <argument
-            android:name="@string/safe_arg_id"
-            app:argType="com.vikmanz.shpppro.presentation.base.BaseArgument"/>
-    </fragment>
+       </fragment>
 
 
     <fragment
@@ -28,10 +25,7 @@
         <action
             android:id="@+id/action_myContactsFragment_to_contactDetailsFragment"
             app:destination="@id/contactDetailsFragment" />
-        <argument
-            android:name="@string/safe_arg_id"
-            app:argType="com.vikmanz.shpppro.presentation.base.BaseArgument" />
-    </fragment>
+       </fragment>
 
 
     <fragment
@@ -39,9 +33,6 @@
         android:name="com.vikmanz.shpppro.presentation.main.contact_details.ContactDetailsFragment"
         android:label="fragment_contact_details"
         tools:layout="@layout/fragment_contact_details">
-        <argument
-            android:name="@string/safe_arg_id"
-            app:argType="com.vikmanz.shpppro.presentation.base.BaseArgument" />
-    </fragment>
+        </fragment>
 
 </navigation>

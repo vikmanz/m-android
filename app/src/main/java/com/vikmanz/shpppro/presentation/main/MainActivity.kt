@@ -1,32 +1,22 @@
 package com.vikmanz.shpppro.presentation.main
 
-import androidx.activity.viewModels
-import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
+import com.vikmanz.shpppro.R
 import com.vikmanz.shpppro.databinding.ActivityMainBinding
 import com.vikmanz.shpppro.presentation.base.BaseActivity
-import com.vikmanz.shpppro.presentation.navigator.MainNavigator
 
 /**
  * Class represents user main profile screen activity.
  */
 class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::inflate) {
 
-    private val navigator by viewModels<MainNavigator> {
-        ViewModelProvider.AndroidViewModelFactory(
-            application
-        )
+    override lateinit var navController: NavController
+    override fun initNavController() {
+        val navHost = supportFragmentManager.findFragmentById(R.id.fragmentContainer_mainActivity) as NavHostFragment
+        navController = navHost.navController
     }
 
-
-    override fun onResume() {
-        super.onResume()
-        navigator.whenActivityActive.currentActivity = this
-    }
-
-    override fun onPause() {
-        super.onPause()
-        navigator.whenActivityActive.currentActivity = null
-    }
 
 }
 

@@ -1,17 +1,21 @@
 package com.vikmanz.shpppro.presentation.main.contact_details
 
-import com.vikmanz.shpppro.App
+import androidx.lifecycle.ViewModel
 import com.vikmanz.shpppro.data.contact_model.Contact
+import com.vikmanz.shpppro.data.repository.interfaces.Repository
 import com.vikmanz.shpppro.presentation.navigator.Navigator
-import com.vikmanz.shpppro.presentation.base.BaseViewModel
+import javax.inject.Inject
 
 class ContactDetailsViewModel(
     private val navigator: Navigator,
-    customArgument: ContactDetailsFragment.CustomArgument
-) : BaseViewModel() {
+    private val contactID: Long
+) : ViewModel() {
 
-    private val contactsRepository = App.contactsRepository
-    private val id = customArgument.contactID
+
+    @Inject
+    lateinit var contactsRepository: Repository<Contact>
+
+    private val id = contactID
 
     private val contact: Contact = contactsRepository.findContact(id) ?: contactsRepository.generateRandomContact()
 

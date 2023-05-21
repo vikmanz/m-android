@@ -1,26 +1,26 @@
 package com.vikmanz.shpppro.presentation.main.my_profile
 
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.vikmanz.shpppro.App
-import com.vikmanz.shpppro.presentation.base.BaseViewModel
-import com.vikmanz.shpppro.presentation.main.my_contacts_list.MyContactsListFragment
+import com.vikmanz.shpppro.data.datastore.interfaces.MyPreferences
 import com.vikmanz.shpppro.presentation.navigator.Navigator
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class MyProfileViewModel (
+class MyProfileViewModel @Inject constructor(
     private val navigator: Navigator,
-    customArgument: MyProfileFragment.CustomArgument
-) : BaseViewModel() {
+    private val dataStore: MyPreferences,
+    private val email: String
+) : ViewModel() {
 
-    val userEmail = customArgument.email
+    val userEmail = email
 
     fun onMyContactsPressed() {
-       navigator.launchMyContacts(MyContactsListFragment.CustomArgument())
+       navigator.launchMyContacts()
     }
 
     fun clearSavedUserData() {
-        val dataStore = App.dataStore
         viewModelScope.launch(Dispatchers.IO) {
             dataStore.clearUser()
         }

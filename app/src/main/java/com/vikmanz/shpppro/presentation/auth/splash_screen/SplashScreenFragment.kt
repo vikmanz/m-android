@@ -1,24 +1,18 @@
 package com.vikmanz.shpppro.presentation.auth.splash_screen
 
 import android.annotation.SuppressLint
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.vikmanz.shpppro.databinding.FragmentSplashScreenBinding
-import com.vikmanz.shpppro.presentation.base.BaseArgument
 import com.vikmanz.shpppro.presentation.base.BaseFragment
 import com.vikmanz.shpppro.presentation.utils.extensions.startMainActivity
-import com.vikmanz.shpppro.presentation.utils.screenAuthViewModel
 
 @SuppressLint("CustomSplashScreen")
 class SplashScreenFragment :
-    BaseFragment<FragmentSplashScreenBinding, SplashScreenViewModel>(FragmentSplashScreenBinding::inflate) {
+    BaseFragment<FragmentSplashScreenBinding>(FragmentSplashScreenBinding::inflate) {
 
 
-    /**
-     * Create ViewModel for this activity. Custom class need to change relevant type of viewModel in fabric.
-     */
-    class CustomArgument : BaseArgument
-
-    override val viewModel by screenAuthViewModel()
+    private val viewModel by viewModels<SplashScreenViewModel>()
 
     private lateinit var autologinObserver: Observer<String>
 

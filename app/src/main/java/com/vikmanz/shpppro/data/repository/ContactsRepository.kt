@@ -1,24 +1,27 @@
-package com.vikmanz.shpppro.data
+package com.vikmanz.shpppro.data.repository
 
 import android.net.Uri
 import com.github.javafaker.Faker
 import com.vikmanz.shpppro.constants.Constants.START_NUMBER_OF_CONTACTS
 import com.vikmanz.shpppro.data.contact_model.Contact
+import com.vikmanz.shpppro.data.repository.interfaces.Repository
 import com.vikmanz.shpppro.data.utils.ContactsPhoneInfoTaker
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import java.net.URL
-import java.util.*
+import java.util.UUID
 
 /**
+ * Implementation of repository.
  * Main service to create contacts objects from information on from random.
  */
-class ContactsRepository {
+class ContactsRepository : Repository<Contact> {
 
     //This object is a wrapper. if we pass it a new object it will call emit
     private val _contactList = MutableStateFlow(listOf<Contact>())
+
     //this object sends out the immutable list
-    val contactList = _contactList.asStateFlow()
+    override val contactList = _contactList.asStateFlow()
 
     private val faker = Faker.instance() // fake data generator.
 
@@ -31,7 +34,7 @@ class ContactsRepository {
     /**
      * Create and return one contact with information from input.
      */
-    fun createContact(
+    override fun createContact(
         contactPhotoLink: Any,
         photoIndex: Int,
         name: String,
@@ -59,21 +62,21 @@ class ContactsRepository {
     /**
      * Create and return one contact with random fake information.
      */
-    fun generateRandomContact(): Contact = createContact(
-            contactPhotoLink = IMAGES[imgCounter % IMAGES.size],
-            photoIndex = imgCounter,
-            name = faker.name().fullName(),
-            career = faker.company().name(),
-            email = faker.internet().emailAddress(),
-            phone = faker.phoneNumber().phoneNumber(),
-            address = faker.address().fullAddress(),
-            birthday = faker.date().birthday().toString()
-        )
+    override fun generateRandomContact(): Contact = createContact(
+        contactPhotoLink = IMAGES[imgCounter % IMAGES.size],
+        photoIndex = imgCounter,
+        name = faker.name().fullName(),
+        career = faker.company().name(),
+        email = faker.internet().emailAddress(),
+        phone = faker.phoneNumber().phoneNumber(),
+        address = faker.address().fullAddress(),
+        birthday = faker.date().birthday().toString()
+    )
 
     /**
      * Create and return list of fake contacts.
      */
-    fun setFakeContacts() {
+    override fun setFakeContacts() {
         _contactList.value = (0 until START_NUMBER_OF_CONTACTS).map {
             generateRandomContact()
         }.toMutableList()
@@ -82,7 +85,7 @@ class ContactsRepository {
     /**
      * Create and return contact list with information from phonebook ArrayList<[name: String, phone: String]>.
      */
-    fun setPhoneContacts() {
+    override fun setPhoneContacts() {
         val listOfContactsInformation = ContactsPhoneInfoTaker().getPhonebookContactsInfo()
         _contactList.value = (0 until listOfContactsInformation.size).map {
             createContact(
@@ -106,69 +109,70 @@ class ContactsRepository {
     private fun getRandomId(): Long {
         return UUID.randomUUID().mostSignificantBits
     }
+
     /**
      * Return current random photo url.
      */
-    fun getCurrentContactPhotoUrl(): URL {
+    override fun getCurrentContactPhotoUrl(): URL {
         return IMAGES[imgCounter % IMAGES.size]
     }
 
     /**
      * Return current random photo counter.
      */
-    fun getCurrentPhotoCounter(): Int {
+    override fun getCurrentPhotoCounter(): Int {
         return imgCounter
     }
 
     /**
      * Change random photo counter to switch random image to next.
      */
-    fun incrementPhotoCounter() {
+    override fun incrementPhotoCounter() {
         imgCounter++
     }
 
-    fun addContact(contact: Contact) {
+    override fun addContact(contact: Contact) {
         addContact(contact, _contactList.value.size)
     }
 
     /**
      * Add new contact to list of contacts to concrete index.
      */
-    fun addContact(contact: Contact, index: Int) {
+    override fun addContact(contact: Contact, index: Int) {
         _contactList.value = _contactList.value.toMutableList().apply { add(index, contact) }
     }
 
     /**
      * Delete contact from list of contacts.
      */
-    fun deleteContact(contact: Contact) {
+    override fun deleteContact(contact: Contact) {
         _contactList.value = _contactList.value.toMutableList().apply { remove(contact) }
     }
 
     /**
      * Get contact position in list of contacts.
      */
-    fun getContactPosition(contact: Contact) : Int{
+    override fun getContactPosition(contact: Contact): Int {
         return _contactList.value.indexOf(contact)
     }
 
     /**
      * Get contact from list via index.
      */
-    fun getContact(index: Int) : Contact? =
+    override fun getContact(index: Int): Contact? =
         if (index >= 0 && index < _contactList.value.size) _contactList.value[index]
         else null
 
     /**
      * Get contact from list via id.
      */
-    fun findContact(id: Long) : Contact? {
-        _contactList.value.forEach { if(it.contactId == id) return it}
+    override fun findContact(id: Long): Contact? {
+        _contactList.value.forEach { if (it.contactId == id) return it }
         return null
     }
 
 
-    fun isContainsContact(contact: Contact): Boolean {
+    override fun isContainsContact(contact: Contact): Boolean {
         return _contactList.value.contains(contact)
     }
 

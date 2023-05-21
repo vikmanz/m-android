@@ -1,30 +1,22 @@
 package com.vikmanz.shpppro.presentation.auth
 
-import androidx.activity.viewModels
-import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
+import com.vikmanz.shpppro.R
 import com.vikmanz.shpppro.databinding.ActivityAuthBinding
 import com.vikmanz.shpppro.presentation.base.BaseActivity
-import com.vikmanz.shpppro.presentation.navigator.AuthNavigator
+import dagger.hilt.android.AndroidEntryPoint
 
 /**
  * Class represents SignIn or SignUp screen activity .
  */
+@AndroidEntryPoint
 class AuthActivity : BaseActivity<ActivityAuthBinding>(ActivityAuthBinding::inflate) {
 
-    private val navigator by viewModels<AuthNavigator> {
-        ViewModelProvider.AndroidViewModelFactory(
-            application
-        )
-    }
-
-    override fun onResume() {
-        super.onResume()
-        navigator.whenActivityActive.currentActivity = this
-    }
-
-    override fun onPause() {
-        super.onPause()
-        navigator.whenActivityActive.currentActivity = null
+    override lateinit var navController: NavController
+    override fun initNavController() {
+        val navHost = supportFragmentManager.findFragmentById(R.id.fragmentContainer_authActivity) as NavHostFragment
+        navController = navHost.navController
     }
 
 }

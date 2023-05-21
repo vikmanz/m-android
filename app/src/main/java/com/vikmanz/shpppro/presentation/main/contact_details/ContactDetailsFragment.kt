@@ -1,23 +1,16 @@
 package com.vikmanz.shpppro.presentation.main.contact_details
 
+import androidx.fragment.app.viewModels
 import com.vikmanz.shpppro.databinding.FragmentContactDetailsBinding
-import com.vikmanz.shpppro.presentation.base.BaseArgument
 import com.vikmanz.shpppro.presentation.base.BaseFragment
 import com.vikmanz.shpppro.presentation.utils.extensions.setImageWithGlide
-import com.vikmanz.shpppro.presentation.utils.screenMainViewModel
 
 class ContactDetailsFragment :
-    BaseFragment<FragmentContactDetailsBinding, ContactDetailsViewModel>(
+    BaseFragment<FragmentContactDetailsBinding>(
         FragmentContactDetailsBinding::inflate
     ) {
 
-    /**
-     * Create ViewModel for this activity. Custom class need to change relevant type of viewModel in fabric.
-     */
-    class CustomArgument(
-        val contactID: Long
-    ) : BaseArgument
-    override val viewModel by screenMainViewModel()
+    private val viewModel by viewModels<ContactDetailsViewModel>()
 
     override fun onCreatedFragmentView() {
         with(binding) {
