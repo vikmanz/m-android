@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewbinding.ViewBinding
 import com.vikmanz.shpppro.R
-import com.vikmanz.shpppro.presentation.auth.login.TEST_LOGIN
+import com.vikmanz.shpppro.presentation.auth.login.LoginFragment.Companion.TEST_LOGIN
 import com.vikmanz.shpppro.presentation.base.BaseArgument
 import com.vikmanz.shpppro.presentation.base.BaseFragment
 import com.vikmanz.shpppro.presentation.base.BaseViewModel

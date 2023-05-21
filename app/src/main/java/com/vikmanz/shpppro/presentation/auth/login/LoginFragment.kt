@@ -21,12 +21,6 @@ import com.vikmanz.shpppro.presentation.utils.extensions.setVisible
 import com.vikmanz.shpppro.presentation.utils.extensions.startMainActivity
 import com.vikmanz.shpppro.presentation.utils.screenAuthViewModel
 
-/**
- * Constants.
- */
-const val TEST_LOGIN = "viktor.manza@gmail.com"
-private const val TEST_PASSWORD = "passwordE3@a"
-
 class LoginFragment :
     BaseFragment<FragmentLoginBinding, LoginViewModel>(FragmentLoginBinding::inflate) {
 
@@ -306,4 +300,13 @@ class LoginFragment :
         viewModel.loginScreen.removeObserver(uiObserver)
         viewModel.helperButtonsVisible.removeObserver(helpersObserver)
     }
+
+    companion object {
+        /**
+         * Constants.
+         */
+        const val TEST_LOGIN = "viktor.manza@gmail.com"
+        private const val TEST_PASSWORD = "passwordE3@a"
+    }
+
 }
