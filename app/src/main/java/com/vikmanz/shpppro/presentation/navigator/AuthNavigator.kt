@@ -14,8 +14,10 @@ import javax.inject.Inject
  */
 class AuthNavigator @Inject constructor(
     @ActivityContext val context: Context,
-    @Inject val navController: NavController
+    navController: NavController
 ) : Navigator {
+
+    private val _navController = navController
 
     override fun launchLoginFragment() {
         navigateTo(
@@ -26,12 +28,12 @@ class AuthNavigator @Inject constructor(
     override fun launchContactDetails() {    }
 
     override fun goBack() {
-        navController.popBackStack()
+        _navController.popBackStack()
     }
 
     private fun navigateTo(
         direction: Int, //NavDirections
     ) {
-        navController.navigate(direction)
+        _navController.navigate(direction)
     }
 }

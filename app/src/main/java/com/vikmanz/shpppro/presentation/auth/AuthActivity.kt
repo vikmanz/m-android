@@ -15,7 +15,7 @@ class AuthActivity : BaseActivity<ActivityAuthBinding>(ActivityAuthBinding::infl
 
     override lateinit var navController: NavController
     override fun initNavController() {
-        val navHost = supportFragmentManager.findFragmentById(R.id.fragmentContainer_authActivity) as NavHostFragment
+        val navHost = supportFragmentManager.findFragmentById(R.id.fragmentContainer) as NavHostFragment
         navController = navHost.navController
     }
 

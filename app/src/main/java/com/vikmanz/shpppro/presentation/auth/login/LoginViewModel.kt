@@ -11,7 +11,11 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 private const val DEFAULT_SHOW_HELPERS = false
-class LoginViewModel : ViewModel() {
+class LoginViewModel @Inject constructor(
+    dataStore: MyPreferences
+) : ViewModel() {
+
+    private val _dataStore = dataStore
 
     // Save state of screen layout. True - Login screen, False - Register screen.
     val loginScreen = MutableLiveData(LOGIN_VIEW_FIRST)
@@ -22,8 +26,6 @@ class LoginViewModel : ViewModel() {
     // For show errors only for one field and not for all if it didn't been activated.
     var emailAlreadyFocused = false
     var passwordAlreadyFocused = false
-
-    @Inject lateinit var dataStore: MyPreferences
 
     /**
      * Change screen to register or to login.
@@ -44,7 +46,7 @@ class LoginViewModel : ViewModel() {
      */
     fun saveUserEmailToDatastore(email: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            dataStore.saveUserSata(email)
+            _dataStore.saveUserSata(email)
         }
     }
 

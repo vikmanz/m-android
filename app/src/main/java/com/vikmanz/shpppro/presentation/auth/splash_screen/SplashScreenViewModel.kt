@@ -6,16 +6,18 @@ import androidx.lifecycle.viewModelScope
 import com.vikmanz.shpppro.constants.Constants
 import com.vikmanz.shpppro.data.datastore.interfaces.MyPreferences
 import com.vikmanz.shpppro.presentation.navigator.Navigator
+import com.vikmanz.shpppro.utilits.extensions.log
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class SplashScreenViewModel @Inject constructor(
-    private val navigator: Navigator,
-    private val dataStore: MyPreferences
+    navigator: Navigator,
+    dataStore: MyPreferences
 ) : ViewModel() {
 
     val login = MutableLiveData("")
+    private val _navigator = navigator
 
     /**
      * Check if user already save login-password, and do autologin if it's need.
@@ -30,7 +32,8 @@ class SplashScreenViewModel @Inject constructor(
     }
 
     private fun goToLoginFragment() {
-        navigator.launchLoginFragment()
+        log("DDD")
+        _navigator.launchLoginFragment()
     }
 
 }

@@ -13,7 +13,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
 
     override lateinit var navController: NavController
     override fun initNavController() {
-        val navHost = supportFragmentManager.findFragmentById(R.id.fragmentContainer_mainActivity) as NavHostFragment
+        val navHost = supportFragmentManager.findFragmentById(R.id.fragmentContainer) as NavHostFragment
         navController = navHost.navController
     }
 

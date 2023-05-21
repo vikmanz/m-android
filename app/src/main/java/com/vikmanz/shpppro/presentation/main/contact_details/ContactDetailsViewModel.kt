@@ -6,16 +6,17 @@ import com.vikmanz.shpppro.data.repository.interfaces.Repository
 import com.vikmanz.shpppro.presentation.navigator.Navigator
 import javax.inject.Inject
 
-class ContactDetailsViewModel(
-    private val navigator: Navigator,
+class ContactDetailsViewModel @Inject constructor(
+    navigator: Navigator,
+    contactsRepository: Repository<Contact>,
     private val contactID: Long
 ) : ViewModel() {
 
 
-    @Inject
-    lateinit var contactsRepository: Repository<Contact>
-
     private val id = contactID
+
+    private val _navigator = navigator
+
 
     private val contact: Contact = contactsRepository.findContact(id) ?: contactsRepository.generateRandomContact()
 
@@ -25,6 +26,6 @@ class ContactDetailsViewModel(
     val photoLink = contact.contactPhotoLink
 
     fun onButtonBackPressed() {
-        navigator.goBack()
+        _navigator.goBack()
     }
 }

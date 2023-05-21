@@ -9,20 +9,23 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class MyProfileViewModel @Inject constructor(
-    private val navigator: Navigator,
-    private val dataStore: MyPreferences,
-    private val email: String
+    navigator: Navigator,
+    dataStore: MyPreferences,
+    email: String = "TEST.test@gmail.com"
 ) : ViewModel() {
 
     val userEmail = email
 
+    private val _navigator = navigator
+    private val _dataStore = dataStore
+
     fun onMyContactsPressed() {
-       navigator.launchMyContacts()
+        _navigator.launchMyContacts()
     }
 
     fun clearSavedUserData() {
         viewModelScope.launch(Dispatchers.IO) {
-            dataStore.clearUser()
+            _dataStore.clearUser()
         }
     }
 

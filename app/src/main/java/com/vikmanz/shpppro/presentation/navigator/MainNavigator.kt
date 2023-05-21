@@ -14,8 +14,10 @@ import javax.inject.Inject
  */
 class MainNavigator @Inject constructor(
     @ActivityContext val context: Context,
-    @Inject val navController: NavController
+    navController: NavController
 ): Navigator {
+
+    private val _navController = navController
 
     override fun launchLoginFragment() {  }
 
@@ -28,14 +30,14 @@ class MainNavigator @Inject constructor(
     )
 
     override fun goBack() {
-        navController.popBackStack()
+        _navController.popBackStack()
     }
 
     private fun navigateTo(
         direction: Int
     ) {
        // val bundle = bundleOf(getString(R.string.safe_arg_id) to argument)
-        navController.navigate(direction)
+        _navController.navigate(direction)
     }
 
 }
