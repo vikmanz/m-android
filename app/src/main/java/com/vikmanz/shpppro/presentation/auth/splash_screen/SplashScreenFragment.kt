@@ -6,8 +6,10 @@ import androidx.lifecycle.Observer
 import com.vikmanz.shpppro.databinding.FragmentSplashScreenBinding
 import com.vikmanz.shpppro.presentation.base.BaseFragment
 import com.vikmanz.shpppro.presentation.utils.extensions.startMainActivity
+import dagger.hilt.android.AndroidEntryPoint
 
 @SuppressLint("CustomSplashScreen")
+@AndroidEntryPoint
 class SplashScreenFragment :
     BaseFragment<FragmentSplashScreenBinding>(FragmentSplashScreenBinding::inflate) {
 

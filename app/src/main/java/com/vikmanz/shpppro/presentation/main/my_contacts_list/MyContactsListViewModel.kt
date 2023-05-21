@@ -4,8 +4,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.vikmanz.shpppro.data.contact_model.Contact
 import com.vikmanz.shpppro.data.repository.interfaces.Repository
-import com.vikmanz.shpppro.presentation.navigator.Navigator
+import com.vikmanz.shpppro.presentation.navigator.interfaces.Navigator
 import com.vikmanz.shpppro.presentation.utils.extensions.swapBoolean
+import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 // FakeData (true) or PhoneData (false) view first on myContacts
@@ -14,6 +15,7 @@ private const val FAKE_LIST_FIRST = true
 /**
  * ViewModel for My Contacts Activity.
  */
+@HiltViewModel
 class MyContactsListViewModel @Inject constructor(
     navigator: Navigator,
     contactsRepository: Repository<Contact>

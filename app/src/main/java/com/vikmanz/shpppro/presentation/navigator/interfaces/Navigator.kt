@@ -1,4 +1,4 @@
-package com.vikmanz.shpppro.presentation.navigator
+package com.vikmanz.shpppro.presentation.navigator.interfaces
 
 interface Navigator {
     fun launchLoginFragment()

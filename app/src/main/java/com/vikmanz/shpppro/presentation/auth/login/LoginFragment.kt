@@ -19,7 +19,9 @@ import com.vikmanz.shpppro.presentation.utils.extensions.setMultipleGone
 import com.vikmanz.shpppro.presentation.utils.extensions.setMultipleVisible
 import com.vikmanz.shpppro.presentation.utils.extensions.setVisible
 import com.vikmanz.shpppro.presentation.utils.extensions.startMainActivity
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class LoginFragment :
     BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::inflate) {
 

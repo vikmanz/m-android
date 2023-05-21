@@ -1,7 +1,7 @@
 package com.vikmanz.shpppro.di
 
 import com.vikmanz.shpppro.presentation.navigator.AuthNavigator
-import com.vikmanz.shpppro.presentation.navigator.Navigator
+import com.vikmanz.shpppro.presentation.navigator.interfaces.Navigator
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

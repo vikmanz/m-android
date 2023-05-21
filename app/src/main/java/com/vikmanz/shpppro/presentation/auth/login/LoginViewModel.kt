@@ -6,11 +6,13 @@ import androidx.lifecycle.viewModelScope
 import com.vikmanz.shpppro.constants.Constants.LOGIN_VIEW_FIRST
 import com.vikmanz.shpppro.data.datastore.interfaces.MyPreferences
 import com.vikmanz.shpppro.presentation.utils.extensions.swapBoolean
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 private const val DEFAULT_SHOW_HELPERS = false
+@HiltViewModel
 class LoginViewModel @Inject constructor(
     dataStore: MyPreferences
 ) : ViewModel() {

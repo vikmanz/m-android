@@ -5,7 +5,9 @@ import androidx.navigation.fragment.NavHostFragment
 import com.vikmanz.shpppro.R
 import com.vikmanz.shpppro.databinding.ActivityAuthBinding
 import com.vikmanz.shpppro.presentation.base.BaseActivity
+import com.vikmanz.shpppro.presentation.navigator.AuthNavGetter
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 /**
  * Class represents SignIn or SignUp screen activity .
@@ -13,10 +15,11 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class AuthActivity : BaseActivity<ActivityAuthBinding>(ActivityAuthBinding::inflate) {
 
+    @Inject lateinit var navGetter: AuthNavGetter
     override lateinit var navController: NavController
     override fun initNavController() {
         val navHost = supportFragmentManager.findFragmentById(R.id.fragmentContainer) as NavHostFragment
-        navController = navHost.navController
+        navGetter.setNavController(navHost.navController)
     }
 
 }

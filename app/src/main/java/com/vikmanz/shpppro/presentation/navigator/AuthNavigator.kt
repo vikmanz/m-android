@@ -1,10 +1,9 @@
 package com.vikmanz.shpppro.presentation.navigator
 
-import android.content.Context
 import androidx.lifecycle.AndroidViewModel
-import androidx.navigation.NavController
 import com.vikmanz.shpppro.R
-import dagger.hilt.android.qualifiers.ActivityContext
+import com.vikmanz.shpppro.presentation.navigator.interfaces.AuthNavControllerManager
+import com.vikmanz.shpppro.presentation.navigator.interfaces.Navigator
 import javax.inject.Inject
 
 /**
@@ -13,11 +12,10 @@ import javax.inject.Inject
  * https://github.com/romychab/android-tutorials/tree/main/mvvm-navigation
  */
 class AuthNavigator @Inject constructor(
-    @ActivityContext val context: Context,
-    navController: NavController
+    authNavControllerManager: AuthNavControllerManager
 ) : Navigator {
 
-    private val _navController = navController
+    private val navController = authNavControllerManager.getNavController()
 
     override fun launchLoginFragment() {
         navigateTo(
@@ -28,12 +26,12 @@ class AuthNavigator @Inject constructor(
     override fun launchContactDetails() {    }
 
     override fun goBack() {
-        _navController.popBackStack()
+        navController.popBackStack()
     }
 
     private fun navigateTo(
         direction: Int, //NavDirections
     ) {
-        _navController.navigate(direction)
+        navController.navigate(direction)
     }
 }

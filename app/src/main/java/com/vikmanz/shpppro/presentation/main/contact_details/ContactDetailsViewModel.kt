@@ -3,9 +3,10 @@ package com.vikmanz.shpppro.presentation.main.contact_details
 import androidx.lifecycle.ViewModel
 import com.vikmanz.shpppro.data.contact_model.Contact
 import com.vikmanz.shpppro.data.repository.interfaces.Repository
-import com.vikmanz.shpppro.presentation.navigator.Navigator
+import com.vikmanz.shpppro.presentation.navigator.interfaces.Navigator
+import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
-
+@HiltViewModel
 class ContactDetailsViewModel @Inject constructor(
     navigator: Navigator,
     contactsRepository: Repository<Contact>,
