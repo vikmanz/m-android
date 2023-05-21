@@ -1,9 +1,14 @@
 package com.vikmanz.shpppro.presentation.navigator
 
+import android.content.Context
 import androidx.navigation.NavController
 import com.vikmanz.shpppro.presentation.navigator.interfaces.MainNavControllerManager
+import dagger.hilt.android.qualifiers.ApplicationContext
+import javax.inject.Inject
 
-class MainNavGetter : MainNavControllerManager {
+class MainNavGetter @Inject constructor(
+    @ApplicationContext applicationContext: Context
+) : MainNavControllerManager {
 
 
     private var navigatorController: NavController? = null

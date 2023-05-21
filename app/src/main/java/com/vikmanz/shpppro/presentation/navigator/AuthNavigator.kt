@@ -4,6 +4,7 @@ import androidx.lifecycle.AndroidViewModel
 import com.vikmanz.shpppro.R
 import com.vikmanz.shpppro.presentation.navigator.interfaces.AuthNavControllerManager
 import com.vikmanz.shpppro.presentation.navigator.interfaces.Navigator
+import com.vikmanz.shpppro.utilits.extensions.log
 import javax.inject.Inject
 
 /**
@@ -14,6 +15,11 @@ import javax.inject.Inject
 class AuthNavigator @Inject constructor(
     authNavControllerManager: AuthNavControllerManager
 ) : Navigator {
+
+    init {
+        log("inside AuthNavigator we have controller $authNavControllerManager")
+        log("and getter ${authNavControllerManager.getNavController()}")
+    }
 
     private val navController = authNavControllerManager.getNavController()
 

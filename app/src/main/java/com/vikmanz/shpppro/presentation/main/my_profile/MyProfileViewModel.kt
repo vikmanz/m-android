@@ -13,10 +13,10 @@ import javax.inject.Inject
 class MyProfileViewModel @Inject constructor(
     navigator: Navigator,
     dataStore: MyPreferences,
-    email: String = "TEST.test@gmail.com"
+    //email: String = "TEST.test@gmail.com"
 ) : ViewModel() {
 
-    val userEmail = email
+    val userEmail = "TEST.test@gmail.com"
 
     private val _navigator = navigator
     private val _dataStore = dataStore

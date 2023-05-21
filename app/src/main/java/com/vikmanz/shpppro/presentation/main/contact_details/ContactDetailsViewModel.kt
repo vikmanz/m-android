@@ -10,16 +10,16 @@ import javax.inject.Inject
 class ContactDetailsViewModel @Inject constructor(
     navigator: Navigator,
     contactsRepository: Repository<Contact>,
-    private val contactID: Long
+    //private val contactID: Long
 ) : ViewModel() {
 
 
-    private val id = contactID
+  //  private val id = contactID
 
     private val _navigator = navigator
 
 
-    private val contact: Contact = contactsRepository.findContact(id) ?: contactsRepository.generateRandomContact()
+    private val contact: Contact = contactsRepository.findContact(1) ?: contactsRepository.generateRandomContact()
 
     val name = contact.contactName
     val career = contact.contactCareer
