@@ -1,7 +1,9 @@
 plugins {
-    id 'com.android.application'                        // core
-    id 'org.jetbrains.kotlin.android'                   // core
-    id 'androidx.navigation.safeargs'                   // safe args for navigation
+    id 'com.android.application'            // core
+    id 'org.jetbrains.kotlin.android'       // core
+    id 'androidx.navigation.safeargs'       // safe args for navigation
+    id 'kotlin-kapt'                        // Hilt
+    id 'com.google.dagger.hilt.android'     // Hilt
 }
 
 android {
@@ -25,17 +27,20 @@ android {
         }
     }
 
+    // ViewBinding
     buildFeatures {
         viewBinding = true
     }
 
+    // Hilt uses Java VERSION_1_8 but kaptGenerateStubsDebugKotlin use VERSION_18
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
 
+    // Hilt uses Java VERSION_1_8 but kaptGenerateStubsDebugKotlin use VERSION_18
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8.toString()
+        jvmTarget = JavaVersion.VERSION_17.toString()
     }
 
 }
@@ -63,18 +68,21 @@ dependencies {
     implementation "android.arch.lifecycle:extensions:1.1.1"
 
     // Kotlin coroutines components
-    api 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4'
-    api "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4"
+    api 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1'
+    api 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1'
 
     // Preferences DataStore
     implementation "androidx.datastore:datastore-preferences:1.1.0-alpha04"
 
     // Navigation
-    def nav_version = "2.5.3"  // version
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
     implementation "androidx.navigation:navigation-dynamic-features-fragment:$nav_version"
     implementation "androidx.navigation:navigation-testing:$nav_version"
+
+    // Hilt
+    implementation "com.google.dagger:hilt-android:$hilt_version"
+    kapt "com.google.dagger:hilt-compiler:$hilt_version"
 
     // External libraries
     implementation 'com.github.javafaker:javafaker:1.0.2'       // generator for fake info
