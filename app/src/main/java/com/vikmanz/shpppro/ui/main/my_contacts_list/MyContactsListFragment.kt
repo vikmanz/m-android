@@ -9,7 +9,6 @@ import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -45,11 +44,9 @@ class MyContactsListFragment :
 
     override val viewModel: MyContactsListViewModel by viewModels()
 
-    private lateinit var uiObserver: Observer<Boolean>
-
     private var undo: Snackbar? = null
 
-    private var deletedContact: Contact? = null
+    private var deletedContact: Contact? = null     //TODO move in viewModel
 
     /**
      * Set listeners for buttons.
@@ -78,7 +75,7 @@ class MyContactsListFragment :
     }
 
     private fun observeUI() {
-        uiObserver = Observer<Boolean> {
+        viewModel.fakeListActivated.observe(viewLifecycleOwner) {
             with(binding) {
                 if (it) {
                     setMultipleInvisible(
@@ -96,7 +93,7 @@ class MyContactsListFragment :
                     buttonMyContactsAddContactsFromPhonebook.setGone()
                 }
             }
-        }.also { viewModel.fakeListActivated.observe(this@MyContactsListFragment, it) }
+        }
     }
 
     private fun observeContactsList() {
@@ -148,13 +145,13 @@ class MyContactsListFragment :
      * Delete contact from ViewModel and show Undo to restore it.
      */
     private fun deleteContactFromViewModelWithUndo(contact: Contact) {
-        deletedContact = contact
+        deletedContact = contact                                //TODO move in viewModel
         val position = viewModel.getContactPosition(contact)
         viewModel.deleteContact(contact)
         undo = Snackbar
             .make(binding.root, getString(R.string.my_contacts_remove_contact), SNACK_BAR_VIEW_TIME)
             .setAction(getString(R.string.my_contacts_remove_contact_undo)) {
-                if (!viewModel.isContainsContact(contact)) {
+                if (!viewModel.isContainsContact(contact)) {        //TODO move in viewModel
                     viewModel.addContactToPosition(
                         contact,
                         position
@@ -172,7 +169,7 @@ class MyContactsListFragment :
     private fun initSwipeToDelete() {
         val swipeHandler = object : SwipeToDeleteCallback(requireContext()) {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                val position = viewHolder.adapterPosition
+                val position = viewHolder.adapterPosition                                       //TODO move in delete?
                 viewModel.getContact(position)?.let { deleteContactFromViewModelWithUndo(it) }
             }
         }
@@ -235,7 +232,6 @@ class MyContactsListFragment :
         deletedContact = null
         undo?.dismiss()
         undo = null
-        viewModel.fakeListActivated.removeObserver(uiObserver)
     }
 
 }

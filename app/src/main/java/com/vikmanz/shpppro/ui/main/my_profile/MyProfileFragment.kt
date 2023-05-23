@@ -59,7 +59,7 @@ class MyProfileFragment :
      */
     private fun logout() {
         viewModel.clearSavedUserData()
-        startAuthActivity()
+        startAuthActivity()             //TODO migrate to nav
     }
 
     /**

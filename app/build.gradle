@@ -34,13 +34,13 @@ android {
 
     // Hilt uses Java VERSION_1_8 but kaptGenerateStubsDebugKotlin use VERSION_18
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_17
-        targetCompatibility JavaVersion.VERSION_17
+        sourceCompatibility JavaVersion.VERSION_18
+        targetCompatibility JavaVersion.VERSION_18
     }
 
     // Hilt uses Java VERSION_1_8 but kaptGenerateStubsDebugKotlin use VERSION_18
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_17.toString()
+        jvmTarget = JavaVersion.VERSION_18.toString()
     }
 
 }

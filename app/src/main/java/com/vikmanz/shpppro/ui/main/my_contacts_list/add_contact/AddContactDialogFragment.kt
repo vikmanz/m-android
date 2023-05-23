@@ -7,10 +7,10 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import com.vikmanz.shpppro.R
 import com.vikmanz.shpppro.databinding.FragmentAddContactMyContactsBinding
 import com.vikmanz.shpppro.ui.utils.extensions.setImageWithGlide
+import com.vikmanz.shpppro.utilits.extensions.log
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
@@ -25,11 +25,7 @@ class AddContactDialogFragment : DialogFragment() {
      * Binding of that Dialog Fragment.
      */
     private var binding: FragmentAddContactMyContactsBinding? = null
-
-    /**
-     * Observer var for nulling it when destroy view.
-     */
-    private var avatarObserver: Observer<Any>? = null
+    private val _binding by lazy { requireNotNull(binding) } // Only for don't writing "?."
 
     /**
      * Register activity for result for request image from gallery.
@@ -53,7 +49,7 @@ class AddContactDialogFragment : DialogFragment() {
             // create dialog
             val builder = AlertDialog.Builder(it)
 
-            binding?.apply {
+            with(_binding) {
 
                 // set listener for change fake image and choose image from gallery
                 imageViewAddContactAvatar.setOnClickListener { changeFakePhotoToNext() }
@@ -79,7 +75,7 @@ class AddContactDialogFragment : DialogFragment() {
             }
 
             // Set view and create dialog
-            builder.setView(binding?.root).create()
+            builder.setView(_binding.root).create()
 
         } ?: throw IllegalStateException("Activity cannot be null")
     }
@@ -87,19 +83,19 @@ class AddContactDialogFragment : DialogFragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         binding = null
-        avatarObserver = null
     }
 
-    private fun setAvatarObserver() = with(viewModel.currentPhoto) {
-        avatarObserver = Observer<Any> {
-            value?.let {
-                binding?.imageViewAddContactAvatar?.setImageWithGlide(value!!)
-            }
-        }.also { observe(this@AddContactDialogFragment, it) }
+    private fun setAvatarObserver() {
+        log("set observer")
+        viewModel.currentPhoto.observe(this@AddContactDialogFragment) {
+            log("it = $it")
+            log("binding = $_binding")
+            _binding.imageViewAddContactAvatar.setImageWithGlide(it)
+        }
     }
 
     private fun checkContactIsNotEmpty(): Boolean {
-        return if (binding?.textInputAddContactUserNameInputField?.text.toString().isEmpty()) {
+        return if (_binding.textInputAddContactUserNameInputField.text.toString().isEmpty()) {
             Toast.makeText(
                 requireContext(),
                 getString(R.string.my_contacts_add_contact_please_write_name),

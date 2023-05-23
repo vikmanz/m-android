@@ -5,7 +5,6 @@ import android.content.Intent
 import android.provider.Settings
 import android.util.Patterns
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import com.vikmanz.shpppro.R
 import com.vikmanz.shpppro.base.BaseFragment
 import com.vikmanz.shpppro.data.utils.PasswordErrorsChecker.checkPasswordErrors
@@ -26,14 +25,6 @@ class LoginFragment :
 
     override val viewModel: LoginViewModel by viewModels()
 
-    private lateinit var uiObserver: Observer<Boolean>
-    private lateinit var helpersObserver: Observer<Boolean>
-
-    override fun setObservers() {
-        observeUI()
-        observeHelpers()
-    }
-
     override fun setListeners() {
         with(binding) {
             buttonLoginRegisterByEmail.setOnClickListener { checkForm() }
@@ -47,11 +38,16 @@ class LoginFragment :
         backgroundFocusHandler()                // de-focus fields when click on bg
     }
 
+    override fun setObservers() {
+        observeUI()
+        observeHelpers()
+    }
+
     /**
      * Observe and swap SignIn ans SignUp screens via changing text and visibility view on layout.
      */
     private fun observeUI() {
-        uiObserver = Observer<Boolean> {
+        viewModel.loginScreen.observe(viewLifecycleOwner) {
             with(binding) {
                 if (it) {
                     textViewLoginHelloText.text =
@@ -88,20 +84,18 @@ class LoginFragment :
                     )
                 }
             }
-
-        }.also { viewModel.loginScreen.observe(this@LoginFragment, it) }
-
+        }
     }
 
     /**
      * Observe and show/Hide help buttons.
      */
     private fun observeHelpers() {
-        helpersObserver = Observer<Boolean> {
+        viewModel.helperButtonsVisible.observe(viewLifecycleOwner) {
             with(binding.flowLoginDebugButtons) {
                 if (it) setVisible() else setGone()
             }
-        }.also { viewModel.helperButtonsVisible.observe(this@LoginFragment, it) }
+        }
     }
 
     /**
@@ -109,7 +103,7 @@ class LoginFragment :
      */
     private fun setLoginPasswordFocusListeners() {
         with(binding) {
-           textInputLoginEmailField.setOnFocusChangeListener { _, focused ->
+            textInputLoginEmailField.setOnFocusChangeListener { _, focused ->
                 if (focused && !viewModel.emailAlreadyFocused) {
                     viewModel.emailAlreadyFocused = true
                 } else if (!focused && viewModel.emailAlreadyFocused) {
@@ -290,12 +284,6 @@ class LoginFragment :
         }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        viewModel.loginScreen.removeObserver(uiObserver)
-        viewModel.helperButtonsVisible.removeObserver(helpersObserver)
-    }
-
     companion object {
         /**
          * Constants.
@@ -303,5 +291,4 @@ class LoginFragment :
         const val TEST_LOGIN = "viktor.manza@gmail.com"
         private const val TEST_PASSWORD = "passwordE3@a"
     }
-
 }
