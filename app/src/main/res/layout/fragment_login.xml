@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/colorSecondary"
-    tools:context=".presentation.auth.AuthActivity">
+    tools:context=".ui.auth.AuthActivity">
 
     <!-- Guide of center of elements. -->
     <androidx.constraintlayout.widget.Guideline
@@ -178,7 +178,7 @@
 <!--        android:background="@drawable/btn_google"-->
 <!--        tools:ignore="MissingConstraints,TouchTargetSizeCheck,SpeakableTextPresentCheck,VisualLintButtonSize" />-->
 
-    <com.vikmanz.shpppro.presentation.utils.CustomGoogleButton
+    <com.vikmanz.shpppro.ui.utils.CustomGoogleButton
         android:id="@+id/button_login_registerByGoogle"
         android:layout_width="0dp"
         android:layout_height="@dimen/size_buttonHeight_M"

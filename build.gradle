@@ -1,6 +1,7 @@
 buildscript {
 
     ext.nav_version = "2.5.3"
+    ext.nav_plugin_version = "2.6.0-rc01"
     ext.hilt_version = "2.46.1"
 
     repositories {
@@ -9,7 +10,7 @@ buildscript {
     }
 
     dependencies {
-        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"     // navigation
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_plugin_version"     // navigation
         classpath "com.google.dagger:hilt-android-gradle-plugin:$hilt_version"              // hilt
     }
 }
