@@ -3,9 +3,8 @@ package com.vikmanz.shpppro.ui.main.my_profile
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.navArgs
 import com.vikmanz.shpppro.R
-import com.vikmanz.shpppro.base.BaseFragmentWithArgs
+import com.vikmanz.shpppro.base.BaseFragment
 import com.vikmanz.shpppro.data.utils.EmailParser
 import com.vikmanz.shpppro.databinding.FragmentMyProfileBinding
 import com.vikmanz.shpppro.ui.auth.AuthActivity
@@ -14,9 +13,8 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MyProfileFragment :
-    BaseFragmentWithArgs<FragmentMyProfileBinding, MyProfileViewModel, MyProfileFragmentArgs>(FragmentMyProfileBinding::inflate) {
+    BaseFragment<FragmentMyProfileBinding, MyProfileViewModel>(FragmentMyProfileBinding::inflate) {
 
-    override val args: MyProfileFragmentArgs by navArgs()
     override val viewModel: MyProfileViewModel by viewModels()
 
     override fun onReady(savedInstanceState: Bundle?) {

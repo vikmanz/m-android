@@ -2,19 +2,17 @@ package com.vikmanz.shpppro.ui.main.contact_details
 
 import android.os.Bundle
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.navArgs
-import com.vikmanz.shpppro.base.BaseFragmentWithArgs
+import com.vikmanz.shpppro.base.BaseFragment
 import com.vikmanz.shpppro.databinding.FragmentContactDetailsBinding
 import com.vikmanz.shpppro.ui.utils.extensions.setImageWithGlide
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class ContactDetailsFragment :
-    BaseFragmentWithArgs<FragmentContactDetailsBinding, ContactDetailsViewModel, ContactDetailsFragmentArgs>(
+    BaseFragment<FragmentContactDetailsBinding, ContactDetailsViewModel>(
         FragmentContactDetailsBinding::inflate
     ) {
 
-    override val args: ContactDetailsFragmentArgs by navArgs()
     override val viewModel: ContactDetailsViewModel by viewModels()
 
     override fun onReady(savedInstanceState: Bundle?) {

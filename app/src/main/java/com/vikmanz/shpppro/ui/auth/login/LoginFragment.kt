@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.provider.Settings
 import android.util.Patterns
+import android.view.View
 import androidx.fragment.app.viewModels
 import com.vikmanz.shpppro.R
 import com.vikmanz.shpppro.base.BaseFragment
@@ -252,9 +253,9 @@ class LoginFragment :
             }
 
             // Language change button listener.
-            buttonLoginChangeLanguage.setOnClickListener {
-                goToChangeLanguage()
-            }
+//            buttonLoginChangeLanguage.setOnClickListener {
+//                goToChangeLanguage()
+//            }
         }
     }
 
@@ -262,7 +263,7 @@ class LoginFragment :
     /**
      *  Open device language settings.
      */
-    private fun goToChangeLanguage() {
+    private fun goaToChangeLanguage() {
         val intent = Intent(Settings.ACTION_LOCALE_SETTINGS)
         with(intent) {
             addCategory(Intent.CATEGORY_DEFAULT)
@@ -280,7 +281,18 @@ class LoginFragment :
         root.setOnClickListener {
             textInputLoginEmailField.clearFocus()
             textInputLoginPasswordField.clearFocus()
-            hideKeyboard(root)
+            hideKeyboard(it)
+        }
+    }
+
+    fun goToChangeLanguage(view: View) {
+        val intent = Intent(Settings.ACTION_LOCALE_SETTINGS)
+        with(intent) {
+            addCategory(Intent.CATEGORY_DEFAULT)
+            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
+            addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS)
+            startActivity(this)
         }
     }
 
@@ -291,4 +303,5 @@ class LoginFragment :
         const val TEST_LOGIN = "viktor.manza@gmail.com"
         private const val TEST_PASSWORD = "passwordE3@a"
     }
+
 }

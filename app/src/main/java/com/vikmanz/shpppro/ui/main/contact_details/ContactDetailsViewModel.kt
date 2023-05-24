@@ -1,6 +1,7 @@
 package com.vikmanz.shpppro.ui.main.contact_details
 
-import com.vikmanz.shpppro.base.BaseViewModelWithArgs
+import androidx.lifecycle.SavedStateHandle
+import com.vikmanz.shpppro.base.BaseViewModel
 import com.vikmanz.shpppro.data.contact_model.Contact
 import com.vikmanz.shpppro.data.repository.interfaces.Repository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -8,22 +9,23 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ContactDetailsViewModel @Inject constructor(
-    contactsRepository: Repository<Contact>
-) : BaseViewModelWithArgs<ContactDetailsFragmentArgs>() {
+    contactsRepository: Repository<Contact>,
+    savedStateHandle: SavedStateHandle
+) : BaseViewModel() {
 
-    private val contact: Contact by lazy {
-        contactsRepository.findContact(args.contactID)
+    private val navArgs = ContactDetailsFragmentArgs.fromSavedStateHandle(savedStateHandle)
+
+    private val contact =
+        contactsRepository.findContact(navArgs.contactID)
             ?: contactsRepository.generateRandomContact()
-    }
 
-    val contactName by lazy { contact.contactName }
-    val contactCareer by lazy { contact.contactCareer }
-    val contactAddress by lazy { contact.contactAddress }
-    val contactPhoto by lazy { contact.contactPhotoLink }
+    val contactName = contact.contactName
+    val contactCareer = contact.contactCareer
+    val contactAddress = contact.contactAddress
+    val contactPhoto = contact.contactPhotoLink
 
     fun onButtonBackPressed() {
         navigateBack()
     }
-
 
 }
