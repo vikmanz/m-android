@@ -30,6 +30,7 @@ android {
     // ViewBinding
     buildFeatures {
         viewBinding = true
+    //    dataBinding = true
     }
 
     // Hilt uses Java VERSION_1_8 but kaptGenerateStubsDebugKotlin use VERSION_18
