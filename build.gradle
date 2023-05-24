@@ -2,7 +2,7 @@ buildscript {
 
     ext.nav_version = "2.5.3"
     ext.nav_plugin_version = "2.6.0-rc01"
-    ext.hilt_version = "2.46.1"
+    ext.hilt_version = '2.46.1'
 
     repositories {
         google()
@@ -19,4 +19,9 @@ plugins {
     id 'com.android.application' version '8.0.1' apply false                    // core
     id 'com.android.library' version '8.0.1' apply false                        // core
     id 'org.jetbrains.kotlin.android' version '1.8.20-RC2' apply false          // core
+}
+
+ext {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
 }

@@ -1,13 +1,11 @@
 package com.vikmanz.shpppro.data.repository
 
-import android.content.Context
 import android.net.Uri
 import com.github.javafaker.Faker
 import com.vikmanz.shpppro.constants.Constants.START_NUMBER_OF_CONTACTS
 import com.vikmanz.shpppro.data.contact_model.Contact
 import com.vikmanz.shpppro.data.repository.interfaces.Repository
 import com.vikmanz.shpppro.data.utils.ContactsPhoneInfoTaker
-import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import java.net.URL
@@ -19,7 +17,6 @@ import javax.inject.Inject
  * Main service to create contacts objects from information on from random.
  */
 class ContactsRepository @Inject constructor(
-    @ApplicationContext applicationContext: Context
 ) : Repository<Contact> {
 
     //This object is a wrapper. if we pass it a new object it will call emit
