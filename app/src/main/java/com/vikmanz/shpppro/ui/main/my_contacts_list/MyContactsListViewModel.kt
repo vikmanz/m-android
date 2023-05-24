@@ -1,11 +1,13 @@
 package com.vikmanz.shpppro.ui.main.my_contacts_list
 
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.vikmanz.shpppro.base.BaseViewModel
 import com.vikmanz.shpppro.data.contact_model.Contact
 import com.vikmanz.shpppro.data.repository.interfaces.Repository
 import com.vikmanz.shpppro.utilits.extensions.swapBoolean
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 // FakeData (true) or PhoneData (false) view first on myContacts
@@ -74,12 +76,14 @@ class MyContactsListViewModel @Inject constructor(
      * Change contact list to fake contacts list.
      */
     fun getContactsList() {
-        if (fakeListActivated.value == true){
-            _repository.setPhoneContacts()
-        } else {
-            _repository.setFakeContacts()
+        viewModelScope.launch {
+            if (fakeListActivated.value == true){
+                _repository.setPhoneContacts()
+            } else {
+                _repository.setFakeContacts()
+            }
+            fakeListActivated.swapBoolean()
         }
-        fakeListActivated.swapBoolean()
     }
 
     fun onContactPressed(contactID: Long) {
