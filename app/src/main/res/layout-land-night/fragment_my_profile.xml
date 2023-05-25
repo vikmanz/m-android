@@ -17,7 +17,7 @@
     <!-- Top half of screen. -->
     <View
         android:id="@+id/guideLine_myProfile_bgTopHalf"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="?attr/colorSecondary"
         app:layout_constraintBottom_toTopOf="@id/guideLine_myProfile_bgCenterOfScreen"
@@ -28,7 +28,7 @@
     <!-- Settings and Logout flow. -->
     <androidx.constraintlayout.helper.widget.Flow
         android:id="@+id/flow_myProfile_topButtons"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/offset_M"
         android:layout_marginTop="@dimen/offset_M"
@@ -180,10 +180,12 @@
     <!-- Down half of screen. -->
     <!-- Edit Profile and View Contacts buttons flow. -->
     <View
-        android:id="@+id/guideLine_myProfile_bgBottomHalf"
-        android:layout_width="match_parent"
+        android:id="@+id/view_myProfile_bgBottomHalf"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="?attr/colorTertiary"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/guideLine_myProfile_bgTopHalf"
         app:layout_constraintVertical_bias="0.0" />
