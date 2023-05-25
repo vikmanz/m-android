@@ -16,8 +16,7 @@ class ContactDetailsViewModel @Inject constructor(
     private val navArgs = ContactDetailsFragmentArgs.fromSavedStateHandle(savedStateHandle)
 
     private val contact =
-        contactsRepository.findContact(navArgs.contactID)
-            ?: contactsRepository.generateRandomContact()
+        requireNotNull(contactsRepository.findContact(navArgs.contactID))
 
     val contactName = contact.contactName
     val contactCareer = contact.contactCareer

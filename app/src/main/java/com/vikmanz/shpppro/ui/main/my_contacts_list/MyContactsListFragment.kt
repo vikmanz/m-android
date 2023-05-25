@@ -1,10 +1,7 @@
 package com.vikmanz.shpppro.ui.main.my_contacts_list
 
 import android.Manifest.permission.READ_CONTACTS
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
-import android.provider.Settings
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
@@ -31,22 +28,49 @@ import com.vikmanz.shpppro.ui.utils.extensions.setMultipleVisible
 import com.vikmanz.shpppro.ui.utils.extensions.setVisible
 import com.vikmanz.shpppro.ui.utils.recycler_view_decoration.MarginItemDecoration
 import com.vikmanz.shpppro.ui.utils.recycler_view_decoration.SwipeToDeleteCallback
+import com.vikmanz.shpppro.utilits.extensions.startDeclineAccessActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+
+private const val ADD_CONTACT_DIALOG_TAG = "ConfirmationDialogFragmentTag"
 
 /**
  * Class represents MyContacts screen activity.
  */
 @AndroidEntryPoint
 class MyContactsListFragment :
-    BaseFragment<FragmentMyContactsListBinding, MyContactsListViewModel>(FragmentMyContactsListBinding::inflate) {
-
+    BaseFragment<FragmentMyContactsListBinding, MyContactsListViewModel>(
+        FragmentMyContactsListBinding::inflate
+    ) {
 
     override val viewModel: MyContactsListViewModel by viewModels()
 
     private var undo: Snackbar? = null
 
-    private var deletedContact: Contact? = null     //TODO move in viewModel
+    /**
+     * Create adapter for contacts recycler view.
+     */
+    private val adapter: ContactsAdapter by lazy {
+        ContactsAdapter(contactActionListener = object : ContactActionListener {
+            override fun onTapUser(contactID: Long) {
+                viewModel.onContactPressed(contactID)
+            }
+
+            override fun onDeleteUser(contact: Contact) {
+                deleteContactWithUndo(contact)
+            }
+        })
+    }
+
+    /**
+     * Register activity for request permission for read contacts from phonebook.
+     */
+    private val requestPermissionLauncher =                         // req permissions
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) {
+            if (it) changeContactsList()                          // if yes set phone contacts
+            else OnDeclinePermissionDialogFragment()                // if no show warning
+                .show(parentFragmentManager, ADD_CONTACT_DIALOG_TAG)
+        }
 
     /**
      * Set listeners for buttons.
@@ -54,7 +78,7 @@ class MyContactsListFragment :
     override fun setListeners() {
         with(binding) {
             buttonMyContactsBackButton.setOnClickListener { viewModel.onButtonBackPressed() }
-            buttonMyContactsDeclineAccess.setOnClickListener { buttonToRemoveAccess() }
+            buttonMyContactsDeclineAccess.setOnClickListener { startDeclineAccessActivity() }
             buttonMyContactsAddContact.setOnClickListener { addNewContact() }
             buttonMyContactsAddContactsFromPhonebook.setOnClickListener { requestReadContactsPermission() }
             buttonMyContactsAddContactsFromFaker.setOnClickListener { changeContactsList() }
@@ -124,41 +148,20 @@ class MyContactsListFragment :
         initSwipeToDelete()
     }
 
-    /**
-     * Create adapter for contacts recycler view.
-     */
-    private val adapter: ContactsAdapter by lazy {
-        ContactsAdapter(contactActionListener = object : ContactActionListener {
-            override fun onTapUser(contactID: Long) {
-                viewModel.onContactPressed(contactID)
-            }
 
-            override fun onDeleteUser(contact: Contact) {
-                // take contact from ContactsAdapter and delete it from ViewModel.
-               if (contact != deletedContact) deleteContactFromViewModelWithUndo(contact)
-            }
-        })
+    private fun deleteContactWithUndo(contact: Contact) {
+        if (viewModel.deleteContact(contact)) createUndo()
     }
-
 
     /**
      * Delete contact from ViewModel and show Undo to restore it.
      */
-    private fun deleteContactFromViewModelWithUndo(contact: Contact) {
-        deletedContact = contact                                //TODO move in viewModel
-        val position = viewModel.getContactPosition(contact)
-        viewModel.deleteContact(contact)
+    private fun createUndo() {
         undo = Snackbar
             .make(binding.root, getString(R.string.my_contacts_remove_contact), SNACK_BAR_VIEW_TIME)
             .setAction(getString(R.string.my_contacts_remove_contact_undo)) {
-                if (!viewModel.isContainsContact(contact)) {        //TODO move in viewModel
-                    viewModel.addContactToPosition(
-                        contact,
-                        position
-                    )
-                    deletedContact = null
-                    undo?.dismiss()
-                }
+                viewModel.restoreLastDeletedContact()
+                undo?.dismiss()
             }
         undo?.show()
     }
@@ -169,8 +172,8 @@ class MyContactsListFragment :
     private fun initSwipeToDelete() {
         val swipeHandler = object : SwipeToDeleteCallback(requireContext()) {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                val position = viewHolder.adapterPosition                                       //TODO move in delete?
-                viewModel.getContact(position)?.let { deleteContactFromViewModelWithUndo(it) }
+                val position = viewHolder.adapterPosition
+                viewModel.getContact(position)?.let { deleteContactWithUndo(it) }
             }
         }
         val itemTouchHelper = ItemTouchHelper(swipeHandler)
@@ -183,7 +186,7 @@ class MyContactsListFragment :
      */
     private fun addNewContact() {
         AddContactDialogFragment()
-            .show(parentFragmentManager, "ConfirmationDialogFragmentTag")
+            .show(parentFragmentManager, ADD_CONTACT_DIALOG_TAG)
     }
 
     /**
@@ -194,44 +197,16 @@ class MyContactsListFragment :
     }
 
     /**
-     * Register activity for request permission for read contacts from phonebook.
-     */
-    private val requestPermissionLauncher =                         // req permissions
-        registerForActivityResult(ActivityResultContracts.RequestPermission()) {
-            if (it) changeContactsList()                          // if yes set phone contacts
-            else OnDeclinePermissionDialogFragment()                // if no show warning
-                .show(parentFragmentManager, "ConfirmationDialogFragmentTag")
-        }
-
-    /**
      * Set contacts to phonebook or back to fake list.
      */
     private fun changeContactsList() {
-        viewModel.getContactsList()
+        viewModel.changeContactList()
         undo?.dismiss()
     }
-
-    /**
-     * Button to open application settings to change permission.
-     */
-    private fun buttonToRemoveAccess() {
-        val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
-        with(intent) {
-            data = Uri.fromParts("package", requireContext().packageName, null)
-            addCategory(Intent.CATEGORY_DEFAULT)
-            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
-            addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS)
-        }
-        startActivity(intent)
-    }
-
 
     override fun onDestroyView() {
         super.onDestroyView()
-        deletedContact = null
         undo?.dismiss()
         undo = null
     }
-
 }

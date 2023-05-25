@@ -1,15 +1,12 @@
 package com.vikmanz.shpppro.ui.auth.login
 
 import android.app.AlertDialog
-import android.content.Intent
-import android.provider.Settings
 import android.util.Patterns
 import androidx.fragment.app.viewModels
 import com.vikmanz.shpppro.R
 import com.vikmanz.shpppro.base.BaseFragment
 import com.vikmanz.shpppro.data.utils.PasswordErrorsChecker.checkPasswordErrors
 import com.vikmanz.shpppro.databinding.FragmentLoginBinding
-import com.vikmanz.shpppro.ui.utils.CustomGoogleButton
 import com.vikmanz.shpppro.ui.utils.extensions.clearError
 import com.vikmanz.shpppro.ui.utils.extensions.setGone
 import com.vikmanz.shpppro.ui.utils.extensions.setInvisible
@@ -17,6 +14,7 @@ import com.vikmanz.shpppro.ui.utils.extensions.setMultipleGone
 import com.vikmanz.shpppro.ui.utils.extensions.setMultipleVisible
 import com.vikmanz.shpppro.ui.utils.extensions.setVisible
 import com.vikmanz.shpppro.utilits.extensions.hideKeyboard
+import com.vikmanz.shpppro.utilits.extensions.startChangeLanguageActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -29,9 +27,7 @@ class LoginFragment :
         with(binding) {
             buttonLoginRegisterByEmail.setOnClickListener { checkForm() }
             textViewLoginSwitchScreenToLoginButton.setOnClickListener { viewModel.swapLoginAndRegister() }
-            buttonLoginRegisterByGoogle.setOnClickListener {
-                (buttonLoginRegisterByGoogle as CustomGoogleButton).setFunText()
-            }
+            buttonLoginRegisterByGoogle.setOnClickListener { buttonLoginRegisterByGoogle.setFunText() }
         }
         initHelpTesterButtons()
         setLoginPasswordFocusListeners()        // Listeners to fields and buttons.
@@ -251,24 +247,7 @@ class LoginFragment :
                 checkboxLoginRememberMe.isChecked = false
             }
 
-            buttonLoginChangeLanguage.setOnClickListener {
-                goToChangeLanguage()
-            }
-        }
-    }
-
-
-    /**
-     *  Open device language settings.
-     */
-    private fun goToChangeLanguage() {
-        val intent = Intent(Settings.ACTION_LOCALE_SETTINGS)
-        with(intent) {
-            addCategory(Intent.CATEGORY_DEFAULT)
-            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
-            addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS)
-            startActivity(this)
+            buttonLoginChangeLanguage.setOnClickListener { startChangeLanguageActivity() }
         }
     }
 

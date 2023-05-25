@@ -16,7 +16,7 @@ import javax.inject.Inject
  * Implementation of repository.
  * Main service to create contacts objects from information on from random.
  */
-class ContactsRepository @Inject constructor(
+class ContactsRepositoryImpl @Inject constructor(
 ) : Repository<Contact> {
 
     //This object is a wrapper. if we pass it a new object it will call emit

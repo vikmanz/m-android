@@ -1,13 +1,11 @@
 package com.vikmanz.shpppro.ui.main.my_contacts_list
 
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
 import com.vikmanz.shpppro.base.BaseViewModel
 import com.vikmanz.shpppro.data.contact_model.Contact
 import com.vikmanz.shpppro.data.repository.interfaces.Repository
 import com.vikmanz.shpppro.utilits.extensions.swapBoolean
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 // FakeData (true) or PhoneData (false) view first on myContacts
@@ -22,6 +20,9 @@ class MyContactsListViewModel @Inject constructor(
 ) : BaseViewModel() {
 
     private val _repository = contactsRepository
+
+    private var lastDeletedContact: Contact? = null
+    private var lastDeletedPosition: Int = 0
 
     init {
         _repository.setFakeContacts()
@@ -38,52 +39,45 @@ class MyContactsListViewModel @Inject constructor(
     val fakeListActivated = MutableLiveData(FAKE_LIST_FIRST)
 
     /**
-     * Add new contact to list of contacts to concrete index.
+     * Delete contact from list of contacts.
      */
-    fun addContactToPosition(contact: Contact, index: Int) {
-        _repository.addContact(contact, index)
+    fun deleteContact(contact: Contact): Boolean {
+        if (contact == lastDeletedContact) return false
+        lastDeletedContact = contact
+        lastDeletedPosition = getContactPosition(contact)
+        _repository.deleteContact(contact)
+        return true
     }
 
     /**
      * Delete contact from list of contacts.
      */
-    fun deleteContact(contact: Contact) {
-        _repository.deleteContact(contact)
-    }
-
-    /**
-     * Get contact position in list of contacts.
-     */
-    fun getContactPosition(contact: Contact) : Int {
-        return _repository.getContactPosition(contact)
+    fun restoreLastDeletedContact() {
+        lastDeletedContact?.let {
+            if (!_repository.isContainsContact(it)) {
+                addContactToPosition(it, lastDeletedPosition)
+                lastDeletedContact = null
+            }
+        }
     }
 
     /**
      * Get contact from list via index.
      */
-    fun getContact(index: Int) : Contact? {
+    fun getContact(index: Int): Contact? {
         return _repository.getContact(index)
-    }
-
-    /**
-     * Get contact from list via index.
-     */
-    fun isContainsContact(contact: Contact) : Boolean {
-        return _repository.isContainsContact(contact)
     }
 
     /**
      * Change contact list to fake contacts list.
      */
-    fun getContactsList() {
-        viewModelScope.launch {
-            if (fakeListActivated.value == true){
-                _repository.setPhoneContacts()
-            } else {
-                _repository.setFakeContacts()
-            }
-            fakeListActivated.swapBoolean()
+    fun changeContactList() {
+        if (fakeListActivated.value == true) {
+            _repository.setPhoneContacts()
+        } else {
+            _repository.setFakeContacts()
         }
+        fakeListActivated.swapBoolean()
     }
 
     fun onContactPressed(contactID: Long) {
@@ -92,5 +86,19 @@ class MyContactsListViewModel @Inject constructor(
 
     fun onButtonBackPressed() {
         navigateBack()
+    }
+
+    /**
+     * Get contact position in list of contacts.
+     */
+    private fun getContactPosition(contact: Contact): Int {
+        return _repository.getContactPosition(contact)
+    }
+
+    /**
+     * Add new contact to list of contacts to concrete index.
+     */
+    private fun addContactToPosition(contact: Contact, index: Int) {
+        _repository.addContact(contact, index)
     }
 }
