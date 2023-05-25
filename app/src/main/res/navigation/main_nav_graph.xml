@@ -14,18 +14,22 @@
             android:name="email"
             app:argType="string"
             android:defaultValue="login.fromnavigator@gmail.com"/>
-    </fragment>
-
-
-    <fragment
-        android:id="@+id/myContactsFragment"
-        android:name="com.vikmanz.shpppro.ui.main.main_fragment.my_contacts_list.MyContactsListFragment"
-        android:label="fragment_my_contacts"
-        tools:layout="@layout/fragment_my_contacts_list">
         <action
-            android:id="@+id/action_myContactsFragment_to_contactDetailsFragment"
+            android:id="@+id/startContactDetails"
             app:destination="@id/contactDetailsFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.vikmanz.shpppro.ui.main.main_fragment.my_profile.MyProfileFragment"
+        android:label="fragment_my_profile"
+        tools:layout="@layout/fragment_my_profile">
+        <argument
+            android:name="email"
+            app:argType="string"
+            android:defaultValue="login.fromnavigator@gmail.com"/>
+    </fragment>
+
 
     <fragment
         android:id="@+id/contactDetailsFragment"

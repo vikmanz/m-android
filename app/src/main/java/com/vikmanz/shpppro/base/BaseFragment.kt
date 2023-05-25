@@ -17,7 +17,7 @@ abstract class BaseFragment<VBinding : ViewBinding, VM : BaseViewModel>(
     protected abstract val viewModel: VM
 
     private var _binding: VBinding? = null
-    protected open val binding get() = requireNotNull(_binding)
+    protected val binding get() = requireNotNull(_binding)
 
     protected open fun setListeners() {}
     protected open fun setObservers() {}

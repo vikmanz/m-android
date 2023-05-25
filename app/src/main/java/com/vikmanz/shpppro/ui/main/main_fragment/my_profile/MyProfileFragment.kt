@@ -7,6 +7,7 @@ import com.vikmanz.shpppro.base.BaseFragment
 import com.vikmanz.shpppro.data.utils.EmailParser
 import com.vikmanz.shpppro.databinding.FragmentMyProfileBinding
 import com.vikmanz.shpppro.ui.auth.AuthActivity
+import com.vikmanz.shpppro.ui.main.main_fragment.MainViewPagerFragment
 import com.vikmanz.shpppro.ui.utils.extensions.setImageWithGlide
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -28,9 +29,6 @@ class MyProfileFragment :
         }
     }
 
-    fun setEmail(email: String) {
-        viewModel.setEmail(email)
-    }
     /**
      * Get full email, parse it and set name/surname of user.
      */
@@ -76,7 +74,7 @@ class MyProfileFragment :
      * Start My contacts activity.
      */
     private fun goToMyContacts() {
-        viewModel.onMyContactsPressed()
+        (parentFragment as MainViewPagerFragment).viewPager.currentItem = 1 //todo enum
     }
 
 }

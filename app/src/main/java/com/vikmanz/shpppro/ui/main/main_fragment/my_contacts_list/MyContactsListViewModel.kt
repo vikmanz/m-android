@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import com.vikmanz.shpppro.base.BaseViewModel
 import com.vikmanz.shpppro.data.contact_model.Contact
 import com.vikmanz.shpppro.data.repository.interfaces.Repository
+import com.vikmanz.shpppro.ui.main.main_fragment.MainViewPagerFragmentDirections
 import com.vikmanz.shpppro.utilits.extensions.swapBoolean
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -81,7 +82,7 @@ class MyContactsListViewModel @Inject constructor(
     }
 
     fun onContactPressed(contactID: Long) {
-        //navigate(MyContactsListFragmentDirections.startContactDetails(contactID))
+        navigate(MainViewPagerFragmentDirections.startContactDetails(contactID))
     }
 
     fun onButtonBackPressed() {

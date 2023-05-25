@@ -17,11 +17,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
      * Add safe args to start destination fragment.
      */
     override fun setIncomingArguments() {
-//        log("set incoming args")
-//        val navHostFragment =
-//            supportFragmentManager.findFragmentById(R.id.mainFragmentContainer) as NavHostFragment
-//        val navController = navHostFragment.navController
-//        navController.setGraph(R.navigation.main_nav_graph, intent.extras)
+        log("set incoming args")
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.mainFragmentContainer) as NavHostFragment
+        val navController = navHostFragment.navController
+        navController.setGraph(R.navigation.main_nav_graph, intent.extras)
     }
 
 }

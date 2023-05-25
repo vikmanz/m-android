@@ -3,6 +3,7 @@ package com.vikmanz.shpppro.ui.main.main_fragment.my_contacts_list
 import android.Manifest.permission.READ_CONTACTS
 import android.os.Bundle
 import android.view.View
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -18,6 +19,7 @@ import com.vikmanz.shpppro.constants.Constants.MARGINS_OF_ELEMENTS
 import com.vikmanz.shpppro.constants.Constants.SNACK_BAR_VIEW_TIME
 import com.vikmanz.shpppro.data.contact_model.Contact
 import com.vikmanz.shpppro.databinding.FragmentMyContactsListBinding
+import com.vikmanz.shpppro.ui.main.main_fragment.MainViewPagerFragment
 import com.vikmanz.shpppro.ui.main.main_fragment.my_contacts_list.adapter.ContactsAdapter
 import com.vikmanz.shpppro.ui.main.main_fragment.my_contacts_list.adapter.listeners.ContactActionListener
 import com.vikmanz.shpppro.ui.main.main_fragment.my_contacts_list.add_contact.AddContactDialogFragment
@@ -77,12 +79,16 @@ class MyContactsListFragment :
      */
     override fun setListeners() {
         with(binding) {
-            buttonMyContactsBackButton.setOnClickListener { viewModel.onButtonBackPressed() }
+            buttonMyContactsBackButton.setOnClickListener { onButtonBackPressed() }
             buttonMyContactsDeclineAccess.setOnClickListener { startDeclineAccessActivity() }
             buttonMyContactsAddContact.setOnClickListener { addNewContact() }
             buttonMyContactsAddContactsFromPhonebook.setOnClickListener { requestReadContactsPermission() }
             buttonMyContactsAddContactsFromFaker.setOnClickListener { changeContactsList() }
         }
+    }
+
+    private fun onButtonBackPressed() {         //todo extension
+      (parentFragment as MainViewPagerFragment).viewPager.currentItem = 0
     }
 
     /**

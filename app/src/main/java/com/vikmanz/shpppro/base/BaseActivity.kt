@@ -14,7 +14,7 @@ abstract class BaseActivity<VBinding : ViewBinding>(
     AppCompatActivity() {
 
     private var _binding: VBinding? = null
-    val binding get() = requireNotNull(_binding)
+    protected val binding get() = requireNotNull(_binding)
 
     protected open fun setIncomingArguments() {}
 

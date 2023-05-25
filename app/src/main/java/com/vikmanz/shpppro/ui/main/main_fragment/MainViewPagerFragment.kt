@@ -1,7 +1,10 @@
 package com.vikmanz.shpppro.ui.main.main_fragment
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.viewpager2.adapter.FragmentStateAdapter
@@ -24,27 +27,45 @@ class MainViewPagerFragment :
 
     override val viewModel: MainViewPagerFragmentViewModel by viewModels()
 
-    private lateinit var viewPager: ViewPager2
+    lateinit var viewPager: ViewPager2
 
-//    override fun initUI() {
+
+    override fun setListeners() {
+       onBackPressedListener()
+    }
+
     override fun onReady() {
         log("after create fragment view")
 
-//        val viewPager = binding.pager
-//        val adapter = MainViewPagerFragmentStateAdapter(this)
-//        viewPager.adapter = adapter
+        viewPager = binding.pager
+        val adapter = MainViewPagerFragmentStateAdapter(this)
+        viewPager.adapter = adapter
 
-//        val tabLayout = binding.tabLayout
-//        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
-//            tab.text = when (position) {
-//                0 -> "MyProfileFragment"
-//                else -> "MyContactsListFragment"
-//            }
-//        }.attach()
+        val tabLayout = binding.tabLayout
+        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+            tab.text = when (position) {
+                0 -> "MyProfileFragment"
+                else -> "MyContactsListFragment"
+            }
+        }.attach()
 
-        log("${binding}")
+    }
 
-        log("place adapter")
+    fun onBackPressedListener() {
+        requireActivity()
+            .onBackPressedDispatcher
+            .addCallback(this, object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    if (viewPager.currentItem == 0) {
+                        // If the user is currently looking at the first step, allow the system to handle
+                        // the Back button. This calls finish() on this activity and pops the back stack.
+                        requireActivity().onBackPressed()       //todo navigation + crash
+                    } else {
+                        // Otherwise, select the previous step.
+                        viewPager.currentItem = viewPager.currentItem - 1
+                    }
+                }
+            })
     }
 
     inner class MainViewPagerFragmentStateAdapter(f: MainViewPagerFragment) :
@@ -56,10 +77,9 @@ class MainViewPagerFragment :
             return when (position) {
                 0 -> {
                     val fragment = MyProfileFragment()
-                    fragment.setEmail("sample.pager@gmail.com")
+                    fragment.arguments = arguments
                     fragment
                 }
-
                 1 -> MyContactsListFragment()
                 else -> throw IllegalStateException()
             }
