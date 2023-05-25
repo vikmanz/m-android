@@ -1,4 +1,4 @@
-package com.vikmanz.shpppro.ui.main.my_contacts_list.add_contact
+package com.vikmanz.shpppro.ui.main.main_fragment.my_contacts_list.add_contact
 
 import android.net.Uri
 import androidx.lifecycle.MutableLiveData

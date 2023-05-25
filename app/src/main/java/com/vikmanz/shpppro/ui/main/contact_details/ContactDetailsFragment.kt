@@ -1,6 +1,5 @@
 package com.vikmanz.shpppro.ui.main.contact_details
 
-import android.os.Bundle
 import androidx.fragment.app.viewModels
 import com.vikmanz.shpppro.base.BaseFragment
 import com.vikmanz.shpppro.databinding.FragmentContactDetailsBinding
@@ -15,8 +14,7 @@ class ContactDetailsFragment :
 
     override val viewModel: ContactDetailsViewModel by viewModels()
 
-    override fun onReady(savedInstanceState: Bundle?) {
-        super.onReady(savedInstanceState)
+    override fun initUI() {
         with(binding) {
             textViewContactDetailsPersonName.text = viewModel.contactName
             textViewContactDetailsPersonCareer.text = viewModel.contactCareer

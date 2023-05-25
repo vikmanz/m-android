@@ -1,6 +1,5 @@
-package com.vikmanz.shpppro.ui.main.my_profile
+package com.vikmanz.shpppro.ui.main.main_fragment.my_profile
 
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.vikmanz.shpppro.base.BaseViewModel
 import com.vikmanz.shpppro.data.datastore.interfaces.MyPreferences
@@ -12,16 +11,19 @@ import javax.inject.Inject
 @HiltViewModel
 class MyProfileViewModel @Inject constructor(
     dataStore: MyPreferences,
-    savedStateHandle: SavedStateHandle
 ) : BaseViewModel() {
 
-    private val navArgs = MyProfileFragmentArgs.fromSavedStateHandle(savedStateHandle)
+    //private val navArgs = MainViewPagerFragmentArgs.fromSavedStateHandle(savedStateHandle)
     private val _dataStore = dataStore
 
-    val userEmail = navArgs.email
+    var userEmail = "" //navArgs.email
+
+    fun setEmail(email: String) {
+        userEmail = email
+    }
 
     fun onMyContactsPressed() {
-        navigate(MyProfileFragmentDirections.startMyContacts())
+       // navigate(MyProfileFragmentDirections.startMyContacts())
     }
 
     fun clearSavedUserData() {

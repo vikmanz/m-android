@@ -18,7 +18,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainer) as NavHostFragment
+        // Place SafeArgs from this activity to fragment.
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.mainFragmentContainer) as NavHostFragment
         val navController = navHostFragment.navController
         navController
             .setGraph(R.navigation.main_nav_graph, intent.extras)

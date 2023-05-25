@@ -3,32 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_nav_graph"
-    app:startDestination="@id/myProfileFragment">
+    app:startDestination="@id/mainFragment">
 
     <fragment
-        android:id="@+id/myProfileFragment"
-        android:name="com.vikmanz.shpppro.ui.main.my_profile.MyProfileFragment"
-        android:label="fragment_my_profile"
+        android:id="@+id/mainFragment"
+        android:name="com.vikmanz.shpppro.ui.main.main_fragment.MainViewPagerFragment"
+        android:label="fragment_main"
         tools:layout="@layout/fragment_my_profile">
-        <action
-            android:id="@+id/startMyContacts"
-            app:destination="@id/myContactsFragment" />
         <argument
             android:name="email"
             app:argType="string"
             android:defaultValue="login.fromnavigator@gmail.com"/>
-    </fragment>
-
-
-    <fragment
-        android:id="@+id/myContactsFragment"
-        android:name="com.vikmanz.shpppro.ui.main.my_contacts_list.MyContactsListFragment"
-        android:label="fragment_my_contacts"
-        tools:layout="@layout/fragment_my_contacts_list">
         <action
             android:id="@+id/startContactDetails"
-            app:destination="@id/contactDetailsFragment">
-        </action>
+            app:destination="@id/contactDetailsFragment" />
     </fragment>
 
 

@@ -1,4 +1,4 @@
-package com.vikmanz.shpppro.ui.main.my_contacts_list
+package com.vikmanz.shpppro.ui.main.main_fragment.my_contacts_list
 
 import android.Manifest.permission.READ_CONTACTS
 import android.os.Bundle
@@ -18,10 +18,10 @@ import com.vikmanz.shpppro.constants.Constants.MARGINS_OF_ELEMENTS
 import com.vikmanz.shpppro.constants.Constants.SNACK_BAR_VIEW_TIME
 import com.vikmanz.shpppro.data.contact_model.Contact
 import com.vikmanz.shpppro.databinding.FragmentMyContactsListBinding
-import com.vikmanz.shpppro.ui.main.my_contacts_list.adapter.ContactsAdapter
-import com.vikmanz.shpppro.ui.main.my_contacts_list.adapter.listeners.ContactActionListener
-import com.vikmanz.shpppro.ui.main.my_contacts_list.add_contact.AddContactDialogFragment
-import com.vikmanz.shpppro.ui.main.my_contacts_list.decline_permision.OnDeclinePermissionDialogFragment
+import com.vikmanz.shpppro.ui.main.main_fragment.my_contacts_list.adapter.ContactsAdapter
+import com.vikmanz.shpppro.ui.main.main_fragment.my_contacts_list.adapter.listeners.ContactActionListener
+import com.vikmanz.shpppro.ui.main.main_fragment.my_contacts_list.add_contact.AddContactDialogFragment
+import com.vikmanz.shpppro.ui.main.main_fragment.my_contacts_list.decline_permision.OnDeclinePermissionDialogFragment
 import com.vikmanz.shpppro.ui.utils.extensions.setGone
 import com.vikmanz.shpppro.ui.utils.extensions.setMultipleInvisible
 import com.vikmanz.shpppro.ui.utils.extensions.setMultipleVisible

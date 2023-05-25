@@ -1,4 +1,4 @@
-package com.vikmanz.shpppro.ui.main.my_contacts_list.adapter.listeners
+package com.vikmanz.shpppro.ui.main.main_fragment.my_contacts_list.adapter.listeners
 
 import com.vikmanz.shpppro.data.contact_model.Contact
 
