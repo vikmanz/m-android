@@ -8,3 +8,43 @@
 //            viewPager.currentItem = viewPager.currentItem - 1
 //        }
 //    }
+
+
+
+    <!--<?xml version="1.0" encoding="utf-8"?>-->
+    <!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--    xmlns:tools="http://schemas.android.com/tools"-->
+    <!--    android:layout_width="match_parent"-->
+    <!--    android:layout_height="match_parent"-->
+    <!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+    <!--    android:orientation="vertical"-->
+    <!--    android:weightSum="1">-->
+
+    <!--    &lt;!&ndash;    <androidx.viewpager2.widget.ViewPager2&ndash;&gt;-->
+    <!--    &lt;!&ndash;        android:id="@+id/viewPager2_mainActivity"&ndash;&gt;-->
+    <!--    &lt;!&ndash;        android:layout_width="match_parent"&ndash;&gt;-->
+    <!--    &lt;!&ndash;        android:layout_height="0dp"&ndash;&gt;-->
+    <!--    &lt;!&ndash;        android:layout_weight="1"&ndash;&gt;-->
+    <!--    &lt;!&ndash;         />&ndash;&gt;-->
+
+    <!--    &lt;!&ndash;    <com.google.android.material.tabs.TabLayout&ndash;&gt;-->
+    <!--    &lt;!&ndash;        android:id="@+id/tabLayout_mainActivity"&ndash;&gt;-->
+    <!--    &lt;!&ndash;        android:layout_width="match_parent"&ndash;&gt;-->
+    <!--    &lt;!&ndash;        android:layout_height="0dp"/>&ndash;&gt;-->
+
+
+    <!--    <androidx.viewpager2.widget.ViewPager2-->
+    <!--        android:id="@+id/viewPager2_mainActivity"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="0dp" />-->
+
+    <!--    <com.google.android.material.tabs.TabLayout-->
+    <!--        android:id="@+id/tabLayout_mainActivity"-->
+    <!--        app:tabIndicatorColor="#000000"-->
+    <!--        app:tabIndicatorHeight="4dp"-->
+    <!--        app:tabMode="fixed"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        tools:ignore="SpeakableTextPresentCheck" />-->
+
+    <!--</LinearLayout>-->

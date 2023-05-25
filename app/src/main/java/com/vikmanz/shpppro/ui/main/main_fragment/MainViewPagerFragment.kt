@@ -1,5 +1,7 @@
 package com.vikmanz.shpppro.ui.main.main_fragment
 
+import android.os.Bundle
+import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.viewpager2.adapter.FragmentStateAdapter
@@ -24,11 +26,27 @@ class MainViewPagerFragment :
 
     private lateinit var viewPager: ViewPager2
 
-    override fun initUI() {
+//    override fun initUI() {
+//        log("after create fragment view")
+//        viewPager = binding.viewPager2MainActivity
+//        viewPager.adapter = MainViewPagerFragmentStateAdapter(parentFragmentManager, this.lifecycle)
+//        TabLayoutMediator(binding.tabLayoutMainActivity, viewPager) { tab, position ->
+//            tab.text = when (position) {
+//                0 -> "MyProfileFragment"
+//                else -> "MyContactsListFragment"
+//            }
+//        }.attach()
+//        log("place adapter")
+//    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         log("after create fragment view")
-        viewPager = binding.viewPager2MainActivity
-        viewPager.adapter = MainViewPagerFragmentStateAdapter(this@MainViewPagerFragment)
-        TabLayoutMediator(binding.tabLayoutMainActivity, viewPager) { tab, position ->
+        val viewPager = binding.pager
+        val adapter = MainViewPagerFragmentStateAdapter(this)
+        val tabLayout = binding.tabLayout
+        viewPager.adapter = adapter
+        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             tab.text = when (position) {
                 0 -> "MyProfileFragment"
                 else -> "MyContactsListFragment"
@@ -37,25 +55,26 @@ class MainViewPagerFragment :
         log("place adapter")
     }
 
-    override fun onResume() {
-        super.onResume()
-        log("on resume")
-        viewPager.currentItem = 5
-    }
+//    override fun onResume() {
+//        super.onResume()
+//        log("on resume")
+//        viewPager.currentItem = 5
+//    }
 
-    inner class MainViewPagerFragmentStateAdapter(f: Fragment) : FragmentStateAdapter(f) {
+    inner class MainViewPagerFragmentStateAdapter(f: MainViewPagerFragment) :
+        FragmentStateAdapter(f) {
         override fun getItemCount(): Int = NUM_PAGES
 
         override fun createFragment(position: Int): Fragment {
             log("create page fragment!")
             return when (position) {
-                1 -> {
+                0 -> {
                     val fragment = MyProfileFragment()
                     fragment.setEmail(viewModel.userEmail)
                     fragment
                 }
 
-                0 -> MyContactsListFragment()
+                1 -> MyContactsListFragment()
                 else -> throw IllegalStateException()
             }
         }
