@@ -37,15 +37,15 @@ abstract class BaseFragment<VBinding : ViewBinding, VM : BaseViewModel>(
         savedInstanceState: Bundle?
     ): View? {
         _binding = inflaterMethod.invoke(inflater, container, false)
-        setListeners()
-        setObservers()
-        observeNavigation()
-        initUI()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setListeners()
+        setObservers()
+        observeNavigation()
+        initUI()
         onReady()
     }
 

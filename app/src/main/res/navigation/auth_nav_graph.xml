@@ -8,7 +8,6 @@
     <fragment
         android:id="@+id/splashScreenFragment"
         android:name="com.vikmanz.shpppro.ui.auth.splash_screen.SplashScreenFragment"
-        android:label="SplashScreenFragment"
         tools:layout="@layout/fragment_splash_screen">
 
         <action
@@ -22,26 +21,24 @@
             app:destination="@id/mainActivity"
             app:popUpTo="@id/splashScreenFragment"
             app:popUpToInclusive="true">
-        </action>>
+        </action>
     </fragment>
 
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.vikmanz.shpppro.ui.auth.login.LoginFragment"
-        android:label="LoginFragment"
         tools:layout="@layout/fragment_login">
         <action
             android:id="@+id/startMainActivity"
             app:destination="@id/mainActivity"
             app:popUpTo="@id/splashScreenFragment"
             app:popUpToInclusive="true">
-    </action>>
+    </action>
     </fragment>
 
     <activity
         android:id="@+id/mainActivity"
         android:name="com.vikmanz.shpppro.ui.main.MainActivity"
-        android:label="activity_Main"
         tools:layout="@layout/fragment_my_profile">
 
         <argument

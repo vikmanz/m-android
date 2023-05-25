@@ -29,16 +29,21 @@ class MainViewPagerFragment :
 //    override fun initUI() {
     override fun onReady() {
         log("after create fragment view")
-        val viewPager = binding.pager
-        val adapter = MainViewPagerFragmentStateAdapter(this)
-        val tabLayout = binding.tabLayout
-        viewPager.adapter = adapter
-        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
-            tab.text = when (position) {
-                0 -> "MyProfileFragment"
-                else -> "MyContactsListFragment"
-            }
-        }.attach()
+
+//        val viewPager = binding.pager
+//        val adapter = MainViewPagerFragmentStateAdapter(this)
+//        viewPager.adapter = adapter
+
+//        val tabLayout = binding.tabLayout
+//        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+//            tab.text = when (position) {
+//                0 -> "MyProfileFragment"
+//                else -> "MyContactsListFragment"
+//            }
+//        }.attach()
+
+        log("${binding}")
+
         log("place adapter")
     }
 
