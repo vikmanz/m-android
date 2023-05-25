@@ -27,20 +27,7 @@ class MainViewPagerFragment :
     private lateinit var viewPager: ViewPager2
 
 //    override fun initUI() {
-//        log("after create fragment view")
-//        viewPager = binding.viewPager2MainActivity
-//        viewPager.adapter = MainViewPagerFragmentStateAdapter(parentFragmentManager, this.lifecycle)
-//        TabLayoutMediator(binding.tabLayoutMainActivity, viewPager) { tab, position ->
-//            tab.text = when (position) {
-//                0 -> "MyProfileFragment"
-//                else -> "MyContactsListFragment"
-//            }
-//        }.attach()
-//        log("place adapter")
-//    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onReady() {
         log("after create fragment view")
         val viewPager = binding.pager
         val adapter = MainViewPagerFragmentStateAdapter(this)
@@ -55,12 +42,6 @@ class MainViewPagerFragment :
         log("place adapter")
     }
 
-//    override fun onResume() {
-//        super.onResume()
-//        log("on resume")
-//        viewPager.currentItem = 5
-//    }
-
     inner class MainViewPagerFragmentStateAdapter(f: MainViewPagerFragment) :
         FragmentStateAdapter(f) {
         override fun getItemCount(): Int = NUM_PAGES
@@ -70,7 +51,7 @@ class MainViewPagerFragment :
             return when (position) {
                 0 -> {
                     val fragment = MyProfileFragment()
-                    fragment.setEmail(viewModel.userEmail)
+                    fragment.setEmail("sample.pager@gmail.com")
                     fragment
                 }
 

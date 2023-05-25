@@ -8,8 +8,7 @@
     <fragment
         android:id="@+id/viewPagerMain"
         android:name="com.vikmanz.shpppro.ui.main.main_fragment.MainViewPagerFragment"
-        android:label="fragmentPager"
-        tools:layout="@layout/fragment_my_profile">
+        android:label="fragmentPager">
         <argument
             android:name="email"
             app:argType="string"
