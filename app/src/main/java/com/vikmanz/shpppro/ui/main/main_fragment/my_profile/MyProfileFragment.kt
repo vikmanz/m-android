@@ -1,7 +1,6 @@
-package com.vikmanz.shpppro.ui.main.my_profile
+package com.vikmanz.shpppro.ui.main.main_fragment.my_profile
 
 import android.content.Intent
-import android.os.Bundle
 import androidx.fragment.app.viewModels
 import com.vikmanz.shpppro.R
 import com.vikmanz.shpppro.base.BaseFragment
@@ -17,8 +16,7 @@ class MyProfileFragment :
 
     override val viewModel: MyProfileViewModel by viewModels()
 
-    override fun onReady(savedInstanceState: Bundle?) {
-        super.onReady(savedInstanceState)
+    override fun initUI() {
         setUserInformation()
         setAvatar()
     }
@@ -30,6 +28,9 @@ class MyProfileFragment :
         }
     }
 
+    fun setEmail(email: String) {
+        viewModel.setEmail(email)
+    }
     /**
      * Get full email, parse it and set name/surname of user.
      */

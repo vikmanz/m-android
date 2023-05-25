@@ -86,6 +86,9 @@ dependencies {
     implementation "com.google.dagger:hilt-android:$hilt_version"
     kapt "com.google.dagger:hilt-compiler:$hilt_version"
 
+    // ViewPager2
+    implementation "androidx.viewpager2:viewpager2:1.1.0-beta02"
+
     // External libraries
     implementation 'com.github.javafaker:javafaker:1.0.2'       // generator for fake info
     implementation 'com.github.bumptech.glide:glide:4.15.1'     // image placer

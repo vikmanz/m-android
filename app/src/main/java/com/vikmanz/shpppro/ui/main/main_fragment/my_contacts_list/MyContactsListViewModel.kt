@@ -1,4 +1,4 @@
-package com.vikmanz.shpppro.ui.main.my_contacts_list
+package com.vikmanz.shpppro.ui.main.main_fragment.my_contacts_list
 
 import androidx.lifecycle.MutableLiveData
 import com.vikmanz.shpppro.base.BaseViewModel
@@ -81,7 +81,7 @@ class MyContactsListViewModel @Inject constructor(
     }
 
     fun onContactPressed(contactID: Long) {
-        navigate(MyContactsListFragmentDirections.startContactDetails(contactID))
+        //navigate(MyContactsListFragmentDirections.startContactDetails(contactID))
     }
 
     fun onButtonBackPressed() {

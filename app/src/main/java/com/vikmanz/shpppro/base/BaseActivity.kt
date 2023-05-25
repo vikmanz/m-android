@@ -19,17 +19,10 @@ abstract class BaseActivity<VBinding : ViewBinding>(
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = inflaterMethod.invoke(layoutInflater).also{setContentView(it.root)}
-        setListeners()
-        setObservers()
     }
 
     override fun onDestroy() {
         _binding = null
         super.onDestroy()
     }
-
-    protected open fun setListeners() { }
-
-    protected open fun setObservers() { }
-
 }

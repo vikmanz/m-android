@@ -1,4 +1,4 @@
-package com.vikmanz.shpppro.ui.main.my_contacts_list.decline_permision
+package com.vikmanz.shpppro.ui.main.main_fragment.my_contacts_list.decline_permision
 
 import android.app.Dialog
 import android.content.Intent

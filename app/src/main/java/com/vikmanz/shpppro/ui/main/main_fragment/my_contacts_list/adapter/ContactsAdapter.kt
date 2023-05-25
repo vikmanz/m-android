@@ -1,4 +1,4 @@
-package com.vikmanz.shpppro.ui.main.my_contacts_list.adapter
+package com.vikmanz.shpppro.ui.main.main_fragment.my_contacts_list.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,8 +6,8 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.vikmanz.shpppro.data.contact_model.Contact
 import com.vikmanz.shpppro.databinding.OneContactItemBinding
-import com.vikmanz.shpppro.ui.main.my_contacts_list.adapter.listeners.ContactActionListener
-import com.vikmanz.shpppro.ui.main.my_contacts_list.adapter.utils.DiffUtilContactsComparator
+import com.vikmanz.shpppro.ui.main.main_fragment.my_contacts_list.adapter.listeners.ContactActionListener
+import com.vikmanz.shpppro.ui.main.main_fragment.my_contacts_list.adapter.utils.DiffUtilContactsComparator
 import com.vikmanz.shpppro.ui.utils.extensions.setImageWithGlide
 
 /**

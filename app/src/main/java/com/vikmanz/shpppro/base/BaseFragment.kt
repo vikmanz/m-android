@@ -21,9 +21,10 @@ abstract class BaseFragment<VBinding : ViewBinding, VM : BaseViewModel>(
 
     protected open fun setListeners() {}
     protected open fun setObservers() {}
-
-    protected open fun onReady(savedInstanceState: Bundle?) {}
+    protected open fun initUI() {}
+    protected open fun onReady() {}
     protected open fun setIncomingArguments() {}
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,12 +40,13 @@ abstract class BaseFragment<VBinding : ViewBinding, VM : BaseViewModel>(
         setListeners()
         setObservers()
         observeNavigation()
+        initUI()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        onReady(savedInstanceState)
+        onReady()
     }
 
     private fun observeNavigation() {
