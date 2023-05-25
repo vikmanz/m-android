@@ -3,6 +3,7 @@ package com.vikmanz.shpppro.ui.main.my_contacts_list.add_contact
 import android.app.Dialog
 import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
@@ -31,7 +32,7 @@ class AddContactDialogFragment : DialogFragment() {
      * Register activity for result for request image from gallery.
      */
     private val requestImageLauncher =
-        registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
+        registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
             uri?.let { viewModel.setPhotoUri(uri) }
         }
 
@@ -116,14 +117,8 @@ class AddContactDialogFragment : DialogFragment() {
      * Start activity with request image from gallery.
      */
     private fun requestImageFromGallery() {
-        requestImageLauncher.launch(REQUEST_IMAGE_FROM_GALLERY)
+        val request = PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
+        requestImageLauncher.launch(request)
     }
 
-    /**
-     * Constants.
-     */
-    companion object {
-        // input for request image launcher.
-        private const val REQUEST_IMAGE_FROM_GALLERY = "image/*"
-    }
 }
