@@ -7,7 +7,7 @@ interface Repository<T> {
 
     val contactList: StateFlow<List<T>>
 
-    fun createContact(
+    fun createContactListItem(
         contactPhotoLink: Any,
         photoIndex: Int,
         name: String,
@@ -18,7 +18,7 @@ interface Repository<T> {
         birthday: String
     ): T
 
-    fun generateRandomContact(): T
+    fun generateRandomContactListItem(): T
 
     fun setFakeContacts()
 
@@ -35,6 +35,8 @@ interface Repository<T> {
     fun addContact(contact: T, index: Int)
 
     fun deleteContact(contact: T)
+    fun checkContact(index: Int): Unit?
+    fun unCheckContact(index: Int): Unit?
 
     fun getContactPosition(contact: T): Int
 

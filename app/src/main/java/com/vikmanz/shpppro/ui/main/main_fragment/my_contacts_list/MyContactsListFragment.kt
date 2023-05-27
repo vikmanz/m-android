@@ -3,7 +3,6 @@ package com.vikmanz.shpppro.ui.main.main_fragment.my_contacts_list
 import android.Manifest.permission.READ_CONTACTS
 import android.os.Bundle
 import android.view.View
-import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -17,7 +16,7 @@ import com.vikmanz.shpppro.R
 import com.vikmanz.shpppro.base.BaseFragment
 import com.vikmanz.shpppro.constants.Constants.MARGINS_OF_ELEMENTS
 import com.vikmanz.shpppro.constants.Constants.SNACK_BAR_VIEW_TIME
-import com.vikmanz.shpppro.data.contact_model.Contact
+import com.vikmanz.shpppro.data.contact_model.ContactListItem
 import com.vikmanz.shpppro.databinding.FragmentMyContactsListBinding
 import com.vikmanz.shpppro.ui.main.main_fragment.MainViewPagerFragment
 import com.vikmanz.shpppro.ui.main.main_fragment.my_contacts_list.adapter.ContactsAdapter
@@ -58,7 +57,7 @@ class MyContactsListFragment :
                 viewModel.onContactPressed(contactID)
             }
 
-            override fun onDeleteUser(contact: Contact) {
+            override fun onDeleteUser(contact: ContactListItem) {
                 deleteContactWithUndo(contact)
             }
         })
@@ -155,7 +154,7 @@ class MyContactsListFragment :
     }
 
 
-    private fun deleteContactWithUndo(contact: Contact) {
+    private fun deleteContactWithUndo(contact: ContactListItem) {
         if (viewModel.deleteContact(contact)) createUndo()
     }
 

@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.vikmanz.shpppro.data.contact_model.Contact
+import com.vikmanz.shpppro.data.contact_model.ContactListItem
 import com.vikmanz.shpppro.databinding.OneContactItemBinding
 import com.vikmanz.shpppro.ui.main.main_fragment.my_contacts_list.adapter.listeners.ContactActionListener
 import com.vikmanz.shpppro.ui.main.main_fragment.my_contacts_list.adapter.utils.DiffUtilContactsComparator
@@ -15,14 +15,14 @@ import com.vikmanz.shpppro.ui.utils.extensions.setImageWithGlide
  */
 class ContactsAdapter(
     private val contactActionListener: ContactActionListener
-) : ListAdapter<Contact, ContactsAdapter.ContactHolder>(DiffUtilContactsComparator()) {
+) : ListAdapter<ContactListItem, ContactsAdapter.ContactHolder>(DiffUtilContactsComparator()) {
 
     /**
      * Create Holder for one element.
      */
     inner class ContactHolder(private val binding: OneContactItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(contact: Contact) {
+        fun bind(contact: ContactListItem) {
             with(binding) {
                 imageViewOneContactAvatarImage.setImageWithGlide(contact.contactPhotoLink)
                 // bind Name/Career

@@ -19,20 +19,13 @@ object Constants {
      * My Contacts:
      */
     // Minimum number of chars in password.
-    const val START_NUMBER_OF_CONTACTS = 5
+    const val START_NUMBER_OF_CONTACTS = 10
     // Undo dialog show length when contact was deleted.
     const val SNACK_BAR_VIEW_TIME = 5000
     // Margin of elements in recycler view (left, right, bottom).
     const val MARGINS_OF_ELEMENTS = 20
     // Minimum number of contacts, which will be imported from phonebook.
     const val MAX_PHONE_IMPORT_CONTACTS_COUNT = 10
-
-
-    /**
-     * Intent extras Keys. Don't change it.
-     */
-    const val INTENT_EMAIL_ID = "email_identifier"
-
 
     /**
      * TAG for LOG

@@ -41,6 +41,7 @@
         android:name="com.vikmanz.shpppro.ui.main.MainActivity"
         tools:layout="@layout/fragment_my_profile">
 
+        <!--suppress NavigationFile -->
         <argument
             android:name="email"
             app:argType="string" />

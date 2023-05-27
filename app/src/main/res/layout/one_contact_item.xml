@@ -19,6 +19,17 @@
         android:paddingHorizontal="@dimen/offset_S"
         android:paddingVertical="@dimen/offset_S">
 
+        <androidx.appcompat.widget.AppCompatRadioButton
+            android:id="@+id/radioButton_oneContact_multiSelect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:visibility="gone"
+            tools:visibility="visible"
+            />
+
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/imageView_oneContact_avatarImage"
             android:layout_width="@dimen/avatarSide_myContactsList"

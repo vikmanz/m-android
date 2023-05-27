@@ -1,15 +1,12 @@
 package com.vikmanz.shpppro.ui.main.main_fragment
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
+import com.vikmanz.shpppro.R
 import com.vikmanz.shpppro.base.BaseFragment
 import com.vikmanz.shpppro.databinding.FragmentMainViewPagerBinding
 import com.vikmanz.shpppro.ui.main.main_fragment.my_contacts_list.MyContactsListFragment
@@ -44,14 +41,15 @@ class MainViewPagerFragment :
         val tabLayout = binding.tabLayout
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             tab.text = when (position) {
-                0 -> "MyProfileFragment"
-                else -> "MyContactsListFragment"
+                0 -> getString(R.string.main_my_profile_tab)
+                1 -> getString(R.string.main_my_contacts_tab)
+                else -> throw IllegalStateException()
             }
         }.attach()
 
     }
 
-    fun onBackPressedListener() {
+    private fun onBackPressedListener() {
         requireActivity()
             .onBackPressedDispatcher
             .addCallback(this, object : OnBackPressedCallback(true) {
@@ -59,6 +57,7 @@ class MainViewPagerFragment :
                     if (viewPager.currentItem == 0) {
                         // If the user is currently looking at the first step, allow the system to handle
                         // the Back button. This calls finish() on this activity and pops the back stack.
+                        @Suppress("DEPRECATION")
                         requireActivity().onBackPressed()       //todo navigation + crash
                     } else {
                         // Otherwise, select the previous step.

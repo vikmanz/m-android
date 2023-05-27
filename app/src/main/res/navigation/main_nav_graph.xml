@@ -10,6 +10,7 @@
         android:name="com.vikmanz.shpppro.ui.main.main_fragment.MainViewPagerFragment"
         android:label="fragment_main_view_pager"
         tools:layout="@layout/fragment_my_profile">
+        <!--suppress NavigationFile -->
         <argument
             android:name="email"
             app:argType="string"
@@ -24,6 +25,7 @@
         android:name="com.vikmanz.shpppro.ui.main.main_fragment.my_profile.MyProfileFragment"
         android:label="fragment_my_profile"
         tools:layout="@layout/fragment_my_profile">
+        <!--suppress NavigationFile -->
         <argument
             android:name="email"
             app:argType="string"
@@ -36,6 +38,7 @@
         android:name="com.vikmanz.shpppro.ui.main.contact_details.ContactDetailsFragment"
         android:label="fragment_contact_details"
         tools:layout="@layout/fragment_contact_details">
+        <!--suppress NavigationFile -->
         <argument
             android:name="contactID"
             app:argType="long" />
