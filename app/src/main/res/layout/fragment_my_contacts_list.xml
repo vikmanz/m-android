@@ -47,7 +47,7 @@
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:background="@android:color/transparent"
-        android:src="@drawable/arrow_back"
+        android:src="@drawable/button_arrow_back"
         tools:ignore="MissingConstraints,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -78,7 +78,7 @@
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:background="@android:color/transparent"
-        android:src="@drawable/baseline_highlight_off_24"
+        android:src="@drawable/button_revoke_permissions"
         android:visibility="invisible"
         tools:ignore="MissingConstraints,SpeakableTextPresentCheck,TouchTargetSizeCheck"
         tools:layout_editor_absoluteX="359dp"

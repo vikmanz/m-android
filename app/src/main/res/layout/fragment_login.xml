@@ -203,7 +203,7 @@
         android:id="@+id/button_login_registerByEmail"
         android:layout_width="0dp"
         android:layout_height="@dimen/size_buttonHeight_XL"
-        android:background="@drawable/btn_std_orange_outlined_bg_all_in_one_file"
+        android:background="@drawable/button_std_orange_outlined_bg_all_in_one_file"
         android:text="@string/auth_layout_register_button"
         android:textAppearance="@style/basicText_buttonsText"
         tools:ignore="MissingConstraints,VisualLintButtonSize" />
@@ -276,7 +276,7 @@
         android:id="@+id/button_login_fillLoginAndPass"
         android:layout_width="@dimen/width_loginFragment_helpButtonsWidth"
         android:layout_height="@dimen/size_buttonHeight_M"
-        android:background="@drawable/btn_std_orange_outlined_bg_all_in_one_file"
+        android:background="@drawable/button_std_orange_outlined_bg_all_in_one_file"
         android:text="@string/auth_layout_debug_button_fill"
         android:textAppearance="@style/basicText_buttonsText"
         tools:ignore="MissingConstraints,TouchTargetSizeCheck" />
@@ -285,7 +285,7 @@
         android:id="@+id/button_login_clearLoginPassFields"
         android:layout_width="@dimen/width_loginFragment_helpButtonsWidth"
         android:layout_height="@dimen/size_buttonHeight_M"
-        android:background="@drawable/btn_std_orange_outlined_bg_all_in_one_file"
+        android:background="@drawable/button_std_orange_outlined_bg_all_in_one_file"
         android:text="@string/auth_layout_debug_button_clear"
         android:textAppearance="@style/basicText_buttonsText"
         tools:ignore="MissingConstraints,TouchTargetSizeCheck" />
@@ -295,7 +295,7 @@
         android:id="@+id/button_login_changeLanguage"
         android:layout_width="@dimen/width_loginFragment_helpButtonsWidth"
         android:layout_height="@dimen/size_buttonHeight_M"
-        android:background="@drawable/btn_std_orange_outlined_bg_all_in_one_file"
+        android:background="@drawable/button_std_orange_outlined_bg_all_in_one_file"
         android:text="@string/auth_layout_debug_button_language"
         android:textAppearance="@style/basicText_buttonsText"
         tools:ignore="MissingConstraints,TouchTargetSizeCheck" />

@@ -16,8 +16,8 @@ import java.security.InvalidParameterException
 val GLIDE_OPTIONS = RequestOptions()
     .centerCrop()
     .circleCrop()
-    .placeholder(R.drawable.ic_person)
-    .error(R.drawable.ic_person)
+    .placeholder(R.drawable.icon_person)
+    .error(R.drawable.icon_person)
     .diskCacheStrategy(DiskCacheStrategy.ALL)
     .priority(Priority.HIGH)
 

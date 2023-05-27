@@ -47,7 +47,7 @@
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:background="@android:color/transparent"
-            android:src="@drawable/arrow_back"
+            android:src="@drawable/button_arrow_back"
             tools:ignore="MissingConstraints,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -89,7 +89,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imageView_addContact_avatar"
             app:layout_constraintTop_toTopOf="@+id/imageView_addContact_avatar"
-            app:srcCompat="@drawable/add_from_gallery_icon"
+            app:srcCompat="@drawable/button_add_photo_from_gallery"
             tools:ignore="ContentDescription,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
         <!-- Bottom half of screen. -->
@@ -231,7 +231,7 @@
             android:layout_height="@dimen/size_buttonHeight_XL"
             android:layout_marginHorizontal="@dimen/marginHorizontal"
             android:layout_marginVertical="@dimen/marginHorizontal"
-            android:background="@drawable/btn_std_orange_bg"
+            android:background="@drawable/button_std_orange_bg"
             android:text="@string/contacts_add_contact_save_button"
             android:textAppearance="@style/basicText_buttonsText"
             android:textStyle="bold"

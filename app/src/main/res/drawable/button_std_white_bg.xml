@@ -3,21 +3,21 @@
 
     <!-- pressed -->
     <item
-        android:drawable="@drawable/btn_std_white_bg_pressed"
+        android:drawable="@drawable/button_std_white_bg_pressed"
         android:state_pressed="true" />
 
     <!-- focused -->
     <item
-        android:drawable="@drawable/btn_std_white_bg_focused"
+        android:drawable="@drawable/button_std_white_bg_focused"
         android:state_focused="true" />
 
     <!-- hovered -->
     <item
-        android:drawable="@drawable/btn_std_white_bg_hovered"
+        android:drawable="@drawable/button_std_white_bg_hovered"
         android:state_hovered="true" />
 
     <!-- default -->
     <item
-        android:drawable="@drawable/btn_std_white_bg_normal" />
+        android:drawable="@drawable/button_std_white_bg_normal" />
 
 </selector>

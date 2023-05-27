@@ -205,7 +205,7 @@
         android:id="@+id/button_myProfile_editProfile"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/size_buttonHeight_M"
-        android:background="@drawable/btn_std_white_bg"
+        android:background="@drawable/button_std_white_bg"
         android:text="@string/main_edit_profile_button"
         android:textAppearance="@style/basicText_buttonsText"
         android:textColor="?attr/colorSecondary"
@@ -216,7 +216,7 @@
         android:layout_width="wrap_content"
         android:layout_height="@dimen/size_buttonHeight_M"
         android:width="164dp"
-        android:background="@drawable/btn_std_orange_bg"
+        android:background="@drawable/button_std_orange_bg"
         android:text="@string/main_view_my_contacts_button"
         android:textAppearance="@style/basicText_buttonsText"
         tools:ignore="MissingConstraints,TextContrastCheck,TouchTargetSizeCheck" />

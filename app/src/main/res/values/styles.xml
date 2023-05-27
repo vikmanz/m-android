@@ -16,7 +16,7 @@
     <style name="checkbox" parent="basicText">
         <item name="android:textSize">@dimen/size_textFont_XS</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:button">@drawable/checkbox_selector</item>
+        <item name="android:button">@drawable/checkbox_selector_registration</item>
         <item name="android:paddingStart">8sp</item>
     </style>
 
@@ -47,14 +47,14 @@
     <style name="textInputLayout_basicTextInput" parent="Widget.AppCompat.EditText">
         <item name="android:fontFamily">@font/open_sans_regular</item>      <!-- FONT -->
         <item name="android:textColor">?attr/colorTertiary</item>
-        <item name="android:background">@drawable/edittext_bottom_line_white</item>
+        <item name="android:background">@drawable/line_edittext_bottom_line_white</item>
         <item name="android:paddingStart">0dp</item>
         <item name="android:paddingEnd">0dp</item>
     </style>
 
     <style name="textInput_AddNewContact" parent="textInputLayout_basicTextInput">
         <item name="android:textColor">?attr/colorSecondary</item>
-        <item name="android:background">@drawable/edittext_bottom_line_secondary_color</item>
+        <item name="android:background">@drawable/line_edittext_bottom_line_secondary_color</item>
     </style>
 
 
