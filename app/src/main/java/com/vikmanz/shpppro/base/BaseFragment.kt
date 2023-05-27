@@ -21,7 +21,6 @@ abstract class BaseFragment<VBinding : ViewBinding, VM : BaseViewModel>(
 
     protected open fun setListeners() {}
     protected open fun setObservers() {}
-    protected open fun initUI() {}
     protected open fun onReady() {}
     protected open fun setIncomingArguments() {}
 
@@ -45,7 +44,6 @@ abstract class BaseFragment<VBinding : ViewBinding, VM : BaseViewModel>(
         setListeners()
         setObservers()
         observeNavigation()
-        initUI()
         onReady()
     }
 

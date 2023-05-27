@@ -17,7 +17,7 @@ class MyProfileFragment :
 
     override val viewModel: MyProfileViewModel by viewModels()
 
-    override fun initUI() {
+    override fun onReady() {
         setUserInformation()
         setAvatar()
     }

@@ -14,7 +14,7 @@ class ContactDetailsFragment :
 
     override val viewModel: ContactDetailsViewModel by viewModels()
 
-    override fun initUI() {
+    override fun onReady() {
         with(binding) {
             textViewContactDetailsPersonName.text = viewModel.contactName
             textViewContactDetailsPersonCareer.text = viewModel.contactCareer
