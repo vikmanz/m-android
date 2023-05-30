@@ -87,10 +87,7 @@ class AddContactDialogFragment : DialogFragment() {
     }
 
     private fun setAvatarObserver() {
-        log("set observer")
         viewModel.currentPhoto.observe(this@AddContactDialogFragment) {
-            log("it = $it")
-            log("binding = $_binding")
             _binding.imageViewAddContactAvatar.setImageWithGlide(it)
         }
     }

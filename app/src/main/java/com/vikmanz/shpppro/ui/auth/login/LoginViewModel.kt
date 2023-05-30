@@ -55,7 +55,6 @@ class LoginViewModel @Inject constructor(
     }
 
     fun startMainActivity(email: String) {
-        log("Go to main activity")
         val direction = SplashScreenFragmentDirections.startMainActivity(email)
         navigate(direction)
     }

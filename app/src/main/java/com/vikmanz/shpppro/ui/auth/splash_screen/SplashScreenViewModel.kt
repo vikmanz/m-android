@@ -31,13 +31,11 @@ class SplashScreenViewModel @Inject constructor(
     }
 
     private fun startLoginFragment() {
-       log("Go to login fragment")
         val direction = SplashScreenFragmentDirections.startLoginFragment()
         navigate(direction)
     }
 
     private fun startMainActivity(email: String) {
-        log("Go to main activity")
         val direction = SplashScreenFragmentDirections.startMainActivity(email)
         navigate(direction)
     }

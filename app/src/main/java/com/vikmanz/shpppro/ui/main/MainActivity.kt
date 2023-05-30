@@ -17,7 +17,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
      * Add safe args to start destination fragment.
      */
     override fun setIncomingArguments() {
-        log("set incoming args")
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.mainFragmentContainer) as NavHostFragment
         val navController = navHostFragment.navController

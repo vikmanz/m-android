@@ -19,16 +19,29 @@ import com.vikmanz.shpppro.ui.utils.extensions.setVisible
  * Adapter for Recycler view.
  */
 class ContactsAdapter(
-    private val contactActionListener: ContactActionListener
+    private val contactActionListener: ContactActionListener,
+    var isMultiselectMode: Boolean = false
 ) : ListAdapter<Contact, ContactsAdapter.ContactHolder>(DiffUtilContactsComparator()) {
 
-    private var isMultiselectMode = false
-    val multiselectList = ArrayList<Contact>()
+    /**
+     * Create one element from holder and return it.
+     */
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContactHolder {
+        val binding =
+            OneContactItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ContactHolder(binding)
+    }
+    /**
+     * Bind info to one element holder.
+     */
+    override fun onBindViewHolder(holder: ContactHolder, position: Int) {
+        holder.bind(currentList[position])
+    }
 
     /**
      * Create Holder for one element.
      */
-    inner class ContactHolder(private val binding: OneContactItemBinding) :
+    inner class ContactHolder(val binding: OneContactItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         private val multiselectColor = ContextCompat.getColorStateList(
             binding.root.context,
@@ -37,7 +50,7 @@ class ContactsAdapter(
 
         fun bind(contact: Contact) {
             with(binding) {
-                if (isMultiselectMode) bindMultiselectMode()
+               // if (isMultiselectMode) bindMultiselectMode()
                 imageViewOneContactAvatarImage.setImageWithGlide(contact.contactPhotoLink)
                 // bind Name/Career
                 textViewOneContactName.text = contact.contactName
@@ -49,36 +62,33 @@ class ContactsAdapter(
                 }
 
                 root.setOnClickListener {
-                    // send contact id to MyContactsActivity for navigate to contact details.
                     if (isMultiselectMode) {
-                        multiselectList.add(contact)
+                        checkboxOneContactMultiSelect.isChecked = !checkboxOneContactMultiSelect.isChecked
                         bindMultiselectMode()
-                    } else {
-                        contactActionListener.onTapContact(contact.contactId)
                     }
+                    // send contact id to MyContactsActivity for navigate to contact details.
+                    contactActionListener.onTapContact(contact)
                 }
 
                 root.setOnLongClickListener {
+                    isMultiselectMode = !isMultiselectMode
                     if (isMultiselectMode) {
-                        contactActionListener.goToNormalMode()
-                        isMultiselectMode = false
-                        bindNormalMode()
-                    } else {
-                        contactActionListener.goToMultiselectMode()
-                        isMultiselectMode = true
+                        contactActionListener.onLongTapContact(contact)
                         bindMultiselectMode()
+                        checkboxOneContactMultiSelect.isChecked = true
+                    } else {
+                        contactActionListener.onLongTapContact(contact)
+                        bindNormalMode()
                     }
                     true
                 }
             }
         }
-
         private fun bindMultiselectMode() = with(binding) {
             root.backgroundTintList = multiselectColor
             checkboxOneContactMultiSelect.setVisible()
             buttonOneContactRemove.setGone()
         }
-
         private fun bindNormalMode() = with(binding) {
             root.backgroundTintList = null
             checkboxOneContactMultiSelect.setGone()
@@ -86,21 +96,4 @@ class ContactsAdapter(
         }
     }
 
-
-    /**
-     * Create one element from holder and return it.
-     */
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContactHolder {
-        val binding =
-            OneContactItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ContactHolder(binding)
-    }
-
-    /**
-     * Bind info to one element holder.
-     */
-    override fun onBindViewHolder(holder: ContactHolder, position: Int) {
-        holder.bind(currentList[position])
-
-    }
 }

@@ -32,8 +32,6 @@ class MainViewPagerFragment :
     }
 
     override fun onReady() {
-        log("after create fragment view")
-
         viewPager = binding.pager
         val adapter = MainViewPagerFragmentStateAdapter(this)
         viewPager.adapter = adapter
@@ -72,7 +70,6 @@ class MainViewPagerFragment :
         override fun getItemCount(): Int = NUM_PAGES
 
         override fun createFragment(position: Int): Fragment {
-            log("create page fragment!")
             return when (position) {
                 0 -> {
                     val fragment = MyProfileFragment()

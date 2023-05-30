@@ -53,25 +53,18 @@ class MyContactsListFragment :
      */
     private val adapter: ContactsAdapter by lazy {
         ContactsAdapter(contactActionListener = object : ContactActionListener {
-            override fun onTapContact(contactID: Long) {
-                viewModel.onContactPressed(contactID)
+            override fun onTapContact(contact: Contact) {
+                viewModel.onContactPressed(contact)
+            }
+
+            override fun onLongTapContact(contact: Contact) {
+                viewModel.swapSelectMode(contact)
             }
 
             override fun onDeleteContact(contact: Contact) {
                 deleteContactWithUndo(contact)
             }
 
-            override fun goToMultiselectMode() {
-                binding.buttonMyContactsDeleteMultipleContacts.setVisible()
-            }
-
-            override fun goToNormalMode() {
-                binding.buttonMyContactsDeleteMultipleContacts.setGone()
-            }
-
-            override fun onMultipleDeleteContacts(contacts: ArrayList<Contact>) {
-                binding.buttonMyContactsDeleteMultipleContacts.setGone()
-            }
         })
     }
 
@@ -95,11 +88,17 @@ class MyContactsListFragment :
             buttonMyContactsAddContact.setOnClickListener { addNewContact() }
             buttonMyContactsAddContactsFromPhonebook.setOnClickListener { requestReadContactsPermission() }
             buttonMyContactsAddContactsFromFaker.setOnClickListener { changeContactsList() }
+            buttonMyContactsDeleteMultipleContacts.setOnClickListener { deleteMultipleContacts() }
         }
     }
 
+    private fun deleteMultipleContacts() {
+        binding.buttonMyContactsDeleteMultipleContacts.setGone()
+        viewModel.deleteMultipleContacts()
+    }
+
     private fun onButtonBackPressed() {         //todo extension
-      (parentFragment as MainViewPagerFragment).viewPager.currentItem = 0
+        (parentFragment as MainViewPagerFragment).viewPager.currentItem = 0
     }
 
     /**
@@ -133,6 +132,11 @@ class MyContactsListFragment :
                     )
                     buttonMyContactsAddContactsFromPhonebook.setGone()
                 }
+            }
+        }
+        viewModel.isMultiselectMode.observe(viewLifecycleOwner) {
+            binding.buttonMyContactsDeleteMultipleContacts.apply {
+                if (it) setVisible() else setGone()
             }
         }
     }
