@@ -7,6 +7,7 @@
     <!-- Offsets of elements. -->
     <dimen name="offset_XS">4dp</dimen>
     <dimen name="offset_S">8dp</dimen>
+    <dimen name="offset_SM">12dp</dimen>
     <dimen name="offset_M">16dp</dimen>
     <dimen name="offset_L">24dp</dimen>
     <dimen name="offset_XL">32dp</dimen>

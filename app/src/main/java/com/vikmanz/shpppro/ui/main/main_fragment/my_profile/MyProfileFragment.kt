@@ -49,7 +49,7 @@ class MyProfileFragment :
      * Set avatar image.
      */
     private fun setAvatar() =
-        binding.imageViewMyProfileAvatarImage.setImageWithGlide(R.drawable.sample_avatar)
+        binding.imageViewMyProfileAvatarImage.setImageWithGlide(R.drawable.jpg_sample_avatar)
 
     /**
      * Logout with clear information about user from Data Store.

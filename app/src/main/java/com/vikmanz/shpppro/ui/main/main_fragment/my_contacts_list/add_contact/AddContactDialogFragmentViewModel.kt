@@ -3,7 +3,7 @@ package com.vikmanz.shpppro.ui.main.main_fragment.my_contacts_list.add_contact
 import android.net.Uri
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.vikmanz.shpppro.data.contact_model.ContactListItem
+import com.vikmanz.shpppro.data.contact_model.Contact
 import com.vikmanz.shpppro.data.repository.interfaces.Repository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -13,7 +13,7 @@ import javax.inject.Inject
  */
 @HiltViewModel
 class AddContactDialogFragmentViewModel @Inject constructor(
-    repository: Repository<ContactListItem>
+    repository: Repository<Contact>
 ) : ViewModel() {
 
     private val contactsRepository = repository
@@ -39,7 +39,7 @@ class AddContactDialogFragmentViewModel @Inject constructor(
         address: String,
         birthday: String
     ) {
-        val newContact = contactsRepository.createContactListItem(
+        val newContact = contactsRepository.createContact(
             contactPhotoLink = getCurrentPhoto(),
             photoIndex = contactsRepository.getCurrentPhotoCounter(),
             name = name,

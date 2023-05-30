@@ -19,8 +19,9 @@
         android:paddingHorizontal="@dimen/offset_S"
         android:paddingVertical="@dimen/offset_S">
 
-        <androidx.appcompat.widget.AppCompatRadioButton
-            android:id="@+id/radioButton_oneContact_multiSelect"
+        <androidx.appcompat.widget.AppCompatCheckBox
+            android:id="@+id/checkbox_oneContact_multiSelect"
+            android:button="@drawable/checkbox_selector_contact_list_multiselect"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -28,6 +29,7 @@
             android:minHeight="0dp"
             android:visibility="gone"
             tools:visibility="visible"
+            android:layout_marginEnd="@dimen/offset_SM"
             />
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -74,7 +76,7 @@
             android:layout_gravity="center"
             android:layout_marginHorizontal="@dimen/offset_S"
             android:background="@android:color/transparent"
-            android:src="@drawable/trash"
+            android:src="@drawable/icon_trash_contact_list"
             tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
     </LinearLayout>

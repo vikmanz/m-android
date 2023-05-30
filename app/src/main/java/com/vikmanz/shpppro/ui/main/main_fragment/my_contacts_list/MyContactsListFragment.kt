@@ -16,7 +16,7 @@ import com.vikmanz.shpppro.R
 import com.vikmanz.shpppro.base.BaseFragment
 import com.vikmanz.shpppro.constants.Constants.MARGINS_OF_ELEMENTS
 import com.vikmanz.shpppro.constants.Constants.SNACK_BAR_VIEW_TIME
-import com.vikmanz.shpppro.data.contact_model.ContactListItem
+import com.vikmanz.shpppro.data.contact_model.Contact
 import com.vikmanz.shpppro.databinding.FragmentMyContactsListBinding
 import com.vikmanz.shpppro.ui.main.main_fragment.MainViewPagerFragment
 import com.vikmanz.shpppro.ui.main.main_fragment.my_contacts_list.adapter.ContactsAdapter
@@ -53,12 +53,16 @@ class MyContactsListFragment :
      */
     private val adapter: ContactsAdapter by lazy {
         ContactsAdapter(contactActionListener = object : ContactActionListener {
-            override fun onTapUser(contactID: Long) {
+            override fun onTapContact(contactID: Long) {
                 viewModel.onContactPressed(contactID)
             }
 
-            override fun onDeleteUser(contact: ContactListItem) {
+            override fun onDeleteContact(contact: Contact) {
                 deleteContactWithUndo(contact)
+            }
+
+            override fun onMultipleDeleteContacts(contacts: ArrayList<Contact>) {
+                TODO("Not yet implemented")
             }
         })
     }
@@ -154,7 +158,7 @@ class MyContactsListFragment :
     }
 
 
-    private fun deleteContactWithUndo(contact: ContactListItem) {
+    private fun deleteContactWithUndo(contact: Contact) {
         if (viewModel.deleteContact(contact)) createUndo()
     }
 

@@ -19,7 +19,7 @@ object Constants {
      * My Contacts:
      */
     // Minimum number of chars in password.
-    const val START_NUMBER_OF_CONTACTS = 10
+    const val START_NUMBER_OF_CONTACTS = 4
     // Undo dialog show length when contact was deleted.
     const val SNACK_BAR_VIEW_TIME = 5000
     // Margin of elements in recycler view (left, right, bottom).
