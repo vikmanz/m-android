@@ -7,6 +7,7 @@ import java.io.Serializable
  */
 data class Contact(
     val contactId: Long,
+    var isChecked: Boolean = false,
     val contactPhotoLink: Any,
     val contactPhotoIndex: Int,
     val contactName: String,
