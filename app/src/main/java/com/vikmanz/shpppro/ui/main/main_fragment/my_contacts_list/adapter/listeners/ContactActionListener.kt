@@ -8,5 +8,7 @@ import com.vikmanz.shpppro.data.contact_model.Contact
 interface ContactActionListener {
     fun onTapContact(contactID: Long)
     fun onDeleteContact(contact: Contact)
+    fun goToMultiselectMode()
+    fun goToNormalMode()
     fun onMultipleDeleteContacts(contacts: ArrayList<Contact>)
 }

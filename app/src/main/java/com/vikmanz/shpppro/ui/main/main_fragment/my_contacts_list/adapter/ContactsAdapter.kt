@@ -60,9 +60,11 @@ class ContactsAdapter(
 
                 root.setOnLongClickListener {
                     if (isMultiselectMode) {
+                        contactActionListener.goToNormalMode()
                         isMultiselectMode = false
                         bindNormalMode()
                     } else {
+                        contactActionListener.goToMultiselectMode()
                         isMultiselectMode = true
                         bindMultiselectMode()
                     }
@@ -79,8 +81,8 @@ class ContactsAdapter(
 
         private fun bindNormalMode() = with(binding) {
             root.backgroundTintList = null
-            checkboxOneContactMultiSelect.setVisible()
-            buttonOneContactRemove.setGone()
+            checkboxOneContactMultiSelect.setGone()
+            buttonOneContactRemove.setVisible()
         }
     }
 

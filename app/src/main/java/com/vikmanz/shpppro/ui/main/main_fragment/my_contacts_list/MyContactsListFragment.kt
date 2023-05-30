@@ -61,8 +61,16 @@ class MyContactsListFragment :
                 deleteContactWithUndo(contact)
             }
 
+            override fun goToMultiselectMode() {
+                binding.buttonMyContactsDeleteMultipleContacts.setVisible()
+            }
+
+            override fun goToNormalMode() {
+                binding.buttonMyContactsDeleteMultipleContacts.setGone()
+            }
+
             override fun onMultipleDeleteContacts(contacts: ArrayList<Contact>) {
-                TODO("Not yet implemented")
+                binding.buttonMyContactsDeleteMultipleContacts.setGone()
             }
         })
     }
