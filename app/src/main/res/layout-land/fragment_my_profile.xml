@@ -80,7 +80,7 @@
         android:layout_height="@dimen/avatarSide_myProfile"
         android:layout_marginTop="28dp"
         android:layout_marginBottom="28dp"
-        android:src="@drawable/sample_avatar"
+        android:src="@drawable/jpg_sample_avatar"
         tools:ignore="MissingConstraints" />
 
     <!-- <!- Person Info flow. -->
@@ -156,33 +156,33 @@
         android:id="@+id/imageView_myProfile_facebookButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/socials_outline_circle"
+        android:background="@drawable/icon_socials_outline_circle"
         android:clickable="true"
         android:focusable="true"
         android:scaleType="center"
-        app:srcCompat="@drawable/socials_logo_facebook"
+        app:srcCompat="@drawable/icon_socials_logo_facebook"
         tools:ignore="MissingConstraints,SpeakableTextPresentCheck" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/imageView_myProfile_linkedinButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/socials_outline_circle"
+        android:background="@drawable/icon_socials_outline_circle"
         android:clickable="true"
         android:focusable="true"
         android:scaleType="center"
-        app:srcCompat="@drawable/socials_logo_linkedin"
+        app:srcCompat="@drawable/icon_socials_logo_linkedin"
         tools:ignore="MissingConstraints,SpeakableTextPresentCheck" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/imageView_myProfile_instagramButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/socials_outline_circle"
+        android:background="@drawable/icon_socials_outline_circle"
         android:clickable="true"
         android:focusable="true"
         android:scaleType="center"
-        app:srcCompat="@drawable/socials_logo_instagram"
+        app:srcCompat="@drawable/icon_socials_logo_instagram"
         tools:ignore="MissingConstraints,SpeakableTextPresentCheck" />
 
     <!-- Edit Profile and View Contacts buttons flow. -->
@@ -205,7 +205,7 @@
         android:id="@+id/button_myProfile_editProfile"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/size_buttonHeight_M"
-        android:background="@drawable/button_std_white_bg"
+        android:background="@drawable/button_selector_white"
         android:text="@string/main_edit_profile_button"
         android:textAppearance="@style/basicText_buttonsText"
         android:textColor="?attr/colorSecondary"
@@ -216,7 +216,7 @@
         android:layout_width="wrap_content"
         android:layout_height="@dimen/size_buttonHeight_M"
         android:width="164dp"
-        android:background="@drawable/button_std_orange_bg"
+        android:background="@drawable/button_selector_orange"
         android:text="@string/main_view_my_contacts_button"
         android:textAppearance="@style/basicText_buttonsText"
         tools:ignore="MissingConstraints,TextContrastCheck,TouchTargetSizeCheck" />

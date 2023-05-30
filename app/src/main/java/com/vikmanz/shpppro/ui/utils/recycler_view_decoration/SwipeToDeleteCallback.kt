@@ -19,7 +19,7 @@ import com.vikmanz.shpppro.constants.Constants.MARGINS_OF_ELEMENTS
  */
 abstract class SwipeToDeleteCallback(context: Context) : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
 
-    private val deleteIcon = ContextCompat.getDrawable(context, R.drawable.icon_recycle_bin_delete_contact)
+    private val deleteIcon = ContextCompat.getDrawable(context, R.drawable.icon_trash_delete_contact)
     private val intrinsicWidth = deleteIcon?.intrinsicWidth ?: 0
     private val intrinsicHeight = deleteIcon?.intrinsicHeight ?: 0
     private val background = ColorDrawable()

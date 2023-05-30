@@ -2,7 +2,7 @@ package com.vikmanz.shpppro.ui.main.main_fragment.my_contacts_list
 
 import androidx.lifecycle.MutableLiveData
 import com.vikmanz.shpppro.base.BaseViewModel
-import com.vikmanz.shpppro.data.contact_model.ContactListItem
+import com.vikmanz.shpppro.data.contact_model.Contact
 import com.vikmanz.shpppro.data.repository.interfaces.Repository
 import com.vikmanz.shpppro.ui.main.main_fragment.MainViewPagerFragmentDirections
 import com.vikmanz.shpppro.utilits.extensions.swapBoolean
@@ -17,12 +17,12 @@ private const val FAKE_LIST_FIRST = true
  */
 @HiltViewModel
 class MyContactsListViewModel @Inject constructor(
-    contactsRepository: Repository<ContactListItem>
+    contactsRepository: Repository<Contact>
 ) : BaseViewModel() {
 
     private val _repository = contactsRepository
 
-    private var lastDeletedContact: ContactListItem? = null
+    private var lastDeletedContact: Contact? = null
     private var lastDeletedPosition: Int = 0
 
     init {
@@ -42,7 +42,7 @@ class MyContactsListViewModel @Inject constructor(
     /**
      * Delete contact from list of contacts.
      */
-    fun deleteContact(contact: ContactListItem): Boolean {
+    fun deleteContact(contact: Contact): Boolean {
         if (contact == lastDeletedContact) return false
         lastDeletedContact = contact
         lastDeletedPosition = getContactPosition(contact)
@@ -65,7 +65,7 @@ class MyContactsListViewModel @Inject constructor(
     /**
      * Get contact from list via index.
      */
-    fun getContact(index: Int): ContactListItem? {
+    fun getContact(index: Int): Contact? {
         return _repository.getContact(index)
     }
 
@@ -88,14 +88,14 @@ class MyContactsListViewModel @Inject constructor(
     /**
      * Get contact position in list of contacts.
      */
-    private fun getContactPosition(contact: ContactListItem): Int {
+    private fun getContactPosition(contact: Contact): Int {
         return _repository.getContactPosition(contact)
     }
 
     /**
      * Add new contact to list of contacts to concrete index.
      */
-    private fun addContactToPosition(contact: ContactListItem, index: Int) {
+    private fun addContactToPosition(contact: Contact, index: Int) {
         _repository.addContact(contact, index)
     }
 }

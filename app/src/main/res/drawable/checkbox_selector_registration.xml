@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <!-- Checked -->
     <item android:state_checked="true">
         <vector
             android:width="20dp"
@@ -22,6 +23,9 @@
         </vector>
     </item>
 
+
+
+    <!-- Unchecked -->
     <item android:state_checked="false">
         <vector android:width="20dp"
             android:height="20dp"

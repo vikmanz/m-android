@@ -92,7 +92,7 @@
         android:id="@+id/imageView_contactDetails_avatarImage"
         android:layout_width="@dimen/avatarSide_myProfile"
         android:layout_height="@dimen/avatarSide_myProfile"
-        android:src="@drawable/sample_avatar"
+        android:src="@drawable/jpg_sample_avatar"
         tools:ignore="MissingConstraints" />
 
     <!-- <!- Person Info flow. -->
@@ -172,33 +172,33 @@
         android:id="@+id/imageView_contactDetails_facebookButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/socials_outline_circle"
+        android:background="@drawable/icon_socials_outline_circle"
         android:clickable="true"
         android:focusable="true"
         android:scaleType="center"
-        app:srcCompat="@drawable/socials_logo_facebook"
+        app:srcCompat="@drawable/icon_socials_logo_facebook"
         tools:ignore="MissingConstraints,SpeakableTextPresentCheck" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/imageView_contactDetails_linkedinButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/socials_outline_circle"
+        android:background="@drawable/icon_socials_outline_circle"
         android:clickable="true"
         android:focusable="true"
         android:scaleType="center"
-        app:srcCompat="@drawable/socials_logo_linkedin"
+        app:srcCompat="@drawable/icon_socials_logo_linkedin"
         tools:ignore="MissingConstraints,SpeakableTextPresentCheck" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/imageView_contactDetails_instagramButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/socials_outline_circle"
+        android:background="@drawable/icon_socials_outline_circle"
         android:clickable="true"
         android:focusable="true"
         android:scaleType="center"
-        app:srcCompat="@drawable/socials_logo_instagram"
+        app:srcCompat="@drawable/icon_socials_logo_instagram"
         tools:ignore="MissingConstraints,SpeakableTextPresentCheck" />
 
     <!-- View Contacts button. -->
@@ -208,7 +208,7 @@
         android:layout_height="@dimen/size_buttonHeight_XL"
         android:layout_marginHorizontal="@dimen/marginHorizontal"
         android:layout_marginBottom="@dimen/offset_M"
-        android:background="@drawable/button_std_orange_bg"
+        android:background="@drawable/button_selector_orange"
         android:text="@string/contactDetails_messageButton"
         android:textAppearance="@style/basicText_buttonsText"
         app:layout_constraintBottom_toBottomOf="parent"
