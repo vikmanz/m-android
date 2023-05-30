@@ -22,6 +22,8 @@
 
         <item name="myGoogleButtonStyle">@style/defaultMyGButtonStyle</item>
 
+
+
     </style>
 
     <style name="defaultMyGButtonStyle">

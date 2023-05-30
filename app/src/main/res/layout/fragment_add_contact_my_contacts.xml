@@ -12,7 +12,7 @@
         <!-- Top half of screen. -->
         <View
             android:id="@+id/view_addContact_topHalfBg"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="?attr/colorSecondary"
             app:layout_constraintBottom_toBottomOf="@id/barrier_addContact_barrier"
@@ -30,7 +30,7 @@
         <!-- Title and title buttons flow. -->
         <androidx.constraintlayout.helper.widget.Flow
             android:id="@+id/flow_myContacts_titleAndButtons"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/marginHorizontal"
             android:layout_marginTop="@dimen/offset_M"
@@ -47,7 +47,7 @@
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:background="@android:color/transparent"
-            android:src="@drawable/arrow_back"
+            android:src="@drawable/button_arrow_back"
             tools:ignore="MissingConstraints,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -64,7 +64,7 @@
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:background="@android:color/transparent"
-            android:src="@drawable/search"
+            android:src="@drawable/icon_search"
             android:visibility="invisible"
             tools:ignore="MissingConstraints" />
 
@@ -74,7 +74,7 @@
             android:layout_height="@dimen/avatarSide_addContactDialog"
             android:layout_marginTop="@dimen/avatarMargin_addContactDialog"
             android:layout_marginBottom="@dimen/avatarMargin_addContactDialog"
-            android:src="@drawable/sample_avatar"
+            android:src="@drawable/jpg_sample_avatar"
             app:layout_constraintBottom_toBottomOf="@id/barrier_addContact_barrier"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -89,13 +89,13 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imageView_addContact_avatar"
             app:layout_constraintTop_toTopOf="@+id/imageView_addContact_avatar"
-            app:srcCompat="@drawable/add_from_gallery_icon"
+            app:srcCompat="@drawable/button_add_photo_from_gallery"
             tools:ignore="ContentDescription,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
         <!-- Bottom half of screen. -->
         <androidx.constraintlayout.helper.widget.Flow
             android:id="@+id/flow_addContact_contactInfoFields"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/marginHorizontal"
             android:layout_marginTop="@dimen/offset_M"
@@ -227,11 +227,11 @@
         <!-- View Contacts button. -->
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/button_addContact_saveUser"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="@dimen/size_buttonHeight_XL"
             android:layout_marginHorizontal="@dimen/marginHorizontal"
             android:layout_marginVertical="@dimen/marginHorizontal"
-            android:background="@drawable/btn_std_orange_bg"
+            android:background="@drawable/button_selector_orange"
             android:text="@string/contacts_add_contact_save_button"
             android:textAppearance="@style/basicText_buttonsText"
             android:textStyle="bold"

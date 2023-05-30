@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.main.MainActivity">
+    tools:context=".ui.main.MainActivity">
 
     <!-- Guide of center of elements. -->
     <androidx.constraintlayout.widget.Guideline
@@ -17,7 +17,7 @@
     <!-- Top half of screen. -->
     <View
         android:id="@+id/guideLine_contactDetails_bgTopHalf"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="?attr/colorSecondary"
         app:layout_constraintBottom_toTopOf="@id/guideLine_contactDetails_bgCenterOfScreen"
@@ -28,7 +28,7 @@
     <!-- Title and title buttons flow. -->
     <androidx.constraintlayout.helper.widget.Flow
         android:id="@+id/flow_contactDetails_titleAndButtons"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/marginHorizontal"
         android:layout_marginTop="@dimen/offset_M"
@@ -48,7 +48,7 @@
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:background="@android:color/transparent"
-        android:src="@drawable/arrow_back"
+        android:src="@drawable/button_arrow_back"
         tools:ignore="MissingConstraints,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -65,7 +65,7 @@
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:background="@android:color/transparent"
-        android:src="@drawable/baseline_highlight_off_24"
+        android:src="@drawable/button_revoke_permissions"
         android:visibility="invisible"
         tools:ignore="MissingConstraints,SpeakableTextPresentCheck,TouchTargetSizeCheck"
         tools:layout_editor_absoluteX="359dp"
@@ -92,7 +92,7 @@
         android:id="@+id/imageView_contactDetails_avatarImage"
         android:layout_width="@dimen/avatarSide_myProfile"
         android:layout_height="@dimen/avatarSide_myProfile"
-        android:src="@drawable/sample_avatar"
+        android:src="@drawable/jpg_sample_avatar"
         tools:ignore="MissingConstraints" />
 
     <!-- <!- Person Info flow. -->
@@ -143,10 +143,12 @@
 
     <!-- Bottom half of screen. -->
     <View
-        android:id="@+id/guideLine_contactDetails_bgBottomHalf"
-        android:layout_width="match_parent"
+        android:id="@+id/view_contactDetails_bgBottomHalf"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="?attr/colorTertiary"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/guideLine_contactDetails_bgTopHalf" />
 
@@ -170,43 +172,43 @@
         android:id="@+id/imageView_contactDetails_facebookButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/socials_outline_circle"
+        android:background="@drawable/icon_socials_outline_circle"
         android:clickable="true"
         android:focusable="true"
         android:scaleType="center"
-        app:srcCompat="@drawable/socials_logo_facebook"
+        app:srcCompat="@drawable/icon_socials_logo_facebook"
         tools:ignore="MissingConstraints,SpeakableTextPresentCheck" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/imageView_contactDetails_linkedinButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/socials_outline_circle"
+        android:background="@drawable/icon_socials_outline_circle"
         android:clickable="true"
         android:focusable="true"
         android:scaleType="center"
-        app:srcCompat="@drawable/socials_logo_linkedin"
+        app:srcCompat="@drawable/icon_socials_logo_linkedin"
         tools:ignore="MissingConstraints,SpeakableTextPresentCheck" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/imageView_contactDetails_instagramButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/socials_outline_circle"
+        android:background="@drawable/icon_socials_outline_circle"
         android:clickable="true"
         android:focusable="true"
         android:scaleType="center"
-        app:srcCompat="@drawable/socials_logo_instagram"
+        app:srcCompat="@drawable/icon_socials_logo_instagram"
         tools:ignore="MissingConstraints,SpeakableTextPresentCheck" />
 
     <!-- View Contacts button. -->
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_contactDetails_viewMyContacts"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="@dimen/size_buttonHeight_XL"
         android:layout_marginHorizontal="@dimen/marginHorizontal"
         android:layout_marginBottom="@dimen/offset_M"
-        android:background="@drawable/btn_std_orange_bg"
+        android:background="@drawable/button_selector_orange"
         android:text="@string/contactDetails_messageButton"
         android:textAppearance="@style/basicText_buttonsText"
         app:layout_constraintBottom_toBottomOf="parent"

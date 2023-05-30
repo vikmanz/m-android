@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.main.MainActivity">
+    tools:context=".ui.main.MainActivity">
 
     <!-- Guide of center of elements. -->
     <androidx.constraintlayout.widget.Guideline
@@ -17,7 +17,7 @@
     <!-- Top half of screen. -->
     <View
         android:id="@+id/guideLine_myProfile_bgTopHalf"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="?attr/colorSecondary"
         app:layout_constraintBottom_toTopOf="@id/guideLine_myProfile_bgCenterOfScreen"
@@ -28,7 +28,7 @@
     <!-- Settings and Logout flow. -->
     <androidx.constraintlayout.helper.widget.Flow
         android:id="@+id/flow_myProfile_topButtons"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/marginHorizontal"
         android:orientation="horizontal"
@@ -78,7 +78,7 @@
         android:id="@+id/imageView_myProfile_avatarImage"
         android:layout_width="@dimen/avatarSide_myProfile"
         android:layout_height="@dimen/avatarSide_myProfile"
-        android:src="@drawable/sample_avatar"
+        android:src="@drawable/jpg_sample_avatar"
         tools:ignore="MissingConstraints" />
 
     <!-- <!- Person Info flow. -->
@@ -126,10 +126,12 @@
 
     <!-- Bottom half of screen. -->
     <View
-        android:id="@+id/guideLine_myProfile_bgBottomHalf"
-        android:layout_width="match_parent"
+        android:id="@+id/view_myProfile_bgBottomHalf"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="?attr/colorTertiary"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/guideLine_myProfile_bgTopHalf" />
 
@@ -152,43 +154,43 @@
         android:id="@+id/imageView_myProfile_facebookButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/socials_outline_circle"
+        android:background="@drawable/icon_socials_outline_circle"
         android:clickable="true"
         android:focusable="true"
         android:scaleType="center"
-        app:srcCompat="@drawable/socials_logo_facebook"
+        app:srcCompat="@drawable/icon_socials_logo_facebook"
         tools:ignore="MissingConstraints,SpeakableTextPresentCheck" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/imageView_myProfile_linkedinButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/socials_outline_circle"
+        android:background="@drawable/icon_socials_outline_circle"
         android:clickable="true"
         android:focusable="true"
         android:scaleType="center"
-        app:srcCompat="@drawable/socials_logo_linkedin"
+        app:srcCompat="@drawable/icon_socials_logo_linkedin"
         tools:ignore="MissingConstraints,SpeakableTextPresentCheck" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/imageView_myProfile_instagramButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/socials_outline_circle"
+        android:background="@drawable/icon_socials_outline_circle"
         android:clickable="true"
         android:focusable="true"
         android:scaleType="center"
-        app:srcCompat="@drawable/socials_logo_instagram"
+        app:srcCompat="@drawable/icon_socials_logo_instagram"
         tools:ignore="MissingConstraints,SpeakableTextPresentCheck" />
 
     <!-- Edit Profile button. -->
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_myProfile_editProfile"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="@dimen/size_buttonHeight_M"
         android:layout_marginHorizontal="@dimen/marginHorizontal"
         android:layout_marginBottom="@dimen/offset_M"
-        android:background="@drawable/btn_std_white_bg"
+        android:background="@drawable/button_selector_white"
         android:text="@string/main_edit_profile_button"
         android:textAppearance="@style/basicText_buttonsText"
         android:textColor="?attr/colorSecondary"
@@ -200,11 +202,11 @@
     <!-- View Contacts button. -->
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_myProfile_viewMyContacts"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="@dimen/size_buttonHeight_XL"
         android:layout_marginHorizontal="@dimen/marginHorizontal"
         android:layout_marginBottom="@dimen/offset_M"
-        android:background="@drawable/btn_std_orange_bg"
+        android:background="@drawable/button_selector_orange"
         android:text="@string/main_view_my_contacts_button"
         android:textAppearance="@style/basicText_buttonsText"
         app:layout_constraintBottom_toBottomOf="parent"

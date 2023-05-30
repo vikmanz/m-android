@@ -2,32 +2,50 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/auth_nav_graph"
+    android:id="@+id/nav_graph"
     app:startDestination="@id/splashScreenFragment">
 
     <fragment
         android:id="@+id/splashScreenFragment"
-        android:name="com.vikmanz.shpppro.presentation.auth.splash_screen.SplashScreenFragment"
-        android:label="SplashScreenFragment"
+        android:name="com.vikmanz.shpppro.ui.auth.splash_screen.SplashScreenFragment"
         tools:layout="@layout/fragment_splash_screen">
-        <argument
-            android:name="@string/safe_arg_id"
-            app:argType="com.vikmanz.shpppro.presentation.base.BaseArgument" />
+
         <action
-            android:id="@+id/action_splashScreenFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
+            android:id="@+id/startLoginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/splashScreenFragment"
+            app:popUpToInclusive="true"/>
+
+        <action
+            android:id="@+id/startMainActivity"
+            app:destination="@id/mainActivity"
+            app:popUpTo="@id/splashScreenFragment"
+            app:popUpToInclusive="true">
+        </action>
     </fragment>
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.vikmanz.shpppro.presentation.auth.login.LoginFragment"
-        android:label="LoginFragment"
+        android:name="com.vikmanz.shpppro.ui.auth.login.LoginFragment"
         tools:layout="@layout/fragment_login">
-        <argument
-            android:name="@string/safe_arg_id"
-            app:argType="com.vikmanz.shpppro.presentation.base.BaseArgument" />
+        <action
+            android:id="@+id/startMainActivity"
+            app:destination="@id/mainActivity"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true">
+    </action>
     </fragment>
 
+    <activity
+        android:id="@+id/mainActivity"
+        android:name="com.vikmanz.shpppro.ui.main.MainActivity"
+        tools:layout="@layout/fragment_my_profile">
+
+        <!--suppress NavigationFile -->
+        <argument
+            android:name="email"
+            app:argType="string" />
+    </activity>
 
 </navigation>
 

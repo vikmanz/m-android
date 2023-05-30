@@ -40,6 +40,9 @@
     <string name="auth_activity_warning_message_password_title">Password</string>
 
     <!-- ———————————————————— Main ———————————————————— -->
+    <!-- Tabs -->
+    <string name="main_my_profile_tab">MY PROFILE</string>
+    <string name="main_my_contacts_tab">MY CONTACTS</string>
     <!-- Layout -->
     <string name="main_settings">Settings</string>
     <string name="main_logout_button">LOGOUT</string>

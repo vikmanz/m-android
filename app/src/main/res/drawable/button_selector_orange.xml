@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- pressed -->
+    <item android:state_pressed="true">
+        <vector
+            android:width="164dp"
+            android:height="20dp"
+            android:viewportWidth="328"
+            android:viewportHeight="40">
+            <path
+                android:fillColor="?attr/colorSecondary"
+                android:pathData="M6,1L322,1A5,5 0,0 1,327 6L327,34A5,5 0,0 1,322 39L6,39A5,5 0,0 1,1 34L1,6A5,5 0,0 1,6 1z"
+                android:strokeWidth="2"
+                android:strokeColor="?attr/colorOnSecondary" />
+        </vector>
+    </item>
+
+
+
+    <!-- focused -->
+    <item android:state_focused="true">
+        <vector
+            android:width="164dp"
+            android:height="20dp"
+            android:viewportWidth="328"
+            android:viewportHeight="40">
+            <path
+                android:fillColor="?attr/colorPrimaryVariant"
+                android:pathData="M6,1L322,1A5,5 0,0 1,327 6L327,34A5,5 0,0 1,322 39L6,39A5,5 0,0 1,1 34L1,6A5,5 0,0 1,6 1z"
+                android:strokeWidth="2"
+                android:strokeColor="?attr/colorPrimary" />
+        </vector>
+    </item>
+
+
+
+    <!-- hovered -->
+    <item android:state_hovered="true">
+    <vector
+        android:width="164dp"
+        android:height="20dp"
+        android:viewportWidth="328"
+        android:viewportHeight="40">
+
+        <path
+            android:pathData="M6,1L322,1A5,5 0,0 1,327 6L327,34A5,5 0,0 1,322 39L6,39A5,5 0,0 1,1 34L1,6A5,5 0,0 1,6 1z"
+            android:strokeWidth="2"
+            android:fillColor="?attr/colorSecondaryVariant"
+            android:strokeColor="?attr/colorOnSecondary" />
+    </vector>
+    </item>
+
+
+
+    <!-- default -->
+    <item>
+    <vector
+        android:width="164dp"
+        android:height="20dp"
+        android:viewportWidth="328"
+        android:viewportHeight="40">
+
+        <path
+            android:pathData="M6,1L322,1A5,5 0,0 1,327 6L327,34A5,5 0,0 1,322 39L6,39A5,5 0,0 1,1 34L1,6A5,5 0,0 1,6 1z"
+            android:strokeWidth="2"
+            android:fillColor="?attr/colorPrimary"
+            android:strokeColor="?attr/colorPrimary" />
+    </vector>
+    </item>
+
+</selector>

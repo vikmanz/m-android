@@ -1,7 +1,7 @@
 package com.vikmanz.shpppro.data.utils
 
-import com.vikmanz.shpppro.presentation.utils.extensions.firstCharToUpperCase
-import java.util.*
+import com.vikmanz.shpppro.utilits.extensions.firstCharToUpperCase
+import java.util.Locale
 
 /**
  * Class which get full email and parse email to "Name Surname".
