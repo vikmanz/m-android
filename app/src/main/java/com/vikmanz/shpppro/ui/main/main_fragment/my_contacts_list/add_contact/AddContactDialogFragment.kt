@@ -11,7 +11,6 @@ import androidx.fragment.app.viewModels
 import com.vikmanz.shpppro.R
 import com.vikmanz.shpppro.databinding.FragmentAddContactMyContactsBinding
 import com.vikmanz.shpppro.ui.utils.extensions.setImageWithGlide
-import com.vikmanz.shpppro.utilits.extensions.log
 import dagger.hilt.android.AndroidEntryPoint
 
 /**

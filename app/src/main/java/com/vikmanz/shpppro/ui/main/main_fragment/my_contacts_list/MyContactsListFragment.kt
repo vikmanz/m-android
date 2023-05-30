@@ -29,6 +29,7 @@ import com.vikmanz.shpppro.ui.utils.extensions.setMultipleVisible
 import com.vikmanz.shpppro.ui.utils.extensions.setVisible
 import com.vikmanz.shpppro.ui.utils.recycler_view_decoration.MarginItemDecoration
 import com.vikmanz.shpppro.ui.utils.recycler_view_decoration.SwipeToDeleteCallback
+import com.vikmanz.shpppro.utilits.extensions.isFalse
 import com.vikmanz.shpppro.utilits.extensions.startDeclineAccessActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -53,6 +54,7 @@ class MyContactsListFragment :
      */
     private val adapter: ContactsAdapter by lazy {
         ContactsAdapter(contactActionListener = object : ContactActionListener {
+
             override fun onTapContact(contact: Contact) {
                 viewModel.onContactPressed(contact)
             }
@@ -134,7 +136,10 @@ class MyContactsListFragment :
                 }
             }
         }
+
         viewModel.isMultiselectMode.observe(viewLifecycleOwner) {
+            adapter.setMultiselectMode(it)
+            binding.recyclerViewMyContactsContactList.adapter = adapter     // adapter.notifyDataSetChanged()
             binding.buttonMyContactsDeleteMultipleContacts.apply {
                 if (it) setVisible() else setGone()
             }
@@ -164,7 +169,7 @@ class MyContactsListFragment :
                     MARGINS_OF_ELEMENTS
                 )
             )
-            recyclerViewMyContactsContactList.adapter = adapter
+            //recyclerViewMyContactsContactList.adapter = adapter
         }
         initSwipeToDelete()
     }
@@ -194,7 +199,13 @@ class MyContactsListFragment :
         val swipeHandler = object : SwipeToDeleteCallback(requireContext()) {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val position = viewHolder.adapterPosition
-                viewModel.getContact(position)?.let { deleteContactWithUndo(it) }
+                viewModel.getContact(position)?.let {
+                    deleteContactWithUndo(it)
+                }
+            }
+
+            override fun isItemViewSwipeEnabled(): Boolean {
+                return viewModel.isMultiselectMode.isFalse()
             }
         }
         val itemTouchHelper = ItemTouchHelper(swipeHandler)

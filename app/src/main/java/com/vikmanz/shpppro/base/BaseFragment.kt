@@ -22,12 +22,10 @@ abstract class BaseFragment<VBinding : ViewBinding, VM : BaseViewModel>(
     protected open fun setListeners() {}
     protected open fun setObservers() {}
     protected open fun onReady() {}
-    protected open fun setIncomingArguments() {}
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setIncomingArguments()
     }
 
     override fun onCreateView(
@@ -58,12 +56,16 @@ abstract class BaseFragment<VBinding : ViewBinding, VM : BaseViewModel>(
     private fun handleNavigation(navCommand: NavigationCommand) {
         when (navCommand) {
             is NavigationCommand.ToDirection -> findNavController().navigate(navCommand.directions)
+            is NavigationCommand.ToActivity -> {
+                findNavController().navigate(navCommand.directions)
+                requireActivity().finish()
+            }
             is NavigationCommand.Back -> findNavController().navigateUp()
         }
     }
 
     override fun onDestroyView() {
-        _binding = null
         super.onDestroyView()
+        _binding = null
     }
 }

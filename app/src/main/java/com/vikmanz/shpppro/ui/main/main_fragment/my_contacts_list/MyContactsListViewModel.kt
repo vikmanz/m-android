@@ -5,7 +5,8 @@ import com.vikmanz.shpppro.base.BaseViewModel
 import com.vikmanz.shpppro.data.contact_model.Contact
 import com.vikmanz.shpppro.data.repository.interfaces.Repository
 import com.vikmanz.shpppro.ui.main.main_fragment.MainViewPagerFragmentDirections
-import com.vikmanz.shpppro.utilits.extensions.log
+import com.vikmanz.shpppro.utilits.extensions.isFalse
+import com.vikmanz.shpppro.utilits.extensions.isTrue
 import com.vikmanz.shpppro.utilits.extensions.swapBoolean
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -27,7 +28,7 @@ class MyContactsListViewModel @Inject constructor(
     private var lastDeletedPosition: Int = 0
 
     val isMultiselectMode = MutableLiveData(false)
-    private val multiselectList = ArrayList<Contact>()
+
 
     init {
         _repository.setFakeContacts()
@@ -77,7 +78,7 @@ class MyContactsListViewModel @Inject constructor(
      * Change contact list to fake contacts list.
      */
     fun changeContactList() {
-        if (fakeListActivated.value == true) {
+        if (fakeListActivated.isTrue()) {
             _repository.setPhoneContacts()
         } else {
             _repository.setFakeContacts()
@@ -86,15 +87,11 @@ class MyContactsListViewModel @Inject constructor(
     }
 
     fun onContactPressed(contact: Contact) {
-        if (isMultiselectMode.value == false) {
+        if (isMultiselectMode.isFalse()) {
             navigate(MainViewPagerFragmentDirections.startContactDetails(contact.contactId))
         } else {
-            if (!multiselectList.contains(contact)) {
-                multiselectList.add(contact)
-                log("Add contact to list. List count = ${multiselectList.size}")
-            } else {
-                multiselectList.remove(contact)
-                log("remove contact from list. List count = ${multiselectList.size}")
+            if (_repository.checkContactInMultiselect(contact)) {
+                isMultiselectMode.swapBoolean()
             }
         }
     }
@@ -114,20 +111,17 @@ class MyContactsListViewModel @Inject constructor(
     }
 
     fun deleteMultipleContacts() {
-        isMultiselectMode.value = false
-        multiselectList.forEach { contact ->
-            _repository.deleteContact(contact)
-        }
-        multiselectList.clear()
+        _repository.deleteMultipleContacts()
+        isMultiselectMode.swapBoolean()
     }
 
 
     fun swapSelectMode(contact: Contact) {
         isMultiselectMode.swapBoolean()
-        if (isMultiselectMode.value == true) {
+        if (isMultiselectMode.isTrue()) {
             onContactPressed(contact)
         } else {
-            multiselectList.clear()
+            _repository.clearMultiselect()
         }
     }
 }

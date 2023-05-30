@@ -9,13 +9,16 @@ import com.vikmanz.shpppro.utilits.Event
 
 abstract class BaseViewModel : ViewModel() {
 
-    // хранит обернутое значение NavigationCommand. Эти значения обёрнуты с помощью Event<T> чтобы использовать это значение только один раз.
     private val _navigation = MutableLiveData<Event<NavigationCommand>>()
 
     val navigation: LiveData<Event<NavigationCommand>> get() = _navigation
 
     fun navigate(navDirections: NavDirections) {
         _navigation.value = Event(NavigationCommand.ToDirection(navDirections))
+    }
+
+    fun navigateToActivity(navDirections: NavDirections) {
+        _navigation.value = Event(NavigationCommand.ToActivity(navDirections))
     }
 
     fun navigateBack() {

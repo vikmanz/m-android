@@ -6,6 +6,7 @@ import com.vikmanz.shpppro.constants.Constants.START_NUMBER_OF_CONTACTS
 import com.vikmanz.shpppro.data.contact_model.Contact
 import com.vikmanz.shpppro.data.repository.interfaces.Repository
 import com.vikmanz.shpppro.data.utils.ContactsPhoneInfoTaker
+import com.vikmanz.shpppro.utilits.extensions.log
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import java.net.URL
@@ -28,6 +29,8 @@ class ContactsRepositoryImpl @Inject constructor(
     private val faker = Faker.instance() // fake data generator.
 
     private var imgCounter = 0  // counter to switch random images.
+
+    private val multiselectList = ArrayList<Contact>()
 
     init {
         setFakeContacts()
@@ -64,17 +67,17 @@ class ContactsRepositoryImpl @Inject constructor(
     /**
      * Create and return one contact with random fake information.
      */
-    override fun generateRandomContact() : Contact =
+    override fun generateRandomContact(): Contact =
         createContact(
-        contactPhotoLink = IMAGES[imgCounter % IMAGES.size],
-        photoIndex = imgCounter,
-        name = faker.name().fullName(),
-        career = faker.company().name(),
-        email = faker.internet().emailAddress(),
-        phone = faker.phoneNumber().phoneNumber(),
-        address = faker.address().fullAddress(),
-        birthday = faker.date().birthday().toString(),
-    )
+            contactPhotoLink = IMAGES[imgCounter % IMAGES.size],
+            photoIndex = imgCounter,
+            name = faker.name().fullName(),
+            career = faker.company().name(),
+            email = faker.internet().emailAddress(),
+            phone = faker.phoneNumber().phoneNumber(),
+            address = faker.address().fullAddress(),
+            birthday = faker.date().birthday().toString(),
+        )
 
     /**
      * Create and return list of fake contacts.
@@ -174,10 +177,39 @@ class ContactsRepositoryImpl @Inject constructor(
         return null
     }
 
+    override fun deleteMultipleContacts() {
+        multiselectList.forEach { contact ->
+            _contactList.value = _contactList.value.toMutableList().apply {
+                remove(contact)
+            }
+        }
+
+    }
+
+    override fun clearMultiselect() {
+        _contactList.value = _contactList.value.toMutableList().onEach { it.isChecked = false }
+        multiselectList.clear()
+    }
+
+    override fun checkContactInMultiselect(contact: Contact): Boolean {
+        log("list count start: ${multiselectList.size}")
+        contact.isChecked = !contact.isChecked
+        if (multiselectList.contains(contact)) {
+            multiselectList.remove(contact)
+            log("list count: ${multiselectList.size}")
+        } else {
+            multiselectList.add(contact)
+            log("list count: ${multiselectList.size}")
+        }
+        log("list count end: ${multiselectList.size}")
+        return multiselectList.size == 0
+    }
+
 
     override fun isContainsContact(contact: Contact): Boolean {
         return _contactList.value.contains(contact)
     }
+
 
     /**
      * Random images for fake data or adding new contacts.

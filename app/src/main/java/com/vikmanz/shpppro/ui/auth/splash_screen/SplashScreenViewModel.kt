@@ -5,7 +5,6 @@ import androidx.lifecycle.viewModelScope
 import com.vikmanz.shpppro.base.BaseViewModel
 import com.vikmanz.shpppro.constants.Constants
 import com.vikmanz.shpppro.data.datastore.interfaces.MyPreferences
-import com.vikmanz.shpppro.utilits.extensions.log
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -37,6 +36,6 @@ class SplashScreenViewModel @Inject constructor(
 
     private fun startMainActivity(email: String) {
         val direction = SplashScreenFragmentDirections.startMainActivity(email)
-        navigate(direction)
+        navigateToActivity(direction)
     }
 }

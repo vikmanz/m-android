@@ -11,12 +11,9 @@ import com.vikmanz.shpppro.base.BaseFragment
 import com.vikmanz.shpppro.databinding.FragmentMainViewPagerBinding
 import com.vikmanz.shpppro.ui.main.main_fragment.my_contacts_list.MyContactsListFragment
 import com.vikmanz.shpppro.ui.main.main_fragment.my_profile.MyProfileFragment
-import com.vikmanz.shpppro.utilits.extensions.log
-import dagger.hilt.android.AndroidEntryPoint
 
 private const val NUM_PAGES = 2
 
-@AndroidEntryPoint
 class MainViewPagerFragment :
     BaseFragment<FragmentMainViewPagerBinding, MainViewPagerFragmentViewModel>(
         FragmentMainViewPagerBinding::inflate
@@ -53,19 +50,15 @@ class MainViewPagerFragment :
             .addCallback(this, object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
                     if (viewPager.currentItem == 0) {
-                        // If the user is currently looking at the first step, allow the system to handle
-                        // the Back button. This calls finish() on this activity and pops the back stack.
-                        @Suppress("DEPRECATION")
-                        requireActivity().onBackPressed()       //todo navigation + crash
+                        requireActivity().finish()
                     } else {
-                        // Otherwise, select the previous step.
-                        viewPager.currentItem = viewPager.currentItem - 1
+                        viewPager.currentItem--
                     }
                 }
             })
     }
 
-    inner class MainViewPagerFragmentStateAdapter(f: MainViewPagerFragment) :
+    inner class MainViewPagerFragmentStateAdapter(f: Fragment) :
         FragmentStateAdapter(f) {
         override fun getItemCount(): Int = NUM_PAGES
 

@@ -28,6 +28,7 @@
             android:minWidth="0dp"
             android:minHeight="0dp"
             android:visibility="gone"
+            android:clickable="false"
             tools:visibility="visible"
             android:layout_marginEnd="@dimen/offset_SM"
             />

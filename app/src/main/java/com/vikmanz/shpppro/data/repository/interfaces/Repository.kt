@@ -44,4 +44,8 @@ interface Repository<T> {
 
     fun isContainsContact(contact: T): Boolean
 
+    fun checkContactInMultiselect(contact: T): Boolean
+    fun deleteMultipleContacts()
+    fun clearMultiselect()
+
 }

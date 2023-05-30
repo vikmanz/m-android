@@ -74,7 +74,7 @@ class MyProfileFragment :
      * Start My contacts activity.
      */
     private fun goToMyContacts() {
-        (parentFragment as MainViewPagerFragment).viewPager.currentItem = 1 //todo enum
+        (parentFragment as MainViewPagerFragment).viewPager.currentItem = 1
     }
 
 }

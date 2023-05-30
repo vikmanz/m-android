@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -42,7 +41,7 @@
         textView_login_helloSubtext"
         app:layout_constraintBottom_toTopOf="@+id/flow_login_emailAndPassword"
         app:layout_constraintEnd_toStartOf="@+id/guideLine_login_rightBorder"
-        app:layout_constraintStart_toStartOf="@+id/guideLine_login_leftBorder"  />
+        app:layout_constraintStart_toStartOf="@+id/guideLine_login_leftBorder" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textView_login_helloText"
@@ -74,7 +73,7 @@
         flow_login_rememberAndForgot"
         app:layout_constraintBottom_toTopOf="@+id/guideLine_login_bgCenterOfScreen"
         app:layout_constraintEnd_toStartOf="@+id/guideLine_login_rightBorder"
-        app:layout_constraintStart_toStartOf="@+id/guideLine_login_leftBorder"  />
+        app:layout_constraintStart_toStartOf="@+id/guideLine_login_leftBorder" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout_login_email"
@@ -82,7 +81,12 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="@string/auth_layout_email_hint"
+        android:textColorHint="?attr/colorOnTertiary"
+        app:colorControlActivated="?attr/colorOnTertiary"
+        app:colorControlHighlight="?attr/colorOnTertiary"
+        app:colorControlNormal="?attr/colorOnTertiary"
         app:helperTextTextColor="?attr/colorError"
+        android:textCursorDrawable="@null"
         app:hintTextAppearance="@style/textInputLayout_hintSize"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -91,6 +95,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/textInput_login_emailField"
             style="@style/textInputLayout_basicTextInput"
+            android:textCursorDrawable="@null"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textEmailAddress"
@@ -101,17 +106,22 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout_login_password"
         style="@style/textInputLayout_LoginPassword"
-        app:helperTextTextColor="?attr/colorError"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="@string/auth_layout_password_hint"
         android:paddingTop="@dimen/offset_S"
+        android:textColorHint="?attr/colorOnTertiary"
+        app:colorControlActivated="?attr/colorOnTertiary"
+        app:colorControlHighlight="?attr/colorOnTertiary"
+        app:colorControlNormal="?attr/colorOnTertiary"
         app:counterEnabled="true"
         app:counterMaxLength="@integer/count_loginFragment_passwordMaxLength"
         app:counterTextColor="?attr/colorTertiary"
+        app:helperTextTextColor="?attr/colorError"
         app:hintTextAppearance="@style/textInputLayout_hintSize"
         app:passwordToggleEnabled="true"
         app:passwordToggleTint="?attr/colorTertiary"
+        android:textCursorDrawable="@null"
         tools:ignore="MissingConstraints">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -120,6 +130,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
+            android:textCursorDrawable="@null"
             tools:ignore="VisualLintTextFieldSize" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -172,22 +183,22 @@
         app:layout_constraintStart_toStartOf="@+id/guideLine_login_leftBorder"
         app:layout_constraintTop_toBottomOf="@+id/guideLine_login_bgCenterOfScreen" />
 
-<!--    <androidx.appcompat.widget.AppCompatButton-->
-<!--        android:id="@+id/button_login_registerByGoogle"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="@dimen/size_buttonHeight_M"-->
-<!--        android:background="@drawable/btn_google"-->
-<!--        tools:ignore="MissingConstraints,TouchTargetSizeCheck,SpeakableTextPresentCheck,VisualLintButtonSize" />-->
+    <!--    <androidx.appcompat.widget.AppCompatButton-->
+    <!--        android:id="@+id/button_login_registerByGoogle"-->
+    <!--        android:layout_width="0dp"-->
+    <!--        android:layout_height="@dimen/size_buttonHeight_M"-->
+    <!--        android:background="@drawable/btn_google"-->
+    <!--        tools:ignore="MissingConstraints,TouchTargetSizeCheck,SpeakableTextPresentCheck,VisualLintButtonSize" />-->
 
     <com.vikmanz.shpppro.ui.utils.CustomGoogleButton
         android:id="@+id/button_login_registerByGoogle"
         android:layout_width="0dp"
         android:layout_height="@dimen/size_buttonHeight_M"
-        app:mgbText="GOOGLE"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:mgbText="GOOGLE"
         tools:ignore="MissingConstraints,TouchTargetSizeCheck,SpeakableTextPresentCheck,VisualLintButtonSize" />
 
     <androidx.appcompat.widget.AppCompatTextView

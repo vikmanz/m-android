@@ -6,7 +6,6 @@ import com.vikmanz.shpppro.base.BaseViewModel
 import com.vikmanz.shpppro.constants.Constants.LOGIN_VIEW_FIRST
 import com.vikmanz.shpppro.data.datastore.interfaces.MyPreferences
 import com.vikmanz.shpppro.ui.auth.splash_screen.SplashScreenFragmentDirections
-import com.vikmanz.shpppro.utilits.extensions.log
 import com.vikmanz.shpppro.utilits.extensions.swapBoolean
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -56,7 +55,7 @@ class LoginViewModel @Inject constructor(
 
     fun startMainActivity(email: String) {
         val direction = SplashScreenFragmentDirections.startMainActivity(email)
-        navigate(direction)
+        navigateToActivity(direction)
     }
 
 }
