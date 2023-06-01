@@ -23,11 +23,6 @@ abstract class BaseFragment<VBinding : ViewBinding, VM : BaseViewModel>(
     protected open fun setObservers() {}
     protected open fun onReady() {}
 
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
