@@ -1,5 +1,6 @@
 package com.vikmanz.shpppro.ui.main
 
+import android.os.Bundle
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.vikmanz.shpppro.R
@@ -18,7 +19,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
     /**
      * Add safe args to start destination fragment.
      */
-    override fun setIncomingArguments() {
+    override fun setIncomingArguments(savedInstanceState: Bundle?) {
+        if (savedInstanceState != null) return
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.mainFragmentContainer) as NavHostFragment
         navController = navHostFragment.navController

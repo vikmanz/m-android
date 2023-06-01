@@ -52,7 +52,7 @@ dependencies {
     implementation "androidx.core:core-ktx:1.10.1"
     implementation "androidx.activity:activity-ktx:1.7.2"
     implementation "androidx.fragment:fragment-ktx:1.5.7"
-    implementation "com.android.tools.build:aapt2:8.2.0-alpha05-10154469"
+    implementation "com.android.tools.build:aapt2:8.2.0-alpha06-10154469"
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.9.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
@@ -83,9 +83,6 @@ dependencies {
     // Hilt
     implementation "com.google.dagger:hilt-android:$hilt_version"
     kapt "com.google.dagger:hilt-compiler:$hilt_version"
-
-    // ViewPager2
-    //implementation "androidx.viewpager2:viewpager2:1.1.0-beta02"
 
     // External libraries
     implementation 'com.github.javafaker:javafaker:1.0.2'       // generator for fake info
