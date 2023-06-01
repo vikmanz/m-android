@@ -147,8 +147,8 @@ class MyContactsListFragment :
     }
 
     private fun observeContactsList() {
-        lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.contactList.collect { contactList ->
                     adapter.submitList(contactList)
                 }
@@ -169,7 +169,6 @@ class MyContactsListFragment :
                     MARGINS_OF_ELEMENTS
                 )
             )
-            //recyclerViewMyContactsContactList.adapter = adapter
         }
         initSwipeToDelete()
     }
