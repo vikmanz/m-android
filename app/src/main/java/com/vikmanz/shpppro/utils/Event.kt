@@ -1,4 +1,4 @@
-package com.vikmanz.shpppro.utilits
+package com.vikmanz.shpppro.utils
 
 open class Event<out T>(private val content: T) {
 

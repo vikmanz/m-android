@@ -1,13 +1,13 @@
 package com.vikmanz.shpppro.ui.main.main_fragment.my_contacts_list
 
 import androidx.lifecycle.MutableLiveData
-import com.vikmanz.shpppro.base.BaseViewModel
+import com.vikmanz.shpppro.ui.base.BaseViewModel
 import com.vikmanz.shpppro.data.contact_model.Contact
 import com.vikmanz.shpppro.data.repository.interfaces.Repository
 import com.vikmanz.shpppro.ui.main.main_fragment.MainViewPagerFragmentDirections
-import com.vikmanz.shpppro.utilits.extensions.isFalse
-import com.vikmanz.shpppro.utilits.extensions.isTrue
-import com.vikmanz.shpppro.utilits.extensions.swapBoolean
+import com.vikmanz.shpppro.utils.extensions.isFalse
+import com.vikmanz.shpppro.utils.extensions.isTrue
+import com.vikmanz.shpppro.utils.extensions.swapBoolean
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

@@ -31,4 +31,9 @@ object Constants {
      * TAG for LOG
      */
     const val LOG_TAG = "myLog"
+
+    /**
+     * Server settings
+     */
+    const val BASE_URL = "http://178.63.9.114:7777/api/"
 }

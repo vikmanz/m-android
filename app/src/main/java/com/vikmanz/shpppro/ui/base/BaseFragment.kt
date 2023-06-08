@@ -1,4 +1,4 @@
-package com.vikmanz.shpppro.base
+package com.vikmanz.shpppro.ui.base
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
 import com.vikmanz.shpppro.ui.navigator.NavigationCommand
-import com.vikmanz.shpppro.utilits.extensions.observeNonNull
+import com.vikmanz.shpppro.utils.extensions.observeNonNull
 
 abstract class BaseFragment<VBinding : ViewBinding, VM : BaseViewModel>(
     private val inflaterMethod: (LayoutInflater, ViewGroup?, Boolean) -> VBinding

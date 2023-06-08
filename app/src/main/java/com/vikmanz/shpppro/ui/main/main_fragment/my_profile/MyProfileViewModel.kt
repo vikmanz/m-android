@@ -2,7 +2,7 @@ package com.vikmanz.shpppro.ui.main.main_fragment.my_profile
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
-import com.vikmanz.shpppro.base.BaseViewModel
+import com.vikmanz.shpppro.ui.base.BaseViewModel
 import com.vikmanz.shpppro.data.datastore.interfaces.MyPreferences
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers

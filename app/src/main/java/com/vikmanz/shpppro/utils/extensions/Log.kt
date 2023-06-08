@@ -1,4 +1,4 @@
-package com.vikmanz.shpppro.utilits.extensions
+package com.vikmanz.shpppro.utils.extensions
 
 import android.util.Log
 import com.vikmanz.shpppro.constants.Constants.LOG_TAG

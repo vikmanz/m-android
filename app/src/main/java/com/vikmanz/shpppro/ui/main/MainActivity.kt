@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.vikmanz.shpppro.R
-import com.vikmanz.shpppro.base.BaseActivity
+import com.vikmanz.shpppro.ui.base.BaseActivity
 import com.vikmanz.shpppro.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 

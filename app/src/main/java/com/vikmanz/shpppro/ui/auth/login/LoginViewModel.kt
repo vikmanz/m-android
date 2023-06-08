@@ -2,11 +2,11 @@ package com.vikmanz.shpppro.ui.auth.login
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.vikmanz.shpppro.base.BaseViewModel
+import com.vikmanz.shpppro.ui.base.BaseViewModel
 import com.vikmanz.shpppro.constants.Constants.LOGIN_VIEW_FIRST
 import com.vikmanz.shpppro.data.datastore.interfaces.MyPreferences
 import com.vikmanz.shpppro.ui.auth.splash_screen.SplashScreenFragmentDirections
-import com.vikmanz.shpppro.utilits.extensions.swapBoolean
+import com.vikmanz.shpppro.utils.extensions.swapBoolean
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

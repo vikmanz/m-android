@@ -1,11 +1,11 @@
-package com.vikmanz.shpppro.base
+package com.vikmanz.shpppro.ui.base
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.NavDirections
 import com.vikmanz.shpppro.ui.navigator.NavigationCommand
-import com.vikmanz.shpppro.utilits.Event
+import com.vikmanz.shpppro.utils.Event
 
 abstract class BaseViewModel : ViewModel() {
 

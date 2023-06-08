@@ -1,4 +1,4 @@
-package com.vikmanz.shpppro.utilits.extensions
+package com.vikmanz.shpppro.utils.extensions
 
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData

@@ -7,7 +7,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
 import com.vikmanz.shpppro.R
-import com.vikmanz.shpppro.base.BaseFragment
+import com.vikmanz.shpppro.ui.base.BaseFragment
 import com.vikmanz.shpppro.databinding.FragmentMainViewPagerBinding
 import com.vikmanz.shpppro.ui.main.main_fragment.my_contacts_list.MyContactsListFragment
 import com.vikmanz.shpppro.ui.main.main_fragment.my_profile.MyProfileFragment

@@ -1,7 +1,7 @@
 package com.vikmanz.shpppro.ui.main.contact_details
 
 import androidx.fragment.app.viewModels
-import com.vikmanz.shpppro.base.BaseFragment
+import com.vikmanz.shpppro.ui.base.BaseFragment
 import com.vikmanz.shpppro.databinding.FragmentContactDetailsBinding
 import com.vikmanz.shpppro.ui.utils.extensions.setImageWithGlide
 import dagger.hilt.android.AndroidEntryPoint

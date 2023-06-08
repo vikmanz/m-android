@@ -1,7 +1,7 @@
 package com.vikmanz.shpppro.ui.main.contact_details
 
 import androidx.lifecycle.SavedStateHandle
-import com.vikmanz.shpppro.base.BaseViewModel
+import com.vikmanz.shpppro.ui.base.BaseViewModel
 import com.vikmanz.shpppro.data.contact_model.Contact
 import com.vikmanz.shpppro.data.repository.interfaces.Repository
 import dagger.hilt.android.lifecycle.HiltViewModel

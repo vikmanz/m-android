@@ -3,7 +3,7 @@ package com.vikmanz.shpppro.ui.main.main_fragment.my_profile
 import android.content.Intent
 import androidx.fragment.app.viewModels
 import com.vikmanz.shpppro.R
-import com.vikmanz.shpppro.base.BaseFragment
+import com.vikmanz.shpppro.ui.base.BaseFragment
 import com.vikmanz.shpppro.data.utils.EmailParser
 import com.vikmanz.shpppro.databinding.FragmentMyProfileBinding
 import com.vikmanz.shpppro.ui.auth.AuthActivity

@@ -4,7 +4,7 @@ import android.app.AlertDialog
 import android.util.Patterns
 import androidx.fragment.app.viewModels
 import com.vikmanz.shpppro.R
-import com.vikmanz.shpppro.base.BaseFragment
+import com.vikmanz.shpppro.ui.base.BaseFragment
 import com.vikmanz.shpppro.data.utils.PasswordErrorsChecker.checkPasswordErrors
 import com.vikmanz.shpppro.databinding.FragmentLoginBinding
 import com.vikmanz.shpppro.ui.utils.extensions.clearError
@@ -13,8 +13,8 @@ import com.vikmanz.shpppro.ui.utils.extensions.setInvisible
 import com.vikmanz.shpppro.ui.utils.extensions.setMultipleGone
 import com.vikmanz.shpppro.ui.utils.extensions.setMultipleVisible
 import com.vikmanz.shpppro.ui.utils.extensions.setVisible
-import com.vikmanz.shpppro.utilits.extensions.hideKeyboard
-import com.vikmanz.shpppro.utilits.extensions.startChangeLanguageActivity
+import com.vikmanz.shpppro.utils.extensions.hideKeyboard
+import com.vikmanz.shpppro.utils.extensions.startChangeLanguageActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

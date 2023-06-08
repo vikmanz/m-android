@@ -6,7 +6,7 @@ import com.vikmanz.shpppro.constants.Constants.START_NUMBER_OF_CONTACTS
 import com.vikmanz.shpppro.data.contact_model.Contact
 import com.vikmanz.shpppro.data.repository.interfaces.Repository
 import com.vikmanz.shpppro.data.utils.ContactsPhoneInfoTaker
-import com.vikmanz.shpppro.utilits.extensions.log
+import com.vikmanz.shpppro.utils.extensions.log
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import java.net.URL

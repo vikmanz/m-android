@@ -1,4 +1,4 @@
-package com.vikmanz.shpppro.utilits.extensions
+package com.vikmanz.shpppro.utils.extensions
 
 import java.util.Locale
 

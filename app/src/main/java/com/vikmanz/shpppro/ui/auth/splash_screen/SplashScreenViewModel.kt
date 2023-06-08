@@ -2,7 +2,7 @@ package com.vikmanz.shpppro.ui.auth.splash_screen
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.vikmanz.shpppro.base.BaseViewModel
+import com.vikmanz.shpppro.ui.base.BaseViewModel
 import com.vikmanz.shpppro.constants.Constants
 import com.vikmanz.shpppro.data.datastore.interfaces.MyPreferences
 import dagger.hilt.android.lifecycle.HiltViewModel
