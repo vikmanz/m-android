@@ -1,4 +1,4 @@
-package com.vikmanz.shpppro.data.entities
+package com.vikmanz.shpppro.data.source.network.entities
 
 import com.vikmanz.shpppro.data.model.User
 

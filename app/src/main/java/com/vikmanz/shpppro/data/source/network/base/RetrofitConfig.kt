@@ -1,4 +1,4 @@
-package com.vikmanz.shpppro.data.base
+package com.vikmanz.shpppro.data.source.network.base
 
 import com.squareup.moshi.Moshi
 import retrofit2.Retrofit

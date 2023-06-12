@@ -1,4 +1,4 @@
-package com.vikmanz.shpppro.data.entities
+package com.vikmanz.shpppro.data.source.network.entities
 
 data class TokenRefreshResponseEntity(
     val status: String,

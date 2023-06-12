@@ -1,8 +1,8 @@
 package com.vikmanz.shpppro.data.di
 
-import com.vikmanz.shpppro.data.model.Contact
+import com.vikmanz.shpppro.data.model.ContactListItem
 import com.vikmanz.shpppro.data.repository.ContactsRepositoryImpl
-import com.vikmanz.shpppro.data.repository.interfaces.Repository
+import com.vikmanz.shpppro.data.repository.interfaces.ContactsRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -18,6 +18,6 @@ abstract class RepositoryModule {
     @Singleton
     abstract fun bindRepository(
         repository: ContactsRepositoryImpl
-    ): Repository<Contact>
+    ): ContactsRepository<ContactListItem>
 
 }

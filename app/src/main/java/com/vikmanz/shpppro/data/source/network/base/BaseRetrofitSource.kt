@@ -1,4 +1,4 @@
-package com.vikmanz.shpppro.data.base
+package com.vikmanz.shpppro.data.source.network.base
 
 import android.util.Log
 import com.squareup.moshi.JsonDataException

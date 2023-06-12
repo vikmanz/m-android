@@ -4,7 +4,8 @@ import android.net.Uri
 import com.github.javafaker.Faker
 import com.vikmanz.shpppro.constants.Constants.START_NUMBER_OF_CONTACTS
 import com.vikmanz.shpppro.data.model.Contact
-import com.vikmanz.shpppro.data.repository.interfaces.Repository
+import com.vikmanz.shpppro.data.model.ContactListItem
+import com.vikmanz.shpppro.data.repository.interfaces.ContactsRepository
 import com.vikmanz.shpppro.data.utils.ContactsPhoneInfoTaker
 import com.vikmanz.shpppro.utils.extensions.log
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -18,10 +19,10 @@ import javax.inject.Inject
  * Main service to create contacts objects from information on from random.
  */
 class ContactsRepositoryImpl @Inject constructor(
-) : Repository<Contact> {
+) : ContactsRepository<ContactListItem> {
 
     //This object is a wrapper. if we pass it a new object it will call emit
-    private val _contactList = MutableStateFlow(listOf<Contact>())
+    private val _contactList = MutableStateFlow(listOf<ContactListItem>())
 
     //this object sends out the immutable list
     override val contactList = _contactList.asStateFlow()
@@ -30,7 +31,7 @@ class ContactsRepositoryImpl @Inject constructor(
 
     private var imgCounter = 0  // counter to switch random images.
 
-    private val multiselectList = ArrayList<Contact>()
+    private val multiselectList = ArrayList<ContactListItem>()
 
     init {
         setFakeContacts()
@@ -39,7 +40,7 @@ class ContactsRepositoryImpl @Inject constructor(
     /**
      * Create and return one contact with information from input.
      */
-    override fun createContact(
+    override fun createContactListItem(
         contactPhotoLink: Any,
         photoIndex: Int,
         name: String,
@@ -48,27 +49,29 @@ class ContactsRepositoryImpl @Inject constructor(
         phone: String,
         address: String,
         birthday: String
-    ): Contact {
-        val newContact = Contact(
-            contactId = getRandomId(),
-            contactPhotoLink = contactPhotoLink,
-            contactPhotoIndex = photoIndex,
-            contactName = name,
-            contactCareer = career,
-            contactEmail = email,
-            contactPhone = phone,
-            contactAddress = address,
-            contactBirthday = birthday
+    ): ContactListItem {
+        val newContactItem = ContactListItem(
+            Contact(
+                contactId = getRandomId(),
+                contactPhotoLink = contactPhotoLink,
+                contactPhotoIndex = photoIndex,
+                contactName = name,
+                contactCareer = career,
+                contactEmail = email,
+                contactPhone = phone,
+                contactAddress = address,
+                contactBirthday = birthday
+            ), false
         )
         imgCounter++
-        return newContact
+        return newContactItem
     }
 
     /**
      * Create and return one contact with random fake information.
      */
-    override fun generateRandomContact(): Contact =
-        createContact(
+    override fun generateRandomContactItem(): ContactListItem =
+        createContactListItem(
             contactPhotoLink = IMAGES[imgCounter % IMAGES.size],
             photoIndex = imgCounter,
             name = faker.name().fullName(),
@@ -84,7 +87,7 @@ class ContactsRepositoryImpl @Inject constructor(
      */
     override fun setFakeContacts() {
         _contactList.value = (0 until START_NUMBER_OF_CONTACTS).map {
-            generateRandomContact()
+            generateRandomContactItem()
         }.toMutableList()
     }
 
@@ -94,7 +97,7 @@ class ContactsRepositoryImpl @Inject constructor(
     override fun setPhoneContacts() {
         val listOfContactsInformation = ContactsPhoneInfoTaker().getPhonebookContactsInfo()
         _contactList.value = (0 until listOfContactsInformation.size).map {
-            createContact(
+            createContactListItem(
                 contactPhotoLink = Uri.parse(listOfContactsInformation[it][1]).let { uri ->
                     if (uri == Uri.EMPTY) IMAGES[imgCounter % IMAGES.size] else uri
                 },
@@ -137,53 +140,53 @@ class ContactsRepositoryImpl @Inject constructor(
         imgCounter++
     }
 
-    override fun addContact(contact: Contact) {
-        addContact(contact, _contactList.value.size)
+    override fun addContactItem(contactListItem: ContactListItem) {
+        addContactItem(contactListItem, _contactList.value.size)
     }
 
     /**
      * Add new contact to list of contacts to concrete index.
      */
-    override fun addContact(contact: Contact, index: Int) {
-        _contactList.value = _contactList.value.toMutableList().apply { add(index, contact) }
+    override fun addContactItem(contactListItem: ContactListItem, index: Int) {
+        _contactList.value = _contactList.value.toMutableList().apply { add(index, contactListItem) }
     }
 
     /**
      * Delete contact from list of contacts.
      */
-    override fun deleteContact(contact: Contact) {
-        _contactList.value = _contactList.value.toMutableList().apply { remove(contact) }
+    override fun deleteContactItem(contactListItem: ContactListItem) {
+        _contactList.value = _contactList.value.toMutableList().apply { remove(contactListItem) }
     }
 
     /**
      * Get contact position in list of contacts.
      */
-    override fun getContactPosition(contact: Contact): Int {
-        return _contactList.value.indexOf(contact)
+    override fun getContactItemPosition(contactListItem: ContactListItem): Int {
+        return _contactList.value.indexOf(contactListItem)
     }
 
     /**
      * Get contact from list via index.
      */
-    override fun getContact(index: Int): Contact? =
+    override fun getContactItem(index: Int): ContactListItem? =
         if (index >= 0 && index < _contactList.value.size) _contactList.value[index]
         else null
 
     /**
      * Get contact from list via id.
      */
-    override fun findContact(id: Long): Contact? {
-        _contactList.value.forEach { if (it.contactId == id) return it }
+    override fun findContactItem(id: Long): ContactListItem? {
+        _contactList.value.forEach { if (it.contact.contactId == id) return it }
         return null
     }
 
-    override fun deleteMultipleContacts() {
-        multiselectList.forEach { contact ->
+    override fun deleteMultipleContactItems() {
+        multiselectList.forEach { contactItem ->
             _contactList.value = _contactList.value.toMutableList().apply {
-                remove(contact)
+                remove(contactItem)
             }
         }
-
+        multiselectList.clear()
     }
 
     override fun clearMultiselect() {
@@ -191,23 +194,27 @@ class ContactsRepositoryImpl @Inject constructor(
         multiselectList.clear()
     }
 
-    override fun checkContactInMultiselect(contact: Contact): Boolean {
+    override fun checkContactInMultiselect(contactListItem: ContactListItem): Boolean {
         log("list count start: ${multiselectList.size}")
-        contact.isChecked = !contact.isChecked
-        if (multiselectList.contains(contact)) {
-            multiselectList.remove(contact)
+        contactListItem.isChecked = !contactListItem.isChecked
+        if (multiselectList.contains(contactListItem)) {
+            multiselectList.remove(contactListItem)
             log("list count: ${multiselectList.size}")
         } else {
-            multiselectList.add(contact)
+            multiselectList.add(contactListItem)
             log("list count: ${multiselectList.size}")
         }
         log("list count end: ${multiselectList.size}")
         return multiselectList.size == 0
     }
 
+    override fun toggleIsSelected(contactListItem: ContactListItem) {
+        val index = _contactList.value.indexOf(contactListItem)
+        if (index != -1) _contactList.value[index].apply { isChecked = !isChecked }
+    }
 
-    override fun isContainsContact(contact: Contact): Boolean {
-        return _contactList.value.contains(contact)
+    override fun isContainsContactItem(contactListItem: ContactListItem): Boolean {
+        return _contactList.value.contains(contactListItem)
     }
 
 

@@ -4,7 +4,8 @@ import android.net.Uri
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.vikmanz.shpppro.data.model.Contact
-import com.vikmanz.shpppro.data.repository.interfaces.Repository
+import com.vikmanz.shpppro.data.model.ContactListItem
+import com.vikmanz.shpppro.data.repository.interfaces.ContactsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -13,7 +14,7 @@ import javax.inject.Inject
  */
 @HiltViewModel
 class AddContactDialogFragmentViewModel @Inject constructor(
-    repository: Repository<Contact>
+    repository: ContactsRepository<ContactListItem>
 ) : ViewModel() {
 
     private val contactsRepository = repository
@@ -39,7 +40,7 @@ class AddContactDialogFragmentViewModel @Inject constructor(
         address: String,
         birthday: String
     ) {
-        val newContact = contactsRepository.createContact(
+        val newContactItem = contactsRepository.createContactListItem(
             contactPhotoLink = getCurrentPhoto(),
             photoIndex = contactsRepository.getCurrentPhotoCounter(),
             name = name,
@@ -49,7 +50,7 @@ class AddContactDialogFragmentViewModel @Inject constructor(
             address = address,
             birthday = birthday
         )
-        contactsRepository.addContact(newContact)
+        contactsRepository.addContactItem(newContactItem)
     }
 
     private fun getCurrentPhoto(): Any = with(currentPhoto.value) {

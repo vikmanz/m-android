@@ -6,10 +6,10 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.vikmanz.shpppro.R
-import com.vikmanz.shpppro.data.model.Contact
+import com.vikmanz.shpppro.data.model.ContactListItem
 import com.vikmanz.shpppro.databinding.OneContactItemBinding
 import com.vikmanz.shpppro.ui.main.main_fragment.my_contacts_list.adapter.listeners.ContactActionListener
-import com.vikmanz.shpppro.ui.main.main_fragment.my_contacts_list.adapter.utils.DiffUtilContactsComparator
+import com.vikmanz.shpppro.ui.main.main_fragment.my_contacts_list.adapter.utils.DiffUtilContactListItemComparator
 import com.vikmanz.shpppro.ui.utils.extensions.setGone
 import com.vikmanz.shpppro.ui.utils.extensions.setImageWithGlide
 import com.vikmanz.shpppro.ui.utils.extensions.setVisible
@@ -17,15 +17,11 @@ import com.vikmanz.shpppro.ui.utils.extensions.setVisible
 /**
  * Adapter for Recycler view.
  */
-class ContactsAdapter(
+class ContactsNormalAdapter(
     private val contactActionListener: ContactActionListener
-) : ListAdapter<Contact, ContactsAdapter.ContactHolder>(DiffUtilContactsComparator()) {
+) : ListAdapter<ContactListItem, ContactsNormalAdapter.ContactHolder>(DiffUtilContactListItemComparator()) {
 
     var isMultiselect: Boolean = false
-
-    fun setMultiselectMode(isMultiselect: Boolean) {
-        this.isMultiselect = isMultiselect
-    }
 
     /**
      * Create one element from holder and return it.
@@ -53,25 +49,25 @@ class ContactsAdapter(
             R.color.multiselect_background_contact_list
         )
 
-        fun bind(contact: Contact) {
+        fun bind(contactListItem: ContactListItem) {
             with(binding) {
 
                 // if (isMultiselectMode) bindMultiselectMode()
-                imageViewOneContactAvatarImage.setImageWithGlide(contact.contactPhotoLink)
+                imageViewOneContactAvatarImage.setImageWithGlide(contactListItem.contact.contactPhotoLink)
                 // bind Name/Career
-                textViewOneContactName.text = contact.contactName
-                textViewOneContactCareer.text = contact.contactPhone
+                textViewOneContactName.text = contactListItem.contact.contactName
+                textViewOneContactCareer.text = contactListItem.contact.contactPhone
                 // bind delete listener
                 buttonOneContactRemove.setOnClickListener {
                     // send contact to MyContactsActivity for delete it from ViewModel.
-                    contactActionListener.onDeleteContact(contact)
+                    contactActionListener.onDeleteContact(contactListItem)
                 }
 
                 // Multiselect decorations
                 if (isMultiselect) {
                     root.backgroundTintList = multiselectColor
                     checkboxOneContactMultiSelect.setVisible()
-                    checkboxOneContactMultiSelect.isChecked = contact.isChecked
+                    checkboxOneContactMultiSelect.isChecked = contactListItem.isChecked
                     buttonOneContactRemove.setGone()
                 } else {
                     root.backgroundTintList = null
@@ -85,11 +81,11 @@ class ContactsAdapter(
                             !checkboxOneContactMultiSelect.isChecked
                     }
                     // send contact id to MyContactsActivity for navigate to contact details.
-                    contactActionListener.onTapContact(contact)
+                    contactActionListener.onTapContact(contactListItem)
                 }
 
                 root.setOnLongClickListener {
-                    contactActionListener.onLongTapContact(contact)
+                    contactActionListener.onLongTapContact(contactListItem)
                     true
                 }
             }

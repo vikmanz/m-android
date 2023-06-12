@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.vikmanz.shpppro.ui.base.BaseViewModel
 import com.vikmanz.shpppro.constants.Constants
-import com.vikmanz.shpppro.data.datastore.interfaces.MyPreferences
+import com.vikmanz.shpppro.data.source.local.interfaces.PreferencesDatastore
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -12,7 +12,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SplashScreenViewModel @Inject constructor(
-    dataStore: MyPreferences
+    dataStore: PreferencesDatastore
 ) : BaseViewModel() {
 
     val login = MutableLiveData("")

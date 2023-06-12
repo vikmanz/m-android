@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.vikmanz.shpppro.ui.base.BaseViewModel
 import com.vikmanz.shpppro.constants.Constants.LOGIN_VIEW_FIRST
-import com.vikmanz.shpppro.data.datastore.interfaces.MyPreferences
+import com.vikmanz.shpppro.data.source.local.interfaces.PreferencesDatastore
 import com.vikmanz.shpppro.ui.auth.splash_screen.SplashScreenFragmentDirections
 import com.vikmanz.shpppro.utils.extensions.swapBoolean
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -15,7 +15,7 @@ import javax.inject.Inject
 private const val DEFAULT_SHOW_HELPERS = false
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-    dataStore: MyPreferences
+    dataStore: PreferencesDatastore
 ) : BaseViewModel() {
 
     private val _dataStore = dataStore

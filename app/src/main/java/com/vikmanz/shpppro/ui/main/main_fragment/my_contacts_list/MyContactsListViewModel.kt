@@ -2,8 +2,8 @@ package com.vikmanz.shpppro.ui.main.main_fragment.my_contacts_list
 
 import androidx.lifecycle.MutableLiveData
 import com.vikmanz.shpppro.ui.base.BaseViewModel
-import com.vikmanz.shpppro.data.model.Contact
-import com.vikmanz.shpppro.data.repository.interfaces.Repository
+import com.vikmanz.shpppro.data.model.ContactListItem
+import com.vikmanz.shpppro.data.repository.interfaces.ContactsRepository
 import com.vikmanz.shpppro.ui.main.main_fragment.MainViewPagerFragmentDirections
 import com.vikmanz.shpppro.utils.extensions.isFalse
 import com.vikmanz.shpppro.utils.extensions.isTrue
@@ -19,12 +19,12 @@ private const val FAKE_LIST_FIRST = true
  */
 @HiltViewModel
 class MyContactsListViewModel @Inject constructor(
-    contactsRepository: Repository<Contact>
+    contactsRepository: ContactsRepository<ContactListItem>
 ) : BaseViewModel() {
 
     private val _repository = contactsRepository
 
-    private var lastDeletedContact: Contact? = null
+    private var lastDeletedContact: ContactListItem? = null
     private var lastDeletedPosition: Int = 0
 
     val isMultiselectMode = MutableLiveData(false)
@@ -38,6 +38,10 @@ class MyContactsListViewModel @Inject constructor(
      * Create fake contact list and Flow to take it from outside.
      */
     val contactList = _repository.contactList
+//        .stateIn(
+//        scope = viewModelScope,
+//        initialValue = MutableStateFlow(listOf<ContactListItem>()),
+//        started = SharingStarted.WhileSubscribed(stopTimeoutMillis = 5_000))
 
     /**
      * Variables to control swap between fake contacts and phone contacts lists.
@@ -47,11 +51,11 @@ class MyContactsListViewModel @Inject constructor(
     /**
      * Delete contact from list of contacts.
      */
-    fun deleteContact(contact: Contact): Boolean {
-        if (contact == lastDeletedContact) return false
-        lastDeletedContact = contact
-        lastDeletedPosition = getContactPosition(contact)
-        _repository.deleteContact(contact)
+    fun deleteContact(item: ContactListItem): Boolean {
+        if (item == lastDeletedContact) return false
+        lastDeletedContact = item
+        lastDeletedPosition = getContactPosition(item)
+        _repository.deleteContactItem(item)
         return true
     }
 
@@ -60,7 +64,7 @@ class MyContactsListViewModel @Inject constructor(
      */
     fun restoreLastDeletedContact() {
         lastDeletedContact?.let {
-            if (!_repository.isContainsContact(it)) {
+            if (!_repository.isContainsContactItem(it)) {
                 addContactToPosition(it, lastDeletedPosition)
                 lastDeletedContact = null
             }
@@ -70,8 +74,8 @@ class MyContactsListViewModel @Inject constructor(
     /**
      * Get contact from list via index.
      */
-    fun getContact(index: Int): Contact? {
-        return _repository.getContact(index)
+    fun getContact(index: Int): ContactListItem? {
+        return _repository.getContactItem(index)
     }
 
     /**
@@ -86,11 +90,11 @@ class MyContactsListViewModel @Inject constructor(
         fakeListActivated.swapBoolean()
     }
 
-    fun onContactPressed(contact: Contact) {
+    fun onContactPressed(item: ContactListItem) {
         if (isMultiselectMode.isFalse()) {
-            navigate(MainViewPagerFragmentDirections.startContactDetails(contact.contactId))
+            navigate(MainViewPagerFragmentDirections.startContactDetails(item.contact.contactId))
         } else {
-            if (_repository.checkContactInMultiselect(contact)) {
+            if (_repository.checkContactInMultiselect(item)) {
                 isMultiselectMode.swapBoolean()
             }
         }
@@ -99,27 +103,27 @@ class MyContactsListViewModel @Inject constructor(
     /**
      * Get contact position in list of contacts.
      */
-    private fun getContactPosition(contact: Contact): Int {
-        return _repository.getContactPosition(contact)
+    private fun getContactPosition(item: ContactListItem): Int {
+        return _repository.getContactItemPosition(item)
     }
 
     /**
      * Add new contact to list of contacts to concrete index.
      */
-    private fun addContactToPosition(contact: Contact, index: Int) {
-        _repository.addContact(contact, index)
+    private fun addContactToPosition(item: ContactListItem, index: Int) {
+        _repository.addContactItem(item, index)
     }
 
     fun deleteMultipleContacts() {
-        _repository.deleteMultipleContacts()
+        _repository.deleteMultipleContactItems()
         isMultiselectMode.swapBoolean()
     }
 
 
-    fun swapSelectMode(contact: Contact) {
+    fun swapSelectMode(item: ContactListItem) {
         isMultiselectMode.swapBoolean()
         if (isMultiselectMode.isTrue()) {
-            onContactPressed(contact)
+            onContactPressed(item)
         } else {
             _repository.clearMultiselect()
         }

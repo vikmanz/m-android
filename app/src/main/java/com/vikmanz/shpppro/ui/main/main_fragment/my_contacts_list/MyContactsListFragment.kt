@@ -16,10 +16,10 @@ import com.vikmanz.shpppro.R
 import com.vikmanz.shpppro.ui.base.BaseFragment
 import com.vikmanz.shpppro.constants.Constants.MARGINS_OF_ELEMENTS
 import com.vikmanz.shpppro.constants.Constants.SNACK_BAR_VIEW_TIME
-import com.vikmanz.shpppro.data.model.Contact
+import com.vikmanz.shpppro.data.model.ContactListItem
 import com.vikmanz.shpppro.databinding.FragmentMyContactsListBinding
 import com.vikmanz.shpppro.ui.main.main_fragment.MainViewPagerFragment
-import com.vikmanz.shpppro.ui.main.main_fragment.my_contacts_list.adapter.ContactsAdapter
+import com.vikmanz.shpppro.ui.main.main_fragment.my_contacts_list.adapter.ContactsNormalAdapter
 import com.vikmanz.shpppro.ui.main.main_fragment.my_contacts_list.adapter.listeners.ContactActionListener
 import com.vikmanz.shpppro.ui.main.main_fragment.my_contacts_list.add_contact.AddContactDialogFragment
 import com.vikmanz.shpppro.ui.main.main_fragment.my_contacts_list.decline_permision.OnDeclinePermissionDialogFragment
@@ -52,19 +52,19 @@ class MyContactsListFragment :
     /**
      * Create adapter for contacts recycler view.
      */
-    private val adapter: ContactsAdapter by lazy {
-        ContactsAdapter(contactActionListener = object : ContactActionListener {
+    private val adapter: ContactsNormalAdapter by lazy {
+        ContactsNormalAdapter(contactActionListener = object : ContactActionListener {
 
-            override fun onTapContact(contact: Contact) {
-                viewModel.onContactPressed(contact)
+            override fun onTapContact(item: ContactListItem) {
+                viewModel.onContactPressed(item)
             }
 
-            override fun onLongTapContact(contact: Contact) {
-                viewModel.swapSelectMode(contact)
+            override fun onLongTapContact(item: ContactListItem) {
+                viewModel.swapSelectMode(item)
             }
 
-            override fun onDeleteContact(contact: Contact) {
-                deleteContactWithUndo(contact)
+            override fun onDeleteContact(item: ContactListItem) {
+                deleteContactWithUndo(item)
             }
 
         })
@@ -138,7 +138,7 @@ class MyContactsListFragment :
         }
 
         viewModel.isMultiselectMode.observe(viewLifecycleOwner) {
-            adapter.setMultiselectMode(it)
+            adapter.isMultiselect = it
             binding.recyclerViewMyContactsContactList.adapter = adapter     // adapter.notifyDataSetChanged()
             binding.buttonMyContactsDeleteMultipleContacts.apply {
                 if (it) setVisible() else setGone()
@@ -174,8 +174,8 @@ class MyContactsListFragment :
     }
 
 
-    private fun deleteContactWithUndo(contact: Contact) {
-        if (viewModel.deleteContact(contact)) createUndo()
+    private fun deleteContactWithUndo(item: ContactListItem) {
+        if (viewModel.deleteContact(item)) createUndo()
     }
 
     /**

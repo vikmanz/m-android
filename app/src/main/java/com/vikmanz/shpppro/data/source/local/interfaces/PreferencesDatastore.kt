@@ -1,8 +1,8 @@
-package com.vikmanz.shpppro.data.datastore.interfaces
+package com.vikmanz.shpppro.data.source.local.interfaces
 
 import kotlinx.coroutines.flow.Flow
 
-interface MyPreferences {
+interface PreferencesDatastore {
 
     suspend fun saveUserSata(name: String)
     suspend fun clearUser()
