@@ -3,7 +3,7 @@ package com.vikmanz.shpppro.ui.main.main_fragment.my_contacts_list.add_contact
 import android.net.Uri
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.vikmanz.shpppro.data.contact_model.Contact
+import com.vikmanz.shpppro.data.model.Contact
 import com.vikmanz.shpppro.data.repository.interfaces.Repository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject

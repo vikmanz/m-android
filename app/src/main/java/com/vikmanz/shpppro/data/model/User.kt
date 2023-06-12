@@ -1,4 +1,4 @@
-package com.example.domain.model
+package com.vikmanz.shpppro.data.model
 
 data class User(
     val id:Int,

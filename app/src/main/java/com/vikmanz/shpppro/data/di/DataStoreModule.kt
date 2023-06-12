@@ -1,4 +1,4 @@
-package com.vikmanz.shpppro.di
+package com.vikmanz.shpppro.data.di
 
 import com.vikmanz.shpppro.data.datastore.DataStoreManager
 import com.vikmanz.shpppro.data.datastore.interfaces.MyPreferences

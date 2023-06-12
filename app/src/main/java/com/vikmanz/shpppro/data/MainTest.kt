@@ -1,14 +1,14 @@
 package com.example
 
-import com.example.domain.model.User
-import com.example.domain.interfaces.ShPpApi
-import com.example.domain.entities.ContactAddRequestEntity
-import com.example.domain.entities.ContactAddResponseBody
-import com.example.domain.entities.ContactAddResponseEntity
-import com.example.domain.entities.ContactDeleteResponseBody
-import com.example.domain.entities.ContactDeleteResponseEntity
-import com.example.domain.entities.UserAuthorizeRequestEntity
-import com.example.domain.entities.UserEditRequestEntity
+import com.vikmanz.shpppro.data.model.User
+import com.vikmanz.shpppro.data.repository.interfaces.ShPPApi
+import com.vikmanz.shpppro.data.entities.ContactAddRequestEntity
+import com.vikmanz.shpppro.data.entities.ContactAddResponseBody
+import com.vikmanz.shpppro.data.entities.ContactAddResponseEntity
+import com.vikmanz.shpppro.data.entities.ContactDeleteResponseBody
+import com.vikmanz.shpppro.data.entities.ContactDeleteResponseEntity
+import com.vikmanz.shpppro.data.entities.UserAuthorizeRequestEntity
+import com.vikmanz.shpppro.data.entities.UserEditRequestEntity
 import com.squareup.moshi.Moshi
 import kotlinx.coroutines.runBlocking
 import okhttp3.OkHttpClient
@@ -34,7 +34,7 @@ fun main() = runBlocking {
         .client(client)
         .addConverterFactory(moshiConvertorFactory)
         .build()
-    val api = retrofit.create(ShPpApi::class.java)
+    val api = retrofit.create(ShPPApi::class.java)
     val login = UserAuthorizeRequestEntity(
         email = EMAIL,
         password = PASS
@@ -79,7 +79,8 @@ fun main() = runBlocking {
     val responseChangeUserInfo = api.editUser(token, selfId, UserEditRequestEntity(
         phone = "32!",
         career = "duje super klassna robota"
-    ))
+    )
+    )
     println("...done!")
     println("Self from response:")
     printUser(responseChangeUserInfo.data.user)

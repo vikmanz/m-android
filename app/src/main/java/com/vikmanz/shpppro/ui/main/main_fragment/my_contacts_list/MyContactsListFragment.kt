@@ -16,7 +16,7 @@ import com.vikmanz.shpppro.R
 import com.vikmanz.shpppro.ui.base.BaseFragment
 import com.vikmanz.shpppro.constants.Constants.MARGINS_OF_ELEMENTS
 import com.vikmanz.shpppro.constants.Constants.SNACK_BAR_VIEW_TIME
-import com.vikmanz.shpppro.data.contact_model.Contact
+import com.vikmanz.shpppro.data.model.Contact
 import com.vikmanz.shpppro.databinding.FragmentMyContactsListBinding
 import com.vikmanz.shpppro.ui.main.main_fragment.MainViewPagerFragment
 import com.vikmanz.shpppro.ui.main.main_fragment.my_contacts_list.adapter.ContactsAdapter
@@ -30,7 +30,7 @@ import com.vikmanz.shpppro.ui.utils.extensions.setVisible
 import com.vikmanz.shpppro.ui.utils.recycler_view_decoration.MarginItemDecoration
 import com.vikmanz.shpppro.ui.utils.recycler_view_decoration.SwipeToDeleteCallback
 import com.vikmanz.shpppro.utils.extensions.isFalse
-import com.vikmanz.shpppro.utils.extensions.startDeclineAccessActivity
+import com.vikmanz.shpppro.ui.utils.extensions.startDeclineAccessActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 

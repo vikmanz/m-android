@@ -1,4 +1,4 @@
-package com.example.domain.base
+package com.vikmanz.shpppro.data.base
 
 import com.squareup.moshi.Moshi
 import retrofit2.Retrofit

@@ -1,18 +1,18 @@
-package com.example.domain.interfaces
+package com.vikmanz.shpppro.data.repository.interfaces
 
-import com.example.domain.entities.ContactAddRequestEntity
-import com.example.domain.entities.ContactAddResponseEntity
-import com.example.domain.entities.ContactDeleteResponseEntity
-import com.example.domain.entities.TokenRefreshResponseEntity
-import com.example.domain.entities.UserAuthorizeRequestEntity
-import com.example.domain.entities.UserAuthorizeResponseEntity
-import com.example.domain.entities.UserCreateRequestEntity
-import com.example.domain.entities.UserCreateResponseEntity
-import com.example.domain.entities.UserEditRequestEntity
-import com.example.domain.entities.UserEditResponseEntity
-import com.example.domain.entities.UserGetAllResponseEntity
-import com.example.domain.entities.UserGetContactsResponseEntity
-import com.example.domain.entities.UserGetResponseEntity
+import com.vikmanz.shpppro.data.entities.ContactAddRequestEntity
+import com.vikmanz.shpppro.data.entities.ContactAddResponseEntity
+import com.vikmanz.shpppro.data.entities.ContactDeleteResponseEntity
+import com.vikmanz.shpppro.data.entities.TokenRefreshResponseEntity
+import com.vikmanz.shpppro.data.entities.UserAuthorizeRequestEntity
+import com.vikmanz.shpppro.data.entities.UserAuthorizeResponseEntity
+import com.vikmanz.shpppro.data.entities.UserCreateRequestEntity
+import com.vikmanz.shpppro.data.entities.UserCreateResponseEntity
+import com.vikmanz.shpppro.data.entities.UserEditRequestEntity
+import com.vikmanz.shpppro.data.entities.UserEditResponseEntity
+import com.vikmanz.shpppro.data.entities.UserGetAllResponseEntity
+import com.vikmanz.shpppro.data.entities.UserGetContactsResponseEntity
+import com.vikmanz.shpppro.data.entities.UserGetResponseEntity
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
@@ -22,7 +22,7 @@ import retrofit2.http.POST
 import retrofit2.http.PUT
 import retrofit2.http.Path
 
-interface ShPpApi {
+interface ShPPApi {
 
     @POST("users")
     @Headers("Content-Type: miltipart/form-data")
@@ -65,7 +65,7 @@ interface ShPpApi {
     suspend fun addContact(
         @Header("Authorization") token: String,
         @Path("userId") userId: Int,
-        @Body body:ContactAddRequestEntity
+        @Body body: ContactAddRequestEntity
     ): ContactAddResponseEntity
 
     @DELETE("users/{userId}/contacts/{contactId}")

@@ -13,8 +13,8 @@ import com.vikmanz.shpppro.ui.utils.extensions.setInvisible
 import com.vikmanz.shpppro.ui.utils.extensions.setMultipleGone
 import com.vikmanz.shpppro.ui.utils.extensions.setMultipleVisible
 import com.vikmanz.shpppro.ui.utils.extensions.setVisible
-import com.vikmanz.shpppro.utils.extensions.hideKeyboard
-import com.vikmanz.shpppro.utils.extensions.startChangeLanguageActivity
+import com.vikmanz.shpppro.ui.utils.extensions.hideKeyboard
+import com.vikmanz.shpppro.ui.utils.extensions.startChangeLanguageActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

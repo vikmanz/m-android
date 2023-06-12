@@ -1,4 +1,4 @@
-package com.vikmanz.shpppro.utils.extensions
+package com.vikmanz.shpppro.ui.utils.extensions
 
 import android.content.Context
 import android.content.Intent

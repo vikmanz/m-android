@@ -1,4 +1,4 @@
-package com.vikmanz.shpppro.data.contact_model
+package com.vikmanz.shpppro.data.model
 
 import java.io.Serializable
 

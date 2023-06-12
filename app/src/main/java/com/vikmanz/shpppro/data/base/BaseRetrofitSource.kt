@@ -1,4 +1,4 @@
-package com.example.domain.base
+package com.vikmanz.shpppro.data.base
 
 import android.util.Log
 import com.squareup.moshi.JsonDataException

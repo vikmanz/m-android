@@ -2,7 +2,7 @@ package com.vikmanz.shpppro.ui.main.main_fragment.my_contacts_list
 
 import androidx.lifecycle.MutableLiveData
 import com.vikmanz.shpppro.ui.base.BaseViewModel
-import com.vikmanz.shpppro.data.contact_model.Contact
+import com.vikmanz.shpppro.data.model.Contact
 import com.vikmanz.shpppro.data.repository.interfaces.Repository
 import com.vikmanz.shpppro.ui.main.main_fragment.MainViewPagerFragmentDirections
 import com.vikmanz.shpppro.utils.extensions.isFalse

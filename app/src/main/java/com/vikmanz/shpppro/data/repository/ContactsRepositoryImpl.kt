@@ -3,7 +3,7 @@ package com.vikmanz.shpppro.data.repository
 import android.net.Uri
 import com.github.javafaker.Faker
 import com.vikmanz.shpppro.constants.Constants.START_NUMBER_OF_CONTACTS
-import com.vikmanz.shpppro.data.contact_model.Contact
+import com.vikmanz.shpppro.data.model.Contact
 import com.vikmanz.shpppro.data.repository.interfaces.Repository
 import com.vikmanz.shpppro.data.utils.ContactsPhoneInfoTaker
 import com.vikmanz.shpppro.utils.extensions.log

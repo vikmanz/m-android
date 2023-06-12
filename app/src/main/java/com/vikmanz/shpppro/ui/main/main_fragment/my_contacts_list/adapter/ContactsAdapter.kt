@@ -6,7 +6,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.vikmanz.shpppro.R
-import com.vikmanz.shpppro.data.contact_model.Contact
+import com.vikmanz.shpppro.data.model.Contact
 import com.vikmanz.shpppro.databinding.OneContactItemBinding
 import com.vikmanz.shpppro.ui.main.main_fragment.my_contacts_list.adapter.listeners.ContactActionListener
 import com.vikmanz.shpppro.ui.main.main_fragment.my_contacts_list.adapter.utils.DiffUtilContactsComparator

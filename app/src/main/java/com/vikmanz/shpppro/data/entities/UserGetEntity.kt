@@ -1,6 +1,6 @@
-package com.example.domain.entities
+package com.vikmanz.shpppro.data.entities
 
-import com.example.domain.model.User
+import com.vikmanz.shpppro.data.model.User
 
 data class UserGetResponseEntity(
     val status: String,

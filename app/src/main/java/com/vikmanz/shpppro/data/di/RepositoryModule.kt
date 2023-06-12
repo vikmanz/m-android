@@ -1,6 +1,6 @@
-package com.vikmanz.shpppro.di
+package com.vikmanz.shpppro.data.di
 
-import com.vikmanz.shpppro.data.contact_model.Contact
+import com.vikmanz.shpppro.data.model.Contact
 import com.vikmanz.shpppro.data.repository.ContactsRepositoryImpl
 import com.vikmanz.shpppro.data.repository.interfaces.Repository
 import dagger.Binds
