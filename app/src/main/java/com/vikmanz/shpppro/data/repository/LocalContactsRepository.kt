@@ -4,11 +4,11 @@ import android.net.Uri
 import com.github.javafaker.Faker
 import com.vikmanz.shpppro.constants.Constants.START_NUMBER_OF_CONTACTS
 import com.vikmanz.shpppro.data.model.Contact
-import com.vikmanz.shpppro.data.model.ContactListItem
 import com.vikmanz.shpppro.data.repository.interfaces.ContactsRepository
 import com.vikmanz.shpppro.data.utils.ContactsPhoneInfoTaker
 import com.vikmanz.shpppro.utils.extensions.log
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import java.net.URL
 import java.util.UUID
@@ -19,19 +19,19 @@ import javax.inject.Inject
  * Main service to create contacts objects from information on from random.
  */
 class LocalContactsRepository @Inject constructor(
-) : ContactsRepository<ContactListItem> {
+) : ContactsRepository<Contact> {
 
     //This object is a wrapper. if we pass it a new object it will call emit
-    private val _contactList = MutableStateFlow(listOf<ContactListItem>())
+    private val _contactList = MutableStateFlow(listOf<Contact>())
 
     //this object sends out the immutable list
-    override val contactList = _contactList.asStateFlow()
+    override val contactList: StateFlow<List<Contact>> = _contactList.asStateFlow()
 
     private val faker = Faker.instance() // fake data generator.
 
     private var imgCounter = 0  // counter to switch random images.
 
-    private val multiselectList = ArrayList<ContactListItem>()
+    private val multiselectList = ArrayList<Contact>()
 
     init {
         setFakeContacts()
@@ -40,7 +40,7 @@ class LocalContactsRepository @Inject constructor(
     /**
      * Create and return one contact with information from input.
      */
-    override fun createContactListItem(
+    override fun createContact(
         contactPhotoLink: Any,
         photoIndex: Int,
         name: String,
@@ -49,29 +49,27 @@ class LocalContactsRepository @Inject constructor(
         phone: String,
         address: String,
         birthday: String
-    ): ContactListItem {
-        val newContactItem = ContactListItem(
-            Contact(
-                contactId = getRandomId(),
-                contactPhotoLink = contactPhotoLink,
-                contactPhotoIndex = photoIndex,
-                contactName = name,
-                contactCareer = career,
-                contactEmail = email,
-                contactPhone = phone,
-                contactAddress = address,
-                contactBirthday = birthday
-            ), false
+    ): Contact {
+        val newContact = Contact(
+            contactId = getRandomId(),
+            contactPhotoLink = contactPhotoLink,
+            contactPhotoIndex = photoIndex,
+            contactName = name,
+            contactCareer = career,
+            contactEmail = email,
+            contactPhone = phone,
+            contactAddress = address,
+            contactBirthday = birthday
         )
         imgCounter++
-        return newContactItem
+        return newContact
     }
 
     /**
      * Create and return one contact with random fake information.
      */
-    override fun generateRandomContactItem(): ContactListItem =
-        createContactListItem(
+    override fun generateRandomContact(): Contact =
+        createContact(
             contactPhotoLink = IMAGES[imgCounter % IMAGES.size],
             photoIndex = imgCounter,
             name = faker.name().fullName(),
@@ -87,7 +85,7 @@ class LocalContactsRepository @Inject constructor(
      */
     override fun setFakeContacts() {
         _contactList.value = (0 until START_NUMBER_OF_CONTACTS).map {
-            generateRandomContactItem()
+            generateRandomContact()
         }.toMutableList()
     }
 
@@ -97,7 +95,7 @@ class LocalContactsRepository @Inject constructor(
     override fun setPhoneContacts() {
         val listOfContactsInformation = ContactsPhoneInfoTaker().getPhonebookContactsInfo()
         _contactList.value = (0 until listOfContactsInformation.size).map {
-            createContactListItem(
+            createContact(
                 contactPhotoLink = Uri.parse(listOfContactsInformation[it][1]).let { uri ->
                     if (uri == Uri.EMPTY) IMAGES[imgCounter % IMAGES.size] else uri
                 },
@@ -140,81 +138,104 @@ class LocalContactsRepository @Inject constructor(
         imgCounter++
     }
 
-    override fun addContactItem(contactListItem: ContactListItem) {
-        addContactItem(contactListItem, _contactList.value.size)
+    override fun addContact(contact: Contact) {
+        addContact(contact, _contactList.value.size)
     }
 
     /**
      * Add new contact to list of contacts to concrete index.
      */
-    override fun addContactItem(contactListItem: ContactListItem, index: Int) {
-        _contactList.value = _contactList.value.toMutableList().apply { add(index, contactListItem) }
+    override fun addContact(contact: Contact, index: Int) {
+        _contactList.value = _contactList.value.toMutableList().apply { add(index, contact) }
     }
 
     /**
      * Delete contact from list of contacts.
      */
-    override fun deleteContactItem(contactListItem: ContactListItem) {
-        _contactList.value = _contactList.value.toMutableList().apply { remove(contactListItem) }
+    override fun deleteContact(contact: Contact) {
+        _contactList.value = _contactList.value.toMutableList().apply { remove(contact) }
     }
 
     /**
      * Get contact position in list of contacts.
      */
-    override fun getContactItemPosition(contactListItem: ContactListItem): Int {
-        return _contactList.value.indexOf(contactListItem)
+    override fun getContactPosition(contact: Contact): Int {
+        _contactList.value.indexOf(contact).let { if (it != -1) return it }
+        return 0
     }
 
     /**
      * Get contact from list via index.
      */
-    override fun getContactItem(index: Int): ContactListItem? =
+    override fun getContact(index: Int): Contact? =
         if (index >= 0 && index < _contactList.value.size) _contactList.value[index]
         else null
 
     /**
      * Get contact from list via id.
      */
-    override fun findContactItem(id: Long): ContactListItem? {
-        _contactList.value.forEach { if (it.contact.contactId == id) return it }
+    override fun findContact(contactId: Long): Contact? {
+        _contactList.value.forEach { if (it.contactId == contactId) return it }
         return null
     }
 
-    override fun deleteMultipleContactItems() {
-        multiselectList.forEach { contactItem ->
+
+    override fun deleteMultipleContacts() {
+        multiselectList.forEach { contact ->
             _contactList.value = _contactList.value.toMutableList().apply {
-                remove(contactItem)
+                remove(contact)
             }
         }
         multiselectList.clear()
     }
 
     override fun clearMultiselect() {
+        log("clear multiselect")
         _contactList.value = _contactList.value.toMutableList().onEach { it.isChecked = false }
         multiselectList.clear()
     }
 
-    override fun checkContactInMultiselect(contactListItem: ContactListItem): Boolean {
-        log("list count start: ${multiselectList.size}")
-        contactListItem.isChecked = !contactListItem.isChecked
-        if (multiselectList.contains(contactListItem)) {
-            multiselectList.remove(contactListItem)
-            log("list count: ${multiselectList.size}")
-        } else {
-            multiselectList.add(contactListItem)
-            log("list count: ${multiselectList.size}")
+    override fun checkIsMultiselect(): Boolean {
+        _contactList.value.forEach {
+            if (it.isChecked) {
+                log("check is multiselect - true")
+                return true
+            }
         }
-        log("list count end: ${multiselectList.size}")
-        return multiselectList.size == 0
+        log("check is multiselect - false")
+        return false
     }
 
-    override fun toggleIsSelected(contactListItem: ContactListItem) {
-        val index = _contactList.value.indexOf(contactListItem)
-        if (index != -1) _contactList.value[index].apply { isChecked = !isChecked }
+    override fun toggleContactSelectionState(contact: Contact) {
+        log("Toggle contact state")
+        changeContactSelectionState(contact)
+        updateMultiselectContactList(contact)
+        log("arraylist size = ${multiselectList.size}")
     }
 
-    override fun isContainsContactItem(contactListItem: ContactListItem): Boolean {
-        return _contactList.value.contains(contactListItem)
+
+    private fun updateMultiselectContactList(contact: Contact) {
+        val index = _contactList.value.indexOf(contact)
+        if (_contactList.value[index].isChecked) {
+            multiselectList.add(contact)
+        }
+        else {
+            multiselectList.remove(contact)
+        }
+    }
+
+    private fun changeContactSelectionState(contact: Contact) {
+        val index = _contactList.value.indexOf(contact)
+        if (index != -1) _contactList.value[index].apply {
+            isChecked = !isChecked
+        }
+    }
+
+    override fun checkMultiselectState(): Boolean = multiselectList.size != 0
+
+
+    override fun isContainsContact(contact: Contact): Boolean {
+        return _contactList.value.contains(contact)
     }
 
 

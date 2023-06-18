@@ -1,5 +1,6 @@
 package com.vikmanz.shpppro.data.repository.interfaces
 
+import com.vikmanz.shpppro.data.model.Contact
 import kotlinx.coroutines.flow.StateFlow
 import java.net.URL
 
@@ -7,7 +8,7 @@ interface ContactsRepository<T> {
 
     val contactList: StateFlow<List<T>>
 
-    fun createContactListItem(
+    fun createContact(
         contactPhotoLink: Any,
         photoIndex: Int,
         name: String,
@@ -18,7 +19,7 @@ interface ContactsRepository<T> {
         birthday: String
     ): T
 
-    fun generateRandomContactItem(): T
+    fun generateRandomContact(): T
 
     fun setFakeContacts()
 
@@ -30,24 +31,26 @@ interface ContactsRepository<T> {
 
     fun incrementPhotoCounter()
 
-    fun addContactItem(contactListItem: T)
+    fun addContact(contact: T)
 
-    fun addContactItem(contactListItem: T, index: Int)
+    fun addContact(contact: T, index: Int)
 
-    fun deleteContactItem(contactListItem: T)
+    fun deleteContact(contact: Contact)
 
-    fun getContactItemPosition(contactListItem: T): Int
+    fun getContactPosition(contact: Contact): Int
 
-    fun getContactItem(index: Int): T?
+    fun getContact(index: Int): T?
 
-    fun findContactItem(id: Long): T?
+    fun findContact(contactId: Long): T?
 
-    fun isContainsContactItem(contactListItem: T): Boolean
+    fun isContainsContact(contact: Contact): Boolean
 
-    fun checkContactInMultiselect(contactListItem: T): Boolean
-    fun deleteMultipleContactItems()
+    fun checkIsMultiselect(): Boolean
+    fun deleteMultipleContacts()
 
-    fun toggleIsSelected(contactListItem: T)
+    fun toggleContactSelectionState(contact: T)
+    fun checkMultiselectState(): Boolean
     fun clearMultiselect()
+
 
 }

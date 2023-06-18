@@ -1,6 +1,6 @@
 package com.vikmanz.shpppro.data.model
 
-data class ContactListItem(
+data class ContactListItemState(
     val contact: Contact,
-    var isChecked: Boolean
+    val onCheck: () -> Unit
 )

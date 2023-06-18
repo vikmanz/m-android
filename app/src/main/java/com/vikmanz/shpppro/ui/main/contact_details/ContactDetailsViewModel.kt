@@ -1,23 +1,22 @@
 package com.vikmanz.shpppro.ui.main.contact_details
 
 import androidx.lifecycle.SavedStateHandle
-import com.vikmanz.shpppro.ui.base.BaseViewModel
 import com.vikmanz.shpppro.data.model.Contact
-import com.vikmanz.shpppro.data.model.ContactListItem
 import com.vikmanz.shpppro.data.repository.interfaces.ContactsRepository
+import com.vikmanz.shpppro.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class ContactDetailsViewModel @Inject constructor(
-    contactsRepository: ContactsRepository<ContactListItem>,
+    contactsRepository: ContactsRepository<Contact>,
     savedStateHandle: SavedStateHandle
 ) : BaseViewModel() {
 
     private val navArgs = ContactDetailsFragmentArgs.fromSavedStateHandle(savedStateHandle)
 
     private val contact =
-        requireNotNull(contactsRepository.findContactItem(navArgs.contactID)).contact
+        requireNotNull(contactsRepository.findContact(navArgs.contactID))
 
     val contactName = contact.contactName
     val contactCareer = contact.contactCareer
