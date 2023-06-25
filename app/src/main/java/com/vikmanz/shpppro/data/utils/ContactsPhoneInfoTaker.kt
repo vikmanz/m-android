@@ -1,12 +1,11 @@
 package com.vikmanz.shpppro.data.utils
 
-import android.annotation.SuppressLint
 import android.content.ContentResolver
 import android.provider.ContactsContract
 import com.vikmanz.shpppro.App
 import com.vikmanz.shpppro.constants.Constants.MAX_PHONE_IMPORT_CONTACTS_COUNT
+import com.vikmanz.shpppro.data.utils.extentions.getColumnIndexFromResource
 
-@SuppressLint("Range")
 class ContactsPhoneInfoTaker {
 
     /**
@@ -19,58 +18,60 @@ class ContactsPhoneInfoTaker {
 
         val uri = ContactsContract.Data.CONTENT_URI
         val projection = arrayOf(
-            ContactsContract.Data.CONTACT_ID,
-            ContactsContract.Contacts.DISPLAY_NAME,
-            ContactsContract.CommonDataKinds.Phone.PHOTO_URI,
-            ContactsContract.CommonDataKinds.Phone.NUMBER
+                ContactsContract.Data.CONTACT_ID,
+                ContactsContract.Contacts.DISPLAY_NAME,
+                ContactsContract.CommonDataKinds.Phone.PHOTO_URI,
+                ContactsContract.CommonDataKinds.Phone.NUMBER
         )
         val selection =
-            ContactsContract.Data.MIMETYPE + "='" + ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE + "'"
+                ContactsContract.Data.MIMETYPE + "='" + ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE + "'"
         val sortOrder = ContactsContract.Contacts.DISPLAY_NAME
 
         val cursor = contentResolver.query(uri, projection, selection, null, sortOrder)
 
-        cursor?.let {
-            while (cursor.moveToNext()) {
+        cursor?.use { it ->
+            while (it.moveToNext()) {
 
-                val id = cursor.getLong(cursor.getColumnIndex(ContactsContract.Data.CONTACT_ID))
-
-                val name: String = cursor.getString(
-                    cursor.getColumnIndex(
-                        ContactsContract.Contacts.DISPLAY_NAME
-                    )
+                val id = it.getLong(
+                        it.getColumnIndexFromResource(
+                                ContactsContract.Data.CONTACT_ID)
                 )
 
-                val photoUri: String = cursor.getString(
-                    cursor.getColumnIndex(
-                        ContactsContract.CommonDataKinds.Phone.PHOTO_URI
-                    )
+                val name: String = it.getString(
+                        it.getColumnIndexFromResource(
+                                ContactsContract.Contacts.DISPLAY_NAME
+                        )
+                )
+
+                val photoUri: String = it.getString(
+                        it.getColumnIndexFromResource(
+                                ContactsContract.CommonDataKinds.Phone.PHOTO_URI
+                        )
                 ) ?: ""
 
-                val phone: String = cursor.getString(
-                    cursor.getColumnIndex(
-                        ContactsContract.CommonDataKinds.Phone.NUMBER
-                    )
+                val phone: String = it.getString(
+                        it.getColumnIndexFromResource(
+                                ContactsContract.CommonDataKinds.Phone.NUMBER
+                        )
                 )
 
                 val company: String = getInfoForType(
-                    contentResolver,
-                    id,
-                    ContactsContract.CommonDataKinds.Organization.COMPANY,
-                    ContactsContract.CommonDataKinds.Organization.CONTENT_ITEM_TYPE
-                    )
+                        contentResolver,
+                        id,
+                        ContactsContract.CommonDataKinds.Organization.COMPANY,
+                        ContactsContract.CommonDataKinds.Organization.CONTENT_ITEM_TYPE
+                )
 
                 val email: String = getInfoForType(
-                    contentResolver,
-                    id,
-                    ContactsContract.CommonDataKinds.Email.ADDRESS,
-                    ContactsContract.CommonDataKinds.Email.CONTENT_ITEM_TYPE
+                        contentResolver,
+                        id,
+                        ContactsContract.CommonDataKinds.Email.ADDRESS,
+                        ContactsContract.CommonDataKinds.Email.CONTENT_ITEM_TYPE
                 )
                 listOfContactsInformation.add(listOf(name, photoUri, phone, email, company))
 
                 if (listOfContactsInformation.size == MAX_PHONE_IMPORT_CONTACTS_COUNT) break
             }
-            cursor.close()
         }
         return listOfContactsInformation
     }
@@ -79,24 +80,26 @@ class ContactsPhoneInfoTaker {
      * Take info from table fields via column id and content type.
      */
     private fun getInfoForType(
-        resolver: ContentResolver,
-        contactId: Long,
-        column: String,
-        contentType: String
+            resolver: ContentResolver,
+            contactId: Long,
+            column: String,
+            contentType: String
     ): String {
         val uri = ContactsContract.Data.CONTENT_URI
         val projection = arrayOf(column)
         val selection =
-            ContactsContract.Data.MIMETYPE + "='" +
-                    contentType + "' AND " +
-                    ContactsContract.CommonDataKinds.Organization.CONTACT_ID + " = ?"
+                ContactsContract.Data.MIMETYPE + "='" +
+                        contentType + "' AND " +
+                        ContactsContract.CommonDataKinds.Organization.CONTACT_ID + " = ?"
         val selectionArgs = arrayOf(contactId.toString())
         val cursor = resolver.query(uri, projection, selection, selectionArgs, null)
 
-        if (cursor != null && cursor.moveToFirst()) {
-            val result = cursor.getString(cursor.getColumnIndex(column))
-            cursor.close()
-            return result
+        cursor?.use { it ->
+            if (it.moveToFirst()) {
+                val result = it.getString(it.use { it.getColumnIndex(column) })
+                it.close()
+                return result
+            }
         }
         return ""
     }

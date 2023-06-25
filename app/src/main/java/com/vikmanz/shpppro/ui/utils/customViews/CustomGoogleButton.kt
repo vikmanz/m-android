@@ -15,22 +15,12 @@ import kotlin.properties.Delegates
 /**
  * Custom Google Button view class.
  */
-class CustomGoogleButton(
-    context: Context, attributesSet: AttributeSet?, defStyleAttr: Int, defStyleRes: Int
+class CustomGoogleButton @JvmOverloads constructor(
+    context: Context,
+    attributesSet: AttributeSet?,
+    defStyleAttr: Int = R.attr.myGoogleButtonStyle,
+    defStyleRes: Int =  R.style.defaultMyGButtonStyle
 ) : View(context, attributesSet, defStyleAttr, defStyleRes) {
-
-    /**
-     * Constructors.
-     */
-    constructor(context: Context, attributesSet: AttributeSet?, defStyleAttr: Int) : this(
-        context, attributesSet, defStyleAttr, R.style.defaultMyGButtonStyle
-    )
-
-    constructor(context: Context, attributesSet: AttributeSet?) : this(
-        context, attributesSet, R.attr.myGoogleButtonStyle
-    )
-
-    constructor(context: Context) : this(context, null)
 
     /**
      * Constants
