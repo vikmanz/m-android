@@ -8,27 +8,25 @@ import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import com.vikmanz.shpppro.data.source.local.interfaces.PreferencesDatastore
 import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 /**
  * Data Store manager. Save and load user data from memory.
  */
 class DataStoreManager @Inject constructor(
-    @ApplicationContext applicationContext: Context
+    @ApplicationContext private val context: Context //todo
 ) : PreferencesDatastore {
 
-    /**
-     * Application context.
-     */
-    private val appContext = applicationContext
 
     /**
      * Get name, password and autologin, and save all these in memory.
      */
     override suspend fun saveUserSata(name: String) {
-        appContext.dataStore.edit {
+        context.dataStore.edit {
             it[USER_LOGIN_KEY] = name
         }
     }
@@ -37,15 +35,18 @@ class DataStoreManager @Inject constructor(
      * Clear user data in memory.
      */
     override suspend fun clearUser() {
-        appContext.dataStore.edit {
-            it[USER_LOGIN_KEY] = ""
+        //todo
+        withContext(Dispatchers.IO) {
+            context.dataStore.edit {
+                it[USER_LOGIN_KEY] = ""
+            }
         }
     }
 
     /**
      * Return user login as Flow.
      */
-    override val userName: Flow<String> = appContext.dataStore.data.map {
+    override val userName: Flow<String> = context.dataStore.data.map {
         it[USER_LOGIN_KEY] ?: ""
     }
 
@@ -57,6 +58,8 @@ class DataStoreManager @Inject constructor(
         private const val DS_USER_NAME = "user_name"
 
         private val USER_LOGIN_KEY = stringPreferencesKey(DS_USER_NAME)
-        private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = DATA_STORE_NAME)
+        private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(
+            name = DATA_STORE_NAME
+        )
     }
 }

@@ -15,6 +15,8 @@ class App : Application() {
         super.onCreate()
     }
 
+    //todo
+
     companion object {
         private lateinit var app: App
         val contentResolver: ContentResolver get() = app.contentResolver

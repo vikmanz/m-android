@@ -21,7 +21,7 @@ interface ContactsRepository<T> {
 
     fun generateRandomContact(): T
 
-    fun setFakeContacts()
+    suspend fun setFakeContacts()
 
     fun setPhoneContacts()
 

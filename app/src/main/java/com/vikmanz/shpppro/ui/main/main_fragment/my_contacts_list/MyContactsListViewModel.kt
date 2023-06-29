@@ -1,6 +1,7 @@
 package com.vikmanz.shpppro.ui.main.main_fragment.my_contacts_list
 
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.vikmanz.shpppro.data.model.Contact
 import com.vikmanz.shpppro.data.model.ContactListItemState
 import com.vikmanz.shpppro.data.repository.interfaces.ContactsRepository
@@ -11,6 +12,7 @@ import com.vikmanz.shpppro.utils.extensions.log
 import com.vikmanz.shpppro.utils.extensions.swapBoolean
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 // FakeData (true) or PhoneData (false) view first on myContacts
@@ -90,7 +92,9 @@ class MyContactsListViewModel @Inject constructor(
         if (fakeListActivated.isTrue()) {
             _repository.setPhoneContacts()
         } else {
-            _repository.setFakeContacts()
+            viewModelScope.launch {
+                _repository.setFakeContacts()
+            }
         }
         fakeListActivated.swapBoolean()
     }

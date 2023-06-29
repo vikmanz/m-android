@@ -19,7 +19,7 @@ import com.vikmanz.shpppro.ui.utils.extensions.setVisible
  */
 class ContactsAdapter(
     private val contactActionListener: ContactActionListener
-) : ListAdapter<ContactListItemState, ContactsAdapter.ContactHolder>(
+) : ListAdapter<ContactListItemState, ContactsAdapter.ContactViewHolder>(
     DiffUtilContactListItemComparator()
 ) {
 
@@ -28,23 +28,23 @@ class ContactsAdapter(
     /**
      * Create one element from holder and return it.
      */
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContactHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContactViewHolder {
         val binding =
             OneContactItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ContactHolder(binding)
+        return ContactViewHolder(binding)
     }
 
     /**
      * Bind info to one element holder.
      */
-    override fun onBindViewHolder(holder: ContactHolder, position: Int) {
+    override fun onBindViewHolder(holder: ContactViewHolder, position: Int) {
         holder.bind(currentList[position])
     }
 
     /**
      * Create Holder for one element.
      */
-    inner class ContactHolder(private val binding: OneContactItemBinding) :
+    inner class ContactViewHolder(private val binding: OneContactItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         private val multiselectColor = ContextCompat.getColorStateList(
             binding.root.context,
@@ -63,8 +63,7 @@ class ContactsAdapter(
             root.setOnClickListener {
                 if (isMultiselect) {
                     contactState.onCheck()
-                }
-                else {
+                } else {
                     contactActionListener.onTapContact(contactState.contact.contactId)
                 }
             }

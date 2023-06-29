@@ -62,17 +62,18 @@ class MyProfileFragment :
     /**
      * Finish that activity and start SignIn/SignUp activity.
      */
+    //todo
     private fun startAuthActivity() {
-        val activity = requireActivity()
-        val intentObject = Intent(activity, AuthActivity::class.java)
+        val intentObject = Intent(context, AuthActivity::class.java)
         startActivity(intentObject)
-        activity.overridePendingTransition(R.anim.zoom_in_inner, R.anim.zoom_in_outter)
-        activity.finish()
+        activity?.overridePendingTransition(R.anim.zoom_in_inner, R.anim.zoom_in_outter)
+        activity?.finish()
     }
 
     /**
      * Start My contacts activity.
      */
+    //todo would be better to have an enum
     private fun goToMyContacts() {
         (parentFragment as MainViewPagerFragment).viewPager.currentItem = 1
     }

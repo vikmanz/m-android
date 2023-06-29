@@ -7,9 +7,15 @@ import com.vikmanz.shpppro.data.model.Contact
 import com.vikmanz.shpppro.data.repository.interfaces.ContactsRepository
 import com.vikmanz.shpppro.data.utils.ContactsPhoneInfoTaker
 import com.vikmanz.shpppro.utils.extensions.log
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.net.URL
 import java.util.UUID
 import javax.inject.Inject
@@ -33,8 +39,13 @@ class LocalContactsRepository @Inject constructor(
 
     private val multiselectList = ArrayList<Contact>()
 
+    private val coroutineScope = CoroutineScope(Dispatchers.IO + SupervisorJob())
+
     init {
-        setFakeContacts()
+        //todo
+        coroutineScope.launch {
+            setFakeContacts()
+        }
     }
 
     /**
@@ -68,6 +79,7 @@ class LocalContactsRepository @Inject constructor(
     /**
      * Create and return one contact with random fake information.
      */
+    //todo private
     override fun generateRandomContact(): Contact =
         createContact(
             contactPhotoLink = IMAGES[imgCounter % IMAGES.size],
@@ -83,10 +95,12 @@ class LocalContactsRepository @Inject constructor(
     /**
      * Create and return list of fake contacts.
      */
-    override fun setFakeContacts() {
-        _contactList.value = (0 until START_NUMBER_OF_CONTACTS).map {
-            generateRandomContact()
-        }.toMutableList()
+    override suspend fun setFakeContacts() {
+        withContext(Dispatchers.IO) {
+            _contactList.value = (0 until START_NUMBER_OF_CONTACTS).map {
+                generateRandomContact()
+            }.toMutableList()
+        }
     }
 
     /**

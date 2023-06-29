@@ -21,7 +21,9 @@ class MyProfileViewModel @Inject constructor(
     var userEmail = navArgs.email //"hard.codedviewmodel@gm.com" //
 
     fun clearSavedUserData() {
-        viewModelScope.launch(Dispatchers.IO) {
+
+        //todo
+        viewModelScope.launch {
             _dataStore.clearUser()
         }
     }

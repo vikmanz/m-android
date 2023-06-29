@@ -21,6 +21,7 @@ class MainViewPagerFragment :
 
     override val viewModel: MainViewPagerFragmentViewModel by viewModels()
 
+    //todo try using get?
     lateinit var viewPager: ViewPager2
 
 
@@ -38,7 +39,7 @@ class MainViewPagerFragment :
             tab.text = when (position) {
                 0 -> getString(R.string.main_my_profile_tab)
                 1 -> getString(R.string.main_my_contacts_tab)
-                else -> throw IllegalStateException()
+                else -> throw IllegalStateException("Unknown tab layout position")
             }
         }.attach()
 
