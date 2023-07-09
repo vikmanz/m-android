@@ -14,8 +14,7 @@ data class Contact(
     val contactEmail: String,
     val contactPhone: String,
     val contactAddress: String,
-    val contactBirthday: String,
-    var isChecked: Boolean = false, //todo
+    val contactBirthday: String
 ): Serializable
 
 

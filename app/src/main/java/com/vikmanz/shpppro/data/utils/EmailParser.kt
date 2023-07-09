@@ -1,6 +1,6 @@
 package com.vikmanz.shpppro.data.utils
 
-import com.vikmanz.shpppro.utils.extensions.firstCharToUpperCase
+import com.vikmanz.shpppro.common.extensions.firstCharToUpperCase
 import java.util.Locale
 
 /**

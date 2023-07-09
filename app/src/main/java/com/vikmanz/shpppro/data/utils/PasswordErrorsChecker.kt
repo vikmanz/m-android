@@ -2,7 +2,7 @@ package com.vikmanz.shpppro.data.utils
 
 import androidx.fragment.app.Fragment
 import com.vikmanz.shpppro.R
-import com.vikmanz.shpppro.constants.Constants
+import com.vikmanz.shpppro.common.Constants
 
 /**
  * Class which get full email and parse email to "Name Surname".

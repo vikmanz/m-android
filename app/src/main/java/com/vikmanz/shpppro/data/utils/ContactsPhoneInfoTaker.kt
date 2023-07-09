@@ -3,7 +3,7 @@ package com.vikmanz.shpppro.data.utils
 import android.content.ContentResolver
 import android.provider.ContactsContract
 import com.vikmanz.shpppro.App
-import com.vikmanz.shpppro.constants.Constants.MAX_PHONE_IMPORT_CONTACTS_COUNT
+import com.vikmanz.shpppro.common.Constants.MAX_PHONE_IMPORT_CONTACTS_COUNT
 import com.vikmanz.shpppro.data.utils.extentions.getColumnIndexFromResource
 
 class ContactsPhoneInfoTaker {
