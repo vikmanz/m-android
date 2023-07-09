@@ -1,7 +1,7 @@
 package com.vikmanz.shpppro.data.dto
 
-import com.vikmanz.shpppro.data.model.Account
-import com.vikmanz.shpppro.data.model.User
+import com.vikmanz.shpppro.common.model.Account
+import com.vikmanz.shpppro.common.model.User
 
 data class UserRegisterRequest (
     val email: String,

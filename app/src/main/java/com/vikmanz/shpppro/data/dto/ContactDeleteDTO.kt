@@ -1,6 +1,6 @@
 package com.vikmanz.shpppro.data.dto
 
-import com.vikmanz.shpppro.data.model.User
+import com.vikmanz.shpppro.common.model.User
 data class ContactDeleteResponse(
     val status: String,
     val code: Int,

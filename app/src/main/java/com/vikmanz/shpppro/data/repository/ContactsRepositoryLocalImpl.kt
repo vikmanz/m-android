@@ -3,11 +3,11 @@ package com.vikmanz.shpppro.data.repository
 import android.net.Uri
 import com.github.javafaker.Faker
 import com.vikmanz.shpppro.common.Constants.START_NUMBER_OF_CONTACTS
-import com.vikmanz.shpppro.data.model.Contact
-import com.vikmanz.shpppro.domain.repository.ContactsRepositoryLocal
-import com.vikmanz.shpppro.data.utils.ContactsPhoneInfoTaker
 import com.vikmanz.shpppro.common.extensions.log
-import com.vikmanz.shpppro.data.model.ContactItem
+import com.vikmanz.shpppro.common.model.Contact
+import com.vikmanz.shpppro.common.model.ContactItem
+import com.vikmanz.shpppro.data.utils.ContactsPhoneInfoTaker
+import com.vikmanz.shpppro.domain.repository.ContactsRepositoryLocal
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -18,13 +18,12 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.net.URL
 import java.util.UUID
-import javax.inject.Inject
 
 /**
  * Implementation of repository.
  * Main service to create contacts objects from information on from random.
  */
-class ContactsRepositoryLocalImpl : ContactsRepositoryLocal<ContactItem> {
+class ContactsRepositoryLocalImpl : ContactsRepositoryLocal {
 
     //This object is a wrapper. if we pass it a new object it will call emit
     private val _contactList = MutableStateFlow(listOf<ContactItem>())

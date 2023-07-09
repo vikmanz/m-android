@@ -1,14 +1,6 @@
 package com.vikmanz.shpppro.data
 
-import com.vikmanz.shpppro.data.model.User
-import com.vikmanz.shpppro.data.dto.ContactAddRequest
-import com.vikmanz.shpppro.data.dto.ContactAddResponseBody
-import com.vikmanz.shpppro.data.dto.ContactAddResponse
-import com.vikmanz.shpppro.data.dto.ContactDeleteResponseBody
-import com.vikmanz.shpppro.data.dto.ContactDeleteResponse
-import com.vikmanz.shpppro.data.dto.UserAuthorizeRequest
-import com.vikmanz.shpppro.data.dto.UserEditRequest
-import kotlinx.coroutines.runBlocking
+import com.vikmanz.shpppro.common.model.User
 
 const val BASE_URL = "http://178.63.9.114:7777/api/"
 const val EMAIL = "boris.lezo@gmail.com"
