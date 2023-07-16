@@ -1,176 +1,179 @@
 <?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    layout_width="match_parent"
+    layout_height="match_parent" />
 
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="?attr/colorSecondary">
-
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/imageView_addContact_avatar"
-        android:layout_width="@dimen/avatarSide_addContactDialog"
-        android:layout_height="@dimen/avatarSide_addContactDialog"
-        android:layout_marginTop="71dp"
-        android:layout_marginBottom="@dimen/avatarMargin_addContactDialog"
-        android:src="@drawable/jpg_sample_avatar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-
-    <ImageButton
-        android:id="@+id/button_addContact_getAvatarFromGallery"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView_addContact_avatar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView_addContact_avatar"
-        app:layout_constraintTop_toTopOf="@+id/imageView_addContact_avatar"
-        app:srcCompat="@drawable/button_add_photo_from_gallery"
-        tools:ignore="ContentDescription,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
-
-    <!-- Hello text. -->
-    <androidx.constraintlayout.helper.widget.Flow
-        android:id="@+id/flow_login_helloText"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/offset_M"
-        android:layout_marginBottom="@dimen/offset_M"
-        android:orientation="vertical"
-        app:constraint_referenced_ids="
-        textView_login_helloText,
-        textView_login_helloSubtext"
-        app:layout_constraintBottom_toTopOf="@id/flow_addContact_contactInfoFields"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imageView_addContact_avatar" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/textView_login_helloText"
-        style="@style/basicText_bold"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Your profile data"
-        android:textSize="@dimen/size_textFont_L"
-        tools:ignore="MissingConstraints" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/textView_login_helloSubtext"
-        style="@style/basicText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Fill out the profile and go to the application!"
-        android:textSize="@dimen/size_textFont_XXS"
-        tools:ignore="MissingConstraints" />
-
-    <!-- Bottom half of screen. -->
-    <androidx.constraintlayout.helper.widget.Flow
-        android:id="@+id/flow_addContact_contactInfoFields"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/marginHorizontal"
-        android:layout_marginTop="@dimen/offset_M"
-        android:orientation="vertical"
-        app:constraint_referenced_ids="
-            textInput_addContact_userNameLayout,
-            space_in_flow_addContact_contactInfoFields,
-            textInput_addContact_userPhoneLayout"
-        app:layout_constraintBottom_toTopOf="button_addContact_saveUser"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/flow_login_helloText" />
+<!--<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    xmlns:tools="http://schemas.android.com/tools"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
+<!--    android:background="?attr/colorSecondary">-->
 
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInput_addContact_userNameLayout"
-        style="@style/textInputLayout_LoginPassword"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/main_color_white"
-        android:hint="User name"
-        android:textColorHint="?attr/colorOnTertiary"
-        android:textCursorDrawable="@null"
-        app:colorControlActivated="?attr/colorOnTertiary"
-        app:colorControlHighlight="?attr/colorOnTertiary"
-        app:colorControlNormal="?attr/colorOnTertiary"
-        app:helperTextTextColor="?attr/colorError"
-        app:hintTextAppearance="@style/textInputLayout_hintSize"
-        tools:ignore="MissingConstraints, VisualLintTextFieldSize">
+<!--    <androidx.appcompat.widget.AppCompatImageView-->
+<!--        android:id="@+id/imageView_addContact_avatar"-->
+<!--        android:layout_width="@dimen/avatarSide_addContactDialog"-->
+<!--        android:layout_height="@dimen/avatarSide_addContactDialog"-->
+<!--        android:layout_marginTop="71dp"-->
+<!--        android:layout_marginBottom="@dimen/avatarMargin_addContactDialog"-->
+<!--        android:src="@drawable/jpg_sample_avatar"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"/>-->
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/textInput_addContact_userNameField"
-            style="@style/textInputLayout_basicTextInput"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textEmailAddress"
-            android:textCursorDrawable="@null"
-            tools:ignore="MissingConstraints, VisualLintTextFieldSize" />
-    </com.google.android.material.textfield.TextInputLayout>
+<!--    <ImageButton-->
+<!--        android:id="@+id/button_addContact_getAvatarFromGallery"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:background="@android:color/transparent"-->
+<!--        app:layout_constraintBottom_toBottomOf="@+id/imageView_addContact_avatar"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toEndOf="@+id/imageView_addContact_avatar"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/imageView_addContact_avatar"-->
+<!--        app:srcCompat="@drawable/button_add_photo_from_gallery"-->
+<!--        tools:ignore="ContentDescription,SpeakableTextPresentCheck,TouchTargetSizeCheck" />-->
 
-    <Space
-        android:id="@+id/space_in_flow_addContact_contactInfoFields"
-        android:layout_width="0dp"
-        android:layout_height="24dp"
-        tools:ignore="MissingConstraints" />
+<!--    &lt;!&ndash; Hello text. &ndash;&gt;-->
+<!--    <androidx.constraintlayout.helper.widget.Flow-->
+<!--        android:id="@+id/flow_login_helloText"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="@dimen/offset_M"-->
+<!--        android:layout_marginBottom="@dimen/offset_M"-->
+<!--        android:orientation="vertical"-->
+<!--        app:constraint_referenced_ids="-->
+<!--        textView_login_helloText,-->
+<!--        textView_login_helloSubtext"-->
+<!--        app:layout_constraintBottom_toTopOf="@id/flow_addContact_contactInfoFields"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/imageView_addContact_avatar" />-->
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInput_addContact_userPhoneLayout"
-        style="@style/textInputLayout_LoginPassword"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/main_color_white"
-        android:hint="Mobile phone"
-        android:textColorHint="?attr/colorOnTertiary"
-        android:textCursorDrawable="@null"
-        app:colorControlActivated="?attr/colorOnTertiary"
-        app:colorControlHighlight="?attr/colorOnTertiary"
-        app:colorControlNormal="?attr/colorOnTertiary"
-        app:helperTextTextColor="?attr/colorError"
-        app:hintTextAppearance="@style/textInputLayout_hintSize"
-        tools:ignore="MissingConstraints, VisualLintTextFieldSize">
+<!--    <androidx.appcompat.widget.AppCompatTextView-->
+<!--        android:id="@+id/textView_login_helloText"-->
+<!--        style="@style/basicText_bold"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Your profile data"-->
+<!--        android:textSize="@dimen/size_textFont_L"-->
+<!--        tools:ignore="MissingConstraints" />-->
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/textInput_addContact_userPhoneField"
-            style="@style/textInputLayout_basicTextInput"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textEmailAddress"
-            android:textCursorDrawable="@null"
-            tools:ignore="MissingConstraints, VisualLintTextFieldSize" />
-    </com.google.android.material.textfield.TextInputLayout>
+<!--    <androidx.appcompat.widget.AppCompatTextView-->
+<!--        android:id="@+id/textView_login_helloSubtext"-->
+<!--        style="@style/basicText"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Fill out the profile and go to the application!"-->
+<!--        android:textSize="@dimen/size_textFont_XXS"-->
+<!--        tools:ignore="MissingConstraints" />-->
+
+<!--    &lt;!&ndash; Bottom half of screen. &ndash;&gt;-->
+<!--    <androidx.constraintlayout.helper.widget.Flow-->
+<!--        android:id="@+id/flow_addContact_contactInfoFields"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginHorizontal="@dimen/marginHorizontal"-->
+<!--        android:layout_marginTop="@dimen/offset_M"-->
+<!--        android:orientation="vertical"-->
+<!--        app:constraint_referenced_ids="-->
+<!--            textInput_addContact_userNameLayout,-->
+<!--            space_in_flow_addContact_contactInfoFields,-->
+<!--            textInput_addContact_userPhoneLayout"-->
+<!--        app:layout_constraintBottom_toTopOf="button_addContact_saveUser"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/flow_login_helloText" />-->
 
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/button_addContact_cancel"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/size_buttonHeight_XL"
-        android:layout_marginHorizontal="@dimen/marginHorizontal"
-        android:layout_marginVertical="@dimen/marginHorizontal"
-        android:background="@drawable/button_selector_orange_outlined"
-        android:backgroundTint="@color/main_color_white"
-        android:text="Cancel"
-        android:textAppearance="@style/basicText_buttonsText"
-        app:layout_constraintBottom_toTopOf="@id/button_addContact_saveUser"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="VisualLintButtonSize" />
+<!--    <com.google.android.material.textfield.TextInputLayout-->
+<!--        android:id="@+id/textInput_addContact_userNameLayout"-->
+<!--        style="@style/textInputLayout_LoginPassword"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:backgroundTint="@color/main_color_white"-->
+<!--        android:hint="User name"-->
+<!--        android:textColorHint="?attr/colorOnTertiary"-->
+<!--        android:textCursorDrawable="@null"-->
+<!--        app:colorControlActivated="?attr/colorOnTertiary"-->
+<!--        app:colorControlHighlight="?attr/colorOnTertiary"-->
+<!--        app:colorControlNormal="?attr/colorOnTertiary"-->
+<!--        app:helperTextTextColor="?attr/colorError"-->
+<!--        app:hintTextAppearance="@style/textInputLayout_hintSize"-->
+<!--        tools:ignore="MissingConstraints, VisualLintTextFieldSize">-->
 
-    <!-- View Contacts button. -->
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/button_addContact_saveUser"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/size_buttonHeight_XL"
-        android:layout_marginHorizontal="@dimen/marginHorizontal"
-        android:layout_marginVertical="@dimen/marginHorizontal"
-        android:background="@drawable/button_selector_orange"
-        android:text="@string/contacts_add_contact_save_button"
-        android:textAppearance="@style/basicText_buttonsText"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="TextContrastCheck,VisualLintButtonSize" />
+<!--        <com.google.android.material.textfield.TextInputEditText-->
+<!--            android:id="@+id/textInput_addContact_userNameField"-->
+<!--            style="@style/textInputLayout_basicTextInput"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:inputType="textEmailAddress"-->
+<!--            android:textCursorDrawable="@null"-->
+<!--            tools:ignore="MissingConstraints, VisualLintTextFieldSize" />-->
+<!--    </com.google.android.material.textfield.TextInputLayout>-->
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+<!--    <Space-->
+<!--        android:id="@+id/space_in_flow_addContact_contactInfoFields"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="24dp"-->
+<!--        tools:ignore="MissingConstraints" />-->
+
+<!--    <com.google.android.material.textfield.TextInputLayout-->
+<!--        android:id="@+id/textInput_addContact_userPhoneLayout"-->
+<!--        style="@style/textInputLayout_LoginPassword"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:backgroundTint="@color/main_color_white"-->
+<!--        android:hint="Mobile phone"-->
+<!--        android:textColorHint="?attr/colorOnTertiary"-->
+<!--        android:textCursorDrawable="@null"-->
+<!--        app:colorControlActivated="?attr/colorOnTertiary"-->
+<!--        app:colorControlHighlight="?attr/colorOnTertiary"-->
+<!--        app:colorControlNormal="?attr/colorOnTertiary"-->
+<!--        app:helperTextTextColor="?attr/colorError"-->
+<!--        app:hintTextAppearance="@style/textInputLayout_hintSize"-->
+<!--        tools:ignore="MissingConstraints, VisualLintTextFieldSize">-->
+
+<!--        <com.google.android.material.textfield.TextInputEditText-->
+<!--            android:id="@+id/textInput_addContact_userPhoneField"-->
+<!--            style="@style/textInputLayout_basicTextInput"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:inputType="textEmailAddress"-->
+<!--            android:textCursorDrawable="@null"-->
+<!--            tools:ignore="MissingConstraints, VisualLintTextFieldSize" />-->
+<!--    </com.google.android.material.textfield.TextInputLayout>-->
+
+
+<!--    <androidx.appcompat.widget.AppCompatButton-->
+<!--        android:id="@+id/button_addContact_cancel"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="@dimen/size_buttonHeight_XL"-->
+<!--        android:layout_marginHorizontal="@dimen/marginHorizontal"-->
+<!--        android:layout_marginVertical="@dimen/marginHorizontal"-->
+<!--        android:background="@drawable/button_selector_orange_outlined"-->
+<!--        android:backgroundTint="@color/main_color_white"-->
+<!--        android:text="Cancel"-->
+<!--        android:textAppearance="@style/basicText_buttonsText"-->
+<!--        app:layout_constraintBottom_toTopOf="@id/button_addContact_saveUser"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        tools:ignore="VisualLintButtonSize" />-->
+
+<!--    &lt;!&ndash; View Contacts button. &ndash;&gt;-->
+<!--    <androidx.appcompat.widget.AppCompatButton-->
+<!--        android:id="@+id/button_addContact_saveUser"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="@dimen/size_buttonHeight_XL"-->
+<!--        android:layout_marginHorizontal="@dimen/marginHorizontal"-->
+<!--        android:layout_marginVertical="@dimen/marginHorizontal"-->
+<!--        android:background="@drawable/button_selector_orange"-->
+<!--        android:text="@string/contacts_add_contact_save_button"-->
+<!--        android:textAppearance="@style/basicText_buttonsText"-->
+<!--        android:textStyle="bold"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        tools:ignore="TextContrastCheck,VisualLintButtonSize" />-->
+
+<!--</androidx.constraintlayout.widget.ConstraintLayout>-->

@@ -1,0 +1,142 @@
+[versions]
+# Kotlin
+agp = "8.0.2"
+datastore-preferences = "1.0.0"
+glide = "4.15.1"
+javafaker = "1.0.2"
+kotlinx-coroutines-android = "1.7.1"
+kotlinx-coroutines-core = "1.7.1"
+lifecycle-extensions = "2.2.0"
+material = "1.9.0"
+constraintlayout = "2.1.4"
+material3 = "1.1.1"
+kotlin = "1.8.10"
+core-ktx = "1.10.1"
+lifecycle-runtime-ktx = "2.6.1"
+activity-compose = "1.7.2"
+compose-bom = "2023.06.01"
+picasso = "2.71828"
+ui-version = "1.4.3"
+
+# Google SignIn
+firebase-auth-common = "9.8.0"
+firebase-auth-ktx = "22.1.0"
+firebase-common-ktx = "20.3.3"
+coil-compose = "2.4.0"
+play-services-auth = "20.6.0"
+google-services = "4.3.15"
+
+# Tests
+junit = "4.13.2"
+androidx-test-ext-junit = "1.1.5"
+espresso-core = "3.5.1"
+
+# ViewModel
+viewmodel-compose = "2.6.1"
+
+# Navigation
+navigation-compose = "2.6.0"
+
+# Hilt
+hilt-android = "2.46.1"
+hilt-navigation-compose = "1.0.0"
+
+# KSP
+hilt-ksp = "1.8.10-1.0.9"
+
+# Symbol processing
+symbol-processing-api = "1.8.22-1.0.11"
+
+# Retrofit
+retrofit = "2.9.0"
+okhttp = "4.11.0"
+moshi = "1.15.0"
+appcompat = "1.6.1"
+gson = "2.10"
+
+
+[libraries]
+# Kotlin
+androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastore-preferences" }
+androidx-hilt-navigation-fragment = { module = "androidx.hilt:hilt-navigation-fragment", version.ref = "hilt-navigation-compose" }
+androidx-lifecycle-extensions = { module = "androidx.lifecycle:lifecycle-extensions", version.ref = "lifecycle-extensions" }
+androidx-lifecycle-common-java8 = { module = "androidx.lifecycle:lifecycle-common-java8", version.ref = "lifecycle-runtime-ktx" }
+androidx-lifecycle-livedata-ktx = { module = "androidx.lifecycle:lifecycle-livedata-ktx", version.ref = "lifecycle-runtime-ktx" }
+androidx-lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycle-runtime-ktx" }
+androidx-navigation-dynamic-features-fragment = { module = "androidx.navigation:navigation-dynamic-features-fragment", version.ref = "navigation-compose" }
+androidx-navigation-ui-ktx = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "navigation-compose" }
+androidx-navigation-fragment-ktx = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigation-compose" }
+androidx-navigation-testing = { module = "androidx.navigation:navigation-testing", version.ref = "navigation-compose" }
+glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
+javafaker = { module = "com.github.javafaker:javafaker", version.ref = "javafaker" }
+hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt-android" }
+kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinx-coroutines-android" }
+kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx-coroutines-core" }
+material = { module = "com.google.android.material:material", version.ref = "material" }
+androidx-constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraintlayout" }
+picasso = { module = "com.squareup.picasso:picasso", version.ref = "picasso" }
+ui = { group = "androidx.compose.ui", name = "ui", version.ref = "ui-version" }
+ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics", version.ref = "ui-version"  }
+ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling", version.ref = "ui-version"  }
+ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview", version.ref = "ui-version"  }
+lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycle-runtime-ktx" }
+activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activity-compose" }
+compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "compose-bom" }
+core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
+
+# Tests
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+androidx-test-ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidx-test-ext-junit" }
+espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso-core" }
+ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest", version.ref = "ui-version" }
+ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4", version.ref = "ui-version" }
+
+# ViewModel
+lifecycle-viewmodel-compose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "viewmodel-compose" }
+
+# Navigation
+androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigation-compose" }
+
+# Hilt
+dagger-hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt-android" }
+# hilt-android-gradle-plugin = { module = "com.google.dagger:hilt-android-gradle-plugin", version.ref = "hilt-android" }
+androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hilt-navigation-compose" }
+
+# Symbol Processing (for Moshi, Room) and Kapt (for Hilt)
+hilt-android-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt-android" }
+symbol-processing-api = { module = "com.google.devtools.ksp:symbol-processing-api", version.ref = "symbol-processing-api" }
+
+# Retrofit
+gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
+converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit" }
+converter-moshi = { module = "com.squareup.retrofit2:converter-moshi", version.ref = "retrofit" }
+logging-interceptor = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "okhttp" }
+moshi = { module = "com.squareup.moshi:moshi", version.ref = "moshi" }
+moshi-kotlin-codegen = { module = "com.squareup.moshi:moshi-kotlin-codegen", version.ref = "moshi" }
+okhttp = { module = "com.squareup.okhttp3:okhttp", version.ref = "okhttp" }
+retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+
+# Google SignIn
+coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil-compose" }
+firebase-auth-common = { module = "com.google.firebase:firebase-auth-common", version.ref = "firebase-auth-common" }
+firebase-auth-ktx = { module = "com.google.firebase:firebase-auth-ktx", version.ref = "firebase-auth-ktx" }
+firebase-common-ktx = { module = "com.google.firebase:firebase-common-ktx", version.ref = "firebase-common-ktx" }
+google-services = { module = "com.google.gms:google-services", version.ref = "google-services" }
+play-services-auth = { module = "com.google.android.gms:play-services-auth", version.ref = "play-services-auth" }
+
+
+
+[plugins]
+# Kotlin
+androidApplication = { id = "com.android.application", version.ref = "agp" }
+kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+
+# Hilt
+hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt-android" }
+
+# KSP
+ksp = { id = "com.google.devtools.ksp", version.ref = "hilt-ksp" }
+
+[bundles]
+
