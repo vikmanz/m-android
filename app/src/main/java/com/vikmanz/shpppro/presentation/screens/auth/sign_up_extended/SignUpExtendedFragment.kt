@@ -1,4 +1,4 @@
-package com.vikmanz.shpppro.presentation.screens.auth.login
+package com.vikmanz.shpppro.presentation.screens.auth.sign_up_extended
 
 import android.app.AlertDialog
 import android.util.Patterns
@@ -18,16 +18,16 @@ import com.vikmanz.shpppro.presentation.utils.extensions.startChangeLanguageActi
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class LoginFragment :
-    BaseFragment<FragmentLoginBinding, LoginViewModel>(FragmentLoginBinding::inflate) {
+class SignUpExtendedFragment :
+    BaseFragment<FragmentLoginBinding, SignUpExtendedViewModel>(FragmentLoginBinding::inflate) {
 
-    override val viewModel: LoginViewModel by viewModels()
+    override val viewModel: SignUpExtendedViewModel by viewModels()
 
     override fun setListeners() {
         with(binding) {
             buttonLoginRegisterByEmail.setOnClickListener { checkForm() }
             textViewLoginSwitchScreenToLoginButton.setOnClickListener { viewModel.swapLoginAndRegister() }
-//            buttonLoginRegisterByGoogle.setOnClickListener { buttonLoginRegisterByGoogle.setFunText() }
+           // buttonLoginRegisterByGoogle.setOnClickListener { buttonLoginRegisterByGoogle.setFunText() }
         }
         initHelpTesterButtons()
         setLoginPasswordFocusListeners()        // Listeners to fields and buttons.

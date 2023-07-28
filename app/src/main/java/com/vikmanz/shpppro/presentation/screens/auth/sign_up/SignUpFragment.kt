@@ -1,4 +1,4 @@
-package com.vikmanz.shpppro.presentation.screens.auth.login
+package com.vikmanz.shpppro.presentation.screens.auth.sign_up
 
 import android.app.AlertDialog
 import android.util.Patterns
@@ -7,6 +7,7 @@ import com.vikmanz.shpppro.R
 import com.vikmanz.shpppro.data.utils.PasswordErrorsChecker.checkPasswordErrors
 import com.vikmanz.shpppro.databinding.FragmentLoginBinding
 import com.vikmanz.shpppro.presentation.base.BaseFragment
+import com.vikmanz.shpppro.presentation.screens.auth.login.LoginViewModel
 import com.vikmanz.shpppro.presentation.utils.extensions.clearError
 import com.vikmanz.shpppro.presentation.utils.extensions.hideKeyboard
 import com.vikmanz.shpppro.presentation.utils.extensions.setGone
@@ -18,7 +19,7 @@ import com.vikmanz.shpppro.presentation.utils.extensions.startChangeLanguageActi
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class LoginFragment :
+class SignUpFragment :
     BaseFragment<FragmentLoginBinding, LoginViewModel>(FragmentLoginBinding::inflate) {
 
     override val viewModel: LoginViewModel by viewModels()
@@ -27,7 +28,7 @@ class LoginFragment :
         with(binding) {
             buttonLoginRegisterByEmail.setOnClickListener { checkForm() }
             textViewLoginSwitchScreenToLoginButton.setOnClickListener { viewModel.swapLoginAndRegister() }
-//            buttonLoginRegisterByGoogle.setOnClickListener { buttonLoginRegisterByGoogle.setFunText() }
+          //  buttonLoginRegisterByGoogle.setOnClickListener { buttonLoginRegisterByGoogle.setFunText() }
         }
         initHelpTesterButtons()
         setLoginPasswordFocusListeners()        // Listeners to fields and buttons.

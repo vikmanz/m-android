@@ -26,8 +26,8 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.vikmanz.shpppro.presentation.screens.auth.login.LoginFragment"
-        tools:layout="@layout/fragment_login">
+        android:name="com.vikmanz.shpppro.presentation.screens.auth.sign_up.SignUpFragment"
+        tools:layout="@layout/fragment_sign_up">
         <action
             android:id="@+id/startMainActivity"
             app:destination="@id/mainActivity"
