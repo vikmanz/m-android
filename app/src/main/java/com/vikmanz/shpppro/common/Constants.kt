@@ -28,9 +28,10 @@ object Constants {
     const val MAX_PHONE_IMPORT_CONTACTS_COUNT = 10
 
     /**
-     * TAG for LOG
+     * LOG
      */
     const val LOG_TAG = "myLog"
+    const val LOG_DEFAULT_MESSAGE = "default message"
 
     /**
      * Server settings
