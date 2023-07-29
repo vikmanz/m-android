@@ -1,33 +1,30 @@
-package com.vikmanz.shpppro.presentation.screens.auth.login
+package com.vikmanz.shpppro.presentation.screens.auth.sign_in
 
 import android.app.AlertDialog
 import android.util.Patterns
 import androidx.fragment.app.viewModels
 import com.vikmanz.shpppro.R
 import com.vikmanz.shpppro.data.utils.PasswordErrorsChecker.checkPasswordErrors
-import com.vikmanz.shpppro.databinding.FragmentLoginBinding
+import com.vikmanz.shpppro.databinding.FragmentSignInBinding
 import com.vikmanz.shpppro.presentation.base.BaseFragment
 import com.vikmanz.shpppro.presentation.utils.extensions.clearError
 import com.vikmanz.shpppro.presentation.utils.extensions.hideKeyboard
-import com.vikmanz.shpppro.presentation.utils.extensions.setGone
-import com.vikmanz.shpppro.presentation.utils.extensions.setInvisible
 import com.vikmanz.shpppro.presentation.utils.extensions.setMultipleGone
 import com.vikmanz.shpppro.presentation.utils.extensions.setMultipleVisible
-import com.vikmanz.shpppro.presentation.utils.extensions.setVisible
 import com.vikmanz.shpppro.presentation.utils.extensions.startChangeLanguageActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class LoginFragment :
-    BaseFragment<FragmentLoginBinding, LoginViewModel>(FragmentLoginBinding::inflate) {
+class SignInFragment :
+    BaseFragment<FragmentSignInBinding, SignInViewModel>(FragmentSignInBinding::inflate) {
 
-    override val viewModel: LoginViewModel by viewModels()
+    override val viewModel: SignInViewModel by viewModels()
 
     override fun setListeners() {
         with(binding) {
             buttonLoginRegisterByEmail.setOnClickListener { checkForm() }
-            textViewLoginSwitchScreenToLoginButton.setOnClickListener { viewModel.swapLoginAndRegister() }
-//            buttonLoginRegisterByGoogle.setOnClickListener { buttonLoginRegisterByGoogle.setFunText() }
+            textViewLoginSwitchScreenToLoginButton.setOnClickListener { viewModel.onSignUpClick() }
+            buttonLoginRegisterByGoogle.setOnClickListener { buttonLoginRegisterByGoogle.setFunText() }
         }
         initHelpTesterButtons()
         setLoginPasswordFocusListeners()        // Listeners to fields and buttons.
@@ -35,52 +32,7 @@ class LoginFragment :
     }
 
     override fun setObservers() {
-        observeUI()
         observeHelpers()
-    }
-
-    /**
-     * Observe and swap SignIn ans SignUp screens via changing text and visibility view on layout.
-     */
-    private fun observeUI() {
-        viewModel.loginScreen.observe(viewLifecycleOwner) {
-            with(binding) {
-                if (it) {
-                    textViewLoginHelloText.text =
-                        getString(R.string.auth_activity_hello_text_login_screen)
-                    textViewLoginHelloSubtext.text =
-                        getString(R.string.auth_activity_hello_subtext_login_screen)
-                    buttonLoginRegisterByEmail.text =
-                        getString(R.string.auth_activity_register_button_login_screen)
-                    textViewLoginAlreadyHaveAccountMessage.text =
-                        getString(R.string.auth_activity_already_have_account_message_login_screen)
-                    textViewLoginSwitchScreenToLoginButton.text =
-                        getString(R.string.auth_activity_sign_in_button_login_screen)
-                    textViewLoginForgotPasswordText.setVisible()
-//                    setMultipleGone(
-//                        buttonLoginRegisterByGoogle,
-//                        textViewLoginTextBetweenGoogleAndRegister,
-//                        textViewLoginWarningAboutTerms
-//                    )
-                } else {
-                    textViewLoginHelloText.text = getString(R.string.auth_layout_hello_text)
-                    textViewLoginHelloSubtext.text =
-                        getString(R.string.auth_layout_hello_subtext)
-                    buttonLoginRegisterByEmail.text =
-                        getString(R.string.auth_layout_register_button)
-                    textViewLoginAlreadyHaveAccountMessage.text =
-                        getString(R.string.auth_layout_already_have_account_message)
-                    textViewLoginSwitchScreenToLoginButton.text =
-                        getString(R.string.auth_layout_sign_in_button)
-                    textViewLoginForgotPasswordText.setInvisible()
-//                    setMultipleVisible(
-//                        buttonLoginRegisterByGoogle,
-//                        textViewLoginTextBetweenGoogleAndRegister,
-//                        textViewLoginWarningAboutTerms
-//                    )
-                }
-            }
-        }
     }
 
     /**
@@ -88,9 +40,21 @@ class LoginFragment :
      */
     private fun observeHelpers() {
         viewModel.helperButtonsVisible.observe(viewLifecycleOwner) {
-//            with(binding.flowLoginDebugButtons) {
-//                if (it) setVisible() else setGone()
-//            }
+            with(binding) {
+                if (it) {
+                    setMultipleVisible(
+                        buttonLoginFillLoginAndPass,
+                        buttonLoginClearLoginPassFields,
+                        buttonLoginChangeLanguage
+                    )
+                } else {
+                    setMultipleGone(
+                        buttonLoginFillLoginAndPass,
+                        buttonLoginClearLoginPassFields,
+                        buttonLoginChangeLanguage
+                    )
+                }
+            }
         }
     }
 

@@ -58,4 +58,8 @@ class SignUpViewModel @Inject constructor(
         navigateToActivity(direction)
     }
 
+    fun onSignInClick() {
+        TODO("Not yet implemented")
+    }
+
 }

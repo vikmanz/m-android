@@ -1,6 +1,8 @@
 package com.vikmanz.shpppro.data.result
 
+import com.google.gson.Gson
 import com.vikmanz.shpppro.common.extensions.log
+import com.vikmanz.shpppro.data.dto.ErrorServerResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
@@ -9,7 +11,7 @@ import ua.digitalminds.fortrainerapp.data.result.ApiSafeCallerError
 import ua.digitalminds.fortrainerapp.data.result.ApiSafeCallerError.UNKNOWN_EXCEPTION
 import java.io.IOException
 
-private const val DEBUG = false
+private const val DEBUG = true
 object ApiSafeCaller {
 
     suspend fun <T> safeApiCall(
@@ -28,7 +30,7 @@ object ApiSafeCaller {
                 when (throwable) {
 
                     is IOException -> handleIOError()
-                    is HttpException -> handleUnknownError()  //handleHttpError(throwable)
+                    is HttpException -> handleHttpError(throwable)
                     else -> handleUnknownError()
 
                 }
@@ -45,48 +47,40 @@ object ApiSafeCaller {
         return ApiResult.ServerError(UNKNOWN_EXCEPTION)
     }
 
-//    private fun handleHttpError(throwable: HttpException): ApiResult.ServerError {
-//        log("HttpException Exception!", DEBUG)
-//        val code = throwable.code()
-//        val json = throwable.response()?.errorBody()?.string()
-//        return try {
-//            log("try convert first", DEBUG)
-//            val errorResponse = convertErrorBody(json, ErrorServerResponse::class.java)
-//            responseToServerError(errorResponse)
-//        } catch (e: Exception) {
-//            log("try convert second for JWT", DEBUG)
-//            try {
-//                val errorResponse =
-//                    convertErrorBody(json, ErrorJWTAuthResponse::class.java)?.toErrorServerResponse()
-//                responseToServerError(errorResponse)
-//            }
-//            catch (e: Exception) {
-//                ApiResult.ServerError(UNKNOWN_EXCEPTION)
-//            }
-//        }
-//    }
+    private fun handleHttpError(throwable: HttpException): ApiResult.ServerError {
+        log("HttpException Exception!", DEBUG)
+        val code = throwable.code()
+        val json = throwable.response()?.errorBody()?.string()
+        return try {
+            log("try convert first", DEBUG)
+            val errorResponse = convertErrorBody(json, ErrorServerResponse::class.java)
+            responseToServerError(errorResponse)
+        } catch (e: Exception) {
+                ApiResult.ServerError(UNKNOWN_EXCEPTION)
+        }
+    }
 
-//    private fun <T> convertErrorBody(
-//        jsonString: String?,
-//        classOfError: Class<T>
-//    ): T? {
-//        return jsonString?.let {
-//            log("Try convert error to class [${classOfError.simpleName}]", DEBUG)
-//            log("Error json [$it]", DEBUG)
-//            val errorResponse = Gson().fromJson(it, classOfError)
-//            log("error response: $errorResponse", DEBUG)
-//            errorResponse
-//        }
-//    }
-//
-//    private fun responseToServerError(errorResponse: ErrorServerResponse?): ApiResult.ServerError {
-//        val error = ApiSafeCallerError from errorResponse?.message
-//        return if (error != null) {
-//            log("Error is not null", DEBUG)
-//            ApiResult.ServerError(error)
-//        } else {
-//            log("!!!Error is null!!!", DEBUG)
-//            ApiResult.ServerError(UNKNOWN_HTTP_EXCEPTION)
-//        }
-//    }
+    private fun <T> convertErrorBody(
+        jsonString: String?,
+        classOfError: Class<T>
+    ): T? {
+        return jsonString?.let {
+            log("Try convert error to class [${classOfError.simpleName}]", DEBUG)
+            log("Error json [$it]", DEBUG)
+            val errorResponse = Gson().fromJson(it, classOfError)
+            log("error response: $errorResponse", DEBUG)
+            errorResponse
+        }
+    }
+
+    private fun responseToServerError(errorResponse: ErrorServerResponse?): ApiResult.ServerError {
+        val error = ApiSafeCallerError from errorResponse?.message
+        return if (error != null) {
+            log("Error is not null", DEBUG)
+            ApiResult.ServerError(error)
+        } else {
+            log("!!!Error is null!!!", DEBUG)
+            ApiResult.ServerError(ApiSafeCallerError.UNKNOWN_HTTP_EXCEPTION)
+        }
+    }
 }

@@ -12,12 +12,12 @@ enum class ApiSafeCallerError(val code: Int, val message: String, val uiMessage:
         code = 0,
         message = "unknown exception",
         uiMessage = UiText.DynamicString("Невідома помилка")
+    ),
+    UNKNOWN_HTTP_EXCEPTION(
+        code = 1,
+        message = "unknown http exception",
+        uiMessage = UiText.DynamicString("Невідома помилка серверу")
     );
-//    UNKNOWN_HTTP_EXCEPTION(
-//        code = 1,
-//        message = "unknown http exception",
-//        uiMessage = UiText.DynamicString("Невідома помилка серверу")
-//    ),
 //
 //    @Suppress("unused")
 //    NO_INTERNET_CONNECTION(

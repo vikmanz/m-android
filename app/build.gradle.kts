@@ -115,6 +115,8 @@ dependencies {
     implementation(libs.logging.interceptor)
     implementation(libs.retrofit)
     implementation(libs.converter.moshi)
+    implementation (libs.converter.gson)    // Gson
+    implementation (libs.gson) // Gson
 
     // Symbol Processing (for Moshi, Room) and Kapt (for Hilt)
     implementation(libs.symbol.processing.api)

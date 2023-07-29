@@ -1,4 +1,4 @@
-package com.vikmanz.shpppro.presentation.screens.auth.login
+package com.vikmanz.shpppro.presentation.screens.auth.sign_in
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -14,14 +14,11 @@ import javax.inject.Inject
 
 private const val DEFAULT_SHOW_HELPERS = false
 @HiltViewModel
-class LoginViewModel @Inject constructor(
+class SignInViewModel @Inject constructor(
     dataStore: PreferencesDatastore
 ) : BaseViewModel() {
 
     private val _dataStore = dataStore
-
-    // Save state of screen layout. True - Login screen, False - Register screen.
-    val loginScreen = MutableLiveData(LOGIN_VIEW_FIRST)
 
     // Save state of helper buttons. True - visible, False - gone.
     val helperButtonsVisible = MutableLiveData(DEFAULT_SHOW_HELPERS)
@@ -29,13 +26,6 @@ class LoginViewModel @Inject constructor(
     // For show errors only for one field and not for all if it didn't been activated.
     var emailAlreadyFocused = false
     var passwordAlreadyFocused = false
-
-    /**
-     * Change screen to register or to login.
-     */
-    fun swapLoginAndRegister() {
-        loginScreen.swapBoolean()
-    }
 
     /**
      * Show/hide helper buttons.
@@ -56,6 +46,10 @@ class LoginViewModel @Inject constructor(
     fun startMainActivity(email: String) {
         val direction = SplashScreenFragmentDirections.startMainActivity(email)
         navigateToActivity(direction)
+    }
+
+    fun onSignUpClick() {
+        TODO("Not yet implemented")
     }
 
 }

@@ -165,13 +165,32 @@
         tools:ignore="MissingConstraints"
         tools:visibility="visible" />
 
-    <!--    <androidx.appcompat.widget.AppCompatButton-->
-    <!--        android:id="@+id/button_login_registerByGoogle"-->
-    <!--        android:layout_width="0dp"-->
-    <!--        android:layout_height="@dimen/size_buttonHeight_M"-->
-    <!--        android:background="@drawable/btn_google"-->
-    <!--        tools:ignore="MissingConstraints,TouchTargetSizeCheck,SpeakableTextPresentCheck,VisualLintButtonSize" />-->
+    <!-- Google or Register and Terms warning. -->
 
+    <com.vikmanz.shpppro.presentation.utils.customViews.CustomGoogleButton
+        android:id="@+id/button_login_registerByGoogle"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/size_buttonHeight_M"
+        app:layout_constraintEnd_toEndOf="@+id/guideLine_login_rightBorder"
+        app:layout_constraintStart_toStartOf="@id/guideLine_login_leftBorder"
+        app:layout_constraintBottom_toTopOf="@+id/textView_login_textBetweenGoogleAndRegister"
+        android:layout_marginBottom="4dp"
+        app:mgbText="GOOGLE"
+        tools:ignore="MissingConstraints,TouchTargetSizeCheck,SpeakableTextPresentCheck,VisualLintButtonSize"
+        />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textView_login_textBetweenGoogleAndRegister"
+        style="@style/basicText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/auth_layout_text_between_google_and_register"
+        android:textSize="@dimen/size_textFont_M"
+        android:layout_marginBottom="4dp"
+        app:layout_constraintEnd_toEndOf="@+id/guideLine_login_rightBorder"
+        app:layout_constraintStart_toStartOf="@id/guideLine_login_leftBorder"
+        app:layout_constraintBottom_toTopOf="@+id/button_login_registerByEmail"
+        tools:ignore="MissingConstraints" />
 
 
     <androidx.appcompat.widget.AppCompatButton

@@ -5,94 +5,26 @@ import android.util.Patterns
 import androidx.fragment.app.viewModels
 import com.vikmanz.shpppro.R
 import com.vikmanz.shpppro.data.utils.PasswordErrorsChecker.checkPasswordErrors
-import com.vikmanz.shpppro.databinding.FragmentLoginBinding
+import com.vikmanz.shpppro.databinding.FragmentSignUpBinding
 import com.vikmanz.shpppro.presentation.base.BaseFragment
-import com.vikmanz.shpppro.presentation.screens.auth.login.LoginViewModel
-import com.vikmanz.shpppro.presentation.utils.extensions.clearError
+import com.vikmanz.shpppro.presentation.screens.auth.sign_in.SignInViewModel
 import com.vikmanz.shpppro.presentation.utils.extensions.hideKeyboard
-import com.vikmanz.shpppro.presentation.utils.extensions.setGone
-import com.vikmanz.shpppro.presentation.utils.extensions.setInvisible
-import com.vikmanz.shpppro.presentation.utils.extensions.setMultipleGone
-import com.vikmanz.shpppro.presentation.utils.extensions.setMultipleVisible
-import com.vikmanz.shpppro.presentation.utils.extensions.setVisible
-import com.vikmanz.shpppro.presentation.utils.extensions.startChangeLanguageActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class SignUpFragment :
-    BaseFragment<FragmentLoginBinding, LoginViewModel>(FragmentLoginBinding::inflate) {
+    BaseFragment<FragmentSignUpBinding, SignUpViewModel>(FragmentSignUpBinding::inflate) {
 
-    override val viewModel: LoginViewModel by viewModels()
+    override val viewModel: SignUpViewModel by viewModels()
 
     override fun setListeners() {
         with(binding) {
             buttonLoginRegisterByEmail.setOnClickListener { checkForm() }
-            textViewLoginSwitchScreenToLoginButton.setOnClickListener { viewModel.swapLoginAndRegister() }
+            textViewLoginSwitchScreenToLoginButton.setOnClickListener { viewModel.onSignInClick() }
           //  buttonLoginRegisterByGoogle.setOnClickListener { buttonLoginRegisterByGoogle.setFunText() }
         }
-        initHelpTesterButtons()
         setLoginPasswordFocusListeners()        // Listeners to fields and buttons.
         backgroundFocusHandler()                // de-focus fields when click on bg
-    }
-
-    override fun setObservers() {
-        observeUI()
-        observeHelpers()
-    }
-
-    /**
-     * Observe and swap SignIn ans SignUp screens via changing text and visibility view on layout.
-     */
-    private fun observeUI() {
-        viewModel.loginScreen.observe(viewLifecycleOwner) {
-            with(binding) {
-                if (it) {
-                    textViewLoginHelloText.text =
-                        getString(R.string.auth_activity_hello_text_login_screen)
-                    textViewLoginHelloSubtext.text =
-                        getString(R.string.auth_activity_hello_subtext_login_screen)
-                    buttonLoginRegisterByEmail.text =
-                        getString(R.string.auth_activity_register_button_login_screen)
-                    textViewLoginAlreadyHaveAccountMessage.text =
-                        getString(R.string.auth_activity_already_have_account_message_login_screen)
-                    textViewLoginSwitchScreenToLoginButton.text =
-                        getString(R.string.auth_activity_sign_in_button_login_screen)
-                    textViewLoginForgotPasswordText.setVisible()
-//                    setMultipleGone(
-//                        buttonLoginRegisterByGoogle,
-//                        textViewLoginTextBetweenGoogleAndRegister,
-//                        textViewLoginWarningAboutTerms
-//                    )
-                } else {
-                    textViewLoginHelloText.text = getString(R.string.auth_layout_hello_text)
-                    textViewLoginHelloSubtext.text =
-                        getString(R.string.auth_layout_hello_subtext)
-                    buttonLoginRegisterByEmail.text =
-                        getString(R.string.auth_layout_register_button)
-                    textViewLoginAlreadyHaveAccountMessage.text =
-                        getString(R.string.auth_layout_already_have_account_message)
-                    textViewLoginSwitchScreenToLoginButton.text =
-                        getString(R.string.auth_layout_sign_in_button)
-                    textViewLoginForgotPasswordText.setInvisible()
-//                    setMultipleVisible(
-//                        buttonLoginRegisterByGoogle,
-//                        textViewLoginTextBetweenGoogleAndRegister,
-//                        textViewLoginWarningAboutTerms
-//                    )
-                }
-            }
-        }
-    }
-
-    /**
-     * Observe and show/Hide help buttons.
-     */
-    private fun observeHelpers() {
-        viewModel.helperButtonsVisible.observe(viewLifecycleOwner) {
-//            with(binding.flowLoginDebugButtons) {
-//                if (it) setVisible() else setGone()
-//            }
-        }
     }
 
     /**
@@ -221,38 +153,6 @@ class SignUpFragment :
     }
 
     /**
-     *  Init helper buttons for tests.
-     *  It will be removed from release version.
-     */
-    private fun initHelpTesterButtons() {
-
-        // Set onClickListeners().
-        with(binding) {
-            // Set onClickListener to message "Do you have account" to see help buttons.
-            textViewLoginAlreadyHaveAccountMessage.setOnClickListener { viewModel.showOrHideHelpers() }
-
-            // Fill fields button listener.
-            buttonLoginFillLoginAndPass.setOnClickListener {
-                textInputLoginEmailField.setText(TEST_LOGIN)
-                textInputLoginPasswordField.setText(TEST_PASSWORD)
-                textInputLayoutLoginEmail.clearError()
-                textInputLayoutLoginPassword.clearError()
-            }
-
-            // Clear fields button listener.
-            buttonLoginClearLoginPassFields.setOnClickListener {
-                textInputLoginEmailField.setText("")
-                textInputLoginPasswordField.setText("")
-                textInputLayoutLoginEmail.clearError()
-                textInputLayoutLoginPassword.clearError()
-                checkboxLoginRememberMe.isChecked = false
-            }
-
-            buttonLoginChangeLanguage.setOnClickListener { startChangeLanguageActivity() }
-        }
-    }
-
-    /**
      *  De-focus views, when user do click on background.
      */
     private fun backgroundFocusHandler() = with(binding) {
@@ -261,15 +161,6 @@ class SignUpFragment :
             textInputLoginPasswordField.clearFocus()
             hideKeyboard(it)
         }
-    }
-
-
-    companion object {
-        /**
-         * Constants.
-         */
-        const val TEST_LOGIN = "viktor.manza@gmail.com"
-        private const val TEST_PASSWORD = "passwordE3@a"
     }
 
 }
