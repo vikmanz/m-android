@@ -6,9 +6,8 @@ import com.vikmanz.shpppro.common.Constants.LOGIN_VIEW_FIRST
 import com.vikmanz.shpppro.common.extensions.log
 import com.vikmanz.shpppro.common.extensions.swapBoolean
 import com.vikmanz.shpppro.data.datastore.PreferencesDatastore
-import com.vikmanz.shpppro.domain.usecases.RegisterUserUseCase
+import com.vikmanz.shpppro.domain.usecases.account.RegisterUserUseCase
 import com.vikmanz.shpppro.presentation.base.BaseViewModel
-import com.vikmanz.shpppro.presentation.screens.auth.sign_in.SignInFragmentDirections
 import com.vikmanz.shpppro.presentation.screens.auth.splash_screen.SplashScreenFragmentDirections
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers

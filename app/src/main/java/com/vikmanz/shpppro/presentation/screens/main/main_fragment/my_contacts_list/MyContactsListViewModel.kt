@@ -7,6 +7,7 @@ import com.vikmanz.shpppro.common.extensions.log
 import com.vikmanz.shpppro.common.extensions.swapBoolean
 import com.vikmanz.shpppro.common.model.ContactItem
 import com.vikmanz.shpppro.domain.repository.ContactsRepositoryLocal
+import com.vikmanz.shpppro.domain.usecases.contacts.GetAllUsersUseCase
 import com.vikmanz.shpppro.presentation.base.BaseViewModel
 import com.vikmanz.shpppro.presentation.screens.main.main_fragment.MainViewPagerFragmentDirections
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -22,7 +23,8 @@ private const val FAKE_LIST_FIRST = true
  */
 @HiltViewModel
 class MyContactsListViewModel @Inject constructor(
-    private val contactsRepository: ContactsRepositoryLocal
+    private val contactsRepository: ContactsRepositoryLocal,
+    private val getAllUsersUseCase: GetAllUsersUseCase
 ) : BaseViewModel() {
 
     private var lastDeletedContact: ContactItem? = null

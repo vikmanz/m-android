@@ -8,6 +8,7 @@ import com.vikmanz.shpppro.common.model.Contact
 import com.vikmanz.shpppro.common.model.ContactItem
 import com.vikmanz.shpppro.data.utils.ContactsPhoneInfoTaker
 import com.vikmanz.shpppro.domain.repository.ContactsRepositoryLocal
+import com.vikmanz.shpppro.domain.usecases.contacts.GetAllUsersUseCase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -18,12 +19,15 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.net.URL
 import java.util.UUID
+import javax.inject.Inject
 
 /**
  * Implementation of repository.
  * Main service to create contacts objects from information on from random.
  */
-class ContactsRepositoryLocalImpl : ContactsRepositoryLocal {
+class ContactsRepositoryLocalImpl @Inject constructor(
+    private val getAllUsersUseCase: GetAllUsersUseCase
+) : ContactsRepositoryLocal {
 
     //This object is a wrapper. if we pass it a new object it will call emit
     private val _contactList = MutableStateFlow(listOf<ContactItem>())
@@ -42,7 +46,10 @@ class ContactsRepositoryLocalImpl : ContactsRepositoryLocal {
     init {
         //todo
         coroutineScope.launch {
-            setFakeContacts()
+            //setFakeContacts()
+
+
+
         }
     }
 

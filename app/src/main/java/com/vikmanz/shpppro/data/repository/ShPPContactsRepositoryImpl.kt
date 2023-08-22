@@ -13,7 +13,7 @@ import com.vikmanz.shpppro.data.dto.toListOfContacts
 import com.vikmanz.shpppro.data.dto.toListOfUsers
 import com.vikmanz.shpppro.data.dto.toUser
 import com.vikmanz.shpppro.data.result.ApiSafeCaller
-import com.vikmanz.shpppro.domain.repository.ShPPRepositoryNet
+import com.vikmanz.shpppro.domain.repository.ShPPContactsRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -25,9 +25,10 @@ import javax.inject.Inject
  * Implementation of repository.
  * Main service to create contacts objects from information on from random.
  */
-class ShPPRepositoryNetImpl @Inject constructor(
-    private val api: ShPPApi, private val apiSafeCaller: ApiSafeCaller
-) : ShPPRepositoryNet {
+class ShPPContactsRepositoryImpl @Inject constructor(
+    private val api: ShPPApi,
+    private val apiSafeCaller: ApiSafeCaller
+) : ShPPContactsRepository {
 
     //This object is a wrapper. if we pass it a new object it will call emit
     private val _contactList = MutableStateFlow(listOf<ContactItem>())
@@ -37,62 +38,6 @@ class ShPPRepositoryNetImpl @Inject constructor(
 
     private val multiselectList = ArrayList<ContactItem>()
 
-
-    override suspend fun registerUser(email: String, password: String): ApiResult<Account> =
-        apiSafeCaller.safeApiCall {
-            api.registerUser(
-                UserRegisterRequest(
-                    email = email,
-                    password = password
-                )
-            ).toAccount()
-        }
-
-
-    override suspend fun authorizeUser(email: String, password: String): ApiResult<Account> =
-        apiSafeCaller.safeApiCall {
-            api.authorizeUser(
-                UserAuthorizeRequest(
-                    email = email,
-                    password = password
-                )
-            ).toAccount()
-        }
-
-    override suspend fun refreshToken(oldAccount: Account): ApiResult<Account> =
-        apiSafeCaller.safeApiCall {
-            api.refreshToken(
-                refreshToken = "Bearer ${oldAccount.refreshToken}"
-            ).toAccount(oldAccount.user)
-        }
-
-
-    override suspend fun getUser(token: String, userId: Int): ApiResult<User> =
-        apiSafeCaller.safeApiCall {
-            api.getUser(
-                token = "Bearer $token",
-                userId = userId
-            ).toUser()
-        }
-
-    override suspend fun editUser(token: String, user: User): ApiResult<User> =
-        apiSafeCaller.safeApiCall {
-            api.editUser(
-                token = "Bearer $token",
-                userId = requireNotNull(user.id),
-                body = UserEditRequest(
-                    name = user.name,
-                    phone = user.phone,
-                    address = user.address,
-                    career = user.career,
-                    birthday = user.birthday,
-                    facebook = user.facebook,
-                    instagram = user.instagram,
-                    twitter = user.twitter,
-                    linkedin = user.linkedin
-                )
-            ).toUser()
-        }
 
     override suspend fun getAllUsers(token: String, user: User): ApiResult<List<User>> =
         apiSafeCaller.safeApiCall {

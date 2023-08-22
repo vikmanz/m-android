@@ -1,7 +1,7 @@
 package com.vikmanz.shpppro.di.repository
 
-import com.vikmanz.shpppro.data.repository.ShPPRepositoryNetImpl
-import com.vikmanz.shpppro.domain.repository.ShPPRepositoryNet
+import com.vikmanz.shpppro.domain.repository.ShPPAccountRepository
+import com.vikmanz.shpppro.domain.repository.ShPPContactsRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -16,7 +16,13 @@ abstract class NetRepositoryModule {
     @Binds
     @Singleton
     abstract fun bindShPPRepositoryNet(
-        authenticationRepository: ShPPRepositoryNetImpl
-    ): ShPPRepositoryNet
+        accountRepository: ShPPAccountRepository
+    ): ShPPAccountRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindShPPRepositoryNet(
+        contactsRepository: ShPPContactsRepository
+    ): ShPPContactsRepository
 
 }

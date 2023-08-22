@@ -8,11 +8,8 @@ import com.vikmanz.shpppro.common.extensions.log
 import com.vikmanz.shpppro.common.extensions.swapBoolean
 import com.vikmanz.shpppro.common.model.User
 import com.vikmanz.shpppro.data.datastore.PreferencesDatastore
-import com.vikmanz.shpppro.domain.usecases.EditUserUseCase
+import com.vikmanz.shpppro.domain.usecases.account.EditUserUseCase
 import com.vikmanz.shpppro.presentation.base.BaseViewModel
-import com.vikmanz.shpppro.presentation.screens.auth.sign_up.SignUpFragmentDirections
-import com.vikmanz.shpppro.presentation.screens.auth.splash_screen.SplashScreenFragmentDirections
-import com.vikmanz.shpppro.presentation.screens.main.main_fragment.my_profile.MyProfileFragmentArgs
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
