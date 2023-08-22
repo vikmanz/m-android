@@ -34,7 +34,7 @@ class ShPPContactsRepositoryImpl @Inject constructor(
     private val _contactList = MutableStateFlow(listOf<ContactItem>())
 
     //this object sends out the immutable list
-    val contactList: StateFlow<List<ContactItem>> = _contactList.asStateFlow()
+    override val contactList: StateFlow<List<ContactItem>> = _contactList.asStateFlow()
 
     private val multiselectList = ArrayList<ContactItem>()
 
