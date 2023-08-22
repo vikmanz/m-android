@@ -7,7 +7,9 @@ import com.vikmanz.shpppro.R
 import com.vikmanz.shpppro.data.utils.PasswordErrorsChecker.checkPasswordErrors
 import com.vikmanz.shpppro.databinding.FragmentSignUpBinding
 import com.vikmanz.shpppro.presentation.base.BaseFragment
+import com.vikmanz.shpppro.presentation.screens.auth.sign_in.SignInFragment
 import com.vikmanz.shpppro.presentation.screens.auth.sign_in.SignInViewModel
+import com.vikmanz.shpppro.presentation.utils.extensions.clearError
 import com.vikmanz.shpppro.presentation.utils.extensions.hideKeyboard
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -21,10 +23,27 @@ class SignUpFragment :
         with(binding) {
             buttonLoginRegisterByEmail.setOnClickListener { checkForm() }
             textViewLoginSwitchScreenToLoginButton.setOnClickListener { viewModel.onSignInClick() }
-          //  buttonLoginRegisterByGoogle.setOnClickListener { buttonLoginRegisterByGoogle.setFunText() }
+
+            buttonLoginRegisterByGoogle.setOnClickListener {
+                textInputLoginEmailField.setText(SignInFragment.TEST_LOGIN)
+                textInputLoginPasswordField.setText(SignInFragment.TEST_PASSWORD)
+                textInputLayoutLoginEmail.clearError()
+                textInputLayoutLoginPassword.clearError()
+                checkboxLoginRememberMe.isChecked = false
+            }
+
+            textViewLoginAlreadyHaveAccountMessage.setOnClickListener {
+                textInputLoginEmailField.setText("")
+                textInputLoginPasswordField.setText("")
+                textInputLayoutLoginEmail.clearError()
+                textInputLayoutLoginPassword.clearError()
+                checkboxLoginRememberMe.isChecked = false
+            }
+
+
         }
         setLoginPasswordFocusListeners()        // Listeners to fields and buttons.
-        backgroundFocusHandler()                // de-focus fields when click on bg
+        //backgroundFocusHandler()                // de-focus fields when click on bg
     }
 
     /**
@@ -100,9 +119,11 @@ class SignUpFragment :
 
     private fun initMainActivity() {
         with(binding) {
-            if (checkboxLoginRememberMe.isChecked) saveUserData()  // If check Remember, save data to Data Store.
-            val email = textInputLoginEmailField.text.toString()   // Take email text.
-            viewModel.startMainActivity(email)                     // Start main activity.
+            if (checkboxLoginRememberMe.isChecked) saveUserData()           // If check Remember, save data to Data Store.
+            val email = textInputLoginEmailField.text.toString()            // Take email text.
+            val password = textInputLoginPasswordField.text.toString()      // Take pass text.
+            viewModel.onRegisterClick(email, password)
+//            viewModel.startMainActivity(email)                              // Start main activity.
         }
     }
 

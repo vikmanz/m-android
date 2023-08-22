@@ -3,19 +3,23 @@ package com.vikmanz.shpppro.presentation.screens.auth.sign_in
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.vikmanz.shpppro.common.Constants.LOGIN_VIEW_FIRST
+import com.vikmanz.shpppro.common.extensions.log
 import com.vikmanz.shpppro.common.extensions.swapBoolean
 import com.vikmanz.shpppro.data.datastore.PreferencesDatastore
+import com.vikmanz.shpppro.domain.usecases.AuthorizeUserUseCase
 import com.vikmanz.shpppro.presentation.base.BaseViewModel
 import com.vikmanz.shpppro.presentation.screens.auth.splash_screen.SplashScreenFragmentDirections
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import ua.digitalminds.fortrainerapp.data.result.ApiResult
 import javax.inject.Inject
 
 private const val DEFAULT_SHOW_HELPERS = false
 @HiltViewModel
 class SignInViewModel @Inject constructor(
-    dataStore: PreferencesDatastore
+    dataStore: PreferencesDatastore,
+    private val authorizeUserUseCase : AuthorizeUserUseCase
 ) : BaseViewModel() {
 
     private val _dataStore = dataStore
@@ -44,12 +48,46 @@ class SignInViewModel @Inject constructor(
     }
 
     fun startMainActivity(email: String) {
-        val direction = SplashScreenFragmentDirections.startMainActivity(email)
+        val direction = SignInFragmentDirections.startMainActivity(email)
         navigateToActivity(direction)
     }
 
     fun onSignUpClick() {
-        TODO("Not yet implemented")
+        val direction = SignInFragmentDirections.startSignUpFragment()
+        navigate(direction)
+    }
+
+    fun onSignInClick(email: String, password: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            log("Start coroutine")
+            authorizeUserUseCase(email, password).collect {
+
+                when (it) {
+
+                    is ApiResult.Loading -> {
+                        log("loading")
+                    }
+
+                    is ApiResult.Success -> {
+                        log("api success")
+                        log(it.value.toString())
+
+                        val direction = SignInFragmentDirections.startMainActivity(email)
+                        navigateToActivity(direction)
+
+                    }
+
+                    is ApiResult.NetworkError -> {
+                        log("api network error!")
+                    }
+
+                    is ApiResult.ServerError -> {
+                        log("api server error!")
+                    }
+                }
+            }
+            log("End coroutine")
+        }
     }
 
 }

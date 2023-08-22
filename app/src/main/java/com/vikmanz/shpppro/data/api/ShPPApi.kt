@@ -25,7 +25,7 @@ import retrofit2.http.Path
 interface ShPPApi {
 
     @POST("users")
-    @Headers("Content-Type: miltipart/form-data")
+    //@Headers("Content-Type: miltipart/form-data")
     suspend fun registerUser(
         @Body body: UserRegisterRequest
     ): UserRegisterResponse

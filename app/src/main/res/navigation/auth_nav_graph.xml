@@ -14,20 +14,19 @@
             android:id="@+id/startSignUpFragment"
             app:destination="@id/signUpFragment"
             app:popUpTo="@id/splashScreenFragment"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="true" />
 
         <action
             android:id="@+id/startSignInFragment"
             app:destination="@id/signInFragment"
             app:popUpTo="@id/splashScreenFragment"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="true" />
 
         <action
             android:id="@+id/startMainActivity"
             app:destination="@id/mainActivity"
             app:popUpTo="@id/splashScreenFragment"
-            app:popUpToInclusive="true">
-        </action>
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
@@ -36,8 +35,13 @@
         tools:layout="@layout/fragment_sign_up">
         <action
             android:id="@+id/startSignUpExtended"
-            app:destination="@id/signUpExtendedFragment">
-    </action>
+            app:destination="@id/signUpExtendedFragment"
+            />
+        <action
+            android:id="@+id/startSignInFragment"
+            app:destination="@id/signInFragment"
+            app:popUpTo="@id/signUpFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
@@ -47,9 +51,12 @@
         <action
             android:id="@+id/startMainActivity"
             app:destination="@id/mainActivity"
-            app:popUpTo="@id/signUpExtendedFragment"
-            app:popUpToInclusive="true">
-        </action>
+            app:popUpTo="@id/signUpFragment"
+            app:popUpToInclusive="true" />
+        <argument
+            android:name="Account"
+            app:argType="com.vikmanz.shpppro.common.model.Account" />
+
     </fragment>
 
     <fragment
@@ -60,8 +67,12 @@
             android:id="@+id/startMainActivity"
             app:destination="@id/mainActivity"
             app:popUpTo="@id/signInFragment"
-            app:popUpToInclusive="true">
-        </action>
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/startSignUpFragment"
+            app:destination="@id/signUpFragment"
+            app:popUpTo="@id/signInFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <activity
@@ -74,7 +85,6 @@
             android:name="email"
             app:argType="string" />
     </activity>
-
 
 
 </navigation>

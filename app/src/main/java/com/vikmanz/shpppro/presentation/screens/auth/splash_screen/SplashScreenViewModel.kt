@@ -30,7 +30,7 @@ class SplashScreenViewModel @Inject constructor(
     }
 
     private fun startLoginFragment() {
-        val direction = SplashScreenFragmentDirections.startLoginFragment()
+        val direction = SplashScreenFragmentDirections.startSignInFragment()
         navigate(direction)
     }
 

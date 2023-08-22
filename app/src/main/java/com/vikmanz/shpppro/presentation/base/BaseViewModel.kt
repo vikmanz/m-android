@@ -14,15 +14,18 @@ abstract class BaseViewModel : ViewModel() {
     val navigation: LiveData<Event<NavigationCommand>> get() = _navigation
 
     fun navigate(navDirections: NavDirections) {
-        _navigation.value = Event(NavigationCommand.ToDirection(navDirections))
+//        _navigation.value = Event(NavigationCommand.ToDirection(navDirections))
+        _navigation.postValue(Event(NavigationCommand.ToDirection(navDirections)))
     }
 
     fun navigateToActivity(navDirections: NavDirections) {
-        _navigation.value = Event(NavigationCommand.ToActivity(navDirections))
+//        _navigation.value = Event(NavigationCommand.ToActivity(navDirections))
+        _navigation.postValue(Event(NavigationCommand.ToActivity(navDirections)))
     }
 
     fun navigateBack() {
-        _navigation.value = Event(NavigationCommand.Back)
+//        _navigation.value = Event(NavigationCommand.Back)
+        _navigation.postValue(Event(NavigationCommand.Back))
     }
 
 }

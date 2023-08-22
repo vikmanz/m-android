@@ -131,9 +131,10 @@ class SignInFragment :
 
     private fun initMainActivity() {
         with(binding) {
-            if (checkboxLoginRememberMe.isChecked) saveUserData()  // If check Remember, save data to Data Store.
-            val email = textInputLoginEmailField.text.toString()   // Take email text.
-            viewModel.startMainActivity(email)                     // Start main activity.
+            if (checkboxLoginRememberMe.isChecked) saveUserData()       // If check Remember, save data to Data Store.
+            val email = textInputLoginEmailField.text.toString()        // Take email text.
+            val password = textInputLoginPasswordField.text.toString()  // Take pass text.
+            viewModel.onSignInClick(email, password)                    // Start main activity.
         }
     }
 
@@ -200,6 +201,7 @@ class SignInFragment :
                 textInputLoginPasswordField.setText(TEST_PASSWORD)
                 textInputLayoutLoginEmail.clearError()
                 textInputLayoutLoginPassword.clearError()
+                checkboxLoginRememberMe.isChecked = false
             }
 
             // Clear fields button listener.
@@ -232,7 +234,7 @@ class SignInFragment :
          * Constants.
          */
         const val TEST_LOGIN = "viktor.manza@gmail.com"
-        private const val TEST_PASSWORD = "passwordE3@a"
+        const val TEST_PASSWORD = "passwordE3@a"
     }
 
 }
