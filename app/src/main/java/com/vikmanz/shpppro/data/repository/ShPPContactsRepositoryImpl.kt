@@ -13,11 +13,13 @@ import com.vikmanz.shpppro.data.dto.toListOfContacts
 import com.vikmanz.shpppro.data.dto.toListOfUsers
 import com.vikmanz.shpppro.data.dto.toUser
 import com.vikmanz.shpppro.data.result.ApiSafeCaller
+import com.vikmanz.shpppro.domain.repository.ShPPAccountRepository
 import com.vikmanz.shpppro.domain.repository.ShPPContactsRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import ua.digitalminds.fortrainerapp.data.result.ApiResult
+import java.net.URL
 import javax.inject.Inject
 
 //todo withContext(Dispatchers.IO) { ?
@@ -27,7 +29,8 @@ import javax.inject.Inject
  */
 class ShPPContactsRepositoryImpl @Inject constructor(
     private val api: ShPPApi,
-    private val apiSafeCaller: ApiSafeCaller
+    private val apiSafeCaller: ApiSafeCaller,
+    private val accRepository: ShPPAccountRepository
 ) : ShPPContactsRepository {
 
     //This object is a wrapper. if we pass it a new object it will call emit
@@ -38,43 +41,53 @@ class ShPPContactsRepositoryImpl @Inject constructor(
 
     private val multiselectList = ArrayList<ContactItem>()
 
-
-    override suspend fun getAllUsers(token: String, user: User): ApiResult<List<User>> =
-        apiSafeCaller.safeApiCall {
+    override suspend fun getAllUsers(user: User): ApiResult<List<User>> {
+        val result = apiSafeCaller.safeApiCall {
             api.getAllUsers(
-                token = "Bearer $token",
+                token = "Bearer ${accRepository.account.accessToken}",
             ).toListOfUsers()
         }
+        if (result is ApiResult.Success) _contactList.value = result.value.map { ContactItem(it) }
+        return result
+    }
+
 
     override suspend fun addContact(
-        token: String, userId: Int, contactId: Int
+        contactId: Int
     ): ApiResult<List<User>> = apiSafeCaller.safeApiCall {
         api.addContact(
-            token = "Bearer $token",
-            userId = userId,
+            token = "Bearer ${accRepository.account.accessToken}",
+            userId = accRepository.account.user.id,
             body = ContactAddRequest(
-            contactId = contactId
+                contactId = contactId
             )
         ).toListOfContacts()
     }
 
+
     override suspend fun deleteContact(
-        token: String, userId: Int, contactId: Int
+        contactId: Int
     ): ApiResult<List<User>> = apiSafeCaller.safeApiCall {
         api.deleteContact(
-            token = "Bearer $token",
-            userId = userId,
+            token = "Bearer ${accRepository.account.accessToken}",
+            userId = accRepository.account.user.id,
             contactId = contactId
         ).toListOfContacts()
 
     }
 
     override suspend fun getUserContacts(
-        token: String, userId: Int, contactId: Int
+        contactId: Int
     ): ApiResult<List<User>> = apiSafeCaller.safeApiCall {
         api.getUserContacts(
-            token = "Bearer $token",
-            userId = userId,
+            token = "Bearer ${accRepository.account.accessToken}",
+            userId = accRepository.account.user.id,
         ).toListOfContacts()
     }
+
+    override fun findContact(contactId: Int): ContactItem? {
+        return contactList.value[contactId]
+    }
+
+
 }

@@ -6,6 +6,6 @@ import com.vikmanz.shpppro.common.model.ContactItem
  * Interface to send deleteUser from ContactAdapter to MyContactsActivity
  */
 interface ContactActionListener {
-    fun onTapContact(contactId: Long)
+    fun onTapContact(contactId: Int)
     fun onDeleteContact(contact: ContactItem)
 }

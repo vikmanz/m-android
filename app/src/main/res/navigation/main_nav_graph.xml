@@ -39,9 +39,11 @@
         android:label="fragment_contact_details"
         tools:layout="@layout/fragment_contact_details">
         <!--suppress NavigationFile -->
+
         <argument
             android:name="contactID"
-            app:argType="long" />
+            app:argType="integer" />
+
     </fragment>
 
 </navigation>

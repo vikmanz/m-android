@@ -1,7 +1,7 @@
 package com.vikmanz.shpppro.common.model
 
 data class ContactItem(
-    val contact: Contact,
+    val contact: User,
     var isChecked: Boolean = false,
     val onCheck: () -> Unit = {}
 )

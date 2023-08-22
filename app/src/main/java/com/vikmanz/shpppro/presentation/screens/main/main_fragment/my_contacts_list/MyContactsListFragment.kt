@@ -58,7 +58,7 @@ class MyContactsListFragment :
 
             contactActionListener = object : ContactActionListener {
 
-            override fun onTapContact(contactId: Long) {
+            override fun onTapContact(contactId: Int) {
                 viewModel.onContactPressed(contactId)
             }
 
@@ -201,9 +201,9 @@ class MyContactsListFragment :
         val swipeHandler = object : SwipeToDeleteCallback(requireContext()) {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val position = viewHolder.adapterPosition
-                viewModel.getContact(position)?.let {
-                    deleteContactWithUndo(it)
-                }
+//                viewModel.getContact(position)?.let {
+//                    deleteContactWithUndo(it)
+//                }
             }
 
             override fun isItemViewSwipeEnabled(): Boolean {

@@ -33,10 +33,10 @@ class ShPPAccountRepositoryImpl @Inject constructor(
 
 
     private val _account = MutableStateFlow(Account())
-    override val account: StateFlow<Account> = _account.asStateFlow()
+    override val account: Account = _account.value
 
-    override suspend fun registerUser(email: String, password: String): ApiResult<Account> =
-        apiSafeCaller.safeApiCall {
+    override suspend fun registerUser(email: String, password: String): ApiResult<Account> {
+        val result = apiSafeCaller.safeApiCall {
             api.registerUser(
                 UserRegisterRequest(
                     email = email,
@@ -44,10 +44,13 @@ class ShPPAccountRepositoryImpl @Inject constructor(
                 )
             ).toAccount()
         }
+        if (result is ApiResult.Success) _account.value = result.value
+        return result
+    }
 
 
-    override suspend fun authorizeUser(email: String, password: String): ApiResult<Account> =
-        apiSafeCaller.safeApiCall {
+    override suspend fun authorizeUser(email: String, password: String): ApiResult<Account> {
+        val result = apiSafeCaller.safeApiCall {
             api.authorizeUser(
                 UserAuthorizeRequest(
                     email = email,
@@ -55,40 +58,62 @@ class ShPPAccountRepositoryImpl @Inject constructor(
                 )
             ).toAccount()
         }
+        if (result is ApiResult.Success) _account.value = result.value
+        return result
+    }
 
-    override suspend fun refreshToken(oldAccount: Account): ApiResult<Account> =
-        apiSafeCaller.safeApiCall {
+
+    override suspend fun refreshToken(): ApiResult<Account> {
+        val result = apiSafeCaller.safeApiCall {
             api.refreshToken(
-                refreshToken = "Bearer ${oldAccount.refreshToken}"
-            ).toAccount(oldAccount.user)
+                refreshToken = "Bearer ${account.refreshToken}"
+            ).toAccount(account.user)
         }
+        if (result is ApiResult.Success) _account.value = result.value
+        return result
+    }
 
 
-    override suspend fun getUser(token: String, userId: Int): ApiResult<User> =
+    override suspend fun getUser(): ApiResult<User> =
         apiSafeCaller.safeApiCall {
             api.getUser(
-                token = "Bearer $token",
-                userId = userId
+                token = "Bearer ${account.accessToken}",
+                userId = requireNotNull(account.user.id)
             ).toUser()
         }
 
-    override suspend fun editUser(token: String, user: User): ApiResult<User> =
-        apiSafeCaller.safeApiCall {
+    override suspend fun editUser(
+        name: String?,
+        phone: String?,
+        address: String?,
+        career: String?,
+        birthday:String?,
+        facebook: String?,
+        instagram: String?,
+        twitter: String?,
+        linkedin: String?
+    ): ApiResult<User> {
+        val result = apiSafeCaller.safeApiCall {
             api.editUser(
-                token = "Bearer $token",
-                userId = requireNotNull(user.id),
+                token = "Bearer ${account.accessToken}",
+                userId = account.user.id,
                 body = UserEditRequest(
-                    name = user.name,
-                    phone = user.phone,
-                    address = user.address,
-                    career = user.career,
-                    birthday = user.birthday,
-                    facebook = user.facebook,
-                    instagram = user.instagram,
-                    twitter = user.twitter,
-                    linkedin = user.linkedin
+                    name = name,
+                    phone = phone,
+                    address = address,
+                    career = career,
+                    birthday = birthday,
+                    facebook = facebook,
+                    instagram = instagram,
+                    twitter = twitter,
+                    linkedin = linkedin
                 )
             ).toUser()
         }
+        if (result is ApiResult.Success) _account.value = _account.value.copy(
+            user = result.value
+        )
+        return result
+    }
 
 }

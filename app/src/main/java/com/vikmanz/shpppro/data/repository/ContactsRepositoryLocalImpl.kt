@@ -6,6 +6,7 @@ import com.vikmanz.shpppro.common.Constants.START_NUMBER_OF_CONTACTS
 import com.vikmanz.shpppro.common.extensions.log
 import com.vikmanz.shpppro.common.model.Contact
 import com.vikmanz.shpppro.common.model.ContactItem
+import com.vikmanz.shpppro.common.model.User
 import com.vikmanz.shpppro.data.utils.ContactsPhoneInfoTaker
 import com.vikmanz.shpppro.domain.repository.ContactsRepositoryLocal
 import com.vikmanz.shpppro.domain.usecases.contacts.GetAllUsersUseCase
@@ -25,9 +26,7 @@ import javax.inject.Inject
  * Implementation of repository.
  * Main service to create contacts objects from information on from random.
  */
-class ContactsRepositoryLocalImpl @Inject constructor(
-    private val getAllUsersUseCase: GetAllUsersUseCase
-) : ContactsRepositoryLocal {
+class ContactsRepositoryLocalImpl @Inject constructor() : ContactsRepositoryLocal {
 
     //This object is a wrapper. if we pass it a new object it will call emit
     private val _contactList = MutableStateFlow(listOf<ContactItem>())
@@ -47,9 +46,6 @@ class ContactsRepositoryLocalImpl @Inject constructor(
         //todo
         coroutineScope.launch {
             //setFakeContacts()
-
-
-
         }
     }
 
@@ -67,16 +63,15 @@ class ContactsRepositoryLocalImpl @Inject constructor(
         birthday: String
     ): ContactItem {
         val newContact = ContactItem(
-            Contact(
-                contactId = getRandomId(),
-                contactPhotoLink = contactPhotoLink,
-                contactPhotoIndex = photoIndex,
-                contactName = name,
-                contactCareer = career,
-                contactEmail = email,
-                contactPhone = phone,
-                contactAddress = address,
-                contactBirthday = birthday
+            User(
+                id = -1,
+                image = "",
+                name = name,
+                career = career,
+                email = email,
+                phone = phone,
+                address = address,
+                birthday = birthday
             )
         )
         imgCounter++
@@ -195,8 +190,8 @@ class ContactsRepositoryLocalImpl @Inject constructor(
     /**
      * Get contact from list via id.
      */
-    override fun findContact(contactId: Long): ContactItem? {
-        _contactList.value.forEach { if (it.contact.contactId == contactId) return it }
+    override fun findContact(contactId: Int): ContactItem? {
+        _contactList.value.forEach { if (it.contact.id == contactId) return it }
         return null
     }
 

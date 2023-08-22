@@ -64,19 +64,11 @@ class SignUpExtendedViewModel @Inject constructor(
 
     fun onSaveClick(username: String, phone: String) {
 
-        val account = navArgs.account
-        val user = User(
-            id = account.user.id,
-            email = account.user.email,
-            name = username,
-            phone = phone
-        )
-
         viewModelScope.launch(Dispatchers.IO) {
             log("Start coroutine")
             editUserUseCase(
-                token = account.accessToken,
-                user = user
+                name = username,
+                phone = phone
             ).collect {
 
                 when (it) {
@@ -90,7 +82,7 @@ class SignUpExtendedViewModel @Inject constructor(
                         log(it.value.toString())
 
                         val direction =
-                            SignUpExtendedFragmentDirections.startMainActivity(user.email.toString())
+                            SignUpExtendedFragmentDirections.startMainActivity(it.value.email.toString())
                         navigateToActivity(direction)
 
                     }

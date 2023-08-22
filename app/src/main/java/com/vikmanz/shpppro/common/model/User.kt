@@ -3,7 +3,7 @@ package com.vikmanz.shpppro.common.model
 import java.io.Serializable
 
 data class User(
-    val id:Int? = null,
+    val id:Int = -1,
     val email: String? = null,
     var name: String? = null,
     var phone: String? = null,

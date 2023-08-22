@@ -11,11 +11,28 @@ class EditUserUseCase @Inject constructor(
         private val accountRepository: ShPPAccountRepository
 ) {
 
-    operator fun invoke(token: String, user: User): Flow<ApiResult<User>> = flow {
+    operator fun invoke(
+        name: String? = null,
+        phone: String? = null,
+        address: String? = null,
+        career: String? = null,
+        birthday:String? = null,
+        facebook: String? = null,
+        instagram: String? = null,
+        twitter: String? = null,
+        linkedin: String? = null,
+    ): Flow<ApiResult<User>> = flow {
         emit(ApiResult.Loading)
         emit(accountRepository.editUser(
-            token = token,
-            user = user
+            name = name,
+            phone = phone,
+            address = address,
+            career = career,
+            birthday = birthday,
+            facebook = facebook,
+            instagram = instagram,
+            twitter = twitter,
+            linkedin = linkedin
         ))
     }
 }

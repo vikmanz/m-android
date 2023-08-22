@@ -9,12 +9,22 @@ import ua.digitalminds.fortrainerapp.data.result.ApiResult
 
 interface ShPPAccountRepository {
 
-    val account: StateFlow<Account>
+    val account: Account
 
     suspend fun registerUser(email: String, password: String): ApiResult<Account>
     suspend fun authorizeUser(email: String, password: String): ApiResult<Account>
-    suspend fun refreshToken(oldAccount: Account): ApiResult<Account>
-    suspend fun getUser(token: String, userId: Int): ApiResult<User>
-    suspend fun editUser(token: String, user: User): ApiResult<User>
+    suspend fun refreshToken(): ApiResult<Account>
+    suspend fun getUser(): ApiResult<User>
+    suspend fun editUser(
+        name: String?,
+        phone: String?,
+        address: String?,
+        career: String?,
+        birthday:String?,
+        facebook: String?,
+        instagram: String?,
+        twitter: String?,
+        linkedin: String?
+    ): ApiResult<User>
 
 }

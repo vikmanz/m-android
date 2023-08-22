@@ -41,7 +41,7 @@ interface ContactsRepositoryLocal {
 
     fun getContact(index: Int): ContactItem?
 
-    fun findContact(contactId: Long): ContactItem?
+    fun findContact(contactId: Int): ContactItem?
 
     fun isContainsContact(contact: ContactItem): Boolean
 

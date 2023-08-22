@@ -15,13 +15,13 @@ abstract class NetRepositoryModule {
 
     @Binds
     @Singleton
-    abstract fun bindShPPRepositoryNet(
+    abstract fun bindShPPAccountRepository(
         accountRepository: ShPPAccountRepository
     ): ShPPAccountRepository
 
     @Binds
     @Singleton
-    abstract fun bindShPPRepositoryNet(
+    abstract fun bindShPPContactsRepository(
         contactsRepository: ShPPContactsRepository
     ): ShPPContactsRepository
 

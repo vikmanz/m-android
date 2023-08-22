@@ -11,11 +11,8 @@ class RefreshTokenUseCase @Inject constructor(
     private val accountRepository: ShPPAccountRepository
 ) {
 
-    operator fun invoke(oldAccount: Account): Flow<ApiResult<Account>> = flow {
+    operator fun invoke(): Flow<ApiResult<Account>> = flow {
         emit(ApiResult.Loading)
-        emit(accountRepository.refreshToken(
-                oldAccount = oldAccount
-            )
-        )
+        emit(accountRepository.refreshToken())
     }
 }

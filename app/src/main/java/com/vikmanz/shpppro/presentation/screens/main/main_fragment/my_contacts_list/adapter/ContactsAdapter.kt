@@ -64,7 +64,7 @@ class ContactsAdapter(
                 if (isMultiselect) {
                     contactState.onCheck()
                 } else {
-                    contactActionListener.onTapContact(contactState.contact.contactId)
+                    contactActionListener.onTapContact(contactState.contact.id)
                 }
             }
 
@@ -83,9 +83,9 @@ class ContactsAdapter(
         }
 
         private fun bindContactInfo(contact: ContactItem) = with(binding) {
-            imageViewOneContactAvatarImage.setImageWithGlide(contact.contact.contactPhotoLink)
-            textViewOneContactName.text = contact.contact.contactName
-            textViewOneContactCareer.text = contact.contact.contactPhone
+            imageViewOneContactAvatarImage.setImageWithGlide(contact.contact.image)
+            textViewOneContactName.text = contact.contact.name
+            textViewOneContactCareer.text = contact.contact.phone
         }
 
         private fun decorateHolder(contact: ContactItem) = with(binding) {

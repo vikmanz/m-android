@@ -8,14 +8,11 @@ import ua.digitalminds.fortrainerapp.data.result.ApiResult
 import javax.inject.Inject
 
 class GetUserUseCase @Inject constructor(
-        private val accountRepository: ShPPAccountRepository
+    private val accountRepository: ShPPAccountRepository
 ) {
 
-    operator fun invoke(token: String, userId: Int): Flow<ApiResult<User>> = flow {
+    operator fun invoke(): Flow<ApiResult<User>> = flow {
         emit(ApiResult.Loading)
-        emit(accountRepository.getUser(
-            token = token,
-            userId = userId
-        ))
+        emit(accountRepository.getUser())
     }
 }
