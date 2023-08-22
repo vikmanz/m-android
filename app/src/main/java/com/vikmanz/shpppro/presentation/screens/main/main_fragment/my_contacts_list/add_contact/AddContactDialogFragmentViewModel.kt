@@ -3,7 +3,7 @@ package com.vikmanz.shpppro.presentation.screens.main.main_fragment.my_contacts_
 import android.net.Uri
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.vikmanz.shpppro.domain.repository.ContactsRepositoryLocal
+import com.vikmanz.shpppro.data.repository.ShPPContactsRepositoryImpl
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -12,15 +12,15 @@ import javax.inject.Inject
  */
 @HiltViewModel
 class AddContactDialogFragmentViewModel @Inject constructor(
-    private val contactsRepository: ContactsRepositoryLocal
+    private val contactsRepository: ShPPContactsRepositoryImpl
 ) : ViewModel() {
 
     // avatar
     val currentPhoto = MutableLiveData<Any>(getFakePhotoUrl())
-    private fun getFakePhotoUrl() = contactsRepository.getCurrentContactPhotoUrl()
+    private fun getFakePhotoUrl() = "" // contactsRepository.getCurrentContactPhotoUrl()
 
     fun changeFakePhotoToNext() {
-        contactsRepository.incrementPhotoCounter()
+        //contactsRepository.incrementPhotoCounter()
         currentPhoto.value = getFakePhotoUrl()
     }
 
@@ -28,26 +28,26 @@ class AddContactDialogFragmentViewModel @Inject constructor(
         currentPhoto.value = uri
     }
 
-    fun createNewContact(
-        name: String,
-        career: String,
-        email: String,
-        phone: String,
-        address: String,
-        birthday: String
-    ) {
-        val newContactItem = contactsRepository.createContact(      //todo change!
-            contactPhotoLink = getCurrentPhoto(),
-            photoIndex = contactsRepository.getCurrentPhotoCounter(),
-            name = name,
-            career = career,
-            email = email,
-            phone = phone,
-            address = address,
-            birthday = birthday
-        )
-        contactsRepository.addContact(newContactItem)
-    }
+//    fun createNewContact(
+//        name: String,
+//        career: String,
+//        email: String,
+//        phone: String,
+//        address: String,
+//        birthday: String
+//    ) {
+//        val newContactItem = contactsRepository.createContact(      //todo change!
+//            contactPhotoLink = getCurrentPhoto(),
+//            photoIndex = contactsRepository.getCurrentPhotoCounter(),
+//            name = name,
+//            career = career,
+//            email = email,
+//            phone = phone,
+//            address = address,
+//            birthday = birthday
+//        )
+//        contactsRepository.addContact(newContactItem)
+//    }
 
     private fun getCurrentPhoto(): Any = with(currentPhoto.value) {
         if (this is Uri) this else getFakePhotoUrl()

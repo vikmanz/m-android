@@ -59,14 +59,14 @@ class AddContactDialogFragment : DialogFragment() {
                 buttonAddContactSaveUser.setOnClickListener {
                     if (checkContactIsNotEmpty()) {
                         dialog?.dismiss()
-                        viewModel.createNewContact(
-                            name = textInputAddContactUserNameInputField.text.toString(),
-                            career = textInputAddContactUserCareerInputField.text.toString(),
-                            email = textInputAddContactUserEmailInputField.text.toString(),
-                            phone = textInputAddContactUserPhoneInputField.text.toString(),
-                            address = textInputAddContactUserAddressInputField.text.toString(),
-                            birthday = textInputAddContactUserBirthdayInputField.text.toString()
-                        )
+//                        viewModel.createNewContact(
+//                            name = textInputAddContactUserNameInputField.text.toString(),
+//                            career = textInputAddContactUserCareerInputField.text.toString(),
+//                            email = textInputAddContactUserEmailInputField.text.toString(),
+//                            phone = textInputAddContactUserPhoneInputField.text.toString(),
+//                            address = textInputAddContactUserAddressInputField.text.toString(),
+//                            birthday = textInputAddContactUserBirthdayInputField.text.toString()
+//                        )
                     }
                 }
 

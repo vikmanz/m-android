@@ -6,7 +6,6 @@ import com.vikmanz.shpppro.common.extensions.isTrue
 import com.vikmanz.shpppro.common.extensions.log
 import com.vikmanz.shpppro.common.extensions.swapBoolean
 import com.vikmanz.shpppro.common.model.ContactItem
-import com.vikmanz.shpppro.domain.repository.ContactsRepositoryLocal
 import com.vikmanz.shpppro.domain.repository.ShPPContactsRepository
 import com.vikmanz.shpppro.domain.usecases.contacts.GetAllUsersUseCase
 import com.vikmanz.shpppro.presentation.base.BaseViewModel
