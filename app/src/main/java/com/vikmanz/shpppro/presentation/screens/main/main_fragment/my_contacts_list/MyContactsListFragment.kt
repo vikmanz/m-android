@@ -54,7 +54,9 @@ class MyContactsListFragment :
      * Create adapter for contacts recycler view.
      */
     private val adapter: ContactsAdapter by lazy {
-        ContactsAdapter(contactActionListener = object : ContactActionListener {
+        ContactsAdapter(
+
+            contactActionListener = object : ContactActionListener {
 
             override fun onTapContact(contactId: Long) {
                 viewModel.onContactPressed(contactId)
@@ -64,7 +66,9 @@ class MyContactsListFragment :
                 deleteContactWithUndo(contact)
             }
 
-        })
+        }
+
+        )
     }
 
     /**
@@ -117,12 +121,14 @@ class MyContactsListFragment :
         viewModel.fakeListActivated.observe(viewLifecycleOwner) {
             with(binding) {
                 if (it) {
+
                     setMultipleInvisible(
                         buttonMyContactsDeclineAccess,
                         textviewMyContactsRevokePermission
                     )
                     buttonMyContactsAddContactsFromFaker.setGone()
                     buttonMyContactsAddContactsFromPhonebook.setVisible()
+
                 } else {
                     setMultipleVisible(
                         buttonMyContactsAddContactsFromFaker,

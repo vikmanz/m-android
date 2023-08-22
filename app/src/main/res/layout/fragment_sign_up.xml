@@ -23,24 +23,6 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.95" />
 
-    <!-- E-Mail, Password, Remember and Forgot. -->
-    <androidx.constraintlayout.helper.widget.Flow
-        android:id="@+id/flow_login_emailAndPassword"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:constraint_referenced_ids="
-        flow_login_helloText,
-        textInputLayout_login_email,
-        textInputLayout_login_password,
-        flow_login_rememberAndForgot"
-        app:layout_constraintEnd_toStartOf="@+id/guideLine_login_rightBorder"
-        app:layout_constraintStart_toStartOf="@+id/guideLine_login_leftBorder"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.60"
-        app:layout_constraintBottom_toTopOf="@id/button_login_registerByGoogle"
-        />
-
     <!-- Hello text. -->
     <androidx.constraintlayout.helper.widget.Flow
         android:id="@+id/flow_login_helloText"
@@ -51,14 +33,16 @@
         app:constraint_referenced_ids="
         textView_login_helloText,
         textView_login_helloSubtext"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintBottom_toTopOf="@+id/flow_login_emailAndPassword"
+        app:layout_constraintEnd_toStartOf="@+id/guideLine_login_rightBorder"
+        app:layout_constraintStart_toStartOf="@+id/guideLine_login_leftBorder" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textView_login_helloText"
         style="@style/basicText_bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/auth_layout_hello_text"
+        android:text="Hello"
         android:textSize="@dimen/size_textFont_L"
         tools:ignore="MissingConstraints" />
 
@@ -67,10 +51,25 @@
         style="@style/basicText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/auth_layout_hello_subtext"
+        android:text="Enter your email and password below"
         android:textSize="@dimen/size_textFont_XXS"
-        android:paddingBottom="24dp"
         tools:ignore="MissingConstraints" />
+
+    <!-- E-Mail, Password, Remember and Forgot. -->
+    <androidx.constraintlayout.helper.widget.Flow
+        android:id="@+id/flow_login_emailAndPassword"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:constraint_referenced_ids="
+        textInputLayout_login_email,
+        textInputLayout_login_password,
+        flow_login_rememberAndForgot"
+        app:layout_constraintEnd_toStartOf="@+id/guideLine_login_rightBorder"
+        app:layout_constraintStart_toStartOf="@+id/guideLine_login_leftBorder"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteY="173dp" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout_login_email"
@@ -84,7 +83,6 @@
         app:colorControlHighlight="?attr/colorOnTertiary"
         app:colorControlNormal="?attr/colorOnTertiary"
         app:helperTextTextColor="?attr/colorError"
-
         app:hintTextAppearance="@style/textInputLayout_hintSize"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -143,7 +141,9 @@
         checkbox_login_rememberMe,
         textView_login_forgotPasswordText"
         app:flow_horizontalStyle="spread_inside"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="21dp"
+        tools:layout_editor_absoluteY="318dp" />
 
     <androidx.appcompat.widget.AppCompatCheckBox
         android:id="@+id/checkbox_login_rememberMe"
@@ -177,7 +177,7 @@
         android:layout_marginBottom="4dp"
         app:mgbText="GOOGLE"
         tools:ignore="MissingConstraints,TouchTargetSizeCheck,SpeakableTextPresentCheck,VisualLintButtonSize"
- />
+        />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textView_login_textBetweenGoogleAndRegister"
@@ -192,46 +192,32 @@
         app:layout_constraintBottom_toTopOf="@+id/button_login_registerByEmail"
         tools:ignore="MissingConstraints" />
 
+
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_login_registerByEmail"
         android:layout_width="0dp"
         android:layout_height="@dimen/size_buttonHeight_XL"
         android:background="@drawable/button_selector_orange_outlined"
-        android:text="@string/auth_layout_register_button"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintEnd_toEndOf="@+id/guideLine_login_rightBorder"
-        app:layout_constraintStart_toStartOf="@id/guideLine_login_leftBorder"
-        app:layout_constraintBottom_toTopOf="@id/textView_login_warningAboutTerms"
+        android:text="LOGIN"
         android:textAppearance="@style/basicText_buttonsText"
-        tools:ignore="MissingConstraints,VisualLintButtonSize" />
+        tools:ignore="VisualLintButtonSize"
+        app:layout_constraintStart_toStartOf="@id/guideLine_login_leftBorder"
+        app:layout_constraintEnd_toEndOf="@id/guideLine_login_rightBorder"
+        app:layout_constraintBottom_toTopOf="@id/textView_login_alreadyHaveAccountMessage"
+        android:layout_marginBottom="12dp" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/textView_login_warningAboutTerms"
-        style="@style/basicText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/offset_S"
-        android:text="@string/auth_layout_terms_warning"
-        android:textAlignment="center"
-        android:textSize="@dimen/size_textFont_XXS"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView_login_alreadyHaveAccountMessage"
-        app:layout_constraintEnd_toStartOf="@+id/guideLine_login_rightBorder"
-        app:layout_constraintStart_toStartOf="@+id/guideLine_login_leftBorder" />
-
-    <!-- Sign in or Sign up. -->
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textView_login_alreadyHaveAccountMessage"
         style="@style/basicText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/auth_layout_already_have_account_message"
+        android:text="Don’t have account?"
         android:textColor="?attr/colorOnTertiary"
-        android:layout_marginBottom="12dp"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toStartOf="@+id/guideLine_login_leftBorder"
-        app:layout_constraintEnd_toStartOf="@+id/textView_login_switchScreenToLoginButton"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/textView_login_switchScreenToLoginButton"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="@id/guideLine_login_leftBorder"
+        android:layout_marginBottom="12dp"
         tools:ignore="MissingConstraints" />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -239,12 +225,12 @@
         style="@style/basicText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sign In"
         android:layout_marginStart="12dp"
-        app:layout_constraintEnd_toEndOf="@+id/guideLine_login_rightBorder"
-        app:layout_constraintStart_toEndOf="@+id/textView_login_alreadyHaveAccountMessage"
-        app:layout_constraintTop_toTopOf="@+id/textView_login_alreadyHaveAccountMessage"
-        app:layout_constraintBottom_toBottomOf="@+id/textView_login_alreadyHaveAccountMessage"
+        android:text="Sign up"
+        app:layout_constraintBottom_toBottomOf="@id/textView_login_alreadyHaveAccountMessage"
+        app:layout_constraintEnd_toEndOf="@id/guideLine_login_rightBorder"
+        app:layout_constraintStart_toEndOf="@id/textView_login_alreadyHaveAccountMessage"
+        app:layout_constraintTop_toTopOf="@id/textView_login_alreadyHaveAccountMessage"
         tools:ignore="MissingConstraints" />
 
 
