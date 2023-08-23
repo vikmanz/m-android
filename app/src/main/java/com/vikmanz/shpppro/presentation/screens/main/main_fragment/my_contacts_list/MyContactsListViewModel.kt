@@ -6,6 +6,7 @@ import com.vikmanz.shpppro.common.extensions.isTrue
 import com.vikmanz.shpppro.common.extensions.log
 import com.vikmanz.shpppro.common.extensions.swapBoolean
 import com.vikmanz.shpppro.common.model.ContactItem
+import com.vikmanz.shpppro.common.model.User
 import com.vikmanz.shpppro.domain.repository.ShPPContactsRepository
 import com.vikmanz.shpppro.domain.usecases.contacts.GetAllUsersUseCase
 import com.vikmanz.shpppro.presentation.base.BaseViewModel
@@ -15,6 +16,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import ua.digitalminds.fortrainerapp.data.result.ApiResult
@@ -28,50 +30,53 @@ private const val FAKE_LIST_FIRST = true
  */
 @HiltViewModel
 class MyContactsListViewModel @Inject constructor(
-   private val contactsRepository: ShPPContactsRepository,
-   // private val getAllUsersUseCase: GetAllUsersUseCase
+   private val getAllUsersUseCase: GetAllUsersUseCase
 ) : BaseViewModel() {
-
-    init{
-
-//        viewModelScope.launch(Dispatchers.IO) {
-//            log("Start coroutine")
-//            getAllUsersUseCase().collect {
-//
-//                when (it) {
-//
-//                    is ApiResult.Loading -> {
-//                        log("loading")
-//                    }
-//
-//                    is ApiResult.Success -> {
-//                        log("api success")
-//                        log(it.value.toString())
-//
-//                    }
-//
-//                    is ApiResult.NetworkError -> {
-//                        log("api network error!")
-//                    }
-//
-//                    is ApiResult.ServerError -> {
-//                        log("api server error!")
-//                    }
-//                }
-//            }
-//            log("End coroutine")
-//        }
-    }
 
     private var lastDeletedContact: ContactItem? = null
     private var lastDeletedContactPosition: Int = 0
 
     val isMultiselectMode = MutableLiveData(false)
 
+    private val _contactList = MutableStateFlow(emptyList<ContactItem>())
+
+    init {
+        viewModelScope.launch(Dispatchers.IO) {
+            log("Start coroutine")
+            getAllUsersUseCase().collect {
+
+                when (it) {
+
+                    is ApiResult.Loading -> {
+                        log("loading")
+                        emptyList<ContactItem>()
+                    }
+
+                    is ApiResult.Success -> {
+                        log("api success")
+                        log(it.value.toString())
+                        _contactList.value = it.value.map { user -> ContactItem(contact = user) }
+                    }
+
+                    is ApiResult.NetworkError -> {
+                        log("api network error!")
+                        emptyList<ContactItem>()
+                    }
+
+                    is ApiResult.ServerError -> {
+                        log("api server error!")
+                        emptyList<ContactItem>()
+                    }
+                }
+            }
+            log("End coroutine")
+        }
+    }
+
     /**
      * Create fake contact list and Flow to take it from outside.
      */
-    val contactList = contactsRepository.contactList.map {
+    val contactList = _contactList.map {
         it.map { contactItem ->
             ContactItem(
                 contact = contactItem.contact,

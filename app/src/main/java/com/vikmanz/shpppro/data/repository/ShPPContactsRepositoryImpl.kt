@@ -7,7 +7,9 @@ import com.vikmanz.shpppro.data.dto.ContactAddRequest
 import com.vikmanz.shpppro.data.dto.toListOfContacts
 import com.vikmanz.shpppro.data.dto.toListOfUsers
 import com.vikmanz.shpppro.data.result.ApiSafeCaller
+import com.vikmanz.shpppro.domain.repository.ShPPAccountRepository
 import com.vikmanz.shpppro.domain.repository.ShPPContactsRepository
+import com.vikmanz.shpppro.domain.usecases.account.GetAccountUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -21,10 +23,8 @@ import javax.inject.Inject
  */
 class ShPPContactsRepositoryImpl @Inject constructor(
     private val api: ShPPApi,
-    private val apiSafeCaller: ApiSafeCaller,
+    private val apiSafeCaller: ApiSafeCaller
 ) : ShPPContactsRepository {
-
-    // private val accRepository: ShPPAccountRepository
 
     //This object is a wrapper. if we pass it a new object it will call emit
     private val _contactList = MutableStateFlow(listOf<ContactItem>())
@@ -34,11 +34,11 @@ class ShPPContactsRepositoryImpl @Inject constructor(
 
     private val multiselectList = ArrayList<ContactItem>()
 
-    override suspend fun getAllUsers(user: User): ApiResult<List<User>> {
+    override suspend fun getAllUsers(token: String, user: User): ApiResult<List<User>> {
         val result = apiSafeCaller.safeApiCall {
             api.getAllUsers(
-                //token = "Bearer ${accRepository.account.accessToken}",
-                token = "Bearer ",
+                token = "Bearer $token",
+                //token = "Bearer ",
             ).toListOfUsers()
         }
         if (result is ApiResult.Success) _contactList.value = result.value.map { ContactItem(it) }
@@ -47,13 +47,15 @@ class ShPPContactsRepositoryImpl @Inject constructor(
 
 
     override suspend fun addContact(
+        token: String,
+        userId: Int,
         contactId: Int
     ): ApiResult<List<User>> = apiSafeCaller.safeApiCall {
         api.addContact(
-            //token = "Bearer ${accRepository.account.accessToken}",
-            token = "Bearer ",
-            //userId = accRepository.account.user.id,
-            userId = 308,
+            token = "Bearer $token",
+            //token = "Bearer ",
+            userId = userId,
+            //userId = 308,
             body = ContactAddRequest(
                 contactId = contactId
             )
@@ -62,26 +64,29 @@ class ShPPContactsRepositoryImpl @Inject constructor(
 
 
     override suspend fun deleteContact(
+        token: String,
+        userId: Int,
         contactId: Int
     ): ApiResult<List<User>> = apiSafeCaller.safeApiCall {
         api.deleteContact(
-            //token = "Bearer ${accRepository.account.accessToken}",
-            token = "Bearer ",
-            //userId = accRepository.account.user.id,
-            userId = 308,
+            token = "Bearer $token",
+            //token = "Bearer ",
+            userId = userId,
+            //userId = 308,
             contactId = contactId
         ).toListOfContacts()
-
     }
 
     override suspend fun getUserContacts(
+        token: String,
+        userId: Int,
         contactId: Int
     ): ApiResult<List<User>> = apiSafeCaller.safeApiCall {
         api.getUserContacts(
-            //token = "Bearer ${accRepository.account.accessToken}",
-            token = "Bearer ",
-            //userId = accRepository.account.user.id,
-            userId = 308,
+            token = "Bearer $token",
+            //token = "Bearer ",
+            userId = userId,
+            //userId = 308,
         ).toListOfContacts()
     }
 

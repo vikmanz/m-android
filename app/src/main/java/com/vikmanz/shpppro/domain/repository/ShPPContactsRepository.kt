@@ -10,10 +10,26 @@ import java.net.URL
 interface ShPPContactsRepository {
 
     val contactList: StateFlow<List<ContactItem>>
-    suspend fun getAllUsers(user: User): ApiResult<List<User>>
-    suspend fun addContact(contactId: Int): ApiResult<List<User>>
-    suspend fun deleteContact(contactId: Int): ApiResult<List<User>>
-    suspend fun getUserContacts(contactId: Int): ApiResult<List<User>>
-    fun findContact(contactId: Int): ContactItem?
 
+    suspend fun getAllUsers(
+        token: String,
+        user: User
+    ): ApiResult<List<User>>
+    suspend fun addContact(
+        token: String,
+        userId: Int,
+        contactId: Int
+    ): ApiResult<List<User>>
+    suspend fun deleteContact(
+        token: String,
+        userId: Int,
+        contactId: Int
+    ): ApiResult<List<User>>
+    suspend fun getUserContacts(
+        token: String,
+        userId: Int,
+        contactId: Int
+    ): ApiResult<List<User>>
+
+    fun findContact(contactId: Int): ContactItem?
 }
