@@ -13,6 +13,8 @@ import com.vikmanz.shpppro.presentation.screens.auth.sign_up_extended.SignUpExte
 import com.vikmanz.shpppro.presentation.screens.main.main_fragment.MainViewPagerFragmentDirections
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import ua.digitalminds.fortrainerapp.data.result.ApiResult
@@ -26,39 +28,39 @@ private const val FAKE_LIST_FIRST = true
  */
 @HiltViewModel
 class MyContactsListViewModel @Inject constructor(
-    private val contactsRepository: ShPPContactsRepository,
-    private val getAllUsersUseCase: GetAllUsersUseCase
+   private val contactsRepository: ShPPContactsRepository,
+   // private val getAllUsersUseCase: GetAllUsersUseCase
 ) : BaseViewModel() {
 
     init{
 
-        viewModelScope.launch(Dispatchers.IO) {
-            log("Start coroutine")
-            getAllUsersUseCase().collect {
-
-                when (it) {
-
-                    is ApiResult.Loading -> {
-                        log("loading")
-                    }
-
-                    is ApiResult.Success -> {
-                        log("api success")
-                        log(it.value.toString())
-
-                    }
-
-                    is ApiResult.NetworkError -> {
-                        log("api network error!")
-                    }
-
-                    is ApiResult.ServerError -> {
-                        log("api server error!")
-                    }
-                }
-            }
-            log("End coroutine")
-        }
+//        viewModelScope.launch(Dispatchers.IO) {
+//            log("Start coroutine")
+//            getAllUsersUseCase().collect {
+//
+//                when (it) {
+//
+//                    is ApiResult.Loading -> {
+//                        log("loading")
+//                    }
+//
+//                    is ApiResult.Success -> {
+//                        log("api success")
+//                        log(it.value.toString())
+//
+//                    }
+//
+//                    is ApiResult.NetworkError -> {
+//                        log("api network error!")
+//                    }
+//
+//                    is ApiResult.ServerError -> {
+//                        log("api server error!")
+//                    }
+//                }
+//            }
+//            log("End coroutine")
+//        }
     }
 
     private var lastDeletedContact: ContactItem? = null

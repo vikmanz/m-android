@@ -22,8 +22,9 @@ import javax.inject.Inject
 class ShPPContactsRepositoryImpl @Inject constructor(
     private val api: ShPPApi,
     private val apiSafeCaller: ApiSafeCaller,
-   // private val accRepository: ShPPAccountRepository
 ) : ShPPContactsRepository {
+
+    // private val accRepository: ShPPAccountRepository
 
     //This object is a wrapper. if we pass it a new object it will call emit
     private val _contactList = MutableStateFlow(listOf<ContactItem>())
