@@ -1,5 +1,6 @@
 package com.vikmanz.shpppro.data.dto
 
+import com.vikmanz.shpppro.common.extensions.log
 import com.vikmanz.shpppro.common.model.User
 
 data class UserGetAllResponse(
@@ -13,4 +14,7 @@ data class UserGetAllResponseBody(
     val users: List<User>
 )
 
-fun UserGetAllResponse.toListOfUsers() = data.users
+fun UserGetAllResponse.toListOfUsers(): List<User> {
+    log("to list!")
+    return data.users
+}

@@ -1,5 +1,7 @@
 package com.vikmanz.shpppro.di.repository
 
+import com.vikmanz.shpppro.data.repository.ShPPAccountRepositoryImpl
+import com.vikmanz.shpppro.data.repository.ShPPContactsRepositoryImpl
 import com.vikmanz.shpppro.domain.repository.ShPPAccountRepository
 import com.vikmanz.shpppro.domain.repository.ShPPContactsRepository
 import dagger.Binds
@@ -16,13 +18,13 @@ abstract class NetRepositoryModule {
     @Binds
     @Singleton
     abstract fun bindShPPAccountRepository(
-        accountRepository: ShPPAccountRepository
+        accountRepository: ShPPAccountRepositoryImpl
     ): ShPPAccountRepository
 
     @Binds
     @Singleton
     abstract fun bindShPPContactsRepository(
-        contactsRepository: ShPPContactsRepository
+        contactsRepository: ShPPContactsRepositoryImpl
     ): ShPPContactsRepository
 
 }

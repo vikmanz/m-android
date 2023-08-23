@@ -34,16 +34,18 @@ class ShPPContactsRepositoryImpl @Inject constructor(
 
     private val multiselectList = ArrayList<ContactItem>()
 
-    override suspend fun getAllUsers(token: String, user: User): ApiResult<List<User>> {
-        val result = apiSafeCaller.safeApiCall {
+    override suspend fun getAllUsers(token: String, user: User): ApiResult<List<User>>
+    //{
+        //val result
+        = apiSafeCaller.safeApiCall {
             api.getAllUsers(
                 token = "Bearer $token",
                 //token = "Bearer ",
             ).toListOfUsers()
         }
-        if (result is ApiResult.Success) _contactList.value = result.value.map { ContactItem(it) }
-        return result
-    }
+        //if (result is ApiResult.Success) _contactList.value = result.value.map { ContactItem(it) }
+        //return result
+    //}
 
 
     override suspend fun addContact(

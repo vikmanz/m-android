@@ -3,16 +3,14 @@ package com.vikmanz.shpppro.presentation.screens.main.main_fragment.my_contacts_
 import android.net.Uri
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.vikmanz.shpppro.data.repository.ShPPContactsRepositoryImpl
-import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
+import com.vikmanz.shpppro.domain.repository.ShPPContactsRepository
 
 /**
  * ViewModel for My Contacts Activity.
  */
-@HiltViewModel
-class AddContactDialogFragmentViewModel @Inject constructor(
-    private val contactsRepository: ShPPContactsRepositoryImpl
+//@HiltViewModel
+class AddContactDialogFragmentViewModel (//@Inject constructor(
+    private val contactsRepository: ShPPContactsRepository
 ) : ViewModel() {
 
     // avatar
@@ -28,14 +26,14 @@ class AddContactDialogFragmentViewModel @Inject constructor(
         currentPhoto.value = uri
     }
 
-//    fun createNewContact(
-//        name: String,
-//        career: String,
-//        email: String,
-//        phone: String,
-//        address: String,
-//        birthday: String
-//    ) {
+    fun createNewContact(
+        name: String,
+        career: String,
+        email: String,
+        phone: String,
+        address: String,
+        birthday: String
+    ) {
 //        val newContactItem = contactsRepository.createContact(      //todo change!
 //            contactPhotoLink = getCurrentPhoto(),
 //            photoIndex = contactsRepository.getCurrentPhotoCounter(),
@@ -47,7 +45,7 @@ class AddContactDialogFragmentViewModel @Inject constructor(
 //            birthday = birthday
 //        )
 //        contactsRepository.addContact(newContactItem)
-//    }
+    }
 
     private fun getCurrentPhoto(): Any = with(currentPhoto.value) {
         if (this is Uri) this else getFakePhotoUrl()

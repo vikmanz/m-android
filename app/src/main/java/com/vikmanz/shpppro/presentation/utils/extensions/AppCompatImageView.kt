@@ -31,10 +31,10 @@ val GLIDE_OPTIONS = RequestOptions()
  * @param link URI, URL or resource id.
  */
 fun AppCompatImageView.setImageWithGlide(link: Any?) {
-    if (link is Uri || link is URL || link is Int || link is String)
+   //if (link is Uri || link is URL || link is Int || link is String)
         Glide.with(context)
             .load(link)
             .apply(GLIDE_OPTIONS)
             .into(this)
-    else throw InvalidParameterException()
+   // else throw InvalidParameterException()
 }

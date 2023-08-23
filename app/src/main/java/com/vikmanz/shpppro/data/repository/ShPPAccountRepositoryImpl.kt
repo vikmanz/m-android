@@ -33,7 +33,7 @@ class ShPPAccountRepositoryImpl @Inject constructor(
 
 
     private val _account = MutableStateFlow(Account())
-    override val account: Account = _account.value
+    override val account: Account get() = _account.value
 
     override suspend fun registerUser(email: String, password: String): ApiResult<Account> {
         val result = apiSafeCaller.safeApiCall {

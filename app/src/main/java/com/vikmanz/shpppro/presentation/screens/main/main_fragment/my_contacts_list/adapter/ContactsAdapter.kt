@@ -84,8 +84,8 @@ class ContactsAdapter(
 
         private fun bindContactInfo(contact: ContactItem) = with(binding) {
             imageViewOneContactAvatarImage.setImageWithGlide(contact.contact.image)
-            textViewOneContactName.text = contact.contact.name
-            textViewOneContactCareer.text = contact.contact.phone
+            textViewOneContactName.text = contact.contact.email
+            textViewOneContactCareer.text = contact.contact.name
         }
 
         private fun decorateHolder(contact: ContactItem) = with(binding) {
