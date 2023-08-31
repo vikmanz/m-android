@@ -13,8 +13,8 @@ buildscript {
 //        classpath ("com.android.tools.build:gradle:4.2.2")                          // Kotlin DSL
 //        classpath ("org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.0")               // Kotlin DSL
 
-        classpath ("androidx.navigation:navigation-safe-args-gradle-plugin:2.6.0")  // navigation
-        classpath ("com.google.dagger:hilt-android-gradle-plugin:2.46.1")           // Hilt
+        classpath (libs.androidx.navigation.safe.args.gradle.plugin)    // navigation
+        classpath (libs.hilt.android.gradle.plugin)                     // Hilt
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -22,7 +22,7 @@ buildscript {
 }
 
 plugins {
-    id("com.android.application") version "8.0.2" apply false                    // core
+    id("com.android.application") version "8.1.1" apply false                    // core
     id("org.jetbrains.kotlin.android") version "1.8.20-RC2" apply false          // core
     //id("com.android.library") version "8.0.2" apply false                        // core
 }
