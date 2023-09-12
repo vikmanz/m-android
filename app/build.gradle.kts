@@ -5,20 +5,17 @@ plugins {
     id("kotlin-kapt")                       // Hilt
     id("com.google.dagger.hilt.android")    // Hilt
 
-    // Symbol Processing: KSP (for Moshi, Room) and Kapt (for Hilt)
-//    id("com.google.devtools.ksp")
-//    kotlin("kapt")
 
 }
 
 android {
     namespace = "com.vikmanz.shpppro"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.vikmanz.shpppro"
         minSdk = 24
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
@@ -28,7 +25,6 @@ android {
     buildTypes {
         getByName("release") {
             isMinifyEnabled = false
-            @Suppress("UnstableApiUsage")
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -37,7 +33,6 @@ android {
     }
 
     // ViewBinding
-    @Suppress("UnstableApiUsage")
     buildFeatures {
         viewBinding = true
     }
@@ -52,7 +47,6 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_17.toString()
     }
-    @Suppress("UnstableApiUsage")
     buildToolsVersion = "33.0.2"
 
 }
