@@ -1,7 +1,6 @@
 package com.vikmanz.shpppro.data.dto
 
-import com.vikmanz.shpppro.common.model.Account
-import com.vikmanz.shpppro.common.model.User
+import com.vikmanz.shpppro.data.model.User
 
 data class UserRegisterRequest (
     val email: String,
@@ -29,10 +28,4 @@ data class UserRegisterResponseBody(
     val user: User,
     val accessToken: String,
     val refreshToken: String
-)
-
-fun UserRegisterResponse.toAccount() = Account(
-    user = this.data.user,
-    accessToken = this.data.accessToken,
-    refreshToken = this.data.refreshToken
 )

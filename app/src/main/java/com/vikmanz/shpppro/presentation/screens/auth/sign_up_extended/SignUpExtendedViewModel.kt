@@ -6,8 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.vikmanz.shpppro.common.Constants.LOGIN_VIEW_FIRST
 import com.vikmanz.shpppro.common.extensions.log
 import com.vikmanz.shpppro.common.extensions.swapBoolean
-import com.vikmanz.shpppro.common.model.User
-import com.vikmanz.shpppro.data.datastore.PreferencesDatastore
+import com.vikmanz.shpppro.data.datastore.Datastore
 import com.vikmanz.shpppro.domain.usecases.account.EditUserUseCase
 import com.vikmanz.shpppro.presentation.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -20,12 +19,10 @@ private const val DEFAULT_SHOW_HELPERS = false
 
 @HiltViewModel
 class SignUpExtendedViewModel @Inject constructor(
-    dataStore: PreferencesDatastore,
-    savedStateHandle: SavedStateHandle,
+    dataStore: Datastore,
     private val editUserUseCase: EditUserUseCase
 ) : BaseViewModel() {
 
-    private val navArgs = SignUpExtendedFragmentArgs.fromSavedStateHandle(savedStateHandle)
 
     private val _dataStore = dataStore
 
@@ -56,9 +53,9 @@ class SignUpExtendedViewModel @Inject constructor(
     /**
      *  Save user data from text input fields and language key from class variable to Data Store.
      */
-    fun saveUserEmailToDatastore(email: String) {
+    fun saveUserEmailToDatastore(email: String, password: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            _dataStore.saveUserSata(email)
+            _dataStore.saveUserSata(email, password)
         }
     }
 

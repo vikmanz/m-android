@@ -1,7 +1,7 @@
 package com.vikmanz.shpppro.di
 
-import com.vikmanz.shpppro.data.datastore.DataStoreManager
-import com.vikmanz.shpppro.data.datastore.PreferencesDatastore
+import com.vikmanz.shpppro.data.datastore.DatastoreImpl
+import com.vikmanz.shpppro.data.datastore.Datastore
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -16,7 +16,7 @@ abstract class DataStoreModule {
     @Binds
     @Singleton
     abstract fun bindDataStore(
-        navigator: DataStoreManager
-    ): PreferencesDatastore
+        datastore: DatastoreImpl
+    ): Datastore
 
 }

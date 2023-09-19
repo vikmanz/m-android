@@ -1,19 +1,13 @@
 package com.vikmanz.shpppro.domain.repository
 
-import com.vikmanz.shpppro.common.model.Account
-import com.vikmanz.shpppro.common.model.User
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
+import com.vikmanz.shpppro.data.model.User
 import ua.digitalminds.fortrainerapp.data.result.ApiResult
 
 interface ShPPAccountRepository {
 
-    val account: Account
-
-    suspend fun registerUser(email: String, password: String): ApiResult<Account>
-    suspend fun authorizeUser(email: String, password: String): ApiResult<Account>
-    suspend fun refreshToken(): ApiResult<Account>
+    suspend fun registerUser(email: String, password: String): ApiResult<Boolean>
+    suspend fun authorizeUser(email: String, password: String): ApiResult<Boolean>
+    suspend fun refreshToken(): ApiResult<Boolean>
     suspend fun getUser(): ApiResult<User>
     suspend fun editUser(
         name: String?,

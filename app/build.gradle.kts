@@ -13,7 +13,7 @@ plugins {
 
 android {
     namespace = "com.vikmanz.shpppro"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.vikmanz.shpppro"
@@ -28,7 +28,6 @@ android {
     buildTypes {
         getByName("release") {
             isMinifyEnabled = false
-            @Suppress("UnstableApiUsage")
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -37,7 +36,6 @@ android {
     }
 
     // ViewBinding
-    @Suppress("UnstableApiUsage")
     buildFeatures {
         viewBinding = true
     }
@@ -52,8 +50,8 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_17.toString()
     }
-    @Suppress("UnstableApiUsage")
-    buildToolsVersion = "33.0.2"
+
+    buildToolsVersion = rootProject.extra["buildToolsVersion"] as String
 
 }
 

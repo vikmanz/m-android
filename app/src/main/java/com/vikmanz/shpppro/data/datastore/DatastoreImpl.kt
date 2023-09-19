@@ -16,17 +16,21 @@ import javax.inject.Inject
 /**
  * Data Store manager. Save and load user data from memory.
  */
-class DataStoreManager @Inject constructor(
-    @ApplicationContext private val context: Context //todo
-) : PreferencesDatastore {
+class DatastoreImpl @Inject constructor(
+    @ApplicationContext private val context: Context
+) : Datastore {
 
 
     /**
      * Get name, password and autologin, and save all these in memory.
      */
-    override suspend fun saveUserSata(name: String) {
+    override suspend fun saveUserSata(
+        name: String,
+        password: String
+    ) {
         context.dataStore.edit {
-            it[USER_LOGIN_KEY] = name
+            it[EMAIL_INDEX] = name
+            it[PASSWORD_INDEX] = password
         }
     }
 
@@ -37,7 +41,7 @@ class DataStoreManager @Inject constructor(
         //todo
         withContext(Dispatchers.IO) {
             context.dataStore.edit {
-                it[USER_LOGIN_KEY] = ""
+                it[EMAIL_INDEX] = ""
             }
         }
     }
@@ -45,20 +49,32 @@ class DataStoreManager @Inject constructor(
     /**
      * Return user login as Flow.
      */
-    override val userName: Flow<String> = context.dataStore.data.map {
-        it[USER_LOGIN_KEY] ?: ""
+    override val userEmail: Flow<String> = context.dataStore.data.map {
+        it[EMAIL_INDEX] ?: ""
+    }
+
+    /**
+     * Return user pass as Flow.
+     */
+    override val userPassword: Flow<String> = context.dataStore.data.map {
+        it[PASSWORD_INDEX] ?: ""
     }
 
     /**
      * Companion object with keys of Data Store Preferences fields.
      */
     companion object {
-        private const val DATA_STORE_NAME = "auth"
-        private const val DS_USER_NAME = "user_name"
 
-        private val USER_LOGIN_KEY = stringPreferencesKey(DS_USER_NAME)
+        private const val DATA_STORE_NAME = "auth"
         private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(
             name = DATA_STORE_NAME
         )
+
+        private const val DATA_STORE_LOGIN_KEY = "user_name"
+        private val EMAIL_INDEX = stringPreferencesKey(DATA_STORE_LOGIN_KEY)
+
+        private const val DATA_STORE_PASSWORD_KEY = "user_name"
+        private val PASSWORD_INDEX = stringPreferencesKey(DATA_STORE_PASSWORD_KEY)
+
     }
 }

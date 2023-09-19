@@ -53,9 +53,6 @@
             app:destination="@id/mainActivity"
             app:popUpTo="@id/signUpFragment"
             app:popUpToInclusive="true" />
-        <argument
-            android:name="account"
-            app:argType="com.vikmanz.shpppro.common.model.Account" />
 
     </fragment>
 

@@ -22,10 +22,11 @@ buildscript {
 }
 
 plugins {
-    id("com.android.application") version "8.1.1" apply false                    // core
+    id("com.android.application") version "8.2.0-beta04" apply false                    // core
     id("org.jetbrains.kotlin.android") version "1.8.20-RC2" apply false          // core
     //id("com.android.library") version "8.0.2" apply false                        // core
 }
+val buildToolsVersion by extra("34.0.0")
 
 //ext {
 //    sourceCompatibility = JavaVersion.VERSION_11

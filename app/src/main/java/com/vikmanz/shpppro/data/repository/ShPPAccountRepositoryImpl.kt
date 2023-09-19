@@ -1,23 +1,15 @@
 package com.vikmanz.shpppro.data.repository
 
-import com.vikmanz.shpppro.common.model.Account
-import com.vikmanz.shpppro.common.model.ContactItem
-import com.vikmanz.shpppro.common.model.User
+import android.accounts.Account
+import com.vikmanz.shpppro.data.model.User
 import com.vikmanz.shpppro.data.api.ShPPApi
-import com.vikmanz.shpppro.data.dto.ContactAddRequest
 import com.vikmanz.shpppro.data.dto.UserAuthorizeRequest
 import com.vikmanz.shpppro.data.dto.UserEditRequest
 import com.vikmanz.shpppro.data.dto.UserRegisterRequest
-import com.vikmanz.shpppro.data.dto.toAccount
-import com.vikmanz.shpppro.data.dto.toListOfContacts
-import com.vikmanz.shpppro.data.dto.toListOfUsers
 import com.vikmanz.shpppro.data.dto.toUser
 import com.vikmanz.shpppro.data.result.ApiSafeCaller
+import com.vikmanz.shpppro.data.user_token.UserTokenHandler
 import com.vikmanz.shpppro.domain.repository.ShPPAccountRepository
-import com.vikmanz.shpppro.domain.repository.ShPPContactsRepository
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import ua.digitalminds.fortrainerapp.data.result.ApiResult
 import javax.inject.Inject
 
@@ -28,57 +20,80 @@ import javax.inject.Inject
  */
 class ShPPAccountRepositoryImpl @Inject constructor(
     private val api: ShPPApi,
-    private val apiSafeCaller: ApiSafeCaller
+    private val apiSafeCaller: ApiSafeCaller,
+    private val userTokenHandler: UserTokenHandler
 ) : ShPPAccountRepository {
 
-
-    private val _account = MutableStateFlow(Account())
-    override val account: Account get() = _account.value
-
-    override suspend fun registerUser(email: String, password: String): ApiResult<Account> {
-        val result = apiSafeCaller.safeApiCall {
+    override suspend fun registerUser(
+        email: String,
+        password: String
+    ): ApiResult<Boolean> =
+        apiSafeCaller.safeApiCall {             // do call
             api.registerUser(
                 UserRegisterRequest(
                     email = email,
                     password = password
                 )
-            ).toAccount()
-        }
-        if (result is ApiResult.Success) _account.value = result.value
-        return result
-    }
+            )
+        }.also {    // save credentials
+            if (it is ApiResult.Success) {
+                with(it.value.data) {
+                    userTokenHandler.setUserData(
+                        user = user,
+                        accessToken = accessToken,
+                        refreshToken = accessToken
+                    )
+                }
+            }
+        }.convertToBoolean()                    // convert result to boolean and return
 
 
-    override suspend fun authorizeUser(email: String, password: String): ApiResult<Account> {
-        val result = apiSafeCaller.safeApiCall {
+    override suspend fun authorizeUser(
+        email: String,
+        password: String
+    ): ApiResult<Boolean> =
+        apiSafeCaller.safeApiCall {             // do call
             api.authorizeUser(
                 UserAuthorizeRequest(
                     email = email,
                     password = password
                 )
-            ).toAccount()
-        }
-        if (result is ApiResult.Success) _account.value = result.value
-        return result
-    }
+            )
+        }.also {    // save credentials
+            if (it is ApiResult.Success) {
+                with(it.value.data) {
+                    userTokenHandler.setUserData(
+                        user = user,
+                        accessToken = accessToken,
+                        refreshToken = refreshToken
+                    )
+                }
+            }
+        }.convertToBoolean()                    // convert result to boolean and return
 
 
-    override suspend fun refreshToken(): ApiResult<Account> {
-        val result = apiSafeCaller.safeApiCall {
+    override suspend fun refreshToken(): ApiResult<Boolean> =
+        apiSafeCaller.safeApiCall {             // do call
             api.refreshToken(
-                refreshToken = "Bearer ${account.refreshToken}"
-            ).toAccount(account.user)
-        }
-        if (result is ApiResult.Success) _account.value = result.value
-        return result
-    }
+                refreshToken = "Bearer ${userTokenHandler.refreshToken}"
+            )
+        }.also {    // save credentials
+            if (it is ApiResult.Success) {
+                with(it.value.data) {
+                    userTokenHandler.setUserData(
+                        accessToken = accessToken,
+                        refreshToken = refreshToken
+                    )
+                }
+            }
+        }.convertToBoolean()                    // convert result to boolean and return
 
 
     override suspend fun getUser(): ApiResult<User> =
         apiSafeCaller.safeApiCall {
             api.getUser(
-                token = "Bearer ${account.accessToken}",
-                userId = requireNotNull(account.user.id)
+                token = userTokenHandler.accessToken,
+                userId = userTokenHandler.user.id
             ).toUser()
         }
 
@@ -87,16 +102,16 @@ class ShPPAccountRepositoryImpl @Inject constructor(
         phone: String?,
         address: String?,
         career: String?,
-        birthday:String?,
+        birthday: String?,
         facebook: String?,
         instagram: String?,
         twitter: String?,
         linkedin: String?
-    ): ApiResult<User> {
-        val result = apiSafeCaller.safeApiCall {
+    ): ApiResult<User> =
+        apiSafeCaller.safeApiCall {                     // do call
             api.editUser(
-                token = "Bearer ${account.accessToken}",
-                userId = account.user.id,
+                token = userTokenHandler.accessToken,
+                userId = userTokenHandler.user.id,
                 body = UserEditRequest(
                     name = name,
                     phone = phone,
@@ -109,11 +124,12 @@ class ShPPAccountRepositoryImpl @Inject constructor(
                     linkedin = linkedin
                 )
             ).toUser()
+        }.also {                        // save new user
+            if (it is ApiResult.Success) {
+                userTokenHandler.setUserData(
+                    user = it.value
+                )
+            }
         }
-        if (result is ApiResult.Success) _account.value = _account.value.copy(
-            user = result.value
-        )
-        return result
-    }
 
 }

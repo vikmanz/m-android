@@ -1,6 +1,6 @@
 package com.vikmanz.shpppro.data
 
-import com.vikmanz.shpppro.common.model.User
+import com.vikmanz.shpppro.data.model.User
 
 const val BASE_URL = "http://178.63.9.114:7777/api/"
 const val EMAIL = "boris.lezo@gmail.com"

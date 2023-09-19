@@ -5,7 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.vikmanz.shpppro.common.Constants.LOGIN_VIEW_FIRST
 import com.vikmanz.shpppro.common.extensions.log
 import com.vikmanz.shpppro.common.extensions.swapBoolean
-import com.vikmanz.shpppro.data.datastore.PreferencesDatastore
+import com.vikmanz.shpppro.data.datastore.Datastore
 import com.vikmanz.shpppro.domain.usecases.account.RegisterUserUseCase
 import com.vikmanz.shpppro.presentation.base.BaseViewModel
 import com.vikmanz.shpppro.presentation.screens.auth.splash_screen.SplashScreenFragmentDirections
@@ -18,7 +18,7 @@ import javax.inject.Inject
 private const val DEFAULT_SHOW_HELPERS = false
 @HiltViewModel
 class SignUpViewModel @Inject constructor(
-    dataStore: PreferencesDatastore,
+    dataStore: Datastore,
     private val registerUserUseCase: RegisterUserUseCase
 ) : BaseViewModel() {
 
@@ -51,9 +51,9 @@ class SignUpViewModel @Inject constructor(
     /**
      *  Save user data from text input fields and language key from class variable to Data Store.
      */
-    fun saveUserEmailToDatastore(email: String) {
+    fun saveUserEmailToDatastore(email: String, password: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            _dataStore.saveUserSata(email)
+            _dataStore.saveUserSata(email, password)
         }
     }
 
@@ -81,10 +81,8 @@ class SignUpViewModel @Inject constructor(
                     is ApiResult.Success -> {
                         log("api success")
                         log(it.value.toString())
-
-                        val direction = SignUpFragmentDirections.startSignUpExtended(it.value)
+                        val direction = SignUpFragmentDirections.startSignUpExtended()
                         navigate(direction)
-
                     }
 
                     is ApiResult.NetworkError -> {

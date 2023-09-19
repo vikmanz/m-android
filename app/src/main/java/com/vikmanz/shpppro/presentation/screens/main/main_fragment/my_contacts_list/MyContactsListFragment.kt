@@ -17,7 +17,7 @@ import com.vikmanz.shpppro.common.Constants.MARGINS_OF_ELEMENTS
 import com.vikmanz.shpppro.common.Constants.SNACK_BAR_VIEW_TIME
 import com.vikmanz.shpppro.common.extensions.isFalse
 import com.vikmanz.shpppro.common.extensions.log
-import com.vikmanz.shpppro.common.model.ContactItem
+import com.vikmanz.shpppro.data.model.ContactItem
 import com.vikmanz.shpppro.databinding.FragmentMyContactsListBinding
 import com.vikmanz.shpppro.presentation.base.BaseFragment
 import com.vikmanz.shpppro.presentation.screens.main.main_fragment.MainViewPagerFragment

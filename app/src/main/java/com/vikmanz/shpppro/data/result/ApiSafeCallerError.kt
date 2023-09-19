@@ -1,6 +1,6 @@
 package ua.digitalminds.fortrainerapp.data.result
 
-import com.vikmanz.shpppro.common.UiText
+import com.vikmanz.shpppro.presentation.utils.UiText
 
 // https://www.baeldung.com/kotlin/enum-find-by-value (Enum class map)
 enum class ApiSafeCallerError(val code: Int, val message: String, val uiMessage: UiText) {

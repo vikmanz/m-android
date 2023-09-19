@@ -119,20 +119,13 @@ class SignUpFragment :
 
     private fun initMainActivity() {
         with(binding) {
-            if (checkboxLoginRememberMe.isChecked) saveUserData()           // If check Remember, save data to Data Store.
             val email = textInputLoginEmailField.text.toString()            // Take email text.
             val password = textInputLoginPasswordField.text.toString()      // Take pass text.
+            if (checkboxLoginRememberMe.isChecked) {                        // If check Remember,
+                viewModel.saveUserEmailToDatastore(email, password)         // save data to Data Store.
+            }
             viewModel.onRegisterClick(email, password)
-//            viewModel.startMainActivity(email)                              // Start main activity.
         }
-    }
-
-    /**
-     *  Save user data from text input fields and language key from class variable to Data Store.
-     */
-    private fun saveUserData() {
-        val email = binding.textInputLoginEmailField.text.toString()
-        viewModel.saveUserEmailToDatastore(email)
     }
 
     /**

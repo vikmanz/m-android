@@ -1,4 +1,4 @@
-package com.vikmanz.shpppro.common.model
+package com.vikmanz.shpppro.data.model
 
 data class ContactItem(
     val contact: User,

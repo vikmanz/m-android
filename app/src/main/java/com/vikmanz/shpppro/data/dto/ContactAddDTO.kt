@@ -1,6 +1,6 @@
 package com.vikmanz.shpppro.data.dto
 
-import com.vikmanz.shpppro.common.model.User
+import com.vikmanz.shpppro.data.model.User
 
 data class ContactAddRequest (
     val contactId: Int

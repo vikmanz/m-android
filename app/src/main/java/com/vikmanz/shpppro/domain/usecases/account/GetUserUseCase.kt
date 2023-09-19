@@ -1,6 +1,6 @@
 package com.vikmanz.shpppro.domain.usecases.account
 
-import com.vikmanz.shpppro.common.model.User
+import com.vikmanz.shpppro.data.model.User
 import com.vikmanz.shpppro.domain.repository.ShPPAccountRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow

@@ -1,6 +1,5 @@
 package com.vikmanz.shpppro.domain.usecases.account
 
-import com.vikmanz.shpppro.common.model.Account
 import com.vikmanz.shpppro.domain.repository.ShPPAccountRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -11,7 +10,7 @@ class AuthorizeUserUseCase @Inject constructor(
     private val accountRepository: ShPPAccountRepository
 ) {
 
-    operator fun invoke(email: String, password: String): Flow<ApiResult<Account>> = flow {
+    operator fun invoke(email: String, password: String): Flow<ApiResult<Boolean>> = flow {
         emit(ApiResult.Loading)
         emit(accountRepository.authorizeUser(
                 email = email,

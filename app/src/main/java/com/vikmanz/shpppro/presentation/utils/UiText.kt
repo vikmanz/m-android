@@ -1,4 +1,4 @@
-package com.vikmanz.shpppro.common
+package com.vikmanz.shpppro.presentation.utils
 
 import android.content.Context
 import androidx.annotation.StringRes

@@ -1,7 +1,7 @@
 package com.vikmanz.shpppro.data.dto
 
 import com.vikmanz.shpppro.common.extensions.log
-import com.vikmanz.shpppro.common.model.User
+import com.vikmanz.shpppro.data.model.User
 
 data class UserGetAllResponse(
     val status: String,
