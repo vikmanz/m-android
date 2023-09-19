@@ -57,11 +57,6 @@ class SignUpViewModel @Inject constructor(
         }
     }
 
-    fun startMainActivity(email: String) {
-        val direction = SplashScreenFragmentDirections.startMainActivity(email)
-        navigateToActivity(direction)
-    }
-
     fun onSignInClick() {
         val direction = SignUpFragmentDirections.startSignInFragment()
         navigate(direction)

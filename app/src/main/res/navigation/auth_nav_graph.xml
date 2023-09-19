@@ -76,11 +76,6 @@
         android:id="@+id/mainActivity"
         android:name="com.vikmanz.shpppro.presentation.screens.main.MainActivity"
         tools:layout="@layout/fragment_my_profile">
-
-        <!--suppress NavigationFile -->
-        <argument
-            android:name="email"
-            app:argType="string" />
     </activity>
 
 

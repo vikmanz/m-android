@@ -3,16 +3,22 @@ package com.vikmanz.shpppro.presentation.screens.auth.splash_screen
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.vikmanz.shpppro.common.Constants
+import com.vikmanz.shpppro.common.extensions.log
 import com.vikmanz.shpppro.data.datastore.Datastore
+import com.vikmanz.shpppro.domain.usecases.account.AuthorizeUserUseCase
 import com.vikmanz.shpppro.presentation.base.BaseViewModel
+import com.vikmanz.shpppro.presentation.screens.auth.sign_in.SignInFragmentDirections
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import ua.digitalminds.fortrainerapp.data.result.ApiResult
 import javax.inject.Inject
 
 @HiltViewModel
 class SplashScreenViewModel @Inject constructor(
-    dataStore: Datastore
+    dataStore: Datastore,
+    private val authorizeUserUseCase : AuthorizeUserUseCase
 ) : BaseViewModel() {
 
     val login = MutableLiveData("")
@@ -23,9 +29,41 @@ class SplashScreenViewModel @Inject constructor(
     init {
         viewModelScope.launch {
             delay(Constants.SPLASH_DELAY)
-            dataStore.userEmail.collect { email ->
-                if (email.isBlank()) startLoginFragment() else startMainActivity(email)
+            dataStore.userCredentials.collect { credentials ->
+                credentials?.let { login(credentials.userEmail, credentials.userPassword) } ?: startLoginFragment()
             }
+        }
+    }
+
+    fun login(email: String, password: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            log("Start coroutine")
+            authorizeUserUseCase(email, password).collect {
+
+                when (it) {
+
+                    is ApiResult.Loading -> {
+                        log("loading")
+                    }
+
+                    is ApiResult.Success -> {
+                        log("api success")
+                        val direction = SplashScreenFragmentDirections.startMainActivity()
+                        navigateToActivity(direction)
+                    }
+
+                    is ApiResult.NetworkError -> {
+                        log("api network error!")
+                        startLoginFragment()
+                    }
+
+                    is ApiResult.ServerError -> {
+                        log("api server error!")
+                        startLoginFragment()
+                    }
+                }
+            }
+            log("End coroutine")
         }
     }
 
@@ -34,8 +72,4 @@ class SplashScreenViewModel @Inject constructor(
         navigate(direction)
     }
 
-    private fun startMainActivity(email: String) {
-        val direction = SplashScreenFragmentDirections.startMainActivity(email)
-        navigateToActivity(direction)
-    }
 }

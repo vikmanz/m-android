@@ -7,7 +7,6 @@ interface Datastore {
     suspend fun saveUserSata(name: String, password: String)
     suspend fun clearUser()
 
-    val userEmail: Flow<String>
-    val userPassword: Flow<String>
+    val userCredentials: Flow<Credentials?>
 
 }

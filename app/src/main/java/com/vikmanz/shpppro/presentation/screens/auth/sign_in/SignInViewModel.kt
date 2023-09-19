@@ -44,12 +44,6 @@ class SignInViewModel @Inject constructor(
             _dataStore.saveUserSata(email, password)
         }
     }
-
-    fun startMainActivity(email: String) {
-        val direction = SignInFragmentDirections.startMainActivity(email)
-        navigateToActivity(direction)
-    }
-
     fun onSignUpClick() {
         val direction = SignInFragmentDirections.startSignUpFragment()
         navigate(direction)
@@ -70,7 +64,7 @@ class SignInViewModel @Inject constructor(
                         log("api success")
                         log(it.value.toString())
 
-                        val direction = SignInFragmentDirections.startMainActivity(email)
+                        val direction = SignInFragmentDirections.startMainActivity()
                         navigateToActivity(direction)
 
                     }

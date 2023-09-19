@@ -6,12 +6,14 @@ import com.vikmanz.shpppro.data.dto.ErrorServerResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
+import retrofit2.Response
 import ua.digitalminds.fortrainerapp.data.result.ApiResult
 import ua.digitalminds.fortrainerapp.data.result.ApiSafeCallerError
 import ua.digitalminds.fortrainerapp.data.result.ApiSafeCallerError.UNKNOWN_EXCEPTION
 import java.io.IOException
 
 private const val DEBUG = true
+
 object ApiSafeCaller {
 
     suspend fun <T> safeApiCall(
@@ -29,7 +31,15 @@ object ApiSafeCaller {
 
                 when (throwable) {
 
-                    is IOException -> handleIOError()
+                    is IOException -> {
+                        try {
+                            ApiResult.Success(apiCall.invoke()) // To catch error with }
+                        }
+                        catch (throwable: Throwable) {
+                            handleIOError()
+                        }
+                    }
+
                     is HttpException -> handleHttpError(throwable)
                     else -> handleUnknownError()
 
@@ -37,10 +47,24 @@ object ApiSafeCaller {
             }
         }
 
+
     private fun handleIOError(): ApiResult.NetworkError {
         log("IO Exception!", DEBUG)
         return ApiResult.NetworkError
     }
+
+//    private fun <T> tryParsingAgain(throwable: Throwable): ApiResult.Success<T>? {
+//        val json = throwable.response()?.errorBody()?.string()
+//
+//        return try {
+//            log("try convert first", DEBUG)
+//            val errorResponse = convertErrorBody(json, ErrorServerResponse::class.java)
+//            return ApiResult.Success(value = )
+//        }
+//        catch (e: Exception) {
+//            return null
+//        }
+//    }
 
     private fun handleUnknownError(): ApiResult.ServerError {
         log("Other Exception!", DEBUG)
@@ -56,7 +80,7 @@ object ApiSafeCaller {
             val errorResponse = convertErrorBody(json, ErrorServerResponse::class.java)
             responseToServerError(errorResponse)
         } catch (e: Exception) {
-                ApiResult.ServerError(UNKNOWN_EXCEPTION)
+            ApiResult.ServerError(UNKNOWN_EXCEPTION)
         }
     }
 

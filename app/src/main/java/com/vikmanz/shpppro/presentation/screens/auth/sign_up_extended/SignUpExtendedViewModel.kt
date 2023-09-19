@@ -79,7 +79,7 @@ class SignUpExtendedViewModel @Inject constructor(
                         log(it.value.toString())
 
                         val direction =
-                            SignUpExtendedFragmentDirections.startMainActivity(it.value.email.toString())
+                            SignUpExtendedFragmentDirections.startMainActivity()
                         navigateToActivity(direction)
 
                     }

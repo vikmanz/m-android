@@ -49,15 +49,10 @@ class DatastoreImpl @Inject constructor(
     /**
      * Return user login as Flow.
      */
-    override val userEmail: Flow<String> = context.dataStore.data.map {
-        it[EMAIL_INDEX] ?: ""
-    }
-
-    /**
-     * Return user pass as Flow.
-     */
-    override val userPassword: Flow<String> = context.dataStore.data.map {
-        it[PASSWORD_INDEX] ?: ""
+    override val userCredentials: Flow<Credentials?> = context.dataStore.data.map {
+        val email = it[EMAIL_INDEX] ?: ""
+        val password = it[PASSWORD_INDEX] ?: ""
+        if (email.isNotEmpty() && password.isNotEmpty()) Credentials(email, password) else null
     }
 
     /**
@@ -73,7 +68,7 @@ class DatastoreImpl @Inject constructor(
         private const val DATA_STORE_LOGIN_KEY = "user_name"
         private val EMAIL_INDEX = stringPreferencesKey(DATA_STORE_LOGIN_KEY)
 
-        private const val DATA_STORE_PASSWORD_KEY = "user_name"
+        private const val DATA_STORE_PASSWORD_KEY = "user_password"
         private val PASSWORD_INDEX = stringPreferencesKey(DATA_STORE_PASSWORD_KEY)
 
     }
