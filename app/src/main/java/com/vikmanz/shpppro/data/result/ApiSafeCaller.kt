@@ -31,15 +31,15 @@ object ApiSafeCaller {
 
                 when (throwable) {
 
-                    is IOException -> {
-                        try {
-                            ApiResult.Success(apiCall.invoke()) // To catch error with }
-                        }
-                        catch (throwable: Throwable) {
-                            handleIOError()
-                        }
-                    }
-
+                    is IOException ->  handleIOError()
+//                    {
+//                        try {
+//                            ApiResult.Success(apiCall.invoke()) // To catch error with }
+//                        }
+//                        catch (throwable: Throwable) {
+//                            handleIOError()
+//                        }
+//                    }
                     is HttpException -> handleHttpError(throwable)
                     else -> handleUnknownError()
 
