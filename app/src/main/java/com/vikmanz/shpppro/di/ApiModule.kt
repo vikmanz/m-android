@@ -1,12 +1,11 @@
 package com.vikmanz.shpppro.di
 
-import android.content.Context
 import com.vikmanz.shpppro.common.Constants.BASE_URL
 import com.vikmanz.shpppro.data.api.ShPPApi
+import com.vikmanz.shpppro.data.utils.MyResponseInterceptor
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -28,9 +27,17 @@ object ApiModule {
 
     @Singleton
     @Provides
-    fun providesOkHttpClient(httpLoggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
+    fun providesHttpStringInterceptor(): MyResponseInterceptor = MyResponseInterceptor()
+
+    @Singleton
+    @Provides
+    fun providesOkHttpClient(
+        httpLoggingInterceptor: HttpLoggingInterceptor,
+        myResponseInterceptor: MyResponseInterceptor
+    ): OkHttpClient {
         return OkHttpClient.Builder()
             .addInterceptor(httpLoggingInterceptor)
+            .addInterceptor(myResponseInterceptor)
             .build()
     }
 
