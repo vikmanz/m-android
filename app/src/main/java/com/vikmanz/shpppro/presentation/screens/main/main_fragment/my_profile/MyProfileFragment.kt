@@ -2,6 +2,9 @@ package com.vikmanz.shpppro.presentation.screens.main.main_fragment.my_profile
 
 import android.content.Intent
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.vikmanz.shpppro.R
 import com.vikmanz.shpppro.data.utils.EmailParser
 import com.vikmanz.shpppro.databinding.FragmentMyProfileBinding
@@ -10,6 +13,7 @@ import com.vikmanz.shpppro.presentation.screens.auth.AuthActivity
 import com.vikmanz.shpppro.presentation.screens.main.main_fragment.MainViewPagerFragment
 import com.vikmanz.shpppro.presentation.utils.extensions.setImageWithGlide
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MyProfileFragment :
@@ -17,8 +21,22 @@ class MyProfileFragment :
 
     override val viewModel: MyProfileViewModel by viewModels()
 
+    override fun setObservers() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.user.collect { user ->
+                    with(binding) {
+                        textViewMyProfilePersonName.text = user.name ?: getString(R.string.main_profile_email_not_exist)
+                        textViewMyProfilePersonCareer.text = user.career
+                        textViewMyProfilePersonAddress.text = user.address
+                    }
+                }
+            }
+        }
+    }
+
+
     override fun onReady() {
-        setUserInformation()
         setAvatar()
     }
 
@@ -26,22 +44,6 @@ class MyProfileFragment :
         with(binding) {
             textViewMyProfileLogoutButton.setOnClickListener { logout() }
             buttonMyProfileViewMyContacts.setOnClickListener { goToMyContacts() }
-        }
-    }
-
-    /**
-     * Get full email, parse it and set name/surname of user.
-     */
-    private fun setUserInformation() {
-        val emailToParse = viewModel.userEmail
-        with(binding) {
-            textViewMyProfilePersonName.text =
-                if (emailToParse.isEmpty()) getString(R.string.main_activity_person_name_hardcoded)
-                else EmailParser.getParsedNameSurname(emailToParse)
-            textViewMyProfilePersonCareer.text =
-                getString(R.string.main_activity_person_career_hardcoded)
-            textViewMyProfilePersonAddress.text =
-                getString(R.string.main_activity_person_address_hardcoded)
         }
     }
 
@@ -55,7 +57,7 @@ class MyProfileFragment :
      * Logout with clear information about user from Data Store.
      */
     private fun logout() {
-        viewModel.clearSavedUserData()
+        viewModel.onLogout()
         startAuthActivity()             //TODO migrate to nav
     }
 

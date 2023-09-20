@@ -82,5 +82,6 @@
     <!-- ———————————————————— Contact details ———————————————————— -->
     <string name="contactDetails_profileTitle">Профіль</string>
     <string name="contactDetails_messageButton">ПОВІДОМЛЕННЯ</string>
+    <string name="main_profile_email_not_exist">Профіль не заповнено</string>
 
 </resources>

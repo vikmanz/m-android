@@ -19,44 +19,18 @@ private const val DEFAULT_SHOW_HELPERS = false
 
 @HiltViewModel
 class SignUpExtendedViewModel @Inject constructor(
-    dataStore: Datastore,
     private val editUserUseCase: EditUserUseCase
 ) : BaseViewModel() {
 
-
-    private val _dataStore = dataStore
-
-    // Save state of screen layout. True - Login screen, False - Register screen.
-    val loginScreen = MutableLiveData(LOGIN_VIEW_FIRST)
-
-    // Save state of helper buttons. True - visible, False - gone.
-    val helperButtonsVisible = MutableLiveData(DEFAULT_SHOW_HELPERS)
-
-    // For show errors only for one field and not for all if it didn't been activated.
-    var emailAlreadyFocused = false
-    var passwordAlreadyFocused = false
-
-    /**
-     * Change screen to register or to login.
-     */
-    fun swapLoginAndRegister() {
-        loginScreen.swapBoolean()
+    private val doNavigation = {
+        val direction =
+            SignUpExtendedFragmentDirections.startMainActivity()
+        navigateToActivity(direction)
     }
 
-    /**
-     * Show/hide helper buttons.
-     */
-    fun showOrHideHelpers() {
-        helperButtonsVisible.swapBoolean()
-    }
 
-    /**
-     *  Save user data from text input fields and language key from class variable to Data Store.
-     */
-    fun saveUserEmailToDatastore(email: String, password: String) {
-        viewModelScope.launch(Dispatchers.IO) {
-            _dataStore.saveUserSata(email, password)
-        }
+    fun onCancelClick() {
+        doNavigation()
     }
 
     fun onSaveClick(username: String, phone: String) {
@@ -77,11 +51,7 @@ class SignUpExtendedViewModel @Inject constructor(
                     is ApiResult.Success -> {
                         log("api success")
                         log(it.value.toString())
-
-                        val direction =
-                            SignUpExtendedFragmentDirections.startMainActivity()
-                        navigateToActivity(direction)
-
+                        doNavigation()
                     }
 
                     is ApiResult.NetworkError -> {
@@ -97,9 +67,5 @@ class SignUpExtendedViewModel @Inject constructor(
         }
     }
 
-
-    fun onButtonBackPressed() {
-        navigateBack()
-    }
 
 }

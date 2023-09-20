@@ -4,6 +4,7 @@ import androidx.fragment.app.viewModels
 import com.vikmanz.shpppro.R
 import com.vikmanz.shpppro.databinding.FragmentSignUpExtendedBinding
 import com.vikmanz.shpppro.presentation.base.BaseFragment
+import com.vikmanz.shpppro.presentation.utils.extensions.hideKeyboard
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -16,36 +17,25 @@ class SignUpExtendedFragment :
 
     override fun setListeners() {
         with(binding) {
-            // buttonLoginRegisterByEmail.setOnClickListener { checkForm() }
-            // textViewLoginSwitchScreenToLoginButton.setOnClickListener { viewModel.swapLoginAndRegister() }
-            // buttonLoginRegisterByGoogle.setOnClickListener { buttonLoginRegisterByGoogle.setFunText() }
-
             buttonSignUpExtSaveUser.setOnClickListener {
                 val username = textInputSignUpExtUserNameField.text.toString()
                 val phone = textInputSignUpExtUserPhoneField.text.toString()
                 viewModel.onSaveClick(username, phone)
             }
-
-            buttonSignUpExtCancel.setOnClickListener { viewModel.navigateBack() }
+            buttonSignUpExtCancel.setOnClickListener { viewModel.onCancelClick() }
         }
-
-//        backgroundFocusHandler()                // de-focus fields when click on bg
-
-
+        backgroundFocusHandler()                // de-focus fields when click on bg
     }
-
-
-
 
     /**
      *  De-focus views, when user do click on background.
      */
     private fun backgroundFocusHandler() = with(binding) {
-//        root.setOnClickListener {
-//            textInputLoginEmailField.clearFocus()
-//            textInputLoginPasswordField.clearFocus()
-//            hideKeyboard(it)
-//        }
+        root.setOnClickListener {
+            textInputSignUpExtUserNameField.clearFocus()
+            textInputSignUpExtUserPhoneField.clearFocus()
+            hideKeyboard(it)
+        }
     }
 
 }

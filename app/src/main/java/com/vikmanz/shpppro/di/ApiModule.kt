@@ -27,7 +27,7 @@ object ApiModule {
 
     @Singleton
     @Provides
-    fun providesHttpStringInterceptor(): MyResponseInterceptor = MyResponseInterceptor()
+    fun providesMyResponseInterceptor(): MyResponseInterceptor = MyResponseInterceptor()
 
     @Singleton
     @Provides

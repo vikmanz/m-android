@@ -92,5 +92,6 @@
 
     <!-- ———————————————————— Safe Arg ———————————————————— -->
     <string name="safe_arg_id" translatable="false">argument</string>
+    <string name="main_profile_email_not_exist">User info is empty</string>
 
 </resources>
