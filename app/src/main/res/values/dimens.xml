@@ -31,7 +31,7 @@
     <dimen name="avatarSide_myProfile">130dp</dimen>
     <dimen name="avatarSide_addContactDialog">130dp</dimen>
     <dimen name="avatarMargin_addContactDialog">28dp</dimen>
-    <dimen name="avatarSide_myContactsList">75dp</dimen>
+    <dimen name="avatarSide_myContactsList">50dp</dimen>
 
     <!-- HARD values. -->
     <dimen name="offset_loginFragment_helloTextFromTop_portrait">146dp</dimen>

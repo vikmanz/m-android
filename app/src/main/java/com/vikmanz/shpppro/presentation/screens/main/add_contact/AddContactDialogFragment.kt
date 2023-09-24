@@ -1,4 +1,4 @@
-package com.vikmanz.shpppro.presentation.screens.main.main_fragment.my_contacts_list.add_contact
+package com.vikmanz.shpppro.presentation.screens.main.add_contact
 
 import android.app.Dialog
 import android.os.Bundle

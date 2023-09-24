@@ -148,7 +148,7 @@
         app:layout_constraintEnd_toEndOf="@id/view_myContacts_bgBottomHalf"
         app:layout_constraintStart_toStartOf="@id/view_myContacts_bgBottomHalf"
         app:layout_constraintTop_toTopOf="@id/view_myContacts_bgBottomHalf"
-        tools:listitem="@layout/one_contact_item" />
+        tools:listitem="@layout/my_contact_list_item" />
 
     <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/button_myContacts_deleteMultipleContacts"

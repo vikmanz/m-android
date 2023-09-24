@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardCornerRadius="10dp"
+    app:cardCornerRadius="6dp"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
@@ -16,28 +16,27 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
+        android:background="@color/multiselect_background_contact_list"
         android:paddingHorizontal="@dimen/offset_S"
         android:paddingVertical="@dimen/offset_S">
 
         <androidx.appcompat.widget.AppCompatCheckBox
             android:id="@+id/checkbox_oneContact_multiSelect"
-            android:button="@drawable/checkbox_selector_contact_list_multiselect"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
+            android:button="@drawable/checkbox_selector_contact_list_multiselect"
+            android:clickable="false"
             android:minWidth="0dp"
             android:minHeight="0dp"
-            android:visibility="gone"
-            android:clickable="false"
-            tools:visibility="visible"
-            android:layout_marginEnd="@dimen/offset_SM"
-            />
+            android:visibility="visible" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/imageView_oneContact_avatarImage"
             android:layout_width="@dimen/avatarSide_myContactsList"
             android:layout_height="@dimen/avatarSide_myContactsList"
             android:scaleType="fitXY"
+            android:layout_marginStart="@dimen/offset_SM"
             app:srcCompat="@drawable/icon_person" />
 
         <LinearLayout
@@ -46,7 +45,7 @@
             android:layout_weight="1"
             android:gravity="center_vertical"
             android:orientation="vertical"
-            android:paddingHorizontal="@dimen/offset_S">
+            android:paddingHorizontal="@dimen/offset_M">
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/textView_oneContact_name"
@@ -65,20 +64,10 @@
                 android:layout_height="wrap_content"
                 android:text="@string/contacts_recycler_person_career_sample"
                 android:textColor="?attr/colorOnTertiary"
-                android:textSize="@dimen/size_textFont_XS"
+                android:textSize="@dimen/size_textFont_XXS"
                 tools:ignore="TextContrastCheck" />
 
         </LinearLayout>
-
-        <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/button_oneContact_remove"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginHorizontal="@dimen/offset_S"
-            android:background="@android:color/transparent"
-            android:src="@drawable/icon_trash_contact_list"
-            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
     </LinearLayout>
 

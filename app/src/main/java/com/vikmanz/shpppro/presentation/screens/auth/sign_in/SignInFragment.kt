@@ -21,6 +21,9 @@ class SignInFragment :
     override val viewModel: SignInViewModel by viewModels()
 
     override fun setListeners() {
+
+        autostart()
+
         with(binding) {
             buttonLoginRegisterByEmail.setOnClickListener { checkForm() }
             textViewLoginSwitchScreenToLoginButton.setOnClickListener { viewModel.onSignUpClick() }
@@ -29,6 +32,12 @@ class SignInFragment :
         initHelpTesterButtons()
         setLoginPasswordFocusListeners()        // Listeners to fields and buttons.
         backgroundFocusHandler()                // de-focus fields when click on bg
+    }
+
+    private fun autostart() {
+        binding.textInputLoginEmailField.setText(TEST_LOGIN)
+        binding.textInputLoginPasswordField.setText(TEST_PASSWORD)
+        checkForm()
     }
 
     override fun setObservers() {

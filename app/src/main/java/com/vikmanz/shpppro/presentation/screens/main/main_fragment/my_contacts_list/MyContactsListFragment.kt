@@ -1,6 +1,7 @@
 package com.vikmanz.shpppro.presentation.screens.main.main_fragment.my_contacts_list
 
 import android.Manifest.permission.READ_CONTACTS
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
@@ -17,15 +18,13 @@ import com.vikmanz.shpppro.common.Constants.MARGINS_OF_ELEMENTS
 import com.vikmanz.shpppro.common.Constants.SNACK_BAR_VIEW_TIME
 import com.vikmanz.shpppro.common.extensions.isFalse
 import com.vikmanz.shpppro.common.extensions.log
-import com.vikmanz.shpppro.data.model.ContactItem
 import com.vikmanz.shpppro.databinding.FragmentMyContactsListBinding
 import com.vikmanz.shpppro.presentation.base.BaseFragment
 import com.vikmanz.shpppro.presentation.screens.main.main_fragment.MainViewPagerFragment
 import com.vikmanz.shpppro.presentation.screens.main.main_fragment.my_contacts_list.adapter.ContactsAdapter
 import com.vikmanz.shpppro.presentation.screens.main.main_fragment.my_contacts_list.adapter.decorator.MarginItemDecoration
 import com.vikmanz.shpppro.presentation.screens.main.main_fragment.my_contacts_list.adapter.decorator.SwipeToDeleteCallback
-import com.vikmanz.shpppro.presentation.screens.main.main_fragment.my_contacts_list.adapter.listeners.ContactActionListener
-import com.vikmanz.shpppro.presentation.screens.main.main_fragment.my_contacts_list.add_contact.AddContactDialogFragment
+import com.vikmanz.shpppro.presentation.screens.main.add_contact.AddContactDialogFragment
 import com.vikmanz.shpppro.presentation.screens.main.main_fragment.my_contacts_list.decline_permision.OnDeclinePermissionDialogFragment
 import com.vikmanz.shpppro.presentation.utils.extensions.setGone
 import com.vikmanz.shpppro.presentation.utils.extensions.setMultipleInvisible
@@ -34,6 +33,7 @@ import com.vikmanz.shpppro.presentation.utils.extensions.setVisible
 import com.vikmanz.shpppro.presentation.utils.extensions.startDeclineAccessActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import okhttp3.internal.notify
 
 private const val ADD_CONTACT_DIALOG_TAG = "ConfirmationDialogFragmentTag"
 
@@ -53,23 +53,7 @@ class MyContactsListFragment :
     /**
      * Create adapter for contacts recycler view.
      */
-    private val adapter: ContactsAdapter by lazy {
-        ContactsAdapter(
-
-            contactActionListener = object : ContactActionListener {
-
-            override fun onTapContact(contactId: Int) {
-                viewModel.onContactPressed(contactId)
-            }
-
-            override fun onDeleteContact(contact: ContactItem) {
-                deleteContactWithUndo(contact)
-            }
-
-        }
-
-        )
-    }
+    private val adapterForRecycler = ContactsAdapter()
 
     /**
      * Register activity for request permission for read contacts from phonebook.
@@ -141,9 +125,7 @@ class MyContactsListFragment :
         }
 
         viewModel.isMultiselectMode.observe(viewLifecycleOwner) {
-            adapter.isMultiselect = it
-            log("update adapter")
-            binding.recyclerViewMyContactsContactList.adapter = adapter     // adapter.notifyDataSetChanged()
+            adapterForRecycler.isMultiselect = it
             binding.buttonMyContactsDeleteMultipleContacts.apply {
                 if (it) setVisible() else setGone()
             }
@@ -154,7 +136,7 @@ class MyContactsListFragment :
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.contactList.collect { contactList ->
-                    adapter.submitList(contactList)
+                    adapterForRecycler.submitList(contactList)
                 }
             }
         }
@@ -165,21 +147,17 @@ class MyContactsListFragment :
      * Init recycler view and swipe to delete.
      */
     private fun initRecyclerView() {
-        with(binding) {
-            recyclerViewMyContactsContactList.layoutManager =
-                LinearLayoutManager(requireContext())
-            recyclerViewMyContactsContactList.addItemDecoration(
-                MarginItemDecoration(
-                    MARGINS_OF_ELEMENTS
-                )
-            )
+        with(binding.recyclerViewMyContactsContactList) {
+            layoutManager = LinearLayoutManager(requireContext())
+            addItemDecoration(MarginItemDecoration(MARGINS_OF_ELEMENTS))
+            adapter = adapterForRecycler
         }
         initSwipeToDelete()
     }
 
-    private fun deleteContactWithUndo(contact: ContactItem) {
-        if (viewModel.deleteContact(contact)) createUndo()
-    }
+//    private fun deleteContactWithUndo(contact: ContactItem) {
+//        if (viewModel.deleteContact(contact)) createUndo()
+//    }
 
     /**
      * Delete contact from ViewModel and show Undo to restore it.

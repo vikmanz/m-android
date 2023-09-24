@@ -2,22 +2,22 @@ package com.vikmanz.shpppro.presentation.screens.main.main_fragment.my_contacts_
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.vikmanz.shpppro.common.extensions.isTrue
 import com.vikmanz.shpppro.common.extensions.log
-import com.vikmanz.shpppro.common.extensions.swapBoolean
 import com.vikmanz.shpppro.data.model.ContactItem
 import com.vikmanz.shpppro.data.model.User
-import com.vikmanz.shpppro.domain.repository.ShPPContactsRepository
+import com.vikmanz.shpppro.domain.usecases.contacts.DeleteContactUseCase
 import com.vikmanz.shpppro.domain.usecases.contacts.GetAllUsersUseCase
 import com.vikmanz.shpppro.presentation.base.BaseViewModel
-import com.vikmanz.shpppro.presentation.screens.auth.sign_up_extended.SignUpExtendedFragmentDirections
 import com.vikmanz.shpppro.presentation.screens.main.main_fragment.MainViewPagerFragmentDirections
+import com.vikmanz.shpppro.presentation.utils.extensions.alsoLog
+import com.vikmanz.shpppro.presentation.utils.extensions.alsoLogItAs
+import com.vikmanz.shpppro.presentation.utils.extensions.copyItem
+import com.vikmanz.shpppro.presentation.utils.extensions.findInList
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asFlow
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import ua.digitalminds.fortrainerapp.data.result.ApiResult
 import javax.inject.Inject
@@ -30,64 +30,113 @@ private const val FAKE_LIST_FIRST = true
  */
 @HiltViewModel
 class MyContactsListViewModel @Inject constructor(
-   private val getAllUsersUseCase: GetAllUsersUseCase
+    private val getAllUsersUseCase: GetAllUsersUseCase,
+    private val deleteContactUseCase: DeleteContactUseCase,
 ) : BaseViewModel() {
 
-    private var lastDeletedContact: ContactItem? = null
-    private var lastDeletedContactPosition: Int = 0
+    private var lastDeletedContactItem: ContactItem? = null
 
     val isMultiselectMode = MutableLiveData(false)
 
     private val _contactList = MutableStateFlow(emptyList<ContactItem>())
+    val contactList: StateFlow<List<ContactItem>> = _contactList.asStateFlow()
 
     init {
+        getAllContacts()
+    }
+
+    private fun getAllContacts() {
         viewModelScope.launch(Dispatchers.IO) {
-            log("Start coroutine")
+            log("Start coroutine getAllContacts")
             getAllUsersUseCase().collect {
-
                 when (it) {
-
-                    is ApiResult.Loading -> {
-                        log("loading")
-                        emptyList<ContactItem>()
-                    }
-
-                    is ApiResult.Success -> {
-                        log("api success")
-                        log(it.value.toString())
-                        _contactList.value = it.value.map { user -> ContactItem(contact = user) }
-                    }
-
-                    is ApiResult.NetworkError -> {
-                        log("api network error!")
-                        emptyList<ContactItem>()
-                    }
-
-                    is ApiResult.ServerError -> {
-                        log("api server error!")
-                        emptyList<ContactItem>()
-                    }
+                    is ApiResult.Loading -> "" alsoLog "loading"
+                    is ApiResult.NetworkError -> "" alsoLog "network error!"
+                    is ApiResult.ServerError -> "" alsoLog "server error!"
+                    is ApiResult.Success -> updateContactList(it.value) alsoLog "api success! \n ${it.value}"
                 }
+            } alsoLog "End coroutine getAllContacts"
+        }
+    }
+
+    private fun updateContactList(newContactList: List<User>) {
+        _contactList.value = newContactList
+            .map { user ->
+                ContactItem(
+                    contact = user,
+                    onDelete = ::deleteContact,
+                    onClick = ::onContactClick,
+                    onLongClick = ::onContactLongClick,
+                )
             }
-            log("End coroutine")
+    }
+
+    private fun onContactClick(contactItem: ContactItem) {
+        if (isMultiselectMode.value == true) {
+            changeContactItemCheckedState(contactItem)
+        } else {
+            val contactId = contactItem.contact.id
+            navigate(MainViewPagerFragmentDirections.startContactDetails(contactId))
+        }
+    }
+
+    private fun changeContactItemCheckedState(contactItem: ContactItem) {
+        _contactList.value = _contactList.value.toMutableList().apply {
+            copyItem(contactItem) {
+                copy(isChecked = !contactItem.isChecked)
+            }
+            if (none { it.isChecked }) isMultiselectMode.postValue(false)
+        }
+    }
+
+    private fun onContactLongClick(contactItem: ContactItem) {
+        if (isMultiselectMode.value == false) {
+            isMultiselectMode.postValue(true)
+            changeContactItemCheckedState(contactItem)
         }
     }
 
     /**
-     * Create fake contact list and Flow to take it from outside.
+     * Delete contact from list of contacts.
      */
-    val contactList = _contactList.map {
-        it.map { contactItem ->
-            ContactItem(
-                contact = contactItem.contact,
-                isChecked = contactItem.isChecked,
-                onCheck = {
-                    log("Lambda! mode before = ${isMultiselectMode.value}")
-                   // contactsRepository.toggleContactSelectionState(contactItem)
-                   // isMultiselectMode.value = contactsRepository.checkMultiselectState()
-                    log("Lambda! mode after = ${isMultiselectMode.value}")
+    private fun deleteContact(contactItem: ContactItem) {
+        if (contactItem == lastDeletedContactItem) return
+        lastDeletedContactItem = contactItem
+
+        viewModelScope.launch(Dispatchers.IO) {
+            log("Start coroutine deleteContact")
+            deleteContactUseCase(contactItem.contact.id).collect { it ->
+                when (it) {
+                    //is ApiResult.NetworkError -> "" alsoLog "network error!"
+                    //is ApiResult.ServerError -> "" alsoLog "server error!"
+
+                    is ApiResult.Loading -> {
+                        _contactList.value = _contactList.value.toMutableList().apply {
+                            copyItem(contactItem) {
+                                copy(isLoading = true)
+                            }
+                        }
+                        log("loading")
+                    }
+//
+//                    is ApiResult.Success -> {
+//                        log("api success")
+//                        _contactList.value = _contactList.value.toMutableList().apply {
+//                            remove(contactItem)
+//                        }
+//                        //log(it.value.toString())
+//                    }
+
+                    else -> {
+                        log("api success")
+                        _contactList.value = _contactList.value.toMutableList().apply {
+                            remove(findInList(contactItem))
+                        }
+                    }
+
                 }
-            )
+            }
+            log("End coroutine deleteContact")
         }
     }
 
@@ -96,27 +145,17 @@ class MyContactsListViewModel @Inject constructor(
      */
     val fakeListActivated = MutableLiveData(FAKE_LIST_FIRST)
 
-    /**
-     * Delete contact from list of contacts.
-     */
-    fun deleteContact(contact: ContactItem): Boolean {
-        if (contact == lastDeletedContact) return false
-        lastDeletedContact = contact
-        lastDeletedContactPosition = getContactPosition(contact)
-       // contactsRepository.deleteContact(contact)
-        return true
-    }
 
     /**
      * Delete contact from list of contacts.
      */
     fun restoreLastDeletedContact() {
-        lastDeletedContact?.let {
-         //   if (!contactsRepository.isContainsContact(it)) {
-         //       addContactToPosition(it, lastDeletedContactPosition)
-         //       lastDeletedContact = null
-         //   }
-        }
+//        lastDeletedContact?.let {
+//            //   if (!contactsRepository.isContainsContact(it)) {
+//            //       addContactToPosition(it, lastDeletedContactPosition)
+//            //       lastDeletedContact = null
+//            //   }
+//        }
     }
 
     /**
@@ -140,9 +179,6 @@ class MyContactsListViewModel @Inject constructor(
 //        fakeListActivated.swapBoolean()
     }
 
-    fun onContactPressed(contactId: Int) {
-        navigate(MainViewPagerFragmentDirections.startContactDetails(contactId))
-    }
 
     /**
      * Get contact position in list of contacts.

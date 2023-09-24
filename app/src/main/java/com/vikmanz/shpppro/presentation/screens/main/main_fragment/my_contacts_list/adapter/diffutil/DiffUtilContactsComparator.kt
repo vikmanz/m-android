@@ -9,7 +9,7 @@ import com.vikmanz.shpppro.data.model.ContactItem
 class DiffUtilContactListItemComparator : DiffUtil.ItemCallback<ContactItem>() {
 
     override fun areItemsTheSame(oldItem: ContactItem, newItem: ContactItem): Boolean {
-        return oldItem.contact.id == newItem.contact.id && oldItem.isChecked == newItem.isChecked
+        return oldItem.contact.id == newItem.contact.id
     }
 
     override fun areContentsTheSame(oldItem: ContactItem, newItem: ContactItem): Boolean =
