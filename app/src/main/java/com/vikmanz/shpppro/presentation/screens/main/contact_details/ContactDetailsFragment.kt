@@ -34,7 +34,7 @@ class ContactDetailsFragment :
                     with(binding) {
                         textViewContactDetailsPersonName.text = user.name
                         textViewContactDetailsPersonCareer.text = user.career
-                        textViewContactDetailsPersonAddress.text = user.address
+                        textViewContactDetailsPersonAddress.text = user.email
                         imageViewContactDetailsAvatarImage.setImageWithGlide()
                     }
                 }

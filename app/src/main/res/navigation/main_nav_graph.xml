@@ -44,8 +44,8 @@
         <!--suppress NavigationFile -->
 
         <argument
-            android:name="contactID"
-            app:argType="integer" />
+            android:name="user"
+            app:argType="com.vikmanz.shpppro.data.model.User" />
 
     </fragment>
 

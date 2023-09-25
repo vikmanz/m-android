@@ -22,35 +22,38 @@ import javax.inject.Inject
 @HiltViewModel
 class ContactDetailsViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
-    val getContactUseCase: GetContactUseCase
+   // val getContactUseCase: GetContactUseCase
 ) : BaseViewModel() {
 
     private val navArgs = ContactDetailsFragmentArgs.fromSavedStateHandle(savedStateHandle)
 
-    private val _user = MutableStateFlow(User())
+    private val _user = MutableStateFlow(navArgs.user)
     val user = _user.asStateFlow()
 
     init {
-        getUser()
+        log(_user.value.toString())
     }
 
-    private fun getUser() {
-        val userId = navArgs.contactID
-        viewModelScope.launch(Dispatchers.IO) {
-            log("Start coroutine getUser")
-            getContactUseCase(userId).collect {
-                when (it) {
-                    is ApiResult.NetworkError -> User() alsoLog "network error!"
-                    is ApiResult.ServerError -> User() alsoLog "server error!"
-                    is ApiResult.Loading -> User() alsoLog "loading"
-                    is ApiResult.Success -> {
-                        _user.update { _ -> it.value }
-                }
-            }
-        }
-    } alsoLog "End coroutine getUser"
-    }
-
+//    init {
+//        getUser()
+//    }
+//
+//    private fun getUser() {
+//        val user = navArgs.user
+//        viewModelScope.launch(Dispatchers.IO) {
+//            log("Start coroutine getUser")
+//            getContactUseCase(userId).collect {
+//                when (it) {
+//                    is ApiResult.NetworkError -> User() alsoLog "network error!"
+//                    is ApiResult.ServerError -> User() alsoLog "server error!"
+//                    is ApiResult.Loading -> User() alsoLog "loading"
+//                    is ApiResult.Success -> {
+//                        _user.update { _ -> it.value }
+//                }
+//            }
+//        }
+//    } alsoLog "End coroutine getUser"
+//    }
 
     fun onButtonBackPressed() {
         navigateBack()

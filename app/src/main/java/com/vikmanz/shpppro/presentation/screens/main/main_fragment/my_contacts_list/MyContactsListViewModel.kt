@@ -84,8 +84,8 @@ class MyContactsListViewModel @Inject constructor(
         if (isMultiselectMode.value == true) {
             changeContactItemCheckedState(contactItem)
         } else {
-            val contactId = contactItem.contact.id
-            navigate(MainViewPagerFragmentDirections.startContactDetails(contactId))
+            val contact = contactItem.contact
+            navigate(MainViewPagerFragmentDirections.startContactDetails(contact))
         }
     }
 

@@ -49,8 +49,8 @@ class AddContactViewModel @Inject constructor(
     }
 
     private fun onContactClick(contactItem: ContactItem) {
-        val contactId = contactItem.contact.id
-        navigate(MainViewPagerFragmentDirections.startContactDetails(contactId))
+        val contact = contactItem.contact
+        navigate(MainViewPagerFragmentDirections.startContactDetails(contact))
     }
 
     private fun updateContactList(newContactList: List<User>) {
