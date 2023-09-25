@@ -1,7 +1,6 @@
 package com.vikmanz.shpppro.presentation.screens.main.main_fragment.my_contacts_list
 
 import android.Manifest.permission.READ_CONTACTS
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
@@ -17,14 +16,13 @@ import com.vikmanz.shpppro.R
 import com.vikmanz.shpppro.common.Constants.MARGINS_OF_ELEMENTS
 import com.vikmanz.shpppro.common.Constants.SNACK_BAR_VIEW_TIME
 import com.vikmanz.shpppro.common.extensions.isFalse
-import com.vikmanz.shpppro.common.extensions.log
 import com.vikmanz.shpppro.databinding.FragmentMyContactsListBinding
 import com.vikmanz.shpppro.presentation.base.BaseFragment
 import com.vikmanz.shpppro.presentation.screens.main.main_fragment.MainViewPagerFragment
 import com.vikmanz.shpppro.presentation.screens.main.main_fragment.my_contacts_list.adapter.ContactsAdapter
 import com.vikmanz.shpppro.presentation.screens.main.main_fragment.my_contacts_list.adapter.decorator.MarginItemDecoration
 import com.vikmanz.shpppro.presentation.screens.main.main_fragment.my_contacts_list.adapter.decorator.SwipeToDeleteCallback
-import com.vikmanz.shpppro.presentation.screens.main.add_contact.AddContactDialogFragment
+import com.vikmanz.shpppro.presentation.screens.main.add_contact.AddContactFragment
 import com.vikmanz.shpppro.presentation.screens.main.main_fragment.my_contacts_list.decline_permision.OnDeclinePermissionDialogFragment
 import com.vikmanz.shpppro.presentation.utils.extensions.setGone
 import com.vikmanz.shpppro.presentation.utils.extensions.setMultipleInvisible
@@ -33,7 +31,6 @@ import com.vikmanz.shpppro.presentation.utils.extensions.setVisible
 import com.vikmanz.shpppro.presentation.utils.extensions.startDeclineAccessActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import okhttp3.internal.notify
 
 private const val ADD_CONTACT_DIALOG_TAG = "ConfirmationDialogFragmentTag"
 
@@ -72,7 +69,7 @@ class MyContactsListFragment :
         with(binding) {
             buttonMyContactsBackButton.setOnClickListener { onButtonBackPressed() }
             buttonMyContactsDeclineAccess.setOnClickListener { startDeclineAccessActivity() }
-            buttonMyContactsAddContact.setOnClickListener { addNewContact() }
+            buttonMyContactsAddContact.setOnClickListener { viewModel.startAddContact() }
             buttonMyContactsAddContactsFromPhonebook.setOnClickListener { requestReadContactsPermission() }
             buttonMyContactsAddContactsFromFaker.setOnClickListener { changeContactsList() }
             buttonMyContactsDeleteMultipleContacts.setOnClickListener { deleteMultipleContacts() }
@@ -81,7 +78,7 @@ class MyContactsListFragment :
 
     private fun deleteMultipleContacts() {
         binding.buttonMyContactsDeleteMultipleContacts.setGone()
-        viewModel.deleteMultipleContacts()
+        //viewModel.deleteMultipleContacts()
     }
 
     private fun onButtonBackPressed() {         //todo extension
@@ -130,6 +127,10 @@ class MyContactsListFragment :
                 if (it) setVisible() else setGone()
             }
         }
+
+        viewModel.isShowSnackBar.observe(viewLifecycleOwner) {
+            if (it) showUndo()
+        }
     }
 
     private fun observeContactsList() {
@@ -162,11 +163,11 @@ class MyContactsListFragment :
     /**
      * Delete contact from ViewModel and show Undo to restore it.
      */
-    private fun createUndo() {
+    private fun showUndo() {
         undo = Snackbar
-            .make(binding.root, getString(R.string.my_contacts_remove_contact), SNACK_BAR_VIEW_TIME)
+            .make(binding.root, getString(R.string.my_contacts_remove_contact), SNACK_BAR_VIEW_TIME.toInt())
             .setAction(getString(R.string.my_contacts_remove_contact_undo)) {
-                viewModel.restoreLastDeletedContact()
+                viewModel.restoreDeletedContact()
                 undo?.dismiss()
             }
         undo?.show()
@@ -190,15 +191,6 @@ class MyContactsListFragment :
         }
         val itemTouchHelper = ItemTouchHelper(swipeHandler)
         itemTouchHelper.attachToRecyclerView(binding.recyclerViewMyContactsContactList)
-    }
-
-
-    /**
-     * Show Add new contact Dialog Fragment.
-     */
-    private fun addNewContact() {
-        AddContactDialogFragment()
-            .show(parentFragmentManager, ADD_CONTACT_DIALOG_TAG)
     }
 
     /**

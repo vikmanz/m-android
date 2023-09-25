@@ -7,6 +7,7 @@ import com.bumptech.glide.Priority
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.vikmanz.shpppro.R
+import com.vikmanz.shpppro.data.utils.RandomPhotoTaker
 import java.net.URL
 import java.security.InvalidParameterException
 
@@ -30,10 +31,10 @@ val GLIDE_OPTIONS = RequestOptions()
  *
  * @param link URI, URL or resource id.
  */
-fun AppCompatImageView.setImageWithGlide(link: Any?) {
+fun AppCompatImageView.setImageWithGlide(link: Any? = null) {
    //if (link is Uri || link is URL || link is Int || link is String)
         Glide.with(context)
-            .load(link)
+            .load(link ?: RandomPhotoTaker.getRandomPhoto())
             .apply(GLIDE_OPTIONS)
             .into(this)
    // else throw InvalidParameterException()

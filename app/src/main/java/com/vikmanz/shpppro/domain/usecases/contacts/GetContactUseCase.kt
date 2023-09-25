@@ -7,13 +7,12 @@ import kotlinx.coroutines.flow.flow
 import ua.digitalminds.fortrainerapp.data.result.ApiResult
 import javax.inject.Inject
 
-class GetUserContactsUseCase @Inject constructor(
+class GetContactUseCase @Inject constructor(
         private val contactsRepository: ShPPContactsRepository,
 ) {
-
-    operator fun invoke(): Flow<ApiResult<List<User>>> = flow {
+    operator fun invoke(userId: Int): Flow<ApiResult<User>> = flow {
         emit(ApiResult.Loading)
-        emit(contactsRepository.getUserContacts())
+        emit(contactsRepository.getContact(userId))
     }
 
 }

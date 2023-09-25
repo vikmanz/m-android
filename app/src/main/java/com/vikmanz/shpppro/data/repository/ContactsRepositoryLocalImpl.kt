@@ -35,6 +35,8 @@
 //    override val contactList: StateFlow<List<ContactItem>> = _contactList.asStateFlow()
 //
 //    private val faker = Faker.instance() // fake data generator.
+
+
 //
 //    private var imgCounter = 0  // counter to switch random images.
 //

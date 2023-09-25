@@ -6,5 +6,6 @@ data class ContactItem(
     val isLoading: Boolean = false,
     val isChecked: Boolean = false,
     val onClick: (ContactItem) -> Unit = {},
+    val onPlusClick: (ContactItem) -> Unit = {},
     val onLongClick: (ContactItem) -> Unit = {},
 )

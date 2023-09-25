@@ -6,6 +6,7 @@ import com.vikmanz.shpppro.data.api.ShPPApi
 import com.vikmanz.shpppro.data.dto.ContactAddRequest
 import com.vikmanz.shpppro.data.dto.toListOfContacts
 import com.vikmanz.shpppro.data.dto.toListOfUsers
+import com.vikmanz.shpppro.data.dto.toUser
 import com.vikmanz.shpppro.data.result.ApiSafeCaller
 import com.vikmanz.shpppro.data.user_token.UserTokenHandler
 import com.vikmanz.shpppro.domain.repository.ShPPContactsRepository
@@ -73,9 +74,18 @@ class ShPPContactsRepositoryImpl @Inject constructor(
             ).toListOfContacts()
         }
 
+    override suspend fun getContact (userId: Int): ApiResult<User> =
+        apiSafeCaller.safeApiCall {
+            api.getUser(
+                token = userTokenHandler.accessToken,
+                userId = userId
+            ).toUser()
+        }
+
     override fun findContact(contactId: Int): ContactItem {
         return contactList.value[contactId]
     }
+
 
 
 }

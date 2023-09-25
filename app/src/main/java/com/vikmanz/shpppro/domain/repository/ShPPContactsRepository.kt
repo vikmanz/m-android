@@ -13,5 +13,7 @@ interface ShPPContactsRepository {
     suspend fun addContact(contactId: Int): ApiResult<List<User>>
     suspend fun deleteContact(contactId: Int): ApiResult<List<User>>
     suspend fun getUserContacts(): ApiResult<List<User>>
+    suspend fun getContact(userId: Int): ApiResult<User>
     fun findContact(contactId: Int): ContactItem?
+
 }

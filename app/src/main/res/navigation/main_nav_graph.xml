@@ -9,7 +9,7 @@
         android:id="@+id/viewPagerMain"
         android:name="com.vikmanz.shpppro.presentation.screens.main.main_fragment.MainViewPagerFragment"
         android:label="fragment_main_view_pager"
-        tools:layout="@layout/fragment_my_profile">
+        tools:layout="@layout/fragment_my_contacts_list">
         <!--suppress NavigationFile -->
         <argument
             android:name="email"
@@ -18,6 +18,9 @@
         <action
             android:id="@+id/startContactDetails"
             app:destination="@id/contactDetailsFragment" />
+        <action
+            android:id="@+id/startAddContact"
+            app:destination="@id/addContactFragment" />
     </fragment>
 
     <fragment
@@ -44,6 +47,17 @@
             android:name="contactID"
             app:argType="integer" />
 
+    </fragment>
+
+    <fragment
+        android:id="@+id/addContactFragment"
+        android:name="com.vikmanz.shpppro.presentation.screens.main.add_contact.AddContactFragment"
+        android:label="AddContactFragment"
+        tools:layout="@layout/fragment_add_contact_my_contacts"
+        >
+        <action
+            android:id="@+id/startContactDetails"
+            app:destination="@id/contactDetailsFragment" />
     </fragment>
 
 </navigation>
