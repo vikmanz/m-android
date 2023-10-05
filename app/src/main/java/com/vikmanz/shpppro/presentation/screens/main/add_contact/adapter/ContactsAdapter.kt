@@ -28,14 +28,14 @@ class ContactsAdapter(
         get() = _preFilteredList?.toList() ?: emptyList()
 
 
-    fun filter(query: String) {
+    fun filter(query: String): Boolean {
         @Suppress("UNCHECKED_CAST")
-        submitList(
-            SearchFilter.filter(
-                list = preFilteredList,
-                query = query
-            ) as List<AddContactItem>
-        )
+        val filtered =  SearchFilter.filter(
+            list = preFilteredList,
+            query = query
+        ) as List<AddContactItem>
+        submitList(filtered)
+        return filtered.isEmpty()
     }
 
     fun submitListFromViewModel(list: List<AddContactItem>?){

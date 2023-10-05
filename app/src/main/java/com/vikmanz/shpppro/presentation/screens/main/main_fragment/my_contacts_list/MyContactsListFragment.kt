@@ -107,11 +107,21 @@ class MyContactsListFragment :
                         val isSearchMode = state.isSearchMode
                         textViewMyContactsTitle.setVisibleOrGone(!isSearchMode)
                         buttonMyContactsContactSearch.setVisibleOrGone(!isSearchMode)
+                        buttonMyContactsBackButton.setVisibleOrGone(!isSearchMode)
                         searchBar.setVisibleOrGone(isSearchMode)
                         buttonMyContactCancelSearch.setVisibleOrGone(isSearchMode)
+
+                        //setNoContactsDisclaimerVisible(adapterForRecycler.currentList.isEmpty() && !state.isLoadingData)
                     }
                 }
             }
+        }
+    }
+
+    private fun setNoContactsDisclaimerVisible(isVisible: Boolean) {
+        with(binding) {
+            textViewNoResultsTitle.setVisibleOrGone(isVisible && !viewModel.uiState.value.isLoadingData)
+            textViewNoResultsSubtitle.setVisibleOrGone(isVisible  && !viewModel.uiState.value.isLoadingData)
         }
     }
 
@@ -120,13 +130,17 @@ class MyContactsListFragment :
         with(binding) {
             searchBar.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(newText: String?): Boolean {
-                    adapterForRecycler.filter(newText ?: "")
+                    filterList(newText)
                     return false
                 }
 
                 override fun onQueryTextChange(newText: String?): Boolean {
-                    adapterForRecycler.filter(newText ?: "")
+                    filterList(newText)
                     return false
+                }
+
+                fun filterList(newText: String?) {
+                    setNoContactsDisclaimerVisible(adapterForRecycler.filter(newText ?: ""))
                 }
             })
         }
@@ -138,6 +152,7 @@ class MyContactsListFragment :
                 viewModel.contactList.collect { contactList ->
                     adapterForRecycler.submitListFromViewModel(contactList)
                     adapterForRecycler.filter(binding.searchBar.query.toString())
+                    //setNoContactsDisclaimerVisible(adapterForRecycler.currentList.isEmpty())
                 }
             }
         }

@@ -188,4 +188,38 @@
         app:layout_constraintTop_toTopOf="@id/view_myContacts_bgBottomHalf"
         />
 
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/text_view_no_results_title"
+        style="@style/basicText_bold"
+        android:textColor="?attr/colorSecondary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No results found"
+        android:textSize="24sp"
+        android:layout_marginTop="32dp"
+        tools:ignore="MissingConstraints,RtlSymmetry"
+        android:visibility="gone"
+        tools:visibility="visible"
+        app:layout_constraintEnd_toEndOf="@id/view_myContacts_bgBottomHalf"
+        app:layout_constraintStart_toStartOf="@id/view_myContacts_bgBottomHalf"
+        app:layout_constraintTop_toTopOf="@id/view_myContacts_bgBottomHalf"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/text_view_no_results_subtitle"
+        style="@style/basicText_bold"
+        android:textColor="?attr/colorSecondary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="You can see more contacts in the recommendation"
+        android:textSize="12sp"
+        android:layout_marginTop="8dp"
+        tools:ignore="MissingConstraints,RtlSymmetry"
+        android:visibility="gone"
+        tools:visibility="visible"
+        app:layout_constraintEnd_toEndOf="@id/view_myContacts_bgBottomHalf"
+        app:layout_constraintStart_toStartOf="@id/view_myContacts_bgBottomHalf"
+        app:layout_constraintTop_toBottomOf="@id/text_view_no_results_title"/>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

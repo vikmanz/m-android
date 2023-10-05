@@ -1,5 +1,6 @@
 package com.vikmanz.shpppro.presentation.screens.main.add_contact
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.View
 import android.widget.SearchView
@@ -46,16 +47,20 @@ class AddContactFragment :
     }
 
     private fun setSearchBarListeners() {
-        with(binding){
+        with(binding) {
             searchBar.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(newText: String?): Boolean {
-                    adapterForRecycler.filter(newText ?: "")
+                    filterList(newText)
                     return false
                 }
 
                 override fun onQueryTextChange(newText: String?): Boolean {
-                    adapterForRecycler.filter(newText ?: "")
+                    filterList(newText)
                     return false
+                }
+
+                fun filterList(newText: String?) {
+                    setNoContactsDisclaimerVisible(adapterForRecycler.filter(newText ?: ""))
                 }
             })
         }
@@ -67,6 +72,7 @@ class AddContactFragment :
                 viewModel.contactList.collect { contactList ->
                     adapterForRecycler.submitListFromViewModel(contactList)
                     adapterForRecycler.filter(binding.searchBar.query.toString())
+                    // setNoContactsDisclaimerVisible(adapterForRecycler.currentList.isEmpty())
                 }
             }
         }
@@ -90,12 +96,10 @@ class AddContactFragment :
     }
 
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initRecyclerView()
     }
-
 
 
     private fun observeUI() {
@@ -107,15 +111,54 @@ class AddContactFragment :
                         val isSearchMode = state.isSearchMode
                         textViewAddContactTitle.setVisibleOrGone(!isSearchMode)
                         buttonAddContactSearch.setVisibleOrGone(!isSearchMode)
+                        buttonMyContactsBackButton.setVisibleOrGone(!isSearchMode)
                         searchBar.setVisibleOrGone(isSearchMode)
                         buttonAddContactCancelSearch.setVisibleOrGone(isSearchMode)
-
                         recyclerViewContactList.setVisibleOrGone(!state.isLoadingUsers)
                         progressBarContactList.setVisibleOrGone(state.isLoadingUsers)
+                        //setNoContactsDisclaimerVisible(adapterForRecycler.currentList.isEmpty())
+
+                        showAddContactDialog(
+                            contactEmail = state.contactEmail,
+                            isShowAlertDialog = state.isShowAlertDialog,
+                            onAcceptAlertDialog = state.onAcceptAlertDialog,
+                            onDismissAlertDialog = state.onDismissAlertDialog
+                        )
 
                     }
                 }
             }
+        }
+    }
+
+    private fun showAddContactDialog(
+        contactEmail: String,
+        isShowAlertDialog: Boolean,
+        onAcceptAlertDialog: () -> Unit,
+        onDismissAlertDialog: () -> Unit
+    ) {
+        if (isShowAlertDialog) {
+            val builder = AlertDialog.Builder(requireContext())
+            val title = "Увага!"
+            val message = "Ви хочете додати контакт${ if (contactEmail.isEmpty()) "?" else "\n$contactEmail ?"}"
+            builder.setTitle(title)
+            builder.setMessage(message)
+            builder.setPositiveButton("Додати") { dialog, _ ->
+                onAcceptAlertDialog()
+                dialog.dismiss()
+            }
+            builder.setNegativeButton("Відхилити") { dialog, _ ->
+                onDismissAlertDialog()
+                dialog.dismiss()
+            }
+            builder.show()
+        }
+    }
+
+    private fun setNoContactsDisclaimerVisible(isVisible: Boolean) {
+        with(binding) {
+            textViewNoResultsTitle.setVisibleOrGone(isVisible)
+            textViewNoResultsSubtitle.setVisibleOrGone(isVisible)
         }
     }
 

@@ -78,6 +78,18 @@ class AddContactViewModel @Inject constructor(
     }
 
     private fun addContact(addedContact: AddContactItem) {
+        _uiState.update {
+            it.copy(
+                contactEmail = addedContact.contact.email ?: "",
+                isShowAlertDialog = true,
+                onAcceptAlertDialog = { addContactToServer(addedContact) },
+                onDismissAlertDialog = { clearAlertDialog() }
+            )
+        }
+    }
+
+    private fun addContactToServer(addedContact: AddContactItem) {
+        clearAlertDialog()
         val addedContactIndex = _contactList.value.indexOf(addedContact)
         viewModelScope.launch(Dispatchers.IO) {
             log("Start coroutine restoreDeletedContact")
@@ -132,15 +144,31 @@ class AddContactViewModel @Inject constructor(
     }
 
     fun setSearchMode(isSearchMode: Boolean) {
-        _uiState.update { it.copy(
-            isSearchMode = isSearchMode
-        ) }
+        _uiState.update {
+            it.copy(
+                isSearchMode = isSearchMode
+            )
+        }
     }
 
     private fun setProgressBar(isVisible: Boolean) {
-        _uiState.update { it.copy(
-            isLoadingUsers = isVisible
-        ) }
+        _uiState.update {
+            it.copy(
+                isLoadingUsers = isVisible
+            )
+        }
+    }
+
+
+    private fun clearAlertDialog() {
+        _uiState.update {
+            it.copy(
+                contactEmail = "",
+                isShowAlertDialog = false,
+                onAcceptAlertDialog = {},
+                onDismissAlertDialog = {}
+            )
+        }
     }
 }
 

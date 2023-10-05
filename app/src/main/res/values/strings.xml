@@ -60,7 +60,7 @@
     <!-- ———————————————————— Contacts ———————————————————— -->
     <string name="contacts_recycler_person_name_sample">Person Name</string>
     <string name="contacts_recycler_person_career_sample">Career</string>
-    <string name="contacts_contacts_title">My Contacts</string>
+    <string name="contacts_contacts_title">Contacts</string>
     <string name="contacts_add_contact">Add contact</string>
     <string name="revoke_permits">revoke\npermits</string>
     <string name="contacts_change_to_phonebook">Change to Phonebook</string>
@@ -76,7 +76,7 @@
     <string name="my_contacts_permission_negative_btn">Cancel</string>
 
     <!-- ———————————————————— Add new contact ———————————————————— -->
-    <string name="contacts_add_contact_title">Add contact</string>
+    <string name="contacts_add_contact_title">Users</string>
     <string name="contacts_add_contact_username">Username</string>
     <string name="contacts_add_contact_career">Career</string>
     <string name="contacts_add_contact_email">Email</string>
