@@ -23,12 +23,8 @@ import com.vikmanz.shpppro.presentation.screens.main.main_fragment.my_contacts_l
 import com.vikmanz.shpppro.presentation.utils.extensions.setGone
 import com.vikmanz.shpppro.presentation.utils.extensions.setKeyboardVisibility
 import com.vikmanz.shpppro.presentation.utils.extensions.setVisibleOrGone
-import com.vikmanz.shpppro.presentation.utils.extensions.startDeclineAccessActivity
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.launch
-
-private const val ADD_CONTACT_DIALOG_TAG = "ConfirmationDialogFragmentTag"
 
 /**
  * Class represents MyContacts screen activity.
@@ -55,8 +51,6 @@ class MyContactsListFragment :
         with(binding) {
             buttonMyContactsBackButton.setOnClickListener { onButtonBackPressed() }
             buttonMyContactsAddContact.setOnClickListener { viewModel.startAddContact() }
-            // buttonMyContactsAddContactsFromPhonebook.setOnClickListener { requestReadContactsPermission() }
-            // buttonMyContactsAddContactsFromFaker.setOnClickListener { changeContactsList() }
             buttonMyContactsDeleteMultipleContacts.setOnClickListener { deleteMultipleContacts() }
             buttonMyContactsContactSearch.setOnClickListener { setSearchMode(true) }
             buttonMyContactCancelSearch.setOnClickListener { setSearchMode(false) }
@@ -121,7 +115,7 @@ class MyContactsListFragment :
     private fun setNoContactsDisclaimerVisible(isVisible: Boolean) {
         with(binding) {
             textViewNoResultsTitle.setVisibleOrGone(isVisible && !viewModel.uiState.value.isLoadingData)
-            textViewNoResultsSubtitle.setVisibleOrGone(isVisible  && !viewModel.uiState.value.isLoadingData)
+            textViewNoResultsSubtitle.setVisibleOrGone(isVisible && !viewModel.uiState.value.isLoadingData)
         }
     }
 
@@ -178,17 +172,13 @@ class MyContactsListFragment :
         initSwipeToDelete()
     }
 
-//    private fun deleteContactWithUndo(contact: ContactItem) {
-//        if (viewModel.deleteContact(contact)) createUndo()
-//    }
-
     /**
      * Delete contact from ViewModel and show Undo to restore it.
      */
     private fun showUndo() {
         undo = Snackbar
             .make(
-                binding.root,
+                requireView(),
                 getString(R.string.my_contacts_remove_contact),
                 SNACK_BAR_VIEW_TIME.toInt()
             )
@@ -206,9 +196,7 @@ class MyContactsListFragment :
         val swipeHandler = object : SwipeToDeleteCallback(requireContext()) {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val position = viewHolder.adapterPosition
-//                viewModel.getContact(position)?.let {
-//                    deleteContactWithUndo(it)
-//                }
+                viewModel.deleteContact(adapterForRecycler.currentList[position])
             }
 
             override fun isItemViewSwipeEnabled(): Boolean {

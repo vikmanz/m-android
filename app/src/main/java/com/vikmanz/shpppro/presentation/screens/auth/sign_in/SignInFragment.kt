@@ -21,9 +21,6 @@ class SignInFragment :
     override val viewModel: SignInViewModel by viewModels()
 
     override fun setListeners() {
-
-        autostart()
-
         with(binding) {
             buttonLoginRegisterByEmail.setOnClickListener { checkForm() }
             textViewLoginSwitchScreenToLoginButton.setOnClickListener { viewModel.onSignUpClick() }

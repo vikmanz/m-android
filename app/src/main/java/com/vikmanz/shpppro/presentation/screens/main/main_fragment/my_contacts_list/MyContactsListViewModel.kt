@@ -100,7 +100,7 @@ class MyContactsListViewModel @Inject constructor(
     /**
      * Delete contact from list of contacts.
      */
-    private fun deleteContact(contactItem: ContactItem) {
+    fun deleteContact(contactItem: ContactItem) {
         if (contactItem == lastDeletedContactItem) return
         lastDeletedContactItem = contactItem
 
