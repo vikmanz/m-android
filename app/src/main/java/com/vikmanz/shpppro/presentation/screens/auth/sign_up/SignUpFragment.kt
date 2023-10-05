@@ -8,9 +8,8 @@ import com.vikmanz.shpppro.data.utils.PasswordErrorsChecker.checkPasswordErrors
 import com.vikmanz.shpppro.databinding.FragmentSignUpBinding
 import com.vikmanz.shpppro.presentation.base.BaseFragment
 import com.vikmanz.shpppro.presentation.screens.auth.sign_in.SignInFragment
-import com.vikmanz.shpppro.presentation.screens.auth.sign_in.SignInViewModel
 import com.vikmanz.shpppro.presentation.utils.extensions.clearError
-import com.vikmanz.shpppro.presentation.utils.extensions.hideKeyboard
+import com.vikmanz.shpppro.presentation.utils.extensions.setKeyboardVisibility
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -122,7 +121,10 @@ class SignUpFragment :
             val email = textInputLoginEmailField.text.toString()            // Take email text.
             val password = textInputLoginPasswordField.text.toString()      // Take pass text.
             if (checkboxLoginRememberMe.isChecked) {                        // If check Remember,
-                viewModel.saveUserEmailToDatastore(email, password)         // save data to Data Store.
+                viewModel.saveUserEmailToDatastore(
+                    email,
+                    password
+                )         // save data to Data Store.
             }
             viewModel.onRegisterClick(email, password)
         }
@@ -173,7 +175,7 @@ class SignUpFragment :
         root.setOnClickListener {
             textInputLoginEmailField.clearFocus()
             textInputLoginPasswordField.clearFocus()
-            hideKeyboard(it)
+            setKeyboardVisibility(false)
         }
     }
 

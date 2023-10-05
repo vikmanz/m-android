@@ -4,6 +4,7 @@ import com.vikmanz.shpppro.data.repository.ShPPAccountRepositoryImpl
 import com.vikmanz.shpppro.data.repository.ShPPContactsRepositoryImpl
 import com.vikmanz.shpppro.domain.repository.ShPPAccountRepository
 import com.vikmanz.shpppro.domain.repository.ShPPContactsRepository
+import com.vikmanz.shpppro.domain.repository.ShPPUserContactsList
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

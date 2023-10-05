@@ -8,9 +8,16 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 
-fun Fragment.hideKeyboard(view: View) {
+fun Fragment.setKeyboardVisibility(isShowKeyboard: Boolean, view: View? = null) {
     val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-    imm.hideSoftInputFromWindow(view.windowToken, 0)
+    val viewToHide = view ?: requireView()
+
+    if (isShowKeyboard) {
+        viewToHide.requestFocus()
+        imm.showSoftInput(viewToHide, InputMethodManager.SHOW_IMPLICIT)
+    } else {
+        imm.hideSoftInputFromWindow(viewToHide.windowToken, 0)
+    }
 }
 
 fun Fragment.startDeclineAccessActivity() {

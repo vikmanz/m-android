@@ -1,5 +1,6 @@
 package com.vikmanz.shpppro.data.dto
 
+import com.vikmanz.shpppro.data.model.ContactItem
 import com.vikmanz.shpppro.data.model.User
 
 data class ContactAddRequest (
@@ -17,4 +18,6 @@ data class ContactAddResponseBody(
     val contacts: List<User>
 )
 
-fun ContactAddResponse.toListOfContacts() = data.contacts
+fun ContactAddResponse.toListOfContactItems() = data.contacts.map {
+    ContactItem(contact = it)
+}

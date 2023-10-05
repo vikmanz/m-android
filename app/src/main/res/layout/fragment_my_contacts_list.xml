@@ -59,31 +59,15 @@
         android:textSize="@dimen/size_textFont_XL"
         tools:ignore="MissingConstraints" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/textview_myContacts_revokePermission"
-        style="@style/basicText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/revoke_permits"
-        android:textAlignment="center"
-        android:textSize="@dimen/size_textFont_XXXS"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/button_myContacts_declineAccess"
-        app:layout_constraintEnd_toStartOf="@+id/button_myContacts_declineAccess"
-        app:layout_constraintTop_toTopOf="@+id/button_myContacts_declineAccess"
-        tools:visibility="visible" />
-
     <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/button_myContacts_declineAccess"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:background="@android:color/transparent"
-        android:src="@drawable/button_revoke_permissions"
-        android:visibility="invisible"
+        android:src="@drawable/icon_search"
+        android:visibility="visible"
         tools:ignore="MissingConstraints,SpeakableTextPresentCheck,TouchTargetSizeCheck"
-        tools:layout_editor_absoluteX="359dp"
-        tools:layout_editor_absoluteY="16dp"
-        tools:visibility="visible" />
+        />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/button_myContacts_addContact"
@@ -98,32 +82,32 @@
         app:layout_constraintTop_toBottomOf="@+id/flow_myContacts_titleAndButtons"
         tools:ignore="MissingConstraints" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/button_myContacts_addContactsFromPhonebook"
-        style="@style/basicText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/offset_M"
-        android:text="@string/contacts_change_to_phonebook"
-        android:textSize="@dimen/size_textFont_XS"
-        app:layout_constraintBottom_toTopOf="@+id/guideLine_myContactsFragment_bgCenterOfScreen"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/flow_myContacts_titleAndButtons"
-        tools:ignore="MissingConstraints,VisualLintOverlap" />
+<!--    <androidx.appcompat.widget.AppCompatTextView-->
+<!--        android:id="@+id/button_myContacts_addContactsFromPhonebook"-->
+<!--        style="@style/basicText"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginEnd="@dimen/offset_M"-->
+<!--        android:text="@string/contacts_change_to_phonebook"-->
+<!--        android:textSize="@dimen/size_textFont_XS"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/guideLine_myContactsFragment_bgCenterOfScreen"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/flow_myContacts_titleAndButtons"-->
+<!--        tools:ignore="MissingConstraints,VisualLintOverlap" />-->
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/button_myContacts_addContactsFromFaker"
-        style="@style/basicText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/offset_M"
-        android:text="@string/contacts_change_to_fake_data"
-        android:textSize="@dimen/size_textFont_XS"
-        android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/guideLine_myContactsFragment_bgCenterOfScreen"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/flow_myContacts_titleAndButtons"
-        tools:visibility="visible" />
+<!--    <androidx.appcompat.widget.AppCompatTextView-->
+<!--        android:id="@+id/button_myContacts_addContactsFromFaker"-->
+<!--        style="@style/basicText"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginEnd="@dimen/offset_M"-->
+<!--        android:text="@string/contacts_change_to_fake_data"-->
+<!--        android:textSize="@dimen/size_textFont_XS"-->
+<!--        android:visibility="gone"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/guideLine_myContactsFragment_bgCenterOfScreen"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/flow_myContacts_titleAndButtons"-->
+<!--        tools:visibility="visible" />-->
 
     <!-- Bottom half of screen. -->
     <View
@@ -164,5 +148,16 @@
         app:layout_constraintTop_toBottomOf="@id/recyclerView_myContacts_contactList"
         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck"
         tools:visibility="visible" />
+
+
+    <ProgressBar
+        android:id="@+id/progress_bar_contact_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/view_myContacts_bgBottomHalf"
+        app:layout_constraintEnd_toEndOf="@id/view_myContacts_bgBottomHalf"
+        app:layout_constraintStart_toStartOf="@id/view_myContacts_bgBottomHalf"
+        app:layout_constraintTop_toTopOf="@id/view_myContacts_bgBottomHalf"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

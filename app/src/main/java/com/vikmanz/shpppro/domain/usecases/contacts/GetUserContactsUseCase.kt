@@ -1,5 +1,6 @@
 package com.vikmanz.shpppro.domain.usecases.contacts
 
+import com.vikmanz.shpppro.data.model.ContactItem
 import com.vikmanz.shpppro.data.model.User
 import com.vikmanz.shpppro.domain.repository.ShPPContactsRepository
 import kotlinx.coroutines.flow.Flow
@@ -11,7 +12,7 @@ class GetUserContactsUseCase @Inject constructor(
         private val contactsRepository: ShPPContactsRepository,
 ) {
 
-    operator fun invoke(): Flow<ApiResult<List<User>>> = flow {
+    operator fun invoke(): Flow<ApiResult<List<ContactItem>>> = flow {
         emit(ApiResult.Loading)
         emit(contactsRepository.getUserContacts())
     }

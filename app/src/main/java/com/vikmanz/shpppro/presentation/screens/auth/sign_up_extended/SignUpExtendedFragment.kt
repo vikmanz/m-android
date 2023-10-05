@@ -1,10 +1,9 @@
 package com.vikmanz.shpppro.presentation.screens.auth.sign_up_extended
 
 import androidx.fragment.app.viewModels
-import com.vikmanz.shpppro.R
 import com.vikmanz.shpppro.databinding.FragmentSignUpExtendedBinding
 import com.vikmanz.shpppro.presentation.base.BaseFragment
-import com.vikmanz.shpppro.presentation.utils.extensions.hideKeyboard
+import com.vikmanz.shpppro.presentation.utils.extensions.setKeyboardVisibility
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -34,7 +33,7 @@ class SignUpExtendedFragment :
         root.setOnClickListener {
             textInputSignUpExtUserNameField.clearFocus()
             textInputSignUpExtUserPhoneField.clearFocus()
-            hideKeyboard(it)
+            setKeyboardVisibility(false)
         }
     }
 

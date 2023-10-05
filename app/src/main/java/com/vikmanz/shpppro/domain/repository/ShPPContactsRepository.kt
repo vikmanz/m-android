@@ -6,14 +6,10 @@ import kotlinx.coroutines.flow.StateFlow
 import ua.digitalminds.fortrainerapp.data.result.ApiResult
 
 interface ShPPContactsRepository {
-
-    val contactList: StateFlow<List<ContactItem>>
-
     suspend fun getAllUsers(): ApiResult<List<User>>
-    suspend fun addContact(contactId: Int): ApiResult<List<User>>
-    suspend fun deleteContact(contactId: Int): ApiResult<List<User>>
-    suspend fun getUserContacts(): ApiResult<List<User>>
+    suspend fun addContact(contactId: Int): ApiResult<List<ContactItem>>
+    suspend fun deleteContact(contactId: Int): ApiResult<List<ContactItem>>
+    suspend fun getUserContacts(): ApiResult<List<ContactItem>>
     suspend fun getContact(userId: Int): ApiResult<User>
-    fun findContact(contactId: Int): ContactItem?
 
 }

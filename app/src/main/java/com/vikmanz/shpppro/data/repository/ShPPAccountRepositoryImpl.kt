@@ -1,6 +1,5 @@
 package com.vikmanz.shpppro.data.repository
 
-import android.accounts.Account
 import com.vikmanz.shpppro.data.model.User
 import com.vikmanz.shpppro.data.api.ShPPApi
 import com.vikmanz.shpppro.data.dto.UserAuthorizeRequest
@@ -8,7 +7,7 @@ import com.vikmanz.shpppro.data.dto.UserEditRequest
 import com.vikmanz.shpppro.data.dto.UserRegisterRequest
 import com.vikmanz.shpppro.data.dto.toUser
 import com.vikmanz.shpppro.data.result.ApiSafeCaller
-import com.vikmanz.shpppro.data.user_token.UserTokenHandler
+import com.vikmanz.shpppro.data.holders.user_token.UserTokenHolder
 import com.vikmanz.shpppro.domain.repository.ShPPAccountRepository
 import ua.digitalminds.fortrainerapp.data.result.ApiResult
 import javax.inject.Inject
@@ -21,7 +20,7 @@ import javax.inject.Inject
 class ShPPAccountRepositoryImpl @Inject constructor(
     private val api: ShPPApi,
     private val apiSafeCaller: ApiSafeCaller,
-    private val userTokenHandler: UserTokenHandler
+    private val userTokenHandler: UserTokenHolder
 ) : ShPPAccountRepository {
 
     override suspend fun registerUser(

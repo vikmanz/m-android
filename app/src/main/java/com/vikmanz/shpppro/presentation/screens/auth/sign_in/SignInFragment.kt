@@ -8,7 +8,7 @@ import com.vikmanz.shpppro.data.utils.PasswordErrorsChecker.checkPasswordErrors
 import com.vikmanz.shpppro.databinding.FragmentSignInBinding
 import com.vikmanz.shpppro.presentation.base.BaseFragment
 import com.vikmanz.shpppro.presentation.utils.extensions.clearError
-import com.vikmanz.shpppro.presentation.utils.extensions.hideKeyboard
+import com.vikmanz.shpppro.presentation.utils.extensions.setKeyboardVisibility
 import com.vikmanz.shpppro.presentation.utils.extensions.setMultipleGone
 import com.vikmanz.shpppro.presentation.utils.extensions.setMultipleVisible
 import com.vikmanz.shpppro.presentation.utils.extensions.startChangeLanguageActivity
@@ -227,7 +227,7 @@ class SignInFragment :
         root.setOnClickListener {
             textInputLoginEmailField.clearFocus()
             textInputLoginPasswordField.clearFocus()
-            hideKeyboard(it)
+            setKeyboardVisibility(false)
         }
     }
 

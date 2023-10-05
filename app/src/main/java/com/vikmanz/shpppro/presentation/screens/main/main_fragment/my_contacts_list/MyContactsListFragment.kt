@@ -1,9 +1,7 @@
 package com.vikmanz.shpppro.presentation.screens.main.main_fragment.my_contacts_list
 
-import android.Manifest.permission.READ_CONTACTS
 import android.os.Bundle
 import android.view.View
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -15,19 +13,14 @@ import com.google.android.material.snackbar.Snackbar
 import com.vikmanz.shpppro.R
 import com.vikmanz.shpppro.common.Constants.MARGINS_OF_ELEMENTS
 import com.vikmanz.shpppro.common.Constants.SNACK_BAR_VIEW_TIME
-import com.vikmanz.shpppro.common.extensions.isFalse
 import com.vikmanz.shpppro.databinding.FragmentMyContactsListBinding
 import com.vikmanz.shpppro.presentation.base.BaseFragment
 import com.vikmanz.shpppro.presentation.screens.main.main_fragment.MainViewPagerFragment
 import com.vikmanz.shpppro.presentation.screens.main.main_fragment.my_contacts_list.adapter.ContactsAdapter
 import com.vikmanz.shpppro.presentation.screens.main.main_fragment.my_contacts_list.adapter.decorator.MarginItemDecoration
 import com.vikmanz.shpppro.presentation.screens.main.main_fragment.my_contacts_list.adapter.decorator.SwipeToDeleteCallback
-import com.vikmanz.shpppro.presentation.screens.main.add_contact.AddContactFragment
-import com.vikmanz.shpppro.presentation.screens.main.main_fragment.my_contacts_list.decline_permision.OnDeclinePermissionDialogFragment
 import com.vikmanz.shpppro.presentation.utils.extensions.setGone
-import com.vikmanz.shpppro.presentation.utils.extensions.setMultipleInvisible
-import com.vikmanz.shpppro.presentation.utils.extensions.setMultipleVisible
-import com.vikmanz.shpppro.presentation.utils.extensions.setVisible
+import com.vikmanz.shpppro.presentation.utils.extensions.setVisibleOrGone
 import com.vikmanz.shpppro.presentation.utils.extensions.startDeclineAccessActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -53,16 +46,6 @@ class MyContactsListFragment :
     private val adapterForRecycler = ContactsAdapter()
 
     /**
-     * Register activity for request permission for read contacts from phonebook.
-     */
-    private val requestPermissionLauncher =                         // req permissions
-        registerForActivityResult(ActivityResultContracts.RequestPermission()) {
-            if (it) changeContactsList()                          // if yes set phone contacts
-            else OnDeclinePermissionDialogFragment()                // if no show warning
-                .show(parentFragmentManager, ADD_CONTACT_DIALOG_TAG)
-        }
-
-    /**
      * Set listeners for buttons.
      */
     override fun setListeners() {
@@ -70,8 +53,8 @@ class MyContactsListFragment :
             buttonMyContactsBackButton.setOnClickListener { onButtonBackPressed() }
             buttonMyContactsDeclineAccess.setOnClickListener { startDeclineAccessActivity() }
             buttonMyContactsAddContact.setOnClickListener { viewModel.startAddContact() }
-            buttonMyContactsAddContactsFromPhonebook.setOnClickListener { requestReadContactsPermission() }
-            buttonMyContactsAddContactsFromFaker.setOnClickListener { changeContactsList() }
+           // buttonMyContactsAddContactsFromPhonebook.setOnClickListener { requestReadContactsPermission() }
+           // buttonMyContactsAddContactsFromFaker.setOnClickListener { changeContactsList() }
             buttonMyContactsDeleteMultipleContacts.setOnClickListener { deleteMultipleContacts() }
         }
     }
@@ -99,37 +82,24 @@ class MyContactsListFragment :
     }
 
     private fun observeUI() {
-        viewModel.fakeListActivated.observe(viewLifecycleOwner) {
-            with(binding) {
-                if (it) {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.uiState.collect { state ->
+                    with(binding) {
 
-                    setMultipleInvisible(
-                        buttonMyContactsDeclineAccess,
-                        textviewMyContactsRevokePermission
-                    )
-                    buttonMyContactsAddContactsFromFaker.setGone()
-                    buttonMyContactsAddContactsFromPhonebook.setVisible()
+                        // observe loading data
+                        recyclerViewMyContactsContactList.setVisibleOrGone(!state.isLoadingData)
+                        progressBarContactList.setVisibleOrGone(state.isLoadingData)
 
-                } else {
-                    setMultipleVisible(
-                        buttonMyContactsAddContactsFromFaker,
-                        buttonMyContactsDeclineAccess,
-                        textviewMyContactsRevokePermission
-                    )
-                    buttonMyContactsAddContactsFromPhonebook.setGone()
+                        // observe multiselect mode
+                        adapterForRecycler.isMultiselect = state.isMultiselectMode
+                        binding.buttonMyContactsDeleteMultipleContacts.setVisibleOrGone(state.isMultiselectMode)
+
+                        // observe Undo
+                        if (state.isShowSnackBar) showUndo()
+                    }
                 }
             }
-        }
-
-        viewModel.isMultiselectMode.observe(viewLifecycleOwner) {
-            adapterForRecycler.isMultiselect = it
-            binding.buttonMyContactsDeleteMultipleContacts.apply {
-                if (it) setVisible() else setGone()
-            }
-        }
-
-        viewModel.isShowSnackBar.observe(viewLifecycleOwner) {
-            if (it) showUndo()
         }
     }
 
@@ -186,26 +156,11 @@ class MyContactsListFragment :
             }
 
             override fun isItemViewSwipeEnabled(): Boolean {
-                return viewModel.isMultiselectMode.isFalse()
+                return !viewModel.uiState.value.isMultiselectMode
             }
         }
         val itemTouchHelper = ItemTouchHelper(swipeHandler)
         itemTouchHelper.attachToRecyclerView(binding.recyclerViewMyContactsContactList)
-    }
-
-    /**
-     * Start activity with request permission for read contacts from phonebook.
-     */
-    private fun requestReadContactsPermission() {
-        requestPermissionLauncher.launch(READ_CONTACTS)
-    }
-
-    /**
-     * Set contacts to phonebook or back to fake list.
-     */
-    private fun changeContactsList() {
-        viewModel.changeContactList()
-        undo?.dismiss()
     }
 
     override fun onDestroyView() {

@@ -64,7 +64,7 @@ class ContactsAdapter(
      * Bind info to one element holder.
      */
     override fun onBindViewHolder(holder: ContactViewHolder, position: Int) {
-        holder.bind(currentList[position]) alsoLog "MS = $isMultiselect"
+        holder.bind(currentList[position])
     }
 
 }

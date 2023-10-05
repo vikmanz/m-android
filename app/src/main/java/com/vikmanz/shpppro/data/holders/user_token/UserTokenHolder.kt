@@ -1,9 +1,9 @@
-package com.vikmanz.shpppro.data.user_token
+package com.vikmanz.shpppro.data.holders.user_token
 
 import com.vikmanz.shpppro.data.model.User
 
 @Suppress("MemberVisibilityCanBePrivate")
-object UserTokenHandler {
+object UserTokenHolder {
 
     var user: User = User()
     var accessToken: String = ""
