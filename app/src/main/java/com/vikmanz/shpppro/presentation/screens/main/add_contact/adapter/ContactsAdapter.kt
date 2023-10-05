@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.vikmanz.shpppro.data.model.AddContactItem
+import com.vikmanz.shpppro.data.model.ContactItem
 import com.vikmanz.shpppro.data.utils.SearchFilter
 import com.vikmanz.shpppro.databinding.AddContactListItemBinding
 import com.vikmanz.shpppro.presentation.screens.main.add_contact.adapter.diffutil.DiffUtilAddContactListItemComparator
@@ -20,14 +21,26 @@ class ContactsAdapter(
     DiffUtilAddContactListItemComparator()
 ) {
 
-    fun filter(query: String, noFilteredList: MutableList<AddContactItem>) {
+
+
+    private var _preFilteredList: List<AddContactItem>? = mutableListOf()
+    private val preFilteredList: List<AddContactItem>
+        get() = _preFilteredList?.toList() ?: emptyList()
+
+
+    fun filter(query: String) {
         @Suppress("UNCHECKED_CAST")
         submitList(
             SearchFilter.filter(
-                list = noFilteredList,
+                list = preFilteredList,
                 query = query
             ) as List<AddContactItem>
         )
+    }
+
+    fun submitListFromViewModel(list: List<AddContactItem>?){
+        submitList(list)
+        _preFilteredList = list
     }
 
     /**

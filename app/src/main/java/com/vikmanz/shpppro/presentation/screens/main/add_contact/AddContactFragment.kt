@@ -49,12 +49,12 @@ class AddContactFragment :
         with(binding){
             searchBar.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(newText: String?): Boolean {
-                    adapterForRecycler.filter(newText ?: "", viewModel.contactList.value.toMutableList())
+                    adapterForRecycler.filter(newText ?: "")
                     return false
                 }
 
                 override fun onQueryTextChange(newText: String?): Boolean {
-                    adapterForRecycler.filter(newText ?: "", viewModel.contactList.value.toMutableList())
+                    adapterForRecycler.filter(newText ?: "")
                     return false
                 }
             })
@@ -65,8 +65,8 @@ class AddContactFragment :
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.contactList.collect { contactList ->
-                    adapterForRecycler.submitList(contactList)
-                    adapterForRecycler.filter(binding.searchBar.query.toString(), contactList.toMutableList())
+                    adapterForRecycler.submitListFromViewModel(contactList)
+                    adapterForRecycler.filter(binding.searchBar.query.toString())
                 }
             }
         }
@@ -78,8 +78,6 @@ class AddContactFragment :
             setKeyboardVisibility(isSearchMode, this)
             this.setQuery("", true)    // clear search
         }
-
-
     }
 
 

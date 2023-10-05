@@ -36,7 +36,9 @@
         app:constraint_referenced_ids="
         button_myContacts_backButton,
         textView_myContacts_title,
-        button_myContacts_declineAccess"
+        button_myContacts_contact_search,
+        search_bar,
+        button_my_contact_cancel_search"
         app:flow_horizontalStyle="spread_inside"
         app:layout_constraintEnd_toEndOf="@id/guideLine_myContacts_bgTopHalf"
         app:layout_constraintStart_toStartOf="@id/guideLine_myContacts_bgTopHalf"
@@ -46,9 +48,10 @@
         android:id="@+id/button_myContacts_backButton"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
+        android:paddingEnd="@dimen/offset_S"
         android:background="@android:color/transparent"
         android:src="@drawable/button_arrow_back"
-        tools:ignore="MissingConstraints,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+        tools:ignore="MissingConstraints,RtlSymmetry,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textView_myContacts_title"
@@ -57,17 +60,42 @@
         android:layout_height="wrap_content"
         android:text="@string/contacts_contacts_title"
         android:textSize="@dimen/size_textFont_XL"
-        tools:ignore="MissingConstraints" />
+        android:paddingEnd="@dimen/offset_S"
+        tools:visibility="gone"
+        tools:ignore="MissingConstraints,RtlSymmetry" />
 
     <androidx.appcompat.widget.AppCompatImageButton
-        android:id="@+id/button_myContacts_declineAccess"
+        android:id="@+id/button_myContacts_contact_search"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:background="@android:color/transparent"
         android:src="@drawable/icon_search"
         android:visibility="visible"
+        tools:visibility="gone"
         tools:ignore="MissingConstraints,SpeakableTextPresentCheck,TouchTargetSizeCheck"
         />
+
+    <SearchView
+        android:id="@+id/search_bar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints"
+        android:iconifiedByDefault="false"
+        android:background="@drawable/search_orange_outlined"
+        android:visibility="gone"
+        tools:visibility="visible"
+        />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/button_my_contact_cancel_search"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/button_revoke_permissions"
+        android:paddingStart="@dimen/offset_S"
+        android:visibility="visible"
+        tools:ignore="MissingConstraints,RtlSymmetry,SpeakableTextPresentCheck,TouchTargetSizeCheck"
+        tools:visibility="visible" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/button_myContacts_addContact"

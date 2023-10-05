@@ -3,7 +3,9 @@ package com.vikmanz.shpppro.presentation.screens.main.main_fragment.my_contacts_
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
+import com.vikmanz.shpppro.data.model.AddContactItem
 import com.vikmanz.shpppro.data.model.ContactItem
+import com.vikmanz.shpppro.data.utils.SearchFilter
 import com.vikmanz.shpppro.databinding.MyContactListItemBinding
 import com.vikmanz.shpppro.databinding.MyContactListMultiselectItemBinding
 import com.vikmanz.shpppro.presentation.screens.main.main_fragment.my_contacts_list.adapter.diffutil.DiffUtilContactListItemComparator
@@ -22,8 +24,27 @@ class ContactsAdapter(
 
     var isMultiselect: Boolean = false
 
+    private var _preFilteredList: List<ContactItem>? = mutableListOf()
+    private val preFilteredList: List<ContactItem>
+        get() = _preFilteredList?.toList() ?: emptyList()
+
     private enum class ViewType {
         NORMAL, MULTISELECT
+    }
+
+    fun filter(query: String) {
+        @Suppress("UNCHECKED_CAST")
+        submitList(
+            SearchFilter.filter(
+                list = preFilteredList,
+                query = query
+            ) as List<ContactItem>
+        )
+    }
+
+    fun submitListFromViewModel(list: List<ContactItem>?){
+        submitList(list)
+        _preFilteredList = list
     }
 
     override fun getItemViewType(position: Int): Int {

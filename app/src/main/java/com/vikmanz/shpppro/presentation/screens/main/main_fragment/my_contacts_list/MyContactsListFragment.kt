@@ -2,6 +2,7 @@ package com.vikmanz.shpppro.presentation.screens.main.main_fragment.my_contacts_
 
 import android.os.Bundle
 import android.view.View
+import android.widget.SearchView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -20,9 +21,11 @@ import com.vikmanz.shpppro.presentation.screens.main.main_fragment.my_contacts_l
 import com.vikmanz.shpppro.presentation.screens.main.main_fragment.my_contacts_list.adapter.decorator.MarginItemDecoration
 import com.vikmanz.shpppro.presentation.screens.main.main_fragment.my_contacts_list.adapter.decorator.SwipeToDeleteCallback
 import com.vikmanz.shpppro.presentation.utils.extensions.setGone
+import com.vikmanz.shpppro.presentation.utils.extensions.setKeyboardVisibility
 import com.vikmanz.shpppro.presentation.utils.extensions.setVisibleOrGone
 import com.vikmanz.shpppro.presentation.utils.extensions.startDeclineAccessActivity
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.launch
 
 private const val ADD_CONTACT_DIALOG_TAG = "ConfirmationDialogFragmentTag"
@@ -51,11 +54,13 @@ class MyContactsListFragment :
     override fun setListeners() {
         with(binding) {
             buttonMyContactsBackButton.setOnClickListener { onButtonBackPressed() }
-            buttonMyContactsDeclineAccess.setOnClickListener { startDeclineAccessActivity() }
             buttonMyContactsAddContact.setOnClickListener { viewModel.startAddContact() }
-           // buttonMyContactsAddContactsFromPhonebook.setOnClickListener { requestReadContactsPermission() }
-           // buttonMyContactsAddContactsFromFaker.setOnClickListener { changeContactsList() }
+            // buttonMyContactsAddContactsFromPhonebook.setOnClickListener { requestReadContactsPermission() }
+            // buttonMyContactsAddContactsFromFaker.setOnClickListener { changeContactsList() }
             buttonMyContactsDeleteMultipleContacts.setOnClickListener { deleteMultipleContacts() }
+            buttonMyContactsContactSearch.setOnClickListener { setSearchMode(true) }
+            buttonMyContactCancelSearch.setOnClickListener { setSearchMode(false) }
+            setSearchBarListeners()
         }
     }
 
@@ -97,9 +102,33 @@ class MyContactsListFragment :
 
                         // observe Undo
                         if (state.isShowSnackBar) showUndo()
+
+                        // observe search bar
+                        val isSearchMode = state.isSearchMode
+                        textViewMyContactsTitle.setVisibleOrGone(!isSearchMode)
+                        buttonMyContactsContactSearch.setVisibleOrGone(!isSearchMode)
+                        searchBar.setVisibleOrGone(isSearchMode)
+                        buttonMyContactCancelSearch.setVisibleOrGone(isSearchMode)
                     }
                 }
             }
+        }
+    }
+
+
+    private fun setSearchBarListeners() {
+        with(binding) {
+            searchBar.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(newText: String?): Boolean {
+                    adapterForRecycler.filter(newText ?: "")
+                    return false
+                }
+
+                override fun onQueryTextChange(newText: String?): Boolean {
+                    adapterForRecycler.filter(newText ?: "")
+                    return false
+                }
+            })
         }
     }
 
@@ -107,12 +136,20 @@ class MyContactsListFragment :
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.contactList.collect { contactList ->
-                    adapterForRecycler.submitList(contactList)
+                    adapterForRecycler.submitListFromViewModel(contactList)
+                    adapterForRecycler.filter(binding.searchBar.query.toString())
                 }
             }
         }
     }
 
+    private fun setSearchMode(isSearchMode: Boolean) {
+        viewModel.setSearchMode(isSearchMode)
+        with(binding.searchBar) {
+            setKeyboardVisibility(isSearchMode, this)
+            this.setQuery("", true)    // clear search
+        }
+    }
 
     /**
      * Init recycler view and swipe to delete.
@@ -135,7 +172,11 @@ class MyContactsListFragment :
      */
     private fun showUndo() {
         undo = Snackbar
-            .make(binding.root, getString(R.string.my_contacts_remove_contact), SNACK_BAR_VIEW_TIME.toInt())
+            .make(
+                binding.root,
+                getString(R.string.my_contacts_remove_contact),
+                SNACK_BAR_VIEW_TIME.toInt()
+            )
             .setAction(getString(R.string.my_contacts_remove_contact_undo)) {
                 viewModel.restoreDeletedContact()
                 undo?.dismiss()
