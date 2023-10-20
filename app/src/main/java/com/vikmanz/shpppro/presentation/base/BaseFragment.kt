@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
-import com.vikmanz.shpppro.common.extensions.observeNonNull
+import com.vikmanz.shpppro.utils.extensions.observeNonNull
 import com.vikmanz.shpppro.presentation.navigator.NavigationCommand
 
 abstract class BaseFragment<VBinding : ViewBinding, VM : BaseViewModel>(
@@ -50,12 +50,16 @@ abstract class BaseFragment<VBinding : ViewBinding, VM : BaseViewModel>(
 
     private fun handleNavigation(navCommand: NavigationCommand) {
         when (navCommand) {
-            is NavigationCommand.ToDirection -> findNavController().navigate(navCommand.directions)
-            is NavigationCommand.ToActivity -> {
+            is NavigationCommand.ToDirection -> {   // nav to other screen (fragment)
+                findNavController().navigate(navCommand.directions)
+            }
+            is NavigationCommand.ToActivity -> {    // nav to other activity
                 findNavController().navigate(navCommand.directions)
                 requireActivity().finish()
             }
-            is NavigationCommand.Back -> findNavController().navigateUp()
+            is NavigationCommand.Back -> {          // navigate up
+                findNavController().navigateUp()
+            }
         }
     }
 

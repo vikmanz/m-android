@@ -2,7 +2,7 @@ package com.vikmanz.shpppro.presentation.screens.main.main_fragment.my_contacts_
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import com.vikmanz.shpppro.data.model.ContactItem
+import com.vikmanz.shpppro.data.model.contact_item.ContactItem
 
 abstract class ContactViewHolder (
     val view: View

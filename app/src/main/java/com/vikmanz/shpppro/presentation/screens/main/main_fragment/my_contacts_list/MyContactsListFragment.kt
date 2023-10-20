@@ -12,8 +12,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.vikmanz.shpppro.R
-import com.vikmanz.shpppro.common.Constants.MARGINS_OF_ELEMENTS
-import com.vikmanz.shpppro.common.Constants.SNACK_BAR_VIEW_TIME
+import com.vikmanz.shpppro.constants.Constants.MARGINS_OF_ELEMENTS
+import com.vikmanz.shpppro.constants.Constants.SNACK_BAR_VIEW_TIME
 import com.vikmanz.shpppro.databinding.FragmentMyContactsListBinding
 import com.vikmanz.shpppro.presentation.base.BaseFragment
 import com.vikmanz.shpppro.presentation.screens.main.main_fragment.MainViewPagerFragment

@@ -1,6 +1,6 @@
 package com.vikmanz.shpppro.presentation.utils.extensions
 
-import com.vikmanz.shpppro.data.model.ContactItem
+import com.vikmanz.shpppro.data.model.contact_item.ContactItem
 
 fun MutableList<ContactItem>.findInList(
     contactItem: ContactItem

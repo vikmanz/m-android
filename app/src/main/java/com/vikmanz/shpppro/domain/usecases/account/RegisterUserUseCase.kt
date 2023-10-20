@@ -1,6 +1,6 @@
 package com.vikmanz.shpppro.domain.usecases.account
 
-import com.vikmanz.shpppro.domain.repository.ShPPAccountRepository
+import com.vikmanz.shpppro.data.repository.account.ShPPAccountRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import ua.digitalminds.fortrainerapp.data.result.ApiResult

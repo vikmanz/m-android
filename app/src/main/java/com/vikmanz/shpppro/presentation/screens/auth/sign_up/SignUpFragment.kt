@@ -4,7 +4,7 @@ import android.app.AlertDialog
 import android.util.Patterns
 import androidx.fragment.app.viewModels
 import com.vikmanz.shpppro.R
-import com.vikmanz.shpppro.data.utils.PasswordErrorsChecker.checkPasswordErrors
+import com.vikmanz.shpppro.data.utils.auth.PasswordErrorsChecker.checkPasswordErrors
 import com.vikmanz.shpppro.databinding.FragmentSignUpBinding
 import com.vikmanz.shpppro.presentation.base.BaseFragment
 import com.vikmanz.shpppro.presentation.screens.auth.sign_in.SignInFragment

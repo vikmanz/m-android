@@ -1,6 +1,6 @@
 package com.vikmanz.shpppro.di
 
-import com.vikmanz.shpppro.data.holders.user_contact_list.ContactsListHolder
+import com.vikmanz.shpppro.data.holders.user_contact_list.ContactsListHolderHolder
 import com.vikmanz.shpppro.data.holders.user_token.UserTokenHolder
 import dagger.Module
 import dagger.Provides
@@ -19,7 +19,7 @@ object HandlersModule {
 
     @Singleton
     @Provides
-    fun providesContactsListHolder(): ContactsListHolder = ContactsListHolder
+    fun providesContactsListHolder(): ContactsListHolderHolder = ContactsListHolderHolder
 
 
 }

@@ -6,6 +6,7 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
+import com.vikmanz.shpppro.data.model.Credentials
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -24,7 +25,7 @@ class DatastoreImpl @Inject constructor(
     /**
      * Get name, password and autologin, and save all these in memory.
      */
-    override suspend fun saveUserSata(
+    override suspend fun saveUserData(
         name: String,
         password: String
     ) {
@@ -37,11 +38,11 @@ class DatastoreImpl @Inject constructor(
     /**
      * Clear user data in memory.
      */
-    override suspend fun clearUser() {
-        //todo
+    override suspend fun clearUserData() {
         withContext(Dispatchers.IO) {
             context.dataStore.edit {
                 it[EMAIL_INDEX] = ""
+                it[PASSWORD_INDEX] = ""
             }
         }
     }

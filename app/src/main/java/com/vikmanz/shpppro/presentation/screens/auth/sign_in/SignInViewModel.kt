@@ -2,8 +2,8 @@ package com.vikmanz.shpppro.presentation.screens.auth.sign_in
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.vikmanz.shpppro.common.extensions.log
-import com.vikmanz.shpppro.common.extensions.swapBoolean
+import com.vikmanz.shpppro.utils.extensions.log
+import com.vikmanz.shpppro.utils.extensions.swapBoolean
 import com.vikmanz.shpppro.data.datastore.Datastore
 import com.vikmanz.shpppro.domain.usecases.account.AuthorizeUserUseCase
 import com.vikmanz.shpppro.presentation.base.BaseViewModel
@@ -41,7 +41,7 @@ class SignInViewModel @Inject constructor(
      */
     fun saveUserEmailToDatastore(email: String, password: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            _dataStore.saveUserSata(email, password)
+            _dataStore.saveUserData(email, password)
         }
     }
     fun onSignUpClick() {

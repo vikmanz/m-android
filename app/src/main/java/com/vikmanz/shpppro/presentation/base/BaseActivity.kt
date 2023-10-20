@@ -16,12 +16,9 @@ abstract class BaseActivity<VBinding : ViewBinding>(
     private var _binding: VBinding? = null
     protected val binding get() = requireNotNull(_binding)
 
-    protected open fun setIncomingArguments(savedInstanceState: Bundle?) {}
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        _binding = inflaterMethod.invoke(layoutInflater).also{setContentView(it.root)}
-        setIncomingArguments(savedInstanceState)
+        _binding = inflaterMethod.invoke(layoutInflater).also { setContentView(it.root) }
     }
 
     override fun onDestroy() {

@@ -1,10 +1,10 @@
 package com.vikmanz.shpppro.presentation.screens.main.add_contact
 
 import androidx.lifecycle.viewModelScope
-import com.vikmanz.shpppro.common.extensions.log
-import com.vikmanz.shpppro.data.holders.user_contact_list.ContactsListHolder
-import com.vikmanz.shpppro.data.model.AddContactItem
-import com.vikmanz.shpppro.data.model.ContactItem
+import com.vikmanz.shpppro.utils.extensions.log
+import com.vikmanz.shpppro.data.holders.user_contact_list.ContactsListHolderHolder
+import com.vikmanz.shpppro.data.model.contact_item.AddContactItem
+import com.vikmanz.shpppro.data.model.contact_item.ContactItem
 import com.vikmanz.shpppro.data.model.User
 import com.vikmanz.shpppro.domain.usecases.contacts.AddContactUseCase
 import com.vikmanz.shpppro.domain.usecases.contacts.GetAllUsersUseCase
@@ -27,7 +27,7 @@ import javax.inject.Inject
 class AddContactViewModel @Inject constructor(
     private val getAllUsersUseCase: GetAllUsersUseCase,
     private val addContactUseCase: AddContactUseCase,
-    private val contactListHolder: ContactsListHolder,
+    private val contactListHolder: ContactsListHolderHolder,
 ) : BaseViewModel() {
 
     private val _uiState = MutableStateFlow(AddContactState())

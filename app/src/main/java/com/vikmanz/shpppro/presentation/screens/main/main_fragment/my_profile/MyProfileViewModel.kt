@@ -2,7 +2,7 @@ package com.vikmanz.shpppro.presentation.screens.main.main_fragment.my_profile
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
-import com.vikmanz.shpppro.common.extensions.log
+import com.vikmanz.shpppro.utils.extensions.log
 import com.vikmanz.shpppro.data.datastore.Datastore
 import com.vikmanz.shpppro.data.model.User
 import com.vikmanz.shpppro.domain.usecases.account.GetUserUseCase
@@ -41,7 +41,7 @@ class MyProfileViewModel @Inject constructor(
 
     private fun clearSavedUserData() {
         viewModelScope.launch {
-            _dataStore.clearUser()
+            _dataStore.clearUserData()
         }
     }
 

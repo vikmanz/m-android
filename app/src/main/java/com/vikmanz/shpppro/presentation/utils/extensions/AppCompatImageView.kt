@@ -7,7 +7,7 @@ import com.bumptech.glide.Priority
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.vikmanz.shpppro.R
-import com.vikmanz.shpppro.data.utils.RandomPhotoTaker
+import com.vikmanz.shpppro.data.utils.contacts.RandomPhotoTaker
 import java.net.URL
 import java.security.InvalidParameterException
 

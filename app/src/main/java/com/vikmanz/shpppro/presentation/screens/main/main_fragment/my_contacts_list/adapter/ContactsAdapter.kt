@@ -3,16 +3,14 @@ package com.vikmanz.shpppro.presentation.screens.main.main_fragment.my_contacts_
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
-import com.vikmanz.shpppro.data.model.AddContactItem
-import com.vikmanz.shpppro.data.model.ContactItem
-import com.vikmanz.shpppro.data.utils.SearchFilter
+import com.vikmanz.shpppro.data.model.contact_item.ContactItem
+import com.vikmanz.shpppro.data.utils.contacts.SearchFilter
 import com.vikmanz.shpppro.databinding.MyContactListItemBinding
 import com.vikmanz.shpppro.databinding.MyContactListMultiselectItemBinding
 import com.vikmanz.shpppro.presentation.screens.main.main_fragment.my_contacts_list.adapter.diffutil.DiffUtilContactListItemComparator
 import com.vikmanz.shpppro.presentation.screens.main.main_fragment.my_contacts_list.adapter.view_holders.MultiselectContactViewHolder
 import com.vikmanz.shpppro.presentation.screens.main.main_fragment.my_contacts_list.adapter.view_holders.SimpleContactViewHolder
 import com.vikmanz.shpppro.presentation.screens.main.main_fragment.my_contacts_list.adapter.view_holders.interfaces.ContactViewHolder
-import com.vikmanz.shpppro.presentation.utils.extensions.alsoLog
 
 /**
  * Adapter for Recycler view.

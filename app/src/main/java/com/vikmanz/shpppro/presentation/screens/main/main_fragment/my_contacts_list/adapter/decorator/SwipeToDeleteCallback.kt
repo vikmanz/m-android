@@ -11,7 +11,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.vikmanz.shpppro.R
-import com.vikmanz.shpppro.common.Constants.MARGINS_OF_ELEMENTS
+import com.vikmanz.shpppro.constants.Constants.MARGINS_OF_ELEMENTS
 
 /**
  * Swipe to delete in recycler view.

@@ -4,9 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.vikmanz.shpppro.data.model.AddContactItem
-import com.vikmanz.shpppro.data.model.ContactItem
-import com.vikmanz.shpppro.data.utils.SearchFilter
+import com.vikmanz.shpppro.data.model.contact_item.AddContactItem
+import com.vikmanz.shpppro.data.utils.contacts.SearchFilter
 import com.vikmanz.shpppro.databinding.AddContactListItemBinding
 import com.vikmanz.shpppro.presentation.screens.main.add_contact.adapter.diffutil.DiffUtilAddContactListItemComparator
 import com.vikmanz.shpppro.presentation.utils.extensions.alsoLog

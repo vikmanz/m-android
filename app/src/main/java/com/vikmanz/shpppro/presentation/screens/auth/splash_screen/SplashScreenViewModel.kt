@@ -2,12 +2,11 @@ package com.vikmanz.shpppro.presentation.screens.auth.splash_screen
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.vikmanz.shpppro.common.Constants
-import com.vikmanz.shpppro.common.extensions.log
+import com.vikmanz.shpppro.constants.Constants
+import com.vikmanz.shpppro.utils.extensions.log
 import com.vikmanz.shpppro.data.datastore.Datastore
 import com.vikmanz.shpppro.domain.usecases.account.AuthorizeUserUseCase
 import com.vikmanz.shpppro.presentation.base.BaseViewModel
-import com.vikmanz.shpppro.presentation.screens.auth.sign_in.SignInFragmentDirections
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay

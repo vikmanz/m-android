@@ -5,20 +5,7 @@ import android.content.ContentResolver
 import dagger.hilt.android.HiltAndroidApp
 
 /**
- * Singleton for send ContentResolver to ContactsPhoneInfoTaker()
+ * Needs for Hilt
  */
 @HiltAndroidApp
-class App : Application() {
-
-    override fun onCreate() {
-        app = this
-        super.onCreate()
-    }
-
-    //todo
-
-    companion object {
-        private lateinit var app: App
-        val contentResolver: ContentResolver get() = app.contentResolver
-    }
-}
+class App : Application()

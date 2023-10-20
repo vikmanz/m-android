@@ -1,7 +1,7 @@
 package com.vikmanz.shpppro.presentation.screens.main.main_fragment.my_contacts_list.adapter.diffutil
 
 import androidx.recyclerview.widget.DiffUtil
-import com.vikmanz.shpppro.data.model.ContactItem
+import com.vikmanz.shpppro.data.model.contact_item.ContactItem
 
 /**
  * Compare elements in recycler view. Need for ListAdapter type of Recycler view.

@@ -1,6 +1,6 @@
 package com.vikmanz.shpppro.data.dto
 
-import com.vikmanz.shpppro.common.extensions.log
+import com.vikmanz.shpppro.utils.extensions.log
 import com.vikmanz.shpppro.data.model.User
 
 data class UserGetAllResponse(

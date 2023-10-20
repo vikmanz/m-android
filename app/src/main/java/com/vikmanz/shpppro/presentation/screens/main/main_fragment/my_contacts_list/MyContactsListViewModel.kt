@@ -1,16 +1,14 @@
 package com.vikmanz.shpppro.presentation.screens.main.main_fragment.my_contacts_list
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.vikmanz.shpppro.common.Constants
-import com.vikmanz.shpppro.common.extensions.log
-import com.vikmanz.shpppro.data.holders.user_contact_list.ContactsListHolder
-import com.vikmanz.shpppro.data.model.ContactItem
+import com.vikmanz.shpppro.constants.Constants
+import com.vikmanz.shpppro.utils.extensions.log
+import com.vikmanz.shpppro.data.holders.user_contact_list.ContactsListHolderHolder
+import com.vikmanz.shpppro.data.model.contact_item.ContactItem
 import com.vikmanz.shpppro.domain.usecases.contacts.AddContactUseCase
 import com.vikmanz.shpppro.domain.usecases.contacts.DeleteContactUseCase
 import com.vikmanz.shpppro.domain.usecases.contacts.GetUserContactsUseCase
 import com.vikmanz.shpppro.presentation.base.BaseViewModel
-import com.vikmanz.shpppro.presentation.screens.main.add_contact.AddContactState
 import com.vikmanz.shpppro.presentation.screens.main.main_fragment.MainViewPagerFragmentDirections
 import com.vikmanz.shpppro.presentation.utils.extensions.alsoLog
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -34,7 +32,7 @@ class MyContactsListViewModel @Inject constructor(
     private val getUserContactsUseCase: GetUserContactsUseCase,
     private val deleteContactUseCase: DeleteContactUseCase,
     private val addContactUseCase: AddContactUseCase,
-    private val contactListHolder: ContactsListHolder,
+    private val contactListHolder: ContactsListHolderHolder,
 ) : BaseViewModel() {
 
     private val _uiState = MutableStateFlow(MyContactsListState())

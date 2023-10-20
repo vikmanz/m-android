@@ -4,7 +4,7 @@ import android.app.AlertDialog
 import android.util.Patterns
 import androidx.fragment.app.viewModels
 import com.vikmanz.shpppro.R
-import com.vikmanz.shpppro.data.utils.PasswordErrorsChecker.checkPasswordErrors
+import com.vikmanz.shpppro.data.utils.auth.PasswordErrorsChecker.checkPasswordErrors
 import com.vikmanz.shpppro.databinding.FragmentSignInBinding
 import com.vikmanz.shpppro.presentation.base.BaseFragment
 import com.vikmanz.shpppro.presentation.utils.extensions.clearError
@@ -31,38 +31,31 @@ class SignInFragment :
         backgroundFocusHandler()                // de-focus fields when click on bg
     }
 
-    private fun autostart() {
-        binding.textInputLoginEmailField.setText(TEST_LOGIN)
-        binding.textInputLoginPasswordField.setText(TEST_PASSWORD)
-        checkForm()
-    }
-
     override fun setObservers() {
-        observeHelpers()
+        viewModel.helperButtonsVisible.observe(viewLifecycleOwner) { showHelpers(it) }
     }
 
     /**
      * Observe and show/Hide help buttons.
      */
-    private fun observeHelpers() {
-        viewModel.helperButtonsVisible.observe(viewLifecycleOwner) {
-            with(binding) {
-                if (it) {
-                    setMultipleVisible(
-                        buttonLoginFillLoginAndPass,
-                        buttonLoginClearLoginPassFields,
-                        buttonLoginChangeLanguage
-                    )
-                } else {
-                    setMultipleGone(
-                        buttonLoginFillLoginAndPass,
-                        buttonLoginClearLoginPassFields,
-                        buttonLoginChangeLanguage
-                    )
-                }
+    private fun showHelpers(isVisible: Boolean) {
+        with(binding) {
+            if (isVisible) {
+                setMultipleVisible(
+                    buttonLoginFillLoginAndPass,
+                    buttonLoginClearLoginPassFields,
+                    buttonLoginChangeLanguage
+                )
+            } else {
+                setMultipleGone(
+                    buttonLoginFillLoginAndPass,
+                    buttonLoginClearLoginPassFields,
+                    buttonLoginChangeLanguage
+                )
             }
         }
     }
+
 
     /**
      * Set onClickListeners for email and password text input fields.

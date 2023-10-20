@@ -1,6 +1,6 @@
 package com.vikmanz.shpppro.presentation.screens.main.main_fragment.my_contacts_list.adapter.view_holders
 
-import com.vikmanz.shpppro.data.model.ContactItem
+import com.vikmanz.shpppro.data.model.contact_item.ContactItem
 import com.vikmanz.shpppro.databinding.MyContactListItemBinding
 import com.vikmanz.shpppro.presentation.screens.main.main_fragment.my_contacts_list.adapter.view_holders.interfaces.ContactViewHolder
 import com.vikmanz.shpppro.presentation.utils.extensions.alsoLog

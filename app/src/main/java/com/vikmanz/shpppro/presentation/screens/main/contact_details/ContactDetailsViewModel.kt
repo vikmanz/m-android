@@ -1,22 +1,11 @@
 package com.vikmanz.shpppro.presentation.screens.main.contact_details
 
 import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.viewModelScope
-import com.vikmanz.shpppro.common.extensions.log
-import com.vikmanz.shpppro.data.model.ContactItem
-import com.vikmanz.shpppro.data.model.User
-import com.vikmanz.shpppro.domain.repository.ShPPContactsRepository
-import com.vikmanz.shpppro.domain.usecases.contacts.GetContactUseCase
+import com.vikmanz.shpppro.utils.extensions.log
 import com.vikmanz.shpppro.presentation.base.BaseViewModel
-import com.vikmanz.shpppro.presentation.utils.extensions.alsoLog
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.launch
-import ua.digitalminds.fortrainerapp.data.result.ApiResult
 import javax.inject.Inject
 
 @HiltViewModel
