@@ -15,8 +15,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/defaultTheme"
-        android:usesCleartextTraffic="true"
-        tools:targetApi="33">
+        android:usesCleartextTraffic="true">
 
         <activity
             android:name=".presentation.screens.auth.AuthActivity"

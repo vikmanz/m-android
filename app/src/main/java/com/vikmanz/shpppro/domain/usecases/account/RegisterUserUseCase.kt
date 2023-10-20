@@ -7,14 +7,16 @@ import ua.digitalminds.fortrainerapp.data.result.ApiResult
 import javax.inject.Inject
 
 class RegisterUserUseCase @Inject constructor(
-        private val accountRepository: ShPPAccountRepository
+    private val accountRepository: ShPPAccountRepository
 ) {
 
     operator fun invoke(email: String, password: String): Flow<ApiResult<Boolean>> = flow {
         emit(ApiResult.Loading)
-        emit(accountRepository.registerUser(
+        emit(
+            accountRepository.registerUser(
                 email = email,
                 password = password
-        ))
+            )
+        )
     }
 }

@@ -11,14 +11,13 @@ import kotlinx.coroutines.launch
 import ua.digitalminds.fortrainerapp.data.result.ApiResult
 import javax.inject.Inject
 
-private const val DEFAULT_SHOW_HELPERS = false
 @HiltViewModel
 class SignUpViewModel @Inject constructor(
-    dataStore: Datastore,
+    //TODO create use case for save user data to Data Store
+    private val _dataStore: Datastore,
     private val registerUserUseCase: RegisterUserUseCase
 ) : BaseViewModel() {
 
-    private val _dataStore = dataStore
 
     // For show errors only for one field and not for all if it didn't been activated.
     var emailAlreadyFocused = false
@@ -28,6 +27,7 @@ class SignUpViewModel @Inject constructor(
      *  Save user data from text input fields and language key from class variable to Data Store.
      */
     fun saveUserEmailToDatastore(email: String, password: String) {
+        //TODO extract background coroutine scopes to use case or repository
         viewModelScope.launch(Dispatchers.IO) {
             _dataStore.saveUserData(email, password)
         }
@@ -45,6 +45,7 @@ class SignUpViewModel @Inject constructor(
 
                 when (it) {
 
+                    // TODO implement logic for different states except success, logs are perfect, but we need to show some UI
                     is ApiResult.Loading -> {
                         log("loading")
                     }

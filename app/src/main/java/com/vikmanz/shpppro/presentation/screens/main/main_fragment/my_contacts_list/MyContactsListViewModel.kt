@@ -1,5 +1,6 @@
 package com.vikmanz.shpppro.presentation.screens.main.main_fragment.my_contacts_list
 
+import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.vikmanz.shpppro.constants.Constants
 import com.vikmanz.shpppro.data.holders.user_contact_list.ContactsListHolderHolder
@@ -38,10 +39,11 @@ class MyContactsListViewModel @Inject constructor(
     private val _uiState = MutableStateFlow(MyContactsListState())
     val uiState: StateFlow<MyContactsListState> = _uiState.asStateFlow()
 
+
     private var lastDeletedContactItem: ContactItem? = null
 
     private val _contactList = MutableStateFlow(emptyList<ContactItem>())
-    val contactList: Flow<List<ContactItem>> = _contactList.asStateFlow()
+    val contactList = _contactList.asStateFlow()
 
 
     init {

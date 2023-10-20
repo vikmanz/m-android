@@ -8,6 +8,7 @@ import androidx.viewbinding.ViewBinding
 /**
  * Base activity with binding to extend it in activities.
  */
+//TODO delete this class
 abstract class BaseActivity<VBinding : ViewBinding>(
     private val inflaterMethod: (LayoutInflater) -> VBinding
 ) :

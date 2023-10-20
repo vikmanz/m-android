@@ -17,11 +17,12 @@ sealed class ApiResult<out T> {
 
     data object Loading : ApiResult<Nothing>()
 
+    //TODO think about why do you need this function
     fun convertToBoolean() =
         when (this) {
             is Success<*> -> Success(value = true)
             is Loading -> Loading
-            is NetworkError -> NetworkError
             is ServerError -> ServerError(error = this.error)
+            else -> throw Exception("ApiResult is not Success or ServerError")
         }
 }
