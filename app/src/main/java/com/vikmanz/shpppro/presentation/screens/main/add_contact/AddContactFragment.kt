@@ -9,10 +9,10 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.vikmanz.shpppro.constants.Constants.MARGINS_OF_ELEMENTS
 import com.vikmanz.shpppro.databinding.FragmentAddContactMyContactsBinding
 import com.vikmanz.shpppro.presentation.base.BaseFragment
 import com.vikmanz.shpppro.presentation.screens.main.add_contact.adapter.ContactsAdapter
-import com.vikmanz.shpppro.presentation.screens.main.main_fragment.my_contacts_list.adapter.decorator.MARGINS_OF_ELEMENTS
 import com.vikmanz.shpppro.presentation.screens.main.main_fragment.my_contacts_list.adapter.decorator.MarginItemDecoration
 import com.vikmanz.shpppro.presentation.utils.extensions.setKeyboardVisibility
 import com.vikmanz.shpppro.presentation.utils.extensions.setVisibleOrGone

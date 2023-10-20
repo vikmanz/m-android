@@ -11,6 +11,7 @@ import com.vikmanz.shpppro.presentation.screens.main.main_fragment.my_contacts_l
 import com.vikmanz.shpppro.presentation.screens.main.main_fragment.my_contacts_list.adapter.view_holders.MultiselectContactViewHolder
 import com.vikmanz.shpppro.presentation.screens.main.main_fragment.my_contacts_list.adapter.view_holders.SimpleContactViewHolder
 import com.vikmanz.shpppro.presentation.screens.main.main_fragment.my_contacts_list.adapter.view_holders.interfaces.ContactViewHolder
+import com.vikmanz.shpppro.utils.extensions.log
 
 /**
  * Adapter for Recycler view.
@@ -42,6 +43,7 @@ class ContactsAdapter(
 
     fun submitListFromViewModel(list: List<ContactItem>?){
         submitList(list)
+        log("contact list update in adapter")
         _preFilteredList = list
     }
 

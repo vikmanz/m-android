@@ -1,15 +1,11 @@
 package com.vikmanz.shpppro.presentation.utils.extensions
 
-import android.net.Uri
 import androidx.appcompat.widget.AppCompatImageView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.Priority
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.vikmanz.shpppro.R
-import com.vikmanz.shpppro.data.utils.contacts.RandomPhotoTaker
-import java.net.URL
-import java.security.InvalidParameterException
 
 /**
  * Settings of Glide.
@@ -17,8 +13,8 @@ import java.security.InvalidParameterException
 val GLIDE_OPTIONS = RequestOptions()
     .centerCrop()
     .circleCrop()
-    .placeholder(R.drawable.icon_person)
-    .error(R.drawable.icon_person)
+    .placeholder(R.drawable.jpg_sample_avatar)
+    .error(R.drawable.icon_person_error)
     .diskCacheStrategy(DiskCacheStrategy.ALL)
     .priority(Priority.HIGH)
 
@@ -32,10 +28,10 @@ val GLIDE_OPTIONS = RequestOptions()
  * @param link URI, URL or resource id.
  */
 fun AppCompatImageView.setImageWithGlide(link: Any? = null) {
-   //if (link is Uri || link is URL || link is Int || link is String)
-        Glide.with(context)
-            .load(link ?: RandomPhotoTaker.getRandomPhoto())
-            .apply(GLIDE_OPTIONS)
-            .into(this)
-   // else throw InvalidParameterException()
+    //if (link is Uri || link is URL || link is Int || link is String)
+    Glide.with(context)
+        .load(link ?: R.drawable.jpg_sample_avatar)
+        .apply(GLIDE_OPTIONS)
+        .into(this)
+    // else throw InvalidParameterException()
 }

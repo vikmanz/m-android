@@ -2,7 +2,6 @@ package com.vikmanz.shpppro.presentation.screens.main.main_fragment.my_contacts_
 
 import androidx.lifecycle.viewModelScope
 import com.vikmanz.shpppro.constants.Constants
-import com.vikmanz.shpppro.utils.extensions.log
 import com.vikmanz.shpppro.data.holders.user_contact_list.ContactsListHolderHolder
 import com.vikmanz.shpppro.data.model.contact_item.ContactItem
 import com.vikmanz.shpppro.domain.usecases.contacts.AddContactUseCase
@@ -11,6 +10,7 @@ import com.vikmanz.shpppro.domain.usecases.contacts.GetUserContactsUseCase
 import com.vikmanz.shpppro.presentation.base.BaseViewModel
 import com.vikmanz.shpppro.presentation.screens.main.main_fragment.MainViewPagerFragmentDirections
 import com.vikmanz.shpppro.presentation.utils.extensions.alsoLog
+import com.vikmanz.shpppro.utils.extensions.log
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -40,21 +40,40 @@ class MyContactsListViewModel @Inject constructor(
 
     private var lastDeletedContactItem: ContactItem? = null
 
-    val contactList: Flow<List<ContactItem>> =
-        contactListHolder.contactList.map { contactItemList ->
-            contactItemList.map { contactItem ->
-                ContactItem(
-                    contact = contactItem.contact,
-                    isChecked = contactItem.isChecked,
-                    onDelete = ::deleteContact,
-                    onClick = ::onContactClick,
-                    onLongClick = ::onContactLongClick
-                )
-            }
-        }
+    private val _contactList = MutableStateFlow(emptyList<ContactItem>())
+    val contactList: Flow<List<ContactItem>> = _contactList.asStateFlow()
+
 
     init {
         getMyContacts()
+        initContactsObserver()
+    }
+
+    private fun initContactsObserver() {
+        viewModelScope.launch(Dispatchers.IO) {
+            contactListHolder.contactList.collect { contactItemList ->
+                _contactList.update {
+                    log("Contact list update!")
+                    contactItemList.map { contactItem ->
+                        ContactItem(
+                            contact = contactItem.contact,
+                            isChecked = contactItem.isChecked,
+                            isError = contactItem.isError,
+                            isLoading = contactItem.isLoading,
+                            onDelete = ::deleteContact,
+                            onClick = ::onContactClick,
+                            onLongClick = ::onContactLongClick
+                        )
+                    }.also {
+                        _uiState.update { currentState ->
+                            currentState.copy(
+                                isContactsEmpty = it.isEmpty()
+                            )
+                        }
+                    }
+                }
+            }
+        }
     }
 
     private fun getMyContacts() {
@@ -72,6 +91,8 @@ class MyContactsListViewModel @Inject constructor(
     }
 
     private fun onContactClick(contactItem: ContactItem) {
+        showSnackBar(false)
+        lastDeletedContactItem = null
         if (uiState.value.isMultiselectMode) {
             handleMultiselect(contactItem)
         } else {
@@ -106,18 +127,12 @@ class MyContactsListViewModel @Inject constructor(
             log("Start coroutine deleteContact")
             deleteContactUseCase(contactItem.contact.id).collect { it ->
                 when (it) {
-                    is ApiResult.NetworkError -> {
-                        contactListHolder.setLoadingStatus(
-                            contactItem.contact.id,
-                            false
-                        ) alsoLog "network error !"
-                    }
 
-                    is ApiResult.ServerError -> {
-                        contactListHolder.setLoadingStatus(
-                            contactItem.contact.id,
-                            false
-                        ) alsoLog "server error!"
+                    is ApiResult.NetworkError, is ApiResult.ServerError -> {
+                        contactListHolder.setErrorStatus(
+                            contactItem.contact.id
+                        ) alsoLog "network error !"
+
                     }
 
                     is ApiResult.Loading -> {
@@ -166,18 +181,23 @@ class MyContactsListViewModel @Inject constructor(
     }
 
     fun setSearchMode(isSearchMode: Boolean) {
-        _uiState.update { it.copy(
-            isSearchMode = isSearchMode
-        ) }
+        _uiState.update {
+            it.copy(
+                isSearchMode = isSearchMode
+            )
+        }
     }
 
     private fun setProgressBar(isVisible: Boolean) {
-        _uiState.update { it.copy(
-            isLoadingData = isVisible
-        ) }
+        _uiState.update {
+            it.copy(
+                isLoadingData = isVisible
+            )
+        }
     }
 
     fun startAddContact() {
+        showSnackBar(false)
         navigate(MainViewPagerFragmentDirections.startAddContact())
     }
 

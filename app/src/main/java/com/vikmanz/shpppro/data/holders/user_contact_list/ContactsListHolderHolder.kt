@@ -1,6 +1,7 @@
 package com.vikmanz.shpppro.data.holders.user_contact_list
 
 import com.vikmanz.shpppro.data.model.contact_item.ContactItem
+import com.vikmanz.shpppro.utils.extensions.log
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -56,12 +57,28 @@ object ContactsListHolderHolder : ShPPUserContactsListHolder {
 
 
     override fun setLoadingStatus(contactItemId: Int, isLoading: Boolean) {
+        log("set loading status!")
         val contactIndex = getContactIndexInList(contactItemId)
         _contactList.update {
             it.toMutableList().apply {
                 set(
                     contactIndex, get(contactIndex).copy(
-                        isLoading = isLoading
+                        isLoading = isLoading,
+                        isError = false
+                    )
+                )
+            }
+        }
+    }
+
+    override fun setErrorStatus(contactItemId: Int) {
+        val contactIndex = getContactIndexInList(contactItemId)
+        _contactList.update {
+            it.toMutableList().apply {
+                set(
+                    contactIndex, get(contactIndex).copy(
+                        isLoading = false,
+                        isError = true
                     )
                 )
             }

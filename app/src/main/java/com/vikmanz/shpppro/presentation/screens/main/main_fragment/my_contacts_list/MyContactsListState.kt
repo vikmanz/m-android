@@ -5,6 +5,7 @@ data class MyContactsListState(
     val isLoadingData: Boolean = false,
     val isMultiselectMode: Boolean = false,
     val isShowSnackBar: Boolean = false,
-    val isSearchMode: Boolean = false
+    val isSearchMode: Boolean = false,
+    val isContactsEmpty: Boolean = false
 
 )

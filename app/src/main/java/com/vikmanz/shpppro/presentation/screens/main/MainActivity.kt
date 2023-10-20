@@ -15,18 +15,18 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::inflate) {
 
-    private lateinit var navController: NavController
-
-    /**
-     * Add safe args to start destination fragment.
-     */
-    override fun setIncomingArguments(savedInstanceState: Bundle?) {
-        if (savedInstanceState != null) return
-        val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.mainFragmentContainer) as NavHostFragment
-        navController = navHostFragment.navController
-        navController.setGraph(R.navigation.main_nav_graph, intent.extras)
-    }
+//    private lateinit var navController: NavController
+//
+//    /**
+//     * Add safe args to start destination fragment.
+//     */
+//    override fun setIncomingArguments(savedInstanceState: Bundle?) {
+//        if (savedInstanceState != null) return
+//        val navHostFragment =
+//            supportFragmentManager.findFragmentById(R.id.mainFragmentContainer) as NavHostFragment
+//        navController = navHostFragment.navController
+//        navController.setGraph(R.navigation.main_nav_graph, intent.extras)
+//    }
 
 //    override fun onSupportNavigateUp(): Boolean {
 //        return navController.navigateUp() || super.onSupportNavigateUp()

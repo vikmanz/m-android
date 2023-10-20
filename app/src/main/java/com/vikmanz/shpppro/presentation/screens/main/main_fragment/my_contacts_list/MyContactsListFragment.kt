@@ -23,6 +23,7 @@ import com.vikmanz.shpppro.presentation.screens.main.main_fragment.my_contacts_l
 import com.vikmanz.shpppro.presentation.utils.extensions.setGone
 import com.vikmanz.shpppro.presentation.utils.extensions.setKeyboardVisibility
 import com.vikmanz.shpppro.presentation.utils.extensions.setVisibleOrGone
+import com.vikmanz.shpppro.utils.extensions.log
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -60,10 +61,10 @@ class MyContactsListFragment :
 
     private fun deleteMultipleContacts() {
         binding.buttonMyContactsDeleteMultipleContacts.setGone()
-        //viewModel.deleteMultipleContacts()
+        //viewModel.deleteMultipleContacts() //not now
     }
 
-    private fun onButtonBackPressed() {         //todo extension
+    private fun onButtonBackPressed() {
         (parentFragment as MainViewPagerFragment).viewPager.currentItem = 0
     }
 
@@ -105,7 +106,8 @@ class MyContactsListFragment :
                         searchBar.setVisibleOrGone(isSearchMode)
                         buttonMyContactCancelSearch.setVisibleOrGone(isSearchMode)
 
-                        //setNoContactsDisclaimerVisible(adapterForRecycler.currentList.isEmpty() && !state.isLoadingData)
+                        log("update ui")
+                        setNoContactsDisclaimerVisible(state.isContactsEmpty)
                     }
                 }
             }
@@ -114,8 +116,11 @@ class MyContactsListFragment :
 
     private fun setNoContactsDisclaimerVisible(isVisible: Boolean) {
         with(binding) {
-            textViewNoResultsTitle.setVisibleOrGone(isVisible && !viewModel.uiState.value.isLoadingData)
-            textViewNoResultsSubtitle.setVisibleOrGone(isVisible && !viewModel.uiState.value.isLoadingData)
+            log("is visible = $isVisible and !isLoading = ${!viewModel.uiState.value.isLoadingData}")
+            val isShow = isVisible && !viewModel.uiState.value.isLoadingData
+            log("is show = $isShow")
+            textViewNoResultsTitle.setVisibleOrGone(isShow)
+            textViewNoResultsSubtitle.setVisibleOrGone(isShow)
         }
     }
 
@@ -134,6 +139,7 @@ class MyContactsListFragment :
                 }
 
                 fun filterList(newText: String?) {
+                    log("filter!")
                     setNoContactsDisclaimerVisible(adapterForRecycler.filter(newText ?: ""))
                 }
             })
@@ -144,9 +150,9 @@ class MyContactsListFragment :
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.contactList.collect { contactList ->
+                    log("contact list update in fragment")
                     adapterForRecycler.submitListFromViewModel(contactList)
                     adapterForRecycler.filter(binding.searchBar.query.toString())
-                    //setNoContactsDisclaimerVisible(adapterForRecycler.currentList.isEmpty())
                 }
             }
         }
@@ -207,9 +213,13 @@ class MyContactsListFragment :
         itemTouchHelper.attachToRecyclerView(binding.recyclerViewMyContactsContactList)
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
+    private fun removeUndoSnackBar(){
         undo?.dismiss()
         undo = null
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        removeUndoSnackBar()
     }
 }

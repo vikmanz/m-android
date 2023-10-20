@@ -2,6 +2,7 @@ package com.vikmanz.shpppro.domain.usecases.contacts
 
 import com.vikmanz.shpppro.data.model.contact_item.ContactItem
 import com.vikmanz.shpppro.data.repository.contacts.ShPPContactsRepository
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import ua.digitalminds.fortrainerapp.data.result.ApiResult

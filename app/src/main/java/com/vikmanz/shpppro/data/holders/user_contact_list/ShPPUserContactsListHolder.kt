@@ -14,4 +14,6 @@ interface ShPPUserContactsListHolder {
     fun changeContactItemCheckedState(contactItemId: Int): Boolean
     fun updateContactList(newContactList: List<ContactItem>)
     fun setLoadingStatus(contactItemId: Int, isLoading: Boolean)
+
+    fun setErrorStatus(contactItemId: Int)
 }

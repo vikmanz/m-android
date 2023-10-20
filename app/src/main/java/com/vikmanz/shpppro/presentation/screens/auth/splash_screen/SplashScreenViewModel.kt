@@ -34,7 +34,7 @@ class SplashScreenViewModel @Inject constructor(
         }
     }
 
-    fun login(email: String, password: String) {
+    private fun login(email: String, password: String) {
         viewModelScope.launch(Dispatchers.IO) {
             log("Start coroutine")
             authorizeUserUseCase(email, password).collect {
