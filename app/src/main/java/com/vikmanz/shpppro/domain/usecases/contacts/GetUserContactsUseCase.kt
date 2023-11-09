@@ -11,7 +11,7 @@ class GetUserContactsUseCase @Inject constructor(
     private val contactsRepository: ShPPContactsRepository,
 ) {
 
-    operator fun invoke(): Flow<ApiResult<List<ContactItem>>> = flow {
+    operator fun invoke(): Flow<ApiResult<List<*>>> = flow {
         emit(ApiResult.Loading)
         emit(contactsRepository.getUserContacts())
     }

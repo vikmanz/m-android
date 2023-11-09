@@ -22,7 +22,7 @@ buildscript {
 }
 
 plugins {
-    id("com.android.application") version "8.2.0-beta06" apply false                    // core
+    id("com.android.application") version "8.2.0-rc01" apply false                    // core
     id("org.jetbrains.kotlin.android") version "1.8.20-RC2" apply false          // core
     //id("com.android.library") version "8.0.2" apply false                        // core
 }
