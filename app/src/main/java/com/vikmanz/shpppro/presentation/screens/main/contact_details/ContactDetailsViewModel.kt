@@ -1,11 +1,14 @@
 package com.vikmanz.shpppro.presentation.screens.main.contact_details
 
 import androidx.lifecycle.SavedStateHandle
+import com.bumptech.glide.Glide.init
 import com.vikmanz.shpppro.utils.extensions.log
 import com.vikmanz.shpppro.presentation.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
 @HiltViewModel
