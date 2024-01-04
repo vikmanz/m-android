@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/viewPagerMain"
-        android:name="com.vikmanz.shpppro.ui.main.main_fragment.MainViewPagerFragment"
+        android:name="com.vikmanz.shpppro.presentation.screens.main.main_fragment.MainViewPagerFragment"
         android:label="fragment_main_view_pager"
-        tools:layout="@layout/fragment_my_profile">
+        tools:layout="@layout/fragment_my_contacts_list">
         <!--suppress NavigationFile -->
         <argument
             android:name="email"
@@ -18,11 +18,14 @@
         <action
             android:id="@+id/startContactDetails"
             app:destination="@id/contactDetailsFragment" />
+        <action
+            android:id="@+id/startAddContact"
+            app:destination="@id/addContactFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.vikmanz.shpppro.ui.main.main_fragment.my_profile.MyProfileFragment"
+        android:name="com.vikmanz.shpppro.presentation.screens.main.main_fragment.my_profile.MyProfileFragment"
         android:label="fragment_my_profile"
         tools:layout="@layout/fragment_my_profile">
         <!--suppress NavigationFile -->
@@ -35,13 +38,26 @@
 
     <fragment
         android:id="@+id/contactDetailsFragment"
-        android:name="com.vikmanz.shpppro.ui.main.contact_details.ContactDetailsFragment"
+        android:name="com.vikmanz.shpppro.presentation.screens.main.contact_details.ContactDetailsFragment"
         android:label="fragment_contact_details"
         tools:layout="@layout/fragment_contact_details">
         <!--suppress NavigationFile -->
+
         <argument
-            android:name="contactID"
-            app:argType="long" />
+            android:name="user"
+            app:argType="com.vikmanz.shpppro.data.model.User" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/addContactFragment"
+        android:name="com.vikmanz.shpppro.presentation.screens.main.add_contact.AddContactFragment"
+        android:label="AddContactFragment"
+        tools:layout="@layout/fragment_add_contact_my_contacts"
+        >
+        <action
+            android:id="@+id/startContactDetails"
+            app:destination="@id/contactDetailsFragment" />
     </fragment>
 
 </navigation>

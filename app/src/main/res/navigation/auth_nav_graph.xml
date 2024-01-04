@@ -7,45 +7,77 @@
 
     <fragment
         android:id="@+id/splashScreenFragment"
-        android:name="com.vikmanz.shpppro.ui.auth.splash_screen.SplashScreenFragment"
+        android:name="com.vikmanz.shpppro.presentation.screens.auth.splash_screen.SplashScreenFragment"
         tools:layout="@layout/fragment_splash_screen">
 
         <action
-            android:id="@+id/startLoginFragment"
-            app:destination="@id/loginFragment"
+            android:id="@+id/startSignUpFragment"
+            app:destination="@id/signUpFragment"
             app:popUpTo="@id/splashScreenFragment"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="true" />
+
+        <action
+            android:id="@+id/startSignInFragment"
+            app:destination="@id/signInFragment"
+            app:popUpTo="@id/splashScreenFragment"
+            app:popUpToInclusive="true" />
 
         <action
             android:id="@+id/startMainActivity"
             app:destination="@id/mainActivity"
             app:popUpTo="@id/splashScreenFragment"
-            app:popUpToInclusive="true">
-        </action>
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
-        android:id="@+id/loginFragment"
-        android:name="com.vikmanz.shpppro.ui.auth.login.LoginFragment"
-        tools:layout="@layout/fragment_login">
+        android:id="@+id/signUpFragment"
+        android:name="com.vikmanz.shpppro.presentation.screens.auth.sign_up.SignUpFragment"
+        tools:layout="@layout/fragment_sign_up">
+        <action
+            android:id="@+id/startSignUpExtended"
+            app:destination="@id/signUpExtendedFragment"
+            />
+        <action
+            android:id="@+id/startSignInFragment"
+            app:destination="@id/signInFragment"
+            app:popUpTo="@id/signUpFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/signUpExtendedFragment"
+        android:name="com.vikmanz.shpppro.presentation.screens.auth.sign_up_extended.SignUpExtendedFragment"
+        tools:layout="@layout/fragment_sign_up_extended">
         <action
             android:id="@+id/startMainActivity"
             app:destination="@id/mainActivity"
-            app:popUpTo="@id/loginFragment"
-            app:popUpToInclusive="true">
-    </action>
+            app:popUpTo="@id/signUpFragment"
+            app:popUpToInclusive="true" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/signInFragment"
+        android:name="com.vikmanz.shpppro.presentation.screens.auth.sign_in.SignInFragment"
+        tools:layout="@layout/fragment_sign_up">
+        <action
+            android:id="@+id/startMainActivity"
+            app:destination="@id/mainActivity"
+            app:popUpTo="@id/signInFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/startSignUpFragment"
+            app:destination="@id/signUpFragment"
+            app:popUpTo="@id/signInFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <activity
         android:id="@+id/mainActivity"
-        android:name="com.vikmanz.shpppro.ui.main.MainActivity"
+        android:name="com.vikmanz.shpppro.presentation.screens.main.MainActivity"
         tools:layout="@layout/fragment_my_profile">
-
-        <!--suppress NavigationFile -->
-        <argument
-            android:name="email"
-            app:argType="string" />
     </activity>
+
 
 </navigation>
 

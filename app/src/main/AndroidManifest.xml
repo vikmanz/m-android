@@ -15,10 +15,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/defaultTheme"
-        tools:targetApi="33">
+        android:usesCleartextTraffic="true">
 
         <activity
-            android:name=".ui.auth.AuthActivity"
+            android:name=".presentation.screens.auth.AuthActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,7 +27,7 @@
         </activity>
 
         <activity
-            android:name=".ui.main.MainActivity"
+            android:name=".presentation.screens.main.MainActivity"
             android:exported="false" />
 
 
