@@ -5,6 +5,7 @@ CRUD Contact app where users can create their own profile and manage existing us
 - Registration, login, auto-login.
 - Adding a user to your contacts.
 - Get contacts list from server.
+- Search in list of contacts.
 - Going to the user’s profile.
 - Multi-select deletion, swipe deletion, deleted user recovery.
 
