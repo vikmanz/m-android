@@ -4,11 +4,6 @@ plugins {
     id("androidx.navigation.safeargs")      // safe args for navigation
     id("kotlin-kapt")                       // Hilt
     id("com.google.dagger.hilt.android")    // Hilt
-
-    // Symbol Processing: KSP (for Moshi, Room) and Kapt (for Hilt)
-//    id("com.google.devtools.ksp")
-//    kotlin("kapt")
-
 }
 
 android {
@@ -62,11 +57,9 @@ dependencies {
     implementation (libs.core.ktx)
     implementation (libs.lifecycle.runtime.ktx)
     implementation (libs.activity.compose)
-//    implementation (platform(libs.compose.bom))
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
-//    androidTestImplementation (platform(libs.compose.bom))
 
     // UI
     implementation (libs.ui)
@@ -85,7 +78,6 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.lifecycle.runtime.ktx)
     implementation(libs.androidx.lifecycle.extensions)
-//    implementation("android.arch.lifecycle:extensions:1.1.1")
 
     // Kotlin coroutines components
     api(libs.kotlinx.coroutines.core)
@@ -119,7 +111,6 @@ dependencies {
     // Symbol Processing (for Moshi, Room) and Kapt (for Hilt)
     implementation(libs.symbol.processing.api)
     kapt(libs.hilt.android.compiler)
-    //ksp ("com.google.dagger:hilt-android-compiler:2.46.1")
 
 }
 
