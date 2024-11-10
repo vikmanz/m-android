@@ -13,6 +13,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    env:
+      APK_PATH: build/debug
+      APK_NAME: m_android_debug.apk
+
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
@@ -29,24 +33,26 @@ jobs:
       
     - name: Build Debug apk
       run: ./gradlew assembleDebug
-
+      
     - name: Rename APK file
-      run: mv app/build/outputs/apk/debug/app-debug.apk app/build/outputs/apk/debug/m_android_debug.apk
+      run: mv app/build/outputs/apk/debug/app-debug.apk app/build/outputs/apk/debug/${{ env.APK_NAME }}
 
     - name: Upload APK as artifact
       uses: actions/upload-artifact@v3.1.3
       with:
-        name: m_android_debug.apk
-        path: app/build/outputs/apk/debug/m_android_debug.apk 
+        name: ${{ env.APK_NAME }}
+        path: app/build/outputs/apk/debug/${{ env.APK_NAME }} 
 
     - name: Copy APK to repository
-      run: cp app/build/outputs/apk/debug/m_android_debug.apk ./
+      run: |
+        mkdir -p ./${{ env.APK_PATH }}
+        cp app/build/outputs/apk/debug/${{ env.APK_NAME }} ./${{ env.APK_PATH }}/
       
     - name: Commit APK with tag
       run: |
         git config --global user.name 'GitHub Actions'
         git config --global user.email 'actions@github.com'
-        git add m_android_debug.apk
-        git commit -m "Add built m_android_debug.apk"
+        git add ./${{ env.APK_PATH }}/${{ env.APK_NAME }}
+        git commit -m "Add built ${{ env.APK_NAME }}"
         git tag v1.0-$(date +'%Y%m%d%H%M%S')
-        git push origin develop --tags  
+        git push origin develop --tags
