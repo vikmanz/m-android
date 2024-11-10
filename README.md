@@ -44,3 +44,4 @@ The user can add new contacts by searching for them on the server. At the same t
 The user can delete unnecessary contacts in the contact list. To do this, he can either swipe the contact to the left, or by clicking on the trash button on the corresponding item. This will result in asynchronous deletion of the contact via a request to the server. The last deleted contact can be restored - for this, when deleting, a snack bar with a cancel button pops up at the bottom. You can also delete contacts in bulk at once - a multi-select mode is provided for this. It is activated by pressing one element in the list.
 
 <img src="https://github.com/vikmanz/ShppPro/raw/task5/readme/screen_04.jpg" width="900">
+
