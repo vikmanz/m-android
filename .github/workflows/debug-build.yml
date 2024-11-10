@@ -3,7 +3,7 @@ name: Build apk
 on:
   push:
     branches: [ "develop" ]
-    tags-ignore: ["v*"]
+    tags-ignore: ["^v.*"]
   pull_request:
     branches: [ "develop" ]
   workflow_dispatch:
